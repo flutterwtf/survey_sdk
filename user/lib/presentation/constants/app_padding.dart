@@ -1,0 +1,46 @@
+//TODO: remove unnecessary paddings maybe?
+abstract class AppPadding {
+  static const double extremelyGrand = 110.0;
+  static const double tripleDoubleGrand = 120;
+  static const double doubleExtraGalactic = 100.0;
+  static const double extremelyHuge = 90.0;
+  static const double fourfoldGrand = 80;
+  static const double doubleQuarterGalactic = 75.0;
+  static const double extremelyLarge = 70.0;
+  static const double doubleCosmic = 60;
+  static const double doubleGalactic = 64.0;
+  static const double doubleJumbo = 56;
+  static const double doubleExtraGiant = 50.0;
+  static const double doubleExtraHuge = 46.0;
+  static const double doubleGrand = 40.0;
+  static const double doubleLarge = 36.0;
+  static const double doubleExtraMedium = 34.0;
+  static const double galactic = 32.0;
+  static const double cosmic = 30.0;
+  static const double jumbo = 28.0;
+  static const double extraGiant = 25.0;
+  static const double giant = 24.0;
+  static const double extraHuge = 23.0;
+  static const double huge = 22.0;
+  static const double extraGrand = 21.0;
+  static const double grand = 20.0;
+  static const double large = 18.0;
+  static const double extraMedium = 17.0;
+  static const double medium = 16.0;
+  static const double extraRegular = 15.0;
+  static const double regular = 14.0;
+  static const double extraSmall = 13.0;
+  static const double small = 12.0;
+  static const double extraSmaller = 11.0;
+  static const double smaller = 10.0;
+  static const double extraTiny = 9.0;
+  static const double tiny = 8.0;
+  static const double macro = 7.0;
+  static const double mini = 6.0;
+  static const double milli = 5.0;
+  static const double micro = 4.0;
+  static const double nano = 3.0;
+  static const double pico = 2.0;
+  static const double femto = 1.0;
+  static const double zero = 0.0;
+}
