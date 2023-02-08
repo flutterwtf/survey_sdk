@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:survey_sdk/domain/entities/theme_type.dart';
 import 'package:survey_sdk/presentation/base/base_page.dart';
-import 'package:survey_sdk/presentation/pages/builder/builder_page.dart';
+import 'package:survey_sdk/presentation/pages/splash/splash_page.dart';
 import 'package:survey_sdk/presentation/theme/app_theme.dart';
 import 'package:survey_sdk/presentation/theme/app_themes.dart';
 import 'package:survey_sdk/presentation/theme/theme_extensions.dart';
@@ -66,7 +66,7 @@ class _AppState extends BasePageState<App, AppCubit> with WidgetsBindingObserver
                   GlobalWidgetsLocalizations.delegate,
                   GlobalCupertinoLocalizations.delegate,
                 ],
-                home: const BuilderPage(),
+                home: const SplashPage(),
                 theme: context.theme.theme,
               );
             },

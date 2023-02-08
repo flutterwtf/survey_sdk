@@ -5,7 +5,7 @@ import 'package:survey_sdk/data/repositories/theme_repository.dart';
 import 'package:survey_sdk/domain/data_interfaces/i_locale_repository.dart';
 import 'package:survey_sdk/domain/data_interfaces/i_theme_repository.dart';
 import 'package:survey_sdk/presentation/app/app_cubit.dart';
-import 'package:survey_sdk/presentation/pages/builder/builder_cubit.dart';
+import 'package:survey_sdk/presentation/pages/splash/splash_cubit.dart';
 
 GetIt get i => GetIt.instance;
 
@@ -37,7 +37,7 @@ void _initCubits() {
       i.get(),
     ),
   );
-  i.registerFactory<BuilderCubit>(
-    () => BuilderCubit(),
+  i.registerFactory<SplashCubit>(
+    () => SplashCubit(),
   );
 }
