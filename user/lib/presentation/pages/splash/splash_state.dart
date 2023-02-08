@@ -1,10 +1,14 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:equatable/equatable.dart';
 
 part 'splash_state.freezed.dart';
 
-@freezed
-class SplashState with _$SplashState {
-  const factory SplashState({
-    @Default('') String field1,
-  }) = _SplashState;
+class SplashState extends Equatable {
+  const SplashState();
+
+  SplashState copyWith() {
+   return const SplashState();
+  }
+
+  @override
+  List<Object?> get props => [];
 }
