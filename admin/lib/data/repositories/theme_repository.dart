@@ -1,5 +1,5 @@
 import 'package:survey_sdk/data/data_sources/preferences_data_source.dart';
-import 'package:survey_sdk/domain/data_interfaces/i_theme_repository.dart';
+import 'package:survey_sdk/domain/data_interfaces/theme_repository.dart';
 import 'package:survey_sdk/domain/entities/theme_type.dart';
 
 class ThemeRepositoryImpl implements ThemeRepository {
