@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-part 'splash_state.freezed.dart';
+//part 'splash_state.freezed.dart';
 
 class SplashState extends Equatable {
   const SplashState();
