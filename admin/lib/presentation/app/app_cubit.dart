@@ -1,7 +1,7 @@
 import 'dart:ui';
 
-import 'package:survey_sdk/domain/data_interfaces/i_locale_repository.dart';
-import 'package:survey_sdk/domain/data_interfaces/i_theme_repository.dart';
+import 'package:survey_sdk/domain/data_interfaces/locale_repository.dart';
+import 'package:survey_sdk/domain/data_interfaces/theme_repository.dart';
 import 'package:survey_sdk/domain/entities/theme_type.dart';
 
 import '../base/base_cubit.dart';
