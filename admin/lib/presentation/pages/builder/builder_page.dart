@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:survey_sdk/presentation/base/base_page.dart';
-import 'package:survey_sdk/presentation/pages/builder/builder_cubit.dart';
 
-class BuilderPage extends BasePage {
-  const BuilderPage({super.key});
+class BuilderPage extends StatefulWidget {
+  const BuilderPage({Key? key}) : super(key: key);
 
   @override
-  _BuilderPageState createState() => _BuilderPageState();
+  State<BuilderPage> createState() => _BuilderPageState();
 }
 
-class _BuilderPageState extends BasePageState<BuilderPage, BuilderCubit> {
-
+class _BuilderPageState extends State<BuilderPage> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return const Placeholder();
   }
 }

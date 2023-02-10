@@ -1,26 +1,19 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:survey_sdk/domain/entities/theme_type.dart';
 
 class AppState extends Equatable {
-  final ThemeType themeType;
-  final Locale? locale;
+  final ThemeData themeData;
 
   const AppState({
-    required this.themeType,
-    required this.locale,
+    required this.themeData,
   });
 
-  AppState copyWith({
-    Locale? locale,
-    ThemeType? themeType,
-  }) {
+  AppState copyWith({ThemeData? themeData}) {
     return AppState(
-      themeType: themeType ?? this.themeType,
-      locale: locale ?? this.locale,
+      themeData: themeData ?? this.themeData,
     );
   }
 
   @override
-  List<Object?> get props => [themeType, locale];
+  List<Object?> get props => [themeData];
 }
