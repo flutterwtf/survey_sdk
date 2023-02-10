@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:survey_sdk/data/data_sources/preferences_data_source.dart';
-import 'package:survey_sdk/domain/data_interfaces/i_locale_repository.dart';
+import 'package:survey_sdk/domain/data_interfaces/locale_repository.dart';
 
 class LocaleRepositoryImpl implements LocaleRepository {
   final PreferencesDataSource _preferencesDataSource;

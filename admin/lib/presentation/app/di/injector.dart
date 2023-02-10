@@ -2,8 +2,8 @@ import 'package:get_it/get_it.dart';
 import 'package:survey_sdk/data/data_sources/preferences_data_source.dart';
 import 'package:survey_sdk/data/repositories/locale_repository.dart';
 import 'package:survey_sdk/data/repositories/theme_repository.dart';
-import 'package:survey_sdk/domain/data_interfaces/i_locale_repository.dart';
-import 'package:survey_sdk/domain/data_interfaces/i_theme_repository.dart';
+import 'package:survey_sdk/domain/data_interfaces/locale_repository.dart';
+import 'package:survey_sdk/domain/data_interfaces/theme_repository.dart';
 import 'package:survey_sdk/presentation/app/app_cubit.dart';
 import 'package:survey_sdk/presentation/pages/builder/builder_cubit.dart';
 
