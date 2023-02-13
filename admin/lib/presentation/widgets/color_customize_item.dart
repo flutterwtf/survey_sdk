@@ -37,7 +37,6 @@ class _ColorCustomizeItemState extends State<ColorCustomizeItem> {
         child: Row(
           children: [
             Container(
-              margin: const EdgeInsets.all(AppDimensions.margin2XS),
               decoration: BoxDecoration(
                 border: Border.all(color: AppColors.black),
                 color: currentColor,
