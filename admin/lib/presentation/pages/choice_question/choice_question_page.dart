@@ -7,10 +7,6 @@ import 'package:survey_sdk/presentation/utils/app_fonts.dart';
 import 'package:survey_sdk/presentation/utils/constants/constants.dart';
 import 'package:survey_sdk/presentation/utils/colors.dart';
 
-part 'question_checkboxes.dart';
-
-part 'question_radio_buttons.dart';
-
 class ChoiceQuestionPage extends StatefulWidget {
   const ChoiceQuestionPage({
     super.key,
