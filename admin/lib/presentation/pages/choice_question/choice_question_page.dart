@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:survey_sdk/presentation/pages/question/question_bottom_button.dart';
-import 'package:survey_sdk/presentation/pages/question/question_content.dart';
-import 'package:survey_sdk/presentation/pages/question/question_title.dart';
+import 'package:survey_sdk/presentation/widgets/question_bottom_button.dart';
+import 'package:survey_sdk/presentation/widgets/question_content.dart';
+import 'package:survey_sdk/presentation/widgets/question_title.dart';
 import 'package:survey_sdk/presentation/utils/app_fonts.dart';
 import 'package:survey_sdk/presentation/utils/constants/constants.dart';
 import 'package:survey_sdk/presentation/utils/colors.dart';
