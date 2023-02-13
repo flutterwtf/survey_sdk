@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:survey_sdk/presentation/utils/app_fonts.dart';
 import 'package:survey_sdk/presentation/utils/colors.dart';
 
-class SwitchItem extends StatefulWidget {
+class SwitchItem extends StatelessWidget {
   const SwitchItem({
     super.key,
     required this.title,
@@ -15,16 +15,11 @@ class SwitchItem extends StatefulWidget {
   final void Function(bool isToggled)? onChanged;
 
   @override
-  State<SwitchItem> createState() => _SwitchItemState();
-}
-
-class _SwitchItemState extends State<SwitchItem> {
-  @override
   Widget build(BuildContext context) {
     return Row(
       children: [
         Text(
-          widget.title,
+          title,
           style: const TextStyle(
             fontSize: AppFonts.sizeM,
             fontWeight: AppFonts.weightSemiBold,
@@ -32,8 +27,8 @@ class _SwitchItemState extends State<SwitchItem> {
         ),
         const Spacer(),
         _CustomSwitch(
-          initialValue: widget.initialValue,
-          onChanged: widget.onChanged,
+          initialValue: initialValue,
+          onChanged: onChanged,
         ),
       ],
     );
@@ -69,8 +64,7 @@ class _CustomSwitchState extends State<_CustomSwitch> {
         height: 18,
         width: 34,
         decoration: BoxDecoration(
-          // TODO move colors to colors.dart
-          color: _isToggled ? const Color(0xFF727272) : const Color(0xFFD9D9D9),
+          color: _isToggled ? AppColors.switchBackgroundActive : AppColors.switchBackgroundInactive,
           borderRadius: BorderRadius.circular(9),
         ),
         duration: const Duration(

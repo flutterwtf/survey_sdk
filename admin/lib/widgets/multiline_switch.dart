@@ -13,6 +13,8 @@ class MultilineSwitch extends StatefulWidget {
     this.defaultLineAmount = 3,
   });
 
+  /// if `isMultiline` equals `false` then `lineAmount` is always equals 1.
+  /// In case of any input error `lineAmount` is always equals 1.
   final void Function(bool isMultiline, int lineAmount) onChanged;
   final bool initialValue;
   final int defaultLineAmount;
@@ -36,37 +38,35 @@ class _MultilineSwitchState extends State<MultilineSwitch> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(
-        AppDimensions.sizeM,
+        AppDimensions.marginM,
       ),
-      child: FormBuilder(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SwitchItem(
-              title: 'Multiline',
-              onChanged: (isToggled) {
-                setState(() {
-                  _isMultiline = isToggled;
-                });
-                widget.onChanged(_isMultiline, _isMultiline ? _lineAmount : 1);
-              },
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SwitchItem(
+            title: 'Multiline',
+            onChanged: (isToggled) {
+              setState(() {
+                _isMultiline = isToggled;
+              });
+              widget.onChanged(_isMultiline, _isMultiline ? _lineAmount : 1);
+            },
+          ),
+          AnimatedSize(
+            duration: const Duration(
+              milliseconds: 100,
             ),
-            AnimatedSize(
-              duration: const Duration(
-                milliseconds: 100,
-              ),
-              child: _isMultiline
-                  ? _LineAmountInputField(
-                      defaultLineAmount: widget.defaultLineAmount,
-                      onChanged: (amount) {
-                        _lineAmount = amount;
-                        widget.onChanged(_isMultiline, _lineAmount);
-                      },
-                    )
-                  : const SizedBox.shrink(),
-            ),
-          ],
-        ),
+            child: _isMultiline
+                ? _LineAmountInputField(
+                    defaultLineAmount: widget.defaultLineAmount,
+                    onChanged: (amount) {
+                      _lineAmount = amount;
+                      widget.onChanged(_isMultiline, _lineAmount);
+                    },
+                  )
+                : const SizedBox.shrink(),
+          ),
+        ],
       ),
     );
   }
@@ -83,32 +83,34 @@ class _LineAmountInputField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FormBuilderTextField(
-      name: 'line_amount',
-      initialValue: defaultLineAmount.toString(),
-      autofocus: true,
-      style: const TextStyle(
-        fontSize: AppFonts.sizeM,
-        color: AppColors.black,
-      ),
-      onChanged: (value) {
-        if (value == null) {
-          onChanged(1);
-        } else {
-          onChanged(int.tryParse(value) ?? 1);
-        }
-      },
-      decoration: const InputDecoration(
-        isCollapsed: true,
-        contentPadding: EdgeInsets.only(
-          top: AppDimensions.sizeM,
+    return FormBuilder(
+      child: FormBuilderTextField(
+        name: 'line_amount',
+        initialValue: defaultLineAmount.toString(),
+        autofocus: true,
+        style: const TextStyle(
+          fontSize: AppFonts.sizeM,
+          color: AppColors.black,
         ),
-        border: InputBorder.none,
-        prefix: Text(
-          'Lines ',
-          style: TextStyle(
-            fontSize: AppFonts.sizeM,
-            color: AppColors.black,
+        onChanged: (value) {
+          if (value == null) {
+            onChanged(1);
+          } else {
+            onChanged(int.tryParse(value) ?? 1);
+          }
+        },
+        decoration: const InputDecoration(
+          isCollapsed: true,
+          contentPadding: EdgeInsets.only(
+            top: AppDimensions.marginM,
+          ),
+          border: InputBorder.none,
+          prefix: Text(
+            'Lines ',
+            style: TextStyle(
+              fontSize: AppFonts.sizeM,
+              color: AppColors.black,
+            ),
           ),
         ),
       ),
