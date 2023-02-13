@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-
-import '../../utils/app_fonts.dart';
-import '../../utils/colors.dart';
-import '../../utils/constants/constants.dart';
+import 'package:survey_sdk/presentation/utils/app_fonts.dart';
+import 'package:survey_sdk/presentation/utils/colors.dart';
+import 'package:survey_sdk/presentation/utils/constants/constants.dart';
 
 class QuestionBottomButton extends StatelessWidget {
   const QuestionBottomButton({

@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-
-import '../../../utils/app_fonts.dart';
-import '../../../utils/constants/constants.dart';
-import '../../../utils/colors.dart';
-import '../question_bottom_button.dart';
-import '../question_content.dart';
-import '../question_title.dart';
+import 'package:survey_sdk/presentation/pages/question/question_bottom_button.dart';
+import 'package:survey_sdk/presentation/pages/question/question_content.dart';
+import 'package:survey_sdk/presentation/pages/question/question_title.dart';
+import 'package:survey_sdk/presentation/utils/app_fonts.dart';
+import 'package:survey_sdk/presentation/utils/constants/constants.dart';
+import 'package:survey_sdk/presentation/utils/colors.dart';
 
 part 'question_checkboxes.dart';
 

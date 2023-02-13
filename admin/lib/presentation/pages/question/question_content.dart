@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../../utils/app_fonts.dart';
+import 'package:survey_sdk/presentation/utils/app_fonts.dart';
 
 class QuestionContent extends StatelessWidget {
   const QuestionContent({
