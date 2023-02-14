@@ -21,8 +21,8 @@ class MinMaxCustomizeItem extends StatefulWidget {
 }
 
 class _MinMaxCustomizeItemState extends State<MinMaxCustomizeItem> {
-  late int? _min;
-  late int? _max;
+  int? _min;
+  int? _max;
 
   @override
   void initState() {
