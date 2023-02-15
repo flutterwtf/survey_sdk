@@ -13,7 +13,7 @@ class ChoiceQuestionPage extends StatefulWidget {
     required this.title,
     this.content,
     required this.options,
-    required this.isMultiplyChoice,
+    required this.isMultipleChoice,
     required this.onSend,
     this.canBeSkipped = false,
     this.activeColor = AppColors.black,
@@ -23,7 +23,7 @@ class ChoiceQuestionPage extends StatefulWidget {
   final String title;
   final String? content;
   final List<String> options;
-  final bool isMultiplyChoice;
+  final bool isMultipleChoice;
   final VoidCallback onSend;
   final bool canBeSkipped;
   final Color activeColor;
@@ -96,7 +96,7 @@ class _ChoiceQuestionPageState extends State<ChoiceQuestionPage>
             padding: const EdgeInsets.only(
               top: AppDimensions.margin2XL,
             ),
-            child: widget.isMultiplyChoice
+            child: widget.isMultipleChoice
                 ? _QuestionCheckboxes(
                     options: widget.options,
                     onChanged: _onInputChanged,
