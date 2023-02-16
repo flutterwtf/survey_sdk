@@ -1,11 +1,12 @@
+import 'package:core/src/domain/entities/validator/input_validator.dart';
+import 'package:core/src/presentation/utils/app_fonts.dart';
+import 'package:core/src/presentation/utils/colors.dart';
+import 'package:core/src/presentation/utils/constants.dart';
+import 'package:core/src/presentation/widgets/question_bottom_button.dart';
+import 'package:core/src/presentation/widgets/question_subtitle.dart';
+import 'package:core/src/presentation/widgets/question_title.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:survey_sdk/presentation/utils/app_fonts.dart';
-import 'package:survey_sdk/presentation/utils/colors.dart';
-import 'package:survey_sdk/presentation/utils/constants/constants.dart';
-import 'package:survey_sdk/presentation/widgets/question_bottom_button.dart';
-import 'package:survey_sdk/presentation/widgets/question_subtitle.dart';
-import 'package:survey_sdk/presentation/widgets/question_title.dart';
 
 class InputQuestionPage extends StatelessWidget {
   final String title;
@@ -30,15 +31,15 @@ class InputQuestionPage extends StatelessWidget {
     super.key,
     required this.title,
     required this.onSend,
+    required this.validator,
     this.subtitle,
     this.minLines,
     this.maxLines,
     this.verticalPadding,
     this.horizontalPadding,
     this.hintText,
-    this.validator,
-    this.backgroundColor = AppColors.white,
-    this.borderColor = AppColors.black,
+    this.backgroundColor = Colors.white,
+    this.borderColor = Colors.black,
     this.borderWidth = 1,
     this.hintColor = AppColors.textLightGrey,
     this.hintSize = AppFonts.sizeL,
@@ -84,8 +85,8 @@ class InputQuestionPage extends StatelessWidget {
             ),
           Padding(
             padding: const EdgeInsets.only(top: AppDimensions.marginM),
+            //TODO: add validator?
             child: FormBuilderTextField(
-              validator: validator,
               name: 'Text field',
               minLines: minLines,
               maxLines: maxLines,
