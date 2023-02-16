@@ -3,21 +3,21 @@ import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:survey_sdk/presentation/utils/colors.dart';
 import 'package:survey_sdk/presentation/utils/constants/constants.dart';
 
-class ColorCustomizeItem extends StatefulWidget {
+class ColorCustomizationItem extends StatefulWidget {
   final Color initialColor;
   final ValueChanged<Color> onColorPicked;
 
-  const ColorCustomizeItem({
+  const ColorCustomizationItem({
     required this.initialColor,
     required this.onColorPicked,
     Key? key,
   }) : super(key: key);
 
   @override
-  State<ColorCustomizeItem> createState() => _ColorCustomizeItemState();
+  State<ColorCustomizationItem> createState() => _ColorCustomizationItemState();
 }
 
-class _ColorCustomizeItemState extends State<ColorCustomizeItem> {
+class _ColorCustomizationItemState extends State<ColorCustomizationItem> {
   late Color pickerColor;
   late Color currentColor;
 
