@@ -5,5 +5,5 @@ import 'package:survey_sdk/presentation/app/di/injector.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   initInjector();
-  runApp(const App());
+  runApp(const Material(child: App()));
 }

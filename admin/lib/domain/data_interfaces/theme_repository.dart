@@ -1,4 +1,4 @@
-import 'package:survey_sdk/domain/entities/theme_type.dart';
+import 'package:core/core.dart';
 
 abstract class ThemeRepository {
   Future<ThemeType> getTheme();
