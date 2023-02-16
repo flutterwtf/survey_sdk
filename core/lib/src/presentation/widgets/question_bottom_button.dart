@@ -8,35 +8,40 @@ class QuestionBottomButton extends StatelessWidget {
     required this.text,
     required this.onPressed,
     required this.isEnabled,
-    this.animatedColorOpacity = 1.0,
+    this.isOutlined = false,
   });
 
   final String text;
   final VoidCallback onPressed;
   final bool isEnabled;
-  final double animatedColorOpacity;
+  final bool isOutlined;
 
   @override
   Widget build(BuildContext context) {
+    final accentColor = Colors.black.withOpacity(isEnabled ? 1.0 : 0.6);
     return SizedBox(
       //TODO: let the widget define it's own height depending on the child
       height: 52,
       width: double.infinity,
-      child: Material(
-        color: Colors.black.withOpacity(animatedColorOpacity),
+      child: InkWell(
+        onTap: isEnabled ? onPressed : null,
         borderRadius: BorderRadius.circular(
           AppDimensions.circularRadiusS,
         ),
-        child: InkWell(
-          onTap: isEnabled ? onPressed : null,
-          borderRadius: BorderRadius.circular(
-            AppDimensions.circularRadiusS,
+        child: AnimatedContainer(
+          decoration: BoxDecoration(
+            color: isOutlined ? Colors.white : accentColor,
+            borderRadius: BorderRadius.circular(
+              AppDimensions.circularRadiusS,
+            ),
+            border: Border.all(color: accentColor),
           ),
+          duration: const Duration(milliseconds: 200),
           child: Center(
             child: Text(
               text,
-              style: const TextStyle(
-                color: Colors.white,
+              style: TextStyle(
+                color: isOutlined ? accentColor : Colors.white,
                 fontWeight: AppFonts.weightBold,
                 fontSize: AppFonts.sizeM,
               ),
