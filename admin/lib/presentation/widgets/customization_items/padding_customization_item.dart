@@ -3,13 +3,13 @@ import 'package:flutter/services.dart';
 import 'package:survey_sdk/presentation/utils/colors.dart';
 import 'package:survey_sdk/presentation/utils/constants/constants.dart';
 
-class PaddingCustomizeItem extends StatefulWidget {
+class PaddingCustomizationItem extends StatefulWidget {
   final double initialHorizontalPadding;
   final double initialVerticalPadding;
   final ValueChanged<double> onHorizontalPaddingChange;
   final ValueChanged<double> onVerticalPaddingChange;
 
-  const PaddingCustomizeItem({
+  const PaddingCustomizationItem({
     required this.initialHorizontalPadding,
     required this.initialVerticalPadding,
     required this.onHorizontalPaddingChange,
@@ -18,10 +18,10 @@ class PaddingCustomizeItem extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<PaddingCustomizeItem> createState() => _PaddingCustomizeItemState();
+  State<PaddingCustomizationItem> createState() => _PaddingCustomizationItemState();
 }
 
-class _PaddingCustomizeItemState extends State<PaddingCustomizeItem> {
+class _PaddingCustomizationItemState extends State<PaddingCustomizationItem> {
   final horizontalPaddingFocusNode = FocusNode();
   final verticalPaddingFocusNode = FocusNode();
   late double horizontalPadding;
@@ -44,6 +44,7 @@ class _PaddingCustomizeItemState extends State<PaddingCustomizeItem> {
     super.initState();
   }
 
+  //TODO: split to widgets please
   @override
   Widget build(BuildContext context) {
     return Padding(
