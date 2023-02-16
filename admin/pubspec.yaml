@@ -19,6 +19,10 @@ dependencies:
 
   get_it: ^7.2.0
   equatable: ^2.0.3
+  flutter_colorpicker: ^1.0.3
+  flutter_form_builder: ^7.7.0
+  core:
+    path: ../core
 
   survey_core:
     path: ../core
@@ -31,3 +35,4 @@ dev_dependencies:
 
 flutter:
   generate: true
+  uses-material-design: true
