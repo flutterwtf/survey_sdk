@@ -2,10 +2,9 @@ import 'dart:ui';
 
 import 'package:survey_sdk/domain/data_interfaces/locale_repository.dart';
 import 'package:survey_sdk/domain/data_interfaces/theme_repository.dart';
-import 'package:survey_sdk/domain/entities/theme_type.dart';
-
-import '../base/base_cubit.dart';
-import 'app_state.dart';
+import 'package:core/core.dart';
+import 'package:survey_sdk/presentation/app/app_state.dart';
+import 'package:survey_sdk/presentation/base/base_cubit.dart';
 
 class AppCubit extends BaseCubit<AppState> {
   final ThemeRepository _themeRepository;
