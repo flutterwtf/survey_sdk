@@ -26,13 +26,13 @@ class QuestionBottomButton extends StatelessWidget {
       child: InkWell(
         onTap: isEnabled ? onPressed : null,
         borderRadius: BorderRadius.circular(
-          AppDimensions.circularRadiusS,
+          AppDimensions.circularRadiusXS,
         ),
         child: AnimatedContainer(
           decoration: BoxDecoration(
             color: isOutlined ? Colors.white : accentColor,
             borderRadius: BorderRadius.circular(
-              AppDimensions.circularRadiusS,
+              AppDimensions.circularRadiusXS,
             ),
             border: Border.all(color: accentColor),
           ),
