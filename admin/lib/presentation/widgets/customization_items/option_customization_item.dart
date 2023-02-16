@@ -3,17 +3,17 @@ import 'package:survey_sdk/presentation/utils/app_fonts.dart';
 import 'package:survey_sdk/presentation/utils/colors.dart';
 import 'package:survey_sdk/presentation/utils/constants/constants.dart';
 
-class OptionCustomizeItem extends StatefulWidget {
+class OptionCustomizationItem extends StatefulWidget {
   final List<String> options;
 
-  const OptionCustomizeItem({Key? key, required this.options})
+  const OptionCustomizationItem({Key? key, required this.options})
       : super(key: key);
 
   @override
-  State<OptionCustomizeItem> createState() => _OptionCustomizeItemState();
+  State<OptionCustomizationItem> createState() => _OptionCustomizationItemState();
 }
 
-class _OptionCustomizeItemState extends State<OptionCustomizeItem> {
+class _OptionCustomizationItemState extends State<OptionCustomizationItem> {
   TextEditingController controller = TextEditingController();
 
   void onEditingComplete() {
@@ -44,7 +44,7 @@ class _OptionCustomizeItemState extends State<OptionCustomizeItem> {
             const Icon(
               Icons.fiber_manual_record,
               size: AppDimensions.sizeS,
-              color: AppColors.iconGrey,
+              color: AppColors.textGrey,
             ),
             const SizedBox(
               width: AppDimensions.margin2XS,
