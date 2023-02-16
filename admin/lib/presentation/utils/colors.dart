@@ -12,4 +12,7 @@ abstract class AppColors {
 
   static const text = Color(0xFF333333);
   static const textGrey = Color(0xFF292929);
+
+  static const switchBackgroundActive = Color(0xFF727272);
+  static const switchBackgroundInactive = Color(0xFFD9D9D9);
 }

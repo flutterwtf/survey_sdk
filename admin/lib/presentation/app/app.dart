@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:survey_sdk/domain/entities/theme_type.dart';
+import 'package:survey_sdk/presentation/app/app_cubit.dart';
+import 'package:survey_sdk/presentation/app/app_state.dart';
 import 'package:survey_sdk/presentation/base/base_page.dart';
 import 'package:survey_sdk/presentation/pages/builder/builder_page.dart';
 import 'package:survey_sdk/presentation/theme/app_theme.dart';
@@ -10,9 +11,7 @@ import 'package:survey_sdk/presentation/theme/app_themes.dart';
 import 'package:survey_sdk/presentation/theme/theme_extensions.dart';
 import 'package:survey_sdk/presentation/theme/theme_provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
-import 'app_cubit.dart';
-import 'app_state.dart';
+import 'package:core/core.dart';
 
 class App extends BasePage {
   const App({Key? key}) : super(key: key);
