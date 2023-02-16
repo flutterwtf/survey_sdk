@@ -1,25 +1,12 @@
+import 'package:core/src/presentation/utils/app_fonts.dart';
+import 'package:core/src/presentation/utils/constants.dart';
+import 'package:core/src/presentation/widgets/question_bottom_button.dart';
+import 'package:core/src/presentation/widgets/question_content.dart';
+import 'package:core/src/presentation/widgets/question_title.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:survey_sdk/presentation/widgets/question_bottom_button.dart';
-import 'package:survey_sdk/presentation/widgets/question_content.dart';
-import 'package:survey_sdk/presentation/widgets/question_title.dart';
-import 'package:survey_sdk/presentation/utils/app_fonts.dart';
-import 'package:survey_sdk/presentation/utils/constants/constants.dart';
-import 'package:survey_sdk/presentation/utils/colors.dart';
 
 class ChoiceQuestionPage extends StatefulWidget {
-  const ChoiceQuestionPage({
-    super.key,
-    required this.title,
-    this.content,
-    required this.options,
-    required this.isMultipleChoice,
-    required this.onSend,
-    this.canBeSkipped = false,
-    this.activeColor = AppColors.black,
-    this.inactiveColor = Colors.grey,
-  });
-
   final String title;
   final String? content;
   final List<String> options;
@@ -28,6 +15,18 @@ class ChoiceQuestionPage extends StatefulWidget {
   final bool canBeSkipped;
   final Color activeColor;
   final Color inactiveColor;
+
+  const ChoiceQuestionPage({
+    super.key,
+    required this.title,
+    this.content,
+    required this.options,
+    required this.isMultipleChoice,
+    required this.onSend,
+    this.canBeSkipped = false,
+    this.activeColor = Colors.black,
+    this.inactiveColor = Colors.grey,
+  });
 
   @override
   State<ChoiceQuestionPage> createState() => _ChoiceQuestionPageState();
@@ -43,7 +42,9 @@ class _ChoiceQuestionPageState extends State<ChoiceQuestionPage>
   void initState() {
     super.initState();
     _submitButtonAnimation = AnimationController(
+      //TODO: move to const maybe?
       duration: const Duration(milliseconds: 200),
+      //TODO: recheck lower opacity bound
       lowerBound: 0.8,
       vsync: this,
     );

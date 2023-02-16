@@ -1,7 +1,6 @@
+import 'package:core/src/presentation/utils/app_fonts.dart';
+import 'package:core/src/presentation/utils/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:survey_sdk/presentation/utils/app_fonts.dart';
-import 'package:survey_sdk/presentation/utils/colors.dart';
-import 'package:survey_sdk/presentation/utils/constants/constants.dart';
 
 class QuestionBottomButton extends StatelessWidget {
   const QuestionBottomButton({
@@ -20,10 +19,11 @@ class QuestionBottomButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
+      //TODO: let the widget define it's own height depending on the child
       height: 52,
       width: double.infinity,
       child: Material(
-        color: AppColors.black.withOpacity(animatedColorOpacity),
+        color: Colors.black.withOpacity(animatedColorOpacity),
         borderRadius: BorderRadius.circular(
           AppDimensions.circularRadiusS,
         ),
@@ -36,7 +36,7 @@ class QuestionBottomButton extends StatelessWidget {
             child: Text(
               text,
               style: const TextStyle(
-                color: AppColors.white,
+                color: Colors.white,
                 fontWeight: AppFonts.weightBold,
                 fontSize: AppFonts.sizeM,
               ),
