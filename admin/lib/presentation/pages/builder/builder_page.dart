@@ -8,6 +8,11 @@ import 'package:survey_sdk/presentation/widgets/builder_page/phone_redactor.dart
 import 'package:survey_sdk/presentation/widgets/builder_page/phone_view.dart';
 import 'package:survey_sdk/presentation/widgets/builder_page/survey_questions.dart';
 
+//TODO: rework phone widget
+//TODO: recheck size constants
+//TODO: recheck buttons
+//TODO: rework tabs
+//TODO: recheck left container
 class BuilderPage extends BasePage {
   const BuilderPage({super.key});
 
