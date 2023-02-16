@@ -3,8 +3,8 @@ import 'package:survey_sdk/presentation/utils/app_fonts.dart';
 import 'package:survey_sdk/presentation/utils/colors.dart';
 
 //TODO: extend every item from CustomizationItem class
-class SwitchItem extends StatelessWidget {
-  const SwitchItem({
+class SwitchCustomizationItem extends StatelessWidget {
+  const SwitchCustomizationItem({
     super.key,
     required this.title,
     this.initialValue,

@@ -3,7 +3,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:survey_sdk/presentation/utils/app_fonts.dart';
 import 'package:survey_sdk/presentation/utils/colors.dart';
 import 'package:survey_sdk/presentation/utils/constants/constants.dart';
-import 'package:survey_sdk/widgets/customization_items/switch_item.dart';
+import 'package:survey_sdk/presentation/widgets/customization_items/switch_customization_item.dart';
 
 class MultilineSwitch extends StatefulWidget {
   const MultilineSwitch({
@@ -43,7 +43,7 @@ class _MultilineSwitchState extends State<MultilineSwitch> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SwitchItem(
+          SwitchCustomizationItem(
             //TODO: move to localization maaybe?
             title: 'Multiline',
             onChanged: (isToggled) {
