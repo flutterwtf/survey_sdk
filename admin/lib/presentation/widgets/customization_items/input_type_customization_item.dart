@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:survey_sdk/presentation/utils/app_fonts.dart';
 import 'package:survey_sdk/presentation/utils/constants/constants.dart';
 
-// TODO use model from core/lib/domain/entities/ instead of this
 enum InputType {
   text('Text'),
   number('Number'),
@@ -15,8 +14,8 @@ enum InputType {
   final String name;
 }
 
-class InputTypeCustomizeItem extends StatefulWidget {
-  const InputTypeCustomizeItem({
+class InputTypeCustomizationItem extends StatefulWidget {
+  const InputTypeCustomizationItem({
     super.key,
     this.initialValue = InputType.text,
     this.onChanged,
@@ -26,19 +25,19 @@ class InputTypeCustomizeItem extends StatefulWidget {
   final void Function(InputType inputType)? onChanged;
 
   @override
-  State<InputTypeCustomizeItem> createState() => _InputTypeCustomizeItemState();
+  State<InputTypeCustomizationItem> createState() => _InputTypeCustomizationItemState();
 }
 
-class _InputTypeCustomizeItemState extends State<InputTypeCustomizeItem>
+class _InputTypeCustomizationItemState extends State<InputTypeCustomizationItem>
     with SingleTickerProviderStateMixin {
-  late bool _isOtherTypesShowed;
+  late bool _isExpanded;
   late InputType _selectedType;
   late AnimationController _iconAnimationController;
 
   @override
   void initState() {
     super.initState();
-    _isOtherTypesShowed = false;
+    _isExpanded = false;
     _selectedType = widget.initialValue;
     _iconAnimationController = AnimationController(
       vsync: this,
@@ -77,9 +76,9 @@ class _InputTypeCustomizeItemState extends State<InputTypeCustomizeItem>
           ),
           onTap: () {
             setState(() {
-              _isOtherTypesShowed = !_isOtherTypesShowed;
+              _isExpanded = !_isExpanded;
             });
-            if (_isOtherTypesShowed) {
+            if (_isExpanded) {
               _iconAnimationController.forward();
             } else {
               _iconAnimationController.reverse();
@@ -88,7 +87,7 @@ class _InputTypeCustomizeItemState extends State<InputTypeCustomizeItem>
         ),
         AnimatedSize(
           duration: const Duration(milliseconds: 100),
-          child: _isOtherTypesShowed
+          child: _isExpanded
               ? Column(
                   children: InputType.values
                       .where((inputType) => inputType != _selectedType)
@@ -97,11 +96,11 @@ class _InputTypeCustomizeItemState extends State<InputTypeCustomizeItem>
                           inputType: inputType,
                           onTap: () {
                             setState(() {
-                              _isOtherTypesShowed = false;
+                              _isExpanded = false;
                               _selectedType = inputType;
                             });
                             widget.onChanged?.call(inputType);
-                            if (_isOtherTypesShowed) {
+                            if (_isExpanded) {
                               _iconAnimationController.forward();
                             } else {
                               _iconAnimationController.reverse();
@@ -155,6 +154,7 @@ class _InputTypeItem extends StatelessWidget {
   }
 }
 
+//TODO: let's replace it just with the common arrow icon
 class _DropdownListIconPainter extends CustomPainter {
   const _DropdownListIconPainter({
     required this.animatedValue,
