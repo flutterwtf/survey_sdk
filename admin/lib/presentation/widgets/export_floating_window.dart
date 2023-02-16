@@ -3,11 +3,11 @@ import 'package:survey_sdk/presentation/utils/app_fonts.dart';
 import 'package:survey_sdk/presentation/utils/colors.dart';
 import 'package:survey_sdk/presentation/utils/constants/constants.dart';
 
-Future<void> showExportFloatingWindow(
+void showExportFloatingWindow(
   BuildContext context, {
   required VoidCallback onDownloadPressed,
   required VoidCallback onCopyPressed,
-}) async {
+}) {
   final overlayState = Overlay.of(context);
   late OverlayEntry overlayEntry;
 
