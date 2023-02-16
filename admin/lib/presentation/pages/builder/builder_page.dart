@@ -7,6 +7,7 @@ import 'package:survey_sdk/presentation/utils/constants/constants.dart';
 import 'package:survey_sdk/presentation/widgets/builder_page/phone_redactor.dart';
 import 'package:survey_sdk/presentation/widgets/builder_page/phone_view.dart';
 import 'package:survey_sdk/presentation/widgets/builder_page/survey_questions.dart';
+import 'package:survey_sdk/presentation/widgets/export_floating_window.dart';
 
 //TODO: rework phone widget
 //TODO: recheck size constants
@@ -95,7 +96,13 @@ class _BuilderPageState extends BasePageState<BuilderPage, BuilderCubit> {
                   right: AppDimensions.margin2XL,
                 ),
                 child: TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    showExportFloatingWindow(
+                      context,
+                      onDownloadPressed: () {},
+                      onCopyPressed: () {},
+                    );
+                  },
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all(AppColors.black),
                   ),
