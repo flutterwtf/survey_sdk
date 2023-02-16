@@ -1,7 +1,8 @@
+import 'package:core/src/presentation/utils/constants.dart';
+import 'package:core/src/presentation/widgets/question_bottom_button.dart';
+import 'package:core/src/presentation/widgets/question_content.dart';
+import 'package:core/src/presentation/widgets/question_title.dart';
 import 'package:flutter/material.dart';
-import 'package:survey_sdk/presentation/utils/app_fonts.dart';
-import 'package:survey_sdk/presentation/utils/constants/constants.dart';
-import 'package:survey_sdk/presentation/widgets/question_bottom_button.dart';
 
 class IntroQuestionPage extends StatelessWidget {
   final String title;
@@ -33,7 +34,7 @@ class IntroQuestionPage extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _QuestionTitle(
+          QuestionTitle(
             title: title,
           ),
           if (content != null)
@@ -41,7 +42,7 @@ class IntroQuestionPage extends StatelessWidget {
               padding: const EdgeInsets.only(
                 top: AppDimensions.margin2XL,
               ),
-              child: _QuestionTextContent(
+              child: QuestionContent(
                 content: content!,
               ),
             ),
@@ -54,7 +55,6 @@ class IntroQuestionPage extends StatelessWidget {
                   child: QuestionBottomButton(
                     text: secondaryButtonTitle!,
                     onPressed: onSecondaryButtonTap!,
-                    isMain: false,
                     isEnabled: true,
                   ),
                 ),
@@ -62,48 +62,11 @@ class IntroQuestionPage extends StatelessWidget {
                 text: mainButtonTitle,
                 onPressed: onMainButtonTap,
                 isEnabled: true,
-                isMain: true,
+                isOutlined: true,
               ),
             ],
           ),
         ],
-      ),
-    );
-  }
-}
-
-class _QuestionTitle extends StatelessWidget {
-  const _QuestionTitle({
-    required this.title,
-  });
-
-  final String title;
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      title,
-      style: const TextStyle(
-        fontWeight: AppFonts.weightBold,
-        fontSize: AppFonts.sizeL,
-      ),
-    );
-  }
-}
-
-class _QuestionTextContent extends StatelessWidget {
-  const _QuestionTextContent({
-    required this.content,
-  });
-
-  final String content;
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      content,
-      style: const TextStyle(
-        fontSize: AppFonts.sizeS,
       ),
     );
   }

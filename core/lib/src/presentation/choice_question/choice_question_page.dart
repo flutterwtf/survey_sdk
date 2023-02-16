@@ -120,7 +120,6 @@ class _ChoiceQuestionPageState extends State<ChoiceQuestionPage>
               text: 'NEXT',
               onPressed: widget.onSend,
               isEnabled: widget.canBeSkipped ? true : _canBeSend,
-              animatedColorOpacity: _submitButtonAnimation.value,
             ),
           ),
         ],
