@@ -3,20 +3,20 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:survey_sdk/presentation/utils/app_fonts.dart';
 import 'package:survey_sdk/presentation/utils/colors.dart';
 import 'package:survey_sdk/presentation/utils/constants/constants.dart';
-import 'package:survey_sdk/widgets/switch_item.dart';
+import 'package:survey_sdk/widgets/customization_items/switch_item.dart';
 
 class MultilineSwitch extends StatefulWidget {
   const MultilineSwitch({
     super.key,
     required this.onChanged,
-    this.initialValue = false,
+    this.isMultiline = false,
     this.defaultLineAmount = 3,
   });
 
   /// if `isMultiline` equals `false` then `lineAmount` is always equals 1.
   /// In case of any input error `lineAmount` is always equals 1.
   final void Function(bool isMultiline, int lineAmount) onChanged;
-  final bool initialValue;
+  final bool isMultiline;
   final int defaultLineAmount;
 
   @override
@@ -30,7 +30,7 @@ class _MultilineSwitchState extends State<MultilineSwitch> {
   @override
   void initState() {
     super.initState();
-    _isMultiline = widget.initialValue;
+    _isMultiline = widget.isMultiline;
     _lineAmount = widget.defaultLineAmount;
   }
 
@@ -44,6 +44,7 @@ class _MultilineSwitchState extends State<MultilineSwitch> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SwitchItem(
+            //TODO: move to localization maaybe?
             title: 'Multiline',
             onChanged: (isToggled) {
               setState(() {
@@ -53,6 +54,7 @@ class _MultilineSwitchState extends State<MultilineSwitch> {
             },
           ),
           AnimatedSize(
+            //TODO: move to const maybe?
             duration: const Duration(
               milliseconds: 100,
             ),
@@ -72,6 +74,7 @@ class _MultilineSwitchState extends State<MultilineSwitch> {
   }
 }
 
+//TODO: combine with other input fields maybe?
 class _LineAmountInputField extends StatelessWidget {
   const _LineAmountInputField({
     required this.onChanged,
