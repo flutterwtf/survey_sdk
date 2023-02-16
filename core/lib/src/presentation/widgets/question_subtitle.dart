@@ -1,6 +1,5 @@
+import 'package:core/src/presentation/utils/app_fonts.dart';
 import 'package:flutter/material.dart';
-import 'package:survey_sdk/presentation/utils/app_fonts.dart';
-import 'package:survey_sdk/presentation/utils/colors.dart';
 
 class QuestionSubtitle extends StatelessWidget {
   final String content;
@@ -13,7 +12,7 @@ class QuestionSubtitle extends StatelessWidget {
       content,
       style: const TextStyle(
         fontSize: AppFonts.sizeS,
-        color: AppColors.black,
+        color: Colors.black,
       ),
     );
   }

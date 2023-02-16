@@ -1,12 +1,10 @@
+import 'package:core/src/presentation/utils/app_fonts.dart';
+import 'package:core/src/presentation/utils/constants.dart';
+import 'package:core/src/presentation/widgets/question_bottom_button.dart';
+import 'package:core/src/presentation/widgets/question_subtitle.dart';
+import 'package:core/src/presentation/widgets/question_title.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-
-import 'package:survey_sdk/presentation/utils/app_fonts.dart';
-import 'package:survey_sdk/presentation/utils/colors.dart';
-import 'package:survey_sdk/presentation/utils/constants/constants.dart';
-import 'package:survey_sdk/presentation/widgets/question_bottom_button.dart';
-import 'package:survey_sdk/presentation/widgets/question_subtitle.dart';
-import 'package:survey_sdk/presentation/widgets/question_title.dart';
 
 class SliderQuestionPage extends StatelessWidget {
   final String title;
@@ -29,10 +27,10 @@ class SliderQuestionPage extends StatelessWidget {
     required this.maxValue,
     required this.onSend,
     this.isSkip = false,
-    this.activeColor = AppColors.black,
+    this.activeColor = Colors.black,
     this.inactiveColor = Colors.grey,
     this.thickness = 8.0,
-    this.thumbColor = AppColors.black,
+    this.thumbColor = Colors.black,
     this.thumbRadius = 8.0,
   });
 
@@ -75,6 +73,7 @@ class SliderQuestionPage extends StatelessWidget {
           ),
           const Spacer(),
           QuestionBottomButton(
+            //TODO: move to localization?
             text: 'NEXT',
             onPressed: onSend,
             isEnabled: isSkip,
