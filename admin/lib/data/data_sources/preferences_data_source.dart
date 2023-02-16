@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:survey_sdk/domain/entities/theme_type.dart';
+import 'package:core/core.dart';
 
 abstract class PreferencesDataSource {
   factory PreferencesDataSource() => PreferencesDataSourceImpl();
