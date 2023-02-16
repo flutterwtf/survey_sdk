@@ -9,8 +9,8 @@ class AppCubit extends Cubit<AppState> {
       : super(
           AppState(
             themeData: ThemeData(
-              extensions: const [
-                SurveySliderTheme.common(),
+              extensions: [
+                SurveySliderThemeData.common(),
               ],
             ),
           ),

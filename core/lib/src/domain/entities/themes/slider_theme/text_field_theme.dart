@@ -1,24 +1,26 @@
+//TODO: rewrite this to TextFieldTheme PLS
+
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:survey_core/src/entities/api_object.dart';
-import 'package:survey_core/src/entities/themes/theme_extension_composable.dart';
+import 'package:survey_core/src/domain/entities/api_object.dart';
+import 'package:survey_core/src/domain/entities/themes/theme_extension_composable.dart';
 
 @immutable
-class SurveySliderTheme extends ThemeExtension<SurveySliderTheme> with ApiObject {
+class TextFieldTheme extends ThemeExtension<TextFieldTheme> with ApiObject {
   final ThumbTheme thumbTheme;
   final double thickness;
   final Color activeColor;
   final Color inactiveColor;
 
-  const SurveySliderTheme({
+  const TextFieldTheme({
     required this.thumbTheme,
     required this.thickness,
     required this.activeColor,
     required this.inactiveColor,
   });
 
-  const SurveySliderTheme.common()
+  const TextFieldTheme.common()
       : this(
           thumbTheme: const ThumbTheme.common(),
           thickness: 8.0,
@@ -26,7 +28,7 @@ class SurveySliderTheme extends ThemeExtension<SurveySliderTheme> with ApiObject
           inactiveColor: const Color(0xFFCCCCCC),
         );
 
-  SurveySliderTheme.fromJson(Map<String, dynamic> json)
+  TextFieldTheme.fromJson(Map<String, dynamic> json)
       : thumbTheme = ThumbTheme.fromJson(json['thumb']),
         thickness = json['thickness'],
         activeColor = Color(json['activeColor']),
@@ -41,13 +43,13 @@ class SurveySliderTheme extends ThemeExtension<SurveySliderTheme> with ApiObject
       };
 
   @override
-  ThemeExtension<SurveySliderTheme> copyWith({
+  ThemeExtension<TextFieldTheme> copyWith({
     ThumbTheme? thumbTheme,
     double? thickness,
     Color? activeColor,
     Color? inactiveColor,
   }) {
-    return SurveySliderTheme(
+    return TextFieldTheme(
       thumbTheme: thumbTheme ?? this.thumbTheme,
       thickness: thickness ?? this.thickness,
       activeColor: activeColor ?? this.activeColor,
@@ -56,11 +58,11 @@ class SurveySliderTheme extends ThemeExtension<SurveySliderTheme> with ApiObject
   }
 
   @override
-  ThemeExtension<SurveySliderTheme> lerp(covariant ThemeExtension<SurveySliderTheme>? other, double t) {
-    if (other is! SurveySliderTheme) {
+  ThemeExtension<TextFieldTheme> lerp(covariant ThemeExtension<TextFieldTheme>? other, double t) {
+    if (other is! TextFieldTheme) {
       return this;
     }
-    return SurveySliderTheme(
+    return TextFieldTheme(
       activeColor: Color.lerp(activeColor, other.activeColor, t)!,
       inactiveColor: Color.lerp(inactiveColor, other.inactiveColor, t)!,
       thickness: lerpDouble(thickness, other.thickness, t)!,
