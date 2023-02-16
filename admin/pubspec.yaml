@@ -34,4 +34,3 @@ dev_dependencies:
 flutter:
   generate: true
   uses-material-design: true
-

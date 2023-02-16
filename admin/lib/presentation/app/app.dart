@@ -20,7 +20,8 @@ class App extends BasePage {
   _AppState createState() => _AppState();
 }
 
-class _AppState extends BasePageState<App, AppCubit> with WidgetsBindingObserver {
+class _AppState extends BasePageState<App, AppCubit>
+    with WidgetsBindingObserver {
   @override
   void initState() {
     super.initState();
@@ -77,7 +78,8 @@ class _AppState extends BasePageState<App, AppCubit> with WidgetsBindingObserver
 
   AppTheme _selectTheme(ThemeType themeType) {
     if (themeType == ThemeType.system) {
-      return MediaQueryData.fromWindow(WidgetsBinding.instance.window).platformBrightness ==
+      return MediaQueryData.fromWindow(WidgetsBinding.instance.window)
+                  .platformBrightness ==
               Brightness.light
           ? lightTheme
           : darkTheme;
