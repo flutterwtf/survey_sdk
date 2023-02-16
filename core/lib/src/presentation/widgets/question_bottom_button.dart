@@ -8,7 +8,7 @@ class QuestionBottomButton extends StatelessWidget {
     required this.text,
     required this.onPressed,
     required this.isEnabled,
-    required this.animatedColorOpacity,
+    this.animatedColorOpacity = 1.0,
   });
 
   final String text;
