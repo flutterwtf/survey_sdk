@@ -1,6 +1,6 @@
 import 'package:survey_sdk/data/data_sources/preferences_data_source.dart';
 import 'package:survey_sdk/domain/data_interfaces/theme_repository.dart';
-import 'package:survey_sdk/domain/entities/theme_type.dart';
+import 'package:core/core.dart';
 
 class ThemeRepositoryImpl implements ThemeRepository {
   final PreferencesDataSource _preferencesDataSource;
