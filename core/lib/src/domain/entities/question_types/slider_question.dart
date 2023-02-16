@@ -1,8 +1,14 @@
-import 'package:core/domain/entities/question_types/type_question.dart';
+import 'package:core/src/domain/entities/question_types/type_question.dart';
 import 'package:flutter/material.dart';
 
-class IntroQuestion extends TypeQuestion {
-  const IntroQuestion({
+
+class SliderQuestion extends TypeQuestion {
+  final int minValue;
+  final int maxValue;
+
+  const SliderQuestion({
+    required this.minValue,
+    required this.maxValue,
     required super.title,
     required super.subtitle,
     required super.typeQuestion,
@@ -15,5 +21,5 @@ class IntroQuestion extends TypeQuestion {
   Theme get theme => throw UnimplementedError();
 
   @override
-  String get type => 'IntroQuestion';
+  String get type => 'SliderQuestion';
 }

@@ -1,10 +1,8 @@
-import 'package:core/domain/entities/question_types/choice_questions/choice_question.dart';
+import 'package:core/src/domain/entities/question_types/type_question.dart';
 import 'package:flutter/material.dart';
 
-class RadioButtonQuestion extends ChoiceQuestion {
-  const RadioButtonQuestion({
-    required super.isMultiple,
-    required super.questions,
+class IntroQuestion extends TypeQuestion {
+  const IntroQuestion({
     required super.title,
     required super.subtitle,
     required super.typeQuestion,
@@ -17,5 +15,5 @@ class RadioButtonQuestion extends ChoiceQuestion {
   Theme get theme => throw UnimplementedError();
 
   @override
-  String get type => 'RadioButtonQuestion';
+  String get type => 'IntroQuestion';
 }

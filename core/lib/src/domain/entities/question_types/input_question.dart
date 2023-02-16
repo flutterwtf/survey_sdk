@@ -1,5 +1,5 @@
-import 'package:core/domain/entities/question_types/type_question.dart';
-import 'package:core/domain/entities/validator/input_validator.dart';
+import 'package:core/src/domain/entities/question_types/type_question.dart';
+import 'package:core/src/domain/entities/validator/input_validator.dart';
 import 'package:flutter/material.dart';
 
 
