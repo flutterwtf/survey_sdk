@@ -4,8 +4,8 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:survey_sdk/presentation/utils/app_fonts.dart';
 import 'package:survey_sdk/presentation/utils/constants/constants.dart';
 
-class MinMaxCustomizeItem extends StatefulWidget {
-  const MinMaxCustomizeItem({
+class MinMaxCustomizationItem extends StatefulWidget {
+  const MinMaxCustomizationItem({
     super.key,
     this.initialMin = 0,
     this.initialMax = 10,
@@ -17,10 +17,10 @@ class MinMaxCustomizeItem extends StatefulWidget {
   final void Function(int? min, int? max) onChanged;
 
   @override
-  State<MinMaxCustomizeItem> createState() => _MinMaxCustomizeItemState();
+  State<MinMaxCustomizationItem> createState() => _MinMaxCustomizationItemState();
 }
 
-class _MinMaxCustomizeItemState extends State<MinMaxCustomizeItem> {
+class _MinMaxCustomizationItemState extends State<MinMaxCustomizationItem> {
   int? _min;
   int? _max;
 
@@ -81,6 +81,7 @@ class _MinMaxCustomizeItemState extends State<MinMaxCustomizeItem> {
   }
 }
 
+//TODO: combine with default input field
 class _MinMaxInputField extends StatelessWidget {
   const _MinMaxInputField({
     required this.prefix,

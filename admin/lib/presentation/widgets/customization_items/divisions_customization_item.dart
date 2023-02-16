@@ -4,8 +4,8 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:survey_sdk/presentation/utils/app_fonts.dart';
 import 'package:survey_sdk/presentation/utils/constants/constants.dart';
 
-class DivisionsCustomizeItem extends StatelessWidget {
-  const DivisionsCustomizeItem({
+class DivisionsCustomizationItem extends StatelessWidget {
+  const DivisionsCustomizationItem({
     super.key,
     this.initialValue = 10,
     required this.onChanged,
