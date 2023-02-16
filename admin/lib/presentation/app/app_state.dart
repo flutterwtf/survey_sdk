@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:survey_sdk/domain/entities/theme_type.dart';
+import 'package:core/core.dart';
 
 class AppState extends Equatable {
   final ThemeType themeType;
