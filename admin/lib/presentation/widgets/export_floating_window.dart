@@ -92,6 +92,7 @@ class _ExportFloatingWindow extends StatelessWidget {
               const Icon(
                 Icons.task_rounded,
                 size: AppDimensions.size2XL,
+                color: AppColors.black,
               ),
               const Spacer(),
               Padding(
@@ -109,7 +110,7 @@ class _ExportFloatingWindow extends StatelessWidget {
                         ),
                         side: const MaterialStatePropertyAll(
                           BorderSide(
-                            color: Colors.black,
+                            color: AppColors.black,
                           ),
                         ),
                         shape: MaterialStatePropertyAll(
