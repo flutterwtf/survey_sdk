@@ -1,6 +1,6 @@
 {
-    "name": "survey_sdk",
-    "short_name": "survey_sdk",
+    "name": "survey_admin",
+    "short_name": "survey_admin",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

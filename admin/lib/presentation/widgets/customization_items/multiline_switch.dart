@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:survey_sdk/presentation/utils/app_fonts.dart';
-import 'package:survey_sdk/presentation/utils/colors.dart';
-import 'package:survey_sdk/presentation/utils/constants/constants.dart';
-import 'package:survey_sdk/presentation/widgets/customization_items/switch_customization_item.dart';
+import 'package:survey_admin/presentation/utils/app_fonts.dart';
+import 'package:survey_admin/presentation/utils/colors.dart';
+import 'package:survey_admin/presentation/utils/constants/constants.dart';
+import 'package:survey_admin/presentation/widgets/customization_items/switch_customization_item.dart';
 
 class MultilineSwitch extends StatefulWidget {
   const MultilineSwitch({
