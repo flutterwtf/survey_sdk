@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
+import 'package:survey_admin/presentation/widgets/customization_items/customization_text_field.dart';
 
 class PaddingCustomizationItem extends StatefulWidget {
   final double initialHorizontalPadding;
@@ -18,7 +19,8 @@ class PaddingCustomizationItem extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<PaddingCustomizationItem> createState() => _PaddingCustomizationItemState();
+  State<PaddingCustomizationItem> createState() =>
+      _PaddingCustomizationItemState();
 }
 
 class _PaddingCustomizationItemState extends State<PaddingCustomizationItem> {
@@ -72,17 +74,18 @@ class _PaddingCustomizationItemState extends State<PaddingCustomizationItem> {
                 Container(
                   margin: const EdgeInsets.only(left: AppDimensions.marginS),
                   width: AppDimensions.sizeL,
-                  child: TextFormField(
-                    decoration: const InputDecoration(
-                      border: InputBorder.none,
-                    ),
+                  child: CustomizationTextField(
                     focusNode: horizontalPaddingFocusNode,
+                    initialValue: horizontalPadding.toString(),
                     inputFormatters: [
                       FilteringTextInputFormatter.digitsOnly,
                       LengthLimitingTextInputFormatter(3),
                     ],
-                    initialValue: horizontalPadding.toString(),
-                    onChanged: (value) => setState(() => horizontalPadding = double.parse(value)),
+                    onChanged: (value) {
+                      if (value != null) {
+                        setState(() => horizontalPadding = double.parse(value));
+                      }
+                    },
                   ),
                 ),
               ],
@@ -108,17 +111,18 @@ class _PaddingCustomizationItemState extends State<PaddingCustomizationItem> {
                 Container(
                   margin: const EdgeInsets.only(left: AppDimensions.marginS),
                   width: AppDimensions.sizeL,
-                  child: TextFormField(
-                    decoration: const InputDecoration(
-                      border: InputBorder.none,
-                    ),
+                  child: CustomizationTextField(
                     focusNode: verticalPaddingFocusNode,
+                    initialValue: verticalPadding.toString(),
                     inputFormatters: [
                       FilteringTextInputFormatter.digitsOnly,
                       LengthLimitingTextInputFormatter(3),
                     ],
-                    initialValue: verticalPadding.toString(),
-                    onChanged: (value) => setState(() => verticalPadding = double.parse(value)),
+                    onChanged: (value) {
+                      if (value != null) {
+                        setState(() => verticalPadding = double.parse(value));
+                      }
+                    },
                   ),
                 ),
               ],

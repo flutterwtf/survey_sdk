@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
+import 'package:survey_admin/presentation/widgets/customization_items/customization_text_field.dart';
 
-//TODO: add TextField
 class ColorCustomizationItem extends StatefulWidget {
   final Color initialColor;
   final ValueChanged<Color> onColorPicked;
@@ -20,13 +21,39 @@ class ColorCustomizationItem extends StatefulWidget {
 
 class _ColorCustomizationItemState extends State<ColorCustomizationItem> {
   late Color pickerColor;
-  late Color currentColor;
+  TextEditingController controller = TextEditingController();
 
   @override
   void initState() {
-    currentColor = widget.initialColor;
-    pickerColor = currentColor;
+    controller.text = colorToString(widget.initialColor);
+    pickerColor = widget.initialColor;
     super.initState();
+  }
+
+  void onChangedTextField(String? value) {
+    if (value != null) {
+      final color = int.tryParse(value.padRight(8, '0'), radix: 16);
+      if (color != null) {
+        setState(() {
+          pickerColor = Color(color);
+        });
+      }
+    }
+  }
+
+  void onColorChanged(color) {
+    widget.onColorPicked(color);
+    setState(() => pickerColor = color);
+  }
+
+  String colorToString(Color color) =>
+      color.value.toRadixString(16).toUpperCase();
+
+  void updateTextField() {
+    widget.onColorPicked(pickerColor);
+    setState(
+      () => controller.text = colorToString(pickerColor),
+    );
   }
 
   @override
@@ -40,14 +67,24 @@ class _ColorCustomizationItemState extends State<ColorCustomizationItem> {
             Container(
               decoration: BoxDecoration(
                 border: Border.all(color: AppColors.black),
-                color: currentColor,
+                color: pickerColor,
               ),
               width: AppDimensions.sizeM,
               height: AppDimensions.sizeM,
             ),
-            Container(
-              margin: const EdgeInsets.all(AppDimensions.margin2XS),
-              child: Text(currentColor.value.toRadixString(16).padLeft(6, '0').toUpperCase()),
+            Expanded(
+              child: Container(
+                margin: const EdgeInsets.all(AppDimensions.margin2XS),
+                child: CustomizationTextField(
+                  controller: controller,
+                  onEditingComplete: updateTextField,
+                  inputFormatters: [
+                    FilteringTextInputFormatter.allow(RegExp('[0-9a-fA-F]')),
+                    LengthLimitingTextInputFormatter(8),
+                  ],
+                  onChanged: onChangedTextField,
+                ),
+              ),
             ),
           ],
         ),
@@ -64,10 +101,7 @@ class _ColorCustomizationItemState extends State<ColorCustomizationItem> {
             content: SingleChildScrollView(
               child: ColorPicker(
                 pickerColor: pickerColor,
-                onColorChanged: (color) {
-                  widget.onColorPicked(color);
-                  setState(() => pickerColor = color);
-                },
+                onColorChanged: onColorChanged,
                 hexInputBar: true,
               ),
             ),
@@ -75,7 +109,7 @@ class _ColorCustomizationItemState extends State<ColorCustomizationItem> {
               ElevatedButton(
                 child: const Text('OK'),
                 onPressed: () {
-                  setState(() => currentColor = pickerColor);
+                  updateTextField();
                   Navigator.of(context).pop();
                 },
               ),
