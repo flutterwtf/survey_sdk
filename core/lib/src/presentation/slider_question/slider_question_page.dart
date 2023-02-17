@@ -26,13 +26,13 @@ class _SliderQuestionPageState extends State<SliderQuestionPage> {
   late final SliderThemeData _theme;
 
   @override
-  void initState() {
+  void didChangeDependencies() {
     if (widget.data.theme == null) {
       _theme = Theme.of(context).sliderTheme;
     } else {
       _theme = widget.data.theme!;
     }
-    super.initState();
+    super.didChangeDependencies();
   }
 
   @override
