@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:survey_admin/presentation/utils/app_fonts.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
+import 'package:survey_admin/presentation/widgets/customization_items/customization_text_field.dart';
 
 class MinMaxCustomizationItem extends StatefulWidget {
   const MinMaxCustomizationItem({
@@ -17,7 +18,8 @@ class MinMaxCustomizationItem extends StatefulWidget {
   final void Function(int? min, int? max) onChanged;
 
   @override
-  State<MinMaxCustomizationItem> createState() => _MinMaxCustomizationItemState();
+  State<MinMaxCustomizationItem> createState() =>
+      _MinMaxCustomizationItemState();
 }
 
 class _MinMaxCustomizationItemState extends State<MinMaxCustomizationItem> {
@@ -114,9 +116,12 @@ class _MinMaxInputField extends StatelessWidget {
             ),
           ),
           Expanded(
-            child: FormBuilderTextField(
-              name: '${prefix}_input_field',
+            child: CustomizationTextField(
               initialValue: initialValue.toString(),
+              inputFormatters: [
+                FilteringTextInputFormatter.digitsOnly,
+                LengthLimitingTextInputFormatter(6),
+              ],
               onChanged: (value) {
                 if (value != null) {
                   onChanged(int.tryParse(value));
@@ -124,18 +129,6 @@ class _MinMaxInputField extends StatelessWidget {
                   onChanged(null);
                 }
               },
-              decoration: const InputDecoration(
-                isCollapsed: true,
-                border: InputBorder.none,
-              ),
-              style: const TextStyle(
-                fontSize: AppFonts.sizeL,
-                fontWeight: AppFonts.weightRegular,
-              ),
-              inputFormatters: [
-                FilteringTextInputFormatter.digitsOnly,
-                LengthLimitingTextInputFormatter(6),
-              ],
             ),
           ),
         ],

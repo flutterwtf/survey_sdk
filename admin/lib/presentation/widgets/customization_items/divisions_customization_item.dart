@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:survey_admin/presentation/utils/app_fonts.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
+import 'package:survey_admin/presentation/widgets/customization_items/customization_text_field.dart';
 
 class DivisionsCustomizationItem extends StatelessWidget {
   const DivisionsCustomizationItem({
@@ -31,9 +32,15 @@ class DivisionsCustomizationItem extends StatelessWidget {
                 fontWeight: AppFonts.weightSemiBold,
               ),
             ),
-            FormBuilderTextField(
-              name: 'divisions',
+            const SizedBox(
+              height: AppDimensions.marginS,
+            ),
+            CustomizationTextField(
               initialValue: initialValue.toString(),
+              inputFormatters: [
+                FilteringTextInputFormatter.digitsOnly,
+                LengthLimitingTextInputFormatter(3),
+              ],
               onChanged: (divisions) {
                 if (divisions != null) {
                   onChanged(int.tryParse(divisions));
@@ -41,21 +48,6 @@ class DivisionsCustomizationItem extends StatelessWidget {
                   onChanged(null);
                 }
               },
-              decoration: const InputDecoration(
-                isCollapsed: true,
-                border: InputBorder.none,
-                contentPadding: EdgeInsets.only(
-                  top: AppDimensions.marginS,
-                ),
-              ),
-              style: const TextStyle(
-                fontSize: AppFonts.sizeL,
-                fontWeight: AppFonts.weightRegular,
-              ),
-              inputFormatters: [
-                FilteringTextInputFormatter.digitsOnly,
-                LengthLimitingTextInputFormatter(3),
-              ],
             ),
           ],
         ),
