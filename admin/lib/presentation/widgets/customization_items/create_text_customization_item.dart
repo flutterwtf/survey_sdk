@@ -5,7 +5,7 @@ import 'package:survey_sdk/presentation/utils/constants/constants.dart';
 
 class CreateTextCustomizationItem extends StatelessWidget {
   final String title;
-  final void Function(String? divisions) onChanged;
+  final void Function(String text) onChanged;
 
   const CreateTextCustomizationItem({
     Key? key,
@@ -28,11 +28,9 @@ class CreateTextCustomizationItem extends StatelessWidget {
               color: AppColors.black,
             ),
           ),
-          const SizedBox(
-            height: 5,
-          ),
+          const SizedBox(height: AppDimensions.margin2XS),
           Expanded(
-            child: TextFormField(
+            child: TextField(
               decoration: const InputDecoration(
                 border: InputBorder.none,
                 hintText: 'Enter text',
@@ -43,13 +41,7 @@ class CreateTextCustomizationItem extends StatelessWidget {
                 fontWeight: AppFonts.weightRegular,
                 color: AppColors.black,
               ),
-              onChanged: (value) {
-                if (value.isEmpty) {
-                  onChanged(null);
-                } else {
-                  onChanged(value);
-                }
-              },
+              onChanged: onChanged,
             ),
           ),
         ],
