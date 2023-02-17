@@ -1,26 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:survey_sdk/presentation/base/base_page.dart';
-import 'package:survey_sdk/presentation/pages/builder/builder_cubit.dart';
-import 'package:survey_sdk/presentation/utils/app_fonts.dart';
-import 'package:survey_sdk/presentation/utils/colors.dart';
-import 'package:survey_sdk/presentation/utils/constants/constants.dart';
-import 'package:survey_sdk/presentation/widgets/builder_page/survey_editor_bar.dart';
-import 'package:survey_sdk/presentation/widgets/builder_page/phone_view.dart';
-import 'package:survey_sdk/presentation/widgets/builder_page/survey_content_bar.dart';
+import 'package:survey_admin/presentation/utils/app_fonts.dart';
+import 'package:survey_admin/presentation/utils/colors.dart';
+import 'package:survey_admin/presentation/utils/constants/constants.dart';
+import 'package:survey_admin/presentation/widgets/builder_page/phone_view.dart';
+import 'package:survey_admin/presentation/widgets/builder_page/survey_content_bar.dart';
+import 'package:survey_admin/presentation/widgets/builder_page/survey_editor_bar.dart';
 
-//TODO: rework phone widget
-//TODO: recheck size constants
-//TODO: recheck buttons
-//TODO: rework tabs
-//TODO: recheck left container
-class BuilderPage extends BasePage {
+class BuilderPage extends StatefulWidget {
   const BuilderPage({super.key});
 
   @override
-  _BuilderPageState createState() => _BuilderPageState();
+  State<BuilderPage> createState() => _BuilderPageState();
 }
 
-class _BuilderPageState extends BasePageState<BuilderPage, BuilderCubit> {
+class _BuilderPageState extends State<BuilderPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
