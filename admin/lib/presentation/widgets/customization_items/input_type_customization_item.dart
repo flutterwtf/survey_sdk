@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:survey_admin/presentation/utils/app_fonts.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
+import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text.dart';
 
 enum InputType {
   text('Text'),
@@ -25,7 +26,8 @@ class InputTypeCustomizationItem extends StatefulWidget {
   final void Function(InputType inputType)? onChanged;
 
   @override
-  State<InputTypeCustomizationItem> createState() => _InputTypeCustomizationItemState();
+  State<InputTypeCustomizationItem> createState() =>
+      _InputTypeCustomizationItemState();
 }
 
 class _InputTypeCustomizationItemState extends State<InputTypeCustomizationItem>
@@ -55,13 +57,7 @@ class _InputTypeCustomizationItemState extends State<InputTypeCustomizationItem>
             top: AppDimensions.marginM,
             left: AppDimensions.marginM,
           ),
-          child: Text(
-            'Input type',
-            style: TextStyle(
-              fontSize: AppFonts.sizeM,
-              fontWeight: AppFonts.weightSemiBold,
-            ),
-          ),
+          child: CustomizationText('Input type'),
         ),
         _InputTypeItem(
           inputType: _selectedType,

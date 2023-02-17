@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:survey_admin/presentation/utils/app_fonts.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
+import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text.dart';
 
 class CreateTextCustomizationItem extends StatelessWidget {
   final String title;
@@ -20,14 +21,7 @@ class CreateTextCustomizationItem extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            title,
-            style: const TextStyle(
-              fontSize: AppFonts.sizeL,
-              fontWeight: AppFonts.weightSemiBold,
-              color: AppColors.black,
-            ),
-          ),
+          CustomizationText(title),
           const SizedBox(height: AppDimensions.margin2XS),
           Expanded(
             child: TextField(

@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:survey_admin/presentation/utils/app_fonts.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
+import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text.dart';
 
 class MinMaxCustomizationItem extends StatefulWidget {
   const MinMaxCustomizationItem({
@@ -17,7 +18,8 @@ class MinMaxCustomizationItem extends StatefulWidget {
   final void Function(int? min, int? max) onChanged;
 
   @override
-  State<MinMaxCustomizationItem> createState() => _MinMaxCustomizationItemState();
+  State<MinMaxCustomizationItem> createState() =>
+      _MinMaxCustomizationItemState();
 }
 
 class _MinMaxCustomizationItemState extends State<MinMaxCustomizationItem> {
@@ -40,13 +42,7 @@ class _MinMaxCustomizationItemState extends State<MinMaxCustomizationItem> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            'Value',
-            style: TextStyle(
-              fontSize: AppFonts.sizeM,
-              fontWeight: AppFonts.weightSemiBold,
-            ),
-          ),
+          const CustomizationText('Value'),
           FormBuilder(
             child: Row(
               children: [

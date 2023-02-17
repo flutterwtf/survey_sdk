@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
+import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text.dart';
 
 //TODO: add TextField
 class ColorCustomizationItem extends StatefulWidget {
@@ -33,24 +34,34 @@ class _ColorCustomizationItemState extends State<ColorCustomizationItem> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(AppDimensions.marginM),
-      child: GestureDetector(
-        onTap: pickColor,
-        child: Row(
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                border: Border.all(color: AppColors.black),
-                color: currentColor,
-              ),
-              width: AppDimensions.sizeM,
-              height: AppDimensions.sizeM,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const CustomizationText('Fill'),
+          const SizedBox(height: AppDimensions.marginM),
+          GestureDetector(
+            onTap: pickColor,
+            child: Row(
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(color: AppColors.black),
+                    color: currentColor,
+                  ),
+                  width: AppDimensions.sizeM,
+                  height: AppDimensions.sizeM,
+                ),
+                Container(
+                  margin: const EdgeInsets.all(AppDimensions.margin2XS),
+                  child: Text(currentColor.value
+                      .toRadixString(16)
+                      .padLeft(6, '0')
+                      .toUpperCase()),
+                ),
+              ],
             ),
-            Container(
-              margin: const EdgeInsets.all(AppDimensions.margin2XS),
-              child: Text(currentColor.value.toRadixString(16).padLeft(6, '0').toUpperCase()),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
