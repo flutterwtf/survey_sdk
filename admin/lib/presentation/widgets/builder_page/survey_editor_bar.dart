@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:survey_sdk/presentation/utils/colors.dart';
+import 'package:survey_sdk/presentation/utils/constants/constants.dart';
 
-class PhoneRedactor extends StatelessWidget {
-  const PhoneRedactor({super.key});
+class SurveyEditorBar extends StatelessWidget {
+  const SurveyEditorBar({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       color: AppColors.whitePrimaryBackground,
-      width: 300,
+      width: AppDimensions.surveyEditorBarWidth,
       child: SizedBox(
         child: Column(
           children: const [
