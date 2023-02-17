@@ -1,7 +1,11 @@
-import 'package:flutter/material.dart';
+import 'package:survey_core/src/domain/entities/survey_data.dart';
 
 class SurveyState {
-  final ThemeData? themeData;
+  final SurveyData? surveyData;
 
-  SurveyState({this.themeData});
+  SurveyState({this.surveyData});
+
+  SurveyState copyWith({SurveyData? surveyData}) {
+    return SurveyState(surveyData: surveyData ?? this.surveyData);
+  }
 }

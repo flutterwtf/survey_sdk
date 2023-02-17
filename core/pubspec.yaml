@@ -12,9 +12,11 @@ dependencies:
   flutter:
     sdk: flutter
 
+  #TODO: delete
   flutter_form_builder: ^7.7.0
 
   flutter_bloc: ^8.0.1
+  http: ^0.13.5
 
 dev_dependencies:
   flutter_test:

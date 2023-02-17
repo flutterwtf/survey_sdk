@@ -1,20 +1,13 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:core/core.dart';
 
 class AppState extends Equatable {
-  final ThemeData themeData;
-
-  const AppState({
-    required this.themeData,
-  });
+  const AppState();
 
   AppState copyWith({ThemeData? themeData}) {
-    return AppState(
-      themeData: themeData ?? this.themeData,
-    );
+    return const AppState();
   }
 
   @override
-  List<Object?> get props => [themeData];
+  List<Object?> get props => [];
 }

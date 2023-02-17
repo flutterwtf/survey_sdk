@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:survey_sdk/presentation/utils/app_fonts.dart';
-import 'package:survey_sdk/presentation/utils/constants/constants.dart';
+import 'package:survey_admin/presentation/utils/app_fonts.dart';
+import 'package:survey_admin/presentation/utils/constants/constants.dart';
 
 class DivisionsCustomizationItem extends StatelessWidget {
   const DivisionsCustomizationItem({

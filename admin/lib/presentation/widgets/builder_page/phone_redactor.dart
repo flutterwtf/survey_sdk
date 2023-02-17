@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:survey_sdk/presentation/utils/colors.dart';
+import 'package:survey_admin/presentation/utils/colors.dart';
 
 class PhoneRedactor extends StatelessWidget {
   const PhoneRedactor({super.key});
