@@ -5,9 +5,9 @@ import 'package:survey_admin/presentation/widgets/customization_items/item_divid
 
 class CustomizationItemsContainer extends StatefulWidget {
   final String? title;
-  final EdgeInsets? padding;
-  final double titleSeparatorHeight;
-  final double itemSeparatorHeight;
+  final EdgeInsets? titlePadding;
+  final EdgeInsets? itemsPadding;
+  final double itemsSeparatorHeight;
   final bool isTopDividerShown;
   final bool isBottomDividerShown;
   final List<Widget> children;
@@ -15,9 +15,9 @@ class CustomizationItemsContainer extends StatefulWidget {
   CustomizationItemsContainer({
     super.key,
     this.title,
-    this.padding,
-    this.titleSeparatorHeight = AppDimensions.marginLargeS,
-    this.itemSeparatorHeight = AppDimensions.marginLargeS,
+    this.titlePadding,
+    this.itemsPadding,
+    this.itemsSeparatorHeight = AppDimensions.marginLargeS,
     this.isTopDividerShown = false,
     this.isBottomDividerShown = true,
     required this.children,
@@ -48,35 +48,41 @@ class _CustomizationItemsContainerState
     }
   }
 
-  Widget _itemSeparator() => SizedBox(height: widget.itemSeparatorHeight);
+  Widget _itemSeparator() => SizedBox(height: widget.itemsSeparatorHeight);
 
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         if (widget.isTopDividerShown) const ItemDivider(),
+        if (widget.title != null)
+          Padding(
+            padding: widget.titlePadding ??
+                const EdgeInsets.only(
+                  left: AppDimensions.marginM,
+                  top: AppDimensions.marginM,
+                  right: AppDimensions.marginM,
+                  bottom: AppDimensions.marginLargeS,
+                ),
+            child: Text(
+              widget.title!,
+              style: const TextStyle(
+                fontSize: AppFonts.sizeM,
+                fontWeight: AppFonts.weightSemiBold,
+              ),
+            ),
+          ),
         Padding(
-          padding: widget.padding ??
-              const EdgeInsets.all(
-                AppDimensions.marginM,
+          padding: widget.itemsPadding ??
+              const EdgeInsets.only(
+                left: AppDimensions.marginM,
+                right: AppDimensions.marginM,
+                bottom: AppDimensions.marginM,
               ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              if (widget.title != null) ...[
-                Text(
-                  widget.title!,
-                  style: const TextStyle(
-                    fontSize: AppFonts.sizeM,
-                    fontWeight: AppFonts.weightSemiBold,
-                  ),
-                ),
-                SizedBox(
-                  height: widget.titleSeparatorHeight,
-                ),
-              ],
-              ..._items,
-            ],
+            children: _items,
           ),
         ),
         if (widget.isBottomDividerShown) const ItemDivider(),
