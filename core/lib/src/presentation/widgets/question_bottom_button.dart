@@ -1,5 +1,5 @@
-import 'package:core/src/presentation/utils/app_fonts.dart';
-import 'package:core/src/presentation/utils/constants.dart';
+import 'package:survey_core/src/presentation/utils/app_fonts.dart';
+import 'package:survey_core/src/presentation/utils/constants.dart';
 import 'package:flutter/material.dart';
 
 class QuestionBottomButton extends StatelessWidget {
@@ -7,7 +7,7 @@ class QuestionBottomButton extends StatelessWidget {
     super.key,
     required this.text,
     required this.onPressed,
-    required this.isEnabled,
+    this.isEnabled = true,
     this.isOutlined = false,
   });
 

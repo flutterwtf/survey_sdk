@@ -1,38 +1,39 @@
-import 'package:core/src/presentation/utils/app_fonts.dart';
-import 'package:core/src/presentation/utils/constants.dart';
-import 'package:core/src/presentation/widgets/question_bottom_button.dart';
-import 'package:core/src/presentation/widgets/question_subtitle.dart';
-import 'package:core/src/presentation/widgets/question_title.dart';
+import 'package:survey_core/src/domain/entities/question_types/slider_question_data.dart';
+import 'package:survey_core/src/presentation/utils/app_fonts.dart';
+import 'package:survey_core/src/presentation/utils/constants.dart';
+import 'package:survey_core/src/presentation/utils/data_to_widget_util.dart';
+import 'package:survey_core/src/presentation/widgets/question_bottom_button.dart';
+import 'package:survey_core/src/presentation/widgets/question_subtitle.dart';
+import 'package:survey_core/src/presentation/widgets/question_title.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_form_builder/flutter_form_builder.dart';
 
-class SliderQuestionPage extends StatelessWidget {
-  final String title;
-  final String? subtitle;
-  final double minValue;
-  final double maxValue;
-  final VoidCallback onSend;
-  final bool isSkip;
-  final Color activeColor;
-  final Color inactiveColor;
-  final double thickness;
-  final Color thumbColor;
-  final double thumbRadius;
+//TODO: extend from one superclass maybe?
+class SliderQuestionPage extends StatefulWidget {
+  final SliderQuestionData data;
+  final OnSendCallback onSend;
 
   const SliderQuestionPage({
     super.key,
-    required this.title,
-    this.subtitle,
-    required this.minValue,
-    required this.maxValue,
+    required this.data,
     required this.onSend,
-    this.isSkip = false,
-    this.activeColor = Colors.black,
-    this.inactiveColor = Colors.grey,
-    this.thickness = 8.0,
-    this.thumbColor = Colors.black,
-    this.thumbRadius = 8.0,
   });
+
+  @override
+  State<SliderQuestionPage> createState() => _SliderQuestionPageState();
+}
+
+class _SliderQuestionPageState extends State<SliderQuestionPage> {
+  late final SliderThemeData _theme;
+
+  @override
+  void initState() {
+    if (widget.data.theme == null) {
+      _theme = Theme.of(context).sliderTheme;
+    } else {
+      _theme = widget.data.theme!;
+    }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,36 +48,31 @@ class SliderQuestionPage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           QuestionTitle(
-            title: title,
+            title: widget.data.title,
           ),
-          if (subtitle != null)
-            Padding(
-              padding: const EdgeInsets.only(
-                top: AppDimensions.margin2XL,
-              ),
-              child: QuestionSubtitle(
-                content: subtitle!,
-              ),
+          Padding(
+            padding: const EdgeInsets.only(
+              top: AppDimensions.margin2XL,
             ),
+            child: QuestionSubtitle(
+              content: widget.data.subtitle,
+            ),
+          ),
           Padding(
             padding: const EdgeInsets.only(top: AppDimensions.marginM),
             child: _QuestionSlider(
-              minValue: minValue,
-              maxValue: maxValue,
+              minValue: widget.data.minValue,
+              maxValue: widget.data.maxValue,
               onChanged: (double? currentSliderValue) {},
-              activeColor: activeColor,
-              inactiveColor: inactiveColor,
-              thickness: thickness,
-              thumbColor: thumbColor,
-              thumbRadius: thumbRadius,
+              theme: _theme,
             ),
           ),
           const Spacer(),
           QuestionBottomButton(
             //TODO: move to localization?
             text: 'NEXT',
-            onPressed: onSend,
-            isEnabled: isSkip,
+            //TODO: replace '' with data
+            onPressed: () => widget.onSend(''),
           ),
         ],
       ),
@@ -88,51 +84,27 @@ class _QuestionSlider extends StatelessWidget {
   final double minValue;
   final double maxValue;
   final void Function(double? currentSliderValue) onChanged;
-  final Color activeColor;
-  final Color inactiveColor;
-  final double thickness;
-  final Color thumbColor;
-  final double thumbRadius;
+  final SliderThemeData theme;
 
   const _QuestionSlider({
     Key? key,
     required this.minValue,
     required this.maxValue,
     required this.onChanged,
-    required this.activeColor,
-    required this.inactiveColor,
-    required this.thickness,
-    required this.thumbColor,
-    required this.thumbRadius,
+    required this.theme,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SliderTheme(
-      data: SliderTheme.of(context).copyWith(
-        overlayShape: SliderComponentShape.noThumb,
-        trackHeight: thickness,
-        thumbColor: thumbColor,
-        thumbShape: RoundSliderThumbShape(
-          enabledThumbRadius: thumbRadius,
-        ),
-      ),
+      data: theme,
       child: Column(
         children: [
-          FormBuilder(
-            child: FormBuilderSlider(
-              name: 'Slider',
-              initialValue: minValue,
-              min: minValue,
-              max: maxValue,
-              inactiveColor: inactiveColor,
-              activeColor: activeColor,
-              onChanged: onChanged,
-              displayValues: DisplayValues.none,
-              decoration: const InputDecoration(
-                border: InputBorder.none,
-              ),
-            ),
+          Slider(
+            value: minValue + (maxValue - minValue) / 2,
+            onChanged: onChanged,
+            min: minValue,
+            max: maxValue,
           ),
           const SizedBox(height: AppDimensions.margin2XS),
           Row(

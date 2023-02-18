@@ -1,7 +1,7 @@
-import 'package:core/src/presentation/utils/constants.dart';
-import 'package:core/src/presentation/widgets/question_bottom_button.dart';
-import 'package:core/src/presentation/widgets/question_content.dart';
-import 'package:core/src/presentation/widgets/question_title.dart';
+import 'package:survey_core/src/presentation/utils/constants.dart';
+import 'package:survey_core/src/presentation/widgets/question_bottom_button.dart';
+import 'package:survey_core/src/presentation/widgets/question_content.dart';
+import 'package:survey_core/src/presentation/widgets/question_title.dart';
 import 'package:flutter/material.dart';
 
 class IntroQuestionPage extends StatelessWidget {

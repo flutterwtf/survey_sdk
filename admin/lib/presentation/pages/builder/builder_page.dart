@@ -1,134 +1,147 @@
 import 'package:flutter/material.dart';
-import 'package:survey_sdk/presentation/base/base_page.dart';
-import 'package:survey_sdk/presentation/pages/builder/builder_cubit.dart';
-import 'package:survey_sdk/presentation/utils/app_fonts.dart';
-import 'package:survey_sdk/presentation/utils/colors.dart';
-import 'package:survey_sdk/presentation/utils/constants/constants.dart';
-import 'package:survey_sdk/presentation/widgets/builder_page/phone_redactor.dart';
-import 'package:survey_sdk/presentation/widgets/builder_page/phone_view.dart';
-import 'package:survey_sdk/presentation/widgets/builder_page/survey_questions.dart';
-import 'package:survey_sdk/presentation/widgets/export_floating_window.dart';
+import 'package:survey_admin/presentation/utils/app_fonts.dart';
+import 'package:survey_admin/presentation/utils/colors.dart';
+import 'package:survey_admin/presentation/utils/constants/constants.dart';
+import 'package:survey_admin/presentation/widgets/builder_page/phone_view.dart';
+import 'package:survey_admin/presentation/widgets/builder_page/survey_content_bar.dart';
+import 'package:survey_admin/presentation/widgets/builder_page/survey_editor_bar.dart';
+import 'package:survey_admin/presentation/widgets/export_floating_window.dart';
 
-//TODO: rework phone widget
-//TODO: recheck size constants
-//TODO: recheck buttons
-//TODO: rework tabs
-//TODO: recheck left container
-class BuilderPage extends BasePage {
+class BuilderPage extends StatefulWidget {
   const BuilderPage({super.key});
 
   @override
-  _BuilderPageState createState() => _BuilderPageState();
+  State<BuilderPage> createState() => _BuilderPageState();
 }
 
-class _BuilderPageState extends BasePageState<BuilderPage, BuilderCubit> {
-  static const double tabBarPadding = AppDimensions.margin3XL +
-      AppDimensions.margin3XL +
-      AppDimensions.margin2XS;
+class _BuilderPageState extends State<BuilderPage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        toolbarHeight: AppDimensions.appbarSize,
+        backgroundColor: AppColors.white,
+        shadowColor: AppColors.transparentW,
+        centerTitle: true,
+        title: const _BuilderPageTabBar(),
+        actions: const [
+          _CreateTab(),
+          _PreviewTab(),
+        ],
+      ),
+      body: Row(
+        children: const [
+          SurveyContentBar(),
+          Expanded(child: PhoneView()),
+          SurveyEditorBar(),
+        ],
+      ),
+    );
+  }
+}
+
+class _BuilderPageTabBar extends StatelessWidget {
+  const _BuilderPageTabBar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
+    return const DefaultTabController(
       length: 2,
-      child: Scaffold(
-        appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(AppDimensions.appbarSize),
-          child: AppBar(
-            toolbarHeight: AppDimensions.appbarSize,
-            backgroundColor: AppColors.white,
-            shadowColor: AppColors.transparentW,
-            centerTitle: true,
-            title: const SizedBox(
-              width: 500,
-              child: TabBar(
-                padding: EdgeInsets.only(
-                  right: tabBarPadding,
-                ),
-                indicator: UnderlineTabIndicator(
-                  borderSide: BorderSide(width: 1.5),
-                  insets: EdgeInsets.symmetric(
-                    horizontal: AppDimensions.margin3XL + AppDimensions.sizeM,
-                  ),
-                ),
-                unselectedLabelColor: AppColors.textGrey,
-                indicatorColor: AppColors.black,
-                labelColor: AppColors.text,
-                labelStyle: TextStyle(fontWeight: AppFonts.weightBold),
-                tabs: [
-                  Tab(text: 'Create'),
-                  Tab(text: 'Preview'),
-                ],
-              ),
+      child: SizedBox(
+        width: AppDimensions.tabBarWidth,
+        child: TabBar(
+          padding: EdgeInsets.only(
+            right: AppDimensions.tabBarPadding,
+          ),
+          indicator: UnderlineTabIndicator(
+            borderSide: BorderSide(width: 1.0),
+            insets: EdgeInsets.symmetric(
+              horizontal: AppDimensions.margin3XL + AppDimensions.sizeM,
             ),
-            actions: [
-              Padding(
-                padding: const EdgeInsets.only(
-                  top: AppDimensions.marginLargeM,
-                  bottom: AppDimensions.marginLargeM,
-                  right: AppDimensions.marginXL,
-                ),
-                child: OutlinedButton(
-                  onPressed: () {},
-                  style: OutlinedButton.styleFrom(
-                    side: const BorderSide(
-                      width: 1.0,
-                      color: AppColors.black,
-                    ),
-                  ),
-                  child: const Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: AppDimensions.margin2XL,
-                    ),
-                    child: Text(
-                      'IMPORT',
-                      style: TextStyle(
-                        color: AppColors.text,
-                        fontWeight: AppFonts.weightSemiBold,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(
-                  top: AppDimensions.marginLargeM,
-                  bottom: AppDimensions.marginLargeM,
-                  right: AppDimensions.margin2XL,
-                ),
-                child: TextButton(
-                  onPressed: () {
-                    showExportFloatingWindow(
-                      context,
-                      onDownloadPressed: () {},
-                      onCopyPressed: () {},
-                    );
-                  },
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(AppColors.black),
-                  ),
-                  child: const Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: AppDimensions.margin2XL,
-                    ),
-                    child: Text(
-                      'EXPORT',
-                      style: TextStyle(
-                        color: AppColors.white,
-                        fontWeight: AppFonts.weightSemiBold,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ],
+          ),
+          unselectedLabelColor: AppColors.textGrey,
+          indicatorColor: AppColors.black,
+          labelColor: AppColors.text,
+          labelStyle: TextStyle(fontWeight: AppFonts.weightBold),
+          tabs: [
+            Tab(text: 'Create'),
+            Tab(text: 'Preview'),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _CreateTab extends StatelessWidget {
+  const _CreateTab({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(
+        bottom: AppDimensions.margin2XS,
+        top: AppDimensions.margin2XS,
+        right: AppDimensions.marginXL,
+      ),
+      child: OutlinedButton(
+        onPressed: () {},
+        style: OutlinedButton.styleFrom(
+          side: const BorderSide(
+            width: 1.0,
+            color: AppColors.black,
           ),
         ),
-        body: Row(
-          children: const [
-            SurveyQuestions(),
-            Expanded(child: PhoneView()),
-            PhoneRedactor(),
-          ],
+        child: const Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: AppDimensions.margin2XL,
+          ),
+          child: Text(
+            'IMPORT',
+            style: TextStyle(
+              color: AppColors.text,
+              fontWeight: AppFonts.weightSemiBold,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _PreviewTab extends StatelessWidget {
+  const _PreviewTab({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(
+        bottom: AppDimensions.margin2XS,
+        top: AppDimensions.margin2XS,
+        right: AppDimensions.margin2XL,
+      ),
+      child: TextButton(
+        onPressed: () {
+          showExportFloatingWindow(
+            context,
+            onDownloadPressed: () {},
+            onCopyPressed: () {},
+          );
+        },
+        style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all(AppColors.black),
+        ),
+        child: const Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: AppDimensions.margin2XL,
+          ),
+          child: Text(
+            'EXPORT',
+            style: TextStyle(
+              color: AppColors.white,
+              fontWeight: AppFonts.weightSemiBold,
+            ),
+          ),
         ),
       ),
     );

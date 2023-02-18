@@ -9,6 +9,8 @@ abstract class AppDimensions {
 
   static const double sizeS = 12.0;
   static const double sizeM = 24.0;
+  static const double size2M = 28.0;
+  static const double size3M = 28.0;
   static const double sizeL = 48.0;
   static const double size2XL = 96.0;
 
@@ -17,5 +19,12 @@ abstract class AppDimensions {
   static const double circularRadiusM = 14.0;
   static const double circularRadiusL = 24.0;
 
-  static const double appbarSize = 72.0;
+  static const double appbarSize = 50.0;
+
+  static const double surveyContentBarWidth = 210.0;
+
+  static const double surveyEditorBarWidth = 300.0;
+
+  static const double tabBarPadding = 126.0;
+  static const double tabBarWidth = 500.0;
 }

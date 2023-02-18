@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:survey_sdk/presentation/utils/app_fonts.dart';
-import 'package:survey_sdk/presentation/utils/colors.dart';
-import 'package:survey_sdk/presentation/utils/constants/constants.dart';
-import 'package:survey_sdk/presentation/widgets/customization_items/switch_customization_item.dart';
+import 'package:survey_admin/presentation/utils/app_fonts.dart';
+import 'package:survey_admin/presentation/utils/colors.dart';
+import 'package:survey_admin/presentation/utils/constants/constants.dart';
+import 'package:survey_admin/presentation/widgets/customization_items/customization_text_field.dart';
+import 'package:survey_admin/presentation/widgets/customization_items/switch_customization_item.dart';
 
 class MultilineSwitch extends StatefulWidget {
   const MultilineSwitch({
@@ -87,34 +88,33 @@ class _LineAmountInputField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FormBuilder(
-      child: FormBuilderTextField(
-        name: 'line_amount',
-        initialValue: defaultLineAmount.toString(),
-        autofocus: true,
-        style: const TextStyle(
-          fontSize: AppFonts.sizeM,
-          color: AppColors.black,
+      child: Padding(
+        padding: const EdgeInsets.only(
+          top: AppDimensions.marginM,
         ),
-        onChanged: (value) {
-          if (value == null) {
-            onChanged(1);
-          } else {
-            onChanged(int.tryParse(value) ?? 1);
-          }
-        },
-        decoration: const InputDecoration(
-          isCollapsed: true,
-          contentPadding: EdgeInsets.only(
-            top: AppDimensions.marginM,
-          ),
-          border: InputBorder.none,
-          prefix: Text(
-            'Lines ',
-            style: TextStyle(
-              fontSize: AppFonts.sizeM,
-              color: AppColors.black,
+        child: Row(
+          children: [
+            const Text(
+              'Lines ',
+              style: TextStyle(
+                fontSize: AppFonts.sizeM,
+                color: AppColors.black,
+              ),
             ),
-          ),
+            Expanded(
+              child: CustomizationTextField(
+                initialValue: defaultLineAmount.toString(),
+                fontSize: AppFonts.sizeM,
+                onChanged: (value) {
+                  if (value == null) {
+                    onChanged(1);
+                  } else {
+                    onChanged(int.tryParse(value) ?? 1);
+                  }
+                },
+              ),
+            ),
+          ],
         ),
       ),
     );
