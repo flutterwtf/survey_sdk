@@ -58,36 +58,33 @@ class _ColorCustomizationItemState extends State<ColorCustomizationItem> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(AppDimensions.marginM),
-      child: GestureDetector(
-        onTap: pickColor,
-        child: Row(
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                border: Border.all(color: AppColors.black),
-                color: pickerColor,
-              ),
-              width: AppDimensions.sizeM,
-              height: AppDimensions.sizeM,
+    return GestureDetector(
+      onTap: pickColor,
+      child: Row(
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              border: Border.all(color: AppColors.black),
+              color: pickerColor,
             ),
-            Expanded(
-              child: Container(
-                margin: const EdgeInsets.all(AppDimensions.margin2XS),
-                child: CustomizationTextField(
-                  controller: controller,
-                  onEditingComplete: updateTextField,
-                  inputFormatters: [
-                    FilteringTextInputFormatter.allow(RegExp('[0-9a-fA-F]')),
-                    LengthLimitingTextInputFormatter(8),
-                  ],
-                  onChanged: onChangedTextField,
-                ),
+            width: AppDimensions.sizeM,
+            height: AppDimensions.sizeM,
+          ),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(AppDimensions.margin2XS),
+              child: CustomizationTextField(
+                controller: controller,
+                onEditingComplete: updateTextField,
+                inputFormatters: [
+                  FilteringTextInputFormatter.allow(RegExp('[0-9a-fA-F]')),
+                  LengthLimitingTextInputFormatter(8),
+                ],
+                onChanged: onChangedTextField,
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
