@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:survey_admin/presentation/utils/asset_strings.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
 
@@ -10,18 +12,9 @@ class PhoneView extends StatelessWidget {
     return ColoredBox(
       color: AppColors.greyBackground,
       child: Center(
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: const BorderRadius.all(
-              Radius.circular(AppDimensions.marginXL),
-            ),
-            border: Border.all(
-              width: 15,
-              color: AppColors.black,
-            ),
-          ),
-          height: 600,
-          width: 300,
+        child: Padding(
+          padding: const EdgeInsets.all(AppDimensions.size2M),
+          child: SvgPicture.asset(AssetStrings.iphone),
         ),
       ),
     );
