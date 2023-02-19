@@ -21,20 +21,27 @@ class OptionCustomizationItem extends StatefulWidget {
 
 class _OptionCustomizationItemState extends State<OptionCustomizationItem> {
   TextEditingController controller = TextEditingController();
+  List<String> options = [];
+
+  @override
+  void initState() {
+    super.initState();
+    options = widget.options;
+  }
 
   void onEditingComplete() {
     if (controller.text.isNotEmpty) {
       setState(() {
-        widget.options.add(controller.text);
+        options = [...options, controller.text];
       });
     }
     controller.clear();
-    widget.onChanged(widget.options);
+    widget.onChanged(options);
   }
 
   void delete(int index) {
-    setState(() => widget.options.removeAt(index));
-    widget.onChanged(widget.options);
+    setState(() => options.removeAt(index));
+    widget.onChanged(options);
   }
 
   @override
@@ -43,9 +50,9 @@ class _OptionCustomizationItemState extends State<OptionCustomizationItem> {
       children: [
         ListView.builder(
           shrinkWrap: true,
-          itemCount: widget.options.length,
+          itemCount: options.length,
           itemBuilder: (context, index) => _Option(
-            option: widget.options[index],
+            option: options[index],
             delete: () => delete(index),
           ),
         ),
@@ -57,7 +64,7 @@ class _OptionCustomizationItemState extends State<OptionCustomizationItem> {
             const Icon(
               Icons.fiber_manual_record,
               size: AppDimensions.sizeS,
-              color: AppColors.textGrey,
+              color: AppColors.textLightGrey,
             ),
             const SizedBox(
               width: AppDimensions.margin2XS,
@@ -69,7 +76,7 @@ class _OptionCustomizationItemState extends State<OptionCustomizationItem> {
                 decoration: const InputDecoration.collapsed(
                   hintText: 'Type new option here',
                   hintStyle: TextStyle(
-                    color: AppColors.textLightGrey,
+                    color: AppColors.textHintGrey,
                   ),
                 ),
               ),
