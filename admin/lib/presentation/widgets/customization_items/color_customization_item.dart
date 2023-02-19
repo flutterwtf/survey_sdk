@@ -22,6 +22,7 @@ class ColorCustomizationItem extends StatefulWidget {
 class _ColorCustomizationItemState extends State<ColorCustomizationItem> {
   late Color pickerColor;
   TextEditingController controller = TextEditingController();
+  bool isPickerOpened = false;
 
   @override
   void initState() {
@@ -60,61 +61,52 @@ class _ColorCustomizationItemState extends State<ColorCustomizationItem> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(AppDimensions.marginM),
-      child: GestureDetector(
-        onTap: pickColor,
-        child: Row(
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                border: Border.all(color: AppColors.black),
-                color: pickerColor,
-              ),
-              width: AppDimensions.sizeM,
-              height: AppDimensions.sizeM,
-            ),
-            Expanded(
-              child: Container(
-                margin: const EdgeInsets.all(AppDimensions.margin2XS),
-                child: CustomizationTextField(
-                  controller: controller,
-                  onEditingComplete: updateTextField,
-                  inputFormatters: [
-                    FilteringTextInputFormatter.allow(RegExp('[0-9a-fA-F]')),
-                    LengthLimitingTextInputFormatter(8),
-                  ],
-                  onChanged: onChangedTextField,
+      child: Column(
+        children: [
+          Row(
+            children: [
+              GestureDetector(
+                onTap: () => setState(() => isPickerOpened = !isPickerOpened),
+                child: Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(color: AppColors.black),
+                    color: pickerColor,
+                  ),
+                  width: AppDimensions.sizeM,
+                  height: AppDimensions.sizeM,
                 ),
               ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  void pickColor() {
-    showDialog(
-        context: context,
-        builder: (_) {
-          return AlertDialog(
-            title: const Text('Pick a color'),
-            content: SingleChildScrollView(
-              child: ColorPicker(
-                pickerColor: pickerColor,
-                onColorChanged: onColorChanged,
-                hexInputBar: true,
-              ),
-            ),
-            actions: <Widget>[
-              ElevatedButton(
-                child: const Text('OK'),
-                onPressed: () {
-                  updateTextField();
-                  Navigator.of(context).pop();
-                },
+              Expanded(
+                child: Container(
+                  margin: const EdgeInsets.all(AppDimensions.margin2XS),
+                  child: CustomizationTextField(
+                    controller: controller,
+                    onEditingComplete: updateTextField,
+                    inputFormatters: [
+                      FilteringTextInputFormatter.allow(
+                        RegExp('[0-9a-fA-F]'),
+                      ),
+                      LengthLimitingTextInputFormatter(8),
+                    ],
+                    onChanged: onChangedTextField,
+                  ),
+                ),
               ),
             ],
-          );
-        });
+          ),
+          if (isPickerOpened) ...[
+            const SizedBox(
+              height: AppDimensions.margin2XS,
+            ),
+            ColorPicker(
+              pickerColor: pickerColor,
+              onColorChanged: onColorChanged,
+              portraitOnly: true,
+              pickerAreaHeightPercent: 0.4,
+            ),
+          ]
+        ],
+      ),
+    );
   }
 }
