@@ -11,13 +11,11 @@ import 'package:flutter/material.dart';
 class SliderQuestionPage extends StatefulWidget {
   final SliderQuestionData data;
   final OnSendCallback onSend;
-  final bool onlyIntegerN;
 
   const SliderQuestionPage({
     super.key,
     required this.data,
     required this.onSend,
-    this.onlyIntegerN = false,
   });
 
   @override
@@ -65,9 +63,9 @@ class _SliderQuestionPageState extends State<SliderQuestionPage> {
             child: _QuestionSlider(
               minValue: widget.data.minValue,
               maxValue: widget.data.maxValue,
+              initialValue: widget.data.initialValue,
               onChanged: (double? currentSliderValue) {},
               theme: _theme,
-              onlyIntegerN: widget.onlyIntegerN,
             ),
           ),
           const Spacer(),
@@ -84,9 +82,9 @@ class _SliderQuestionPageState extends State<SliderQuestionPage> {
 }
 
 class _QuestionSlider extends StatefulWidget {
-  final double minValue;
-  final double maxValue;
-  final bool onlyIntegerN;
+  final num minValue;
+  final num maxValue;
+  final num initialValue;
   final void Function(double? currentSliderValue) onChanged;
   final SliderThemeData theme;
 
@@ -96,7 +94,7 @@ class _QuestionSlider extends StatefulWidget {
     required this.maxValue,
     required this.onChanged,
     required this.theme,
-    required this.onlyIntegerN,
+    required this.initialValue,
   }) : super(key: key);
 
   @override
@@ -105,10 +103,12 @@ class _QuestionSlider extends StatefulWidget {
 
 class _QuestionSliderState extends State<_QuestionSlider> {
   late double value;
+  late final bool onlyInt;
   @override
   void initState() {
     // TODO: implement initState
-    value = widget.minValue + (widget.maxValue - widget.minValue) / 2;
+    value = widget.initialValue.toDouble();
+    onlyInt = widget.initialValue.ceilToDouble() == widget.initialValue.floorToDouble();
     super.initState();
   }
   @override
@@ -118,13 +118,13 @@ class _QuestionSliderState extends State<_QuestionSlider> {
       child: Column(
         children: [
           Slider(
-            value: widget.onlyIntegerN ? value.roundToDouble() : value,
+            value: value,
             onChanged: (newValue) => setState(() {
-              value = widget.onlyIntegerN ? newValue.roundToDouble() : newValue;
+              value = onlyInt ? newValue.roundToDouble() : newValue;
               widget.onChanged(newValue);
             }),
-            min: widget.minValue,
-            max: widget.maxValue,
+            min: widget.minValue.toDouble(),
+            max: widget.maxValue.toDouble(),
           ),
           const SizedBox(height: AppDimensions.margin2XS),
           Row(
