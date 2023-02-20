@@ -37,40 +37,35 @@ class _MultilineSwitchState extends State<MultilineSwitch> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(
-        AppDimensions.marginM,
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SwitchCustomizationItem(
-            //TODO: move to localization maaybe?
-            title: 'Multiline',
-            onChanged: (isToggled) {
-              setState(() {
-                _isMultiline = isToggled;
-              });
-              widget.onChanged(_isMultiline, _isMultiline ? _lineAmount : 1);
-            },
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SwitchCustomizationItem(
+          //TODO: move to localization maaybe?
+          title: 'Multiline',
+          onChanged: (isToggled) {
+            setState(() {
+              _isMultiline = isToggled;
+            });
+            widget.onChanged(_isMultiline, _isMultiline ? _lineAmount : 1);
+          },
+        ),
+        AnimatedSize(
+          //TODO: move to const maybe?
+          duration: const Duration(
+            milliseconds: 100,
           ),
-          AnimatedSize(
-            //TODO: move to const maybe?
-            duration: const Duration(
-              milliseconds: 100,
-            ),
-            child: _isMultiline
-                ? _LineAmountInputField(
-                    defaultLineAmount: widget.defaultLineAmount,
-                    onChanged: (amount) {
-                      _lineAmount = amount;
-                      widget.onChanged(_isMultiline, _lineAmount);
-                    },
-                  )
-                : const SizedBox.shrink(),
-          ),
-        ],
-      ),
+          child: _isMultiline
+              ? _LineAmountInputField(
+                  defaultLineAmount: widget.defaultLineAmount,
+                  onChanged: (amount) {
+                    _lineAmount = amount;
+                    widget.onChanged(_isMultiline, _lineAmount);
+                  },
+                )
+              : const SizedBox.shrink(),
+        ),
+      ],
     );
   }
 }

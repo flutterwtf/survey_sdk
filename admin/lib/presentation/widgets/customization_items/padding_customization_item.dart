@@ -49,87 +49,84 @@ class _PaddingCustomizationItemState extends State<PaddingCustomizationItem> {
   //TODO: split to widgets please
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(AppDimensions.marginM),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Expanded(
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                  decoration: const BoxDecoration(
-                    border: Border.symmetric(
-                      horizontal: BorderSide(
-                        width: 1.0,
-                        color: AppColors.black,
-                      ),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Expanded(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                decoration: const BoxDecoration(
+                  border: Border.symmetric(
+                    horizontal: BorderSide(
+                      width: 1.0,
+                      color: AppColors.black,
                     ),
-                    color: AppColors.white,
                   ),
-                  width: AppDimensions.sizeM,
-                  height: AppDimensions.sizeM,
+                  color: AppColors.white,
                 ),
-                Container(
-                  margin: const EdgeInsets.only(left: AppDimensions.marginS),
-                  width: AppDimensions.sizeL,
-                  child: CustomizationTextField(
-                    focusNode: horizontalPaddingFocusNode,
-                    initialValue: horizontalPadding.toString(),
-                    inputFormatters: [
-                      FilteringTextInputFormatter.digitsOnly,
-                      LengthLimitingTextInputFormatter(3),
-                    ],
-                    onChanged: (value) {
-                      if (value != null) {
-                        setState(() => horizontalPadding = double.parse(value));
-                      }
-                    },
-                  ),
+                width: AppDimensions.sizeM,
+                height: AppDimensions.sizeM,
+              ),
+              Container(
+                margin: const EdgeInsets.only(left: AppDimensions.marginS),
+                width: AppDimensions.sizeL,
+                child: CustomizationTextField(
+                  focusNode: horizontalPaddingFocusNode,
+                  initialValue: horizontalPadding.toString(),
+                  inputFormatters: [
+                    FilteringTextInputFormatter.digitsOnly,
+                    LengthLimitingTextInputFormatter(3),
+                  ],
+                  onChanged: (value) {
+                    if (value != null) {
+                      setState(() => horizontalPadding = double.parse(value));
+                    }
+                  },
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-          Expanded(
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                  decoration: const BoxDecoration(
-                    border: Border.symmetric(
-                      vertical: BorderSide(
-                        width: 1.0,
-                        color: AppColors.black,
-                      ),
+        ),
+        Expanded(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                decoration: const BoxDecoration(
+                  border: Border.symmetric(
+                    vertical: BorderSide(
+                      width: 1.0,
+                      color: AppColors.black,
                     ),
-                    color: AppColors.white,
                   ),
-                  width: AppDimensions.sizeM,
-                  height: AppDimensions.sizeM,
+                  color: AppColors.white,
                 ),
-                Container(
-                  margin: const EdgeInsets.only(left: AppDimensions.marginS),
-                  width: AppDimensions.sizeL,
-                  child: CustomizationTextField(
-                    focusNode: verticalPaddingFocusNode,
-                    initialValue: verticalPadding.toString(),
-                    inputFormatters: [
-                      FilteringTextInputFormatter.digitsOnly,
-                      LengthLimitingTextInputFormatter(3),
-                    ],
-                    onChanged: (value) {
-                      if (value != null) {
-                        setState(() => verticalPadding = double.parse(value));
-                      }
-                    },
-                  ),
+                width: AppDimensions.sizeM,
+                height: AppDimensions.sizeM,
+              ),
+              Container(
+                margin: const EdgeInsets.only(left: AppDimensions.marginS),
+                width: AppDimensions.sizeL,
+                child: CustomizationTextField(
+                  focusNode: verticalPaddingFocusNode,
+                  initialValue: verticalPadding.toString(),
+                  inputFormatters: [
+                    FilteringTextInputFormatter.digitsOnly,
+                    LengthLimitingTextInputFormatter(3),
+                  ],
+                  onChanged: (value) {
+                    if (value != null) {
+                      setState(() => verticalPadding = double.parse(value));
+                    }
+                  },
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
