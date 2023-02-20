@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:survey_admin/presentation/utils/app_fonts.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/color_customization_item.dart';
@@ -9,80 +10,59 @@ import 'package:survey_admin/presentation/widgets/customization_items/customizat
 import 'package:survey_admin/presentation/widgets/customization_items/input_type_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/multiline_switch.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/padding_customization_item.dart';
-import 'package:survey_admin/presentation/widgets/question_settings_tab_bar.dart';
+import 'package:survey_admin/presentation/widgets/customization_panel_tab_manager.dart';
 
 typedef _ColorCallback = void Function(Color color);
 typedef _SizeCallback = void Function(int? size);
 typedef _TextCallback = void Function(String text);
 
-class InputQuestionCustomizationPanel extends StatefulWidget {
+class InputQuestionCustomizationPanel extends StatelessWidget {
   const InputQuestionCustomizationPanel({super.key});
 
   @override
-  State<InputQuestionCustomizationPanel> createState() =>
-      _InputQuestionCustomizationPanelState();
-}
-
-class _InputQuestionCustomizationPanelState
-    extends State<InputQuestionCustomizationPanel>
-    with SingleTickerProviderStateMixin {
-  late final TabController _tabController;
-
-  @override
-  void initState() {
-    super.initState();
-    _tabController = TabController(
-      length: 3,
-      vsync: this,
-    );
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return QuestionSettingsTabBar(
-      tabTitles: const ['Common', 'Input', 'Content'],
-      questionSettings: [
-        QuestionSettingsListItem(
-          'Common',
-          _CommonCustomizationPanel(
-            onFillColorPicked: (Color color) {},
-            onTitleColorPicked: (Color color) {},
-            onTitleSizeChanged: (int? size) {},
-            onSubtitleColorPicked: (Color color) {},
-            onSubtitleSizeChanged: (int? size) {},
-            onButtonFirstColorPicked: (Color color) {},
-            onButtonSecondColorPicked: (Color color) {},
-            onButtonTextSizeChanged: (int? size) {},
+    return CustomizationPanelTabManager(
+      pages: [
+        CustomizationPanelTab(
+          title: 'Common',
+          child: _CommonCustomizationPanel(
+            onFillColorPicked: (color) {},
+            onTitleColorPicked: (color) {},
+            onTitleFontSizeChanged: (size) {},
+            onSubtitleColorPicked: (color) {},
+            onSubtitleFontSizeChanged: (size) {},
+            onButtonFirstColorPicked: (color) {},
+            onButtonSecondColorPicked: (color) {},
+            onButtonFontSizeChanged: (size) {},
           ),
         ),
-        QuestionSettingsListItem(
-          'Input',
-          _InputCustomizationPanel(
-            onMultilineChanged: (bool isMultiline, int lineAmount) {},
-            onFillColorChanged: (Color color) {},
-            onBorderColorChanged: (Color color) {},
-            onBorderSizeChanged: (int? size) {},
-            onBorderWidthChanged: (int? size) {},
-            onHorizontalPaddingChanged: (double size) {},
-            onVerticalPaddingChanged: (double size) {},
-            onHintColorChanged: (Color color) {},
-            onHintSizeChanged: (int? size) {},
-            onTextColorChanged: (Color color) {},
-            onTextSizeChanged: (int? size) {},
-            onInputTypeChanged: (InputType inputType) {},
+        CustomizationPanelTab(
+          title: 'Input',
+          child: _InputCustomizationPanel(
+            onMultilineChanged: (isMultiline, lineAmount) {},
+            onFillColorChanged: (color) {},
+            onBorderColorChanged: (color) {},
+            onBorderSizeChanged: (size) {},
+            onBorderWidthChanged: (size) {},
+            onHorizontalPaddingChanged: (size) {},
+            onVerticalPaddingChanged: (size) {},
+            onHintColorChanged: (color) {},
+            onHintFontSizeChanged: (size) {},
+            onTextColorChanged: (color) {},
+            onTextFontSizeChanged: (size) {},
+            onInputTypeChanged: (inputType) {},
           ),
         ),
-        QuestionSettingsListItem(
-          'Content',
-          _ContentCustomizationPanel(
-            onTitleChanged: (String text) {},
-            onSubtitleChanged: (String text) {},
-            onHintTextChanged: (String text) {},
-            onButtonTextChanged: (String text) {},
+        CustomizationPanelTab(
+          title: 'Content',
+          child: _ContentCustomizationPanel(
+            onTitleChanged: (text) {},
+            onSubtitleChanged: (text) {},
+            onHintTextChanged: (text) {},
+            onButtonTextChanged: (text) {},
           ),
         ),
       ],
-      tabController: _tabController,
     );
   }
 }
@@ -90,31 +70,31 @@ class _InputQuestionCustomizationPanelState
 class _CommonCustomizationPanel extends StatelessWidget {
   final _ColorCallback onFillColorPicked;
   final _ColorCallback onTitleColorPicked;
-  final _SizeCallback onTitleSizeChanged;
+  final _SizeCallback onTitleFontSizeChanged;
   final _ColorCallback onSubtitleColorPicked;
-  final _SizeCallback onSubtitleSizeChanged;
+  final _SizeCallback onSubtitleFontSizeChanged;
   final _ColorCallback onButtonFirstColorPicked;
   final _ColorCallback onButtonSecondColorPicked;
-  final _SizeCallback onButtonTextSizeChanged;
+  final _SizeCallback onButtonFontSizeChanged;
 
   const _CommonCustomizationPanel({
     required this.onFillColorPicked,
     required this.onTitleColorPicked,
-    required this.onTitleSizeChanged,
+    required this.onTitleFontSizeChanged,
     required this.onSubtitleColorPicked,
-    required this.onSubtitleSizeChanged,
+    required this.onSubtitleFontSizeChanged,
     required this.onButtonFirstColorPicked,
     required this.onButtonSecondColorPicked,
-    required this.onButtonTextSizeChanged,
+    required this.onButtonFontSizeChanged,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
+    return ListView(
       children: [
         CustomizationItemsContainer(
           title: 'Fill',
+          isTopDividerShown: true,
           children: [
             ColorCustomizationItem(
               initialColor: AppColors.black,
@@ -128,14 +108,12 @@ class _CommonCustomizationPanel extends StatelessWidget {
             Row(
               children: [
                 Flexible(
-                  flex: 1,
                   child: ColorCustomizationItem(
                     initialColor: AppColors.black,
                     onColorPicked: onTitleColorPicked,
                   ),
                 ),
                 Flexible(
-                  flex: 1,
                   child: CustomizationTextField(
                     initialValue: '16',
                     inputFormatters: [
@@ -144,9 +122,9 @@ class _CommonCustomizationPanel extends StatelessWidget {
                     ],
                     onChanged: (size) {
                       if (size == null) {
-                        onTitleSizeChanged(null);
+                        onTitleFontSizeChanged(null);
                       } else {
-                        onTitleSizeChanged(int.tryParse(size));
+                        onTitleFontSizeChanged(int.tryParse(size));
                       }
                     },
                   ),
@@ -161,14 +139,12 @@ class _CommonCustomizationPanel extends StatelessWidget {
             Row(
               children: [
                 Flexible(
-                  flex: 1,
                   child: ColorCustomizationItem(
                     initialColor: AppColors.black,
                     onColorPicked: onSubtitleColorPicked,
                   ),
                 ),
                 Flexible(
-                  flex: 1,
                   child: CustomizationTextField(
                     initialValue: '12',
                     inputFormatters: [
@@ -177,9 +153,9 @@ class _CommonCustomizationPanel extends StatelessWidget {
                     ],
                     onChanged: (size) {
                       if (size == null) {
-                        onTitleSizeChanged(null);
+                        onSubtitleFontSizeChanged(null);
                       } else {
-                        onTitleSizeChanged(int.tryParse(size));
+                        onSubtitleFontSizeChanged(int.tryParse(size));
                       }
                     },
                   ),
@@ -198,14 +174,12 @@ class _CommonCustomizationPanel extends StatelessWidget {
             Row(
               children: [
                 Flexible(
-                  flex: 1,
                   child: ColorCustomizationItem(
                     initialColor: AppColors.white,
                     onColorPicked: onButtonSecondColorPicked,
                   ),
                 ),
                 Flexible(
-                  flex: 1,
                   child: CustomizationTextField(
                     initialValue: '12',
                     inputFormatters: [
@@ -214,9 +188,9 @@ class _CommonCustomizationPanel extends StatelessWidget {
                     ],
                     onChanged: (size) {
                       if (size == null) {
-                        onTitleSizeChanged(null);
+                        onButtonFontSizeChanged(null);
                       } else {
-                        onTitleSizeChanged(int.tryParse(size));
+                        onButtonFontSizeChanged(int.tryParse(size));
                       }
                     },
                   ),
@@ -239,9 +213,9 @@ class _InputCustomizationPanel extends StatelessWidget {
   final void Function(double size) onHorizontalPaddingChanged;
   final void Function(double size) onVerticalPaddingChanged;
   final _ColorCallback onHintColorChanged;
-  final _SizeCallback onHintSizeChanged;
+  final _SizeCallback onHintFontSizeChanged;
   final _ColorCallback onTextColorChanged;
-  final _SizeCallback onTextSizeChanged;
+  final _SizeCallback onTextFontSizeChanged;
   final void Function(InputType inputType) onInputTypeChanged;
 
   const _InputCustomizationPanel({
@@ -253,19 +227,21 @@ class _InputCustomizationPanel extends StatelessWidget {
     required this.onHorizontalPaddingChanged,
     required this.onVerticalPaddingChanged,
     required this.onHintColorChanged,
-    required this.onHintSizeChanged,
+    required this.onHintFontSizeChanged,
     required this.onTextColorChanged,
-    required this.onTextSizeChanged,
+    required this.onTextFontSizeChanged,
     required this.onInputTypeChanged,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
+    return ListView(
       children: [
         CustomizationItemsContainer(
-          itemsPadding: const EdgeInsets.all(AppDimensions.marginM),
+          isTopDividerShown: true,
+          itemsPadding: const EdgeInsets.all(
+            AppDimensions.marginM,
+          ),
           children: [
             MultilineSwitch(
               onChanged: onMultilineChanged,
@@ -276,7 +252,7 @@ class _InputCustomizationPanel extends StatelessWidget {
           title: 'Fill',
           children: [
             ColorCustomizationItem(
-              initialColor: AppColors.black,
+              initialColor: AppColors.white,
               onColorPicked: onFillColorChanged,
             ),
           ],
@@ -287,27 +263,37 @@ class _InputCustomizationPanel extends StatelessWidget {
             Row(
               children: [
                 Flexible(
-                  flex: 1,
                   child: ColorCustomizationItem(
-                    initialColor: AppColors.white,
+                    initialColor: AppColors.black,
                     onColorPicked: onBorderColorChanged,
                   ),
                 ),
                 Flexible(
-                  flex: 1,
-                  child: CustomizationTextField(
-                    initialValue: '12',
-                    inputFormatters: [
-                      FilteringTextInputFormatter.digitsOnly,
-                      LengthLimitingTextInputFormatter(3),
-                    ],
-                    onChanged: (size) {
-                      if (size == null) {
-                        onBorderWidthChanged(null);
-                      } else {
-                        onBorderWidthChanged(int.tryParse(size));
-                      }
-                    },
+                  child: SizedBox(
+                    width: AppDimensions.margin3XL,
+                    child: CustomizationTextField(
+                      initialValue: '1',
+                      inputFormatters: [
+                        FilteringTextInputFormatter.digitsOnly,
+                        LengthLimitingTextInputFormatter(3),
+                      ],
+                      decoration: const InputDecoration(
+                        isCollapsed: true,
+                        border: InputBorder.none,
+                        suffixText: 'px',
+                        suffixStyle: TextStyle(
+                          fontSize: AppFonts.sizeL,
+                          fontWeight: AppFonts.weightRegular,
+                        ),
+                      ),
+                      onChanged: (size) {
+                        if (size == null) {
+                          onBorderWidthChanged(null);
+                        } else {
+                          onBorderWidthChanged(int.tryParse(size));
+                        }
+                      },
+                    ),
                   ),
                 ),
               ],
@@ -331,25 +317,23 @@ class _InputCustomizationPanel extends StatelessWidget {
             Row(
               children: [
                 Flexible(
-                  flex: 1,
                   child: ColorCustomizationItem(
                     initialColor: AppColors.textLightGrey,
                     onColorPicked: onHintColorChanged,
                   ),
                 ),
                 Flexible(
-                  flex: 1,
                   child: CustomizationTextField(
-                    initialValue: '12',
+                    initialValue: '16',
                     inputFormatters: [
                       FilteringTextInputFormatter.digitsOnly,
                       LengthLimitingTextInputFormatter(3),
                     ],
                     onChanged: (size) {
                       if (size == null) {
-                        onHintSizeChanged(null);
+                        onHintFontSizeChanged(null);
                       } else {
-                        onHintSizeChanged(int.tryParse(size));
+                        onHintFontSizeChanged(int.tryParse(size));
                       }
                     },
                   ),
@@ -364,14 +348,12 @@ class _InputCustomizationPanel extends StatelessWidget {
             Row(
               children: [
                 Flexible(
-                  flex: 1,
                   child: ColorCustomizationItem(
                     initialColor: AppColors.black,
                     onColorPicked: onTextColorChanged,
                   ),
                 ),
                 Flexible(
-                  flex: 1,
                   child: CustomizationTextField(
                     initialValue: '16',
                     inputFormatters: [
@@ -380,9 +362,9 @@ class _InputCustomizationPanel extends StatelessWidget {
                     ],
                     onChanged: (size) {
                       if (size == null) {
-                        onTextSizeChanged(null);
+                        onTextFontSizeChanged(null);
                       } else {
-                        onTextSizeChanged(int.tryParse(size));
+                        onTextFontSizeChanged(int.tryParse(size));
                       }
                     },
                   ),
@@ -420,16 +402,18 @@ class _ContentCustomizationPanel extends StatelessWidget {
     required this.onButtonTextChanged,
   });
 
+  static const double _maxInputTextHeight = 100;
+
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
+    return ListView(
       children: [
         CustomizationItemsContainer(
           title: 'Title',
+          isTopDividerShown: true,
           children: [
             CreateTextCustomizationItem(
-              maxHeight: 100,
+              maxHeight: _maxInputTextHeight,
               onChanged: onTitleChanged,
             ),
           ],
@@ -438,7 +422,7 @@ class _ContentCustomizationPanel extends StatelessWidget {
           title: 'Subtitle',
           children: [
             CreateTextCustomizationItem(
-              maxHeight: 100,
+              maxHeight: _maxInputTextHeight,
               onChanged: onSubtitleChanged,
             ),
           ],
@@ -447,7 +431,7 @@ class _ContentCustomizationPanel extends StatelessWidget {
           title: 'Hint',
           children: [
             CreateTextCustomizationItem(
-              maxHeight: 100,
+              maxHeight: _maxInputTextHeight,
               onChanged: onHintTextChanged,
             ),
           ],
@@ -456,7 +440,7 @@ class _ContentCustomizationPanel extends StatelessWidget {
           title: 'Button',
           children: [
             CreateTextCustomizationItem(
-              maxHeight: 100,
+              maxHeight: _maxInputTextHeight,
               onChanged: onButtonTextChanged,
             ),
           ],
