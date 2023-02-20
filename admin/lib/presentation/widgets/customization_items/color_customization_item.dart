@@ -20,14 +20,14 @@ class ColorCustomizationItem extends StatefulWidget {
 }
 
 class _ColorCustomizationItemState extends State<ColorCustomizationItem> {
-  late Color pickerColor;
-  TextEditingController controller = TextEditingController();
-  bool isPickerOpened = false;
+  late Color _pickerColor;
+  final TextEditingController _controller = TextEditingController();
+  bool _isPickerOpened = false;
 
   @override
   void initState() {
-    controller.text = colorToString(widget.initialColor);
-    pickerColor = widget.initialColor;
+    _controller.text = colorToString(widget.initialColor);
+    _pickerColor = widget.initialColor;
     super.initState();
   }
 
@@ -36,7 +36,7 @@ class _ColorCustomizationItemState extends State<ColorCustomizationItem> {
       final color = int.tryParse(value.padRight(8, '0'), radix: 16);
       if (color != null) {
         setState(() {
-          pickerColor = Color(color);
+          _pickerColor = Color(color);
         });
       }
     }
@@ -44,16 +44,16 @@ class _ColorCustomizationItemState extends State<ColorCustomizationItem> {
 
   void onColorChanged(color) {
     widget.onColorPicked(color);
-    setState(() => pickerColor = color);
+    setState(() => _pickerColor = color);
   }
 
   String colorToString(Color color) =>
       color.value.toRadixString(16).toUpperCase();
 
   void updateTextField() {
-    widget.onColorPicked(pickerColor);
+    widget.onColorPicked(_pickerColor);
     setState(
-      () => controller.text = colorToString(pickerColor),
+      () => _controller.text = colorToString(_pickerColor),
     );
   }
 
@@ -66,11 +66,11 @@ class _ColorCustomizationItemState extends State<ColorCustomizationItem> {
           Row(
             children: [
               GestureDetector(
-                onTap: () => setState(() => isPickerOpened = !isPickerOpened),
+                onTap: () => setState(() => _isPickerOpened = !_isPickerOpened),
                 child: Container(
                   decoration: BoxDecoration(
                     border: Border.all(color: AppColors.black),
-                    color: pickerColor,
+                    color: _pickerColor,
                   ),
                   width: AppDimensions.sizeM,
                   height: AppDimensions.sizeM,
@@ -80,7 +80,7 @@ class _ColorCustomizationItemState extends State<ColorCustomizationItem> {
                 child: Container(
                   margin: const EdgeInsets.all(AppDimensions.margin2XS),
                   child: CustomizationTextField(
-                    controller: controller,
+                    controller: _controller,
                     onEditingComplete: updateTextField,
                     inputFormatters: [
                       FilteringTextInputFormatter.allow(
@@ -94,12 +94,12 @@ class _ColorCustomizationItemState extends State<ColorCustomizationItem> {
               ),
             ],
           ),
-          if (isPickerOpened) ...[
+          if (_isPickerOpened) ...[
             const SizedBox(
               height: AppDimensions.margin2XS,
             ),
             ColorPicker(
-              pickerColor: pickerColor,
+              pickerColor: _pickerColor,
               onColorChanged: onColorChanged,
               portraitOnly: true,
               pickerAreaHeightPercent: 0.4,
