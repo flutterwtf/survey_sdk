@@ -23,18 +23,19 @@ class CustomizationPanelConstructor extends StatefulWidget {
 
 class _CustomizationPanelConstructorState
     extends State<CustomizationPanelConstructor> {
-  Panel? currentPanel;
+  Panel? _currentPanel;
 
   @override
   void initState() {
     super.initState();
     if (widget.panels.isNotEmpty) {
-      currentPanel = widget.panels.first;
+      _currentPanel = widget.panels.first;
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final currentPanel = _currentPanel;
     return Column(
       children: [
         if (currentPanel != null) ...[
@@ -44,17 +45,17 @@ class _CustomizationPanelConstructorState
                 .map(
                   (panel) => _Label(
                     text: panel.label,
-                    textColor: panel.label == currentPanel!.label
+                    textColor: panel.label == currentPanel.label
                         ? AppColors.black
                         : AppColors.textLightGrey,
-                    onPressed: () => setState(() => currentPanel = panel),
+                    onPressed: () => setState(() => _currentPanel = panel),
                   ),
                 )
                 .toList(),
           ),
           const ItemDivider(),
           Column(
-            children: currentPanel!.content,
+            children: currentPanel.content,
           ),
         ]
       ],

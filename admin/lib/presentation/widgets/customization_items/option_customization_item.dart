@@ -20,28 +20,28 @@ class OptionCustomizationItem extends StatefulWidget {
 }
 
 class _OptionCustomizationItemState extends State<OptionCustomizationItem> {
-  TextEditingController controller = TextEditingController();
-  List<String> options = [];
+  final TextEditingController _controller = TextEditingController();
+  List<String> _options = [];
 
   @override
   void initState() {
     super.initState();
-    options = widget.options;
+    _options = widget.options;
   }
 
   void onEditingComplete() {
-    if (controller.text.isNotEmpty) {
+    if (_controller.text.isNotEmpty) {
       setState(() {
-        options = [...options, controller.text];
+        _options = [..._options, _controller.text];
       });
     }
-    controller.clear();
-    widget.onChanged(options);
+    _controller.clear();
+    widget.onChanged(_options);
   }
 
   void delete(int index) {
-    setState(() => options.removeAt(index));
-    widget.onChanged(options);
+    setState(() => _options.removeAt(index));
+    widget.onChanged(_options);
   }
 
   @override
@@ -50,9 +50,9 @@ class _OptionCustomizationItemState extends State<OptionCustomizationItem> {
       children: [
         ListView.builder(
           shrinkWrap: true,
-          itemCount: options.length,
+          itemCount: _options.length,
           itemBuilder: (context, index) => _Option(
-            option: options[index],
+            option: _options[index],
             delete: () => delete(index),
           ),
         ),
@@ -71,7 +71,7 @@ class _OptionCustomizationItemState extends State<OptionCustomizationItem> {
             ),
             Expanded(
               child: CustomizationTextField(
-                controller: controller,
+                controller: _controller,
                 onEditingComplete: onEditingComplete,
                 decoration: const InputDecoration.collapsed(
                   hintText: 'Type new option here',
