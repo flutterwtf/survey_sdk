@@ -1,4 +1,4 @@
-library client;
+library survey;
 
 /// A Calculator.
 class Calculator {

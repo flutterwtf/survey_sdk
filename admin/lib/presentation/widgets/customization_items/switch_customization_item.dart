@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:survey_sdk/presentation/utils/app_fonts.dart';
-import 'package:survey_sdk/presentation/utils/colors.dart';
+import 'package:survey_admin/presentation/utils/app_fonts.dart';
+import 'package:survey_admin/presentation/utils/colors.dart';
 
 //TODO: extend every item from CustomizationItem class
 class SwitchCustomizationItem extends StatelessWidget {

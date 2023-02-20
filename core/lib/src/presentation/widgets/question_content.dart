@@ -1,4 +1,4 @@
-import 'package:core/src/presentation/utils/app_fonts.dart';
+import 'package:survey_core/src/presentation/utils/app_fonts.dart';
 import 'package:flutter/material.dart';
 
 class QuestionContent extends StatelessWidget {
