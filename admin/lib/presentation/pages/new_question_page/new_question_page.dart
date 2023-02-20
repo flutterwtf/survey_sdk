@@ -42,25 +42,19 @@ class NewQuestionPage extends StatefulWidget {
 }
 
 class _NewQuestionPageState extends State<NewQuestionPage> {
-  String selectedTab = _tabs[0];
-  String? selectedOption;
+  String _selectedTab = _tabs[0];
+  String? _selectedOption;
 
-  List<Widget> _questionTabs({required List<String> tabsTitles}) {
-    List<_TabButton> tabs = [];
-    for (final tabTitle in tabsTitles) {
-      tabs.add(
-        _TabButton(
-          title: tabTitle,
-          onTap: () {
-            setState(
-              () => selectedTab = tabTitle,
-            );
-          },
-          isSelected: selectedTab == tabTitle ? true : false,
-        ),
-      );
-    }
-    return tabs;
+  Widget _questionTab(String tabTitle) {
+    return _TabButton(
+      title: tabTitle,
+      onTap: () {
+        setState(
+              () => _selectedTab = tabTitle,
+        );
+      },
+      isSelected: _selectedTab == tabTitle ? true : false,
+    );
   }
 
   @override
@@ -114,12 +108,12 @@ class _NewQuestionPageState extends State<NewQuestionPage> {
             children: [
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: _questionTabs(tabsTitles: _tabs),
+                children: _tabs.map(_questionTab).toList(),
               ),
               Expanded(
                 child: _QuestionOptionsListView(
-                  options: _optionsInTabs[selectedTab]!,
-                  selectedOption: selectedOption ?? '',
+                  options: _optionsInTabs[_selectedTab] ?? [],
+                  selectedOption: _selectedOption ?? '',
                 ),
               ),
             ],
@@ -185,7 +179,7 @@ class _QuestionOptionsListView extends StatelessWidget {
       scrollDirection: Axis.horizontal,
       itemBuilder: (context, index) {
         return _AssetTextOption(
-          assetName: _optionsAssets[options[index]]!,
+          assetName: _optionsAssets[options[index]] ?? '',
           titleText: options[index],
         );
       },
