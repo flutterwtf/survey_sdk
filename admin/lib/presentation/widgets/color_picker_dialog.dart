@@ -4,7 +4,7 @@ import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:survey_sdk/presentation/utils/colors.dart';
 import 'package:survey_sdk/presentation/utils/constants/constants.dart';
 
-class ColorPickerDialog extends StatefulWidget {
+class ColorPickerDialog extends StatelessWidget {
   final ValueChanged<Color> onColorPicked;
   final TextEditingController colorTextController;
 
@@ -15,19 +15,6 @@ class ColorPickerDialog extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<ColorPickerDialog> createState() => _ColorPickerDialogState();
-}
-
-class _ColorPickerDialogState extends State<ColorPickerDialog> {
-  late Color currentColor;
-
-  @override
-  void initState() {
-    currentColor = colorFromHex(widget.colorTextController.value.text, enableAlpha: true)!;
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return AlertDialog(
       title: const Text('Pick a color'),
@@ -35,15 +22,14 @@ class _ColorPickerDialogState extends State<ColorPickerDialog> {
         child: Column(
           children: [
             ColorPicker(
-                pickerColor:
-                    colorFromHex(widget.colorTextController.value.text, enableAlpha: true)!,
-                hexInputController: widget.colorTextController,
-                portraitOnly: true,
-                onColorChanged: (color) {
-                  setState(
-                    () => currentColor = color,
-                  );
-                }),
+              pickerColor: colorFromHex(
+                colorTextController.value.text,
+                enableAlpha: true,
+              )!,
+              hexInputController: colorTextController,
+              portraitOnly: true,
+              onColorChanged: (_) {},
+            ),
             Padding(
               padding: const EdgeInsets.only(top: AppDimensions.margin2XS),
               child: Row(
@@ -55,10 +41,12 @@ class _ColorPickerDialogState extends State<ColorPickerDialog> {
                   SizedBox(
                     width: 75,
                     child: TextField(
-                      controller: widget.colorTextController,
+                      controller: colorTextController,
                       inputFormatters: [
                         UpperCaseTextFormatter(),
-                        FilteringTextInputFormatter.allow(RegExp(kValidHexPattern)),
+                        FilteringTextInputFormatter.allow(
+                          RegExp(kValidHexPattern),
+                        ),
                       ],
                     ),
                   ),
@@ -71,8 +59,12 @@ class _ColorPickerDialogState extends State<ColorPickerDialog> {
       actions: <Widget>[
         GestureDetector(
           onTap: () {
-            widget.onColorPicked(
-                colorFromHex(widget.colorTextController.value.text, enableAlpha: true)!);
+            onColorPicked(
+              colorFromHex(
+                colorTextController.value.text,
+                enableAlpha: true,
+              )!,
+            );
             Navigator.of(context).pop();
           },
           child: Container(

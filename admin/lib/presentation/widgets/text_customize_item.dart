@@ -27,22 +27,26 @@ class TextCustomizeItem extends StatefulWidget {
 }
 
 class _TextCustomizeItemState extends State<TextCustomizeItem> {
-  late TextEditingController colorTextController;
-  late TextEditingController textWidthTextController;
+  late final TextEditingController _colorTextController;
+  late final TextEditingController _textWidthTextController;
 
   @override
   void initState() {
-    colorTextController = TextEditingController(
-      text: widget.initialColor.value.toRadixString(16).padLeft(6, '0').toUpperCase(),
+    _colorTextController = TextEditingController(
+      text: widget.initialColor.value
+          .toRadixString(16)
+          .padLeft(6, '0')
+          .toUpperCase(),
     );
-    textWidthTextController = TextEditingController(text: widget.initialTextWidth.toString());
+    _textWidthTextController =
+        TextEditingController(text: widget.initialTextWidth.toString());
     super.initState();
   }
 
   @override
   void dispose() {
-    colorTextController.dispose();
-    textWidthTextController.dispose();
+    _colorTextController.dispose();
+    _textWidthTextController.dispose();
     super.dispose();
   }
 
@@ -59,14 +63,15 @@ class _TextCustomizeItemState extends State<TextCustomizeItem> {
                 onTap: () => pickColor(context),
                 child: Container(
                   decoration: BoxDecoration(
-                    color: colorFromHex(colorTextController.value.text, enableAlpha: true)!,
+                    color: colorFromHex(_colorTextController.value.text,
+                        enableAlpha: true)!,
                   ),
                   width: AppDimensions.sizeM,
                   height: AppDimensions.sizeM,
                 ),
               ),
               HexColorField(
-                colorTextController: colorTextController,
+                colorTextController: _colorTextController,
                 onColorPicked: (color) {
                   setState(
                     () => widget.onColorPicked(color),
@@ -75,8 +80,9 @@ class _TextCustomizeItemState extends State<TextCustomizeItem> {
               ),
               const SizedBox(width: AppDimensions.sizeM),
               TextWidthField(
-                textWidthTextController: textWidthTextController,
-                onTextWidthPicked: (textWidth) => widget.onTextWidthPicked(textWidth),
+                textWidthTextController: _textWidthTextController,
+                onTextWidthPicked: (textWidth) =>
+                    widget.onTextWidthPicked(textWidth),
               )
             ],
           ),
@@ -95,7 +101,7 @@ class _TextCustomizeItemState extends State<TextCustomizeItem> {
               widget.onColorPicked(color);
             });
           },
-          colorTextController: colorTextController,
+          colorTextController: _colorTextController,
         );
       },
     );

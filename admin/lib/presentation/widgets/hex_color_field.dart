@@ -17,10 +17,9 @@ class HexColorField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.all(AppDimensions.margin2XS),
-      child: SizedBox(
-        width: 75,
+    return Expanded(
+      child: Container(
+        margin: const EdgeInsets.all(AppDimensions.margin2XS),
         child: TextField(
             controller: colorTextController,
             style: const TextStyle(fontSize: AppFonts.sizeL),
@@ -31,8 +30,9 @@ class HexColorField extends StatelessWidget {
               UpperCaseTextFormatter(),
               FilteringTextInputFormatter.allow(RegExp(kValidHexPattern)),
             ],
-            onChanged: (str) => onColorPicked(colorFromHex(str, enableAlpha: true)!)),
-      ), //
+            onChanged: (str) =>
+                onColorPicked(colorFromHex(str, enableAlpha: true)!)), //
+      ),
     );
   }
 }
