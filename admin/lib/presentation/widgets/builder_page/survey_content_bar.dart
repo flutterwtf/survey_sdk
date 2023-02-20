@@ -14,7 +14,7 @@ class SurveyContentBar extends StatefulWidget {
 }
 
 class _SurveyContentBarState extends State<SurveyContentBar> {
-  final list = [
+  final quiestionsList = [
     const SurveyQuestion(index: 1, title: 'Intro'),
     const SurveyQuestion(index: 2, title: 'Title'),
   ];
@@ -59,13 +59,13 @@ class _SurveyContentBarState extends State<SurveyContentBar> {
             child: ReorderableListView(
               buildDefaultDragHandles: false,
               children: [
-                for (int index = 0; index < list.length; index++)
+                for (int index = 0; index < quiestionsList.length; index++)
                   ReorderableDragStartListener(
                     index: index,
-                    key: ValueKey(list[index].title),
+                    key: ValueKey(quiestionsList[index].title),
                     child: SurveyQuestion(
                       index: index + 1,
-                      title: list[index].title,
+                      title: quiestionsList[index].title,
                     ),
                   )
               ],
@@ -73,8 +73,8 @@ class _SurveyContentBarState extends State<SurveyContentBar> {
                 setState(() {
                   if (newIndex > oldIndex) newIndex--;
 
-                  final item = list.removeAt(oldIndex);
-                  list.insert(newIndex, item);
+                  final item = quiestionsList.removeAt(oldIndex);
+                  quiestionsList.insert(newIndex, item);
                 });
               },
             ),
