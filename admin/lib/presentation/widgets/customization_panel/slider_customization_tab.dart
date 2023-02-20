@@ -6,7 +6,7 @@ import 'package:survey_admin/presentation/widgets/customization_panel/slider_cus
 
 //TODO TabBarView
 class SliderCustomizationTab extends StatelessWidget {
-  final sliderTab = const <Tab>[
+  final _sliderTab = const <Tab>[
     Tab(text: 'Common'),
     Tab(text: 'Slider'),
     Tab(text: 'Content'),
@@ -20,7 +20,7 @@ class SliderCustomizationTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: DefaultTabController(
-        length: sliderTab.length,
+        length: _sliderTab.length,
         child: Scaffold(
           appBar: AppBar(
             backgroundColor: AppColors.white,
@@ -30,7 +30,7 @@ class SliderCustomizationTab extends StatelessWidget {
               indicatorColor: AppColors.white,
               unselectedLabelColor: AppColors.textLightGrey,
               labelColor: Colors.black,
-              tabs: sliderTab,
+              tabs: _sliderTab,
             ),
           ),
           body: TabBarView(
