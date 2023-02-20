@@ -2,10 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:survey_sdk/presentation/utils/app_fonts.dart';
 import 'package:survey_sdk/presentation/utils/colors.dart';
 import 'package:survey_sdk/presentation/utils/constants/constants.dart';
+import 'package:survey_sdk/presentation/widgets/builder_page/survey_question.dart';
 
-class SurveyQuestions extends StatelessWidget {
+class SurveyQuestions extends StatefulWidget {
   const SurveyQuestions({super.key});
 
+  @override
+  State<SurveyQuestions> createState() => _SurveyQuestionsState();
+}
+
+class _SurveyQuestionsState extends State<SurveyQuestions> {
+  final list = [
+    const SurveyQuestion(index: 1, title: 'Intro'),
+    const SurveyQuestion(index: 2, title: 'Title'),
+  ];
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -40,6 +50,30 @@ class SurveyQuestions extends StatelessWidget {
                   onPressed: () {},
                 ),
               ],
+            ),
+          ),
+          Expanded(
+            child: ReorderableListView(
+              buildDefaultDragHandles: false,
+              children: [
+                for (int index = 0; index < list.length; index++)
+                  ReorderableDragStartListener(
+                    index: index,
+                    key: ValueKey(list[index].title),
+                    child: SurveyQuestion(
+                      index: index + 1,
+                      title: list[index].title,
+                    ),
+                  )
+              ],
+              onReorder: (oldIndex, newIndex) {
+                setState(() {
+                  if (newIndex > oldIndex) newIndex--;
+
+                  final item = list.removeAt(oldIndex);
+                  list.insert(newIndex, item);
+                });
+              },
             ),
           ),
         ],
