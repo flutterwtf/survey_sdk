@@ -42,8 +42,8 @@ class _ExportFloatingWindow extends StatelessWidget {
     required this.onCopyPressed,
   });
 
-  static const double windowWidth = 420;
-  static const double windowHeight = 320;
+  static const double _windowWidth = 420;
+  static const double _windowHeight = 320;
 
   @override
   Widget build(BuildContext context) {
@@ -59,8 +59,8 @@ class _ExportFloatingWindow extends StatelessWidget {
               ),
             ),
           ),
-          width: windowWidth,
-          height: windowHeight,
+          width: _windowWidth,
+          height: _windowHeight,
           child: Column(
             children: [
               Row(
