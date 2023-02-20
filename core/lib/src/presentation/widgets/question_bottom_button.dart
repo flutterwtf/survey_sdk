@@ -24,6 +24,7 @@ class QuestionBottomButton extends StatelessWidget {
       height: 52,
       width: double.infinity,
       child: InkWell(
+        key: const Key('QBB'),
         onTap: isEnabled ? onPressed : null,
         borderRadius: BorderRadius.circular(
           AppDimensions.circularRadiusXS,
