@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:survey_sdk/presentation/utils/colors.dart';
 
+//TODO: extend every customization from this
+//TODO: rename to "CustomizationItem"
+//TODO: store tab title here, not in 'titles' list
 class QuestionSettingsListItem {
   final String title;
   final Widget body;
