@@ -1,3 +1,12 @@
 {
-  "exapmle": "exapmle"
+  "next": "NEXT",
+  "create": "Create",
+  "preview": "Preview",
+  "import": "IMPORT",
+  "export": "EXPORT",
+  "survey": "Survey",
+  "ok": "OK",
+  "min": "min",
+  "max": "max",
+  "multiline": "Multiline"
 }
