@@ -4,12 +4,12 @@ import 'package:survey_admin/presentation/widgets/customization_items/create_tex
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/option_customization_item.dart';
 
-class ChoiceQuestionCustomizationPanel extends StatelessWidget {
+class ChoiceContentCustomizationPanel extends StatelessWidget {
   final ValueChanged<String> onTitleChanged;
   final ValueChanged<String> onSubTitleChanged;
   final ValueChanged<List<String>> onOptionsChanged;
 
-  const ChoiceQuestionCustomizationPanel({
+  const ChoiceContentCustomizationPanel({
     Key? key,
     required this.onTitleChanged,
     required this.onSubTitleChanged,
