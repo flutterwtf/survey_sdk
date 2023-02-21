@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:survey_core/src/presentation/di/injector.dart';
 import 'package:survey_core/src/presentation/survey/survey_cubit.dart';
 import 'package:survey_core/src/presentation/survey/survey_state.dart';
+import 'package:survey_core/src/presentation/utils/colors.dart';
 import 'package:survey_core/src/presentation/utils/data_to_widget_util.dart';
 
 class Survey extends StatefulWidget {
@@ -31,8 +32,11 @@ class _SurveyState extends State<Survey> {
       bloc: _cubit,
       builder: (BuildContext context, state) {
         return state.surveyData == null
-            //TODO: style the indicator
-            ? const Center(child: CircularProgressIndicator())
+            ? const Center(
+                child: CircularProgressIndicator(
+                  color: AppColors.black,
+                ),
+              )
             : Theme(
                 data: state.surveyData!.commonTheme.toThemeData(),
                 child: PageView(
