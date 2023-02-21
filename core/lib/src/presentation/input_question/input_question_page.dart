@@ -88,7 +88,7 @@ class InputQuestionPage extends StatelessWidget {
             padding: const EdgeInsets.only(top: AppDimensions.marginM),
             //TODO: add validator?
             child: FormBuilderTextField(
-              name: 'Text field',
+              name: context.localization.text_field,
               minLines: minLines,
               maxLines: maxLines,
               style: TextStyle(

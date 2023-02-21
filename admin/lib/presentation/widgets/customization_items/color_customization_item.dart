@@ -46,8 +46,7 @@ class _ColorCustomizationItemState extends State<ColorCustomizationItem> {
     setState(() => pickerColor = color);
   }
 
-  String colorToString(Color color) =>
-      color.value.toRadixString(16).toUpperCase();
+  String colorToString(Color color) => color.value.toRadixString(16).toUpperCase();
 
   void updateTextField() {
     widget.onColorPicked(pickerColor);
@@ -63,7 +62,7 @@ class _ColorCustomizationItemState extends State<ColorCustomizationItem> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomizationText('Fill'),
+          CustomizationText(context.localization.fill),
           const SizedBox(height: AppDimensions.marginM),
           GestureDetector(
             onTap: pickColor,
@@ -79,10 +78,7 @@ class _ColorCustomizationItemState extends State<ColorCustomizationItem> {
                 ),
                 Container(
                   margin: const EdgeInsets.all(AppDimensions.margin2XS),
-                  child: Text(pickerColor.value
-                      .toRadixString(16)
-                      .padLeft(6, '0')
-                      .toUpperCase()),
+                  child: Text(pickerColor.value.toRadixString(16).padLeft(6, '0').toUpperCase()),
                 ),
               ],
             ),
@@ -94,27 +90,28 @@ class _ColorCustomizationItemState extends State<ColorCustomizationItem> {
 
   void pickColor() {
     showDialog(
-        context: context,
-        builder: (_) {
-          return AlertDialog(
-            title: const Text('Pick a color'),
-            content: SingleChildScrollView(
-              child: ColorPicker(
-                pickerColor: pickerColor,
-                onColorChanged: onColorChanged,
-                hexInputBar: true,
-              ),
+      context: context,
+      builder: (_) {
+        return AlertDialog(
+          title: Text(context.localization.pick_a_color),
+          content: SingleChildScrollView(
+            child: ColorPicker(
+              pickerColor: pickerColor,
+              onColorChanged: onColorChanged,
+              hexInputBar: true,
             ),
-            actions: <Widget>[
-              ElevatedButton(
-                child: Text(context.localization.ok),
-                onPressed: () {
-                  updateTextField();
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
-          );
-        });
+          ),
+          actions: <Widget>[
+            ElevatedButton(
+              child: Text(context.localization.ok),
+              onPressed: () {
+                updateTextField();
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 }

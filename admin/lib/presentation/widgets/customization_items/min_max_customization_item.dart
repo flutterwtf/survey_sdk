@@ -20,8 +20,7 @@ class MinMaxCustomizationItem extends StatefulWidget {
   final void Function(int? min, int? max) onChanged;
 
   @override
-  State<MinMaxCustomizationItem> createState() =>
-      _MinMaxCustomizationItemState();
+  State<MinMaxCustomizationItem> createState() => _MinMaxCustomizationItemState();
 }
 
 class _MinMaxCustomizationItemState extends State<MinMaxCustomizationItem> {
@@ -44,14 +43,14 @@ class _MinMaxCustomizationItemState extends State<MinMaxCustomizationItem> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomizationText('Value'),
+          CustomizationText(context.localization.value),
           FormBuilder(
             child: Row(
               children: [
                 Expanded(
                   flex: 2,
                   child: _MinMaxInputField(
-                    prefix: 'min',
+                    prefix: context.localization.min,
                     initialValue: widget.initialMin,
                     onChanged: (value) {
                       _min = value;
@@ -62,7 +61,7 @@ class _MinMaxCustomizationItemState extends State<MinMaxCustomizationItem> {
                 Expanded(
                   flex: 3,
                   child: _MinMaxInputField(
-                    prefix: 'max',
+                    prefix: context.localization.max,
                     initialValue: widget.initialMax,
                     onChanged: (value) {
                       _max = value;

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:survey_admin/presentation/app/localization/localizations.dart';
 import 'package:survey_admin/presentation/utils/app_fonts.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
@@ -15,8 +16,7 @@ class OptionCustomizationItem extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<OptionCustomizationItem> createState() =>
-      _OptionCustomizationItemState();
+  State<OptionCustomizationItem> createState() => _OptionCustomizationItemState();
 }
 
 class _OptionCustomizationItemState extends State<OptionCustomizationItem> {
@@ -66,9 +66,9 @@ class _OptionCustomizationItemState extends State<OptionCustomizationItem> {
               child: CustomizationTextField(
                 controller: controller,
                 onEditingComplete: onEditingComplete,
-                decoration: const InputDecoration.collapsed(
-                  hintText: 'Type new option here',
-                  hintStyle: TextStyle(
+                decoration: InputDecoration.collapsed(
+                  hintText: context.localization.type_new_option_here,
+                  hintStyle: const TextStyle(
                     color: AppColors.textLightGrey,
                   ),
                 ),
