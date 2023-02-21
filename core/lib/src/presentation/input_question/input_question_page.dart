@@ -1,10 +1,11 @@
-import 'package:core/src/domain/entities/validator/input_validator.dart';
-import 'package:core/src/presentation/utils/app_fonts.dart';
-import 'package:core/src/presentation/utils/colors.dart';
-import 'package:core/src/presentation/utils/constants.dart';
-import 'package:core/src/presentation/widgets/question_bottom_button.dart';
-import 'package:core/src/presentation/widgets/question_subtitle.dart';
-import 'package:core/src/presentation/widgets/question_title.dart';
+import 'package:survey_core/src/domain/entities/validator/input_validator.dart';
+import 'package:survey_core/src/presentation/localization/localizations.dart';
+import 'package:survey_core/src/presentation/utils/app_fonts.dart';
+import 'package:survey_core/src/presentation/utils/colors.dart';
+import 'package:survey_core/src/presentation/utils/constants.dart';
+import 'package:survey_core/src/presentation/widgets/question_bottom_button.dart';
+import 'package:survey_core/src/presentation/widgets/question_subtitle.dart';
+import 'package:survey_core/src/presentation/widgets/question_title.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
@@ -109,7 +110,7 @@ class InputQuestionPage extends StatelessWidget {
           ),
           const Spacer(),
           QuestionBottomButton(
-            text: 'NEXT',
+            text: context.localization.next,
             onPressed: onSend,
             isEnabled: isSkip,
           ),

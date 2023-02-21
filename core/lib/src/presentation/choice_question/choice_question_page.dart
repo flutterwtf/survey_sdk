@@ -1,8 +1,9 @@
-import 'package:core/src/presentation/utils/app_fonts.dart';
-import 'package:core/src/presentation/utils/constants.dart';
-import 'package:core/src/presentation/widgets/question_bottom_button.dart';
-import 'package:core/src/presentation/widgets/question_content.dart';
-import 'package:core/src/presentation/widgets/question_title.dart';
+import 'package:survey_core/src/presentation/localization/localizations.dart';
+import 'package:survey_core/src/presentation/utils/app_fonts.dart';
+import 'package:survey_core/src/presentation/utils/constants.dart';
+import 'package:survey_core/src/presentation/widgets/question_bottom_button.dart';
+import 'package:survey_core/src/presentation/widgets/question_content.dart';
+import 'package:survey_core/src/presentation/widgets/question_title.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
@@ -34,24 +35,12 @@ class ChoiceQuestionPage extends StatefulWidget {
 
 class _ChoiceQuestionPageState extends State<ChoiceQuestionPage>
     with SingleTickerProviderStateMixin {
-  late AnimationController _submitButtonAnimation;
   bool _canBeSend = false;
   List<String> _selectedItems = List.empty();
 
   @override
   void initState() {
     super.initState();
-    _submitButtonAnimation = AnimationController(
-      //TODO: move to const maybe?
-      duration: const Duration(milliseconds: 200),
-      //TODO: recheck lower opacity bound
-      lowerBound: 0.8,
-      vsync: this,
-    );
-
-    if (widget.canBeSkipped) {
-      _submitButtonAnimation.value = 1;
-    }
   }
 
   void _onInputChanged(List<String>? selectedItems) {
@@ -61,11 +50,6 @@ class _ChoiceQuestionPageState extends State<ChoiceQuestionPage>
       setState(() {
         _canBeSend = _selectedItems.isNotEmpty;
       });
-      if (_canBeSend) {
-        _submitButtonAnimation.forward();
-      } else {
-        _submitButtonAnimation.reverse();
-      }
     }
   }
 
@@ -114,13 +98,10 @@ class _ChoiceQuestionPageState extends State<ChoiceQuestionPage>
                   ),
           ),
           const Spacer(),
-          AnimatedBuilder(
-            animation: _submitButtonAnimation,
-            builder: (_, __) => QuestionBottomButton(
-              text: 'NEXT',
-              onPressed: widget.onSend,
-              isEnabled: widget.canBeSkipped ? true : _canBeSend,
-            ),
+          QuestionBottomButton(
+            text: context.localization.next,
+            onPressed: widget.onSend,
+            isEnabled: widget.canBeSkipped ? true : _canBeSend,
           ),
         ],
       ),

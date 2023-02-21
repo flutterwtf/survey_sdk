@@ -1,38 +1,14 @@
-import 'dart:ui';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:survey_admin/presentation/app/app_state.dart';
 
-import 'package:survey_sdk/domain/data_interfaces/locale_repository.dart';
-import 'package:survey_sdk/domain/data_interfaces/theme_repository.dart';
-import 'package:core/core.dart';
-import 'package:survey_sdk/presentation/app/app_state.dart';
-import 'package:survey_sdk/presentation/base/base_cubit.dart';
-
-class AppCubit extends BaseCubit<AppState> {
-  final ThemeRepository _themeRepository;
-  final LocaleRepository _localeRepository;
-
-  AppCubit(
-    this._themeRepository,
-    this._localeRepository,
-  ) : super(
-          const AppState(
-            themeType: ThemeType.system,
-            locale: null,
-          ),
+class AppCubit extends Cubit<AppState> {
+  AppCubit()
+      : super(
+          const AppState(),
         );
 
-  void _changeTheme(ThemeType themeType) {
-    emit(state.copyWith(themeType: themeType));
-  }
-
-  void _changeLocale(Locale locale) {
-    emit(state.copyWith(locale: locale));
-  }
-
-  void onAppStarted() async {
-    _changeTheme(await _themeRepository.getTheme());
-    final locale = await _localeRepository.getLocale();
-    if (locale != null) {
-      _changeLocale(locale);
-    }
+  void changeTheme(ThemeData themeData) {
+    emit(state.copyWith(themeData: themeData));
   }
 }

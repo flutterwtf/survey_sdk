@@ -10,26 +10,12 @@ import 'package:survey_sdk/presentation/pages/new_question_page/new_question_cub
 
 GetIt get i => GetIt.instance;
 
-void initInjector() {
+Future<void> initInjector() async {
   _initDataSources();
   _initRepositories();
-  _initCubits();
 }
 
-void _initDataSources() {
-  i.registerSingleton<PreferencesDataSource>(
-    PreferencesDataSourceImpl(),
-  );
-}
-
-void _initRepositories() {
-  i.registerSingleton<LocaleRepository>(
-    LocaleRepositoryImpl(i.get()),
-  );
-  i.registerSingleton<ThemeRepository>(
-    ThemeRepositoryImpl(i.get()),
-  );
-}
+Future<void> _initDataSources() async {}
 
 void _initCubits() {
   i.registerFactory<AppCubit>(
@@ -45,3 +31,4 @@ void _initCubits() {
     () => NewQuestionCubit(),
   );
 }
+void _initRepositories() {}
