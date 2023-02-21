@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:survey_sdk/presentation/utils/app_fonts.dart';
-import 'package:survey_sdk/presentation/utils/constants/constants.dart';
+import 'package:survey_admin/presentation/utils/app_fonts.dart';
+import 'package:survey_admin/presentation/utils/constants/constants.dart';
+import 'package:survey_admin/presentation/widgets/customization_items/customization_text_field.dart';
+import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text.dart';
 
 class MinMaxCustomizationItem extends StatefulWidget {
   const MinMaxCustomizationItem({
@@ -17,7 +19,8 @@ class MinMaxCustomizationItem extends StatefulWidget {
   final void Function(int? min, int? max) onChanged;
 
   @override
-  State<MinMaxCustomizationItem> createState() => _MinMaxCustomizationItemState();
+  State<MinMaxCustomizationItem> createState() =>
+      _MinMaxCustomizationItemState();
 }
 
 class _MinMaxCustomizationItemState extends State<MinMaxCustomizationItem> {
@@ -40,13 +43,7 @@ class _MinMaxCustomizationItemState extends State<MinMaxCustomizationItem> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            'Value',
-            style: TextStyle(
-              fontSize: AppFonts.sizeM,
-              fontWeight: AppFonts.weightSemiBold,
-            ),
-          ),
+          const CustomizationText('Value'),
           FormBuilder(
             child: Row(
               children: [
@@ -95,51 +92,37 @@ class _MinMaxInputField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(
-        top: AppDimensions.sizeS,
-      ),
-      child: Row(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(
-              right: AppDimensions.marginS,
-            ),
-            child: Text(
-              prefix,
-              style: const TextStyle(
-                fontSize: AppFonts.sizeL,
-                fontWeight: AppFonts.weightRegular,
-              ),
+    return Row(
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(
+            right: AppDimensions.marginS,
+          ),
+          child: Text(
+            prefix,
+            style: const TextStyle(
+              fontSize: AppFonts.sizeL,
+              fontWeight: AppFonts.weightRegular,
             ),
           ),
-          Expanded(
-            child: FormBuilderTextField(
-              name: '${prefix}_input_field',
-              initialValue: initialValue.toString(),
-              onChanged: (value) {
-                if (value != null) {
-                  onChanged(int.tryParse(value));
-                } else {
-                  onChanged(null);
-                }
-              },
-              decoration: const InputDecoration(
-                isCollapsed: true,
-                border: InputBorder.none,
-              ),
-              style: const TextStyle(
-                fontSize: AppFonts.sizeL,
-                fontWeight: AppFonts.weightRegular,
-              ),
-              inputFormatters: [
-                FilteringTextInputFormatter.digitsOnly,
-                LengthLimitingTextInputFormatter(6),
-              ],
-            ),
+        ),
+        Expanded(
+          child: CustomizationTextField(
+            initialValue: initialValue.toString(),
+            inputFormatters: [
+              FilteringTextInputFormatter.digitsOnly,
+              LengthLimitingTextInputFormatter(6),
+            ],
+            onChanged: (value) {
+              if (value != null) {
+                onChanged(int.tryParse(value));
+              } else {
+                onChanged(null);
+              }
+            },
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

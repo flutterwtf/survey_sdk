@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:survey_sdk/presentation/utils/app_fonts.dart';
-import 'package:survey_sdk/presentation/utils/constants/constants.dart';
+import 'package:survey_admin/presentation/utils/app_fonts.dart';
+import 'package:survey_admin/presentation/utils/constants/constants.dart';
+import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text.dart';
 
 enum InputType {
   text('Text'),
@@ -25,7 +26,8 @@ class InputTypeCustomizationItem extends StatefulWidget {
   final void Function(InputType inputType)? onChanged;
 
   @override
-  State<InputTypeCustomizationItem> createState() => _InputTypeCustomizationItemState();
+  State<InputTypeCustomizationItem> createState() =>
+      _InputTypeCustomizationItemState();
 }
 
 class _InputTypeCustomizationItemState extends State<InputTypeCustomizationItem>
@@ -55,13 +57,7 @@ class _InputTypeCustomizationItemState extends State<InputTypeCustomizationItem>
             top: AppDimensions.marginM,
             left: AppDimensions.marginM,
           ),
-          child: Text(
-            'Input type',
-            style: TextStyle(
-              fontSize: AppFonts.sizeM,
-              fontWeight: AppFonts.weightSemiBold,
-            ),
-          ),
+          child: CustomizationText('Input type'),
         ),
         _InputTypeItem(
           inputType: _selectedType,
@@ -130,24 +126,27 @@ class _InputTypeItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onTap,
-      child: Padding(
-        padding: const EdgeInsets.all(
-          AppDimensions.marginM,
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              inputType.name,
-              style: const TextStyle(
-                fontSize: AppFonts.sizeL,
-                fontWeight: AppFonts.weightRegular,
+    return Material(
+      child: InkWell(
+        onTap: onTap,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+            vertical: AppDimensions.margin2XS,
+            horizontal: AppDimensions.marginM,
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                inputType.name,
+                style: const TextStyle(
+                  fontSize: AppFonts.sizeL,
+                  fontWeight: AppFonts.weightRegular,
+                ),
               ),
-            ),
-            if (trailing != null) trailing!,
-          ],
+              if (trailing != null) trailing!,
+            ],
+          ),
         ),
       ),
     );

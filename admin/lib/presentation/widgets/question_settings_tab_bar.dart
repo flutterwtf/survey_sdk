@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:survey_sdk/presentation/utils/colors.dart';
+import 'package:survey_admin/presentation/utils/colors.dart';
 
 //TODO: extend every customization from this
 //TODO: rename to "CustomizationItem"
