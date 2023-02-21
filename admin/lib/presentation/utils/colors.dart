@@ -19,4 +19,6 @@ abstract class AppColors {
   static const textLightGrey = Color(0xFF727272);
 
   static const greyBackground = Color(0xFFDEDEDE);
+
+  static const customizationTabBarInactiveText = Color(0xFF929292);
 }
