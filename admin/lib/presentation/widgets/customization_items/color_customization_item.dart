@@ -44,7 +44,10 @@ class _ColorCustomizationItemState extends State<ColorCustomizationItem> {
 
   void onColorChanged(color) {
     widget.onColorPicked(color);
-    setState(() => _pickerColor = color);
+    setState(() {
+      _pickerColor = color;
+      _controller.text = colorToString(color);
+    });
   }
 
   String colorToString(Color color) =>
