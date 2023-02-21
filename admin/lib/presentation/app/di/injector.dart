@@ -1,28 +1,21 @@
 import 'package:get_it/get_it.dart';
-import 'package:survey_sdk/data/data_sources/preferences_data_source.dart';
-import 'package:survey_sdk/data/repositories/locale_repository.dart';
-import 'package:survey_sdk/data/repositories/theme_repository.dart';
-import 'package:survey_sdk/domain/data_interfaces/locale_repository.dart';
-import 'package:survey_sdk/domain/data_interfaces/theme_repository.dart';
-import 'package:survey_sdk/presentation/app/app_cubit.dart';
-import 'package:survey_sdk/presentation/pages/builder/builder_cubit.dart';
-import 'package:survey_sdk/presentation/pages/new_question_page/new_question_cubit.dart';
+import 'package:survey_admin/presentation/app/app_cubit.dart';
+import 'package:survey_admin/presentation/pages/builder/builder_cubit.dart';
+import 'package:survey_admin/presentation/pages/new_question_page/new_question_cubit.dart';
 
 GetIt get i => GetIt.instance;
 
 Future<void> initInjector() async {
   _initDataSources();
   _initRepositories();
+  _initCubits();
 }
 
 Future<void> _initDataSources() async {}
 
 void _initCubits() {
   i.registerFactory<AppCubit>(
-    () => AppCubit(
-      i.get(),
-      i.get(),
-    ),
+    () => AppCubit(),
   );
   i.registerFactory<BuilderCubit>(
     () => BuilderCubit(),
@@ -31,4 +24,5 @@ void _initCubits() {
     () => NewQuestionCubit(),
   );
 }
+
 void _initRepositories() {}

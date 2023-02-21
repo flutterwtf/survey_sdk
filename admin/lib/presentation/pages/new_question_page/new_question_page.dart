@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:survey_sdk/presentation/utils/app_fonts.dart';
-import 'package:survey_sdk/presentation/utils/colors.dart';
-import 'package:survey_sdk/presentation/utils/constants/constants.dart';
-import 'package:survey_sdk/presentation/utils/constants/image_constants.dart';
-import 'package:survey_sdk/presentation/widgets/vector_image.dart';
+import 'package:survey_admin/presentation/utils/app_fonts.dart';
+import 'package:survey_admin/presentation/utils/colors.dart';
+import 'package:survey_admin/presentation/utils/constants/constants.dart';
+import 'package:survey_admin/presentation/utils/constants/image_constants.dart';
+import 'package:survey_admin/presentation/widgets/vector_image.dart';
 
 const _title = 'New screen';
 const _tabs = [
@@ -58,6 +58,7 @@ class _NewQuestionPageState extends State<NewQuestionPage> {
   }
 
   @override
+  //TODO: split
   Widget build(BuildContext context) {
     return Theme(
       data: ThemeData().copyWith(

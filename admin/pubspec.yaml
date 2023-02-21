@@ -35,5 +35,5 @@ flutter:
   generate: true
   uses-material-design: true
   assets:
-    - assets
+    - assets/
     - assets/images/
