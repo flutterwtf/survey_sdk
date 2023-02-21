@@ -5,12 +5,12 @@ import 'package:survey_admin/presentation/utils/constants/constants.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text.dart';
 
 class CreateTextCustomizationItem extends StatelessWidget {
-  final String title;
+  final double maxHeight;
   final void Function(String text) onChanged;
 
   const CreateTextCustomizationItem({
     Key? key,
-    required this.title,
+    required this.maxHeight,
     required this.onChanged,
   }) : super(key: key);
 

@@ -91,51 +91,37 @@ class _MinMaxInputField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(
-        top: AppDimensions.sizeS,
-      ),
-      child: Row(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(
-              right: AppDimensions.marginS,
-            ),
-            child: Text(
-              prefix,
-              style: const TextStyle(
-                fontSize: AppFonts.sizeL,
-                fontWeight: AppFonts.weightRegular,
-              ),
+    return Row(
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(
+            right: AppDimensions.marginS,
+          ),
+          child: Text(
+            prefix,
+            style: const TextStyle(
+              fontSize: AppFonts.sizeL,
+              fontWeight: AppFonts.weightRegular,
             ),
           ),
-          Expanded(
-            child: FormBuilderTextField(
-              name: '${prefix}_input_field',
-              initialValue: initialValue.toString(),
-              onChanged: (value) {
-                if (value != null) {
-                  onChanged(int.tryParse(value));
-                } else {
-                  onChanged(null);
-                }
-              },
-              decoration: const InputDecoration(
-                isCollapsed: true,
-                border: InputBorder.none,
-              ),
-              style: const TextStyle(
-                fontSize: AppFonts.sizeL,
-                fontWeight: AppFonts.weightRegular,
-              ),
-              inputFormatters: [
-                FilteringTextInputFormatter.digitsOnly,
-                LengthLimitingTextInputFormatter(6),
-              ],
-            ),
+        ),
+        Expanded(
+          child: CustomizationTextField(
+            initialValue: initialValue.toString(),
+            inputFormatters: [
+              FilteringTextInputFormatter.digitsOnly,
+              LengthLimitingTextInputFormatter(6),
+            ],
+            onChanged: (value) {
+              if (value != null) {
+                onChanged(int.tryParse(value));
+              } else {
+                onChanged(null);
+              }
+            },
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

@@ -126,24 +126,27 @@ class _InputTypeItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onTap,
-      child: Padding(
-        padding: const EdgeInsets.all(
-          AppDimensions.marginM,
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              inputType.name,
-              style: const TextStyle(
-                fontSize: AppFonts.sizeL,
-                fontWeight: AppFonts.weightRegular,
+    return Material(
+      child: InkWell(
+        onTap: onTap,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+            vertical: AppDimensions.margin2XS,
+            horizontal: AppDimensions.marginM,
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                inputType.name,
+                style: const TextStyle(
+                  fontSize: AppFonts.sizeL,
+                  fontWeight: AppFonts.weightRegular,
+                ),
               ),
-            ),
-            if (trailing != null) trailing!,
-          ],
+              if (trailing != null) trailing!,
+            ],
+          ),
         ),
       ),
     );
