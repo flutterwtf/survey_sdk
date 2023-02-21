@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
+import 'package:survey_admin/presentation/app/localization/localizations.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
+import 'package:survey_admin/presentation/widgets/customization_items/customization_text_field.dart';
 
 class ColorCustomizationItem extends StatefulWidget {
   final Color initialColor;
@@ -103,7 +105,7 @@ class _ColorCustomizationItemState extends State<ColorCustomizationItem> {
             ),
             actions: <Widget>[
               ElevatedButton(
-                child: const Text('OK'),
+                child: Text(context.localization.ok),
                 onPressed: () {
                   updateTextField();
                   Navigator.of(context).pop();

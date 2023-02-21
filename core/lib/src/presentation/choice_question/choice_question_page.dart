@@ -1,3 +1,4 @@
+import 'package:survey_core/src/presentation/localization/localizations.dart';
 import 'package:survey_core/src/presentation/utils/app_fonts.dart';
 import 'package:survey_core/src/presentation/utils/constants.dart';
 import 'package:survey_core/src/presentation/widgets/question_bottom_button.dart';
@@ -98,7 +99,7 @@ class _ChoiceQuestionPageState extends State<ChoiceQuestionPage>
           ),
           const Spacer(),
           QuestionBottomButton(
-            text: 'NEXT',
+            text: context.localization.next,
             onPressed: widget.onSend,
             isEnabled: widget.canBeSkipped ? true : _canBeSend,
           ),
