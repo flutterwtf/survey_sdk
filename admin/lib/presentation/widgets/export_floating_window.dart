@@ -42,8 +42,8 @@ class _ExportFloatingWindow extends StatelessWidget {
     required this.onCopyPressed,
   });
 
+  // TODO don't use explicit width
   static const double _windowWidth = 420;
-  static const double _windowHeight = 320;
 
   @override
   Widget build(BuildContext context) {
@@ -60,8 +60,8 @@ class _ExportFloatingWindow extends StatelessWidget {
             ),
           ),
           width: _windowWidth,
-          height: _windowHeight,
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
@@ -88,71 +88,78 @@ class _ExportFloatingWindow extends StatelessWidget {
                   ),
                 ),
               ),
-              const Spacer(),
-              const Icon(
-                Icons.task_rounded,
-                size: AppDimensions.size2XL,
-                color: AppColors.black,
+              const Padding(
+                padding: EdgeInsets.symmetric(
+                  vertical: AppDimensions.marginM,
+                ),
+                child: Icon(
+                  Icons.task_rounded,
+                  size: AppDimensions.size2XL,
+                  color: AppColors.black,
+                ),
               ),
-              const Spacer(),
               Padding(
                 padding: const EdgeInsets.all(
                   AppDimensions.marginLargeM,
                 ),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    OutlinedButton(
-                      onPressed: onCopyPressed,
-                      style: ButtonStyle(
-                        fixedSize: const MaterialStatePropertyAll(
-                          Size(113, 34),
+                    Expanded(
+                      child: FilledButton(
+                        onPressed: onCopyPressed,
+                        style: ButtonStyle(
+                          backgroundColor: const MaterialStatePropertyAll(
+                            AppColors.white,
+                          ),
+                          side: const MaterialStatePropertyAll(
+                            BorderSide(
+                              color: AppColors.black,
+                            ),
+                          ),
+                          shape: MaterialStatePropertyAll(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(
+                                AppDimensions.circularRadiusXS,
+                              ),
+                            ),
+                          ),
                         ),
-                        side: const MaterialStatePropertyAll(
-                          BorderSide(
+                        child: const Text(
+                          'COPY',
+                          style: TextStyle(
+                            fontSize: AppFonts.sizeM,
+                            fontWeight: AppFonts.weightBold,
                             color: AppColors.black,
                           ),
                         ),
-                        shape: MaterialStatePropertyAll(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(
-                              AppDimensions.circularRadiusXS,
-                            ),
-                          ),
-                        ),
-                      ),
-                      child: const Text(
-                        'COPY',
-                        style: TextStyle(
-                          fontSize: AppFonts.sizeM,
-                          fontWeight: AppFonts.weightBold,
-                          color: AppColors.black,
-                        ),
                       ),
                     ),
-                    FilledButton(
-                      onPressed: onDownloadPressed,
-                      style: ButtonStyle(
-                        fixedSize: const MaterialStatePropertyAll(
-                          Size(235, 34),
-                        ),
-                        backgroundColor: const MaterialStatePropertyAll(
-                          AppColors.black,
-                        ),
-                        shape: MaterialStatePropertyAll(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(
-                              AppDimensions.circularRadiusXS,
+                    const SizedBox(
+                      width: AppDimensions.marginXL,
+                    ),
+                    Expanded(
+                      flex: 2,
+                      child: FilledButton(
+                        onPressed: onDownloadPressed,
+                        style: ButtonStyle(
+                          backgroundColor: const MaterialStatePropertyAll(
+                            AppColors.black,
+                          ),
+                          shape: MaterialStatePropertyAll(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(
+                                AppDimensions.circularRadiusXS,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      child: const Text(
-                        'DOWNLOAD',
-                        style: TextStyle(
-                          fontSize: AppFonts.sizeM,
-                          fontWeight: AppFonts.weightBold,
-                          color: AppColors.white,
+                        child: const Text(
+                          'DOWNLOAD',
+                          style: TextStyle(
+                            fontSize: AppFonts.sizeM,
+                            fontWeight: AppFonts.weightBold,
+                            color: AppColors.white,
+                          ),
                         ),
                       ),
                     ),
