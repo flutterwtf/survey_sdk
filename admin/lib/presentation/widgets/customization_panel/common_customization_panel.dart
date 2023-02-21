@@ -36,7 +36,7 @@ class CommonCustomizationPanel extends CustomizationPanel {
             ColorCustomizationItem(
               initialColor: AppColors.white,
               onColorPicked: onFillColorChanged,
-            )
+            ),
           ],
         ),
         CustomizationItemsContainer(
