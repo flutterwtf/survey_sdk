@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
@@ -72,14 +71,14 @@ class _ColorCustomizationItemState extends State<ColorCustomizationItem> {
                 Container(
                   decoration: BoxDecoration(
                     border: Border.all(color: AppColors.black),
-                    color: currentColor,
+                    color: pickerColor,
                   ),
                   width: AppDimensions.sizeM,
                   height: AppDimensions.sizeM,
                 ),
                 Container(
                   margin: const EdgeInsets.all(AppDimensions.margin2XS),
-                  child: Text(currentColor.value
+                  child: Text(pickerColor.value
                       .toRadixString(16)
                       .padLeft(6, '0')
                       .toUpperCase()),
