@@ -16,21 +16,19 @@ class CreateTextCustomizationItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return LimitedBox(
       maxHeight: maxHeight,
-      child: Expanded(
-        child: TextField(
-          decoration: const InputDecoration(
-            isCollapsed: true,
-            border: InputBorder.none,
-            hintText: 'Enter text',
-          ),
-          maxLines: null,
-          style: const TextStyle(
-            fontSize: AppFonts.sizeL,
-            fontWeight: AppFonts.weightRegular,
-            color: AppColors.black,
-          ),
-          onChanged: onChanged,
+      child: TextField(
+        decoration: const InputDecoration(
+          isCollapsed: true,
+          border: InputBorder.none,
+          hintText: 'Enter text',
         ),
+        maxLines: null,
+        style: const TextStyle(
+          fontSize: AppFonts.sizeL,
+          fontWeight: AppFonts.weightRegular,
+          color: AppColors.black,
+        ),
+        onChanged: onChanged,
       ),
     );
   }
