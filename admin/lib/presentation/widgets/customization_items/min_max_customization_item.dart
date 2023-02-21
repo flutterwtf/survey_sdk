@@ -5,6 +5,7 @@ import 'package:survey_admin/presentation/app/localization/localizations.dart';
 import 'package:survey_admin/presentation/utils/app_fonts.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_text_field.dart';
+import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text.dart';
 
 class MinMaxCustomizationItem extends StatefulWidget {
   const MinMaxCustomizationItem({
@@ -36,29 +37,40 @@ class _MinMaxCustomizationItemState extends State<MinMaxCustomizationItem> {
 
   @override
   Widget build(BuildContext context) {
-    return FormBuilder(
-      child: Row(
+    return Padding(
+      padding: const EdgeInsets.all(
+        AppDimensions.marginM,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Expanded(
-            flex: 2,
-            child: _MinMaxInputField(
-              prefix: context.localization.min,
-              initialValue: widget.initialMin,
-              onChanged: (value) {
-                _min = value;
-                widget.onChanged(_min, _max);
-              },
-            ),
-          ),
-          Expanded(
-            flex: 3,
-            child: _MinMaxInputField(
-              prefix: context.localization.max,
-              initialValue: widget.initialMax,
-              onChanged: (value) {
-                _max = value;
-                widget.onChanged(_min, _max);
-              },
+          const CustomizationText('Value'),
+          FormBuilder(
+            child: Row(
+              children: [
+                Expanded(
+                  flex: 2,
+                  child: _MinMaxInputField(
+                    prefix: 'min',
+                    initialValue: widget.initialMin,
+                    onChanged: (value) {
+                      _min = value;
+                      widget.onChanged(_min, _max);
+                    },
+                  ),
+                ),
+                Expanded(
+                  flex: 3,
+                  child: _MinMaxInputField(
+                    prefix: 'max',
+                    initialValue: widget.initialMax,
+                    onChanged: (value) {
+                      _max = value;
+                      widget.onChanged(_min, _max);
+                    },
+                  ),
+                ),
+              ],
             ),
           ),
         ],
