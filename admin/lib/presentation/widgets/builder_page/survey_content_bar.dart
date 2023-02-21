@@ -3,13 +3,13 @@ import 'package:survey_admin/presentation/utils/app_fonts.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
 
-class SurveyQuestions extends StatelessWidget {
-  const SurveyQuestions({super.key});
+class SurveyContentBar extends StatelessWidget {
+  const SurveyContentBar({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 210,
+      width: AppDimensions.surveyContentBarWidth,
       color: AppColors.white,
       child: Column(
         children: [
@@ -35,9 +35,10 @@ class SurveyQuestions extends StatelessWidget {
                 const SizedBox(
                   width: AppDimensions.margin3XL + AppDimensions.margin2XL,
                 ),
-                IconButton(
-                  icon: const Icon(Icons.add_circle_outline),
-                  onPressed: () {},
+                SizedBox(
+                  height: AppDimensions.size3M,
+                  width: AppDimensions.size3M,
+                  child: SvgPicture.asset(AssetStrings.addCircle),
                 ),
               ],
             ),

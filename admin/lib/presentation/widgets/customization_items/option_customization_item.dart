@@ -5,12 +5,17 @@ import 'package:survey_admin/presentation/utils/constants/constants.dart';
 
 class OptionCustomizationItem extends StatefulWidget {
   final List<String> options;
+  final ValueChanged<List<String>> onChanged;
 
-  const OptionCustomizationItem({Key? key, required this.options})
-      : super(key: key);
+  const OptionCustomizationItem({
+    Key? key,
+    required this.options,
+    required this.onChanged,
+  }) : super(key: key);
 
   @override
-  State<OptionCustomizationItem> createState() => _OptionCustomizationItemState();
+  State<OptionCustomizationItem> createState() =>
+      _OptionCustomizationItemState();
 }
 
 class _OptionCustomizationItemState extends State<OptionCustomizationItem> {
@@ -23,9 +28,13 @@ class _OptionCustomizationItemState extends State<OptionCustomizationItem> {
       });
     }
     controller.clear();
+    widget.onChanged(widget.options);
   }
 
-  void delete(int index) => setState(() => widget.options.removeAt(index));
+  void delete(int index) {
+    setState(() => widget.options.removeAt(index));
+    widget.onChanged(widget.options);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +48,9 @@ class _OptionCustomizationItemState extends State<OptionCustomizationItem> {
             delete: () => delete(index),
           ),
         ),
+        const SizedBox(
+          height: AppDimensions.sizeS,
+        ),
         Row(
           children: [
             const Icon(
@@ -50,7 +62,7 @@ class _OptionCustomizationItemState extends State<OptionCustomizationItem> {
               width: AppDimensions.margin2XS,
             ),
             Expanded(
-              child: TextFormField(
+              child: CustomizationTextField(
                 controller: controller,
                 onEditingComplete: onEditingComplete,
                 decoration: const InputDecoration.collapsed(
@@ -80,34 +92,30 @@ class _Option extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(
-        bottom: AppDimensions.marginS,
-      ),
-      child: Row(
-        children: [
-          const Icon(
-            Icons.fiber_manual_record,
-            size: AppDimensions.sizeS,
+    return Row(
+      children: [
+        const Icon(
+          Icons.fiber_manual_record,
+          size: AppDimensions.sizeS,
+        ),
+        const SizedBox(
+          width: AppDimensions.margin2XS,
+        ),
+        Expanded(
+          child: Text(
+            option,
+            style: const TextStyle(fontSize: AppFonts.sizeL),
           ),
-          const SizedBox(
-            width: AppDimensions.margin2XS,
+        ),
+        IconButton(
+          padding: EdgeInsets.zero,
+          icon: const Icon(
+            Icons.close,
+            size: AppDimensions.sizeM,
           ),
-          Expanded(
-            child: Text(
-              option,
-              style: const TextStyle(fontSize: AppFonts.sizeL),
-            ),
-          ),
-          IconButton(
-            icon: const Icon(
-              Icons.close,
-              size: AppDimensions.sizeM,
-            ),
-            onPressed: delete,
-          ),
-        ],
-      ),
+          onPressed: delete,
+        ),
+      ],
     );
   }
 }
