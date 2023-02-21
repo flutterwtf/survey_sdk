@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:survey_admin/presentation/app/localization/localizations.dart';
 import 'package:survey_admin/presentation/utils/app_fonts.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
@@ -41,8 +42,7 @@ class _MultilineSwitchState extends State<MultilineSwitch> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SwitchCustomizationItem(
-          //TODO: move to localization maaybe?
-          title: 'Multiline',
+          title: context.localization.multiline,
           onChanged: (isToggled) {
             setState(() {
               _isMultiline = isToggled;

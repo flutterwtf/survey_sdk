@@ -1,4 +1,5 @@
 import 'package:survey_core/src/domain/entities/validator/input_validator.dart';
+import 'package:survey_core/src/presentation/localization/localizations.dart';
 import 'package:survey_core/src/presentation/utils/app_fonts.dart';
 import 'package:survey_core/src/presentation/utils/colors.dart';
 import 'package:survey_core/src/presentation/utils/constants.dart';
@@ -109,7 +110,7 @@ class InputQuestionPage extends StatelessWidget {
           ),
           const Spacer(),
           QuestionBottomButton(
-            text: 'NEXT',
+            text: context.localization.next,
             onPressed: onSend,
             isEnabled: isSkip,
           ),

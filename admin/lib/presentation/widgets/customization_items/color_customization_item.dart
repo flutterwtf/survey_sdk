@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
+import 'package:survey_admin/presentation/app/localization/localizations.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
-import 'package:survey_admin/presentation/widgets/customization_items/customization_text_field.dart';
+import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text.dart';
 
 class ColorCustomizationItem extends StatefulWidget {
   final Color initialColor;
@@ -58,30 +58,33 @@ class _ColorCustomizationItemState extends State<ColorCustomizationItem> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: pickColor,
-      child: Row(
+    return Padding(
+      padding: const EdgeInsets.all(AppDimensions.marginM),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            decoration: BoxDecoration(
-              border: Border.all(color: AppColors.black),
-              color: pickerColor,
-            ),
-            width: AppDimensions.sizeM,
-            height: AppDimensions.sizeM,
-          ),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(AppDimensions.margin2XS),
-              child: CustomizationTextField(
-                controller: controller,
-                onEditingComplete: updateTextField,
-                inputFormatters: [
-                  FilteringTextInputFormatter.allow(RegExp('[0-9a-fA-F]')),
-                  LengthLimitingTextInputFormatter(8),
-                ],
-                onChanged: onChangedTextField,
-              ),
+          const CustomizationText('Fill'),
+          const SizedBox(height: AppDimensions.marginM),
+          GestureDetector(
+            onTap: pickColor,
+            child: Row(
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(color: AppColors.black),
+                    color: pickerColor,
+                  ),
+                  width: AppDimensions.sizeM,
+                  height: AppDimensions.sizeM,
+                ),
+                Container(
+                  margin: const EdgeInsets.all(AppDimensions.margin2XS),
+                  child: Text(pickerColor.value
+                      .toRadixString(16)
+                      .padLeft(6, '0')
+                      .toUpperCase()),
+                ),
+              ],
             ),
           ),
         ],
@@ -104,7 +107,7 @@ class _ColorCustomizationItemState extends State<ColorCustomizationItem> {
             ),
             actions: <Widget>[
               ElevatedButton(
-                child: const Text('OK'),
+                child: Text(context.localization.ok),
                 onPressed: () {
                   updateTextField();
                   Navigator.of(context).pop();
