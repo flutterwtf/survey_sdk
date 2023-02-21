@@ -4,7 +4,7 @@ import 'package:survey_admin/presentation/utils/app_fonts.dart';
 import 'package:survey_admin/presentation/utils/asset_strings.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
-import 'package:survey_admin/presentation/widgets/builder_page/survey_question.dart';
+import 'package:survey_admin/presentation/widgets/builder_page/survey_question_list_tile.dart';
 
 class SurveyContentBar extends StatefulWidget {
   const SurveyContentBar({super.key});
@@ -14,9 +14,9 @@ class SurveyContentBar extends StatefulWidget {
 }
 
 class _SurveyContentBarState extends State<SurveyContentBar> {
-  final quiestionsList = [
-    const SurveyQuestion(index: 1, title: 'Intro'),
-    const SurveyQuestion(index: 2, title: 'Title'),
+  final _quiestionsList = [
+    const SurveyQuestionListItem(index: 1, title: 'Intro'),
+    const SurveyQuestionListItem(index: 2, title: 'Title'),
   ];
   @override
   Widget build(BuildContext context) {
@@ -59,13 +59,13 @@ class _SurveyContentBarState extends State<SurveyContentBar> {
             child: ReorderableListView(
               buildDefaultDragHandles: false,
               children: [
-                for (int index = 0; index < quiestionsList.length; index++)
+                for (int index = 0; index < _quiestionsList.length; index++)
                   ReorderableDragStartListener(
                     index: index,
-                    key: ValueKey(quiestionsList[index].title),
-                    child: SurveyQuestion(
+                    key: ValueKey(_quiestionsList[index].title),
+                    child: SurveyQuestionListItem(
                       index: index + 1,
-                      title: quiestionsList[index].title,
+                      title: _quiestionsList[index].title,
                     ),
                   )
               ],
@@ -73,8 +73,8 @@ class _SurveyContentBarState extends State<SurveyContentBar> {
                 setState(() {
                   if (newIndex > oldIndex) newIndex--;
 
-                  final item = quiestionsList.removeAt(oldIndex);
-                  quiestionsList.insert(newIndex, item);
+                  final item = _quiestionsList.removeAt(oldIndex);
+                  _quiestionsList.insert(newIndex, item);
                 });
               },
             ),
