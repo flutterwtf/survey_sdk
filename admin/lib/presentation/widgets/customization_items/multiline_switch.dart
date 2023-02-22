@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:survey_admin/presentation/app/localization/localizations.dart';
 import 'package:survey_admin/presentation/utils/app_fonts.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
+import 'package:survey_admin/presentation/utils/constants/app_duration.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_text_field.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/switch_customization_item.dart';
@@ -41,8 +43,7 @@ class _MultilineSwitchState extends State<MultilineSwitch> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SwitchCustomizationItem(
-          //TODO: move to localization maaybe?
-          title: 'Multiline',
+          title: context.localization.multiline,
           onChanged: (isToggled) {
             setState(() {
               _isMultiline = isToggled;
@@ -51,10 +52,7 @@ class _MultilineSwitchState extends State<MultilineSwitch> {
           },
         ),
         AnimatedSize(
-          //TODO: move to const maybe?
-          duration: const Duration(
-            milliseconds: 100,
-          ),
+          duration: AppDuration.customizationItemAnimation,
           child: _isMultiline
               ? _LineAmountInputField(
                   defaultLineAmount: widget.defaultLineAmount,
@@ -89,9 +87,9 @@ class _LineAmountInputField extends StatelessWidget {
         ),
         child: Row(
           children: [
-            const Text(
-              'Lines ',
-              style: TextStyle(
+            Text(
+              context.localization.lines,
+              style: const TextStyle(
                 fontSize: AppFonts.sizeM,
                 color: AppColors.black,
               ),

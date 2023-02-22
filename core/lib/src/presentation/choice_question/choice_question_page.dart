@@ -1,5 +1,9 @@
+import 'package:survey_core/src/presentation/localization/localizations.dart';
+import 'package:survey_core/src/domain/entities/question_types/choice_question_data.dart';
+import 'package:survey_core/src/domain/entities/themes/choice_question_theme.dart';
 import 'package:survey_core/src/presentation/utils/app_fonts.dart';
 import 'package:survey_core/src/presentation/utils/constants.dart';
+import 'package:survey_core/src/presentation/utils/data_to_widget_util.dart';
 import 'package:survey_core/src/presentation/widgets/question_bottom_button.dart';
 import 'package:survey_core/src/presentation/widgets/question_content.dart';
 import 'package:survey_core/src/presentation/widgets/question_title.dart';
@@ -7,25 +11,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 class ChoiceQuestionPage extends StatefulWidget {
-  final String title;
-  final String? content;
-  final List<String> options;
-  final bool isMultipleChoice;
-  final VoidCallback onSend;
-  final bool canBeSkipped;
-  final Color activeColor;
-  final Color inactiveColor;
+  final ChoiceQuestionData data;
+  final OnSendCallback onSend;
 
   const ChoiceQuestionPage({
     super.key,
-    required this.title,
-    this.content,
-    required this.options,
-    required this.isMultipleChoice,
+    required this.data,
     required this.onSend,
-    this.canBeSkipped = false,
-    this.activeColor = Colors.black,
-    this.inactiveColor = Colors.grey,
   });
 
   @override
@@ -37,6 +29,8 @@ class _ChoiceQuestionPageState extends State<ChoiceQuestionPage>
   bool _canBeSend = false;
   List<String> _selectedItems = List.empty();
 
+  ChoiceQuestionTheme get _theme => widget.data.theme ?? const ChoiceQuestionTheme.common();
+
   @override
   void initState() {
     super.initState();
@@ -45,7 +39,7 @@ class _ChoiceQuestionPageState extends State<ChoiceQuestionPage>
   void _onInputChanged(List<String>? selectedItems) {
     _selectedItems = selectedItems ?? List.empty();
 
-    if (!widget.canBeSkipped) {
+    if (!widget.data.isSkip) {
       setState(() {
         _canBeSend = _selectedItems.isNotEmpty;
       });
@@ -54,6 +48,7 @@ class _ChoiceQuestionPageState extends State<ChoiceQuestionPage>
 
   @override
   Widget build(BuildContext context) {
+    final content = widget.data.content;
     return Padding(
       padding: const EdgeInsets.only(
         left: AppDimensions.margin2XL,
@@ -65,42 +60,42 @@ class _ChoiceQuestionPageState extends State<ChoiceQuestionPage>
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           QuestionTitle(
-            title: widget.title,
+            title: widget.data.title,
           ),
-          if (widget.content != null)
+          if (content != null)
             Padding(
               padding: const EdgeInsets.only(
                 top: AppDimensions.marginXL,
               ),
               child: QuestionContent(
-                content: widget.content!,
+                content: content,
               ),
             ),
           Padding(
             padding: const EdgeInsets.only(
               top: AppDimensions.margin2XL,
             ),
-            child: widget.isMultipleChoice
+            child: widget.data.isMultipleChoice
                 ? _QuestionCheckboxes(
-                    options: widget.options,
+                    options: widget.data.options,
                     onChanged: _onInputChanged,
-                    activeColor: widget.activeColor,
-                    inactiveColor: widget.inactiveColor,
+                    activeColor: _theme.activeColor,
+                    inactiveColor: _theme.inactiveColor,
                   )
                 : _QuestionRadioButtons(
-                    options: widget.options,
+                    options: widget.data.options,
                     onChanged: (selectedItem) => _onInputChanged(
                       selectedItem == null ? null : [selectedItem],
                     ),
-                    activeColor: widget.activeColor,
-                    inactiveColor: widget.inactiveColor,
+                    activeColor: _theme.activeColor,
+                    inactiveColor: _theme.inactiveColor,
                   ),
           ),
           const Spacer(),
           QuestionBottomButton(
-            text: 'NEXT',
-            onPressed: widget.onSend,
-            isEnabled: widget.canBeSkipped ? true : _canBeSend,
+            text: context.localization.next,
+            onPressed: () => widget.onSend.call(_selectedItems),
+            isEnabled: widget.data.isSkip ? true : _canBeSend,
           ),
         ],
       ),
