@@ -5,7 +5,12 @@ import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
 
 class PhoneView extends StatelessWidget {
-  const PhoneView({super.key});
+  final Widget child;
+
+  const PhoneView({
+    super.key,
+    required this.child,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +19,20 @@ class PhoneView extends StatelessWidget {
       child: Center(
         child: Padding(
           padding: const EdgeInsets.all(AppDimensions.size2M),
-          child: SvgPicture.asset(AssetStrings.iphone),
+          child: Stack(
+            children: [
+              SvgPicture.asset(AssetStrings.iphone),
+              Positioned.fill(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: AppDimensions.marginLargeM,
+                    horizontal: AppDimensions.margin2XL,
+                  ),
+                  child: child,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
