@@ -8,7 +8,7 @@ abstract class AppColors {
   static const whitePrimaryBackground = Color(0xFFFCFCFC);
 
   static const text = Color(0xFF333333);
-  static const textGrey = Color(0xFF292929);
+  static const textGrey = Color(0xFF929292);
   static const textHintGrey = Color(0xFF727272);
   static const textLightGrey = Color(0xFF929292);
 
