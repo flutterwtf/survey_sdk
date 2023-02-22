@@ -65,14 +65,10 @@ class _CustomSwitchState extends State<_CustomSwitch> {
               : AppColors.switchBackgroundInactive,
           borderRadius: BorderRadius.circular(9),
         ),
-        duration: const Duration(
-          milliseconds: AppDuration.customizationItemAnimation,
-        ),
+        duration: AppDuration.customizationItemAnimation,
         child: AnimatedAlign(
           alignment: _isToggled ? Alignment.centerRight : Alignment.centerLeft,
-          duration: const Duration(
-            milliseconds: AppDuration.customizationItemAnimation,
-          ),
+          duration: AppDuration.customizationItemAnimation,
           child: Padding(
             padding: const EdgeInsets.all(2),
             child: Container(

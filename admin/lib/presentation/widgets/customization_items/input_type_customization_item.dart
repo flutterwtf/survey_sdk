@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:survey_admin/presentation/app/localization/localizations.dart';
 import 'package:survey_admin/presentation/utils/app_fonts.dart';
 import 'package:survey_admin/presentation/utils/constants/app_duration.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
@@ -43,9 +42,7 @@ class _InputTypeCustomizationItemState extends State<InputTypeCustomizationItem>
     _selectedType = widget.initialValue;
     _iconAnimationController = AnimationController(
       vsync: this,
-      duration: const Duration(
-        milliseconds: AppDuration.customizationItemAnimation,
-      ),
+      duration: AppDuration.customizationItemAnimation,
     );
   }
 
@@ -77,9 +74,7 @@ class _InputTypeCustomizationItemState extends State<InputTypeCustomizationItem>
           },
         ),
         AnimatedSize(
-          duration: const Duration(
-            milliseconds: AppDuration.customizationItemAnimation,
-          ),
+          duration: AppDuration.customizationItemAnimation,
           child: _isExpanded
               ? Column(
                   children: InputType.values

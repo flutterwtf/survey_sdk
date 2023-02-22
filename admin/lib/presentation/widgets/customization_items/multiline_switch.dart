@@ -52,9 +52,7 @@ class _MultilineSwitchState extends State<MultilineSwitch> {
           },
         ),
         AnimatedSize(
-          duration: const Duration(
-            milliseconds: AppDuration.customizationItemAnimation,
-          ),
+          duration: AppDuration.customizationItemAnimation,
           child: _isMultiline
               ? _LineAmountInputField(
                   defaultLineAmount: widget.defaultLineAmount,
