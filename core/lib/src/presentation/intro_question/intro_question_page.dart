@@ -49,21 +49,28 @@ class IntroQuestionPage extends StatelessWidget {
             ),
           const Spacer(),
           Row(
+            mainAxisSize: MainAxisSize.max,
             children: [
               if (onSecondaryButtonTap != null && secondaryButtonTitle != null)
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: QuestionBottomButton(
-                    text: secondaryButtonTitle,
-                    onPressed: onSecondaryButtonTap,
-                    isEnabled: true,
+                Flexible(
+                  fit: FlexFit.loose,
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 8),
+                    child: QuestionBottomButton(
+                      text: secondaryButtonTitle,
+                      onPressed: onSecondaryButtonTap,
+                      isEnabled: true,
+                      isOutlined: true,
+                    ),
                   ),
                 ),
-              QuestionBottomButton(
-                text: data.mainButtonTitle,
-                onPressed: onMainButtonTap ?? () {},
-                isEnabled: true,
-                isOutlined: true,
+              Flexible(
+                fit: FlexFit.loose,
+                child: QuestionBottomButton(
+                  text: data.mainButtonTitle,
+                  onPressed: onMainButtonTap ?? () {},
+                  isEnabled: true,
+                ),
               ),
             ],
           ),
