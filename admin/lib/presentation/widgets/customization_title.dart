@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:survey_sdk/presentation/utils/app_fonts.dart';
+import 'package:survey_admin/presentation/utils/app_fonts.dart';
 
 class CustomizationTitle extends StatelessWidget {
   final String title;
