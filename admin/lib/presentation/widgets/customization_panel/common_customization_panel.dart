@@ -8,8 +8,9 @@ import 'package:survey_admin/presentation/utils/constants/constants.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/color_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_text_field.dart';
+import 'package:survey_admin/presentation/widgets/customization_panel/customization_panel.dart';
 
-class CommonCustomizationPanel extends StatelessWidget {
+class CommonCustomizationPanel extends CustomizationPanel {
   final ValueChanged<Color> onFillColorChanged;
   final ValueChanged<Color> onTitleColorChanged;
   final ValueChanged<Color> onSubtitleColorChanged;
@@ -18,6 +19,7 @@ class CommonCustomizationPanel extends StatelessWidget {
 
   const CommonCustomizationPanel({
     super.key,
+    required super.title,
     required this.onButtonDownColorChanged,
     required this.onButtonUpColorChanged,
     required this.onFillColorChanged,
@@ -27,7 +29,7 @@ class CommonCustomizationPanel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return ListView(
       children: [
         CustomizationItemsContainer(
           title: context.localization.fill,
@@ -35,7 +37,7 @@ class CommonCustomizationPanel extends StatelessWidget {
             ColorCustomizationItem(
               initialColor: AppColors.white,
               onColorPicked: onFillColorChanged,
-            )
+            ),
           ],
         ),
         CustomizationItemsContainer(

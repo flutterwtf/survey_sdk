@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:survey_admin/presentation/app/localization/localizations.dart';
 import 'package:survey_admin/presentation/utils/app_fonts.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
-import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text.dart';
 
 enum InputType {
   text('Text'),
@@ -52,13 +51,6 @@ class _InputTypeCustomizationItemState extends State<InputTypeCustomizationItem>
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: const EdgeInsets.only(
-            top: AppDimensions.marginM,
-            left: AppDimensions.marginM,
-          ),
-          child: CustomizationText(context.localization.input_type),
-        ),
         _InputTypeItem(
           inputType: _selectedType,
           trailing: AnimatedBuilder(

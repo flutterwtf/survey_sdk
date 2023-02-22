@@ -10,25 +10,31 @@ class ColorCustomizationItem extends StatefulWidget {
   final ValueChanged<Color> onColorPicked;
 
   const ColorCustomizationItem({
+    super.key,
     required this.initialColor,
     required this.onColorPicked,
-    Key? key,
-  }) : super(key: key);
+  });
 
   @override
   State<ColorCustomizationItem> createState() => _ColorCustomizationItemState();
 }
 
 class _ColorCustomizationItemState extends State<ColorCustomizationItem> {
-  late Color _pickerColor;
+  late Color _pickedColor;
   final TextEditingController _controller = TextEditingController();
   bool _isPickerOpened = false;
 
   @override
   void initState() {
     _controller.text = colorToString(widget.initialColor);
-    _pickerColor = widget.initialColor;
+    _pickedColor = widget.initialColor;
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 
   void onChangedTextField(String? value) {
@@ -36,7 +42,7 @@ class _ColorCustomizationItemState extends State<ColorCustomizationItem> {
       final color = int.tryParse(value.padRight(8, '0'), radix: 16);
       if (color != null) {
         setState(() {
-          _pickerColor = Color(color);
+          _pickedColor = Color(color);
         });
       }
     }
@@ -45,7 +51,7 @@ class _ColorCustomizationItemState extends State<ColorCustomizationItem> {
   void onColorChanged(color) {
     widget.onColorPicked(color);
     setState(() {
-      _pickerColor = color;
+      _pickedColor = color;
       _controller.text = colorToString(color);
     });
   }
@@ -53,9 +59,9 @@ class _ColorCustomizationItemState extends State<ColorCustomizationItem> {
   String colorToString(Color color) => color.value.toRadixString(16).toUpperCase();
 
   void updateTextField() {
-    widget.onColorPicked(_pickerColor);
+    widget.onColorPicked(_pickedColor);
     setState(
-      () => _controller.text = colorToString(_pickerColor),
+      () => _controller.text = colorToString(_pickedColor),
     );
   }
 
@@ -72,7 +78,7 @@ class _ColorCustomizationItemState extends State<ColorCustomizationItem> {
                 child: Container(
                   decoration: BoxDecoration(
                     border: Border.all(color: AppColors.black),
-                    color: _pickerColor,
+                    color: _pickedColor,
                   ),
                   width: AppDimensions.sizeM,
                   height: AppDimensions.sizeM,
@@ -101,7 +107,7 @@ class _ColorCustomizationItemState extends State<ColorCustomizationItem> {
               height: AppDimensions.margin2XS,
             ),
             ColorPicker(
-              pickerColor: _pickerColor,
+              pickerColor: _pickedColor,
               onColorChanged: onColorChanged,
               portraitOnly: true,
               pickerAreaHeightPercent: 0.4,

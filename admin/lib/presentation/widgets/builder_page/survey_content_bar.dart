@@ -16,9 +16,10 @@ class SurveyContentBar extends StatefulWidget {
 
 class _SurveyContentBarState extends State<SurveyContentBar> {
   final _quiestionsList = [
-    const SurveyQuestionListItem(index: 1, title: 'Intro'),
-    const SurveyQuestionListItem(index: 2, title: 'Title'),
+    const SurveyQuestion(index: 1, title: 'Intro'),
+    const SurveyQuestion(index: 2, title: 'Title'),
   ];
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -64,7 +65,7 @@ class _SurveyContentBarState extends State<SurveyContentBar> {
                   ReorderableDragStartListener(
                     index: index,
                     key: ValueKey(_quiestionsList[index].title),
-                    child: SurveyQuestionListItem(
+                    child: SurveyQuestion(
                       index: index + 1,
                       title: _quiestionsList[index].title,
                     ),
