@@ -1,4 +1,4 @@
-name: survey_sdk
+name: survey_admin
 description: Survey SDK
 
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -13,14 +13,17 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
+  intl: ^0.17.0
 
   flutter_bloc: ^8.0.1
 
   get_it: ^7.2.0
-  intl: ^0.17.0
-  shared_preferences: ^2.0.12
   equatable: ^2.0.3
   flutter_colorpicker: ^1.0.3
+  flutter_form_builder: ^7.7.0
+  survey_core:
+    path: ../core
+  flutter_svg: ^2.0.1
 
 dev_dependencies:
   flutter_test:
@@ -30,3 +33,7 @@ dev_dependencies:
 
 flutter:
   generate: true
+  uses-material-design: true
+  assets:
+    - assets/
+    - assets/images/

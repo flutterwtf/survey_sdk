@@ -1,9 +1,8 @@
-import 'package:survey_sdk/presentation/base/base_cubit.dart';
-import 'package:survey_sdk/presentation/pages/builder/builder_state.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:survey_admin/presentation/pages/builder/builder_state.dart';
 
-class BuilderCubit extends BaseCubit<BuilderState> {
+class BuilderCubit extends Cubit<BuilderState> {
   BuilderCubit() : super(
     const BuilderState(),
   );
-
 }
