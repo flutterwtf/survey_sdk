@@ -5,7 +5,7 @@ import 'package:survey_admin/presentation/utils/app_fonts.dart';
 import 'package:survey_admin/presentation/utils/asset_strings.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
-import 'package:survey_admin/presentation/widgets/builder_page/survey_question_list_tile.dart';
+import 'package:survey_admin/presentation/widgets/builder_page/survey_question_list_item.dart';
 
 class SurveyContentBar extends StatefulWidget {
   const SurveyContentBar({super.key});
