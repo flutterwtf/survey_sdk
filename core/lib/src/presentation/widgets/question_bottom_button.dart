@@ -21,8 +21,6 @@ class QuestionBottomButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final accentColor = Colors.black.withOpacity(isEnabled ? 1.0 : 0.6);
     return SizedBox(
-      //TODO: let the widget define it's own height depending on the child
-      height: 52,
       width: double.infinity,
       child: InkWell(
         onTap: isEnabled ? onPressed : null,
@@ -37,16 +35,18 @@ class QuestionBottomButton extends StatelessWidget {
             ),
             border: Border.all(color: accentColor),
           ),
-          duration: const Duration(
-            milliseconds: AppDuration.bottomAnimation,
-          ),
-          child: Center(
-            child: Text(
-              text,
-              style: TextStyle(
-                color: isOutlined ? accentColor : Colors.white,
-                fontWeight: AppFonts.weightBold,
-                fontSize: AppFonts.sizeM,
+          duration: const Duration(milliseconds: AppDuration.bottomAnimation),
+          child: Padding(
+            padding: const EdgeInsets.all(AppDimensions.marginS),
+            child: Center(
+              child: Text(
+                text,
+                style: TextStyle(
+                  color: isOutlined ? accentColor : Colors.white,
+                  fontWeight: AppFonts.weightBold,
+                  fontSize: AppFonts.sizeM,
+                ),
+                textAlign: TextAlign.center,
               ),
             ),
           ),

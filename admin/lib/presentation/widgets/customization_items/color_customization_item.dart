@@ -1,33 +1,40 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
-import 'package:survey_admin/presentation/app/localization/localizations.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
-import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text.dart';
+import 'package:survey_admin/presentation/widgets/customization_items/customization_text_field.dart';
 
 class ColorCustomizationItem extends StatefulWidget {
   final Color initialColor;
   final ValueChanged<Color> onColorPicked;
 
   const ColorCustomizationItem({
+    super.key,
     required this.initialColor,
     required this.onColorPicked,
-    Key? key,
-  }) : super(key: key);
+  });
 
   @override
   State<ColorCustomizationItem> createState() => _ColorCustomizationItemState();
 }
 
 class _ColorCustomizationItemState extends State<ColorCustomizationItem> {
-  late Color pickerColor;
-  TextEditingController controller = TextEditingController();
+  late Color _pickedColor;
+  final TextEditingController _controller = TextEditingController();
+  bool _isPickerOpened = false;
 
   @override
   void initState() {
-    controller.text = colorToString(widget.initialColor);
-    pickerColor = widget.initialColor;
+    _controller.text = colorToString(widget.initialColor);
+    _pickedColor = widget.initialColor;
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 
   void onChangedTextField(String? value) {
@@ -35,7 +42,7 @@ class _ColorCustomizationItemState extends State<ColorCustomizationItem> {
       final color = int.tryParse(value.padRight(8, '0'), radix: 16);
       if (color != null) {
         setState(() {
-          pickerColor = Color(color);
+          _pickedColor = Color(color);
         });
       }
     }
@@ -43,16 +50,18 @@ class _ColorCustomizationItemState extends State<ColorCustomizationItem> {
 
   void onColorChanged(color) {
     widget.onColorPicked(color);
-    setState(() => pickerColor = color);
+    setState(() {
+      _pickedColor = color;
+      _controller.text = colorToString(color);
+    });
   }
 
-  String colorToString(Color color) =>
-      color.value.toRadixString(16).toUpperCase();
+  String colorToString(Color color) => color.value.toRadixString(16).toUpperCase();
 
   void updateTextField() {
-    widget.onColorPicked(pickerColor);
+    widget.onColorPicked(_pickedColor);
     setState(
-      () => controller.text = colorToString(pickerColor),
+      () => _controller.text = colorToString(_pickedColor),
     );
   }
 
@@ -61,60 +70,51 @@ class _ColorCustomizationItemState extends State<ColorCustomizationItem> {
     return Padding(
       padding: const EdgeInsets.all(AppDimensions.marginM),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomizationText('Fill'),
-          const SizedBox(height: AppDimensions.marginM),
-          GestureDetector(
-            onTap: pickColor,
-            child: Row(
-              children: [
-                Container(
+          Row(
+            children: [
+              GestureDetector(
+                onTap: () => setState(() => _isPickerOpened = !_isPickerOpened),
+                child: Container(
                   decoration: BoxDecoration(
                     border: Border.all(color: AppColors.black),
-                    color: pickerColor,
+                    color: _pickedColor,
                   ),
                   width: AppDimensions.sizeM,
                   height: AppDimensions.sizeM,
                 ),
-                Container(
+              ),
+              Expanded(
+                child: Container(
                   margin: const EdgeInsets.all(AppDimensions.margin2XS),
-                  child: Text(pickerColor.value
-                      .toRadixString(16)
-                      .padLeft(6, '0')
-                      .toUpperCase()),
+                  child: CustomizationTextField(
+                    controller: _controller,
+                    onEditingComplete: updateTextField,
+                    inputFormatters: [
+                      FilteringTextInputFormatter.allow(
+                        RegExp('[0-9a-fA-F]'),
+                      ),
+                      LengthLimitingTextInputFormatter(8),
+                    ],
+                    onChanged: onChangedTextField,
+                  ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
+          if (_isPickerOpened) ...[
+            const SizedBox(
+              height: AppDimensions.margin2XS,
+            ),
+            ColorPicker(
+              pickerColor: _pickedColor,
+              onColorChanged: onColorChanged,
+              portraitOnly: true,
+              pickerAreaHeightPercent: 0.4,
+            ),
+          ]
         ],
       ),
     );
-  }
-
-  void pickColor() {
-    showDialog(
-        context: context,
-        builder: (_) {
-          return AlertDialog(
-            title: const Text('Pick a color'),
-            content: SingleChildScrollView(
-              child: ColorPicker(
-                pickerColor: pickerColor,
-                onColorChanged: onColorChanged,
-                hexInputBar: true,
-              ),
-            ),
-            actions: <Widget>[
-              ElevatedButton(
-                child: Text(context.localization.ok),
-                onPressed: () {
-                  updateTextField();
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
-          );
-        });
   }
 }

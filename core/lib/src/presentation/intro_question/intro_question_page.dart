@@ -1,29 +1,30 @@
+import 'package:survey_core/src/domain/entities/question_types/intro_question_data.dart';
 import 'package:survey_core/src/presentation/utils/constants.dart';
+import 'package:survey_core/src/presentation/utils/data_to_widget_util.dart';
 import 'package:survey_core/src/presentation/widgets/question_bottom_button.dart';
 import 'package:survey_core/src/presentation/widgets/question_content.dart';
 import 'package:survey_core/src/presentation/widgets/question_title.dart';
 import 'package:flutter/material.dart';
 
 class IntroQuestionPage extends StatelessWidget {
-  final String title;
-  final String? content;
-  final VoidCallback onMainButtonTap;
+  final IntroQuestionData data;
+  final OnSendCallback onSend;
+  final VoidCallback? onMainButtonTap;
   final VoidCallback? onSecondaryButtonTap;
-  final String mainButtonTitle;
-  final String? secondaryButtonTitle;
 
   const IntroQuestionPage({
-    required this.title,
-    required this.onMainButtonTap,
-    required this.mainButtonTitle,
-    this.secondaryButtonTitle,
+    required this.data,
+    required this.onSend,
+    this.onMainButtonTap,
     this.onSecondaryButtonTap,
-    this.content,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
+    final onSecondaryButtonTap = this.onSecondaryButtonTap;
+    final secondaryButtonTitle = data.secondaryButtonTitle;
+    final content = data.content;
     return Padding(
       padding: const EdgeInsets.only(
         left: AppDimensions.margin2XL,
@@ -35,7 +36,7 @@ class IntroQuestionPage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           QuestionTitle(
-            title: title,
+            title: data.title,
           ),
           if (content != null)
             Padding(
@@ -43,24 +44,24 @@ class IntroQuestionPage extends StatelessWidget {
                 top: AppDimensions.margin2XL,
               ),
               child: QuestionContent(
-                content: content!,
+                content: content,
               ),
             ),
           const Spacer(),
           Row(
             children: [
-              if (onSecondaryButtonTap != null)
+              if (onSecondaryButtonTap != null && secondaryButtonTitle != null)
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: QuestionBottomButton(
-                    text: secondaryButtonTitle!,
-                    onPressed: onSecondaryButtonTap!,
+                    text: secondaryButtonTitle,
+                    onPressed: onSecondaryButtonTap,
                     isEnabled: true,
                   ),
                 ),
               QuestionBottomButton(
-                text: mainButtonTitle,
-                onPressed: onMainButtonTap,
+                text: data.mainButtonTitle,
+                onPressed: onMainButtonTap ?? () {},
                 isEnabled: true,
                 isOutlined: true,
               ),
