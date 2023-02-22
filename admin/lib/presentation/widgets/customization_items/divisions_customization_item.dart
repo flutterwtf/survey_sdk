@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:survey_admin/presentation/app/localization/localizations.dart';
 import 'package:survey_admin/presentation/utils/app_fonts.dart';
 
 class DivisionsCustomizationItem extends StatelessWidget {
@@ -17,7 +18,7 @@ class DivisionsCustomizationItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return FormBuilder(
       child: FormBuilderTextField(
-        name: 'divisions',
+        name: context.localization.divisions,
         initialValue: initialValue.toString(),
         onChanged: (divisions) {
           if (divisions != null) {

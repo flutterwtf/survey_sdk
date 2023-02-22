@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:survey_admin/presentation/app/localization/localizations.dart';
 import 'package:survey_admin/presentation/utils/app_fonts.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
@@ -15,26 +16,32 @@ class OptionCustomizationItem extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<OptionCustomizationItem> createState() =>
-      _OptionCustomizationItemState();
+  State<OptionCustomizationItem> createState() => _OptionCustomizationItemState();
 }
 
 class _OptionCustomizationItemState extends State<OptionCustomizationItem> {
-  TextEditingController controller = TextEditingController();
+  final TextEditingController _controller = TextEditingController();
+  List<String> _options = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _options = widget.options;
+  }
 
   void onEditingComplete() {
-    if (controller.text.isNotEmpty) {
+    if (_controller.text.isNotEmpty) {
       setState(() {
-        widget.options.add(controller.text);
+        _options = [..._options, _controller.text];
       });
     }
-    controller.clear();
-    widget.onChanged(widget.options);
+    _controller.clear();
+    widget.onChanged(_options);
   }
 
   void delete(int index) {
-    setState(() => widget.options.removeAt(index));
-    widget.onChanged(widget.options);
+    setState(() => _options.removeAt(index));
+    widget.onChanged(_options);
   }
 
   @override
@@ -43,9 +50,9 @@ class _OptionCustomizationItemState extends State<OptionCustomizationItem> {
       children: [
         ListView.builder(
           shrinkWrap: true,
-          itemCount: widget.options.length,
+          itemCount: _options.length,
           itemBuilder: (context, index) => _Option(
-            option: widget.options[index],
+            option: _options[index],
             delete: () => delete(index),
           ),
         ),
@@ -57,19 +64,19 @@ class _OptionCustomizationItemState extends State<OptionCustomizationItem> {
             const Icon(
               Icons.fiber_manual_record,
               size: AppDimensions.sizeS,
-              color: AppColors.textGrey,
+              color: AppColors.textLightGrey,
             ),
             const SizedBox(
               width: AppDimensions.margin2XS,
             ),
             Expanded(
               child: CustomizationTextField(
-                controller: controller,
+                controller: _controller,
                 onEditingComplete: onEditingComplete,
-                decoration: const InputDecoration.collapsed(
-                  hintText: 'Type new option here',
-                  hintStyle: TextStyle(
-                    color: AppColors.textLightGrey,
+                decoration: InputDecoration.collapsed(
+                  hintText: context.localization.type_new_option_here,
+                  hintStyle: const TextStyle(
+                    color: AppColors.textHintGrey,
                   ),
                 ),
               ),

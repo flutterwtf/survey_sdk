@@ -8,5 +8,22 @@
   "ok": "OK",
   "min": "min",
   "max": "max",
-  "multiline": "Multiline"
+  "multiline": "Multiline",
+  "fill": "Fill",
+  "pick_a_color": "Pick a color",
+  "enter_text": "Enter text",
+  "customization_text_field": "Customization text field",
+  "divisions": "Divisions",
+  "input_type": "Input type",
+  "value": "Value",
+  "lines": "Lines",
+  "type_new_option_here": "Type new option here",
+  "px": "px",
+  "title": "Title",
+  "subtitle": "Subtitle",
+  "button": "Button",
+  "thickness": "Thickness",
+  "active": "Active",
+  "inactive": "Inactive",
+  "thumb": "Thumb"
 }

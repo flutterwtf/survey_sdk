@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:survey_admin/presentation/app/localization/localizations.dart';
 import 'package:survey_admin/presentation/utils/app_fonts.dart';
 import 'package:survey_admin/presentation/utils/asset_strings.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
@@ -31,7 +32,7 @@ class CommonCustomizationPanel extends CustomizationPanel {
     return ListView(
       children: [
         CustomizationItemsContainer(
-          title: 'Fill',
+          title: context.localization.fill,
           children: [
             ColorCustomizationItem(
               initialColor: AppColors.white,
@@ -40,7 +41,7 @@ class CommonCustomizationPanel extends CustomizationPanel {
           ],
         ),
         CustomizationItemsContainer(
-          title: 'Title',
+          title: context.localization.title,
           children: [
             Row(
               children: [
@@ -60,7 +61,7 @@ class CommonCustomizationPanel extends CustomizationPanel {
           ],
         ),
         CustomizationItemsContainer(
-          title: 'Subtitle',
+          title: context.localization.subtitle,
           children: [
             Row(
               children: [
@@ -80,7 +81,7 @@ class CommonCustomizationPanel extends CustomizationPanel {
           ],
         ),
         CustomizationItemsContainer(
-          title: 'Button',
+          title: context.localization.button,
           children: [
             ColorCustomizationItem(
               initialColor: AppColors.black,

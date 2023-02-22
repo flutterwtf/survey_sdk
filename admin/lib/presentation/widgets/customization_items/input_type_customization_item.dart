@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:survey_admin/presentation/app/localization/localizations.dart';
 import 'package:survey_admin/presentation/utils/app_fonts.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
 
@@ -25,8 +26,7 @@ class InputTypeCustomizationItem extends StatefulWidget {
   final void Function(InputType inputType)? onChanged;
 
   @override
-  State<InputTypeCustomizationItem> createState() =>
-      _InputTypeCustomizationItemState();
+  State<InputTypeCustomizationItem> createState() => _InputTypeCustomizationItemState();
 }
 
 class _InputTypeCustomizationItemState extends State<InputTypeCustomizationItem>

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
-import 'package:survey_admin/presentation/app/localization/localizations.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
+import 'package:survey_admin/presentation/widgets/customization_items/customization_text_field.dart';
 
 class ColorCustomizationItem extends StatefulWidget {
   final Color initialColor;
@@ -21,6 +22,7 @@ class ColorCustomizationItem extends StatefulWidget {
 class _ColorCustomizationItemState extends State<ColorCustomizationItem> {
   late Color _pickedColor;
   final TextEditingController _controller = TextEditingController();
+  bool _isPickerOpened = false;
 
   @override
   void initState() {
@@ -48,11 +50,13 @@ class _ColorCustomizationItemState extends State<ColorCustomizationItem> {
 
   void onColorChanged(color) {
     widget.onColorPicked(color);
-    setState(() => _pickedColor = color);
+    setState(() {
+      _pickedColor = color;
+      _controller.text = colorToString(color);
+    });
   }
 
-  String colorToString(Color color) =>
-      color.value.toRadixString(16).toUpperCase();
+  String colorToString(Color color) => color.value.toRadixString(16).toUpperCase();
 
   void updateTextField() {
     widget.onColorPicked(_pickedColor);
@@ -63,60 +67,54 @@ class _ColorCustomizationItemState extends State<ColorCustomizationItem> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: pickColor,
-      child: Row(
+    return Padding(
+      padding: const EdgeInsets.all(AppDimensions.marginM),
+      child: Column(
         children: [
-          Container(
-            decoration: BoxDecoration(
-              border: Border.all(
-                color: AppColors.black,
+          Row(
+            children: [
+              GestureDetector(
+                onTap: () => setState(() => _isPickerOpened = !_isPickerOpened),
+                child: Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(color: AppColors.black),
+                    color: _pickedColor,
+                  ),
+                  width: AppDimensions.sizeM,
+                  height: AppDimensions.sizeM,
+                ),
               ),
-              color: _pickedColor,
-            ),
-            width: AppDimensions.sizeM,
-            height: AppDimensions.sizeM,
+              Expanded(
+                child: Container(
+                  margin: const EdgeInsets.all(AppDimensions.margin2XS),
+                  child: CustomizationTextField(
+                    controller: _controller,
+                    onEditingComplete: updateTextField,
+                    inputFormatters: [
+                      FilteringTextInputFormatter.allow(
+                        RegExp('[0-9a-fA-F]'),
+                      ),
+                      LengthLimitingTextInputFormatter(8),
+                    ],
+                    onChanged: onChangedTextField,
+                  ),
+                ),
+              ),
+            ],
           ),
-          Padding(
-            padding: const EdgeInsets.all(
-              AppDimensions.margin2XS,
+          if (_isPickerOpened) ...[
+            const SizedBox(
+              height: AppDimensions.margin2XS,
             ),
-            child: Text(
-              _pickedColor.value
-                  .toRadixString(16)
-                  .padLeft(6, '0')
-                  .toUpperCase(),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  void pickColor() {
-    showDialog(
-      context: context,
-      builder: (_) {
-        return AlertDialog(
-          title: const Text('Pick a color'),
-          content: SingleChildScrollView(
-            child: ColorPicker(
+            ColorPicker(
               pickerColor: _pickedColor,
               onColorChanged: onColorChanged,
-              hexInputBar: true,
+              portraitOnly: true,
+              pickerAreaHeightPercent: 0.4,
             ),
-          ),
-          actions: <Widget>[
-            ElevatedButton(
-              child: Text(context.localization.ok),
-              onPressed: () {
-                updateTextField();
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
+          ]
+        ],
+      ),
     );
   }
 }

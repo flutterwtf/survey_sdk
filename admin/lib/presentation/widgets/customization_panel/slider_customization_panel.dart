@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:survey_admin/presentation/app/localization/localizations.dart';
 import 'package:survey_admin/presentation/utils/app_fonts.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/color_customization_item.dart';
@@ -28,7 +29,7 @@ class SliderCustomizationPanel extends CustomizationPanel {
     return ListView(
       children: [
         CustomizationItemsContainer(
-          title: 'Thickness',
+          title: context.localization.thickness,
           children: [
             ThicknessCustomizationItem(
               onThicknessChanged: onThicknessChanged,
@@ -37,7 +38,7 @@ class SliderCustomizationPanel extends CustomizationPanel {
           ],
         ),
         CustomizationItemsContainer(
-          title: 'Active',
+          title: context.localization.active,
           children: [
             ColorCustomizationItem(
               initialColor: AppColors.switchBackgroundActive,
@@ -46,7 +47,7 @@ class SliderCustomizationPanel extends CustomizationPanel {
           ],
         ),
         CustomizationItemsContainer(
-          title: 'Inactive',
+          title: context.localization.inactive,
           children: [
             ColorCustomizationItem(
               initialColor: AppColors.switchBackgroundInactive,
@@ -55,7 +56,7 @@ class SliderCustomizationPanel extends CustomizationPanel {
           ],
         ),
         CustomizationItemsContainer(
-          title: 'Thumb',
+          title: context.localization.thumb,
           children: [
             Row(
               children: [
