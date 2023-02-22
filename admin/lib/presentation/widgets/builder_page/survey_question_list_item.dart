@@ -3,11 +3,11 @@ import 'package:survey_admin/presentation/utils/app_fonts.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
 
-class SurveyQuestion extends StatelessWidget {
+class SurveyQuestionListItem extends StatelessWidget {
   final int index;
   final String title;
 
-  const SurveyQuestion({
+  const SurveyQuestionListItem({
     required this.index,
     required this.title,
     super.key,
