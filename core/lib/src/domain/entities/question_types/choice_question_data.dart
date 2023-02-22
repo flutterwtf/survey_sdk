@@ -1,9 +1,10 @@
 import 'package:survey_core/src/domain/entities/question_types/question_data.dart';
-import 'package:flutter/material.dart';
+import 'package:survey_core/src/domain/entities/themes/choice_question_theme.dart';
 
-class ChoiceQuestionData extends QuestionData {
+class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
   final bool isMultipleChoice;
   final List<String> options;
+  final String? content;
 
   const ChoiceQuestionData({
     required this.isMultipleChoice,
@@ -14,37 +15,42 @@ class ChoiceQuestionData extends QuestionData {
     required super.typeQuestion,
     required super.isSkip,
     super.info,
+    this.content,
   });
 
   @override
-  // TODO: implement theme
-  Theme? get theme => throw UnimplementedError();
+  ChoiceQuestionTheme? get theme => const ChoiceQuestionTheme.common();
 
   @override
   String get type => 'Choice';
 
   @override
   Map<String, dynamic> toJson() => {
-    'id': id,
-    'isMultipleChoice': isMultipleChoice,
-    'options': options,
-    'title': title,
-    'subtitle': subtitle,
-    'typeQuestion': typeQuestion,
-    'isSkip': isSkip,
-    'info': info,
-  };
+        'id': id,
+        'title': title,
+        'subtitle': subtitle,
+        'typeQuestion': typeQuestion,
+        'isSkip': isSkip,
+        'info': info,
+        'payload': {
+          'content': content,
+          'isMultipleChoice': isMultipleChoice,
+          'options': options,
+        }
+      };
 
   static ChoiceQuestionData fromJson(Map<String, dynamic> json) {
+    final payload = json['payload'];
     return ChoiceQuestionData(
-        id: json['id'],
-        isMultipleChoice: json['isMultipleChoice'],
-        options: json['options'],
-        title: json['title'],
-        subtitle: json['subtitle'],
-        typeQuestion: json['typeQuestion'],
-        isSkip: json['isSkip'],
-        info: json['info'],
+      id: json['id'],
+      title: json['title'],
+      subtitle: json['subtitle'],
+      typeQuestion: json['typeQuestion'],
+      isSkip: json['isSkip'],
+      info: json['info'],
+      isMultipleChoice: payload['isMultipleChoice'],
+      options: payload['options'],
+      content: payload['content'],
     );
   }
 }
