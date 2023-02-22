@@ -52,81 +52,84 @@ class _PaddingCustomizationItemState extends State<PaddingCustomizationItem> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Expanded(
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Container(
-                decoration: const BoxDecoration(
-                  border: Border.symmetric(
-                    horizontal: BorderSide(
-                      width: 1.0,
-                      color: AppColors.black,
-                    ),
-                  ),
-                  color: AppColors.white,
-                ),
-                width: AppDimensions.sizeM,
-                height: AppDimensions.sizeM,
-              ),
-              Container(
-                margin: const EdgeInsets.only(left: AppDimensions.marginS),
-                width: AppDimensions.sizeL,
-                child: CustomizationTextField(
-                  focusNode: horizontalPaddingFocusNode,
-                  initialValue: horizontalPadding.toString(),
-                  inputFormatters: [
-                    FilteringTextInputFormatter.digitsOnly,
-                    LengthLimitingTextInputFormatter(3),
-                  ],
-                  onChanged: (value) {
-                    if (value != null) {
-                      setState(() => horizontalPadding = double.parse(value));
-                    }
-                  },
-                ),
-              ),
-            ],
-          ),
+        _PaddingItem(
+          isHorizontal: true,
+          focusNode: horizontalPaddingFocusNode,
+          initialValue: horizontalPadding.toString(),
+          onChanged: (value) =>
+              setState(() => horizontalPadding = double.parse(value)),
         ),
-        Expanded(
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Container(
-                decoration: const BoxDecoration(
-                  border: Border.symmetric(
-                    vertical: BorderSide(
-                      width: 1.0,
-                      color: AppColors.black,
-                    ),
-                  ),
-                  color: AppColors.white,
-                ),
-                width: AppDimensions.sizeM,
-                height: AppDimensions.sizeM,
-              ),
-              Container(
-                margin: const EdgeInsets.only(left: AppDimensions.marginS),
-                width: AppDimensions.sizeL,
-                child: CustomizationTextField(
-                  focusNode: verticalPaddingFocusNode,
-                  initialValue: verticalPadding.toString(),
-                  inputFormatters: [
-                    FilteringTextInputFormatter.digitsOnly,
-                    LengthLimitingTextInputFormatter(3),
-                  ],
-                  onChanged: (value) {
-                    if (value != null) {
-                      setState(() => verticalPadding = double.parse(value));
-                    }
-                  },
-                ),
-              ),
-            ],
-          ),
+        _PaddingItem(
+          isHorizontal: false,
+          focusNode: horizontalPaddingFocusNode,
+          initialValue: horizontalPadding.toString(),
+          onChanged: (value) =>
+              setState(() => horizontalPadding = double.parse(value)),
         ),
       ],
+    );
+  }
+}
+
+class _PaddingItem extends StatelessWidget {
+  final bool isHorizontal;
+  final FocusNode focusNode;
+  final String initialValue;
+  final ValueChanged<String> onChanged;
+
+  const _PaddingItem({
+    Key? key,
+    required this.focusNode,
+    required this.initialValue,
+    required this.onChanged,
+    required this.isHorizontal,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              border: isHorizontal
+                  ? const Border.symmetric(
+                      horizontal: BorderSide(
+                        width: 1.0,
+                        color: AppColors.black,
+                      ),
+                    )
+                  : const Border.symmetric(
+                      vertical: BorderSide(
+                        width: 1.0,
+                        color: AppColors.black,
+                      ),
+                    ),
+              color: AppColors.white,
+            ),
+            width: AppDimensions.sizeM,
+            height: AppDimensions.sizeM,
+          ),
+          Container(
+            margin: const EdgeInsets.only(left: AppDimensions.marginS),
+            width: AppDimensions.sizeL,
+            child: CustomizationTextField(
+              focusNode: focusNode,
+              initialValue: initialValue,
+              inputFormatters: [
+                FilteringTextInputFormatter.digitsOnly,
+                LengthLimitingTextInputFormatter(3),
+              ],
+              onChanged: (value) {
+                if (value != null) {
+                  onChanged(value);
+                }
+              },
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

@@ -20,7 +20,7 @@ class CreateTextCustomizationItem extends StatelessWidget {
     return LimitedBox(
       maxHeight: maxHeight,
       child: TextField(
-        decoration: const InputDecoration(
+        decoration: InputDecoration(
           border: InputBorder.none,
           hintText: context.localization.enter_text,
           isCollapsed: true,
