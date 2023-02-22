@@ -25,5 +25,12 @@
   "thickness": "Thickness",
   "active": "Active",
   "inactive": "Inactive",
-  "thumb": "Thumb"
+  "thumb": "Thumb",
+  "common": "Common",
+  "input": "Input",
+  "content": "Content",
+  "hint": "Hint",
+  "border": "Border",
+  "padding": "Padding",
+  "text": "Text"
 }
