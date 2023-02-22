@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:survey_admin/presentation/app/localization/localizations.dart';
 import 'package:survey_admin/presentation/utils/app_fonts.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
@@ -30,9 +31,9 @@ class ThicknessCustomizationItem extends StatelessWidget {
             ],
           ),
         ),
-        const Text(
-          'px',
-          style: TextStyle(
+        Text(
+          context.localization.px,
+          style: const TextStyle(
             fontSize: AppFonts.sizeL,
             fontWeight: AppFonts.weightRegular,
             color: AppColors.black,

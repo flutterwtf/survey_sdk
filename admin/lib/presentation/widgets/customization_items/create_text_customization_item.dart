@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:survey_admin/presentation/app/localization/localizations.dart';
 import 'package:survey_admin/presentation/utils/app_fonts.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
@@ -22,9 +23,9 @@ class CreateTextCustomizationItem extends StatelessWidget {
         children: [
           Expanded(
             child: TextField(
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
                 border: InputBorder.none,
-                hintText: 'Enter text',
+                hintText: context.localization.enter_text,
               ),
               maxLines: 10,
               style: const TextStyle(

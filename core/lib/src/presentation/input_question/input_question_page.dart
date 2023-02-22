@@ -1,9 +1,6 @@
 import 'package:survey_core/src/domain/entities/question_types/input_question_data.dart';
 import 'package:survey_core/src/domain/entities/themes/input_question_theme.dart';
-import 'package:survey_core/src/domain/entities/validator/input_validator.dart';
 import 'package:survey_core/src/presentation/localization/localizations.dart';
-import 'package:survey_core/src/presentation/utils/app_fonts.dart';
-import 'package:survey_core/src/presentation/utils/colors.dart';
 import 'package:survey_core/src/presentation/utils/constants.dart';
 import 'package:survey_core/src/presentation/utils/data_to_widget_util.dart';
 import 'package:survey_core/src/presentation/widgets/question_bottom_button.dart';
@@ -68,7 +65,7 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
             padding: const EdgeInsets.only(top: AppDimensions.marginM),
             //TODO: add validator?
             child: FormBuilderTextField(
-              name: 'Text field',
+              name: context.localization.text_field,
               minLines: theme.minLines,
               maxLines: theme.maxLines,
               style: TextStyle(
