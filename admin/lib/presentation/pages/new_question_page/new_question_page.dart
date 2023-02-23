@@ -30,7 +30,7 @@ const Map<String, String> _optionsAssets = {
 };
 
 class NewQuestionPage extends StatefulWidget {
-  final VoidCallback onSubmit;
+  final ValueChanged<String> onSubmit;
 
   const NewQuestionPage({
     Key? key,
@@ -122,7 +122,10 @@ class _NewQuestionPageState extends State<NewQuestionPage> {
         ),
         persistentFooterButtons: [
           _AddButton(
-            onPressed: widget.onSubmit,
+            onPressed:() {
+              widget.onSubmit(_selectedTab);
+              Navigator.of(context).pop();
+            },
           ),
         ],
       ),
