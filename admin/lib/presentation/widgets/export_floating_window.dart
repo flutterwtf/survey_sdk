@@ -76,7 +76,7 @@ class _ExportFloatingWindow extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(
                   vertical: AppDimensions.marginS,
-                  horizontal: AppDimensions.marginLargeM,
+                  horizontal: AppDimensions.marginL,
                 ),
                 child: Text(
                   context.localization.export_floating_window_title,
@@ -93,13 +93,13 @@ class _ExportFloatingWindow extends StatelessWidget {
                 ),
                 child: Icon(
                   Icons.task_rounded,
-                  size: AppDimensions.size2XL,
+                  size: AppDimensions.sizeXL,
                   color: AppColors.black,
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.all(
-                  AppDimensions.marginLargeM,
+                  AppDimensions.marginL,
                 ),
                 child: Row(
                   children: [
