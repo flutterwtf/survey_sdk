@@ -23,7 +23,7 @@ class IntroContentCustomizationPanel extends CustomizationPanel {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return ListView(
       children: [
         CustomizationItemsContainer(
           title: context.localization.title,

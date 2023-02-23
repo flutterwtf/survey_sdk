@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:survey_admin/presentation/app/localization/localizations.dart';
-import 'package:survey_admin/presentation/utils/asset_strings.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
-import 'package:survey_admin/presentation/utils/constants/constants.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/color_customization_item.dart';
+import 'package:survey_admin/presentation/widgets/customization_items/color_with_text_field_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
-import 'package:survey_admin/presentation/widgets/customization_items/customization_text_field.dart';
+import 'package:survey_admin/presentation/widgets/customization_items/radius_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/customization_panel.dart';
 
 class IntroCommonCustomizationPanel extends CustomizationPanel {
@@ -37,7 +35,7 @@ class IntroCommonCustomizationPanel extends CustomizationPanel {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return ListView(
       children: [
         CustomizationItemsContainer(
           title: context.localization.fill,
@@ -52,62 +50,40 @@ class IntroCommonCustomizationPanel extends CustomizationPanel {
         CustomizationItemsContainer(
           title: context.localization.title,
           children: [
-            Row(
-              children: [
-                Flexible(
-                  child: ColorCustomizationItem(
-                    initialColor: AppColors.black,
-                    onColorPicked: onTitleColorPicked,
-                  ),
-                ),
-                Flexible(
-                  child: CustomizationTextField(
-                    initialValue: '16',
-                    inputFormatters: [
-                      FilteringTextInputFormatter.digitsOnly,
-                      LengthLimitingTextInputFormatter(3),
-                    ],
-                    onChanged: (size) {
-                      if (size == null) {
-                        onTitleFontSizeChanged(null);
-                      } else {
-                        onTitleFontSizeChanged(int.tryParse(size));
-                      }
-                    },
-                  ),
-                ),
+            ColorWithTextFieldCustomizationItem(
+              onColorPicked: onTitleColorPicked,
+              initialText: '16',
+              inputFormatters: [
+                FilteringTextInputFormatter.digitsOnly,
+                LengthLimitingTextInputFormatter(3),
               ],
+              onTextChanged: (size) {
+                if (size == null) {
+                  onTitleFontSizeChanged(null);
+                } else {
+                  onTitleFontSizeChanged(int.tryParse(size));
+                }
+              },
             ),
           ],
         ),
         CustomizationItemsContainer(
           title: context.localization.subtitle,
           children: [
-            Row(
-              children: [
-                Flexible(
-                  child: ColorCustomizationItem(
-                    initialColor: AppColors.black,
-                    onColorPicked: onSubtitleColorPicked,
-                  ),
-                ),
-                Flexible(
-                  child: CustomizationTextField(
-                    initialValue: '12',
-                    inputFormatters: [
-                      FilteringTextInputFormatter.digitsOnly,
-                      LengthLimitingTextInputFormatter(3),
-                    ],
-                    onChanged: (size) {
-                      if (size == null) {
-                        onSubtitleFontSizeChanged(null);
-                      } else {
-                        onSubtitleFontSizeChanged(int.tryParse(size));
-                      }
-                    },
-                  ),
-                ),
+            ColorWithTextFieldCustomizationItem(
+              onColorPicked: onSubtitleColorPicked,
+              initialText: '12',
+              inputFormatters: [
+                FilteringTextInputFormatter.digitsOnly,
+                LengthLimitingTextInputFormatter(3),
               ],
+              onTextChanged: (size) {
+                if (size == null) {
+                  onSubtitleFontSizeChanged(null);
+                } else {
+                  onSubtitleFontSizeChanged(int.tryParse(size));
+                }
+              },
             ),
           ],
         ),
@@ -118,53 +94,25 @@ class IntroCommonCustomizationPanel extends CustomizationPanel {
               initialColor: AppColors.black,
               onColorPicked: onButtonColorPicked,
             ),
-            Row(
-              children: [
-                Flexible(
-                  child: ColorCustomizationItem(
-                    initialColor: AppColors.white,
-                    onColorPicked: onButtonTextColorPicked,
-                  ),
-                ),
-                Flexible(
-                  child: CustomizationTextField(
-                    initialValue: '12',
-                    inputFormatters: [
-                      FilteringTextInputFormatter.digitsOnly,
-                      LengthLimitingTextInputFormatter(3),
-                    ],
-                    onChanged: (size) {
-                      if (size == null) {
-                        onButtonFontSizeChanged(null);
-                      } else {
-                        onButtonFontSizeChanged(int.tryParse(size));
-                      }
-                    },
-                  ),
-                ),
+            ColorWithTextFieldCustomizationItem(
+              initialColor: AppColors.white,
+              onColorPicked: onButtonTextColorPicked,
+              initialText: '12',
+              inputFormatters: [
+                FilteringTextInputFormatter.digitsOnly,
+                LengthLimitingTextInputFormatter(3),
               ],
+              onTextChanged: (size) {
+                if (size == null) {
+                  onButtonFontSizeChanged(null);
+                } else {
+                  onButtonFontSizeChanged(int.tryParse(size));
+                }
+              },
             ),
-            Row(
-              children: [
-                SvgPicture.asset(AssetStrings.arc),
-                const SizedBox(width: AppDimensions.margin2XS),
-                Expanded(
-                  child: CustomizationTextField(
-                    initialValue: '10',
-                    inputFormatters: [
-                      FilteringTextInputFormatter.digitsOnly,
-                      LengthLimitingTextInputFormatter(2),
-                    ],
-                    onChanged: (size) {
-                      if (size == null) {
-                        onButtonRadiusChanged(null);
-                      } else {
-                        onButtonRadiusChanged(int.tryParse(size));
-                      }
-                    },
-                  ),
-                ),
-              ],
+            RadiusCustomizationItem(
+              initialValue: 10,
+              onRadiusChanged: onButtonRadiusChanged,
             ),
           ],
         ),
