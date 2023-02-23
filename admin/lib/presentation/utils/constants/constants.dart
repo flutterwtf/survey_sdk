@@ -18,6 +18,7 @@ abstract class AppDimensions {
   static const double circularRadiusS = 10.0;
   static const double circularRadiusM = 14.0;
   static const double circularRadiusL = 24.0;
+  static const double circularRadiusXL = 36.0;
 
   static const double appbarSize = 50.0;
 

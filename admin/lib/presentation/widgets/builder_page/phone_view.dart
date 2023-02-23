@@ -23,12 +23,16 @@ class PhoneView extends StatelessWidget {
             children: [
               SvgPicture.asset(AssetStrings.iphone),
               Positioned.fill(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: AppDimensions.marginLargeM,
-                    horizontal: AppDimensions.margin2XL,
+                child: Container(
+                  margin: const EdgeInsets.symmetric(
+                    vertical: 18,
+                    horizontal: 55,
                   ),
-                  child: child,
+                  child: ClipRRect(
+                    borderRadius:
+                        BorderRadius.circular(AppDimensions.circularRadiusXL),
+                    child: child,
+                  ),
                 ),
               ),
             ],
