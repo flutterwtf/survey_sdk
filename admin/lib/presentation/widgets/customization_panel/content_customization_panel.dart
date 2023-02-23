@@ -30,7 +30,7 @@ class ContentCustomizationPanel extends CustomizationPanel {
           title: context.localization.title,
           children: [
             CreateTextCustomizationItem(
-              maxHeight: AppDimensions.sizeL,
+              maxHeight: AppDimensions.size2XL,
               onChanged: onTitleChanged,
             )
           ],
@@ -39,7 +39,7 @@ class ContentCustomizationPanel extends CustomizationPanel {
           title: context.localization.subtitle,
           children: [
             CreateTextCustomizationItem(
-              maxHeight: AppDimensions.sizeL,
+              maxHeight: AppDimensions.size2XL,
               onChanged: onSubtitleChanged,
             ),
           ],

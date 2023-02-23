@@ -35,7 +35,7 @@ class _SurveyContentBarState extends State<SurveyContentBar> {
           Padding(
             padding: const EdgeInsets.symmetric(
               vertical: AppDimensions.margin2XS,
-              horizontal: AppDimensions.marginLargeM,
+              horizontal: AppDimensions.marginXL,
             ),
             child: Row(
               children: [
@@ -47,11 +47,11 @@ class _SurveyContentBarState extends State<SurveyContentBar> {
                   ),
                 ),
                 const SizedBox(
-                  width: AppDimensions.margin3XL + AppDimensions.margin2XL,
+                  width: AppDimensions.margin4XL + AppDimensions.margin3XL,
                 ),
                 SizedBox(
-                  height: AppDimensions.size3M,
-                  width: AppDimensions.size3M,
+                  height: AppDimensions.sizeXL,
+                  width: AppDimensions.sizeXL,
                   child: SvgPicture.asset(AssetStrings.addCircle),
                 ),
               ],

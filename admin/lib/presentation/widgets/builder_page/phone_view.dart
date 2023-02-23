@@ -18,15 +18,15 @@ class PhoneView extends StatelessWidget {
       color: AppColors.greyBackground,
       child: Center(
         child: Padding(
-          padding: const EdgeInsets.all(AppDimensions.size2M),
+          padding: const EdgeInsets.all(AppDimensions.sizeL),
           child: Stack(
             children: [
               SvgPicture.asset(AssetStrings.iphone),
               Positioned.fill(
                 child: Container(
                   margin: const EdgeInsets.symmetric(
-                    vertical: 18,
-                    horizontal: 55,
+                    vertical: AppDimensions.marginL,
+                    horizontal: AppDimensions.margin5XL,
                   ),
                   child: ClipRRect(
                     borderRadius:
