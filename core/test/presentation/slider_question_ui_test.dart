@@ -10,7 +10,7 @@ import 'package:survey_core/src/presentation/widgets/question_bottom_button.dart
 
 void main() {
   group(
-    'Intro question widget test',
+    'Slider question widget test',
     () {
       final completerOnSendButtonTap = Completer<void>();
       const title = 'Question widget';
@@ -18,6 +18,7 @@ void main() {
       const typeQuestion = 'SliderQuestion';
       const minValue = 1.0;
       const maxValue = 2.0;
+      const initialValue = 1.0;
       const id = 1;
       const isSkip = false;
 
@@ -39,6 +40,7 @@ void main() {
               subtitle: subTitle,
               typeQuestion: typeQuestion,
               isSkip: isSkip,
+              initialValue: initialValue,
             ),
             onSend: completerOnSendButtonTap.complete,
           ),
