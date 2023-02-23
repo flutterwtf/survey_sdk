@@ -37,32 +37,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Karla&display=swap" rel="stylesheet">
 
-  <style>
-    #progress__container {
-      position: relative;
-      width: 400px;
-      height: 18px;
-      border-radius: 25px;
-      border: 2px solid black;
-    }
-
-    #progress__bar {
-      position: absolute;
-      width: 1%;
-      height: 100%;
-      border-radius: 25px;
-      background-color: black;
-    }
-
-    #splash__container {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin-top: -5%;
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css">
 
   <script>
     // The value below is injected by flutter build, do not touch.
@@ -76,7 +51,7 @@
 <body>
 
   <div id="splash__container">
-    <p style="font-family:'Karla',sans-serif;font-size: 32px;">Survey SDK</p>
+    <p>Survey SDK</p>
     <div id="progress__container">
       <div id="progress__bar">
       </div>
@@ -88,9 +63,9 @@
     function move() {
       var elem = document.getElementById("progress__bar");
 
-      var id = setInterval(frame, 30);
+      var id = setInterval(frame, 40);
       function frame() {
-        if (width >= 100) {
+        if (width >= 98) {
           clearInterval(id);
         } else {
           width++;
@@ -102,16 +77,16 @@
     window.addEventListener('load', function (ev) {
       // Download main.dart.js
       move();
-      if (width < 25) {width = 25;}
+      if (width < 15) { width = 15; }
       _flutter.loader.loadEntrypoint({
         serviceWorker: {
           serviceWorkerVersion: serviceWorkerVersion,
         }
       }).then(function (engineInitializer) {
-        if (width < 80) { width = 80; }
+        if (width < 35) { width = 35; }
         return engineInitializer.initializeEngine();
       }).then(function (appRunner) {
-        if (width < 90) { width = 90; }
+        if (width < 70) { width = 70; }
         document.getElementById("splash__container").firstElementChild.remove();
         document.getElementById("progress__container").remove();
         return appRunner.runApp();
