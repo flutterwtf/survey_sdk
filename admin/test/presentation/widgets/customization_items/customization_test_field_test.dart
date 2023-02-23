@@ -213,8 +213,9 @@ void main() {
       ),
     );
 
-    final textField =
-        tester.widget<FormBuilderTextField>(find.byType(FormBuilderTextField));
+    final textField = tester.widget<FormBuilderTextField>(
+      find.byType(FormBuilderTextField),
+    );
     expect(textField.decoration, decoration);
   });
 }
