@@ -18,7 +18,6 @@ void main() {
           localizationsDelegates: const [
             AppLocalizations.delegate,
             GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
           ],
           home: Scaffold(
             body: InputQuestionPage(
@@ -45,7 +44,6 @@ void main() {
           localizationsDelegates: const [
             AppLocalizations.delegate,
             GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
           ],
           home: Scaffold(
             body: InputQuestionPage(
@@ -74,7 +72,6 @@ void main() {
           localizationsDelegates: const [
             AppLocalizations.delegate,
             GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
           ],
           home: Scaffold(
             body: InputQuestionPage(
@@ -114,7 +111,6 @@ void main() {
             localizationsDelegates: const [
               AppLocalizations.delegate,
               GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
             ],
             home: Scaffold(
               body: InputQuestionPage(
