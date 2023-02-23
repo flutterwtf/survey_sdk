@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <!--
+  <!--
       If you are serving your web app in a path other than the root, change the
       href value below to reflect the base path you are serving from.
 
@@ -14,53 +15,85 @@
       This is a placeholder for base href that will be replaced by the value of
       the `--base-href` argument provided to `flutter build`.
     -->
-    <base href="$FLUTTER_BASE_HREF">
+  <base href="$FLUTTER_BASE_HREF">
 
-    <meta charset="UTF-8">
-    <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-    <meta name="description" content="Survey SDK">
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="Survey SDK">
 
-    <!-- iOS meta tags & icons -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="survey_admin">
-    <link rel="apple-touch-icon" href="icons/Icon-192.png">
+  <!-- iOS meta tags & icons -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="survey_admin">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="favicon.png"/>
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png" />
 
-    <title>survey_admin</title>
-    <link rel="manifest" href="manifest.json">
+  <title>survey_admin</title>
+  <link rel="manifest" href="manifest.json">
 
-    <script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Karla&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+
+  <script>
     // The value below is injected by flutter build, do not touch.
     var serviceWorkerVersion = null;
 
-    </script>
-    <!-- This script adds the flutter initialization JS code -->
-    <script src="flutter.js" defer></script>
+  </script>
+  <!-- This script adds the flutter initialization JS code -->
+  <script src="flutter.js" defer></script>
 </head>
+
 <body>
-<div id="loading" class="splash"></div>
-<script>
-    window.addEventListener('load', function(ev) {
-      var loading = document.querySelector('#loading');
-      loading.textContent = "(1/3) Loading entrypoint...";
+
+  <div id="splash__container">
+    <p>Survey SDK</p>
+    <div id="progress__container">
+      <div id="progress__bar">
+      </div>
+    </div>
+  </div>
+
+  <script>
+    var width = 1;
+    function move() {
+      var elem = document.getElementById("progress__bar");
+
+      var id = setInterval(frame, 40);
+      function frame() {
+        if (width >= 98) {
+          clearInterval(id);
+        } else {
+          width++;
+          elem.style.width = width + '%';
+        }
+      }
+    }
+
+    window.addEventListener('load', function (ev) {
       // Download main.dart.js
+      move();
+      if (width < 15) { width = 15; }
       _flutter.loader.loadEntrypoint({
         serviceWorker: {
           serviceWorkerVersion: serviceWorkerVersion,
         }
-      }).then(function(engineInitializer) {
-        loading.textContent = "(2/3) Initializing engine...";
+      }).then(function (engineInitializer) {
+        if (width < 35) { width = 35; }
         return engineInitializer.initializeEngine();
-      }).then(function(appRunner) {
-        loading.parentNode.removeChild(loading);
+      }).then(function (appRunner) {
+        if (width < 70) { width = 70; }
+        document.getElementById("splash__container").firstElementChild.remove();
+        document.getElementById("progress__container").remove();
         return appRunner.runApp();
       });
     });
+  </script>
 
-
-</script>
 </body>
+
 </html>
