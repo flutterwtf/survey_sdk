@@ -6,6 +6,7 @@ import 'package:survey_admin/presentation/utils/constants/constants.dart';
 import 'package:survey_admin/presentation/widgets/builder_page/phone_view.dart';
 import 'package:survey_admin/presentation/widgets/builder_page/survey_content_bar.dart';
 import 'package:survey_admin/presentation/widgets/builder_page/survey_editor_bar.dart';
+import 'package:survey_admin/presentation/widgets/export_floating_window.dart';
 
 class BuilderPage extends StatefulWidget {
   const BuilderPage({super.key});
@@ -125,7 +126,13 @@ class _PreviewTab extends StatelessWidget {
         right: AppDimensions.margin3XL,
       ),
       child: TextButton(
-        onPressed: () {},
+        onPressed: () {
+          showExportFloatingWindow(
+            context,
+            onDownloadPressed: () {},
+            onCopyPressed: () {},
+          );
+        },
         style: ButtonStyle(
           backgroundColor: MaterialStateProperty.all(AppColors.black),
         ),
