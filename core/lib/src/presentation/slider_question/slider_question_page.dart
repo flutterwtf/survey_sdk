@@ -102,13 +102,12 @@ class _QuestionSlider extends StatefulWidget {
 }
 
 class _QuestionSliderState extends State<_QuestionSlider> {
-  late double value;
-  late final bool onlyInt;
+  late double _value;
+  late final bool _onlyInt;
   @override
   void initState() {
-    // TODO: implement initState
-    value = widget.initialValue.toDouble();
-    onlyInt = widget.initialValue.ceilToDouble() == widget.initialValue.floorToDouble();
+    _value = widget.initialValue.toDouble();
+    _onlyInt = widget.initialValue.ceilToDouble() == widget.initialValue.floorToDouble();
     super.initState();
   }
   @override
@@ -118,9 +117,9 @@ class _QuestionSliderState extends State<_QuestionSlider> {
       child: Column(
         children: [
           Slider(
-            value: value,
+            value: _value,
             onChanged: (newValue) => setState(() {
-              value = onlyInt ? newValue.roundToDouble() : newValue;
+              _value = _onlyInt ? newValue.roundToDouble() : newValue;
               widget.onChanged(newValue);
             }),
             min: widget.minValue.toDouble(),
