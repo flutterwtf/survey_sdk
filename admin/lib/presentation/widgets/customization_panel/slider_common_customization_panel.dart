@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:survey_admin/presentation/app/localization/localizations.dart';
 import 'package:survey_admin/presentation/utils/app_fonts.dart';
 import 'package:survey_admin/presentation/utils/asset_strings.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
@@ -7,16 +8,18 @@ import 'package:survey_admin/presentation/utils/constants/constants.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/color_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_text_field.dart';
+import 'package:survey_admin/presentation/widgets/customization_panel/customization_panel.dart';
 
-class CommonCustomizationPanel extends StatelessWidget {
+class SliderCommonCustomizationPanel extends CustomizationPanel {
   final ValueChanged<Color> onFillColorChanged;
   final ValueChanged<Color> onTitleColorChanged;
   final ValueChanged<Color> onSubtitleColorChanged;
   final ValueChanged<Color> onButtonUpColorChanged;
   final ValueChanged<Color> onButtonDownColorChanged;
 
-  const CommonCustomizationPanel({
+  const SliderCommonCustomizationPanel({
     super.key,
+    required super.title,
     required this.onButtonDownColorChanged,
     required this.onButtonUpColorChanged,
     required this.onFillColorChanged,
@@ -26,19 +29,20 @@ class CommonCustomizationPanel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return ListView(
       children: [
         CustomizationItemsContainer(
-          title: 'Fill',
+          title: context.localization.fill,
+          isTopDividerShown: true,
           children: [
             ColorCustomizationItem(
               initialColor: AppColors.white,
               onColorPicked: onFillColorChanged,
-            )
+            ),
           ],
         ),
         CustomizationItemsContainer(
-          title: 'Title',
+          title: context.localization.title,
           children: [
             Row(
               children: [
@@ -58,7 +62,7 @@ class CommonCustomizationPanel extends StatelessWidget {
           ],
         ),
         CustomizationItemsContainer(
-          title: 'Subtitle',
+          title: context.localization.subtitle,
           children: [
             Row(
               children: [
@@ -78,7 +82,7 @@ class CommonCustomizationPanel extends StatelessWidget {
           ],
         ),
         CustomizationItemsContainer(
-          title: 'Button',
+          title: context.localization.button,
           children: [
             ColorCustomizationItem(
               initialColor: AppColors.black,

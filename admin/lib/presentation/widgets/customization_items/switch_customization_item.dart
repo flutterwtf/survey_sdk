@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
+import 'package:survey_admin/presentation/utils/constants/app_duration.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text.dart';
 
 //TODO: extend every item from CustomizationItem class
@@ -64,14 +65,10 @@ class _CustomSwitchState extends State<_CustomSwitch> {
               : AppColors.switchBackgroundInactive,
           borderRadius: BorderRadius.circular(9),
         ),
-        duration: const Duration(
-          milliseconds: 100,
-        ),
+        duration: AppDuration.customizationItemAnimation,
         child: AnimatedAlign(
           alignment: _isToggled ? Alignment.centerRight : Alignment.centerLeft,
-          duration: const Duration(
-            milliseconds: 100,
-          ),
+          duration: AppDuration.customizationItemAnimation,
           child: Padding(
             padding: const EdgeInsets.all(2),
             child: Container(

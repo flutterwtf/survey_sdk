@@ -2,12 +2,13 @@ import 'package:survey_core/src/domain/entities/question_types/question_data.dar
 import 'package:flutter/material.dart';
 
 class SliderQuestionData extends QuestionData<SliderThemeData> {
-  final double minValue;
-  final double maxValue;
-
+  final num minValue;
+  final num maxValue;
+  final num initialValue;
   const SliderQuestionData({
     required this.minValue,
     required this.maxValue,
+    required this.initialValue,
     required super.id,
     required super.title,
     required super.subtitle,
@@ -29,6 +30,7 @@ class SliderQuestionData extends QuestionData<SliderThemeData> {
         'id': id,
         'minValue': minValue,
         'maxValue': maxValue,
+        'initialValue': initialValue,
         'title': title,
         'subtitle': subtitle,
         'typeQuestion': typeQuestion,
@@ -41,6 +43,7 @@ class SliderQuestionData extends QuestionData<SliderThemeData> {
       id: json['id'],
       minValue: json['minValue'],
       maxValue: json['maxValue'],
+      initialValue: json['initialValue'],
       title: json['title'],
       subtitle: json['subtitle'],
       typeQuestion: json['typeQuestion'],

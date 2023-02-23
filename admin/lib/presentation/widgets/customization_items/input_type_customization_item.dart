@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:survey_admin/presentation/utils/app_fonts.dart';
+import 'package:survey_admin/presentation/utils/asset_strings.dart';
+import 'package:survey_admin/presentation/utils/constants/app_duration.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
-import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text.dart';
 
 enum InputType {
   text('Text'),
@@ -26,15 +28,15 @@ class InputTypeCustomizationItem extends StatefulWidget {
   final void Function(InputType inputType)? onChanged;
 
   @override
-  State<InputTypeCustomizationItem> createState() =>
-      _InputTypeCustomizationItemState();
+  State<InputTypeCustomizationItem> createState() => _InputTypeCustomizationItemState();
 }
 
 class _InputTypeCustomizationItemState extends State<InputTypeCustomizationItem>
     with SingleTickerProviderStateMixin {
   late bool _isExpanded;
   late InputType _selectedType;
-  late AnimationController _iconAnimationController;
+  late final AnimationController _iconAnimationController;
+  late final Animation<double> _animation;
 
   @override
   void initState() {
@@ -43,8 +45,20 @@ class _InputTypeCustomizationItemState extends State<InputTypeCustomizationItem>
     _selectedType = widget.initialValue;
     _iconAnimationController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 100),
+      duration: AppDuration.customizationItemAnimation,
     );
+    _animation = Tween(begin: 0.0, end: .5).animate(
+      CurvedAnimation(
+        parent: _iconAnimationController,
+        curve: Curves.easeOut,
+      ),
+    );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _iconAnimationController.dispose();
   }
 
   @override
@@ -52,23 +66,11 @@ class _InputTypeCustomizationItemState extends State<InputTypeCustomizationItem>
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Padding(
-          padding: EdgeInsets.only(
-            top: AppDimensions.marginM,
-            left: AppDimensions.marginM,
-          ),
-          child: CustomizationText('Input type'),
-        ),
         _InputTypeItem(
           inputType: _selectedType,
-          trailing: AnimatedBuilder(
-            animation: _iconAnimationController,
-            builder: (_, __) => CustomPaint(
-              painter: _DropdownListIconPainter(
-                animatedValue: _iconAnimationController.value,
-              ),
-              size: const Size.square(AppDimensions.sizeS),
-            ),
+          trailing: RotationTransition(
+            turns: _animation,
+            child: SvgPicture.asset(AssetStrings.arrow),
           ),
           onTap: () {
             setState(() {
@@ -82,7 +84,7 @@ class _InputTypeCustomizationItemState extends State<InputTypeCustomizationItem>
           },
         ),
         AnimatedSize(
-          duration: const Duration(milliseconds: 100),
+          duration: AppDuration.customizationItemAnimation,
           child: _isExpanded
               ? Column(
                   children: InputType.values
@@ -150,30 +152,5 @@ class _InputTypeItem extends StatelessWidget {
         ),
       ),
     );
-  }
-}
-
-//TODO: let's replace it just with the common arrow icon
-class _DropdownListIconPainter extends CustomPainter {
-  const _DropdownListIconPainter({
-    required this.animatedValue,
-  });
-
-  final double animatedValue;
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final leftStartPoint = Offset(0, size.height / 2);
-    final rightStartPoint = Offset(size.width, size.height / 2);
-    final center = Offset(size.width / 2, size.height * (1 - animatedValue));
-    final paint = Paint();
-
-    canvas.drawLine(leftStartPoint, center, paint);
-    canvas.drawLine(rightStartPoint, center, paint);
-  }
-
-  @override
-  bool shouldRepaint(covariant _DropdownListIconPainter oldDelegate) {
-    return animatedValue != oldDelegate.animatedValue;
   }
 }

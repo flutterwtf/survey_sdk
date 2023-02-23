@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:survey_admin/presentation/app/localization/localizations.dart';
 import 'package:survey_admin/presentation/utils/app_fonts.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/color_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/thickness_customization_item.dart';
+import 'package:survey_admin/presentation/widgets/customization_panel/customization_panel.dart';
 
-class SliderCustomizationPanel extends StatelessWidget {
+class SliderCustomizationPanel extends CustomizationPanel {
   final ValueChanged<String?> onThicknessChanged;
   final ValueChanged<Color> onActiveColorChanged;
   final ValueChanged<Color> onInactiveColorChanged;
@@ -14,6 +16,7 @@ class SliderCustomizationPanel extends StatelessWidget {
 
   const SliderCustomizationPanel({
     super.key,
+    required super.title,
     required this.onActiveColorChanged,
     required this.onInactiveColorChanged,
     required this.onThicknessChanged,
@@ -23,10 +26,11 @@ class SliderCustomizationPanel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return ListView(
       children: [
         CustomizationItemsContainer(
-          title: 'Thickness',
+          title: context.localization.thickness,
+          isTopDividerShown: true,
           children: [
             ThicknessCustomizationItem(
               onThicknessChanged: onThicknessChanged,
@@ -35,7 +39,7 @@ class SliderCustomizationPanel extends StatelessWidget {
           ],
         ),
         CustomizationItemsContainer(
-          title: 'Active',
+          title: context.localization.active,
           children: [
             ColorCustomizationItem(
               initialColor: AppColors.switchBackgroundActive,
@@ -44,7 +48,7 @@ class SliderCustomizationPanel extends StatelessWidget {
           ],
         ),
         CustomizationItemsContainer(
-          title: 'Inactive',
+          title: context.localization.inactive,
           children: [
             ColorCustomizationItem(
               initialColor: AppColors.switchBackgroundInactive,
@@ -53,7 +57,7 @@ class SliderCustomizationPanel extends StatelessWidget {
           ],
         ),
         CustomizationItemsContainer(
-          title: 'Thumb',
+          title: context.localization.thumb,
           children: [
             Row(
               children: [

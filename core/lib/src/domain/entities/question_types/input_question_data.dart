@@ -34,7 +34,7 @@ class InputQuestionData extends QuestionData<InputQuestionTheme> {
         'isSkip': isSkip,
         'info': info,
         'payload': {
-          'validator': validator,
+          ...JsonValidator.toJson(validator),
           'value': value,
           'hintText': hintText,
         }
@@ -49,7 +49,7 @@ class InputQuestionData extends QuestionData<InputQuestionTheme> {
       typeQuestion: json['typeQuestion'],
       isSkip: json['isSkip'],
       info: json['info'],
-      validator: payload['validator'],
+      validator: JsonValidator.fromJson(payload),
       value: payload['value'],
       hintText: payload['hintText'],
     );

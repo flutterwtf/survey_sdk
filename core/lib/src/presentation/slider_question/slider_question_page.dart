@@ -64,6 +64,7 @@ class _SliderQuestionPageState extends State<SliderQuestionPage> {
             child: _QuestionSlider(
               minValue: widget.data.minValue,
               maxValue: widget.data.maxValue,
+              initialValue: widget.data.initialValue,
               onChanged: (double? currentSliderValue) {},
               theme: _theme,
             ),
@@ -80,9 +81,10 @@ class _SliderQuestionPageState extends State<SliderQuestionPage> {
   }
 }
 
-class _QuestionSlider extends StatelessWidget {
-  final double minValue;
-  final double maxValue;
+class _QuestionSlider extends StatefulWidget {
+  final num minValue;
+  final num maxValue;
+  final num initialValue;
   final void Function(double? currentSliderValue) onChanged;
   final SliderThemeData theme;
 
@@ -92,30 +94,47 @@ class _QuestionSlider extends StatelessWidget {
     required this.maxValue,
     required this.onChanged,
     required this.theme,
+    required this.initialValue,
   }) : super(key: key);
 
   @override
+  State<_QuestionSlider> createState() => _QuestionSliderState();
+}
+
+class _QuestionSliderState extends State<_QuestionSlider> {
+  late double _value;
+  late final bool _onlyInt;
+  @override
+  void initState() {
+    _value = widget.initialValue.toDouble();
+    _onlyInt = widget.initialValue.ceilToDouble() == widget.initialValue.floorToDouble();
+    super.initState();
+  }
+  @override
   Widget build(BuildContext context) {
     return SliderTheme(
-      data: theme,
+      data: widget.theme,
       child: Column(
         children: [
           Slider(
-            value: minValue + (maxValue - minValue) / 2,
-            onChanged: onChanged,
-            min: minValue,
-            max: maxValue,
+            value: _value,
+            onChanged: (newValue) => setState(() {
+              _value = _onlyInt ? newValue.roundToDouble() : newValue;
+              widget.onChanged(newValue);
+            }),
+            min: widget.minValue.toDouble(),
+            max: widget.maxValue.toDouble(),
           ),
           const SizedBox(height: AppDimensions.margin2XS),
           Row(
             children: [
               Text(
-                minValue.toString(),
+                widget.minValue.toString(),
                 style: const TextStyle(fontSize: AppFonts.sizeM),
               ),
               const Spacer(),
               Text(
-                maxValue.toString(),
+                widget.maxValue.toString(),
                 style: const TextStyle(fontSize: AppFonts.sizeM),
               ),
             ],

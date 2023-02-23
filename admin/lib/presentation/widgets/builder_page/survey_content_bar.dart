@@ -19,6 +19,7 @@ class _SurveyContentBarState extends State<SurveyContentBar> {
     const SurveyQuestionListItem(index: 1, title: 'Intro'),
     const SurveyQuestionListItem(index: 2, title: 'Title'),
   ];
+
   @override
   Widget build(BuildContext context) {
     return Container(
