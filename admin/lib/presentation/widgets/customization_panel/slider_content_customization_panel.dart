@@ -31,7 +31,7 @@ class SliderContentCustomizationPanel extends CustomizationPanel {
           isTopDividerShown: true,
           children: [
             CreateTextCustomizationItem(
-              maxHeight: AppDimensions.sizeL,
+              maxHeight: AppDimensions.sizeXL,
               onChanged: onTitleChanged,
             )
           ],
@@ -40,7 +40,7 @@ class SliderContentCustomizationPanel extends CustomizationPanel {
           title: context.localization.subtitle,
           children: [
             CreateTextCustomizationItem(
-              maxHeight: AppDimensions.sizeL,
+              maxHeight: AppDimensions.sizeXL,
               onChanged: onSubtitleChanged,
             ),
           ],

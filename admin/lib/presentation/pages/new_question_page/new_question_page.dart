@@ -89,7 +89,7 @@ class _NewQuestionPageState extends State<NewQuestionPage> {
                 onTap: () => Navigator.pop(context),
                 child: Container(
                   margin:
-                      const EdgeInsets.only(right: AppDimensions.marginLargeM),
+                      const EdgeInsets.only(right: AppDimensions.marginXL),
                   child: const Align(
                     alignment: Alignment.centerRight,
                     child: VectorImage(assetName: AppAssets.closeIcon),
@@ -204,13 +204,13 @@ class _AssetTextOption extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: AppDimensions.margin3XL),
-      padding: const EdgeInsets.all(AppDimensions.marginS),
+      margin: const EdgeInsets.symmetric(horizontal: AppDimensions.margin4XL),
+      padding: const EdgeInsets.all(AppDimensions.marginXS),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           VectorImage(assetName: assetName),
-          const SizedBox(height: AppDimensions.marginLargeM),
+          const SizedBox(height: AppDimensions.marginXL),
           Text(
             titleText,
             style: const TextStyle(
