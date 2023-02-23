@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:survey_admin/presentation/app/localization/localizations.dart';
 import 'package:survey_admin/presentation/utils/app_fonts.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
@@ -44,15 +45,15 @@ class _BuilderPageTabBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const DefaultTabController(
+    return DefaultTabController(
       length: 2,
       child: SizedBox(
         width: AppDimensions.tabBarWidth,
         child: TabBar(
-          padding: EdgeInsets.only(
+          padding: const EdgeInsets.only(
             right: AppDimensions.tabBarPadding,
           ),
-          indicator: UnderlineTabIndicator(
+          indicator: const UnderlineTabIndicator(
             borderSide: BorderSide(width: 1.0),
             insets: EdgeInsets.symmetric(
               horizontal: AppDimensions.margin3XL + AppDimensions.sizeM,
@@ -61,10 +62,10 @@ class _BuilderPageTabBar extends StatelessWidget {
           unselectedLabelColor: AppColors.textGrey,
           indicatorColor: AppColors.black,
           labelColor: AppColors.text,
-          labelStyle: TextStyle(fontWeight: AppFonts.weightBold),
+          labelStyle: const TextStyle(fontWeight: AppFonts.weightBold),
           tabs: [
-            Tab(text: 'Create'),
-            Tab(text: 'Preview'),
+            Tab(text: context.localization.create),
+            Tab(text: context.localization.preview),
           ],
         ),
       ),
@@ -91,13 +92,13 @@ class _CreateTab extends StatelessWidget {
             color: AppColors.black,
           ),
         ),
-        child: const Padding(
-          padding: EdgeInsets.symmetric(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
             horizontal: AppDimensions.margin2XL,
           ),
           child: Text(
-            'IMPORT',
-            style: TextStyle(
+            context.localization.import,
+            style: const TextStyle(
               color: AppColors.text,
               fontWeight: AppFonts.weightSemiBold,
             ),
@@ -124,13 +125,13 @@ class _PreviewTab extends StatelessWidget {
         style: ButtonStyle(
           backgroundColor: MaterialStateProperty.all(AppColors.black),
         ),
-        child: const Padding(
-          padding: EdgeInsets.symmetric(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
             horizontal: AppDimensions.margin2XL,
           ),
           child: Text(
-            'EXPORT',
-            style: TextStyle(
+            context.localization.export,
+            style: const TextStyle(
               color: AppColors.white,
               fontWeight: AppFonts.weightSemiBold,
             ),

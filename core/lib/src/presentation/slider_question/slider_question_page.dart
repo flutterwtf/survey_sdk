@@ -1,4 +1,5 @@
 import 'package:survey_core/src/domain/entities/question_types/slider_question_data.dart';
+import 'package:survey_core/src/presentation/localization/localizations.dart';
 import 'package:survey_core/src/presentation/utils/app_fonts.dart';
 import 'package:survey_core/src/presentation/utils/constants.dart';
 import 'package:survey_core/src/presentation/utils/data_to_widget_util.dart';
@@ -26,13 +27,13 @@ class _SliderQuestionPageState extends State<SliderQuestionPage> {
   late final SliderThemeData _theme;
 
   @override
-  void initState() {
+  void didChangeDependencies() {
     if (widget.data.theme == null) {
       _theme = Theme.of(context).sliderTheme;
     } else {
       _theme = widget.data.theme!;
     }
-    super.initState();
+    super.didChangeDependencies();
   }
 
   @override
@@ -70,8 +71,7 @@ class _SliderQuestionPageState extends State<SliderQuestionPage> {
           ),
           const Spacer(),
           QuestionBottomButton(
-            //TODO: move to localization?
-            text: 'NEXT',
+            text: context.localization.next,
             //TODO: replace '' with data
             onPressed: () => widget.onSend(''),
           ),

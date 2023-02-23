@@ -19,5 +19,4 @@ class FilesystemDataSourceImpl implements FilesystemDataSource {
     var map = jsonDecode(json);
     return SurveyData.fromJson(map);
   }
-
 }

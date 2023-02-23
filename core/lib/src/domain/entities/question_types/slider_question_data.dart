@@ -20,7 +20,7 @@ class SliderQuestionData extends QuestionData<SliderThemeData> {
   //TODO: do like this in every question widget
   //TODO: implement theme
   @override
-  SliderThemeData? get theme => const SliderThemeData();
+  SliderThemeData? get theme => null;
 
   @override
   String get type => 'Slider';
