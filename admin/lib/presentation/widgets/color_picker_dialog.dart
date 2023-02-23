@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
+import 'package:survey_admin/presentation/app/localization/localizations.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
 
@@ -17,7 +18,9 @@ class ColorPickerDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: const Text('Pick a color'),
+      title: Text(
+        context.localization.pick_a_color,
+      ),
       content: SingleChildScrollView(
         child: Column(
           children: [
@@ -36,7 +39,7 @@ class ColorPickerDialog extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text('Hex'),
+                  Text(context.localization.hex),
                   const SizedBox(width: 10),
                   SizedBox(
                     width: 75,
@@ -78,9 +81,9 @@ class ColorPickerDialog extends StatelessWidget {
                 AppDimensions.circularRadiusS,
               ),
             ),
-            child: const Text(
-              'OK',
-              style: TextStyle(color: AppColors.white),
+            child: Text(
+              context.localization.ok,
+              style: const TextStyle(color: AppColors.white),
             ),
           ),
         ),
