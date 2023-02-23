@@ -21,7 +21,7 @@ class ThicknessCustomizationItem extends StatelessWidget {
     return Row(
       children: [
         SizedBox(
-          width: AppDimensions.marginLargeM,
+          width: AppDimensions.marginXL,
           child: CustomizationTextField(
             onChanged: onThicknessChanged,
             initialValue: initialSize.toString(),

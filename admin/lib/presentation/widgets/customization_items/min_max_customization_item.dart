@@ -84,7 +84,7 @@ class _MinMaxInputField extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.only(
-            right: AppDimensions.marginS,
+            right: AppDimensions.marginXS,
           ),
           child: Text(
             prefix,

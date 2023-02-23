@@ -80,7 +80,7 @@ class QuestionInputCustomizationPanel extends CustomizationPanel {
                 ),
                 Flexible(
                   child: SizedBox(
-                    width: AppDimensions.margin3XL,
+                    width: AppDimensions.margin4XL,
                     child: CustomizationTextField(
                       initialValue: '1',
                       inputFormatters: [

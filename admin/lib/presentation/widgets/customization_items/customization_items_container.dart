@@ -18,7 +18,7 @@ class CustomizationItemsContainer extends StatefulWidget {
     this.title,
     this.titlePadding,
     this.itemsPadding,
-    this.itemsSeparatorHeight = AppDimensions.marginLargeS,
+    this.itemsSeparatorHeight = AppDimensions.marginS,
     this.isTopDividerShown = false,
     this.isBottomDividerShown = true,
     required this.children,
@@ -64,7 +64,7 @@ class _CustomizationItemsContainerState
                   left: AppDimensions.marginM,
                   top: AppDimensions.marginM,
                   right: AppDimensions.marginM,
-                  bottom: AppDimensions.marginLargeS,
+                  bottom: AppDimensions.marginS,
                 ),
             child: Text(
               widget.title!,

@@ -1,0 +1,29 @@
+p {
+    font-family: 'Karla', sans-serif;
+    font-size: 32px;
+}
+
+#progress__container {
+    position: relative;
+    width: 400px;
+    height: 18px;
+    border-radius: 25px;
+    border: 2px solid black;
+}
+
+#progress__bar {
+    position: absolute;
+    width: 1%;
+    height: 100%;
+    border-radius: 25px;
+    background-color: black;
+}
+
+#splash__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin-top: -5%;
+}

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:survey_admin/presentation/app/localization/localizations.dart';
 import 'package:survey_admin/presentation/utils/app_fonts.dart';
@@ -96,6 +97,10 @@ class _LineAmountInputField extends StatelessWidget {
             ),
             Expanded(
               child: CustomizationTextField(
+                inputFormatters: [
+                  FilteringTextInputFormatter.digitsOnly,
+                  LengthLimitingTextInputFormatter(3),
+                ],
                 initialValue: defaultLineAmount.toString(),
                 fontSize: AppFonts.sizeM,
                 onChanged: (value) {

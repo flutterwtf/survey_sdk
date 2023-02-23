@@ -6,6 +6,7 @@ import 'package:survey_admin/presentation/utils/constants/constants.dart';
 import 'package:survey_admin/presentation/widgets/builder_page/phone_view.dart';
 import 'package:survey_admin/presentation/widgets/builder_page/survey_content_bar.dart';
 import 'package:survey_admin/presentation/widgets/builder_page/survey_editor_bar.dart';
+import 'package:survey_admin/presentation/widgets/export_floating_window.dart';
 
 class BuilderPage extends StatefulWidget {
   const BuilderPage({super.key});
@@ -30,10 +31,14 @@ class _BuilderPageState extends State<BuilderPage> {
         ],
       ),
       body: Row(
-        children: const [
-          SurveyContentBar(),
-          Expanded(child: PhoneView()),
-          SurveyEditorBar(),
+        children: [
+          const SurveyContentBar(),
+          Expanded(
+            child: PhoneView(
+              child: Container(),
+            ),
+          ),
+          const SurveyEditorBar(),
         ],
       ),
     );
@@ -56,7 +61,7 @@ class _BuilderPageTabBar extends StatelessWidget {
           indicator: const UnderlineTabIndicator(
             borderSide: BorderSide(width: 1.0),
             insets: EdgeInsets.symmetric(
-              horizontal: AppDimensions.margin3XL + AppDimensions.sizeM,
+              horizontal: AppDimensions.margin4XL + AppDimensions.sizeM,
             ),
           ),
           unselectedLabelColor: AppColors.textGrey,
@@ -82,7 +87,7 @@ class _CreateTab extends StatelessWidget {
       padding: const EdgeInsets.only(
         bottom: AppDimensions.margin2XS,
         top: AppDimensions.margin2XS,
-        right: AppDimensions.marginXL,
+        right: AppDimensions.margin2XL,
       ),
       child: OutlinedButton(
         onPressed: () {},
@@ -94,7 +99,7 @@ class _CreateTab extends StatelessWidget {
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(
-            horizontal: AppDimensions.margin2XL,
+            horizontal: AppDimensions.margin3XL,
           ),
           child: Text(
             context.localization.import,
@@ -118,16 +123,22 @@ class _PreviewTab extends StatelessWidget {
       padding: const EdgeInsets.only(
         bottom: AppDimensions.margin2XS,
         top: AppDimensions.margin2XS,
-        right: AppDimensions.margin2XL,
+        right: AppDimensions.margin3XL,
       ),
       child: TextButton(
-        onPressed: () {},
+        onPressed: () {
+          showExportFloatingWindow(
+            context,
+            onDownloadPressed: () {},
+            onCopyPressed: () {},
+          );
+        },
         style: ButtonStyle(
           backgroundColor: MaterialStateProperty.all(AppColors.black),
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(
-            horizontal: AppDimensions.margin2XL,
+            horizontal: AppDimensions.margin3XL,
           ),
           child: Text(
             context.localization.export,
@@ -141,4 +152,3 @@ class _PreviewTab extends StatelessWidget {
     );
   }
 }
-

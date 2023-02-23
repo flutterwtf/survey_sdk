@@ -35,5 +35,10 @@
   "text": "Text",
   "primary_button": "Primary button",
   "secondary_button": "Secondary button",
-  "skip": "Skip"
+  "skip": "Skip",
+  "hex": "Hex",
+  "copy": "COPY",
+  "download": "DOWNLOAD",
+  "export_floating_window_title": "Save generated json-file with all settings to use in your app",
+  "slider": "Slider"
 }
