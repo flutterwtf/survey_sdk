@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:survey_admin/presentation/utils/app_fonts.dart';
 import 'package:survey_admin/presentation/utils/asset_strings.dart';
+import 'package:survey_admin/presentation/utils/constants/app_duration.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
-import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text.dart';
 
 enum InputType {
   text('Text'),
@@ -45,7 +45,7 @@ class _InputTypeCustomizationItemState extends State<InputTypeCustomizationItem>
     _selectedType = widget.initialValue;
     _iconAnimationController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 200),
+      duration: AppDuration.customizationItemAnimation,
     );
     _animation = Tween(begin: 0.0, end: .5).animate(
       CurvedAnimation(
@@ -66,13 +66,6 @@ class _InputTypeCustomizationItemState extends State<InputTypeCustomizationItem>
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Padding(
-          padding: EdgeInsets.only(
-            top: AppDimensions.marginM,
-            left: AppDimensions.marginM,
-          ),
-          child: CustomizationText('Input type'),
-        ),
         _InputTypeItem(
           inputType: _selectedType,
           trailing: RotationTransition(
@@ -91,7 +84,7 @@ class _InputTypeCustomizationItemState extends State<InputTypeCustomizationItem>
           },
         ),
         AnimatedSize(
-          duration: const Duration(milliseconds: 100),
+          duration: AppDuration.customizationItemAnimation,
           child: _isExpanded
               ? Column(
                   children: InputType.values
