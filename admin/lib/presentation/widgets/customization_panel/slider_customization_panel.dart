@@ -30,6 +30,7 @@ class SliderCustomizationPanel extends CustomizationPanel {
       children: [
         CustomizationItemsContainer(
           title: context.localization.thickness,
+          isTopDividerShown: true,
           children: [
             ThicknessCustomizationItem(
               onThicknessChanged: onThicknessChanged,

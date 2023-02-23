@@ -22,7 +22,7 @@ class SurveyQuestionListItem extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.only(top: AppDimensions.marginS),
+              padding: const EdgeInsets.only(top: AppDimensions.marginXS),
               child: Text(
                 index.toString(),
                 style: const TextStyle(
@@ -31,7 +31,7 @@ class SurveyQuestionListItem extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(width: AppDimensions.marginS),
+            const SizedBox(width: AppDimensions.marginXS),
             Container(
               decoration: const BoxDecoration(
                 color: AppColors.switchBackgroundActive,
@@ -40,7 +40,7 @@ class SurveyQuestionListItem extends StatelessWidget {
               height: 40,
               width: 40,
             ),
-            const SizedBox(width: AppDimensions.marginS),
+            const SizedBox(width: AppDimensions.marginXS),
             Text(title),
           ],
         ),

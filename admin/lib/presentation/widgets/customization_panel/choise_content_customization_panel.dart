@@ -24,7 +24,7 @@ class ChoiceContentCustomizationPanel extends StatelessWidget {
           title: 'Title',
           children: [
             CreateTextCustomizationItem(
-              maxHeight: AppDimensions.sizeL,
+              maxHeight: AppDimensions.sizeXL,
               onChanged: onTitleChanged,
             )
           ],
@@ -33,7 +33,7 @@ class ChoiceContentCustomizationPanel extends StatelessWidget {
           title: 'SubTitle',
           children: [
             CreateTextCustomizationItem(
-              maxHeight: AppDimensions.sizeL,
+              maxHeight: AppDimensions.sizeXL,
               onChanged: onSubTitleChanged,
             ),
           ],
