@@ -8,14 +8,14 @@ import 'package:survey_admin/presentation/widgets/vector_image.dart';
 const _title = 'New screen';
 const _tabs = [
   'Intro',
-  'Single choice',
-  'Multiple choice',
+  'Choice',
+  'Slider',
   'Custom input',
 ];
 const _optionsInTabs = {
   'Intro': ['Title', 'Image intro'],
-  'Single choice': ['Radio button', 'Slider'],
-  'Multiple choice': ['Check box'],
+  'Choice': ['Radio button', 'Check box'],
+  'Slider': ['Slider'],
   'Custom input': ['Single-line input', 'Multi-line input'],
 };
 
@@ -50,7 +50,7 @@ class _NewQuestionPageState extends State<NewQuestionPage> {
       title: tabTitle,
       onTap: () {
         setState(
-              () => _selectedTab = tabTitle,
+          () => _selectedTab = tabTitle,
         );
       },
       isSelected: _selectedTab == tabTitle ? true : false,
@@ -88,8 +88,7 @@ class _NewQuestionPageState extends State<NewQuestionPage> {
               GestureDetector(
                 onTap: () => Navigator.pop(context),
                 child: Container(
-                  margin:
-                      const EdgeInsets.only(right: AppDimensions.marginLargeM),
+                  margin: const EdgeInsets.only(right: AppDimensions.marginLargeM),
                   child: const Align(
                     alignment: Alignment.centerRight,
                     child: VectorImage(assetName: AppAssets.closeIcon),
@@ -154,8 +153,7 @@ class _TabButton extends StatelessWidget {
           style: TextStyle(
             color: AppColors.black,
             fontSize: AppFonts.sizeL,
-            fontWeight:
-                isSelected ? AppFonts.weightBold : AppFonts.weightRegular,
+            fontWeight: isSelected ? AppFonts.weightBold : AppFonts.weightRegular,
           ),
         ),
       ),
