@@ -76,7 +76,7 @@ class _ExportFloatingWindow extends StatelessWidget {
               const Padding(
                 padding: EdgeInsets.symmetric(
                   vertical: AppDimensions.marginS,
-                  horizontal: AppDimensions.marginLargeM,
+                  horizontal: AppDimensions.marginL,
                 ),
                 child: Text(
                   'Save generated json-file with all '
@@ -94,13 +94,13 @@ class _ExportFloatingWindow extends StatelessWidget {
                 ),
                 child: Icon(
                   Icons.task_rounded,
-                  size: AppDimensions.size2XL,
+                  size: AppDimensions.sizeXL,
                   color: AppColors.black,
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.all(
-                  AppDimensions.marginLargeM,
+                  AppDimensions.marginL,
                 ),
                 child: Row(
                   children: [

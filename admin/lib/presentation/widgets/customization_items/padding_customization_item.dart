@@ -113,7 +113,7 @@ class _PaddingItem extends StatelessWidget {
           ),
           Container(
             margin: const EdgeInsets.only(left: AppDimensions.marginXS),
-            width: AppDimensions.size2XL,
+            width: AppDimensions.sizeXL,
             child: CustomizationTextField(
               focusNode: focusNode,
               initialValue: initialValue,

@@ -14,9 +14,8 @@ abstract class AppDimensions {
   static const double sizeS = 12.0;
   static const double sizeM = 24.0;
   static const double sizeL = 28.0;
-  static const double sizeXL = 28.0;
-  static const double size2XL = 48.0;
-  static const double size2XL = 96.0;
+  static const double sizeXL = 48.0;
+  static const double size3XL = 96.0;
 
   static const double circularRadiusXS = 6.0;
   static const double circularRadiusS = 10.0;

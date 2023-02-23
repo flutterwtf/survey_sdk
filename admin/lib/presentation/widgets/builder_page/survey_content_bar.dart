@@ -66,8 +66,8 @@ class _SurveyContentBarState extends State<SurveyContentBar> {
                     ),
                   ),
                   child: SizedBox(
-                    height: AppDimensions.sizeXL,
-                    width: AppDimensions.sizeXL,
+                    height: AppDimensions.sizeL,
+                    width: AppDimensions.sizeL,
                     child: SvgPicture.asset(AssetStrings.addCircle),
                   ),
                 ),
