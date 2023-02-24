@@ -5,6 +5,7 @@ import 'package:survey_admin/presentation/utils/constants/constants.dart';
 import 'package:survey_admin/presentation/utils/constants/image_constants.dart';
 import 'package:survey_admin/presentation/widgets/vector_image.dart';
 
+// TODO(dev): check localization
 const _title = 'New screen';
 const _tabs = [
   'Intro',

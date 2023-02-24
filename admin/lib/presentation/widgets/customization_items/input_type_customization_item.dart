@@ -5,6 +5,8 @@ import 'package:survey_admin/presentation/utils/asset_strings.dart';
 import 'package:survey_admin/presentation/utils/constants/app_duration.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
 
+// TODO(dev): localization
+// TODO(dev): add email, password, phone
 enum InputType {
   text('Text'),
   number('Number'),

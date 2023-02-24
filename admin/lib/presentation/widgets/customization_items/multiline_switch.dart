@@ -17,8 +17,8 @@ class MultilineSwitch extends StatefulWidget {
     this.defaultLineAmount = 3,
   });
 
-  /// if `isMultiline` equals `false` then `lineAmount` is always equals 1.
-  /// In case of any input error `lineAmount` is always equals 1.
+  /// if [isMultiline] equals `false` then [lineAmount] is always equals 1.
+  /// In case of any input error [lineAmount] is always equals 1.
   final void Function(bool isMultiline, int lineAmount) onChanged;
   final bool isMultiline;
   final int defaultLineAmount;
