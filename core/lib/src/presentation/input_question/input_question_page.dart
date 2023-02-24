@@ -1,6 +1,7 @@
 import 'package:survey_core/src/domain/entities/question_types/input_question_data.dart';
 import 'package:survey_core/src/domain/entities/themes/input_question_theme.dart';
 import 'package:survey_core/src/presentation/localization/localizations.dart';
+import 'package:survey_core/src/presentation/survey/controller/survey_controller.dart';
 import 'package:survey_core/src/presentation/utils/constants.dart';
 import 'package:survey_core/src/presentation/utils/data_to_widget_util.dart';
 import 'package:survey_core/src/presentation/widgets/question_bottom_button.dart';
@@ -24,7 +25,15 @@ class InputQuestionPage extends StatefulWidget {
 }
 
 class _InputQuestionPageState extends State<InputQuestionPage> {
+  late final SurveyController _controller;
+  final _formKey = GlobalKey<FormBuilderState>();
   String _input = '';
+
+  @override
+  void didChangeDependencies() {
+    _controller = SurveyControllerInherited.of(context).surveyController;
+    super.didChangeDependencies();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,36 +72,43 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
           ),
           Padding(
             padding: const EdgeInsets.only(top: AppDimensions.marginM),
-            //TODO: add validator?
-            child: FormBuilderTextField(
-              name: context.localization.text_field,
-              minLines: theme.minLines,
-              maxLines: theme.maxLines,
-              style: TextStyle(
-                color: theme.textColor,
-                fontSize: theme.textSize,
-              ),
-              validator: widget.data.validator.validate,
-              onChanged: (input) {
-                if (input != null) setState(() => _input = input);
-              },
-              decoration: InputDecoration(
-                fillColor: theme.backgroundColor,
-                hintText: widget.data.hintText ?? '',
-                hintStyle: TextStyle(
-                  color: theme.hintColor,
-                  fontSize: theme.hintSize,
+            child: FormBuilder(
+              key: _formKey,
+              child: FormBuilderTextField(
+                name: context.localization.text_field,
+                minLines: theme.minLines,
+                maxLines: theme.maxLines,
+                style: TextStyle(
+                  color: theme.textColor,
+                  fontSize: theme.textSize,
                 ),
-                enabledBorder: border,
-                focusedBorder: border,
-                border: border,
+                validator: widget.data.validator.validate,
+                onChanged: (input) {
+                  if (input != null) setState(() => _input = input);
+                },
+                decoration: InputDecoration(
+                  fillColor: theme.backgroundColor,
+                  hintText: widget.data.hintText ?? '',
+                  hintStyle: TextStyle(
+                    color: theme.hintColor,
+                    fontSize: theme.hintSize,
+                  ),
+                  enabledBorder: border,
+                  focusedBorder: border,
+                  border: border,
+                ),
               ),
             ),
           ),
           const Spacer(),
           QuestionBottomButton(
             text: context.localization.next,
-            onPressed: () => widget.onSend(_input),
+            onPressed: () {
+              if (_formKey.currentState?.isValid ?? false) {
+                _controller.onNext(widget.data.type, _input);
+                widget.onSend(_input);
+              }
+            },
             isEnabled: widget.data.isSkip,
           ),
         ],

@@ -1,5 +1,6 @@
 import 'package:survey_core/src/domain/entities/question_types/slider_question_data.dart';
 import 'package:survey_core/src/presentation/localization/localizations.dart';
+import 'package:survey_core/src/presentation/survey/controller/survey_controller.dart';
 import 'package:survey_core/src/presentation/utils/app_fonts.dart';
 import 'package:survey_core/src/presentation/utils/constants.dart';
 import 'package:survey_core/src/presentation/utils/data_to_widget_util.dart';
@@ -25,6 +26,14 @@ class SliderQuestionPage extends StatefulWidget {
 
 class _SliderQuestionPageState extends State<SliderQuestionPage> {
   late final SliderThemeData _theme;
+  late final SurveyController _controller;
+  late double _answer;
+
+  @override
+  void initState() {
+    super.initState();
+    _answer = widget.data.initialValue.toDouble();
+  }
 
   @override
   void didChangeDependencies() {
@@ -33,6 +42,7 @@ class _SliderQuestionPageState extends State<SliderQuestionPage> {
     } else {
       _theme = widget.data.theme!;
     }
+    _controller = SurveyControllerInherited.of(context).surveyController;
     super.didChangeDependencies();
   }
 
@@ -65,15 +75,17 @@ class _SliderQuestionPageState extends State<SliderQuestionPage> {
               minValue: widget.data.minValue,
               maxValue: widget.data.maxValue,
               initialValue: widget.data.initialValue,
-              onChanged: (double? currentSliderValue) {},
+              onChanged: (value) => setState(() => _answer = value),
               theme: _theme,
             ),
           ),
           const Spacer(),
           QuestionBottomButton(
             text: context.localization.next,
-            //TODO: replace '' with data
-            onPressed: () => widget.onSend(''),
+            onPressed: () {
+              _controller.onNext(widget.data.type, _answer);
+              widget.onSend.call(_answer);
+            },
           ),
         ],
       ),
@@ -85,7 +97,7 @@ class _QuestionSlider extends StatefulWidget {
   final num minValue;
   final num maxValue;
   final num initialValue;
-  final void Function(double? currentSliderValue) onChanged;
+  final void Function(double currentSliderValue) onChanged;
   final SliderThemeData theme;
 
   const _QuestionSlider({
@@ -104,12 +116,14 @@ class _QuestionSlider extends StatefulWidget {
 class _QuestionSliderState extends State<_QuestionSlider> {
   late double _value;
   late final bool _onlyInt;
+
   @override
   void initState() {
     _value = widget.initialValue.toDouble();
     _onlyInt = widget.initialValue.ceilToDouble() == widget.initialValue.floorToDouble();
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return SliderTheme(
@@ -120,7 +134,7 @@ class _QuestionSliderState extends State<_QuestionSlider> {
             value: _value,
             onChanged: (newValue) => setState(() {
               _value = _onlyInt ? newValue.roundToDouble() : newValue;
-              widget.onChanged(newValue);
+              widget.onChanged(_value);
             }),
             min: widget.minValue.toDouble(),
             max: widget.maxValue.toDouble(),

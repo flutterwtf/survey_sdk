@@ -1,6 +1,7 @@
 import 'package:survey_core/src/presentation/localization/localizations.dart';
 import 'package:survey_core/src/domain/entities/question_types/choice_question_data.dart';
 import 'package:survey_core/src/domain/entities/themes/choice_question_theme.dart';
+import 'package:survey_core/src/presentation/survey/controller/survey_controller.dart';
 import 'package:survey_core/src/presentation/utils/app_fonts.dart';
 import 'package:survey_core/src/presentation/utils/constants.dart';
 import 'package:survey_core/src/presentation/utils/data_to_widget_util.dart';
@@ -26,6 +27,7 @@ class ChoiceQuestionPage extends StatefulWidget {
 
 class _ChoiceQuestionPageState extends State<ChoiceQuestionPage>
     with SingleTickerProviderStateMixin {
+  late final SurveyController _controller;
   bool _canBeSend = false;
   List<String> _selectedItems = List.empty();
 
@@ -34,6 +36,13 @@ class _ChoiceQuestionPageState extends State<ChoiceQuestionPage>
   @override
   void initState() {
     super.initState();
+  }
+
+
+  @override
+  void didChangeDependencies() {
+    _controller = SurveyControllerInherited.of(context).surveyController;
+    super.didChangeDependencies();
   }
 
   void _onInputChanged(List<String>? selectedItems) {
@@ -94,7 +103,10 @@ class _ChoiceQuestionPageState extends State<ChoiceQuestionPage>
           const Spacer(),
           QuestionBottomButton(
             text: context.localization.next,
-            onPressed: () => widget.onSend.call(_selectedItems),
+            onPressed: () {
+              _controller.onNext(widget.data.type, _selectedItems);
+              widget.onSend.call(_selectedItems);
+            },
             isEnabled: widget.data.isSkip ? true : _canBeSend,
           ),
         ],

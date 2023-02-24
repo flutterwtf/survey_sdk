@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:survey_core/src/presentation/di/injector.dart';
+import 'package:survey_core/src/presentation/survey/controller/survey_controller.dart';
 import 'package:survey_core/src/presentation/survey/survey_cubit.dart';
 import 'package:survey_core/src/presentation/survey/survey_state.dart';
 import 'package:survey_core/src/presentation/utils/colors.dart';
@@ -19,6 +20,7 @@ class Survey extends StatefulWidget {
 
 class _SurveyState extends State<Survey> {
   final _cubit = Injector().surveyCubit;
+  final _surveyController = SurveyController();
 
   @override
   void initState() {
@@ -31,24 +33,34 @@ class _SurveyState extends State<Survey> {
     return BlocBuilder<SurveyCubit, SurveyState>(
       bloc: _cubit,
       builder: (BuildContext context, state) {
-        return state.surveyData == null
+        final surveyData = state.surveyData;
+        return surveyData == null
             ? const Center(
                 child: CircularProgressIndicator(
                   color: AppColors.black,
                 ),
               )
-            : Theme(
-                data: state.surveyData!.commonTheme.toThemeData(),
-                child: PageView(
-                  children: state.surveyData!.questions
-                      //TODO: <Widget> to superclass maybe
-                      .map<Widget>(
-                        (question) => DataToWidgetUtil.createWidget(
-                          question,
-                          (data) {},
-                        ),
-                      )
-                      .toList(),
+            : SurveyControllerInherited(
+                surveyController: _surveyController,
+                child: Theme(
+                  data: surveyData.commonTheme.toThemeData(),
+                  child: WillPopScope(
+                    onWillPop: () async {
+                      _surveyController.onBack();
+                      return false;
+                    },
+                    child: PageView(
+                      physics: const NeverScrollableScrollPhysics(),
+                      children: surveyData.questions
+                          .map<Widget>(
+                            (question) => DataToWidgetUtil.createWidget(
+                              question,
+                              (data) {},
+                            ),
+                          )
+                          .toList(),
+                    ),
+                  ),
                 ),
               );
       },
