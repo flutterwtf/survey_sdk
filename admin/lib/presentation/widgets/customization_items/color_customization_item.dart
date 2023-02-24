@@ -56,7 +56,8 @@ class _ColorCustomizationItemState extends State<ColorCustomizationItem> {
     });
   }
 
-  String colorToString(Color color) => color.value.toRadixString(16).toUpperCase();
+  String colorToString(Color color) =>
+      color.value.toRadixString(16).toUpperCase();
 
   void updateTextField() {
     widget.onColorPicked(_pickedColor);
