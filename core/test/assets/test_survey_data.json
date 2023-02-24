@@ -1,0 +1,35 @@
+{
+  "commonTheme": {
+    "sliderThemeData": {
+      "thumbColor": 4278190080,
+      "thumbRadius": 10.0,
+      "trackHeight": null,
+      "activeTrackColor": 4278190080,
+      "inactiveTrackColor": 267386880
+    },
+    "textFieldThemeData": {
+      "thickness": 9.0,
+      "activeColor": 4294967295,
+      "inactiveColor": 4278190080,
+      "thumb": {
+        "color": 4294198070,
+        "radius": 12.0
+      }
+    }
+  },
+  "questions": [
+    {
+      "id": 0,
+      "title": "title",
+      "subtitle": "subtitle",
+      "typeQuestion": "Input",
+      "isSkip": false,
+      "info": null,
+      "payload": {
+        "validator": "default",
+        "value": 0,
+        "hintText": null
+      }
+    }
+  ]
+}
