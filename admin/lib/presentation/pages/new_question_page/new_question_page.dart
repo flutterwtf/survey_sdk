@@ -88,11 +88,13 @@ class _NewQuestionPageState extends State<NewQuestionPage> {
               GestureDetector(
                 onTap: () => Navigator.pop(context),
                 child: Container(
-                  margin:
-                      const EdgeInsets.only(right: AppDimensions.marginXL),
+                  margin: const EdgeInsets.only(right: AppDimensions.marginXL),
                   child: const Align(
                     alignment: Alignment.centerRight,
-                    child: VectorImage(assetName: AppAssets.closeIcon),
+                    child: VectorImage(
+                      key: Key('Close'),
+                      assetName: AppAssets.closeIcon,
+                    ),
                   ),
                 ),
               )
@@ -122,7 +124,7 @@ class _NewQuestionPageState extends State<NewQuestionPage> {
         ),
         persistentFooterButtons: [
           _AddButton(
-            onPressed:() {
+            onPressed: () {
               widget.onSubmit(_selectedTab);
               Navigator.of(context).pop();
             },
