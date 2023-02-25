@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -122,7 +121,7 @@ void main() {
         );
 
         const userInput = 'inputText';
-        await tester.enterText(find.byType(FormBuilderTextField), userInput);
+        await tester.enterText(find.byType(TextFormField), userInput);
         await tester.tap(find.byType(QuestionBottomButton));
         expect(sentData, equals(userInput));
       });
