@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
-import 'package:survey_admin/presentation/widgets/customization_items/customization_text_field.dart';
+import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
 
 class PaddingCustomizationItem extends StatefulWidget {
   final double initialHorizontalPadding;
@@ -33,6 +33,7 @@ class _PaddingCustomizationItemState extends State<PaddingCustomizationItem> {
   void initState() {
     horizontalPadding = widget.initialHorizontalPadding;
     verticalPadding = widget.initialVerticalPadding;
+    // TODO(dev): check for dispose everywhere
     horizontalPaddingFocusNode.addListener(() {
       if (!horizontalPaddingFocusNode.hasFocus) {
         widget.onHorizontalPaddingChange(horizontalPadding);
