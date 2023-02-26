@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:survey_admin/presentation/app/localization/localizations.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/create_text_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
@@ -21,7 +22,7 @@ class ChoiceContentCustomizationPanel extends StatelessWidget {
     return Column(
       children: [
         CustomizationItemsContainer(
-          title: 'Title',
+          title: context.localization.title,
           children: [
             CreateTextCustomizationItem(
               maxHeight: AppDimensions.sizeXL,
@@ -30,7 +31,7 @@ class ChoiceContentCustomizationPanel extends StatelessWidget {
           ],
         ),
         CustomizationItemsContainer(
-          title: 'SubTitle',
+          title: context.localization.subtitle,
           children: [
             CreateTextCustomizationItem(
               maxHeight: AppDimensions.sizeXL,
@@ -39,7 +40,7 @@ class ChoiceContentCustomizationPanel extends StatelessWidget {
           ],
         ),
         CustomizationItemsContainer(
-          title: 'Options',
+          title: 'Options', //TODO: change to context.localization
           children: [
             OptionCustomizationItem(
               options: const [],
