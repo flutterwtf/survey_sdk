@@ -8,14 +8,14 @@ import 'package:survey_admin/presentation/widgets/vector_image.dart';
 const _title = 'New screen';
 const _tabs = [
   'Intro',
-  'Single choice',
-  'Multiple choice',
+  'Choice',
+  'Slider',
   'Custom input',
 ];
 const _optionsInTabs = {
   'Intro': ['Title', 'Image intro'],
-  'Single choice': ['Radio button', 'Slider'],
-  'Multiple choice': ['Check box'],
+  'Choice': ['Radio button', 'Check box'],
+  'Slider': ['Slider'],
   'Custom input': ['Single-line input', 'Multi-line input'],
 };
 
@@ -30,7 +30,7 @@ const Map<String, String> _optionsAssets = {
 };
 
 class NewQuestionPage extends StatefulWidget {
-  final VoidCallback onSubmit;
+  final ValueChanged<String> onSubmit;
 
   const NewQuestionPage({
     Key? key,
@@ -98,7 +98,12 @@ class _NewQuestionPageState extends State<NewQuestionPage> {
           ),
         ),
         persistentFooterButtons: [
-          _AddButton(onPressed: widget.onSubmit),
+          _AddButton(
+            onPressed:() {
+              widget.onSubmit(_selectedTab);
+              Navigator.of(context).pop();
+            },
+          ),
         ],
       ),
     );
@@ -166,8 +171,7 @@ class _TabButton extends StatelessWidget {
           style: TextStyle(
             color: AppColors.black,
             fontSize: AppFonts.sizeL,
-            fontWeight:
-                isSelected ? AppFonts.weightBold : AppFonts.weightRegular,
+            fontWeight: isSelected ? AppFonts.weightBold : AppFonts.weightRegular,
           ),
         ),
       ),
@@ -215,13 +219,13 @@ class _AssetTextOption extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: AppDimensions.margin3XL),
-      padding: const EdgeInsets.all(AppDimensions.marginS),
+      margin: const EdgeInsets.symmetric(horizontal: AppDimensions.margin4XL),
+      padding: const EdgeInsets.all(AppDimensions.marginXS),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           VectorImage(assetName: assetName),
-          const SizedBox(height: AppDimensions.marginLargeM),
+          const SizedBox(height: AppDimensions.marginXL),
           Text(
             titleText,
             style: const TextStyle(

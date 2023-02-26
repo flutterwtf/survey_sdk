@@ -31,10 +31,14 @@ class _BuilderPageState extends State<BuilderPage> {
         ],
       ),
       body: Row(
-        children: const [
-          SurveyContentBar(),
-          Expanded(child: PhoneView()),
-          SurveyEditorBar(),
+        children: [
+          const SurveyContentBar(),
+          Expanded(
+            child: PhoneView(
+              child: Container(),
+            ),
+          ),
+          const SurveyEditorBar(),
         ],
       ),
     );
@@ -57,7 +61,7 @@ class _BuilderPageTabBar extends StatelessWidget {
           indicator: const UnderlineTabIndicator(
             borderSide: BorderSide(width: 1.0),
             insets: EdgeInsets.symmetric(
-              horizontal: AppDimensions.margin3XL + AppDimensions.sizeM,
+              horizontal: AppDimensions.margin4XL + AppDimensions.sizeM,
             ),
           ),
           unselectedLabelColor: AppColors.textGrey,
@@ -83,7 +87,7 @@ class _CreateTab extends StatelessWidget {
       padding: const EdgeInsets.only(
         bottom: AppDimensions.margin2XS,
         top: AppDimensions.margin2XS,
-        right: AppDimensions.marginXL,
+        right: AppDimensions.margin2XL,
       ),
       child: OutlinedButton(
         onPressed: () {},
@@ -95,7 +99,7 @@ class _CreateTab extends StatelessWidget {
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(
-            horizontal: AppDimensions.margin2XL,
+            horizontal: AppDimensions.margin3XL,
           ),
           child: Text(
             context.localization.import,
@@ -119,7 +123,7 @@ class _PreviewTab extends StatelessWidget {
       padding: const EdgeInsets.only(
         bottom: AppDimensions.margin2XS,
         top: AppDimensions.margin2XS,
-        right: AppDimensions.margin2XL,
+        right: AppDimensions.margin3XL,
       ),
       child: TextButton(
         onPressed: () {
@@ -134,7 +138,7 @@ class _PreviewTab extends StatelessWidget {
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(
-            horizontal: AppDimensions.margin2XL,
+            horizontal: AppDimensions.margin3XL,
           ),
           child: Text(
             context.localization.export,

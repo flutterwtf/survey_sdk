@@ -21,17 +21,22 @@ class HexColorField extends StatelessWidget {
       child: Container(
         margin: const EdgeInsets.all(AppDimensions.margin2XS),
         child: TextField(
-            controller: colorTextController,
-            style: const TextStyle(fontSize: AppFonts.sizeL),
-            decoration: const InputDecoration(
-              border: InputBorder.none,
-            ),
-            inputFormatters: [
-              UpperCaseTextFormatter(),
-              FilteringTextInputFormatter.allow(RegExp(kValidHexPattern)),
-            ],
-            onChanged: (str) =>
-                onColorPicked(colorFromHex(str, enableAlpha: true)!)), //
+          controller: colorTextController,
+          style: const TextStyle(fontSize: AppFonts.sizeL),
+          decoration: const InputDecoration(
+            border: InputBorder.none,
+          ),
+          inputFormatters: [
+            UpperCaseTextFormatter(),
+            FilteringTextInputFormatter.allow(RegExp(kValidHexPattern)),
+          ],
+          onChanged: (str) => onColorPicked(
+            colorFromHex(
+              str,
+              enableAlpha: true,
+            )!,
+          ),
+        ), //
       ),
     );
   }
