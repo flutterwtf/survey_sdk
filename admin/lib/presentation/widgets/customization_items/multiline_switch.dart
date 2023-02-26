@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:survey_admin/presentation/app/localization/localizations.dart';
 import 'package:survey_admin/presentation/utils/app_fonts.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/utils/constants/app_duration.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
-import 'package:survey_admin/presentation/widgets/customization_items/customization_text_field.dart';
+import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/switch_customization_item.dart';
 
 class MultilineSwitch extends StatefulWidget {
@@ -81,39 +80,37 @@ class _LineAmountInputField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FormBuilder(
-      child: Padding(
-        padding: const EdgeInsets.only(
-          top: AppDimensions.marginM,
-        ),
-        child: Row(
-          children: [
-            Text(
-              context.localization.lines,
-              style: const TextStyle(
-                fontSize: AppFonts.sizeM,
-                color: AppColors.black,
-              ),
+    return Padding(
+      padding: const EdgeInsets.only(
+        top: AppDimensions.marginM,
+      ),
+      child: Row(
+        children: [
+          Text(
+            context.localization.lines,
+            style: const TextStyle(
+              fontSize: AppFonts.sizeM,
+              color: AppColors.black,
             ),
-            Expanded(
-              child: CustomizationTextField(
-                inputFormatters: [
-                  FilteringTextInputFormatter.digitsOnly,
-                  LengthLimitingTextInputFormatter(3),
-                ],
-                initialValue: defaultLineAmount.toString(),
-                fontSize: AppFonts.sizeM,
-                onChanged: (value) {
-                  if (value == null) {
-                    onChanged(1);
-                  } else {
-                    onChanged(int.tryParse(value) ?? 1);
-                  }
-                },
-              ),
+          ),
+          Expanded(
+            child: CustomizationTextField(
+              inputFormatters: [
+                FilteringTextInputFormatter.digitsOnly,
+                LengthLimitingTextInputFormatter(3),
+              ],
+              initialValue: defaultLineAmount.toString(),
+              fontSize: AppFonts.sizeM,
+              onChanged: (value) {
+                if (value == null) {
+                  onChanged(1);
+                } else {
+                  onChanged(int.tryParse(value) ?? 1);
+                }
+              },
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
