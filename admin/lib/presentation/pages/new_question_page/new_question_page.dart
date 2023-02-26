@@ -118,7 +118,7 @@ class _BackButton extends StatelessWidget {
     return GestureDetector(
       onTap: () => Navigator.pop(context),
       child: Container(
-        margin: const EdgeInsets.only(right: AppDimensions.marginLargeM),
+        margin: const EdgeInsets.only(right: AppDimensions.marginL),
         child: const Align(
           alignment: Alignment.centerRight,
           child: VectorImage(assetName: AppAssets.closeIcon),
