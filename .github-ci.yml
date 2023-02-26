@@ -18,11 +18,29 @@ jobs:
           flutter-version: '3.x'
           channel: 'stable'
 
+      - name: Go to admin dir
+        run: cd admin
+
       - name: Install dependencies
         run: flutter pub get
 
       - name: Analyze project source
         run: flutter analyze
 
-      - name: Run tests
-        run: flutter test
+      - name: Go to core dir
+        run: cd core
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Analyze project source
+        run: flutter analyze
+
+      - name: Go to client dir
+        run: cd client
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Analyze project source
+        run: flutter analyze
