@@ -58,7 +58,6 @@ class _NewQuestionPageState extends State<NewQuestionPage> {
   }
 
   @override
-  //TODO: split
   Widget build(BuildContext context) {
     return Theme(
       data: ThemeData().copyWith(
@@ -73,29 +72,9 @@ class _NewQuestionPageState extends State<NewQuestionPage> {
             backgroundColor: AppColors.white,
             shadowColor: AppColors.transparentW,
             automaticallyImplyLeading: false,
-            title: const Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                _title,
-                style: TextStyle(
-                  color: AppColors.black,
-                  fontSize: AppFonts.sizeM,
-                  fontWeight: AppFonts.weightRegular,
-                ),
-              ),
-            ),
-            actions: [
-              GestureDetector(
-                onTap: () => Navigator.pop(context),
-                child: Container(
-                  margin:
-                      const EdgeInsets.only(right: AppDimensions.marginXL),
-                  child: const Align(
-                    alignment: Alignment.centerRight,
-                    child: VectorImage(assetName: AppAssets.closeIcon),
-                  ),
-                ),
-              )
+            title: const _AppBarTitle(),
+            actions: const [
+              _BackButton(),
             ],
           ),
         ),
@@ -111,11 +90,9 @@ class _NewQuestionPageState extends State<NewQuestionPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: _tabs.map(_questionTab).toList(),
               ),
-              Expanded(
-                child: _QuestionOptionsListView(
-                  options: _optionsInTabs[_selectedTab] ?? [],
-                  selectedOption: _selectedOption ?? '',
-                ),
+              _QuestionOptionsListView(
+                options: _optionsInTabs[_selectedTab] ?? [],
+                selectedOption: _selectedOption ?? '',
               ),
             ],
           ),
@@ -128,6 +105,43 @@ class _NewQuestionPageState extends State<NewQuestionPage> {
             },
           ),
         ],
+      ),
+    );
+  }
+}
+
+class _BackButton extends StatelessWidget {
+  const _BackButton({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () => Navigator.pop(context),
+      child: Container(
+        margin: const EdgeInsets.only(right: AppDimensions.marginL),
+        child: const Align(
+          alignment: Alignment.centerRight,
+          child: VectorImage(assetName: AppAssets.closeIcon),
+        ),
+      ),
+    );
+  }
+}
+
+class _AppBarTitle extends StatelessWidget {
+  const _AppBarTitle({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const Align(
+      alignment: Alignment.centerLeft,
+      child: Text(
+        _title,
+        style: TextStyle(
+          color: AppColors.black,
+          fontSize: AppFonts.sizeM,
+          fontWeight: AppFonts.weightRegular,
+        ),
       ),
     );
   }
@@ -177,15 +191,17 @@ class _QuestionOptionsListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: options.length,
-      scrollDirection: Axis.horizontal,
-      itemBuilder: (context, index) {
-        return _AssetTextOption(
-          assetName: _optionsAssets[options[index]] ?? '',
-          titleText: options[index],
-        );
-      },
+    return Expanded(
+      child: ListView.builder(
+        itemCount: options.length,
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (context, index) {
+          return _AssetTextOption(
+            assetName: _optionsAssets[options[index]] ?? '',
+            titleText: options[index],
+          );
+        },
+      ),
     );
   }
 }

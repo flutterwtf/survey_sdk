@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
-import 'package:survey_admin/presentation/utils/constants/constants.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/customization_panel.dart';
 
 class QuestionSettingsTabBar extends StatefulWidget {
@@ -36,12 +35,11 @@ class _QuestionSettingsTabBarState extends State<QuestionSettingsTabBar>
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        SizedBox(
-          height: AppDimensions.surveyEditorTabBarHeight,
-          child: TabBar(
+    return Expanded(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          TabBar(
             controller: _tabController,
             labelColor: AppColors.black,
             unselectedLabelColor: AppColors.customizationTabBarInactiveText,
@@ -51,21 +49,14 @@ class _QuestionSettingsTabBarState extends State<QuestionSettingsTabBar>
               for (var panel in widget.panels) Tab(text: panel.title),
             ],
           ),
-        ),
-        // TODO use something instead of SizedBox?
-        // SizedBox is used to give height to the TabBarView
-        // which height is double.infinity
-        SizedBox(
-          height: MediaQuery.of(context).size.height -
-              AppDimensions.appbarSize -
-              AppDimensions.surveyEditorTabBarHeight -
-              1,
-          child: TabBarView(
-            controller: _tabController,
-            children: widget.panels,
+          Expanded(
+            child: TabBarView(
+              controller: _tabController,
+              children: widget.panels,
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
