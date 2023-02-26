@@ -6,6 +6,7 @@ import 'package:survey_admin/presentation/widgets/customization_title.dart';
 import 'package:survey_admin/presentation/widgets/hex_color_field.dart';
 import 'package:survey_admin/presentation/widgets/text_width_field.dart';
 
+// TODO(dev): do we need this widget?
 class TextCustomizeItem extends StatefulWidget {
   final String title;
   final int initialTextWidth;

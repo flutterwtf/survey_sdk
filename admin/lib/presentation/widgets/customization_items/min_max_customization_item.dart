@@ -49,6 +49,7 @@ class _MinMaxCustomizationItemState extends State<MinMaxCustomizationItem> {
           Expanded(
             flex: 2,
             child: _MinMaxInputField(
+              // TODO(dev): looks like a constant. Need to check all other parts.
               name: 'min_input_field',
               prefix: context.localization.min,
               initialValue: widget.initialMin,
