@@ -33,6 +33,7 @@ class _PaddingCustomizationItemState extends State<PaddingCustomizationItem> {
   void initState() {
     horizontalPadding = widget.initialHorizontalPadding;
     verticalPadding = widget.initialVerticalPadding;
+    // TODO(dev): check for dispose everywhere
     horizontalPaddingFocusNode.addListener(() {
       if (!horizontalPaddingFocusNode.hasFocus) {
         widget.onHorizontalPaddingChange(horizontalPadding);

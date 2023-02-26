@@ -20,6 +20,7 @@ class ChoiceContentCustomizationPanel extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        // TODO(dev): localization. We should fix it ASAP.
         CustomizationItemsContainer(
           title: 'Title',
           children: [

@@ -57,6 +57,7 @@ class QuestionCommonCustomizationPanel extends CustomizationPanel {
                 ),
                 Flexible(
                   child: CustomizationTextField(
+                    // TODO(dev): we should fix it everywhere
                     initialValue: '16',
                     inputFormatters: [
                       FilteringTextInputFormatter.digitsOnly,

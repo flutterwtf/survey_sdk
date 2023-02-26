@@ -8,6 +8,7 @@ import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
 import 'package:survey_admin/presentation/widgets/builder_page/survey_question_list_item.dart';
 
+// TODO(dev): do we really need this prefix? If so, why do we have it only in several classes
 class SurveyContentBar extends StatefulWidget {
   const SurveyContentBar({super.key});
 

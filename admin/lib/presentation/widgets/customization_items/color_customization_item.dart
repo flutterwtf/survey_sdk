@@ -37,6 +37,7 @@ class _ColorCustomizationItemState extends State<ColorCustomizationItem> {
     super.dispose();
   }
 
+  // TODO(dev): Why is it "public"? Need to check all other places.
   void onChangedTextField(String? value) {
     if (value != null) {
       final color = int.tryParse(value.padRight(8, '0'), radix: 16);
