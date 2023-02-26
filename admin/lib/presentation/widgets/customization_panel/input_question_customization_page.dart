@@ -5,6 +5,7 @@ import 'package:survey_admin/presentation/widgets/customization_panel/question_c
 import 'package:survey_admin/presentation/widgets/customization_panel/question_input_customization_panel.dart';
 import 'package:survey_admin/presentation/widgets/question_settings_tab_bar.dart';
 
+// TODO(dev): why do we have pages in this folder?
 class InputQuestionCustomizationPage extends StatelessWidget {
   const InputQuestionCustomizationPage({super.key});
 

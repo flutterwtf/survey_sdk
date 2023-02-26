@@ -52,6 +52,7 @@ class IntroCommonCustomizationPanel extends CustomizationPanel {
           children: [
             ColorWithTextFieldCustomizationItem(
               onColorPicked: onTitleColorPicked,
+              // TODO(dev): what are the magic Strings here and in items below?
               initialText: '16',
               inputFormatters: [
                 FilteringTextInputFormatter.digitsOnly,

@@ -26,7 +26,7 @@ abstract class QuestionData<T> implements ApiObject {
 
   //TODO: to constants maybe?
   static QuestionData fromType(Map<String, dynamic> json) {
-    switch(json['type']) {
+    switch(json['typeQuestion']) {
       case 'Slider': return SliderQuestionData.fromJson(json);
       case 'Intro': return IntroQuestionData.fromJson(json);
       case 'Input': return InputQuestionData.fromJson(json);

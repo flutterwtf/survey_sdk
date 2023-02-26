@@ -1,14 +1,13 @@
 import 'package:survey_core/src/presentation/localization/localizations.dart';
 import 'package:survey_core/src/domain/entities/question_types/choice_question_data.dart';
 import 'package:survey_core/src/domain/entities/themes/choice_question_theme.dart';
-import 'package:survey_core/src/presentation/utils/app_fonts.dart';
+import 'package:survey_core/src/presentation/utils/colors.dart';
 import 'package:survey_core/src/presentation/utils/constants.dart';
 import 'package:survey_core/src/presentation/utils/data_to_widget_util.dart';
 import 'package:survey_core/src/presentation/widgets/question_bottom_button.dart';
 import 'package:survey_core/src/presentation/widgets/question_content.dart';
 import 'package:survey_core/src/presentation/widgets/question_title.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 class ChoiceQuestionPage extends StatefulWidget {
   final ChoiceQuestionData data;
@@ -29,7 +28,8 @@ class _ChoiceQuestionPageState extends State<ChoiceQuestionPage>
   bool _canBeSend = false;
   List<String> _selectedItems = List.empty();
 
-  ChoiceQuestionTheme get _theme => widget.data.theme ?? const ChoiceQuestionTheme.common();
+  ChoiceQuestionTheme get _theme =>
+      widget.data.theme ?? const ChoiceQuestionTheme.common();
 
   @override
   void initState() {
@@ -37,7 +37,9 @@ class _ChoiceQuestionPageState extends State<ChoiceQuestionPage>
   }
 
   void _onInputChanged(List<String>? selectedItems) {
-    _selectedItems = selectedItems ?? List.empty();
+    setState(() {
+      _selectedItems = selectedItems ?? List.empty();
+    });
 
     if (!widget.data.isSkip) {
       setState(() {
@@ -81,8 +83,11 @@ class _ChoiceQuestionPageState extends State<ChoiceQuestionPage>
                     onChanged: _onInputChanged,
                     activeColor: _theme.activeColor,
                     inactiveColor: _theme.inactiveColor,
+                    selectedOptions: _selectedItems,
                   )
                 : _QuestionRadioButtons(
+                    selectedOption:
+                        _selectedItems.isEmpty ? null : _selectedItems.first,
                     options: widget.data.options,
                     onChanged: (selectedItem) => _onInputChanged(
                       selectedItem == null ? null : [selectedItem],
@@ -109,43 +114,48 @@ class _QuestionCheckboxes extends StatelessWidget {
     required this.onChanged,
     required this.activeColor,
     required this.inactiveColor,
+    required this.selectedOptions,
   });
 
   final List<String> options;
+  final List<String> selectedOptions;
   final void Function(List<String>? selectedItems) onChanged;
   final Color activeColor;
   final Color inactiveColor;
 
   @override
   Widget build(BuildContext context) {
-    return Theme(
-      data: Theme.of(context).copyWith(
-        unselectedWidgetColor: inactiveColor,
-      ),
-      child: FormBuilder(
-        child: FormBuilderCheckboxGroup(
-          orientation: OptionsOrientation.vertical,
-          decoration: const InputDecoration(
-            border: InputBorder.none,
-          ),
-          activeColor: activeColor,
-          onChanged: onChanged,
-          name: '',
-          options: options
-              .map(
-                (option) => FormBuilderFieldOption(
-                  value: option,
-                  child: Text(
-                    option,
-                    style: const TextStyle(
-                      fontSize: AppFonts.sizeM,
-                    ),
-                  ),
+    return Column(
+      children: options
+          .map((option) => CheckboxListTile(
+                controlAffinity: ListTileControlAffinity.leading,
+                title: Text(option),
+                value: selectedOptions.contains(option),
+                activeColor: Colors.transparent,
+                checkColor: AppColors.black,
+                side: MaterialStateBorderSide.resolveWith((states) {
+                  if (states.contains(MaterialState.selected)) {
+                    return BorderSide(color: activeColor);
+                  } else {
+                    return BorderSide(color: inactiveColor);
+                  }
+                }),
+                checkboxShape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(5),
                 ),
-              )
-              .toList(),
-        ),
-      ),
+                onChanged: (shouldAdd) {
+                  if (shouldAdd != null) {
+                    var options = selectedOptions;
+                    if (shouldAdd) {
+                      options = [...selectedOptions, option];
+                    } else {
+                      options.remove(option);
+                    }
+                    onChanged(options);
+                  }
+                },
+              ))
+          .toList(),
     );
   }
 }
@@ -156,10 +166,12 @@ class _QuestionRadioButtons extends StatelessWidget {
     required this.onChanged,
     required this.activeColor,
     required this.inactiveColor,
+    this.selectedOption,
   });
 
   final List<String> options;
-  final void Function(String? selectedItem) onChanged;
+  final String? selectedOption;
+  final ValueChanged<String?> onChanged;
   final Color activeColor;
   final Color inactiveColor;
 
@@ -169,29 +181,17 @@ class _QuestionRadioButtons extends StatelessWidget {
       data: Theme.of(context).copyWith(
         unselectedWidgetColor: inactiveColor,
       ),
-      child: FormBuilder(
-        child: FormBuilderRadioGroup(
-          orientation: OptionsOrientation.vertical,
-          decoration: const InputDecoration(
-            border: InputBorder.none,
-          ),
-          activeColor: activeColor,
-          onChanged: onChanged,
-          name: '',
-          options: options
-              .map(
-                (option) => FormBuilderFieldOption(
+      child: Column(
+        children: options
+            .map((option) => RadioListTile<String?>(
+                  groupValue: selectedOption,
+                  controlAffinity: ListTileControlAffinity.leading,
+                  title: Text(option),
                   value: option,
-                  child: Text(
-                    option,
-                    style: const TextStyle(
-                      fontSize: AppFonts.sizeM,
-                    ),
-                  ),
-                ),
-              )
-              .toList(),
-        ),
+                  activeColor: activeColor,
+                  onChanged: onChanged,
+                ))
+            .toList(),
       ),
     );
   }

@@ -15,7 +15,9 @@ class VectorImage extends StatelessWidget {
   final Clip clipBehavior;
   final bool cacheColorFilter;
   final SvgTheme theme;
-  final Color? color;
+  final ColorFilter? colorFilter;
+  final AssetBundle? bundle;
+  final String? package;
 
   const VectorImage({
     Key? key,
@@ -32,10 +34,11 @@ class VectorImage extends StatelessWidget {
     this.clipBehavior = Clip.hardEdge,
     this.cacheColorFilter = false,
     this.theme = const SvgTheme(),
-    this.color,
+    this.colorFilter,
+    this.bundle,
+    this.package,
   }) : super(key: key);
 
-  //TODO: remove deprecated
   @override
   Widget build(BuildContext context) {
     return SvgPicture.asset(
@@ -49,10 +52,10 @@ class VectorImage extends StatelessWidget {
       placeholderBuilder: placeholderBuilder,
       semanticsLabel: semanticsLabel,
       excludeFromSemantics: excludeFromSemantics,
-      clipBehavior: clipBehavior,
-      cacheColorFilter: cacheColorFilter,
       theme: theme,
-      color: color,
+      colorFilter: colorFilter,
+      bundle: bundle,
+      package: package,
     );
   }
 }
