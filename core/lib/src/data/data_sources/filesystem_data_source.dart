@@ -9,6 +9,8 @@ import 'package:http/http.dart' as http;
 class FilesystemDataSourceImpl implements FilesystemDataSource {
   @override
   Future<SurveyData> getSurveyData(String asset) async {
+    assert(asset.isNotEmpty);
+
     String json;
     if (kIsWeb) {
       final resString = kDebugMode ? asset : 'assets/$asset';
