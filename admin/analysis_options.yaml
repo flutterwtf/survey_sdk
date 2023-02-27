@@ -15,6 +15,9 @@ analyzer:
     missing_return: error
     public_member_api_docs: ignore
     sort_pub_dependencies: ignore
+    unawaited_futures: ignore
+    sort_constructors_first: ignore
+    always_put_required_named_parameters_first: ignore
 
   exclude:
     - "build/**"
