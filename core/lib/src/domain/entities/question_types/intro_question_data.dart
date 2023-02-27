@@ -1,5 +1,7 @@
-import 'package:survey_core/src/domain/entities/question_types/question_data.dart';
+// ignore_for_file: avoid_dynamic_calls
+
 import 'package:flutter/material.dart';
+import 'package:survey_core/src/domain/entities/question_types/question_data.dart';
 
 class IntroQuestionData extends QuestionData {
   final String? content;
@@ -19,7 +21,7 @@ class IntroQuestionData extends QuestionData {
   });
 
   @override
-  // TODO: implement theme
+  // TODO(dev): implement theme
   Theme? get theme => throw UnimplementedError();
 
   @override
@@ -27,20 +29,20 @@ class IntroQuestionData extends QuestionData {
 
   @override
   Map<String, dynamic> toJson() => {
-    'id': id,
-    'title': title,
-    'subtitle': subtitle,
-    'typeQuestion': typeQuestion,
-    'isSkip': isSkip,
-    'info': info,
-    'payload': {
-      'mainButtonTitle': mainButtonTitle,
-      'secondaryButtonTitle': secondaryButtonTitle,
-      'content': content,
-    },
-  };
+        'id': id,
+        'title': title,
+        'subtitle': subtitle,
+        'typeQuestion': typeQuestion,
+        'isSkip': isSkip,
+        'info': info,
+        'payload': {
+          'mainButtonTitle': mainButtonTitle,
+          'secondaryButtonTitle': secondaryButtonTitle,
+          'content': content,
+        },
+      };
 
-  static IntroQuestionData fromJson(Map<String, dynamic> json) {
+  factory IntroQuestionData.fromJson(Map<String, dynamic> json) {
     final payload = json['payload'];
     return IntroQuestionData(
       id: json['id'],

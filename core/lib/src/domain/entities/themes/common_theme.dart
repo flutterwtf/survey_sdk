@@ -25,10 +25,14 @@ class CommonTheme implements ApiObject {
         'textFieldThemeData': textFieldThemeData.toJson(),
       };
 
-  static CommonTheme fromJson(Map<String, dynamic> json) {
+  factory CommonTheme.fromJson(Map<String, dynamic> json) {
     return CommonTheme(
-      textFieldThemeData: TextFieldThemeData.fromJson(json['textFieldThemeData']),
-      sliderThemeData: SliderThemeDataMapper.fromJson(json['sliderThemeData']),
+      textFieldThemeData: TextFieldThemeData.fromJson(
+        json['textFieldThemeData'],
+      ),
+      sliderThemeData: SliderThemeDataMapper.fromJson(
+        json['sliderThemeData'],
+      ),
     );
   }
 }

@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_dynamic_calls
+
 import 'package:survey_core/src/domain/entities/question_types/question_data.dart';
 import 'package:survey_core/src/domain/entities/themes/input_question_theme.dart';
 import 'package:survey_core/src/domain/entities/validator/input_validator.dart';
@@ -40,7 +42,7 @@ class InputQuestionData extends QuestionData<InputQuestionTheme> {
         }
       };
 
-  static InputQuestionData fromJson(Map<String, dynamic> json) {
+  factory InputQuestionData.fromJson(Map<String, dynamic> json) {
     final payload = json['payload'];
     return InputQuestionData(
       id: json['id'],

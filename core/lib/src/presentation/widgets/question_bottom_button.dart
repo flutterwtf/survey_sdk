@@ -1,7 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:survey_core/src/presentation/utils/app_duration.dart';
 import 'package:survey_core/src/presentation/utils/app_fonts.dart';
 import 'package:survey_core/src/presentation/utils/constants.dart';
-import 'package:flutter/material.dart';
 
 class QuestionBottomButton extends StatelessWidget {
   const QuestionBottomButton({

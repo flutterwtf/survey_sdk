@@ -5,7 +5,8 @@ import 'package:survey_core/src/domain/entities/api_object.dart';
 import 'package:survey_core/src/presentation/utils/app_fonts.dart';
 import 'package:survey_core/src/presentation/utils/colors.dart';
 
-class InputQuestionTheme extends ThemeExtension<InputQuestionTheme> with ApiObject {
+class InputQuestionTheme extends ThemeExtension<InputQuestionTheme>
+    with ApiObject {
   final Color backgroundColor;
   final Color borderColor;
   final double borderWidth;
@@ -91,14 +92,15 @@ class InputQuestionTheme extends ThemeExtension<InputQuestionTheme> with ApiObje
       textSize: lerpDouble(textSize, other.textSize, t)!,
       minLines: lerpDouble(minLines, other.minLines, t)?.toInt(),
       maxLines: lerpDouble(maxLines, other.maxLines, t)?.toInt(),
-      verticalPadding: lerpDouble(verticalPadding, other.verticalPadding, t)!,
-      horizontalPadding: lerpDouble(horizontalPadding, other.horizontalPadding, t)!,
+      verticalPadding: lerpDouble(verticalPadding, other.verticalPadding, t),
+      horizontalPadding:
+          lerpDouble(horizontalPadding, other.horizontalPadding, t),
     );
   }
 
   @override
   Map<String, dynamic> toJson() {
-    // TODO: implement toJson
+    // TODO(dev): implement toJson
     throw UnimplementedError();
   }
 }

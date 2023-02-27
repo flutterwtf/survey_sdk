@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_dynamic_calls
+
 import 'package:survey_core/src/domain/entities/question_types/question_data.dart';
 import 'package:survey_core/src/domain/entities/themes/choice_question_theme.dart';
 
@@ -39,7 +41,7 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
         }
       };
 
-  static ChoiceQuestionData fromJson(Map<String, dynamic> json) {
+  factory ChoiceQuestionData.fromJson(Map<String, dynamic> json) {
     final payload = json['payload'];
     return ChoiceQuestionData(
       id: json['id'],

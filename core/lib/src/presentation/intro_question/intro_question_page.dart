@@ -1,10 +1,10 @@
+import 'package:flutter/material.dart';
 import 'package:survey_core/src/domain/entities/question_types/intro_question_data.dart';
 import 'package:survey_core/src/presentation/utils/constants.dart';
 import 'package:survey_core/src/presentation/utils/data_to_widget_util.dart';
 import 'package:survey_core/src/presentation/widgets/question_bottom_button.dart';
 import 'package:survey_core/src/presentation/widgets/question_content.dart';
 import 'package:survey_core/src/presentation/widgets/question_title.dart';
-import 'package:flutter/material.dart';
 
 class IntroQuestionPage extends StatelessWidget {
   final IntroQuestionData data;
@@ -49,27 +49,22 @@ class IntroQuestionPage extends StatelessWidget {
             ),
           const Spacer(),
           Row(
-            mainAxisSize: MainAxisSize.max,
             children: [
               if (onSecondaryButtonTap != null && secondaryButtonTitle != null)
                 Flexible(
-                  fit: FlexFit.loose,
                   child: Padding(
                     padding: const EdgeInsets.only(right: 8),
                     child: QuestionBottomButton(
                       text: secondaryButtonTitle,
                       onPressed: onSecondaryButtonTap,
-                      isEnabled: true,
                       isOutlined: true,
                     ),
                   ),
                 ),
               Flexible(
-                fit: FlexFit.loose,
                 child: QuestionBottomButton(
                   text: data.mainButtonTitle,
                   onPressed: onMainButtonTap ?? () {},
-                  isEnabled: true,
                 ),
               ),
             ],

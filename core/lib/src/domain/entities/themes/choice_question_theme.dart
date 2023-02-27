@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:survey_core/src/domain/entities/api_object.dart';
 
-class ChoiceQuestionTheme extends ThemeExtension<ChoiceQuestionTheme> with ApiObject {
+class ChoiceQuestionTheme extends ThemeExtension<ChoiceQuestionTheme>
+    with ApiObject {
   final Color activeColor;
   final Color inactiveColor;
 

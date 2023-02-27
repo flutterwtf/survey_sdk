@@ -1,5 +1,5 @@
-import 'package:survey_core/src/domain/entities/question_types/question_data.dart';
 import 'package:flutter/material.dart';
+import 'package:survey_core/src/domain/entities/question_types/question_data.dart';
 
 class SliderQuestionData extends QuestionData<SliderThemeData> {
   final num minValue;
@@ -17,8 +17,8 @@ class SliderQuestionData extends QuestionData<SliderThemeData> {
     super.info,
   });
 
-  //TODO: do like this in every question widget
-  //TODO: implement theme
+  // TODO(dev): do like this in every question widget
+  // TODO(dev): implement theme
   @override
   SliderThemeData? get theme => null;
 
@@ -38,7 +38,7 @@ class SliderQuestionData extends QuestionData<SliderThemeData> {
         'info': info,
       };
 
-  static SliderQuestionData fromJson(Map<String, dynamic> json) {
+  factory SliderQuestionData.fromJson(Map<String, dynamic> json) {
     return SliderQuestionData(
       id: json['id'],
       minValue: json['minValue'],
