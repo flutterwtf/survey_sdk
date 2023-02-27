@@ -18,12 +18,10 @@ class SecondaryButtonCustomizationItem extends StatefulWidget {
   });
 
   @override
-  State<SecondaryButtonCustomizationItem> createState() =>
-      _SecondaryButtonCustomizationItemState();
+  State<SecondaryButtonCustomizationItem> createState() => _SecondaryButtonCustomizationItemState();
 }
 
-class _SecondaryButtonCustomizationItemState
-    extends State<SecondaryButtonCustomizationItem> {
+class _SecondaryButtonCustomizationItemState extends State<SecondaryButtonCustomizationItem> {
   late bool _isShown;
   late String _text;
 
@@ -57,7 +55,14 @@ class _SecondaryButtonCustomizationItemState
                   ),
                   child: CustomizationTextField(
                     initialValue: widget.initialText,
-                    onChanged: (text) => widget.onChanged(_isShown, _text),
+                    onChanged: (text) {
+                      if (text != null) {
+                        setState(() {
+                          _text = text;
+                        });
+                      }
+                      widget.onChanged(_isShown, _text);
+                    },
                     decoration: InputDecoration(
                       hintText: context.localization.enter_text,
                       isCollapsed: true,
