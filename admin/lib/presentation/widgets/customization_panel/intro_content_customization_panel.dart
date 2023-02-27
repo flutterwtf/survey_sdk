@@ -3,23 +3,22 @@ import 'package:survey_admin/presentation/app/localization/localizations.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/create_text_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
-import 'package:survey_admin/presentation/widgets/customization_items/divisions_customization_item.dart';
-import 'package:survey_admin/presentation/widgets/customization_items/min_max_customization_item.dart';
+import 'package:survey_admin/presentation/widgets/customization_items/secondary_button_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/customization_panel.dart';
 
-class ContentCustomizationPanel extends CustomizationPanel {
+class IntroContentCustomizationPanel extends CustomizationPanel {
   final ValueChanged<String> onTitleChanged;
   final ValueChanged<String> onSubtitleChanged;
-  final void Function(int? min, int? max) onMinMaxChanged;
-  final ValueChanged<int?> onDivisionsChanged;
+  final ValueChanged<String> onPrimaryButtonTextChanged;
+  final void Function(bool isShown, String text) onSecondaryButtonChanged;
 
-  const ContentCustomizationPanel({
+  const IntroContentCustomizationPanel({
     super.key,
     required super.title,
-    required this.onDivisionsChanged,
-    required this.onMinMaxChanged,
-    required this.onSubtitleChanged,
     required this.onTitleChanged,
+    required this.onSubtitleChanged,
+    required this.onPrimaryButtonTextChanged,
+    required this.onSecondaryButtonChanged,
   });
 
   @override
@@ -28,6 +27,7 @@ class ContentCustomizationPanel extends CustomizationPanel {
       children: [
         CustomizationItemsContainer(
           title: context.localization.title,
+          isTopDividerShown: true,
           children: [
             CreateTextCustomizationItem(
               maxHeight: AppDimensions.sizeL,
@@ -45,18 +45,21 @@ class ContentCustomizationPanel extends CustomizationPanel {
           ],
         ),
         CustomizationItemsContainer(
-          title: context.localization.value,
+          title: context.localization.primary_button,
           children: [
-            MinMaxCustomizationItem(
-              onChanged: onMinMaxChanged,
-            ),
+            CreateTextCustomizationItem(
+              maxHeight: AppDimensions.sizeL,
+              onChanged: onPrimaryButtonTextChanged,
+            )
           ],
         ),
         CustomizationItemsContainer(
-          title: context.localization.divisions,
+          itemsPadding: const EdgeInsets.all(
+            AppDimensions.marginM,
+          ),
           children: [
-            DivisionsCustomizationItem(
-              onChanged: onDivisionsChanged,
+            SecondaryButtonCustomizationItem(
+              onChanged: onSecondaryButtonChanged,
             ),
           ],
         ),

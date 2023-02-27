@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:survey_admin/presentation/utils/app_fonts.dart';
 
+// TODO(dev): Why is this class in a separate folder?
 class CustomizationText extends StatelessWidget {
   final String text;
 

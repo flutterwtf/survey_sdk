@@ -8,7 +8,6 @@ import 'package:survey_core/src/presentation/widgets/question_bottom_button.dart
 import 'package:survey_core/src/presentation/widgets/question_subtitle.dart';
 import 'package:survey_core/src/presentation/widgets/question_title.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 class InputQuestionPage extends StatefulWidget {
   final InputQuestionData data;
@@ -26,7 +25,7 @@ class InputQuestionPage extends StatefulWidget {
 
 class _InputQuestionPageState extends State<InputQuestionPage> {
   late final SurveyController _controller;
-  final _formKey = GlobalKey<FormBuilderState>();
+  final _formKey = GlobalKey<FormFieldState>();
   String _input = '';
 
   @override
@@ -72,10 +71,10 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
           ),
           Padding(
             padding: const EdgeInsets.only(top: AppDimensions.marginM),
-            child: FormBuilder(
+            //TODO: add validator?
+            child: FormField(
               key: _formKey,
-              child: FormBuilderTextField(
-                name: context.localization.text_field,
+              child: TextFormField(
                 minLines: theme.minLines,
                 maxLines: theme.maxLines,
                 style: TextStyle(
@@ -83,9 +82,7 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
                   fontSize: theme.textSize,
                 ),
                 validator: widget.data.validator.validate,
-                onChanged: (input) {
-                  if (input != null) setState(() => _input = input);
-                },
+                onChanged: (input) => setState(() => _input = input),
                 decoration: InputDecoration(
                   fillColor: theme.backgroundColor,
                   hintText: widget.data.hintText ?? '',

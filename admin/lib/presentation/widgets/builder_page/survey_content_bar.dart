@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:survey_admin/presentation/app/localization/localizations.dart';
+import 'package:survey_admin/presentation/pages/new_question_page/new_question_page.dart';
 import 'package:survey_admin/presentation/utils/app_fonts.dart';
 import 'package:survey_admin/presentation/utils/asset_strings.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
 import 'package:survey_admin/presentation/widgets/builder_page/survey_question_list_item.dart';
 
+// TODO(dev): do we really need this prefix? If so, why do we have it only in several classes
 class SurveyContentBar extends StatefulWidget {
   const SurveyContentBar({super.key});
 
@@ -15,10 +17,17 @@ class SurveyContentBar extends StatefulWidget {
 }
 
 class _SurveyContentBarState extends State<SurveyContentBar> {
-  final _quiestionsList = [
+  final _questionsList = [
     const SurveyQuestionListItem(index: 1, title: 'Intro'),
     const SurveyQuestionListItem(index: 2, title: 'Title'),
   ];
+
+  void addQuestion(String title) {
+    final index = _questionsList.length;
+    setState(() {
+      _questionsList.add(SurveyQuestionListItem(index: index, title: title));
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +44,7 @@ class _SurveyContentBarState extends State<SurveyContentBar> {
           Padding(
             padding: const EdgeInsets.symmetric(
               vertical: AppDimensions.margin2XS,
-              horizontal: AppDimensions.marginLargeM,
+              horizontal: AppDimensions.marginXL,
             ),
             child: Row(
               children: [
@@ -47,12 +56,21 @@ class _SurveyContentBarState extends State<SurveyContentBar> {
                   ),
                 ),
                 const SizedBox(
-                  width: AppDimensions.margin3XL + AppDimensions.margin2XL,
+                  width: AppDimensions.margin4XL + AppDimensions.margin3XL,
                 ),
-                SizedBox(
-                  height: AppDimensions.size3M,
-                  width: AppDimensions.size3M,
-                  child: SvgPicture.asset(AssetStrings.addCircle),
+                GestureDetector(
+                  onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => NewQuestionPage(
+                        onSubmit: addQuestion,
+                      ),
+                    ),
+                  ),
+                  child: SizedBox(
+                    height: AppDimensions.sizeL,
+                    width: AppDimensions.sizeL,
+                    child: SvgPicture.asset(AssetStrings.addCircle),
+                  ),
                 ),
               ],
             ),
@@ -61,13 +79,13 @@ class _SurveyContentBarState extends State<SurveyContentBar> {
             child: ReorderableListView(
               buildDefaultDragHandles: false,
               children: [
-                for (int index = 0; index < _quiestionsList.length; index++)
+                for (int index = 0; index < _questionsList.length; index++)
                   ReorderableDragStartListener(
                     index: index,
-                    key: ValueKey(_quiestionsList[index].title),
+                    key: ValueKey(index),
                     child: SurveyQuestionListItem(
                       index: index + 1,
-                      title: _quiestionsList[index].title,
+                      title: _questionsList[index].title,
                     ),
                   )
               ],
@@ -75,8 +93,8 @@ class _SurveyContentBarState extends State<SurveyContentBar> {
                 setState(() {
                   if (newIndex > oldIndex) newIndex--;
 
-                  final item = _quiestionsList.removeAt(oldIndex);
-                  _quiestionsList.insert(newIndex, item);
+                  final item = _questionsList.removeAt(oldIndex);
+                  _questionsList.insert(newIndex, item);
                 });
               },
             ),
