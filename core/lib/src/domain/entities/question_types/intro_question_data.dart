@@ -1,5 +1,5 @@
 import 'package:survey_core/src/domain/entities/question_types/question_data.dart';
-import 'package:flutter/material.dart';
+import 'package:survey_core/src/domain/entities/themes/intro_question_theme.dart';
 
 class IntroQuestionData extends QuestionData {
   final String? content;
@@ -19,26 +19,25 @@ class IntroQuestionData extends QuestionData {
   });
 
   @override
-  // TODO: implement theme
-  Theme? get theme => throw UnimplementedError();
+  IntroQuestionTheme? get theme => const IntroQuestionTheme.common();
 
   @override
   String get type => 'Intro';
 
   @override
   Map<String, dynamic> toJson() => {
-    'id': id,
-    'title': title,
-    'subtitle': subtitle,
-    'typeQuestion': typeQuestion,
-    'isSkip': isSkip,
-    'info': info,
-    'payload': {
-      'mainButtonTitle': mainButtonTitle,
-      'secondaryButtonTitle': secondaryButtonTitle,
-      'content': content,
-    },
-  };
+        'id': id,
+        'title': title,
+        'subtitle': subtitle,
+        'typeQuestion': typeQuestion,
+        'isSkip': isSkip,
+        'info': info,
+        'payload': {
+          'mainButtonTitle': mainButtonTitle,
+          'secondaryButtonTitle': secondaryButtonTitle,
+          'content': content,
+        },
+      };
 
   static IntroQuestionData fromJson(Map<String, dynamic> json) {
     final payload = json['payload'];
