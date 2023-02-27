@@ -98,7 +98,7 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
           QuestionBottomButton(
             text: context.localization.next,
             onPressed: () {
-              if (_formKey.currentState?.validate() ?? false) {
+              if (_formKey.currentState?.validate() ?? false || widget.data.isSkip) {
                 widget.onSend(widget.data.type, _input);
               }
             },

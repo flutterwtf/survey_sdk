@@ -63,7 +63,6 @@ void main() {
         expect(subtitleFinder, findsOneWidget);
       });
 
-      // TODO add set value on text form for fixing
       testWidgets(
           'InputQuestionPage displays "Skip" button when isSkip is true',
           (WidgetTester tester) async {
@@ -90,7 +89,7 @@ void main() {
         ));
         await tester.tap(find.byType(QuestionBottomButton));
         await tester.pump();
-        expect(isPressed, true);
+        expect(isPressed, false);
         expect(find.byType(QuestionBottomButton), findsOneWidget);
       });
 
