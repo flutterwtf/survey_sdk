@@ -30,16 +30,6 @@ class _ChoiceQuestionPageState extends State<ChoiceQuestionPage>
 
   ChoiceQuestionTheme get _theme => widget.data.theme ?? const ChoiceQuestionTheme.common();
 
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-  }
-
   void _onInputChanged(List<String>? selectedItems) {
     setState(() {
       _selectedItems = selectedItems ?? List.empty();
