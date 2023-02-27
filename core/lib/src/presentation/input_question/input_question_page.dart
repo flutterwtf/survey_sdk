@@ -25,7 +25,7 @@ class InputQuestionPage extends StatefulWidget {
 
 class _InputQuestionPageState extends State<InputQuestionPage> {
   late final SurveyController _controller;
-  final _formKey = GlobalKey<FormFieldState>();
+  final _formKey = GlobalKey<FormState>();
   String _input = '';
 
   @override
@@ -72,7 +72,7 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
           Padding(
             padding: const EdgeInsets.only(top: AppDimensions.marginM),
             //TODO: add validator?
-            child: FormField(
+            child: Form(
               key: _formKey,
               child: TextFormField(
                 minLines: theme.minLines,
@@ -101,7 +101,7 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
           QuestionBottomButton(
             text: context.localization.next,
             onPressed: () {
-              if (_formKey.currentState?.isValid ?? false) {
+              if (_formKey.currentState?.validate() ?? false) {
                 _controller.onNext(widget.data.type, _input);
                 widget.onSend(_input);
               }
