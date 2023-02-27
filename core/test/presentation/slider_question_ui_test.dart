@@ -42,7 +42,7 @@ void main() {
               isSkip: isSkip,
               initialValue: initialValue,
             ),
-            onSend: completerOnSendButtonTap.complete,
+            onSend: (key, data) => completerOnSendButtonTap.complete.call(data),
           ),
         ),
       );

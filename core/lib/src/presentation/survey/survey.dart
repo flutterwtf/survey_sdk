@@ -9,8 +9,13 @@ import 'package:survey_core/src/presentation/utils/data_to_widget_util.dart';
 
 class Survey extends StatefulWidget {
   final String surveyDataAsset;
+  final SurveyController? surveyController;
 
-  Survey({Key? key, required this.surveyDataAsset}) : super(key: key) {
+  Survey({
+    Key? key,
+    required this.surveyDataAsset,
+    this.surveyController,
+  }) : super(key: key) {
     Injector().init();
   }
 
@@ -20,12 +25,13 @@ class Survey extends StatefulWidget {
 
 class _SurveyState extends State<Survey> {
   final _cubit = Injector().surveyCubit;
-  final _surveyController = SurveyController();
+  late final SurveyController _surveyController;
 
   @override
   void initState() {
-    _cubit.initData(widget.surveyDataAsset);
     super.initState();
+    _surveyController = widget.surveyController ?? SurveyController();
+    _cubit.initData(widget.surveyDataAsset);
   }
 
   @override
@@ -40,26 +46,23 @@ class _SurveyState extends State<Survey> {
                   color: AppColors.black,
                 ),
               )
-            : SurveyControllerInherited(
-                surveyController: _surveyController,
-                child: Theme(
-                  data: surveyData.commonTheme.toThemeData(),
-                  child: WillPopScope(
-                    onWillPop: () async {
-                      _surveyController.onBack();
-                      return false;
-                    },
-                    child: PageView(
-                      physics: const NeverScrollableScrollPhysics(),
-                      children: surveyData.questions
-                          .map<Widget>(
-                            (question) => DataToWidgetUtil.createWidget(
-                              question,
-                              (data) {},
-                            ),
-                          )
-                          .toList(),
-                    ),
+            : Theme(
+                data: surveyData.commonTheme.toThemeData(),
+                child: WillPopScope(
+                  onWillPop: () async {
+                    _surveyController.onBack();
+                    return false;
+                  },
+                  child: PageView(
+                    physics: const NeverScrollableScrollPhysics(),
+                    children: surveyData.questions
+                        .map<Widget>(
+                          (question) => DataToWidgetUtil.createWidget(
+                            question,
+                            (key, data) => _surveyController.onNext(key, data),
+                          ),
+                        )
+                        .toList(),
                   ),
                 ),
               );

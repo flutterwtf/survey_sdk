@@ -29,7 +29,7 @@ void main() {
                 typeQuestion: 'typeQuestion',
                 isSkip: false,
               ),
-              onSend: (_) {},
+              onSend: (_, __) {},
             ),
           ),
         ));
@@ -55,7 +55,7 @@ void main() {
                 typeQuestion: 'typeQuestion',
                 isSkip: false,
               ),
-              onSend: (_) {},
+              onSend: (_, __) {},
             ),
           ),
         ));
@@ -63,6 +63,7 @@ void main() {
         expect(subtitleFinder, findsOneWidget);
       });
 
+      // TODO add set value on text form for fixing
       testWidgets(
           'InputQuestionPage displays "Skip" button when isSkip is true',
           (WidgetTester tester) async {
@@ -83,7 +84,7 @@ void main() {
                 typeQuestion: 'typeQuestion',
                 isSkip: true,
               ),
-              onSend: (_) => isPressed = true,
+              onSend: (_, __) => isPressed = true,
             ),
           ),
         ));
@@ -114,7 +115,7 @@ void main() {
             home: Scaffold(
               body: InputQuestionPage(
                 data: inputQuestionData,
-                onSend: (data) => sentData = data,
+                onSend: (key, data) => sentData = data,
               ),
             ),
           ),

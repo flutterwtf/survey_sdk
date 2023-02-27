@@ -21,25 +21,3 @@ class SurveyController {
     );
   }
 }
-
-class SurveyControllerInherited extends InheritedWidget {
-  final SurveyController surveyController;
-
-  const SurveyControllerInherited({
-    Key? key,
-    required Widget child,
-    required this.surveyController,
-  }) : super(key: key, child: child);
-
-  static SurveyControllerInherited of(BuildContext context) {
-    final SurveyControllerInherited? result =
-        context.dependOnInheritedWidgetOfExactType<SurveyControllerInherited>();
-    assert(result != null, 'No SurveyControllerInherited found in context');
-    return result!;
-  }
-
-  @override
-  bool updateShouldNotify(SurveyControllerInherited oldWidget) {
-    return oldWidget.surveyController != surveyController;
-  }
-}

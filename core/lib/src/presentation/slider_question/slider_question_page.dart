@@ -1,6 +1,5 @@
 import 'package:survey_core/src/domain/entities/question_types/slider_question_data.dart';
 import 'package:survey_core/src/presentation/localization/localizations.dart';
-import 'package:survey_core/src/presentation/survey/controller/survey_controller.dart';
 import 'package:survey_core/src/presentation/utils/app_fonts.dart';
 import 'package:survey_core/src/presentation/utils/constants.dart';
 import 'package:survey_core/src/presentation/utils/data_to_widget_util.dart';
@@ -26,7 +25,6 @@ class SliderQuestionPage extends StatefulWidget {
 
 class _SliderQuestionPageState extends State<SliderQuestionPage> {
   late final SliderThemeData _theme;
-  late final SurveyController _controller;
   late double _answer;
 
   @override
@@ -42,7 +40,6 @@ class _SliderQuestionPageState extends State<SliderQuestionPage> {
     } else {
       _theme = widget.data.theme!;
     }
-    _controller = SurveyControllerInherited.of(context).surveyController;
     super.didChangeDependencies();
   }
 
@@ -83,8 +80,7 @@ class _SliderQuestionPageState extends State<SliderQuestionPage> {
           QuestionBottomButton(
             text: context.localization.next,
             onPressed: () {
-              _controller.onNext(widget.data.type, _answer);
-              widget.onSend.call(_answer);
+              widget.onSend.call(widget.data.type, _answer);
             },
           ),
         ],

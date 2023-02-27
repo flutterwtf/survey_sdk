@@ -1,7 +1,6 @@
 import 'package:survey_core/src/domain/entities/question_types/input_question_data.dart';
 import 'package:survey_core/src/domain/entities/themes/input_question_theme.dart';
 import 'package:survey_core/src/presentation/localization/localizations.dart';
-import 'package:survey_core/src/presentation/survey/controller/survey_controller.dart';
 import 'package:survey_core/src/presentation/utils/constants.dart';
 import 'package:survey_core/src/presentation/utils/data_to_widget_util.dart';
 import 'package:survey_core/src/presentation/widgets/question_bottom_button.dart';
@@ -24,13 +23,11 @@ class InputQuestionPage extends StatefulWidget {
 }
 
 class _InputQuestionPageState extends State<InputQuestionPage> {
-  late final SurveyController _controller;
   final _formKey = GlobalKey<FormState>();
   String _input = '';
 
   @override
   void didChangeDependencies() {
-    _controller = SurveyControllerInherited.of(context).surveyController;
     super.didChangeDependencies();
   }
 
@@ -102,8 +99,7 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
             text: context.localization.next,
             onPressed: () {
               if (_formKey.currentState?.validate() ?? false) {
-                _controller.onNext(widget.data.type, _input);
-                widget.onSend(_input);
+                widget.onSend(widget.data.type, _input);
               }
             },
             isEnabled: widget.data.isSkip,

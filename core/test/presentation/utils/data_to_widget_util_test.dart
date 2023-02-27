@@ -13,7 +13,7 @@ import 'package:survey_core/src/presentation/utils/data_to_widget_util.dart';
 
 void main() {
   group('createWidget method', () {
-    mockOnSend(dynamic data) {}
+    mockOnSend(String key, dynamic data) {}
 
     test('Call with SliderQuestionData', () async {
       const mockData = SliderQuestionData(
