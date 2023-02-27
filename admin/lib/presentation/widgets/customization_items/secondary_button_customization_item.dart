@@ -56,9 +56,11 @@ class _SecondaryButtonCustomizationItemState extends State<SecondaryButtonCustom
                   child: CustomizationTextField(
                     initialValue: widget.initialText,
                     onChanged: (text) {
-                      setState(() {
-                        _text = text!;
-                      });
+                      if (text != null) {
+                        setState(() {
+                          _text = text;
+                        });
+                      }
                       widget.onChanged(_isShown, _text);
                     },
                     decoration: InputDecoration(
