@@ -16,7 +16,6 @@ dependencies:
   intl: ^0.17.0
   flutter_bloc: ^8.0.1
   http: ^0.13.5
-  mockito: ^5.3.2
 
 dev_dependencies:
   flutter_test:
@@ -24,6 +23,7 @@ dev_dependencies:
 
   very_good_analysis: ^4.0.0
   mockito: ^5.3.2
+  build_runner: ^2.3.3
 
 flutter:
   generate: true
