@@ -20,7 +20,7 @@ void main() {
     });
 
     testWidgets('Toggle switch', (tester) async {
-      bool isToggled = false;
+      var isToggled = false;
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -44,7 +44,7 @@ void main() {
     });
 
     testWidgets('Toggle initially active switch', (tester) async {
-      bool isToggled = true;
+      var isToggled = true;
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(

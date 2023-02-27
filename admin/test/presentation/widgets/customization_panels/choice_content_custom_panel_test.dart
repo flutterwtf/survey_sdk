@@ -8,7 +8,7 @@ import 'package:survey_admin/presentation/widgets/customization_panel/choice_con
 void main() {
   group(
     'Choice content customization panel tests',
-        () {
+    () {
       final choiceContentCustomPanel = MaterialApp(
         supportedLocales: AppLocalizations.supportedLocales,
         localizationsDelegates: const [
@@ -28,12 +28,21 @@ void main() {
 
       testWidgets(
         'All content widget test',
-            (widgetTester) async {
+        (widgetTester) async {
           await widgetTester.pumpWidget(choiceContentCustomPanel);
           await widgetTester.pumpAndSettle();
-          expect(find.widgetWithText(CustomizationItemsContainer, 'Title'), findsOneWidget);
-          expect(find.widgetWithText(CustomizationItemsContainer, 'Subtitle'), findsOneWidget);
-          expect(find.widgetWithText(CustomizationItemsContainer, 'Options'), findsOneWidget);
+          expect(
+            find.widgetWithText(CustomizationItemsContainer, 'Title'),
+            findsOneWidget,
+          );
+          expect(
+            find.widgetWithText(CustomizationItemsContainer, 'Subtitle'),
+            findsOneWidget,
+          );
+          expect(
+            find.widgetWithText(CustomizationItemsContainer, 'Options'),
+            findsOneWidget,
+          );
         },
       );
     },

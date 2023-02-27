@@ -37,7 +37,6 @@ class _QuestionSettingsTabBarState extends State<QuestionSettingsTabBar>
   Widget build(BuildContext context) {
     return Expanded(
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           TabBar(
             controller: _tabController,

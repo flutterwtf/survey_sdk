@@ -8,6 +8,7 @@ import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
 import 'package:survey_admin/presentation/widgets/builder_page/survey_question_list_item.dart';
 
+// ignore: lines_longer_than_80_chars
 // TODO(dev): do we really need this prefix? If so, why do we have it only in several classes
 class SurveyContentBar extends StatefulWidget {
   const SurveyContentBar({super.key});
@@ -60,6 +61,7 @@ class _SurveyContentBarState extends State<SurveyContentBar> {
                 ),
                 GestureDetector(
                   onTap: () => Navigator.of(context).push(
+                    // ignore: inference_failure_on_instance_creation
                     MaterialPageRoute(
                       builder: (context) => NewQuestionPage(
                         onSubmit: addQuestion,

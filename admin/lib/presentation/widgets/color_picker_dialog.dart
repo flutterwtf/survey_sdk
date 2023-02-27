@@ -10,10 +10,10 @@ class ColorPickerDialog extends StatelessWidget {
   final TextEditingController colorTextController;
 
   const ColorPickerDialog({
-    Key? key,
+    super.key,
     required this.onColorPicked,
     required this.colorTextController,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,6 @@ class ColorPickerDialog extends StatelessWidget {
             ColorPicker(
               pickerColor: colorFromHex(
                 colorTextController.value.text,
-                enableAlpha: true,
               )!,
               hexInputController: colorTextController,
               portraitOnly: true,
@@ -65,7 +64,6 @@ class ColorPickerDialog extends StatelessWidget {
             onColorPicked(
               colorFromHex(
                 colorTextController.value.text,
-                enableAlpha: true,
               )!,
             );
             Navigator.of(context).pop();

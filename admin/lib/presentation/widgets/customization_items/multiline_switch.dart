@@ -16,8 +16,8 @@ class MultilineSwitch extends StatefulWidget {
     this.defaultLineAmount = 3,
   });
 
-  /// if [isMultiline] equals `false` then [lineAmount] is always equals 1.
-  /// In case of any input error [lineAmount] is always equals 1.
+  /// if [isMultiline] equals `false` then `lineAmount` is always equals 1.
+  /// In case of any input error `lineAmount` is always equals 1.
   final void Function(bool isMultiline, int lineAmount) onChanged;
   final bool isMultiline;
   final int defaultLineAmount;
@@ -68,7 +68,7 @@ class _MultilineSwitchState extends State<MultilineSwitch> {
   }
 }
 
-//TODO: combine with other input fields maybe?
+// TODO(dev): combine with other input fields maybe?
 class _LineAmountInputField extends StatelessWidget {
   const _LineAmountInputField({
     required this.onChanged,

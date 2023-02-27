@@ -8,10 +8,10 @@ class ChoiceCustomizationPanel extends StatelessWidget {
   final ValueChanged<Color> onInactiveColorPicked;
 
   const ChoiceCustomizationPanel({
-    Key? key,
+    super.key,
     required this.onActiveColorPicked,
     required this.onInactiveColorPicked,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

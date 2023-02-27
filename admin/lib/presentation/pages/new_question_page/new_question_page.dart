@@ -34,9 +34,9 @@ class NewQuestionPage extends StatefulWidget {
   final ValueChanged<String> onSubmit;
 
   const NewQuestionPage({
-    Key? key,
+    super.key,
     required this.onSubmit,
-  }) : super(key: key);
+  });
 
   @override
   State<NewQuestionPage> createState() => _NewQuestionPageState();
@@ -54,7 +54,7 @@ class _NewQuestionPageState extends State<NewQuestionPage> {
           () => _selectedTab = tabTitle,
         );
       },
-      isSelected: _selectedTab == tabTitle ? true : false,
+      isSelected: _selectedTab == tabTitle,
     );
   }
 
@@ -100,7 +100,7 @@ class _NewQuestionPageState extends State<NewQuestionPage> {
         ),
         persistentFooterButtons: [
           _AddButton(
-            onPressed:() {
+            onPressed: () {
               widget.onSubmit(_selectedTab);
               Navigator.of(context).pop();
             },
@@ -112,7 +112,7 @@ class _NewQuestionPageState extends State<NewQuestionPage> {
 }
 
 class _BackButton extends StatelessWidget {
-  const _BackButton({Key? key}) : super(key: key);
+  const _BackButton();
 
   @override
   Widget build(BuildContext context) {
@@ -130,7 +130,7 @@ class _BackButton extends StatelessWidget {
 }
 
 class _AppBarTitle extends StatelessWidget {
-  const _AppBarTitle({Key? key}) : super(key: key);
+  const _AppBarTitle();
 
   @override
   Widget build(BuildContext context) {
@@ -154,11 +154,10 @@ class _TabButton extends StatelessWidget {
   final bool isSelected;
 
   const _TabButton({
-    Key? key,
     required this.title,
     required this.onTap,
     required this.isSelected,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -172,7 +171,8 @@ class _TabButton extends StatelessWidget {
           style: TextStyle(
             color: AppColors.black,
             fontSize: AppFonts.sizeL,
-            fontWeight: isSelected ? AppFonts.weightBold : AppFonts.weightRegular,
+            fontWeight:
+                isSelected ? AppFonts.weightBold : AppFonts.weightRegular,
           ),
         ),
       ),
@@ -185,10 +185,9 @@ class _QuestionOptionsListView extends StatelessWidget {
   final String selectedOption;
 
   const _QuestionOptionsListView({
-    Key? key,
     required this.options,
     required this.selectedOption,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -212,10 +211,9 @@ class _AssetTextOption extends StatelessWidget {
   final String titleText;
 
   const _AssetTextOption({
-    Key? key,
     required this.assetName,
     required this.titleText,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -244,9 +242,8 @@ class _AddButton extends StatelessWidget {
   final VoidCallback onPressed;
 
   const _AddButton({
-    Key? key,
     required this.onPressed,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
