@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -9,11 +7,11 @@ import 'package:survey_admin/presentation/widgets/customization_panel/intro_cont
 
 void main() {
   group('Tests for IntroContentCustomizationPanel', () {
-    final completerOnTitle = Completer<String>();
-    final completerOnSubtitle = Completer<String>();
-    final completerOnPrimaryButton = Completer<String>();
     bool isVisible = false;
     String textSecondaryButton = '';
+    String textTitle = '';
+    String textSubtitle = '';
+    String textPrimaryButton = '';
     final page = MaterialApp(
       supportedLocales: AppLocalizations.supportedLocales,
       localizationsDelegates: const [
@@ -25,13 +23,19 @@ void main() {
       home: Scaffold(
         body: IntroContentCustomizationPanel(
           title: 'Content',
-          onTitleChanged: completerOnTitle.complete,
-          onPrimaryButtonTextChanged: completerOnPrimaryButton.complete,
+          onTitleChanged: (newTitle) {
+            textTitle = newTitle;
+          },
+          onPrimaryButtonTextChanged: (newTextPrimaryButton) {
+            textPrimaryButton = newTextPrimaryButton;
+          },
           onSecondaryButtonChanged: (isShown, text) {
             isVisible = isShown;
             textSecondaryButton = text;
           },
-          onSubtitleChanged: completerOnSubtitle.complete,
+          onSubtitleChanged: (newSubtitle) {
+            textSubtitle = newSubtitle;
+          },
         ),
       ),
     );
@@ -48,14 +52,14 @@ void main() {
       await tester.pumpWidget(page);
       await tester.enterText(find.widgetWithText(CustomizationItemsContainer, 'Title'), 'Intro');
       expect(find.text('Intro'), findsOneWidget);
-      expect(completerOnTitle.isCompleted, isTrue);
+      expect(textTitle, 'Intro');
     });
 
     testWidgets('Input text for Subtitle', (tester) async {
       await tester.pumpWidget(page);
       await tester.enterText(find.widgetWithText(CustomizationItemsContainer, 'Subtitle'), 'sub');
       expect(find.text('sub'), findsOneWidget);
-      expect(completerOnSubtitle.isCompleted, isTrue);
+      expect(textSubtitle, 'sub');
     });
 
     testWidgets('Input text for Primary button', (tester) async {
@@ -63,7 +67,7 @@ void main() {
       await tester.enterText(
           find.widgetWithText(CustomizationItemsContainer, 'Primary button'), 'primary');
       expect(find.text('primary'), findsOneWidget);
-      expect(completerOnPrimaryButton.isCompleted, isTrue);
+      expect(textPrimaryButton, 'primary');
     });
 
     testWidgets('Unlock Secondary button', (tester) async {
