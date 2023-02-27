@@ -13,7 +13,7 @@ analyzer:
     close_sinks: error
     missing_required_param: error
     missing_return: error
-    # remove this line to enable doc lints
+    # remove line below to enable doc lints
     public_member_api_docs: ignore
     sort_pub_dependencies: ignore
     unawaited_futures: ignore

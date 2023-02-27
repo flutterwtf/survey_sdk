@@ -17,7 +17,7 @@ class MinMaxCustomizationItem extends StatefulWidget {
     required this.onChanged,
   }) : assert(
           initialMax > initialMin,
-          'initialMin must be greater then initialMax',
+          'initialMax must be greater then initialMin',
         );
 
   @override

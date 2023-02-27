@@ -83,10 +83,8 @@ class _TextCustomizeItemState extends State<TextCustomizeItem> {
               const SizedBox(width: AppDimensions.sizeM),
               TextWidthField(
                 textWidthTextController: _textWidthTextController,
-                onTextWidthPicked: (textWidth) => widget.onTextWidthPicked(
-                  textWidth,
-                ),
-              )
+                onTextWidthPicked: widget.onTextWidthPicked,
+              ),
             ],
           ),
         ],
