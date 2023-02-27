@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:survey_core/src/domain/entities/question_types/input_question_data.dart';
 import 'package:survey_core/src/domain/entities/validator/input_validator.dart';
@@ -13,52 +13,56 @@ void main() {
     () {
       testWidgets('InputQuestionPage displays title',
           (WidgetTester tester) async {
-        await tester.pumpWidget(MaterialApp(
-          localizationsDelegates: const [
-            AppLocalizations.delegate,
-            GlobalMaterialLocalizations.delegate,
-          ],
-          home: Scaffold(
-            body: InputQuestionPage(
-              data: InputQuestionData(
-                validator: DefaultValidator(),
-                value: 0,
-                id: 0,
-                title: 'title',
-                subtitle: 'subtitle',
-                typeQuestion: 'typeQuestion',
-                isSkip: false,
+        await tester.pumpWidget(
+          MaterialApp(
+            localizationsDelegates: const [
+              AppLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+            ],
+            home: Scaffold(
+              body: InputQuestionPage(
+                data: InputQuestionData(
+                  validator: DefaultValidator(),
+                  value: 0,
+                  id: 0,
+                  title: 'title',
+                  subtitle: 'subtitle',
+                  typeQuestion: 'typeQuestion',
+                  isSkip: false,
+                ),
+                onSend: (_) {},
               ),
-              onSend: (_) {},
             ),
           ),
-        ));
+        );
         final titleFinder = find.text('title');
         expect(titleFinder, findsOneWidget);
       });
 
       testWidgets('InputQuestionPage displays subtitle',
           (WidgetTester tester) async {
-        await tester.pumpWidget(MaterialApp(
-          localizationsDelegates: const [
-            AppLocalizations.delegate,
-            GlobalMaterialLocalizations.delegate,
-          ],
-          home: Scaffold(
-            body: InputQuestionPage(
-              data: InputQuestionData(
-                validator: DefaultValidator(),
-                value: 0,
-                id: 0,
-                title: 'title',
-                subtitle: 'subtitle',
-                typeQuestion: 'typeQuestion',
-                isSkip: false,
+        await tester.pumpWidget(
+          MaterialApp(
+            localizationsDelegates: const [
+              AppLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+            ],
+            home: Scaffold(
+              body: InputQuestionPage(
+                data: InputQuestionData(
+                  validator: DefaultValidator(),
+                  value: 0,
+                  id: 0,
+                  title: 'title',
+                  subtitle: 'subtitle',
+                  typeQuestion: 'typeQuestion',
+                  isSkip: false,
+                ),
+                onSend: (_) {},
               ),
-              onSend: (_) {},
             ),
           ),
-        ));
+        );
         final subtitleFinder = find.text('subtitle');
         expect(subtitleFinder, findsOneWidget);
       });
@@ -67,26 +71,28 @@ void main() {
           'InputQuestionPage displays "Skip" button when isSkip is true',
           (WidgetTester tester) async {
         var isPressed = false;
-        await tester.pumpWidget(MaterialApp(
-          localizationsDelegates: const [
-            AppLocalizations.delegate,
-            GlobalMaterialLocalizations.delegate,
-          ],
-          home: Scaffold(
-            body: InputQuestionPage(
-              data: InputQuestionData(
-                validator: DefaultValidator(),
-                value: 0,
-                id: 0,
-                title: 'title',
-                subtitle: 'subtitle',
-                typeQuestion: 'typeQuestion',
-                isSkip: true,
+        await tester.pumpWidget(
+          MaterialApp(
+            localizationsDelegates: const [
+              AppLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+            ],
+            home: Scaffold(
+              body: InputQuestionPage(
+                data: InputQuestionData(
+                  validator: DefaultValidator(),
+                  value: 0,
+                  id: 0,
+                  title: 'title',
+                  subtitle: 'subtitle',
+                  typeQuestion: 'typeQuestion',
+                  isSkip: true,
+                ),
+                onSend: (_) => isPressed = true,
               ),
-              onSend: (_) => isPressed = true,
             ),
           ),
-        ));
+        );
         await tester.tap(find.byType(QuestionBottomButton));
         await tester.pump();
         expect(isPressed, true);

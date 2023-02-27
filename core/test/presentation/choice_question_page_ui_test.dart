@@ -4,20 +4,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:survey_core/src/presentation/choice_question/choice_question_page.dart';
 
+import '../utils/mocked_entities.dart';
+
 void main() {
   group('components of Choice Question widget', () {
     testWidgets('Load widget', (tester) async {
-      final completer = Completer<void>();
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
             body: ChoiceQuestionPage(
-              title: 'title',
-              content: 'content',
-              onSend: () {},
-              options: const ['option', 'option', 'option'],
-              isMultipleChoice: false,
-              canBeSkipped: false,
+              data: MockedQuestions.choice1,
+              onSend: (_) {},
             ),
           ),
         ),
@@ -33,12 +30,8 @@ void main() {
         MaterialApp(
           home: Scaffold(
             body: ChoiceQuestionPage(
-              title: 'title',
-              content: 'content',
               onSend: completer.complete,
-              options: const ['option', 'option', 'option'],
-              isMultipleChoice: false,
-              canBeSkipped: false,
+              data: MockedQuestions.choice1,
             ),
           ),
         ),
@@ -53,12 +46,8 @@ void main() {
         MaterialApp(
           home: Scaffold(
             body: ChoiceQuestionPage(
-              title: 'title',
-              content: 'content',
               onSend: completer.complete,
-              options: const ['option', 'option', 'option'],
-              isMultipleChoice: false,
-              canBeSkipped: true,
+              data: MockedQuestions.choice1,
             ),
           ),
         ),
@@ -74,11 +63,8 @@ void main() {
       MaterialApp(
         home: Scaffold(
           body: ChoiceQuestionPage(
-            title: 'title',
-            content: 'content',
             onSend: completer.complete,
-            options: const ['option', 'option', 'option'],
-            isMultipleChoice: false,
+            data: MockedQuestions.choice1,
           ),
         ),
       ),
@@ -93,11 +79,8 @@ void main() {
       MaterialApp(
         home: Scaffold(
           body: ChoiceQuestionPage(
-            title: 'title',
-            content: 'content',
             onSend: completer.complete,
-            options: const ['option', 'option', 'option'],
-            isMultipleChoice: false,
+            data: MockedQuestions.choice1,
           ),
         ),
       ),
@@ -114,11 +97,8 @@ void main() {
       MaterialApp(
         home: Scaffold(
           body: ChoiceQuestionPage(
-            title: 'title',
-            content: 'content',
             onSend: completer.complete,
-            options: const ['option', 'option', 'option'],
-            isMultipleChoice: false,
+            data: MockedQuestions.choice1,
           ),
         ),
       ),
@@ -137,11 +117,8 @@ void main() {
       MaterialApp(
         home: Scaffold(
           body: ChoiceQuestionPage(
-            title: 'title',
-            content: 'content',
             onSend: completer.complete,
-            options: const ['option', 'option'],
-            isMultipleChoice: true,
+            data: MockedQuestions.choice1,
           ),
         ),
       ),
@@ -156,11 +133,8 @@ void main() {
       MaterialApp(
         home: Scaffold(
           body: ChoiceQuestionPage(
-            title: 'title',
-            content: 'content',
             onSend: completer.complete,
-            options: const ['option', 'option'],
-            isMultipleChoice: true,
+            data: MockedQuestions.choice1,
           ),
         ),
       ),
@@ -177,11 +151,8 @@ void main() {
       MaterialApp(
         home: Scaffold(
           body: ChoiceQuestionPage(
-            title: 'title',
-            content: 'content',
             onSend: completer.complete,
-            options: const ['option', 'option'],
-            isMultipleChoice: true,
+            data: MockedQuestions.choice1,
           ),
         ),
       ),
@@ -200,11 +171,8 @@ void main() {
       MaterialApp(
         home: Scaffold(
           body: ChoiceQuestionPage(
-            title: 'title',
-            content: 'content',
             onSend: completer.complete,
-            options: const ['option', 'option'],
-            isMultipleChoice: true,
+            data: MockedQuestions.choice1,
           ),
         ),
       ),

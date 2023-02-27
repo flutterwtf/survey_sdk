@@ -13,7 +13,7 @@ import 'package:survey_core/src/presentation/utils/data_to_widget_util.dart';
 
 void main() {
   group('createWidget method', () {
-    mockOnSend(dynamic data) {}
+    void mockOnSend(dynamic data) {}
 
     test('Call with SliderQuestionData', () async {
       const mockData = SliderQuestionData(
@@ -103,7 +103,7 @@ class _BadQuestionData extends QuestionData {
         );
 
   @override
-  get theme => throw UnimplementedError();
+  Never get theme => throw UnimplementedError();
 
   @override
   Map<String, dynamic> toJson() => throw UnimplementedError();

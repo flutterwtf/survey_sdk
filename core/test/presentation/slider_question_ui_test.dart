@@ -71,7 +71,7 @@ void main() {
         'Slider test',
             (widgetTester) async {
           await widgetTester.pumpWidget(sliderQuestionPage);
-          await widgetTester.drag(find.byType(Slider), const Offset(50.0, 0.0));
+          await widgetTester.drag(find.byType(Slider), const Offset(50, 0));
           await widgetTester.pumpAndSettle();
           expect(find.byType(Slider), findsOneWidget);
         },

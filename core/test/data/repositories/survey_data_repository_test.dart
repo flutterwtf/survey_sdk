@@ -6,7 +6,7 @@ import '../../utils/mocked_entities.dart';
 import '../../utils/shared_mocks.mocks.dart';
 
 void main() {
-  final mockFilesystemDataSource = MockFilesystemDataSourceImpl();
+  final mockFilesystemDataSource = MockFilesystemDataSource();
   final surveyDataRepository = SurveyDataRepositoryImpl(
     mockFilesystemDataSource,
   );
