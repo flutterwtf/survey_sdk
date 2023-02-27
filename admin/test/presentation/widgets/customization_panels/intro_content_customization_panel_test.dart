@@ -82,7 +82,6 @@ void main() {
       expect(isVisible, isFalse);
     });
 
-    //TODO: rewrite this test
     testWidgets('Input text for Secondary button', (tester) async {
       await tester.pumpWidget(page);
       await tester.tap(find.byKey(const Key('Switch')));
@@ -90,6 +89,7 @@ void main() {
       await tester.enterText(
           find.widgetWithText(CustomizationItemsContainer, 'Secondary button'), 'qq');
       expect(find.text('qq'), findsOneWidget);
+      expect(textSecondaryButton, 'qq');
     });
   });
 }
