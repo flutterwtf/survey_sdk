@@ -4,11 +4,13 @@ import 'package:survey_core/src/domain/entities/themes/choice_question_theme.dar
 class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
   final bool isMultipleChoice;
   final List<String> options;
+  final List<String>? selectedOptions;
   final String? content;
 
   const ChoiceQuestionData({
     required this.isMultipleChoice,
     required this.options,
+    this.selectedOptions,
     required super.id,
     required super.title,
     required super.subtitle,
@@ -16,7 +18,11 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
     required super.isSkip,
     super.info,
     this.content,
-  });
+  }) : assert(
+          selectedOptions == null ||
+              (!isMultipleChoice && selectedOptions.length == 1) ||
+              (isMultipleChoice && selectedOptions.length != 0),
+        );
 
   @override
   ChoiceQuestionTheme? get theme => const ChoiceQuestionTheme.common();
@@ -36,6 +42,7 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
           'content': content,
           'isMultipleChoice': isMultipleChoice,
           'options': options,
+          'selectedOption': selectedOptions,
         }
       };
 
@@ -51,6 +58,7 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
       isMultipleChoice: payload['isMultipleChoice'],
       options: payload['options'],
       content: payload['content'],
+      selectedOptions: payload['selectedOption'],
     );
   }
 }
