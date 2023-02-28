@@ -18,8 +18,11 @@ jobs:
           flutter-version: '3.x'
           channel: 'stable'
 
-      - name: Dependencies check
-        run: ./scripts/dependencies_check.sh
+      - name: Admin module check
+        run: ./scripts/admin_module.sh
 
-      - name: Analyzer check
-        run: ./scripts/analyzer_check.sh
+      - name: Client module check
+        run: ./scripts/client_module.sh
+
+      - name: Core module check
+        run: ./scripts/core_module.sh

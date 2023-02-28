@@ -24,6 +24,7 @@ dependencies:
   survey_core:
     path: ../core
   flutter_svg: ^2.0.1
+  test_cov_console: ^0.2.2
 
 dev_dependencies:
   flutter_test:

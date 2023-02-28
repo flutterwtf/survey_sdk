@@ -10,6 +10,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  test_cov_console: ^0.2.2
 
 dev_dependencies:
   flutter_test:
