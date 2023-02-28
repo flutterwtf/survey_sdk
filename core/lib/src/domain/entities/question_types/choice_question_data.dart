@@ -42,7 +42,7 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
           'content': content,
           'isMultipleChoice': isMultipleChoice,
           'options': options,
-          'selectedOption': selectedOptions,
+          'selectedOptions': selectedOptions,
         }
       };
 
@@ -58,7 +58,7 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
       isMultipleChoice: payload['isMultipleChoice'],
       options: payload['options'],
       content: payload['content'],
-      selectedOptions: payload['selectedOption'],
+      selectedOptions: payload['selectedOptions'],
     );
   }
 }
