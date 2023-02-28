@@ -23,6 +23,7 @@ class InputQuestionPage extends StatefulWidget {
 }
 
 class _InputQuestionPageState extends State<InputQuestionPage> {
+  final _textFieldKey = GlobalKey<FormFieldState>();
   String _input = '';
 
   @override
@@ -62,15 +63,18 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
           ),
           Padding(
             padding: const EdgeInsets.only(top: AppDimensions.marginM),
-            //TODO: add validator?
             child: TextFormField(
+              key: _textFieldKey,
               minLines: theme.minLines,
               maxLines: theme.maxLines,
               style: TextStyle(
                 color: theme.textColor,
                 fontSize: theme.textSize,
               ),
-              validator: widget.data.validator.validate,
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              validator: (text) => widget.data.isSkip && _input.isEmpty
+                  ? null
+                  : widget.data.validator.validate(text),
               onChanged: (input) => setState(() => _input = input),
               decoration: InputDecoration(
                 fillColor: theme.backgroundColor,
@@ -89,7 +93,8 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
           QuestionBottomButton(
             text: context.localization.next,
             onPressed: () => widget.onSend(_input),
-            isEnabled: widget.data.isSkip,
+            isEnabled: widget.data.isSkip && _input.isEmpty ||
+                (_textFieldKey.currentState?.isValid ?? false),
           ),
         ],
       ),
