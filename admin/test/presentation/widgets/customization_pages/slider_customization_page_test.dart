@@ -6,16 +6,20 @@ import 'package:survey_admin/presentation/widgets/customization_items/customizat
 import 'package:survey_admin/presentation/widgets/customization_panel/slider_customization_page.dart';
 
 void main() {
-  const sliderCustomizationPage = MaterialApp(
+  final sliderCustomizationPage = MaterialApp(
     supportedLocales: AppLocalizations.supportedLocales,
-    localizationsDelegates: [
+    localizationsDelegates: const [
       AppLocalizations.delegate,
       GlobalMaterialLocalizations.delegate,
       GlobalWidgetsLocalizations.delegate,
       GlobalCupertinoLocalizations.delegate,
     ],
     home: Scaffold(
-      body: SliderCustomizationPage(),
+      body: Row(
+        children: const [
+          SliderCustomizationPage(),
+        ],
+      ),
     ),
   );
 
