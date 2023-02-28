@@ -44,7 +44,7 @@ void main() {
       ),
     );
 
-    testWidgets('Load wodget', (tester) async {
+    testWidgets('Load widget', (tester) async {
       await tester.pumpWidget(page);
       expect(find.widgetWithText(CustomizationItemsContainer, 'Thickness'), findsOneWidget);
       expect(find.widgetWithText(CustomizationItemsContainer, 'Active'), findsOneWidget);
