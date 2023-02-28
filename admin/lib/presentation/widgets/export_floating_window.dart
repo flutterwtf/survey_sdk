@@ -42,9 +42,6 @@ class _ExportFloatingWindow extends StatelessWidget {
     required this.onCopyPressed,
   });
 
-  // TODO don't use explicit width
-  static const double _windowWidth = 420;
-
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -54,75 +51,68 @@ class _ExportFloatingWindow extends StatelessWidget {
           decoration: const BoxDecoration(
             color: AppColors.whitePrimaryBackground,
             borderRadius: BorderRadius.all(
-              Radius.circular(
-                AppDimensions.circularRadiusS,
-              ),
+              Radius.circular(AppDimensions.circularRadiusS),
             ),
           ),
-          width: _windowWidth,
+          width: AppDimensions.exportWindowWidth,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  IconButton(
-                    onPressed: onClosePressed,
-                    icon: const Icon(Icons.close),
-                    splashRadius: AppDimensions.sizeS,
-                  ),
-                ],
+              Align(
+                alignment: Alignment.centerRight,
+                child: IconButton(
+                  onPressed: onClosePressed,
+                  icon: const Icon(Icons.close),
+                  splashRadius: AppDimensions.sizeS,
+                  iconSize: AppDimensions.sizeS,
+                ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(
-                  vertical: AppDimensions.marginS,
-                  horizontal: AppDimensions.marginL,
+                padding: const EdgeInsets.only(
+                  top: AppDimensions.marginXS,
+                  left: AppDimensions.margin2XL,
+                  right: AppDimensions.margin2XL,
                 ),
                 child: Text(
                   context.localization.export_floating_window_title,
                   textAlign: TextAlign.center,
                   style: const TextStyle(
                     fontSize: AppFonts.sizeL,
-                    fontWeight: AppFonts.weightMedium,
+                    fontWeight: AppFonts.weightBold,
                   ),
                 ),
               ),
-              const Padding(
-                padding: EdgeInsets.symmetric(
-                  vertical: AppDimensions.marginM,
-                ),
-                child: Icon(
-                  Icons.task_rounded,
-                  size: AppDimensions.sizeXL,
-                  color: AppColors.black,
-                ),
+              const Image(
+                image: AssetImage('images/task_completed.png'),
+                width: 150.0,
+                height: 150.0,
               ),
               Padding(
-                padding: const EdgeInsets.all(
-                  AppDimensions.marginL,
-                ),
+                padding: const EdgeInsets.all(AppDimensions.marginL),
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Expanded(
-                      child: FilledButton(
-                        onPressed: onCopyPressed,
-                        style: ButtonStyle(
-                          backgroundColor: const MaterialStatePropertyAll(
-                            AppColors.white,
+                    FilledButton(
+                      onPressed: onCopyPressed,
+                      style: ButtonStyle(
+                        backgroundColor: const MaterialStatePropertyAll(
+                          AppColors.white,
+                        ),
+                        side: const MaterialStatePropertyAll(
+                          BorderSide(
+                            color: AppColors.black,
                           ),
-                          side: const MaterialStatePropertyAll(
-                            BorderSide(
-                              color: AppColors.black,
-                            ),
-                          ),
-                          shape: MaterialStatePropertyAll(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(
-                                AppDimensions.circularRadiusXS,
-                              ),
+                        ),
+                        shape: MaterialStatePropertyAll(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(
+                              AppDimensions.circularRadiusXS,
                             ),
                           ),
                         ),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: AppDimensions.sizeL),
                         child: Text(
                           context.localization.copy,
                           style: const TextStyle(
@@ -133,31 +123,29 @@ class _ExportFloatingWindow extends StatelessWidget {
                         ),
                       ),
                     ),
-                    const SizedBox(
-                      width: AppDimensions.marginXL,
-                    ),
-                    Expanded(
-                      flex: 2,
-                      child: FilledButton(
-                        onPressed: onDownloadPressed,
-                        style: ButtonStyle(
-                          backgroundColor: const MaterialStatePropertyAll(
-                            AppColors.black,
-                          ),
-                          shape: MaterialStatePropertyAll(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(
-                                AppDimensions.circularRadiusXS,
-                              ),
+                    FilledButton(
+                      onPressed: onDownloadPressed,
+                      style: ButtonStyle(
+                        backgroundColor: const MaterialStatePropertyAll(
+                          AppColors.black,
+                        ),
+                        shape: MaterialStatePropertyAll(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(
+                              AppDimensions.circularRadiusXS,
                             ),
                           ),
                         ),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: AppDimensions.margin5XL),
                         child: Text(
                           context.localization.download,
                           style: const TextStyle(
                             fontSize: AppFonts.sizeM,
-                            fontWeight: AppFonts.weightBold,
+                            fontWeight: AppFonts.weightMedium,
                             color: AppColors.white,
+                            letterSpacing: 0.1,
                           ),
                         ),
                       ),

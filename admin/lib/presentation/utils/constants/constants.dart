@@ -9,8 +9,7 @@ abstract class AppDimensions {
   static const double margin2XL = 32.0;
   static const double margin3XL = 36.0;
   static const double margin4XL = 50.0;
-  static const double margin5XL = 55.0;
-
+  static const double margin5XL = 58.0;
 
   static const double sizeS = 12.0;
   static const double sizeM = 24.0;
@@ -33,4 +32,5 @@ abstract class AppDimensions {
 
   static const double tabBarPadding = 126.0;
   static const double tabBarWidth = 500.0;
+  static const double exportWindowWidth = 420;
 }
