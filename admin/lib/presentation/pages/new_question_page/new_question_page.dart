@@ -38,13 +38,7 @@ const Map<String, String> _optionsAssets = {
 };
 
 class NewQuestionPage extends StatefulWidget {
-  //TODO do we need this? Can we use pop?
-  final ValueChanged<QuestionData> onSubmit;
-
-  const NewQuestionPage({
-    Key? key,
-    required this.onSubmit,
-  }) : super(key: key);
+  const NewQuestionPage({Key? key}) : super(key: key);
 
   @override
   State<NewQuestionPage> createState() => _NewQuestionPageState();
@@ -109,9 +103,7 @@ class _NewQuestionPageState extends State<NewQuestionPage> {
         persistentFooterButtons: [
           _AddButton(
             onPressed: () {
-              //TODO: remove null check
-              widget.onSubmit(_dataMap[_selectedTab]!);
-              Navigator.of(context).pop();
+              Navigator.pop(context, _dataMap[_selectedTab]);
             },
           ),
         ],
