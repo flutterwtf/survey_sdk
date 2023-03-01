@@ -101,4 +101,20 @@ class InputQuestionTheme extends ThemeExtension<InputQuestionTheme> with ApiObje
     // TODO: implement toJson
     throw UnimplementedError();
   }
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [
+        backgroundColor,
+        borderColor,
+        borderWidth,
+        hintColor,
+        hintSize,
+        textColor,
+        textSize,
+        minLines,
+        maxLines,
+        verticalPadding,
+        horizontalPadding,
+      ];
 }

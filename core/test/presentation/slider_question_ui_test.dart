@@ -32,13 +32,12 @@ void main() {
         ],
         home: Scaffold(
           body: SliderQuestionPage(
-            data: const SliderQuestionData(
+            data: SliderQuestionData(
               minValue: minValue,
               maxValue: maxValue,
-              id: id,
+              index: id,
               title: title,
               subtitle: subTitle,
-              typeQuestion: typeQuestion,
               isSkip: isSkip,
               initialValue: initialValue,
             ),

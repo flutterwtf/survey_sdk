@@ -4,21 +4,20 @@ import 'package:survey_core/src/domain/entities/question_types/input_question_da
 import 'package:survey_core/src/domain/entities/question_types/intro_question_data.dart';
 import 'package:survey_core/src/domain/entities/question_types/slider_question_data.dart';
 
-abstract class QuestionData<T> implements ApiObject {
-  final int id;
+//TODO make immutable?
+abstract class QuestionData<T> extends ApiObject {
+  int index;
   final String title;
   final String subtitle;
-  final String? info;
-  final String typeQuestion;
+  final String? content;
   final bool isSkip;
 
-  const QuestionData({
-    required this.id,
+  QuestionData({
+    required this.index,
     required this.title,
     required this.subtitle,
-    required this.typeQuestion,
     required this.isSkip,
-    this.info,
+    this.content,
   });
 
   T? get theme;

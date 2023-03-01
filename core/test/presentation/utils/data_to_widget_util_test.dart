@@ -16,14 +16,13 @@ void main() {
     mockOnSend(dynamic data) {}
 
     test('Call with SliderQuestionData', () async {
-      const mockData = SliderQuestionData(
+      final mockData = SliderQuestionData(
         minValue: 0,
         maxValue: 10,
         initialValue: 5,
-        id: 0,
+        index: 0,
         title: 'title',
         subtitle: 'subtitle',
-        typeQuestion: 'Slider',
         isSkip: false,
       );
       final widget = DataToWidgetUtil.createWidget(mockData, mockOnSend);
@@ -34,13 +33,12 @@ void main() {
     });
 
     test('Call with ChoiceQuestionData', () async {
-      const mockData = ChoiceQuestionData(
+      final mockData = ChoiceQuestionData(
         isMultipleChoice: true,
         options: ['option 1', 'option 2', 'option 3'],
-        id: 0,
+        index: 0,
         title: 'title',
         subtitle: 'subtitle',
-        typeQuestion: 'Choice',
         isSkip: false,
       );
       final widget = DataToWidgetUtil.createWidget(mockData, mockOnSend);
@@ -53,11 +51,9 @@ void main() {
     test('Call with InputQuestionData', () async {
       final mockData = InputQuestionData(
         validator: DefaultValidator(),
-        value: 5,
-        id: 0,
+        index: 0,
         title: 'title',
         subtitle: 'subtitle',
-        typeQuestion: 'Input',
         isSkip: false,
       );
       final widget = DataToWidgetUtil.createWidget(mockData, mockOnSend);
@@ -68,12 +64,11 @@ void main() {
     });
 
     test('Call with IntroQuestionData', () async {
-      const mockData = IntroQuestionData(
+      final mockData = IntroQuestionData(
         mainButtonTitle: 'button title',
-        id: 0,
+        index: 0,
         title: 'title',
         subtitle: 'subtitle',
-        typeQuestion: 'Input',
         isSkip: false,
       );
       final widget = DataToWidgetUtil.createWidget(mockData, mockOnSend);
@@ -95,10 +90,9 @@ void main() {
 class _BadQuestionData extends QuestionData {
   _BadQuestionData()
       : super(
-          id: 0,
+          index: 0,
           title: 'title',
           subtitle: 'subtitle',
-          typeQuestion: 'Bad',
           isSkip: true,
         );
 
@@ -110,4 +104,7 @@ class _BadQuestionData extends QuestionData {
 
   @override
   String get type => throw UnimplementedError();
+
+  @override
+  List<Object?> get props => [];
 }
