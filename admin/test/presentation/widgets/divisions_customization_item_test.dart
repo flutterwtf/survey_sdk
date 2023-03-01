@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/divisions_customization_item.dart';
 
 void main() {
@@ -68,7 +68,7 @@ void main() {
       );
       await tester.tap(find.byType(DivisionsCustomizationItem));
       await tester.sendKeyEvent(LogicalKeyboardKey.backspace);
-      await tester.enterText(find.byType(FormBuilderTextField), '1');
+      await tester.enterText(find.byType(TextField), '1');
       await tester.pump();
       expect(find.text('1'), findsOneWidget);
     });
@@ -89,7 +89,7 @@ void main() {
       );
       await tester.tap(find.byType(DivisionsCustomizationItem));
       await tester.sendKeyEvent(LogicalKeyboardKey.backspace);
-      await tester.enterText(find.byType(FormBuilderTextField), '3331');
+      await tester.enterText(find.byType(TextField), '3331');
       await tester.pump();
       expect(find.text('333'), findsOneWidget);
       expect(find.text('3331'), findsNothing);

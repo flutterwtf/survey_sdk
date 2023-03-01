@@ -3,7 +3,7 @@ import 'package:survey_core/src/data/mappers/slider_theme_data_mapper.dart';
 import 'package:survey_core/src/domain/entities/api_object.dart';
 import 'package:survey_core/src/domain/entities/themes/text_field_theme_data.dart';
 
-class CommonTheme implements ApiObject {
+class CommonTheme extends ApiObject {
   final SliderThemeData sliderThemeData;
   final TextFieldThemeData textFieldThemeData;
 
@@ -31,4 +31,11 @@ class CommonTheme implements ApiObject {
       sliderThemeData: SliderThemeDataMapper.fromJson(json['sliderThemeData']),
     );
   }
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [
+        sliderThemeData,
+        textFieldThemeData,
+      ];
 }

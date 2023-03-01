@@ -4,6 +4,7 @@ import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
 import 'package:survey_admin/presentation/utils/constants/image_constants.dart';
 import 'package:survey_admin/presentation/widgets/vector_image.dart';
+import 'package:survey_core/survey_core.dart';
 
 // TODO(dev): check localization
 const _title = 'New screen';
@@ -13,6 +14,12 @@ const _tabs = [
   'Slider',
   'Custom input',
 ];
+final Map<String, QuestionData> _dataMap = {
+  'Intro': IntroQuestionData.common(),
+  'Choice': ChoiceQuestionData.common(),
+  'Slider': SliderQuestionData.common(),
+  'Custom input': InputQuestionData.common(),
+};
 const _optionsInTabs = {
   'Intro': ['Title', 'Image intro'],
   'Choice': ['Radio button', 'Check box'],
@@ -31,7 +38,8 @@ const Map<String, String> _optionsAssets = {
 };
 
 class NewQuestionPage extends StatefulWidget {
-  final ValueChanged<String> onSubmit;
+  //TODO do we need this? Can we use pop?
+  final ValueChanged<QuestionData> onSubmit;
 
   const NewQuestionPage({
     Key? key,
@@ -100,8 +108,9 @@ class _NewQuestionPageState extends State<NewQuestionPage> {
         ),
         persistentFooterButtons: [
           _AddButton(
-            onPressed:() {
-              widget.onSubmit(_selectedTab);
+            onPressed: () {
+              //TODO: remove null check
+              widget.onSubmit(_dataMap[_selectedTab]!);
               Navigator.of(context).pop();
             },
           ),

@@ -5,19 +5,27 @@ import 'package:survey_core/src/domain/entities/validator/input_validator.dart';
 class InputQuestionData extends QuestionData<InputQuestionTheme> {
   final InputValidator validator;
   final String? hintText;
-  final int value;
 
-  const InputQuestionData({
+  InputQuestionData({
     required this.validator,
-    required this.value,
-    required super.id,
+    required super.index,
     required super.title,
     required super.subtitle,
-    required super.typeQuestion,
     required super.isSkip,
-    super.info,
+    super.content,
     this.hintText,
   });
+
+  InputQuestionData.common({int index = 0})
+      : this(
+          //TODO: to localization somehow
+          validator: NumberValidator(),
+          index: index,
+          title: 'Why is asking the right type of questions important?',
+          subtitle: '',
+          isSkip: false,
+          content: 'Doing so can help you gather the information most relevant and useful to you',
+        );
 
   @override
   InputQuestionTheme? get theme => const InputQuestionTheme.common();
@@ -27,15 +35,14 @@ class InputQuestionData extends QuestionData<InputQuestionTheme> {
 
   @override
   Map<String, dynamic> toJson() => {
-        'id': id,
+        'index': index,
         'title': title,
         'subtitle': subtitle,
-        'typeQuestion': typeQuestion,
+        'type': type,
         'isSkip': isSkip,
-        'info': info,
+        'content': content,
         'payload': {
           ...JsonValidator.toJson(validator),
-          'value': value,
           'hintText': hintText,
         }
       };
@@ -43,15 +50,25 @@ class InputQuestionData extends QuestionData<InputQuestionTheme> {
   static InputQuestionData fromJson(Map<String, dynamic> json) {
     final payload = json['payload'];
     return InputQuestionData(
-      id: json['id'],
+      index: json['index'],
       title: json['title'],
       subtitle: json['subtitle'],
-      typeQuestion: json['typeQuestion'],
       isSkip: json['isSkip'],
-      info: json['info'],
+      content: json['content'],
       validator: JsonValidator.fromJson(payload),
-      value: payload['value'],
       hintText: payload['hintText'],
     );
   }
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [
+        validator,
+        index,
+        title,
+        subtitle,
+        isSkip,
+        content,
+        hintText,
+      ];
 }
