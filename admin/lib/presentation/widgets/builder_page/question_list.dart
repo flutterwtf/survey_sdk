@@ -31,7 +31,7 @@ class _QuestionListState extends State<QuestionList> {
 
   void addQuestion(QuestionData data) {
     final index = _questionList.length;
-    data.index = index;
+    data = data.copyWith(index: index);
     setState(() {
       _questionList.add(QuestionListItem(questionData: data));
     });
@@ -91,18 +91,32 @@ class _QuestionListState extends State<QuestionList> {
                   ReorderableDragStartListener(
                     index: index,
                     key: ValueKey(index),
-                    child: _questionList.where((item) => item.questionData.index == index).first,
+                    child: _questionList
+                        .where((item) => item.questionData.index == index)
+                        .first,
                   )
               ],
               onReorder: (oldIndex, newIndex) {
-                setState(() {
-                  final itemFirst =
-                      _questionList.where((item) => item.questionData.index == oldIndex).first;
-                  final itemSecond =
-                      _questionList.where((item) => item.questionData.index == newIndex).first;
-                  itemFirst.questionData.index = newIndex;
-                  itemSecond.questionData.index = oldIndex;
-                });
+                setState(
+                  () {
+                    final itemFirstIndex = _questionList.indexWhere(
+                        (item) => item.questionData.index == oldIndex);
+                    final itemSecondIndex = _questionList.indexWhere(
+                        (item) => item.questionData.index == newIndex);
+                    final newFirstQuestionData = _questionList[itemFirstIndex]
+                        .questionData
+                        .copyWith(index: newIndex);
+                    final newSecondQuestionData = _questionList[itemSecondIndex]
+                        .questionData
+                        .copyWith(index: oldIndex);
+                    _questionList[itemFirstIndex] = QuestionListItem(
+                      questionData: newFirstQuestionData,
+                    );
+                    _questionList[itemSecondIndex] = QuestionListItem(
+                      questionData: newSecondQuestionData,
+                    );
+                  },
+                );
               },
             ),
           ),
