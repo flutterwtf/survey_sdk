@@ -97,23 +97,22 @@ class _QuestionListState extends State<QuestionList> {
                   )
               ],
               onReorder: (oldIndex, newIndex) {
+                if (newIndex > oldIndex) newIndex--;
                 setState(
                   () {
                     final itemFirstIndex = _questionList.indexWhere(
                         (item) => item.questionData.index == oldIndex);
                     final itemSecondIndex = _questionList.indexWhere(
                         (item) => item.questionData.index == newIndex);
-                    final newFirstQuestionData = _questionList[itemFirstIndex]
-                        .questionData
-                        .copyWith(index: newIndex);
-                    final newSecondQuestionData = _questionList[itemSecondIndex]
-                        .questionData
-                        .copyWith(index: oldIndex);
                     _questionList[itemFirstIndex] = QuestionListItem(
-                      questionData: newFirstQuestionData,
+                      questionData: _questionList[itemFirstIndex]
+                          .questionData
+                          .copyWith(index: newIndex),
                     );
                     _questionList[itemSecondIndex] = QuestionListItem(
-                      questionData: newSecondQuestionData,
+                      questionData: _questionList[itemSecondIndex]
+                          .questionData
+                          .copyWith(index: oldIndex),
                     );
                   },
                 );
