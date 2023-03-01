@@ -31,6 +31,28 @@ class SliderQuestionData extends QuestionData<SliderThemeData> {
               'You may simply need a single, brief answer without discussion. Other times, you may want to talk through a scenario, evaluate how well a group is learning new material or solicit feedback. The types of questions you ask directly impact the type of answer you receive.',
         );
 
+  @override
+  QuestionData copyWith({
+    num? minValue,
+    num? maxValue,
+    num? initialValue,
+    int? index,
+    String? title,
+    String? subtitle,
+    String? content,
+    bool? isSkip,
+  }) {
+    return SliderQuestionData(
+      minValue: minValue ?? this.minValue,
+      maxValue: maxValue ?? this.maxValue,
+      initialValue: initialValue ?? this.initialValue,
+      index: index ?? this.index,
+      title: title ?? this.title,
+      subtitle: subtitle ?? this.subtitle,
+      isSkip: isSkip ?? this.isSkip,
+    );
+  }
+
   //TODO: do like this in every question widget
   //TODO: implement theme
   @override
