@@ -1,5 +1,3 @@
-import 'package:equatable/equatable.dart';
-
-abstract class ApiObject extends Equatable {
+abstract class ApiObject {
   Map<String, dynamic> toJson();
 }

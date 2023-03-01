@@ -4,5 +4,7 @@ include: package:flutter_lints/flutter.yaml
 # https://dart.dev/guides/language/analysis-options
 
 analyzer:
+  language:
+    enableSuperMixins: true
   errors:
     mixin_inherits_from_not_object: ignore

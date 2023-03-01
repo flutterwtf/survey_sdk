@@ -1,3 +1,4 @@
+import 'package:equatable/equatable.dart';
 import 'package:survey_core/src/domain/entities/api_object.dart';
 import 'package:survey_core/src/domain/entities/question_types/choice_question_data.dart';
 import 'package:survey_core/src/domain/entities/question_types/input_question_data.dart';
@@ -5,7 +6,7 @@ import 'package:survey_core/src/domain/entities/question_types/intro_question_da
 import 'package:survey_core/src/domain/entities/question_types/slider_question_data.dart';
 
 //TODO make immutable?
-abstract class QuestionData<T> extends ApiObject {
+abstract class QuestionData<T> extends Equatable with ApiObject {
   int index;
   final String title;
   final String subtitle;
