@@ -1,6 +1,7 @@
 import 'package:survey_core/src/presentation/localization/localizations.dart';
 import 'package:survey_core/src/domain/entities/question_types/choice_question_data.dart';
 import 'package:survey_core/src/domain/entities/themes/choice_question_theme.dart';
+import 'package:survey_core/src/presentation/utils/app_fonts.dart';
 import 'package:survey_core/src/presentation/utils/colors.dart';
 import 'package:survey_core/src/presentation/utils/constants.dart';
 import 'package:survey_core/src/presentation/utils/data_to_widget_util.dart';
@@ -28,8 +29,7 @@ class _ChoiceQuestionPageState extends State<ChoiceQuestionPage>
   bool _canBeSend = false;
   List<String> _selectedItems = List.empty();
 
-  ChoiceQuestionTheme get _theme =>
-      widget.data.theme ?? const ChoiceQuestionTheme.common();
+  ChoiceQuestionTheme get _theme => widget.data.theme ?? const ChoiceQuestionTheme.common();
 
   @override
   void initState() {
@@ -86,8 +86,7 @@ class _ChoiceQuestionPageState extends State<ChoiceQuestionPage>
                     selectedOptions: _selectedItems,
                   )
                 : _QuestionRadioButtons(
-                    selectedOption:
-                        _selectedItems.isEmpty ? null : _selectedItems.first,
+                    selectedOption: _selectedItems.isEmpty ? null : _selectedItems.first,
                     options: widget.data.options,
                     onChanged: (selectedItem) => _onInputChanged(
                       selectedItem == null ? null : [selectedItem],
@@ -129,7 +128,14 @@ class _QuestionCheckboxes extends StatelessWidget {
       children: options
           .map((option) => CheckboxListTile(
                 controlAffinity: ListTileControlAffinity.leading,
-                title: Text(option),
+                title: Text(
+                  option,
+                  style: const TextStyle(
+                    fontFamily: AppFonts.karlaFamily,
+                    fontSize: AppFonts.sizeM,
+                    fontWeight: AppFonts.weightRegular,
+                  ),
+                ),
                 value: selectedOptions.contains(option),
                 activeColor: Colors.transparent,
                 checkColor: AppColors.black,
@@ -186,7 +192,14 @@ class _QuestionRadioButtons extends StatelessWidget {
             .map((option) => RadioListTile<String?>(
                   groupValue: selectedOption,
                   controlAffinity: ListTileControlAffinity.leading,
-                  title: Text(option),
+                  title: Text(
+                    option,
+                    style: const TextStyle(
+                      fontFamily: AppFonts.karlaFamily,
+                      fontSize: AppFonts.sizeM,
+                      fontWeight: AppFonts.weightRegular,
+                    ),
+                  ),
                   value: option,
                   activeColor: activeColor,
                   onChanged: onChanged,

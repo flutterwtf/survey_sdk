@@ -17,6 +17,7 @@ class CustomizationText extends StatelessWidget {
       style: const TextStyle(
         fontSize: AppFonts.sizeM,
         fontWeight: AppFonts.weightSemiBold,
+        fontFamily: AppFonts.interFamily,
       ),
     );
   }

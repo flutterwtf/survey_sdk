@@ -61,6 +61,8 @@ class _QuestionListState extends State<QuestionList> {
                   style: const TextStyle(
                     color: AppColors.text,
                     fontWeight: AppFonts.weightBold,
+                    fontFamily: AppFonts.interFamily,
+                    fontSize: AppFonts.sizeL,
                   ),
                 ),
                 const SizedBox(

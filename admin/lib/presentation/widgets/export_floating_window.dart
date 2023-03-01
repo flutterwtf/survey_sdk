@@ -82,8 +82,9 @@ class _ExportFloatingWindow extends StatelessWidget {
                   context.localization.export_floating_window_title,
                   textAlign: TextAlign.center,
                   style: const TextStyle(
-                    fontSize: AppFonts.sizeL,
+                    fontSize: AppFonts.sizeM,
                     fontWeight: AppFonts.weightMedium,
+                    fontFamily: AppFonts.interFamily,
                   ),
                 ),
               ),
@@ -129,6 +130,7 @@ class _ExportFloatingWindow extends StatelessWidget {
                           style: const TextStyle(
                             fontSize: AppFonts.sizeM,
                             fontWeight: AppFonts.weightBold,
+                            fontFamily: AppFonts.karlaFamily,
                             color: AppColors.black,
                           ),
                         ),
@@ -158,6 +160,7 @@ class _ExportFloatingWindow extends StatelessWidget {
                           style: const TextStyle(
                             fontSize: AppFonts.sizeM,
                             fontWeight: AppFonts.weightBold,
+                            fontFamily: AppFonts.karlaFamily,
                             color: AppColors.white,
                           ),
                         ),

@@ -151,6 +151,7 @@ class _AppBarTitle extends StatelessWidget {
           color: AppColors.black,
           fontSize: AppFonts.sizeM,
           fontWeight: AppFonts.weightRegular,
+          fontFamily: AppFonts.interFamily,
         ),
       ),
     );
@@ -181,7 +182,8 @@ class _TabButton extends StatelessWidget {
           style: TextStyle(
             color: AppColors.black,
             fontSize: AppFonts.sizeL,
-            fontWeight: isSelected ? AppFonts.weightBold : AppFonts.weightRegular,
+            fontFamily: AppFonts.interFamily,
+            fontWeight: isSelected ? AppFonts.weightSemiBold : AppFonts.weightRegular,
           ),
         ),
       ),
@@ -241,6 +243,7 @@ class _AssetTextOption extends StatelessWidget {
             style: const TextStyle(
               fontSize: AppFonts.sizeL,
               fontWeight: AppFonts.weightMedium,
+              fontFamily: AppFonts.interFamily,
             ),
           ),
         ],
@@ -274,6 +277,8 @@ class _AddButton extends StatelessWidget {
             style: TextStyle(
               color: AppColors.white,
               fontWeight: AppFonts.weightBold,
+              fontSize: AppFonts.sizeM,
+              fontFamily: AppFonts.karlaFamily,
             ),
           ),
         ),

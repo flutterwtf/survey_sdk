@@ -46,6 +46,7 @@ class CustomizationTextField extends StatelessWidget {
       style: TextStyle(
         fontSize: fontSize,
         fontWeight: AppFonts.weightRegular,
+        fontFamily: AppFonts.interFamily,
         color: AppColors.black,
       ),
       inputFormatters: inputFormatters,

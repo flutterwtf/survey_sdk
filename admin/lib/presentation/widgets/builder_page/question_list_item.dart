@@ -27,6 +27,8 @@ class QuestionListItem extends StatelessWidget {
                 style: const TextStyle(
                   color: AppColors.textGrey,
                   fontSize: AppFonts.sizeS,
+                  fontFamily: AppFonts.interFamily,
+                  fontWeight: AppFonts.weightRegular,
                 ),
               ),
             ),
@@ -41,7 +43,14 @@ class QuestionListItem extends StatelessWidget {
               width: 40,
             ),
             const SizedBox(width: AppDimensions.marginXS),
-            Text(questionData.type),
+            Text(
+              questionData.type,
+              style: const TextStyle(
+                fontFamily: AppFonts.interFamily,
+                fontSize: AppFonts.sizeM,
+                fontWeight: AppFonts.weightRegular,
+              ),
+            ),
           ],
         ),
       ),

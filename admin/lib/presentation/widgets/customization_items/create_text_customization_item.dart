@@ -29,6 +29,7 @@ class CreateTextCustomizationItem extends StatelessWidget {
         style: const TextStyle(
           fontSize: AppFonts.sizeL,
           fontWeight: AppFonts.weightRegular,
+          fontFamily: AppFonts.interFamily,
           color: AppColors.black,
         ),
         onChanged: onChanged,

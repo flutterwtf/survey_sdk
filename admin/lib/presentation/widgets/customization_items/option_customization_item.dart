@@ -112,7 +112,11 @@ class _Option extends StatelessWidget {
         Expanded(
           child: Text(
             option,
-            style: const TextStyle(fontSize: AppFonts.sizeL),
+            style: const TextStyle(
+              fontSize: AppFonts.sizeL,
+              fontFamily: AppFonts.interFamily,
+              fontWeight: AppFonts.weightRegular,
+            ),
           ),
         ),
         IconButton(

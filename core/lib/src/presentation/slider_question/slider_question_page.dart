@@ -110,6 +110,7 @@ class _QuestionSliderState extends State<_QuestionSlider> {
     _onlyInt = widget.initialValue.ceilToDouble() == widget.initialValue.floorToDouble();
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return SliderTheme(
@@ -130,12 +131,20 @@ class _QuestionSliderState extends State<_QuestionSlider> {
             children: [
               Text(
                 widget.minValue.toString(),
-                style: const TextStyle(fontSize: AppFonts.sizeM),
+                style: const TextStyle(
+                  fontSize: AppFonts.sizeM,
+                  fontFamily: AppFonts.interFamily,
+                  fontWeight: AppFonts.weightRegular,
+                ),
               ),
               const Spacer(),
               Text(
                 widget.maxValue.toString(),
-                style: const TextStyle(fontSize: AppFonts.sizeM),
+                style: const TextStyle(
+                  fontSize: AppFonts.sizeM,
+                  fontFamily: AppFonts.interFamily,
+                  fontWeight: AppFonts.weightRegular,
+                ),
               ),
             ],
           ),

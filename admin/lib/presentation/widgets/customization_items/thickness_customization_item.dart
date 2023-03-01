@@ -34,6 +34,7 @@ class ThicknessCustomizationItem extends StatelessWidget {
         Text(
           context.localization.px,
           style: const TextStyle(
+            fontFamily: AppFonts.interFamily,
             fontSize: AppFonts.sizeL,
             fontWeight: AppFonts.weightRegular,
             color: AppColors.black,

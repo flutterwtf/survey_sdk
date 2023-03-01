@@ -19,6 +19,7 @@ class CustomizationTitle extends StatelessWidget {
         style: const TextStyle(
           fontSize: AppFonts.sizeM,
           fontWeight: AppFonts.weightBold,
+          fontFamily: AppFonts.interFamily,
         ),
       ),
     );

@@ -25,12 +25,10 @@ class CustomizationItemsContainer extends StatefulWidget {
   }) : assert(children.isNotEmpty);
 
   @override
-  State<CustomizationItemsContainer> createState() =>
-      _CustomizationItemsContainerState();
+  State<CustomizationItemsContainer> createState() => _CustomizationItemsContainerState();
 }
 
-class _CustomizationItemsContainerState
-    extends State<CustomizationItemsContainer> {
+class _CustomizationItemsContainerState extends State<CustomizationItemsContainer> {
   final List<Widget> _items = [];
 
   @override
@@ -71,6 +69,7 @@ class _CustomizationItemsContainerState
               style: const TextStyle(
                 fontSize: AppFonts.sizeM,
                 fontWeight: AppFonts.weightSemiBold,
+                fontFamily: AppFonts.interFamily,
               ),
             ),
           ),

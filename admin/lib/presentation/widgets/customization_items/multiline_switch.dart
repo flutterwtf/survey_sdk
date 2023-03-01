@@ -89,6 +89,8 @@ class _LineAmountInputField extends StatelessWidget {
           Text(
             context.localization.lines,
             style: const TextStyle(
+              fontFamily: AppFonts.interFamily,
+              fontWeight: AppFonts.weightRegular,
               fontSize: AppFonts.sizeM,
               color: AppColors.black,
             ),

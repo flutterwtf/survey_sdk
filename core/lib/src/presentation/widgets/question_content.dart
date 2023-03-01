@@ -15,6 +15,9 @@ class QuestionContent extends StatelessWidget {
       content,
       style: const TextStyle(
         fontSize: AppFonts.sizeS,
+        fontFamily: AppFonts.karlaFamily,
+        fontWeight: AppFonts.weightRegular,
+        color: Colors.black,
       ),
     );
   }

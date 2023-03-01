@@ -46,6 +46,7 @@ class QuestionBottomButton extends StatelessWidget {
                   color: isOutlined ? accentColor : Colors.white,
                   fontWeight: AppFonts.weightBold,
                   fontSize: AppFonts.sizeM,
+                  fontFamily: AppFonts.karlaFamily,
                 ),
                 textAlign: TextAlign.center,
               ),

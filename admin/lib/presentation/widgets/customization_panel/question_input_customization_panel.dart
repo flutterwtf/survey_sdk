@@ -94,6 +94,7 @@ class QuestionInputCustomizationPanel extends CustomizationPanel {
                         suffixStyle: const TextStyle(
                           fontSize: AppFonts.sizeL,
                           fontWeight: AppFonts.weightRegular,
+                          fontFamily: AppFonts.interFamily,
                         ),
                       ),
                       onChanged: (size) {

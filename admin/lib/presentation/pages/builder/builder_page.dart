@@ -26,31 +26,30 @@ class _BuilderPageState extends State<BuilderPage> {
   Widget build(BuildContext context) {
     return BlocBuilder<BuilderCubit, BuilderState>(
       bloc: _cubit,
-      builder: (context, state) =>
-          Scaffold(
-            appBar: AppBar(
-              toolbarHeight: AppDimensions.appbarSize,
-              backgroundColor: AppColors.white,
-              shadowColor: AppColors.transparentW,
-              centerTitle: true,
-              title: const _BuilderPageTabBar(),
-              actions: const [
-                _CreateTab(),
-                _PreviewTab(),
-              ],
+      builder: (context, state) => Scaffold(
+        appBar: AppBar(
+          toolbarHeight: AppDimensions.appbarSize,
+          backgroundColor: AppColors.white,
+          shadowColor: AppColors.transparentW,
+          centerTitle: true,
+          title: const _BuilderPageTabBar(),
+          actions: const [
+            _CreateTab(),
+            _PreviewTab(),
+          ],
+        ),
+        body: Row(
+          children: [
+            QuestionList(onSelect: _cubit.select),
+            Expanded(
+              child: PhoneView(
+                child: Container(),
+              ),
             ),
-            body: Row(
-              children: [
-                QuestionList(onSelect: _cubit.select),
-                Expanded(
-                  child: PhoneView(
-                    child: Container(),
-                  ),
-                ),
-                const SurveyEditorBar(),
-              ],
-            ),
-          ),
+            const SurveyEditorBar(),
+          ],
+        ),
+      ),
     );
   }
 }
@@ -77,7 +76,11 @@ class _BuilderPageTabBar extends StatelessWidget {
           unselectedLabelColor: AppColors.textGrey,
           indicatorColor: AppColors.black,
           labelColor: AppColors.text,
-          labelStyle: const TextStyle(fontWeight: AppFonts.weightBold),
+          labelStyle: const TextStyle(
+            fontWeight: AppFonts.weightBold,
+            fontFamily: AppFonts.interFamily,
+            fontSize: AppFonts.sizeL,
+          ),
           tabs: [
             Tab(text: context.localization.create),
             Tab(text: context.localization.preview),
@@ -115,7 +118,9 @@ class _CreateTab extends StatelessWidget {
             context.localization.import,
             style: const TextStyle(
               color: AppColors.text,
-              fontWeight: AppFonts.weightSemiBold,
+              fontWeight: AppFonts.weightBold,
+              fontFamily: AppFonts.karlaFamily,
+              fontSize: AppFonts.sizeM,
             ),
           ),
         ),
@@ -154,7 +159,9 @@ class _PreviewTab extends StatelessWidget {
             context.localization.export,
             style: const TextStyle(
               color: AppColors.white,
-              fontWeight: AppFonts.weightSemiBold,
+              fontWeight: AppFonts.weightBold,
+              fontFamily: AppFonts.karlaFamily,
+              fontSize: AppFonts.sizeM,
             ),
           ),
         ),
