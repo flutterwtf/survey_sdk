@@ -2,20 +2,17 @@ import 'package:survey_core/src/domain/entities/question_types/question_data.dar
 import 'package:survey_core/src/domain/entities/themes/intro_question_theme.dart';
 
 class IntroQuestionData extends QuestionData {
-  final String? content;
   final String mainButtonTitle;
   final String? secondaryButtonTitle;
 
   const IntroQuestionData({
     required this.mainButtonTitle,
-    required super.id,
+    required super.index,
     required super.title,
     required super.subtitle,
-    required super.typeQuestion,
     required super.isSkip,
-    super.info,
+    super.content,
     this.secondaryButtonTitle,
-    this.content,
   });
 
   @override
@@ -26,12 +23,10 @@ class IntroQuestionData extends QuestionData {
 
   @override
   Map<String, dynamic> toJson() => {
-        'id': id,
+        'index': index,
         'title': title,
         'subtitle': subtitle,
-        'typeQuestion': typeQuestion,
         'isSkip': isSkip,
-        'info': info,
         'payload': {
           'mainButtonTitle': mainButtonTitle,
           'secondaryButtonTitle': secondaryButtonTitle,
@@ -42,12 +37,10 @@ class IntroQuestionData extends QuestionData {
   static IntroQuestionData fromJson(Map<String, dynamic> json) {
     final payload = json['payload'];
     return IntroQuestionData(
-      id: json['id'],
+      index: json['index'],
       title: json['title'],
       subtitle: json['subtitle'],
-      typeQuestion: json['typeQuestion'],
       isSkip: json['isSkip'],
-      info: json['info'],
       mainButtonTitle: payload['mainButtonTitle'],
       secondaryButtonTitle: payload['secondaryButtonTitle'],
       content: payload['content'],
