@@ -11,76 +11,76 @@ import 'package:survey_core/src/presentation/intro_question/intro_question_page.
 import 'package:survey_core/src/presentation/slider_question/slider_question_page.dart';
 import 'package:survey_core/src/presentation/utils/data_to_widget_util.dart';
 
+void _mockOnSend(dynamic data) {}
+
 void main() {
+  final mockSliderData = SliderQuestionData(
+    minValue: 0,
+    maxValue: 10,
+    initialValue: 5,
+    index: 0,
+    title: 'title',
+    subtitle: 'subtitle',
+    isSkip: false,
+  );
+  final mockChoiceData = ChoiceQuestionData(
+    isMultipleChoice: true,
+    options: const ['option 1', 'option 2', 'option 3'],
+    index: 0,
+    title: 'title',
+    subtitle: 'subtitle',
+    isSkip: false,
+  );
+  final mockInputData = InputQuestionData(
+    validator: DefaultValidator(),
+    index: 0,
+    title: 'title',
+    subtitle: 'subtitle',
+    isSkip: false,
+  );
+  final mockIntroData = IntroQuestionData(
+    mainButtonTitle: 'button title',
+    index: 0,
+    title: 'title',
+    subtitle: 'subtitle',
+    isSkip: false,
+  );
+
   group('createWidget method', () {
-    mockOnSend(dynamic data) {}
-
-    test('Call with SliderQuestionData', () async {
-      final mockData = SliderQuestionData(
-        minValue: 0,
-        maxValue: 10,
-        initialValue: 5,
-        index: 0,
-        title: 'title',
-        subtitle: 'subtitle',
-        isSkip: false,
-      );
-      final widget = DataToWidgetUtil.createWidget(mockData, mockOnSend);
-
+    test('Call with SliderQuestionData}', () async {
+      final widget = DataToWidgetUtil.createWidget(mockSliderData, _mockOnSend);
       expect(widget.runtimeType, SliderQuestionPage);
-      expect((widget as SliderQuestionPage).data, mockData);
-      expect(widget.onSend, mockOnSend);
+      expect((widget as SliderQuestionPage).data, mockSliderData);
+      expect(widget.onSend, _mockOnSend);
     });
 
     test('Call with ChoiceQuestionData', () async {
-      final mockData = ChoiceQuestionData(
-        isMultipleChoice: true,
-        options: ['option 1', 'option 2', 'option 3'],
-        index: 0,
-        title: 'title',
-        subtitle: 'subtitle',
-        isSkip: false,
-      );
-      final widget = DataToWidgetUtil.createWidget(mockData, mockOnSend);
+      final widget = DataToWidgetUtil.createWidget(mockChoiceData, _mockOnSend);
 
       expect(widget.runtimeType, ChoiceQuestionPage);
-      expect((widget as ChoiceQuestionPage).data, mockData);
-      expect(widget.onSend, mockOnSend);
+      expect((widget as ChoiceQuestionPage).data, mockChoiceData);
+      expect(widget.onSend, _mockOnSend);
     });
 
     test('Call with InputQuestionData', () async {
-      final mockData = InputQuestionData(
-        validator: DefaultValidator(),
-        index: 0,
-        title: 'title',
-        subtitle: 'subtitle',
-        isSkip: false,
-      );
-      final widget = DataToWidgetUtil.createWidget(mockData, mockOnSend);
+      final widget = DataToWidgetUtil.createWidget(mockInputData, _mockOnSend);
 
       expect(widget.runtimeType, InputQuestionPage);
-      expect((widget as InputQuestionPage).data, mockData);
-      expect(widget.onSend, mockOnSend);
+      expect((widget as InputQuestionPage).data, mockInputData);
+      expect(widget.onSend, _mockOnSend);
     });
 
     test('Call with IntroQuestionData', () async {
-      final mockData = IntroQuestionData(
-        mainButtonTitle: 'button title',
-        index: 0,
-        title: 'title',
-        subtitle: 'subtitle',
-        isSkip: false,
-      );
-      final widget = DataToWidgetUtil.createWidget(mockData, mockOnSend);
+      final widget = DataToWidgetUtil.createWidget(mockIntroData, _mockOnSend);
 
       expect(widget.runtimeType, IntroQuestionPage);
-      expect((widget as IntroQuestionPage).data, mockData);
-      expect(widget.onSend, mockOnSend);
+      expect((widget as IntroQuestionPage).data, mockIntroData);
+      expect(widget.onSend, _mockOnSend);
     });
 
     test('Call with bad QuestionData', () async {
       expect(
-        () => DataToWidgetUtil.createWidget(_BadQuestionData(), mockOnSend),
+        () => DataToWidgetUtil.createWidget(_BadQuestionData(), _mockOnSend),
         throwsException,
       );
     });
@@ -107,4 +107,15 @@ class _BadQuestionData extends QuestionData {
 
   @override
   List<Object?> get props => [];
+
+  @override
+  QuestionData copyWith({
+    int? index,
+    String? title,
+    String? subtitle,
+    String? content,
+    bool? isSkip,
+  }) {
+    throw UnimplementedError();
+  }
 }

@@ -26,7 +26,7 @@ class IntroQuestionData extends QuestionData {
         );
 
   @override
-  QuestionData copyWith({
+  IntroQuestionData copyWith({
     String? mainButtonTitle,
     int? index,
     String? title,

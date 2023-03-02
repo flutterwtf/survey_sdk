@@ -29,7 +29,7 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
         );
 
   @override
-  QuestionData copyWith({
+  ChoiceQuestionData copyWith({
     bool? isMultipleChoice,
     List<String>? options,
     int? index,
