@@ -56,7 +56,6 @@ class _CustomSwitchState extends State<_CustomSwitch> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      key: const Key('Switch'),
       onTap: () {
         setState(() {
           _isToggled = !_isToggled;
@@ -67,9 +66,7 @@ class _CustomSwitchState extends State<_CustomSwitch> {
         height: 18,
         width: 34,
         decoration: BoxDecoration(
-          color: _isToggled
-              ? AppColors.switchBackgroundActive
-              : AppColors.switchBackgroundInactive,
+          color: _isToggled ? AppColors.switchBackgroundActive : AppColors.switchBackgroundInactive,
           borderRadius: BorderRadius.circular(9),
         ),
         duration: AppDuration.customizationItemAnimation,
