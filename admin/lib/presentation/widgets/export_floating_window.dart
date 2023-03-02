@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:survey_admin/presentation/app/localization/localizations.dart';
 import 'package:survey_admin/presentation/utils/app_fonts.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
@@ -30,7 +31,6 @@ void showExportFloatingWindow(
   overlayState.insert(overlayEntry);
 }
 
-// TODO use localization
 class _ExportFloatingWindow extends StatelessWidget {
   final VoidCallback onClosePressed;
   final VoidCallback onDownloadPressed;
@@ -73,16 +73,15 @@ class _ExportFloatingWindow extends StatelessWidget {
                   ),
                 ],
               ),
-              const Padding(
-                padding: EdgeInsets.symmetric(
+              Padding(
+                padding: const EdgeInsets.symmetric(
                   vertical: AppDimensions.marginS,
-                  horizontal: AppDimensions.marginLargeM,
+                  horizontal: AppDimensions.marginL,
                 ),
                 child: Text(
-                  'Save generated json-file with all '
-                  'settings to use in your app',
+                  context.localization.export_floating_window_title,
                   textAlign: TextAlign.center,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: AppFonts.sizeL,
                     fontWeight: AppFonts.weightMedium,
                   ),
@@ -93,14 +92,15 @@ class _ExportFloatingWindow extends StatelessWidget {
                   vertical: AppDimensions.marginM,
                 ),
                 child: Icon(
+                  //TODO: replace with the one from figma maybe???
                   Icons.task_rounded,
-                  size: AppDimensions.size2XL,
+                  size: AppDimensions.sizeXL,
                   color: AppColors.black,
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.all(
-                  AppDimensions.marginLargeM,
+                  AppDimensions.marginL,
                 ),
                 child: Row(
                   children: [
@@ -124,9 +124,9 @@ class _ExportFloatingWindow extends StatelessWidget {
                             ),
                           ),
                         ),
-                        child: const Text(
-                          'COPY',
-                          style: TextStyle(
+                        child: Text(
+                          context.localization.copy,
+                          style: const TextStyle(
                             fontSize: AppFonts.sizeM,
                             fontWeight: AppFonts.weightBold,
                             color: AppColors.black,
@@ -153,9 +153,9 @@ class _ExportFloatingWindow extends StatelessWidget {
                             ),
                           ),
                         ),
-                        child: const Text(
-                          'DOWNLOAD',
-                          style: TextStyle(
+                        child: Text(
+                          context.localization.download,
+                          style: const TextStyle(
                             fontSize: AppFonts.sizeM,
                             fontWeight: AppFonts.weightBold,
                             color: AppColors.white,

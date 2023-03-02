@@ -4,18 +4,26 @@ import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
 import 'package:survey_admin/presentation/utils/constants/image_constants.dart';
 import 'package:survey_admin/presentation/widgets/vector_image.dart';
+import 'package:survey_core/survey_core.dart';
 
+// TODO(dev): check localization
 const _title = 'New screen';
 const _tabs = [
   'Intro',
-  'Single choice',
-  'Multiple choice',
+  'Choice',
+  'Slider',
   'Custom input',
 ];
+final Map<String, QuestionData> _dataMap = {
+  'Intro': IntroQuestionData.common(),
+  'Choice': ChoiceQuestionData.common(),
+  'Slider': SliderQuestionData.common(),
+  'Custom input': InputQuestionData.common(),
+};
 const _optionsInTabs = {
   'Intro': ['Title', 'Image intro'],
-  'Single choice': ['Radio button', 'Slider'],
-  'Multiple choice': ['Check box'],
+  'Choice': ['Radio button', 'Check box'],
+  'Slider': ['Slider'],
   'Custom input': ['Single-line input', 'Multi-line input'],
 };
 
@@ -30,12 +38,7 @@ const Map<String, String> _optionsAssets = {
 };
 
 class NewQuestionPage extends StatefulWidget {
-  final VoidCallback onSubmit;
-
-  const NewQuestionPage({
-    Key? key,
-    required this.onSubmit,
-  }) : super(key: key);
+  const NewQuestionPage({Key? key}) : super(key: key);
 
   @override
   State<NewQuestionPage> createState() => _NewQuestionPageState();
@@ -50,7 +53,7 @@ class _NewQuestionPageState extends State<NewQuestionPage> {
       title: tabTitle,
       onTap: () {
         setState(
-              () => _selectedTab = tabTitle,
+          () => _selectedTab = tabTitle,
         );
       },
       isSelected: _selectedTab == tabTitle ? true : false,
@@ -58,7 +61,6 @@ class _NewQuestionPageState extends State<NewQuestionPage> {
   }
 
   @override
-  //TODO: split
   Widget build(BuildContext context) {
     return Theme(
       data: ThemeData().copyWith(
@@ -73,29 +75,9 @@ class _NewQuestionPageState extends State<NewQuestionPage> {
             backgroundColor: AppColors.white,
             shadowColor: AppColors.transparentW,
             automaticallyImplyLeading: false,
-            title: const Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                _title,
-                style: TextStyle(
-                  color: AppColors.black,
-                  fontSize: AppFonts.sizeM,
-                  fontWeight: AppFonts.weightRegular,
-                ),
-              ),
-            ),
-            actions: [
-              GestureDetector(
-                onTap: () => Navigator.pop(context),
-                child: Container(
-                  margin:
-                      const EdgeInsets.only(right: AppDimensions.marginLargeM),
-                  child: const Align(
-                    alignment: Alignment.centerRight,
-                    child: VectorImage(assetName: AppAssets.closeIcon),
-                  ),
-                ),
-              )
+            title: const _AppBarTitle(),
+            actions: const [
+              _BackButton(),
             ],
           ),
         ),
@@ -111,20 +93,57 @@ class _NewQuestionPageState extends State<NewQuestionPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: _tabs.map(_questionTab).toList(),
               ),
-              Expanded(
-                child: _QuestionOptionsListView(
-                  options: _optionsInTabs[_selectedTab] ?? [],
-                  selectedOption: _selectedOption ?? '',
-                ),
+              _QuestionOptionsListView(
+                options: _optionsInTabs[_selectedTab] ?? [],
+                selectedOption: _selectedOption ?? '',
               ),
             ],
           ),
         ),
         persistentFooterButtons: [
           _AddButton(
-            onPressed: widget.onSubmit,
+            onPressed: () {
+              Navigator.pop(context, _dataMap[_selectedTab]);
+            },
           ),
         ],
+      ),
+    );
+  }
+}
+
+class _BackButton extends StatelessWidget {
+  const _BackButton({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () => Navigator.pop(context),
+      child: Container(
+        margin: const EdgeInsets.only(right: AppDimensions.marginL),
+        child: const Align(
+          alignment: Alignment.centerRight,
+          child: VectorImage(assetName: AppAssets.closeIcon),
+        ),
+      ),
+    );
+  }
+}
+
+class _AppBarTitle extends StatelessWidget {
+  const _AppBarTitle({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const Align(
+      alignment: Alignment.centerLeft,
+      child: Text(
+        _title,
+        style: TextStyle(
+          color: AppColors.black,
+          fontSize: AppFonts.sizeM,
+          fontWeight: AppFonts.weightRegular,
+        ),
       ),
     );
   }
@@ -154,8 +173,7 @@ class _TabButton extends StatelessWidget {
           style: TextStyle(
             color: AppColors.black,
             fontSize: AppFonts.sizeL,
-            fontWeight:
-                isSelected ? AppFonts.weightBold : AppFonts.weightRegular,
+            fontWeight: isSelected ? AppFonts.weightBold : AppFonts.weightRegular,
           ),
         ),
       ),
@@ -175,15 +193,17 @@ class _QuestionOptionsListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: options.length,
-      scrollDirection: Axis.horizontal,
-      itemBuilder: (context, index) {
-        return _AssetTextOption(
-          assetName: _optionsAssets[options[index]] ?? '',
-          titleText: options[index],
-        );
-      },
+    return Expanded(
+      child: ListView.builder(
+        itemCount: options.length,
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (context, index) {
+          return _AssetTextOption(
+            assetName: _optionsAssets[options[index]] ?? '',
+            titleText: options[index],
+          );
+        },
+      ),
     );
   }
 }
@@ -201,13 +221,13 @@ class _AssetTextOption extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: AppDimensions.margin3XL),
-      padding: const EdgeInsets.all(AppDimensions.marginS),
+      margin: const EdgeInsets.symmetric(horizontal: AppDimensions.margin4XL),
+      padding: const EdgeInsets.all(AppDimensions.marginXS),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           VectorImage(assetName: assetName),
-          const SizedBox(height: AppDimensions.marginLargeM),
+          const SizedBox(height: AppDimensions.marginXL),
           Text(
             titleText,
             style: const TextStyle(

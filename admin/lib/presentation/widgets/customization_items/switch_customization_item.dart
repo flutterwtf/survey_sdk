@@ -5,16 +5,16 @@ import 'package:survey_admin/presentation/widgets/customization_items/customizat
 
 //TODO: extend every item from CustomizationItem class
 class SwitchCustomizationItem extends StatelessWidget {
+  final String title;
+  final bool? initialValue;
+  final void Function(bool isToggled)? onChanged;
+
   const SwitchCustomizationItem({
     super.key,
     required this.title,
     this.initialValue,
     this.onChanged,
   });
-
-  final String title;
-  final bool? initialValue;
-  final void Function(bool isToggled)? onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class SwitchCustomizationItem extends StatelessWidget {
         CustomizationText(title),
         const Spacer(),
         _CustomSwitch(
-          initialValue: initialValue,
+          initialValue: initialValue ?? false,
           onChanged: onChanged,
         ),
       ],
@@ -32,13 +32,13 @@ class SwitchCustomizationItem extends StatelessWidget {
 }
 
 class _CustomSwitch extends StatefulWidget {
+  final bool initialValue;
+  final void Function(bool isToggled)? onChanged;
+
   const _CustomSwitch({
-    this.initialValue,
+    required this.initialValue,
     this.onChanged,
   });
-
-  final bool? initialValue;
-  final void Function(bool isToggled)? onChanged;
 
   @override
   State<_CustomSwitch> createState() => _CustomSwitchState();
@@ -48,8 +48,15 @@ class _CustomSwitchState extends State<_CustomSwitch> {
   bool _isToggled = false;
 
   @override
+  void initState() {
+    super.initState();
+    _isToggled = widget.initialValue;
+  }
+
+  @override
   Widget build(BuildContext context) {
     return InkWell(
+      key: const Key('Switch'),
       onTap: () {
         setState(() {
           _isToggled = !_isToggled;

@@ -2,14 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:survey_admin/presentation/utils/app_fonts.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
+import 'package:survey_core/survey_core.dart';
 
-class SurveyQuestionListItem extends StatelessWidget {
-  final int index;
-  final String title;
+class QuestionListItem extends StatelessWidget {
+  final QuestionData questionData;
 
-  const SurveyQuestionListItem({
-    required this.index,
-    required this.title,
+  const QuestionListItem({
+    required this.questionData,
     super.key,
   });
 
@@ -22,26 +21,27 @@ class SurveyQuestionListItem extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.only(top: AppDimensions.marginS),
+              padding: const EdgeInsets.only(top: AppDimensions.marginXS),
               child: Text(
-                index.toString(),
+                questionData.index.toString(),
                 style: const TextStyle(
                   color: AppColors.textGrey,
                   fontSize: AppFonts.sizeS,
                 ),
               ),
             ),
-            const SizedBox(width: AppDimensions.marginS),
+            const SizedBox(width: AppDimensions.marginXS),
             Container(
               decoration: const BoxDecoration(
                 color: AppColors.switchBackgroundActive,
                 borderRadius: BorderRadius.all(Radius.circular(10)),
               ),
+              //TODO: to const maybe???
               height: 40,
               width: 40,
             ),
-            const SizedBox(width: AppDimensions.marginS),
-            Text(title),
+            const SizedBox(width: AppDimensions.marginXS),
+            Text(questionData.type),
           ],
         ),
       ),

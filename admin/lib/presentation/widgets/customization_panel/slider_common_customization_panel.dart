@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:survey_admin/presentation/app/localization/localizations.dart';
 import 'package:survey_admin/presentation/utils/app_fonts.dart';
@@ -7,17 +8,21 @@ import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/color_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
-import 'package:survey_admin/presentation/widgets/customization_items/customization_text_field.dart';
+import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/customization_panel.dart';
 
-class CommonCustomizationPanel extends CustomizationPanel {
+class SliderCommonCustomizationPanel extends CustomizationPanel {
   final ValueChanged<Color> onFillColorChanged;
   final ValueChanged<Color> onTitleColorChanged;
   final ValueChanged<Color> onSubtitleColorChanged;
   final ValueChanged<Color> onButtonUpColorChanged;
   final ValueChanged<Color> onButtonDownColorChanged;
+  final ValueChanged<String?> onTitleChanged;
+  final ValueChanged<String?> onSubtitleChanged;
+  final ValueChanged<String?> onButtonDownChanged;
+  final ValueChanged<String?> onButtonBorderChanged;
 
-  const CommonCustomizationPanel({
+  const SliderCommonCustomizationPanel({
     super.key,
     required super.title,
     required this.onButtonDownColorChanged,
@@ -25,6 +30,10 @@ class CommonCustomizationPanel extends CustomizationPanel {
     required this.onFillColorChanged,
     required this.onSubtitleColorChanged,
     required this.onTitleColorChanged,
+    required this.onTitleChanged,
+    required this.onSubtitleChanged,
+    required this.onButtonDownChanged,
+    required this.onButtonBorderChanged,
   });
 
   @override
@@ -33,6 +42,7 @@ class CommonCustomizationPanel extends CustomizationPanel {
       children: [
         CustomizationItemsContainer(
           title: context.localization.fill,
+          isTopDividerShown: true,
           children: [
             ColorCustomizationItem(
               initialColor: AppColors.white,
@@ -54,6 +64,11 @@ class CommonCustomizationPanel extends CustomizationPanel {
                 Expanded(
                   child: CustomizationTextField(
                     initialValue: AppFonts.sizeL.toString(),
+                    onChanged: onTitleChanged,
+                    inputFormatters: [
+                      FilteringTextInputFormatter.digitsOnly,
+                      LengthLimitingTextInputFormatter(2),
+                    ],
                   ),
                 ),
               ],
@@ -74,6 +89,11 @@ class CommonCustomizationPanel extends CustomizationPanel {
                 Expanded(
                   child: CustomizationTextField(
                     initialValue: AppFonts.sizeL.toString(),
+                    onChanged: onSubtitleChanged,
+                    inputFormatters: [
+                      FilteringTextInputFormatter.digitsOnly,
+                      LengthLimitingTextInputFormatter(2),
+                    ],
                   ),
                 ),
               ],
@@ -98,6 +118,11 @@ class CommonCustomizationPanel extends CustomizationPanel {
                 Expanded(
                   child: CustomizationTextField(
                     initialValue: AppFonts.sizeL.toString(),
+                    onChanged: onButtonDownChanged,
+                    inputFormatters: [
+                      FilteringTextInputFormatter.digitsOnly,
+                      LengthLimitingTextInputFormatter(2),
+                    ],
                   ),
                 ),
               ],
@@ -109,6 +134,11 @@ class CommonCustomizationPanel extends CustomizationPanel {
                 Expanded(
                   child: CustomizationTextField(
                     initialValue: AppFonts.sizeL.toString(),
+                    onChanged: onButtonBorderChanged,
+                    inputFormatters: [
+                      FilteringTextInputFormatter.digitsOnly,
+                      LengthLimitingTextInputFormatter(2),
+                    ],
                   ),
                 ),
               ],
