@@ -27,11 +27,6 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
   String _input = '';
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-  }
-
-  @override
   Widget build(BuildContext context) {
     final theme = widget.data.theme ?? const InputQuestionTheme.common();
     final border = OutlineInputBorder(
@@ -99,7 +94,7 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
             text: context.localization.next,
             onPressed: () {
               if (_formKey.currentState?.validate() ?? false || widget.data.isSkip) {
-                widget.onSend(widget.data.type, _input);
+                widget.onSend(key: widget.data.type, data: _input);
               }
             },
             isEnabled: widget.data.isSkip,

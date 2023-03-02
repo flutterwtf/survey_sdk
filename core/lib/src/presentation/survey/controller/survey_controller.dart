@@ -6,8 +6,8 @@ class SurveyController {
 
   dynamic answer(String key) => _answers[key];
 
-  void onNext(String pageType, dynamic data) {
-    _answers['$pageType + ${_pageController.page}'] = data;
+  void onNext({required String key, required dynamic data}) {
+    _answers['$key + ${_pageController.page}'] = data;
     _pageController.nextPage(
       duration: const Duration(seconds: 1),
       curve: Curves.linear,

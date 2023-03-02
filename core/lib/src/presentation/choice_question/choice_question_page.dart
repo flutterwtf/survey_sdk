@@ -93,7 +93,7 @@ class _ChoiceQuestionPageState extends State<ChoiceQuestionPage>
           QuestionBottomButton(
             text: context.localization.next,
             onPressed: () {
-              widget.onSend.call(widget.data.type, _selectedItems);
+              widget.onSend.call(key: widget.data.type, data: _selectedItems);
             },
             isEnabled: widget.data.isSkip ? true : _canBeSend,
           ),

@@ -80,7 +80,7 @@ class _SliderQuestionPageState extends State<SliderQuestionPage> {
           QuestionBottomButton(
             text: context.localization.next,
             onPressed: () {
-              widget.onSend.call(widget.data.type, _answer);
+              widget.onSend.call(key: widget.data.type,data: _answer);
             },
           ),
         ],
@@ -93,7 +93,7 @@ class _QuestionSlider extends StatefulWidget {
   final num minValue;
   final num maxValue;
   final num initialValue;
-  final void Function(double currentSliderValue) onChanged;
+  final ValueChanged<double> onChanged;
   final SliderThemeData theme;
 
   const _QuestionSlider({

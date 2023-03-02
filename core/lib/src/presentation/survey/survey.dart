@@ -59,7 +59,7 @@ class _SurveyState extends State<Survey> {
                         .map<Widget>(
                           (question) => DataToWidgetUtil.createWidget(
                             question,
-                            (key, data) => _surveyController.onNext(key, data),
+                            _surveyController.onNext,
                           ),
                         )
                         .toList(),
