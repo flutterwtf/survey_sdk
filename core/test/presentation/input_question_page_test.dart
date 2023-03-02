@@ -22,11 +22,9 @@ void main() {
             body: InputQuestionPage(
               data: InputQuestionData(
                 validator: DefaultValidator(),
-                value: 0,
-                id: 0,
+                index: 0,
                 title: 'title',
                 subtitle: 'subtitle',
-                typeQuestion: 'typeQuestion',
                 isSkip: false,
               ),
               onSend: (_, __) {},
@@ -48,11 +46,9 @@ void main() {
             body: InputQuestionPage(
               data: InputQuestionData(
                 validator: DefaultValidator(),
-                value: 0,
-                id: 0,
+                index: 0,
                 title: 'title',
                 subtitle: 'subtitle',
-                typeQuestion: 'typeQuestion',
                 isSkip: false,
               ),
               onSend: (_, __) {},
@@ -76,11 +72,9 @@ void main() {
             body: InputQuestionPage(
               data: InputQuestionData(
                 validator: DefaultValidator(),
-                value: 0,
-                id: 0,
+                index: 0,
                 title: 'title',
                 subtitle: 'subtitle',
-                typeQuestion: 'typeQuestion',
                 isSkip: true,
               ),
               onSend: (_, __) => isPressed = true,
@@ -97,11 +91,9 @@ void main() {
           (WidgetTester tester) async {
         final inputQuestionData = InputQuestionData(
           validator: DefaultValidator(),
-          value: 0,
-          id: 0,
+          index: 0,
           title: 'title',
           subtitle: 'subtitle',
-          typeQuestion: 'typeQuestion',
           isSkip: true,
         );
         String? sentData;

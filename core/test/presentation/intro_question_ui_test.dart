@@ -20,14 +20,12 @@ void main() {
       final introQuestionPage = MaterialApp(
         home: Scaffold(
           body: IntroQuestionPage(
-            data: const IntroQuestionData(
+            data: IntroQuestionData(
               mainButtonTitle: mainButtonTitle,
-              secondaryButtonTitle: secondaryButtonTitle,
-              id: 1,
+              index: 1,
               title: title,
               content: content,
               subtitle: '',
-              typeQuestion: 'type',
               isSkip: false,
             ),
             onMainButtonTap: completerOnMainButtonTap.complete,

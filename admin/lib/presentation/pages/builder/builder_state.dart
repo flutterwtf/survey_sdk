@@ -1,12 +1,15 @@
 import 'package:equatable/equatable.dart';
+import 'package:survey_core/survey_core.dart';
 
 class BuilderState extends Equatable {
-  const BuilderState();
+  final QuestionData? selected;
 
-  BuilderState copyWith() {
-    return const BuilderState();
+  const BuilderState({required this.selected});
+
+  BuilderState copyWith({QuestionData? data}) {
+    return BuilderState(selected: data ?? selected);
   }
 
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [selected];
 }
