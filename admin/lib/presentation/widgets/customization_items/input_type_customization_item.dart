@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:survey_admin/presentation/utils/app_fonts.dart';
-import 'package:survey_admin/presentation/utils/asset_strings.dart';
+import 'package:survey_admin/presentation/utils/constants/app_assets.dart';
 import 'package:survey_admin/presentation/utils/constants/app_duration.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
 
@@ -72,7 +72,7 @@ class _InputTypeCustomizationItemState extends State<InputTypeCustomizationItem>
           inputType: _selectedType,
           trailing: RotationTransition(
             turns: _animation,
-            child: SvgPicture.asset(AssetStrings.arrow),
+            child: SvgPicture.asset(AppAssets.arrowIcon),
           ),
           onTap: () {
             setState(() {
