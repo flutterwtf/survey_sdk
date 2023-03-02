@@ -20,17 +20,31 @@ abstract class QuestionData<T> extends Equatable with ApiObject {
     this.content,
   });
 
+  QuestionData copyWith({
+    int? index,
+    String? title,
+    String? subtitle,
+    String? content,
+    bool? isSkip,
+  });
+
   T? get theme;
+
   String get type;
 
   // TODO(dev): to constants maybe?
   static QuestionData fromType(Map<String, dynamic> json) {
-    switch(json['typeQuestion']) {
-      case 'Slider': return SliderQuestionData.fromJson(json);
-      case 'Intro': return IntroQuestionData.fromJson(json);
-      case 'Input': return InputQuestionData.fromJson(json);
-      case 'Choice': return ChoiceQuestionData.fromJson(json);
-      default: throw Exception('Unimplemented error');
+    switch (json['typeQuestion']) {
+      case 'Slider':
+        return SliderQuestionData.fromJson(json);
+      case 'Intro':
+        return IntroQuestionData.fromJson(json);
+      case 'Input':
+        return InputQuestionData.fromJson(json);
+      case 'Choice':
+        return ChoiceQuestionData.fromJson(json);
+      default:
+        throw Exception('Unimplemented error');
     }
   }
 }

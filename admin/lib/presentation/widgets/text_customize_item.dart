@@ -30,6 +30,7 @@ class TextCustomizeItem extends StatefulWidget {
 class _TextCustomizeItemState extends State<TextCustomizeItem> {
   late final TextEditingController _colorTextController;
   late final TextEditingController _textWidthTextController;
+  final stickyKey = GlobalKey();
 
   @override
   void initState() {
@@ -93,19 +94,24 @@ class _TextCustomizeItemState extends State<TextCustomizeItem> {
   }
 
   void pickColor(BuildContext context) {
-    // ignore: inference_failure_on_function_invocation
-    showDialog(
-      context: context,
+    final overlayState = Overlay.of(context);
+    OverlayEntry? overlayEntry;
+    overlayEntry = OverlayEntry(
       builder: (context) {
-        return ColorPickerDialog(
-          onColorPicked: (color) {
-            setState(() {
-              widget.onColorPicked(color);
-            });
-          },
-          colorTextController: _colorTextController,
+        return Positioned(
+          left: Offset.zero.dx,
+          child: ColorPickerDialog(
+            onColorPicked: (color) {
+              setState(() {
+                widget.onColorPicked(color);
+              });
+            },
+            colorTextController: _colorTextController,
+            onClose: overlayEntry!.remove,
+          ),
         );
       },
     );
+    overlayState.insert(overlayEntry);
   }
 }

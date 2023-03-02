@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:survey_core/src/domain/entities/question_types/intro_question_data.dart';
+import 'package:survey_core/src/domain/entities/themes/intro_question_theme.dart';
 import 'package:survey_core/src/presentation/localization/localizations.dart';
 import 'package:survey_core/src/presentation/utils/constants.dart';
 import 'package:survey_core/src/presentation/utils/data_to_widget_util.dart';
@@ -22,6 +23,9 @@ class IntroQuestionPage extends StatelessWidget {
     super.key,
   });
 
+  IntroQuestionTheme get _theme =>
+      data.theme ?? const IntroQuestionTheme.common();
+
   @override
   Widget build(BuildContext context) {
     final onSecondaryButtonTap = this.onSecondaryButtonTap;
@@ -38,6 +42,8 @@ class IntroQuestionPage extends StatelessWidget {
         children: [
           QuestionTitle(
             title: data.title,
+            textColor: _theme.titleTextColor,
+            textSize: _theme.titleTextSize,
           ),
           if (content != null)
             Padding(
@@ -46,6 +52,8 @@ class IntroQuestionPage extends StatelessWidget {
               ),
               child: QuestionContent(
                 content: content,
+                textColor: _theme.subTitleTextColor,
+                textSize: _theme.subTitleTextSize,
               ),
             ),
           const Spacer(),
@@ -58,13 +66,16 @@ class IntroQuestionPage extends StatelessWidget {
                     child: QuestionBottomButton(
                       text: context.localization.skip,
                       onPressed: onSecondaryButtonTap,
-                      isOutlined: true,
                     ),
                   ),
                 ),
               Flexible(
                 child: QuestionBottomButton(
                   text: data.mainButtonTitle,
+                  color: _theme.mainButtonColor,
+                  textColor: _theme.mainButtonTextColor,
+                  textSize: _theme.mainButtonTextSize,
+                  radius: _theme.mainButtonRadius,
                   onPressed: onMainButtonTap ?? () {},
                 ),
               ),

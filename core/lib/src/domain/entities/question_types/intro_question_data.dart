@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:survey_core/src/domain/entities/question_types/question_data.dart';
+import 'package:survey_core/src/domain/entities/themes/intro_question_theme.dart';
 
 class IntroQuestionData extends QuestionData {
   final String mainButtonTitle;
@@ -30,8 +30,25 @@ class IntroQuestionData extends QuestionData {
         );
 
   @override
-  // TODO(dev): implement theme
-  Theme? get theme => throw UnimplementedError();
+  IntroQuestionData copyWith({
+    String? mainButtonTitle,
+    int? index,
+    String? title,
+    String? subtitle,
+    String? content,
+    bool? isSkip,
+  }) {
+    return IntroQuestionData(
+      mainButtonTitle: mainButtonTitle ?? this.mainButtonTitle,
+      index: index ?? this.index,
+      title: title ?? this.title,
+      subtitle: subtitle ?? this.subtitle,
+      isSkip: isSkip ?? this.isSkip,
+    );
+  }
+
+  @override
+  IntroQuestionTheme? get theme => const IntroQuestionTheme.common();
 
   @override
   String get type => 'Intro';

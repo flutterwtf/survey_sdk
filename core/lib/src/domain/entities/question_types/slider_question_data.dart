@@ -35,6 +35,28 @@ class SliderQuestionData extends QuestionData<SliderThemeData> {
               'answer you receive.',
         );
 
+  @override
+  SliderQuestionData copyWith({
+    num? minValue,
+    num? maxValue,
+    num? initialValue,
+    int? index,
+    String? title,
+    String? subtitle,
+    String? content,
+    bool? isSkip,
+  }) {
+    return SliderQuestionData(
+      minValue: minValue ?? this.minValue,
+      maxValue: maxValue ?? this.maxValue,
+      initialValue: initialValue ?? this.initialValue,
+      index: index ?? this.index,
+      title: title ?? this.title,
+      subtitle: subtitle ?? this.subtitle,
+      isSkip: isSkip ?? this.isSkip,
+    );
+  }
+
   // TODO(dev): do like this in every question widget
   // TODO(dev): implement theme
   @override

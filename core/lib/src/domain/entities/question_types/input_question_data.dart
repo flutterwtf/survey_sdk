@@ -29,6 +29,26 @@ class InputQuestionData extends QuestionData<InputQuestionTheme> {
         );
 
   @override
+  InputQuestionData copyWith({
+    InputValidator? validator,
+    String? hintText,
+    int? index,
+    String? title,
+    String? subtitle,
+    String? content,
+    bool? isSkip,
+  }) {
+    return InputQuestionData(
+      validator: validator ?? this.validator,
+      hintText: hintText,
+      index: index ?? this.index,
+      title: title ?? this.title,
+      subtitle: subtitle ?? this.subtitle,
+      isSkip: isSkip ?? this.isSkip,
+    );
+  }
+
+  @override
   InputQuestionTheme? get theme => const InputQuestionTheme.common();
 
   @override

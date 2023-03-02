@@ -145,6 +145,7 @@ class _MinMaxInputField extends StatelessWidget {
         ),
         Expanded(
           child: CustomizationTextField(
+            key: ValueKey(prefix),
             initialValue: initialValue.toString(),
             inputFormatters: [
               FilteringTextInputFormatter.digitsOnly,

@@ -61,7 +61,7 @@ class QuestionCommonCustomizationPanel extends CustomizationPanel {
                     initialValue: '16',
                     inputFormatters: [
                       FilteringTextInputFormatter.digitsOnly,
-                      LengthLimitingTextInputFormatter(3),
+                      LengthLimitingTextInputFormatter(2),
                     ],
                     onChanged: (size) {
                       if (size == null) {
@@ -92,7 +92,7 @@ class QuestionCommonCustomizationPanel extends CustomizationPanel {
                     initialValue: '12',
                     inputFormatters: [
                       FilteringTextInputFormatter.digitsOnly,
-                      LengthLimitingTextInputFormatter(3),
+                      LengthLimitingTextInputFormatter(2),
                     ],
                     onChanged: (size) {
                       if (size == null) {
@@ -127,7 +127,7 @@ class QuestionCommonCustomizationPanel extends CustomizationPanel {
                     initialValue: '12',
                     inputFormatters: [
                       FilteringTextInputFormatter.digitsOnly,
-                      LengthLimitingTextInputFormatter(3),
+                      LengthLimitingTextInputFormatter(2),
                     ],
                     onChanged: (size) {
                       if (size == null) {
