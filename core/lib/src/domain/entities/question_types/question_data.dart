@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:survey_core/src/domain/entities/api_object.dart';
-import 'package:survey_core/src/domain/entities/constants/question_type.dart';
+import 'package:survey_core/src/domain/entities/constants/question_types.dart';
 import 'package:survey_core/src/domain/entities/question_types/choice_question_data.dart';
 import 'package:survey_core/src/domain/entities/question_types/input_question_data.dart';
 import 'package:survey_core/src/domain/entities/question_types/intro_question_data.dart';
@@ -26,14 +26,14 @@ abstract class QuestionData<T> extends Equatable with ApiObject {
   String get type;
 
   static QuestionData fromType(Map<String, dynamic> json) {
-    switch (json['typeQuestion']) {
-      case QuestionType.sliderType:
+    switch (json['type']) {
+      case QuestionTypes.slider:
         return SliderQuestionData.fromJson(json);
-      case QuestionType.introType:
+      case QuestionTypes.intro:
         return IntroQuestionData.fromJson(json);
-      case QuestionType.inputType:
+      case QuestionTypes.input:
         return InputQuestionData.fromJson(json);
-      case QuestionType.choiceType:
+      case QuestionTypes.choice:
         return ChoiceQuestionData.fromJson(json);
       default:
         throw Exception('Unimplemented error');

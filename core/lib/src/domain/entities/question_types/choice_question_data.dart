@@ -1,3 +1,4 @@
+import 'package:survey_core/src/domain/entities/constants/question_types.dart';
 import 'package:survey_core/src/domain/entities/question_types/question_data.dart';
 import 'package:survey_core/src/domain/entities/themes/choice_question_theme.dart';
 
@@ -32,7 +33,7 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
   ChoiceQuestionTheme? get theme => const ChoiceQuestionTheme.common();
 
   @override
-  String get type => 'Choice';
+  String get type => QuestionTypes.choice;
 
   @override
   Map<String, dynamic> toJson() => {

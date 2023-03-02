@@ -1,3 +1,4 @@
+import 'package:survey_core/src/domain/entities/constants/question_types.dart';
 import 'package:survey_core/src/domain/entities/question_types/question_data.dart';
 import 'package:survey_core/src/domain/entities/themes/input_question_theme.dart';
 import 'package:survey_core/src/domain/entities/validator/input_validator.dart';
@@ -31,7 +32,7 @@ class InputQuestionData extends QuestionData<InputQuestionTheme> {
   InputQuestionTheme? get theme => const InputQuestionTheme.common();
 
   @override
-  String get type => 'Input';
+  String get type => QuestionTypes.input;
 
   @override
   Map<String, dynamic> toJson() => {
