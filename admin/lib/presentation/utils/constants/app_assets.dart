@@ -3,13 +3,13 @@
 abstract class AppAssets {
   static const _assetsFolder = 'assets/';
   static const _imagesFolder = '${_assetsFolder}images/';
+  static const _iconsFolder = '${_assetsFolder}icons/';
 
   ///icons
-  static const String closeIcon = '${_assetsFolder}close_icon.svg';
-  static const String iphoneIcon = '${_assetsFolder}iphone.svg';
-  static const String addCircleIcon = '${_assetsFolder}add_circle.svg';
-  static const String arcIcon = '${_assetsFolder}arc.svg';
-  static const String arrowIcon = '${_assetsFolder}arrow.svg';
+  static const String closeIcon = '${_iconsFolder}close_icon.svg';
+  static const String addCircleIcon = '${_iconsFolder}add_circle_icon.svg';
+  static const String arcIcon = '${_iconsFolder}arc_icon.svg';
+  static const String arrowIcon = '${_iconsFolder}arrow_icon.svg';
 
   ///images
   static const String checkBoxImage = '${_imagesFolder}check_box_image.svg';
@@ -19,4 +19,5 @@ abstract class AppAssets {
   static const String radioButtonImage = '${_imagesFolder}radio_button_image.svg';
   static const String singleLineInputImage = '${_imagesFolder}single_line_input_image.svg';
   static const String sliderImage = '${_imagesFolder}slider_image.svg';
+  static const String iphoneImage = '${_imagesFolder}iphone_image.svg';
 }

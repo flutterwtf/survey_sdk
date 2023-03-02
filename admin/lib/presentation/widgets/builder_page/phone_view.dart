@@ -21,7 +21,7 @@ class PhoneView extends StatelessWidget {
           padding: const EdgeInsets.all(AppDimensions.sizeL),
           child: Stack(
             children: [
-              SvgPicture.asset(AppAssets.iphoneIcon),
+              SvgPicture.asset(AppAssets.iphoneImage),
               Positioned.fill(
                 child: Container(
                   margin: const EdgeInsets.symmetric(
