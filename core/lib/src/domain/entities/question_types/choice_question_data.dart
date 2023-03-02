@@ -10,13 +10,13 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
   const ChoiceQuestionData({
     required this.isMultipleChoice,
     required this.options,
-    this.selectedOptions,
     required super.id,
     required super.title,
     required super.subtitle,
     required super.typeQuestion,
     required super.isSkip,
     super.info,
+    this.selectedOptions,
     this.content,
   }) : assert(
           selectedOptions == null ||

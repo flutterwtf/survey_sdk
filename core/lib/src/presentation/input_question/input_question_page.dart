@@ -26,6 +26,8 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
   final _textFieldKey = GlobalKey<FormFieldState>();
   String _input = '';
 
+  bool get _canBeSkipped => widget.data.isSkip && _input.isEmpty;
+
   @override
   Widget build(BuildContext context) {
     final theme = widget.data.theme ?? const InputQuestionTheme.common();
@@ -72,9 +74,8 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
                 fontSize: theme.textSize,
               ),
               autovalidateMode: AutovalidateMode.onUserInteraction,
-              validator: (text) => widget.data.isSkip && _input.isEmpty
-                  ? null
-                  : widget.data.validator.validate(text),
+              validator: (text) =>
+                  _canBeSkipped ? null : widget.data.validator.validate(text),
               onChanged: (input) => setState(() => _input = input),
               decoration: InputDecoration(
                 fillColor: theme.backgroundColor,
@@ -93,8 +94,8 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
           QuestionBottomButton(
             text: context.localization.next,
             onPressed: () => widget.onSend(_input),
-            isEnabled: widget.data.isSkip && _input.isEmpty ||
-                (_textFieldKey.currentState?.isValid ?? false),
+            isEnabled:
+                _canBeSkipped || (_textFieldKey.currentState?.isValid ?? false),
           ),
         ],
       ),
