@@ -8,7 +8,6 @@ analyzer:
     strict-casts: false
     strict-inference: false
     strict-raw-types: false
-    enableSuperMixins: true
 
   errors:
     close_sinks: error
