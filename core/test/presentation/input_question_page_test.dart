@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -23,11 +22,9 @@ void main() {
             body: InputQuestionPage(
               data: InputQuestionData(
                 validator: DefaultValidator(),
-                value: 0,
-                id: 0,
+                index: 0,
                 title: 'title',
                 subtitle: 'subtitle',
-                typeQuestion: 'typeQuestion',
                 isSkip: false,
               ),
               onSend: (_) {},
@@ -49,11 +46,9 @@ void main() {
             body: InputQuestionPage(
               data: InputQuestionData(
                 validator: DefaultValidator(),
-                value: 0,
-                id: 0,
+                index: 0,
                 title: 'title',
                 subtitle: 'subtitle',
-                typeQuestion: 'typeQuestion',
                 isSkip: false,
               ),
               onSend: (_) {},
@@ -77,11 +72,9 @@ void main() {
             body: InputQuestionPage(
               data: InputQuestionData(
                 validator: DefaultValidator(),
-                value: 0,
-                id: 0,
+                index: 0,
                 title: 'title',
                 subtitle: 'subtitle',
-                typeQuestion: 'typeQuestion',
                 isSkip: true,
               ),
               onSend: (_) => isPressed = true,
@@ -98,11 +91,9 @@ void main() {
           (WidgetTester tester) async {
         final inputQuestionData = InputQuestionData(
           validator: DefaultValidator(),
-          value: 0,
-          id: 0,
+          index: 0,
           title: 'title',
           subtitle: 'subtitle',
-          typeQuestion: 'typeQuestion',
           isSkip: true,
         );
         String? sentData;
@@ -122,7 +113,7 @@ void main() {
         );
 
         const userInput = 'inputText';
-        await tester.enterText(find.byType(FormBuilderTextField), userInput);
+        await tester.enterText(find.byType(TextFormField), userInput);
         await tester.tap(find.byType(QuestionBottomButton));
         expect(sentData, equals(userInput));
       });

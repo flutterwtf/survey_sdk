@@ -1,4 +1,5 @@
 import 'package:survey_core/src/domain/entities/question_types/intro_question_data.dart';
+import 'package:survey_core/src/presentation/localization/localizations.dart';
 import 'package:survey_core/src/presentation/utils/constants.dart';
 import 'package:survey_core/src/presentation/utils/data_to_widget_util.dart';
 import 'package:survey_core/src/presentation/widgets/question_bottom_button.dart';
@@ -10,6 +11,7 @@ class IntroQuestionPage extends StatelessWidget {
   final IntroQuestionData data;
   final OnSendCallback onSend;
   final VoidCallback? onMainButtonTap;
+  //TODO: onSkip
   final VoidCallback? onSecondaryButtonTap;
 
   const IntroQuestionPage({
@@ -23,7 +25,6 @@ class IntroQuestionPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final onSecondaryButtonTap = this.onSecondaryButtonTap;
-    final secondaryButtonTitle = data.secondaryButtonTitle;
     final content = data.content;
     return Padding(
       padding: const EdgeInsets.only(
@@ -51,13 +52,13 @@ class IntroQuestionPage extends StatelessWidget {
           Row(
             mainAxisSize: MainAxisSize.max,
             children: [
-              if (onSecondaryButtonTap != null && secondaryButtonTitle != null)
+              if (onSecondaryButtonTap != null)
                 Flexible(
                   fit: FlexFit.loose,
                   child: Padding(
                     padding: const EdgeInsets.only(right: 8),
                     child: QuestionBottomButton(
-                      text: secondaryButtonTitle,
+                      text: context.localization.skip,
                       onPressed: onSecondaryButtonTap,
                       isEnabled: true,
                       isOutlined: true,

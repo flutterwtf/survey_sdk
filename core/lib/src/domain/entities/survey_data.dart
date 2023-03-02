@@ -2,7 +2,7 @@ import 'package:survey_core/src/domain/entities/api_object.dart';
 import 'package:survey_core/src/domain/entities/question_types/question_data.dart';
 import 'package:survey_core/src/domain/entities/themes/common_theme.dart';
 
-class SurveyData implements ApiObject {
+class SurveyData extends ApiObject {
   final List<QuestionData> questions;
   final CommonTheme commonTheme;
 
@@ -31,4 +31,11 @@ class SurveyData implements ApiObject {
       commonTheme: CommonTheme.fromJson(json['commonTheme']),
     );
   }
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [
+        ...questions,
+        commonTheme,
+      ];
 }
