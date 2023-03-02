@@ -7,7 +7,7 @@ class SurveyCubit extends Cubit<SurveyState> {
 
   SurveyCubit(this._surveyDataRepository) : super(SurveyState());
 
-  void initData(String surveyDataAsset) {
+  Future<void> initData(String surveyDataAsset) async {
     _surveyDataRepository.getSurveyData(surveyDataAsset).then(
           (data) => emit(state.copyWith(surveyData: data)),
         );

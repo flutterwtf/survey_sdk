@@ -18,17 +18,14 @@ jobs:
           flutter-version: '3.x'
           channel: 'stable'
 
-      - name: Admin module check
-        run: ./scripts/admin_module.sh
+      - name: Core module check
+        run: ./scripts/core_module.sh
 
       - name: Client module check
         run: ./scripts/client_module.sh
 
-      - name: Core module check
-        run: ./scripts/core_module.sh
-
-      - name: Go to admin folder
-        run: cd ../admin
+      - name: Admin module check
+        run: ./scripts/admin_module.sh
 
       - name: Upload production-ready build files
         uses: actions/upload-artifact@v2
