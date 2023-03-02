@@ -3,38 +3,49 @@ import 'package:survey_core/src/presentation/utils/app_fonts.dart';
 import 'package:survey_core/src/presentation/utils/constants.dart';
 import 'package:flutter/material.dart';
 
+import 'package:survey_core/src/presentation/utils/colors.dart';
+
 class QuestionBottomButton extends StatelessWidget {
+  final String text;
+  final Color? color;
+  final Color? textColor;
+  final double? textSize;
+  final double? radius;
+  final VoidCallback onPressed;
+  final bool isEnabled;
+
   const QuestionBottomButton({
     super.key,
     required this.text,
     required this.onPressed,
     this.isEnabled = true,
-    this.isOutlined = false,
+    this.color,
+    this.textColor,
+    this.textSize,
+    this.radius,
   });
-
-  final String text;
-  final VoidCallback onPressed;
-  final bool isEnabled;
-  final bool isOutlined;
 
   @override
   Widget build(BuildContext context) {
-    final accentColor = Colors.black.withOpacity(isEnabled ? 1.0 : 0.6);
+    final buttonColor =
+        (color ?? AppColors.black).withOpacity(isEnabled ? 1.0 : 0.6);
+    final buttonTextColor =
+        (textColor ?? AppColors.white).withOpacity(isEnabled ? 1.0 : 0.6);
     return SizedBox(
       width: double.infinity,
       child: InkWell(
         key: const Key('QBB'),
         onTap: isEnabled ? onPressed : null,
         borderRadius: BorderRadius.circular(
-          AppDimensions.circularRadiusXS,
+          radius ?? AppDimensions.circularRadiusXS,
         ),
         child: AnimatedContainer(
           decoration: BoxDecoration(
-            color: isOutlined ? Colors.white : accentColor,
+            color: buttonColor,
             borderRadius: BorderRadius.circular(
-              AppDimensions.circularRadiusXS,
+              radius ?? AppDimensions.circularRadiusXS,
             ),
-            border: Border.all(color: accentColor),
+            border: Border.all(color: buttonColor),
           ),
           duration: const Duration(milliseconds: AppDuration.bottomAnimation),
           child: Padding(
@@ -43,9 +54,9 @@ class QuestionBottomButton extends StatelessWidget {
               child: Text(
                 text,
                 style: TextStyle(
-                  color: isOutlined ? accentColor : Colors.white,
+                  color: buttonTextColor,
                   fontWeight: AppFonts.weightBold,
-                  fontSize: AppFonts.sizeM,
+                  fontSize: textSize ?? AppFonts.sizeM,
                 ),
                 textAlign: TextAlign.center,
               ),
