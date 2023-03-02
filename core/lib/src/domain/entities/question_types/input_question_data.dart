@@ -29,7 +29,7 @@ class InputQuestionData extends QuestionData<InputQuestionTheme> {
         );
 
   @override
-  QuestionData copyWith({
+  InputQuestionData copyWith({
     InputValidator? validator,
     String? hintText,
     int? index,

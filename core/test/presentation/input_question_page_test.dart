@@ -59,8 +59,7 @@ void main() {
           await tester.pumpWidget(
             AppTest(
               child: InputQuestionPage(
-                // TODO isSkip true
-                data: mockInputData,
+                data: mockInputData.copyWith(isSkip: true),
                 onSend: (_) => isPressed = true,
               ),
             ),
@@ -79,8 +78,7 @@ void main() {
           await tester.pumpWidget(
             AppTest(
               child: InputQuestionPage(
-                // TODO isSkip true
-                data: mockInputData,
+                data: mockInputData.copyWith(isSkip: true),
                 onSend: (data) => sentData = data,
               ),
             ),

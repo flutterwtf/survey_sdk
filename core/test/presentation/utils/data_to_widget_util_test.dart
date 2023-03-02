@@ -107,4 +107,15 @@ class _BadQuestionData extends QuestionData {
 
   @override
   List<Object?> get props => [];
+
+  @override
+  QuestionData copyWith({
+    int? index,
+    String? title,
+    String? subtitle,
+    String? content,
+    bool? isSkip,
+  }) {
+    throw UnimplementedError();
+  }
 }

@@ -29,7 +29,7 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
         );
 
   @override
-  QuestionData copyWith({
+  ChoiceQuestionData copyWith({
     bool? isMultipleChoice,
     List<String>? options,
     int? index,
@@ -91,22 +91,4 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
         isSkip,
         content,
       ];
-
-  ChoiceQuestionData copyWith({
-    bool? isMultipleChoice,
-    List<String>? options,
-    int? index,
-    String? title,
-    String? subtitle,
-    bool? isSkip,
-  }) {
-    return ChoiceQuestionData(
-      isMultipleChoice: isMultipleChoice ?? this.isMultipleChoice,
-      options: options ?? this.options,
-      index: index ?? this.index,
-      title: title ?? this.title,
-      subtitle: subtitle ?? this.subtitle,
-      isSkip: isSkip ?? this.isSkip,
-    );
-  }
 }

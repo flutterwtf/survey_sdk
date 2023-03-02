@@ -32,7 +32,7 @@ class SliderQuestionData extends QuestionData<SliderThemeData> {
         );
 
   @override
-  QuestionData copyWith({
+  SliderQuestionData copyWith({
     num? minValue,
     num? maxValue,
     num? initialValue,
