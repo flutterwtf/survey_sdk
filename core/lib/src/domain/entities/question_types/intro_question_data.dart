@@ -3,17 +3,45 @@ import 'package:survey_core/src/domain/entities/themes/intro_question_theme.dart
 
 class IntroQuestionData extends QuestionData {
   final String mainButtonTitle;
-  final String? secondaryButtonTitle;
 
-  const IntroQuestionData({
+  IntroQuestionData({
     required this.mainButtonTitle,
     required super.index,
     required super.title,
     required super.subtitle,
     required super.isSkip,
     super.content,
-    this.secondaryButtonTitle,
   });
+
+  IntroQuestionData.common({int index = 0})
+      : this(
+          //TODO: to localization somehow
+          mainButtonTitle: 'NEXT',
+          title: 'Intro',
+          index: index,
+          subtitle: '',
+          isSkip: false,
+          content:
+              'You may simply need a single, brief answer without discussion. Other times, you may want to talk through a scenario, evaluate how well a group is learning new material or solicit feedback. The types of questions you ask directly impact the type of answer you receive.',
+        );
+
+  @override
+  IntroQuestionData copyWith({
+    String? mainButtonTitle,
+    int? index,
+    String? title,
+    String? subtitle,
+    String? content,
+    bool? isSkip,
+  }) {
+    return IntroQuestionData(
+      mainButtonTitle: mainButtonTitle ?? this.mainButtonTitle,
+      index: index ?? this.index,
+      title: title ?? this.title,
+      subtitle: subtitle ?? this.subtitle,
+      isSkip: isSkip ?? this.isSkip,
+    );
+  }
 
   @override
   IntroQuestionTheme? get theme => const IntroQuestionTheme.common();
@@ -26,11 +54,11 @@ class IntroQuestionData extends QuestionData {
         'index': index,
         'title': title,
         'subtitle': subtitle,
+        'type': type,
         'isSkip': isSkip,
+        'content': content,
         'payload': {
           'mainButtonTitle': mainButtonTitle,
-          'secondaryButtonTitle': secondaryButtonTitle,
-          'content': content,
         },
       };
 
@@ -41,9 +69,19 @@ class IntroQuestionData extends QuestionData {
       title: json['title'],
       subtitle: json['subtitle'],
       isSkip: json['isSkip'],
+      content: json['content'],
       mainButtonTitle: payload['mainButtonTitle'],
-      secondaryButtonTitle: payload['secondaryButtonTitle'],
-      content: payload['content'],
     );
   }
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [
+        mainButtonTitle,
+        index,
+        title,
+        subtitle,
+        isSkip,
+        content,
+      ];
 }

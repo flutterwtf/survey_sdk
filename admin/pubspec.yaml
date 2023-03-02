@@ -20,7 +20,6 @@ dependencies:
   get_it: ^7.2.0
   equatable: ^2.0.3
   flutter_colorpicker: ^1.0.3
-  flutter_form_builder: ^7.7.0
   survey_core:
     path: ../core
   flutter_svg: ^2.0.1
@@ -30,6 +29,7 @@ dev_dependencies:
     sdk: flutter
 
   flutter_lints: ^2.0.0
+  mockito: ^5.3.2
 
 flutter:
   generate: true
@@ -37,3 +37,13 @@ flutter:
   assets:
     - assets/
     - assets/images/
+  fonts:
+    - family: Karla
+      fonts:
+        - asset: fonts/Karla-Regular.ttf
+        - asset: fonts/Karla-Bold.ttf
+    - family: Inter
+      fonts:
+        - asset: fonts/Inter-Regular.ttf
+        - asset: fonts/Inter-SemiBold.ttf
+        - asset: fonts/Inter-Medium.ttf

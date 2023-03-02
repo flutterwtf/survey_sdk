@@ -1,3 +1,4 @@
+//TODO: Rewrite. Not a good solution
 abstract class InputValidator {
   String get type;
 
