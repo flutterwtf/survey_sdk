@@ -1,41 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:survey_admin/presentation/pages/new_question_page/new_question_tabs.dart';
 import 'package:survey_admin/presentation/utils/app_fonts.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
 import 'package:survey_admin/presentation/utils/constants/image_constants.dart';
 import 'package:survey_admin/presentation/widgets/vector_image.dart';
-import 'package:survey_core/survey_core.dart';
 
 // TODO(dev): check localization
 const _title = 'New screen';
-const _tabs = [
-  'Intro',
-  'Choice',
-  'Slider',
-  'Custom input',
-];
-final Map<String, QuestionData> _dataMap = {
-  'Intro': IntroQuestionData.common(),
-  'Choice': ChoiceQuestionData.common(),
-  'Slider': SliderQuestionData.common(),
-  'Custom input': InputQuestionData.common(),
-};
-const _optionsInTabs = {
-  'Intro': ['Title', 'Image intro'],
-  'Choice': ['Radio button', 'Check box'],
-  'Slider': ['Slider'],
-  'Custom input': ['Single-line input', 'Multi-line input'],
-};
-
-const Map<String, String> _optionsAssets = {
-  'Title': AppAssets.introImage,
-  'Image intro': AppAssets.imageIntroImage,
-  'Radio button': AppAssets.radioButtonImage,
-  'Slider': AppAssets.sliderImage,
-  'Check box': AppAssets.checkBoxImage,
-  'Single-line input': AppAssets.singleLineInputImage,
-  'Multi-line input': AppAssets.multiLineInputImage,
-};
 
 class NewQuestionPage extends StatefulWidget {
   const NewQuestionPage({Key? key}) : super(key: key);
@@ -45,18 +17,18 @@ class NewQuestionPage extends StatefulWidget {
 }
 
 class _NewQuestionPageState extends State<NewQuestionPage> {
-  String _selectedTab = _tabs[0];
+  NewQuestionTabs _selectedTab = NewQuestionTabs.intro;
   String? _selectedOption;
 
-  Widget _questionTab(String tabTitle) {
+  Widget _questionTab(NewQuestionTabs tab) {
     return _TabButton(
-      title: tabTitle,
+      title: tab.name,
       onTap: () {
         setState(
-          () => _selectedTab = tabTitle,
+          () => _selectedTab = tab,
         );
       },
-      isSelected: _selectedTab == tabTitle ? true : false,
+      isSelected: _selectedTab == tab ? true : false,
     );
   }
 
@@ -91,10 +63,10 @@ class _NewQuestionPageState extends State<NewQuestionPage> {
             children: [
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: _tabs.map(_questionTab).toList(),
+                children: NewQuestionTabs.values.map(_questionTab).toList(),
               ),
               _QuestionOptionsListView(
-                options: _optionsInTabs[_selectedTab] ?? [],
+                options: _selectedTab.options,
                 selectedOption: _selectedOption ?? '',
               ),
             ],
@@ -103,7 +75,7 @@ class _NewQuestionPageState extends State<NewQuestionPage> {
         persistentFooterButtons: [
           _AddButton(
             onPressed: () {
-              Navigator.pop(context, _dataMap[_selectedTab]);
+              Navigator.pop(context, _selectedTab.data);
             },
           ),
         ],
@@ -173,7 +145,8 @@ class _TabButton extends StatelessWidget {
           style: TextStyle(
             color: AppColors.black,
             fontSize: AppFonts.sizeL,
-            fontWeight: isSelected ? AppFonts.weightBold : AppFonts.weightRegular,
+            fontWeight:
+                isSelected ? AppFonts.weightBold : AppFonts.weightRegular,
           ),
         ),
       ),
@@ -182,7 +155,7 @@ class _TabButton extends StatelessWidget {
 }
 
 class _QuestionOptionsListView extends StatelessWidget {
-  final List<String> options;
+  final List<NewQuestionOptions> options;
   final String selectedOption;
 
   const _QuestionOptionsListView({
@@ -199,8 +172,8 @@ class _QuestionOptionsListView extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
           return _AssetTextOption(
-            assetName: _optionsAssets[options[index]] ?? '',
-            titleText: options[index],
+            assetName: options[index].asset,
+            titleText: options[index].name,
           );
         },
       ),
