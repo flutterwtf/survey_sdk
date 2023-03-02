@@ -31,7 +31,7 @@ void main() {
     subtitle: 'subtitle',
     isSkip: false,
   );
-  final mockInputData = InputQuestionData(
+  const mockInputData = InputQuestionData(
     validator: DefaultValidator(),
     index: 0,
     title: 'title',

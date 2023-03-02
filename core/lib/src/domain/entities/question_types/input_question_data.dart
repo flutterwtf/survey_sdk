@@ -16,10 +16,10 @@ class InputQuestionData extends QuestionData<InputQuestionTheme> {
     this.hintText,
   });
 
-  InputQuestionData.common({int index = 0})
+  const InputQuestionData.common({int index = 0})
       : this(
           // TODO(dev): to localization somehow
-          validator: NumberValidator(),
+          validator: const NumberValidator(),
           index: index,
           title: 'Why is asking the right type of questions important?',
           subtitle: '',

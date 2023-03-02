@@ -15,11 +15,11 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
     super.content,
   });
 
-  ChoiceQuestionData.common({int index = 0})
+  const ChoiceQuestionData.common({int index = 0})
       : this(
           // TODO(dev): to localization somehow
           isMultipleChoice: false,
-          options: ['First option', 'Second option', 'Third option'],
+          options: const ['First option', 'Second option', 'Third option'],
           title: 'Title',
           subtitle: '',
           isSkip: false,

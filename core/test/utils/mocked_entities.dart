@@ -28,7 +28,7 @@ abstract class MockedQuestions {
     content: 'content',
   );
 
-  final input1 = InputQuestionData(
+  static const input1 = InputQuestionData(
     validator: DefaultValidator(),
     index: 0,
     title: 'title',
@@ -36,7 +36,7 @@ abstract class MockedQuestions {
     isSkip: false,
   );
 
-  final input2 = InputQuestionData(
+  static const input2 = InputQuestionData(
     validator: NumberValidator(),
     index: 1,
     title: 'Another title',

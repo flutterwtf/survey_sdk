@@ -28,7 +28,7 @@ class _QuestionListState extends State<QuestionList> {
     const QuestionListItem(
       questionData: IntroQuestionData.common(),
     ),
-    QuestionListItem(
+    const QuestionListItem(
       questionData: InputQuestionData.common(index: 1),
     ),
   ];
