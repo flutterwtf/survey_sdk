@@ -6,17 +6,17 @@ import 'package:survey_admin/presentation/utils/constants/app_duration.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
 
 // TODO(dev): localization
-// TODO(dev): add email, password, phone
 enum InputType {
   text('Text'),
   number('Number'),
-  date('Date');
-
-  const InputType(
-    this.name,
-  );
+  date('Date'),
+  email('Email'),
+  password('Password'),
+  phone('Phone');
 
   final String name;
+
+  const InputType(this.name);
 }
 
 class InputTypeCustomizationItem extends StatefulWidget {

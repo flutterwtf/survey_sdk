@@ -24,8 +24,7 @@ class InputQuestionData extends QuestionData<InputQuestionTheme> {
           title: 'Why is asking the right type of questions important?',
           subtitle: '',
           isSkip: false,
-          content:
-              'Doing so can help you gather the information most relevant and useful to you',
+          content: 'Doing so can help you gather the information most relevant and useful to you',
         );
 
   @override
@@ -63,7 +62,7 @@ class InputQuestionData extends QuestionData<InputQuestionTheme> {
         'isSkip': isSkip,
         'content': content,
         'payload': {
-          ...JsonValidator.toJson(validator),
+          ...validator.toJson(),
           'hintText': hintText,
         }
       };
@@ -76,7 +75,7 @@ class InputQuestionData extends QuestionData<InputQuestionTheme> {
       subtitle: json['subtitle'],
       isSkip: json['isSkip'],
       content: json['content'],
-      validator: JsonValidator.fromJson(payload),
+      validator: InputValidator.fromJson(payload),
       hintText: payload['hintText'],
     );
   }
@@ -92,6 +91,4 @@ class InputQuestionData extends QuestionData<InputQuestionTheme> {
         content,
         hintText,
       ];
-
-
 }

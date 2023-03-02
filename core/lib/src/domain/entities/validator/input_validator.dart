@@ -1,42 +1,39 @@
-//TODO: Rewrite. Not a good solution
-abstract class InputValidator {
+import 'package:survey_core/src/domain/entities/api_object.dart';
+import 'package:survey_core/src/presentation/utils/app_validators.dart';
+
+part 'default_validator.dart';
+part 'number_validator.dart';
+part 'date_validator.dart';
+part 'email_validator.dart';
+part 'password_validator.dart';
+part 'phone_validator.dart';
+
+const String _validatorName = 'validator';
+const String _validatorErrorText = 'validator';
+
+abstract class InputValidator implements ApiObject {
   String get type;
 
   String? validate(String? input);
-}
-
-class DefaultValidator implements InputValidator {
-  @override
-  String get type => 'default';
 
   @override
-  String? validate(String? input) {
-    return input == null || input.isNotEmpty ? null : 'Error';
-  }
-}
+  Map<String, dynamic> toJson();
 
-class NumberValidator implements InputValidator {
-  RegExp get _reg => RegExp(r'^[0-9]+$');
-
-  @override
-  String get type => 'number';
-
-  @override
-  String? validate(String? input) {
-    return input == null || _reg.hasMatch(input) ? null : 'Error';
-  }
-}
-
-abstract class JsonValidator {
   static InputValidator fromJson(Map<String, dynamic> json) {
-    final type = json['validator'];
-    if (type == 'number') return NumberValidator();
-    return DefaultValidator();
-  }
-
-  static Map<String, dynamic> toJson(InputValidator validator) {
-    return {
-      'validator': validator.type,
-    };
+    String type = json[_validatorName];
+    switch (type) {
+      case AppValidators.number:
+        return NumberValidator();
+      case AppValidators.date:
+        return DateValidator();
+      case AppValidators.email:
+        return EmailValidator();
+      case AppValidators.password:
+        return PasswordValidator();
+      case AppValidators.phone:
+        return PhoneValidator();
+      default:
+        return DefaultValidator();
+    }
   }
 }
