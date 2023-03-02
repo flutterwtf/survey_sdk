@@ -4,7 +4,7 @@ import 'package:survey_admin/presentation/app/di/injector.dart';
 import 'package:survey_admin/presentation/app/localization/localizations.dart';
 import 'package:survey_admin/presentation/pages/builder/builder_cubit.dart';
 import 'package:survey_admin/presentation/pages/builder/builder_state.dart';
-import 'package:survey_admin/presentation/utils/app_fonts.dart';
+import 'package:survey_admin/presentation/utils/app_text_styles.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
 import 'package:survey_admin/presentation/widgets/builder_page/phone_view.dart';
@@ -76,11 +76,7 @@ class _BuilderPageTabBar extends StatelessWidget {
           unselectedLabelColor: AppColors.textGrey,
           indicatorColor: AppColors.black,
           labelColor: AppColors.text,
-          labelStyle: const TextStyle(
-            fontWeight: AppFonts.weightBold,
-            fontFamily: AppFonts.interFamily,
-            fontSize: AppFonts.sizeL,
-          ),
+          labelStyle: AppTextStyles.interLBold,
           tabs: [
             Tab(text: context.localization.create),
             Tab(text: context.localization.preview),
@@ -116,12 +112,7 @@ class _CreateTab extends StatelessWidget {
           ),
           child: Text(
             context.localization.import,
-            style: const TextStyle(
-              color: AppColors.text,
-              fontWeight: AppFonts.weightBold,
-              fontFamily: AppFonts.karlaFamily,
-              fontSize: AppFonts.sizeM,
-            ),
+            style: AppTextStyles.karlaMBoldBlack,
           ),
         ),
       ),
@@ -157,12 +148,7 @@ class _PreviewTab extends StatelessWidget {
           ),
           child: Text(
             context.localization.export,
-            style: const TextStyle(
-              color: AppColors.white,
-              fontWeight: AppFonts.weightBold,
-              fontFamily: AppFonts.karlaFamily,
-              fontSize: AppFonts.sizeM,
-            ),
+            style: AppTextStyles.karlaMBoldWhite,
           ),
         ),
       ),

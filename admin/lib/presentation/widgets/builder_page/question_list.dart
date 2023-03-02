@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:survey_admin/presentation/app/localization/localizations.dart';
 import 'package:survey_admin/presentation/pages/new_question_page/new_question_page.dart';
-import 'package:survey_admin/presentation/utils/app_fonts.dart';
+import 'package:survey_admin/presentation/utils/app_text_styles.dart';
 import 'package:survey_admin/presentation/utils/asset_strings.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
@@ -58,12 +58,7 @@ class _QuestionListState extends State<QuestionList> {
               children: [
                 Text(
                   context.localization.survey,
-                  style: const TextStyle(
-                    color: AppColors.text,
-                    fontWeight: AppFonts.weightBold,
-                    fontFamily: AppFonts.interFamily,
-                    fontSize: AppFonts.sizeL,
-                  ),
+                  style: AppTextStyles.interLBoldBlack,
                 ),
                 const SizedBox(
                   width: AppDimensions.margin4XL + AppDimensions.margin3XL,

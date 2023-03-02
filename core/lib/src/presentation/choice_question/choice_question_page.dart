@@ -1,7 +1,7 @@
 import 'package:survey_core/src/presentation/localization/localizations.dart';
 import 'package:survey_core/src/domain/entities/question_types/choice_question_data.dart';
 import 'package:survey_core/src/domain/entities/themes/choice_question_theme.dart';
-import 'package:survey_core/src/presentation/utils/app_fonts.dart';
+import 'package:survey_core/src/presentation/utils/app_text_styles.dart';
 import 'package:survey_core/src/presentation/utils/colors.dart';
 import 'package:survey_core/src/presentation/utils/constants.dart';
 import 'package:survey_core/src/presentation/utils/data_to_widget_util.dart';
@@ -130,11 +130,7 @@ class _QuestionCheckboxes extends StatelessWidget {
                 controlAffinity: ListTileControlAffinity.leading,
                 title: Text(
                   option,
-                  style: const TextStyle(
-                    fontFamily: AppFonts.karlaFamily,
-                    fontSize: AppFonts.sizeM,
-                    fontWeight: AppFonts.weightRegular,
-                  ),
+                  style: AppTextStyles.karlaM,
                 ),
                 value: selectedOptions.contains(option),
                 activeColor: Colors.transparent,
@@ -194,11 +190,7 @@ class _QuestionRadioButtons extends StatelessWidget {
                   controlAffinity: ListTileControlAffinity.leading,
                   title: Text(
                     option,
-                    style: const TextStyle(
-                      fontFamily: AppFonts.karlaFamily,
-                      fontSize: AppFonts.sizeM,
-                      fontWeight: AppFonts.weightRegular,
-                    ),
+                    style: AppTextStyles.karlaM,
                   ),
                   value: option,
                   activeColor: activeColor,

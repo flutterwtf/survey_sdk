@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:survey_admin/presentation/utils/app_fonts.dart';
-import 'package:survey_admin/presentation/utils/colors.dart';
+import 'package:survey_admin/presentation/utils/app_text_styles.dart';
 
 class CustomizationTextField extends StatelessWidget {
   final String? initialValue;
@@ -43,12 +43,7 @@ class CustomizationTextField extends StatelessWidget {
       onEditingComplete: onEditingComplete,
       focusNode: focusNode,
       decoration: decoration,
-      style: TextStyle(
-        fontSize: fontSize,
-        fontWeight: AppFonts.weightRegular,
-        fontFamily: AppFonts.interFamily,
-        color: AppColors.black,
-      ),
+      style: AppTextStyles.interMBlack.copyWith(fontSize: fontSize),
       inputFormatters: inputFormatters,
     );
   }

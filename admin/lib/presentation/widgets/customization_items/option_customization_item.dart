@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:survey_admin/presentation/app/localization/localizations.dart';
-import 'package:survey_admin/presentation/utils/app_fonts.dart';
+import 'package:survey_admin/presentation/utils/app_text_styles.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
@@ -112,11 +112,7 @@ class _Option extends StatelessWidget {
         Expanded(
           child: Text(
             option,
-            style: const TextStyle(
-              fontSize: AppFonts.sizeL,
-              fontFamily: AppFonts.interFamily,
-              fontWeight: AppFonts.weightRegular,
-            ),
+            style: AppTextStyles.interL,
           ),
         ),
         IconButton(

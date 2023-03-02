@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:survey_admin/presentation/utils/app_fonts.dart';
+import 'package:survey_admin/presentation/utils/app_text_styles.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
 import 'package:survey_admin/presentation/utils/constants/image_constants.dart';
@@ -143,16 +143,11 @@ class _AppBarTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Align(
+    return Align(
       alignment: Alignment.centerLeft,
       child: Text(
         _title,
-        style: TextStyle(
-          color: AppColors.black,
-          fontSize: AppFonts.sizeM,
-          fontWeight: AppFonts.weightRegular,
-          fontFamily: AppFonts.interFamily,
-        ),
+        style: AppTextStyles.interMBlack,
       ),
     );
   }
@@ -179,12 +174,7 @@ class _TabButton extends StatelessWidget {
         padding: const EdgeInsets.only(top: AppDimensions.sizeM),
         child: Text(
           title,
-          style: TextStyle(
-            color: AppColors.black,
-            fontSize: AppFonts.sizeL,
-            fontFamily: AppFonts.interFamily,
-            fontWeight: isSelected ? AppFonts.weightSemiBold : AppFonts.weightRegular,
-          ),
+          style: isSelected ? AppTextStyles.interLSemiBoldBlack : AppTextStyles.interLBlack,
         ),
       ),
     );
@@ -240,11 +230,7 @@ class _AssetTextOption extends StatelessWidget {
           const SizedBox(height: AppDimensions.marginXL),
           Text(
             titleText,
-            style: const TextStyle(
-              fontSize: AppFonts.sizeL,
-              fontWeight: AppFonts.weightMedium,
-              fontFamily: AppFonts.interFamily,
-            ),
+            style: AppTextStyles.interLMedium,
           ),
         ],
       ),
@@ -271,15 +257,10 @@ class _AddButton extends StatelessWidget {
           color: AppColors.black,
           borderRadius: BorderRadius.circular(AppDimensions.circularRadiusXS),
         ),
-        child: const Center(
+        child: Center(
           child: Text(
             'ADD',
-            style: TextStyle(
-              color: AppColors.white,
-              fontWeight: AppFonts.weightBold,
-              fontSize: AppFonts.sizeM,
-              fontFamily: AppFonts.karlaFamily,
-            ),
+            style: AppTextStyles.karlaMBoldWhite,
           ),
         ),
       ),

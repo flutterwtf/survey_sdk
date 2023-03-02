@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:survey_admin/presentation/utils/app_fonts.dart';
+import 'package:survey_admin/presentation/utils/app_text_styles.dart';
 
 // TODO(dev): Do we really need this widget?
 class CustomizationTitle extends StatelessWidget {
@@ -16,11 +16,7 @@ class CustomizationTitle extends StatelessWidget {
       alignment: Alignment.centerLeft,
       child: Text(
         title,
-        style: const TextStyle(
-          fontSize: AppFonts.sizeM,
-          fontWeight: AppFonts.weightBold,
-          fontFamily: AppFonts.interFamily,
-        ),
+        style: AppTextStyles.interMBold,
       ),
     );
   }

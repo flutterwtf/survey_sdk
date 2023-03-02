@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:survey_admin/presentation/app/localization/localizations.dart';
-import 'package:survey_admin/presentation/utils/app_fonts.dart';
+import 'package:survey_admin/presentation/utils/app_text_styles.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
 
@@ -133,11 +133,7 @@ class _MinMaxInputField extends StatelessWidget {
           ),
           child: Text(
             prefix,
-            style: const TextStyle(
-              fontFamily: AppFonts.interFamily,
-              fontSize: AppFonts.sizeL,
-              fontWeight: AppFonts.weightRegular,
-            ),
+            style: AppTextStyles.interL,
           ),
         ),
         Expanded(

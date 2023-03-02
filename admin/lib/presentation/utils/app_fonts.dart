@@ -8,8 +8,8 @@ class AppFonts {
   static const FontWeight weightMedium = FontWeight.w500;
   static const FontWeight weightRegular = FontWeight.w400;
 
-  static const String interFamily = 'Inter';
-  static const String karlaFamily = 'Karla';
+  static const inter = 'Inter';
+  static const karla = 'Karla';
 
   static const double sizeXS = 10;
   static const double sizeS = 12;

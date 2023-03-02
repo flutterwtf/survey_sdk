@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:survey_admin/presentation/app/localization/localizations.dart';
-import 'package:survey_admin/presentation/utils/app_fonts.dart';
+import 'package:survey_admin/presentation/utils/app_text_styles.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/color_customization_item.dart';
@@ -91,11 +91,7 @@ class QuestionInputCustomizationPanel extends CustomizationPanel {
                         isCollapsed: true,
                         border: InputBorder.none,
                         suffixText: context.localization.px,
-                        suffixStyle: const TextStyle(
-                          fontSize: AppFonts.sizeL,
-                          fontWeight: AppFonts.weightRegular,
-                          fontFamily: AppFonts.interFamily,
-                        ),
+                        suffixStyle: AppTextStyles.interL,
                       ),
                       onChanged: (size) {
                         if (size == null) {

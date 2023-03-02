@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:survey_admin/presentation/utils/app_fonts.dart';
+import 'package:survey_admin/presentation/utils/app_text_styles.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/customization_panel.dart';
 
@@ -46,11 +46,7 @@ class _QuestionSettingsTabBarState extends State<QuestionSettingsTabBar>
             unselectedLabelColor: AppColors.customizationTabBarInactiveText,
             indicatorColor: AppColors.black,
             indicatorSize: TabBarIndicatorSize.label,
-            labelStyle: const TextStyle(
-              fontWeight: AppFonts.weightMedium,
-              fontFamily: AppFonts.interFamily,
-              fontSize: AppFonts.sizeM,
-            ),
+            labelStyle: AppTextStyles.interMMedium,
             tabs: [
               for (var panel in widget.panels) Tab(text: panel.title),
             ],

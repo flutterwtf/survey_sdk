@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:survey_admin/presentation/utils/app_fonts.dart';
+import 'package:survey_admin/presentation/utils/app_text_styles.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/item_divider.dart';
 
@@ -66,11 +66,7 @@ class _CustomizationItemsContainerState extends State<CustomizationItemsContaine
                 ),
             child: Text(
               widget.title!,
-              style: const TextStyle(
-                fontSize: AppFonts.sizeM,
-                fontWeight: AppFonts.weightSemiBold,
-                fontFamily: AppFonts.interFamily,
-              ),
+              style: AppTextStyles.interMSemiBold,
             ),
           ),
         Padding(

@@ -1,5 +1,5 @@
 import 'package:survey_core/src/presentation/utils/app_duration.dart';
-import 'package:survey_core/src/presentation/utils/app_fonts.dart';
+import 'package:survey_core/src/presentation/utils/app_text_styles.dart';
 import 'package:survey_core/src/presentation/utils/constants.dart';
 import 'package:flutter/material.dart';
 
@@ -42,12 +42,9 @@ class QuestionBottomButton extends StatelessWidget {
             child: Center(
               child: Text(
                 text,
-                style: TextStyle(
-                  color: isOutlined ? accentColor : Colors.white,
-                  fontWeight: AppFonts.weightBold,
-                  fontSize: AppFonts.sizeM,
-                  fontFamily: AppFonts.karlaFamily,
-                ),
+                style: isOutlined
+                    ? AppTextStyles.karlaMBoldWhite.copyWith(color: accentColor)
+                    : AppTextStyles.karlaMBoldWhite,
                 textAlign: TextAlign.center,
               ),
             ),

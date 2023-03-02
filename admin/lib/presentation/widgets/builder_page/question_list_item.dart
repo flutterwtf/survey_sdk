@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:survey_admin/presentation/utils/app_fonts.dart';
+import 'package:survey_admin/presentation/utils/app_text_styles.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
 import 'package:survey_core/survey_core.dart';
@@ -24,12 +24,7 @@ class QuestionListItem extends StatelessWidget {
               padding: const EdgeInsets.only(top: AppDimensions.marginXS),
               child: Text(
                 questionData.index.toString(),
-                style: const TextStyle(
-                  color: AppColors.textGrey,
-                  fontSize: AppFonts.sizeS,
-                  fontFamily: AppFonts.interFamily,
-                  fontWeight: AppFonts.weightRegular,
-                ),
+                style: AppTextStyles.interSGrey,
               ),
             ),
             const SizedBox(width: AppDimensions.marginXS),
@@ -45,11 +40,7 @@ class QuestionListItem extends StatelessWidget {
             const SizedBox(width: AppDimensions.marginXS),
             Text(
               questionData.type,
-              style: const TextStyle(
-                fontFamily: AppFonts.interFamily,
-                fontSize: AppFonts.sizeM,
-                fontWeight: AppFonts.weightRegular,
-              ),
+              style: AppTextStyles.interM,
             ),
           ],
         ),

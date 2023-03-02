@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:survey_admin/presentation/app/localization/localizations.dart';
-import 'package:survey_admin/presentation/utils/app_fonts.dart';
+import 'package:survey_admin/presentation/utils/app_text_styles.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
 
@@ -81,11 +81,7 @@ class _ExportFloatingWindow extends StatelessWidget {
                 child: Text(
                   context.localization.export_floating_window_title,
                   textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    fontSize: AppFonts.sizeM,
-                    fontWeight: AppFonts.weightMedium,
-                    fontFamily: AppFonts.interFamily,
-                  ),
+                  style: AppTextStyles.interMMedium,
                 ),
               ),
               const Padding(
@@ -127,12 +123,7 @@ class _ExportFloatingWindow extends StatelessWidget {
                         ),
                         child: Text(
                           context.localization.copy,
-                          style: const TextStyle(
-                            fontSize: AppFonts.sizeM,
-                            fontWeight: AppFonts.weightBold,
-                            fontFamily: AppFonts.karlaFamily,
-                            color: AppColors.black,
-                          ),
+                          style: AppTextStyles.karlaMBoldBlack,
                         ),
                       ),
                     ),
@@ -157,12 +148,7 @@ class _ExportFloatingWindow extends StatelessWidget {
                         ),
                         child: Text(
                           context.localization.download,
-                          style: const TextStyle(
-                            fontSize: AppFonts.sizeM,
-                            fontWeight: AppFonts.weightBold,
-                            fontFamily: AppFonts.karlaFamily,
-                            color: AppColors.white,
-                          ),
+                          style: AppTextStyles.karlaMBoldWhite,
                         ),
                       ),
                     ),
