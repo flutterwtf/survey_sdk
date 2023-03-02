@@ -6,8 +6,8 @@ class CustomizationTitle extends StatelessWidget {
   final String title;
 
   const CustomizationTitle({
-    super.key,
     required this.title,
+    super.key,
   });
 
   @override

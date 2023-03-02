@@ -14,14 +14,14 @@ class CustomizationItemsContainer extends StatefulWidget {
   final List<Widget> children;
 
   CustomizationItemsContainer({
-    super.key,
+    required this.children,
     this.title,
     this.titlePadding,
     this.itemsPadding,
     this.itemsSeparatorHeight = AppDimensions.marginS,
     this.isTopDividerShown = false,
     this.isBottomDividerShown = true,
-    required this.children,
+    super.key,
   }) : assert(children.isNotEmpty, 'children must not be empty');
 
   @override

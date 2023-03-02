@@ -5,11 +5,11 @@ import 'package:survey_core/src/presentation/utils/constants.dart';
 
 class QuestionBottomButton extends StatelessWidget {
   const QuestionBottomButton({
-    super.key,
     required this.text,
     required this.onPressed,
     this.isEnabled = true,
     this.isOutlined = false,
+    super.key,
   });
 
   final String text;

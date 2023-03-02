@@ -9,7 +9,10 @@ import 'package:survey_core/src/presentation/utils/data_to_widget_util.dart';
 class Survey extends StatefulWidget {
   final String surveyDataAsset;
 
-  Survey({super.key, required this.surveyDataAsset}) {
+  Survey({
+    required this.surveyDataAsset,
+    super.key,
+  }) {
     Injector().init();
   }
 

@@ -9,9 +9,9 @@ class ColorCustomizationItem extends StatefulWidget {
   final ValueChanged<Color> onColorPicked;
 
   const ColorCustomizationItem({
-    super.key,
     required this.initialColor,
     required this.onColorPicked,
+    super.key,
   });
 
   @override

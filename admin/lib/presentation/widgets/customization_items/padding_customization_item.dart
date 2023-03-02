@@ -11,11 +11,11 @@ class PaddingCustomizationItem extends StatefulWidget {
   final ValueChanged<double> onVerticalPaddingChange;
 
   const PaddingCustomizationItem({
-    super.key,
     required this.initialHorizontalPadding,
     required this.initialVerticalPadding,
     required this.onHorizontalPaddingChange,
     required this.onVerticalPaddingChange,
+    super.key,
   });
 
   @override

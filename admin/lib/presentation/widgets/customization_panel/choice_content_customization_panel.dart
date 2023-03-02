@@ -11,10 +11,10 @@ class ChoiceContentCustomizationPanel extends StatelessWidget {
   final ValueChanged<List<String>> onOptionsChanged;
 
   const ChoiceContentCustomizationPanel({
-    super.key,
     required this.onTitleChanged,
     required this.onSubTitleChanged,
     required this.onOptionsChanged,
+    super.key,
   });
 
   @override

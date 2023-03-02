@@ -15,12 +15,12 @@ class TextCustomizeItem extends StatefulWidget {
   final ValueChanged<int> onTextWidthPicked;
 
   const TextCustomizeItem({
-    super.key,
     required this.title,
     required this.initialTextWidth,
     required this.initialColor,
     required this.onColorPicked,
     required this.onTextWidthPicked,
+    super.key,
   });
 
   @override

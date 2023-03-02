@@ -13,9 +13,9 @@ class InputQuestionPage extends StatefulWidget {
   final OnSendCallback onSend;
 
   const InputQuestionPage({
-    super.key,
     required this.data,
     required this.onSend,
+    super.key,
   });
 
   @override

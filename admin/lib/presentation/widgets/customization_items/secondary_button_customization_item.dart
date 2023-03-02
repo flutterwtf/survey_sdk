@@ -11,10 +11,10 @@ class SecondaryButtonCustomizationItem extends StatefulWidget {
   final bool isShown;
 
   const SecondaryButtonCustomizationItem({
-    super.key,
     required this.onChanged,
     this.initialText = '',
     this.isShown = false,
+    super.key,
   });
 
   @override

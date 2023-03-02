@@ -11,10 +11,10 @@ class MinMaxCustomizationItem extends StatefulWidget {
   final void Function(int? min, int? max) onChanged;
 
   const MinMaxCustomizationItem({
-    super.key,
+    required this.onChanged,
     this.initialMin = 0,
     this.initialMax = 10,
-    required this.onChanged,
+    super.key,
   }) : assert(
           initialMax > initialMin,
           'initialMax must be greater then initialMin',

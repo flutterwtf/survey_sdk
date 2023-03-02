@@ -3,8 +3,8 @@ import 'package:survey_core/src/presentation/utils/app_fonts.dart';
 
 class QuestionContent extends StatelessWidget {
   const QuestionContent({
-    super.key,
     required this.content,
+    super.key,
   });
 
   final String content;

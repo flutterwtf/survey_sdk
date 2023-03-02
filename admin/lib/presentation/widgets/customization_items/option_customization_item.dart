@@ -10,9 +10,9 @@ class OptionCustomizationItem extends StatefulWidget {
   final ValueChanged<List<String>> onChanged;
 
   const OptionCustomizationItem({
-    super.key,
     required this.options,
     required this.onChanged,
+    super.key,
   });
 
   @override

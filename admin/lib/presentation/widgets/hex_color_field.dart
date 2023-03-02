@@ -9,9 +9,9 @@ class HexColorField extends StatelessWidget {
   final ValueChanged<Color> onColorPicked;
 
   const HexColorField({
-    super.key,
     required this.colorTextController,
     required this.onColorPicked,
+    super.key,
   });
 
   @override

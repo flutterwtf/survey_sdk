@@ -9,9 +9,9 @@ class TextWidthField extends StatelessWidget {
   final ValueChanged<int> onTextWidthPicked;
 
   const TextWidthField({
-    super.key,
     required this.textWidthTextController,
     required this.onTextWidthPicked,
+    super.key,
   });
 
   @override

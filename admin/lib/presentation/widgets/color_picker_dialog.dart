@@ -10,9 +10,9 @@ class ColorPickerDialog extends StatelessWidget {
   final TextEditingController colorTextController;
 
   const ColorPickerDialog({
-    super.key,
     required this.onColorPicked,
     required this.colorTextController,
+    super.key,
   });
 
   @override

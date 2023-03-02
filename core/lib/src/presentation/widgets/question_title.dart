@@ -3,8 +3,8 @@ import 'package:survey_core/src/presentation/utils/app_fonts.dart';
 
 class QuestionTitle extends StatelessWidget {
   const QuestionTitle({
-    super.key,
     required this.title,
+    super.key,
   });
 
   final String title;

@@ -14,9 +14,9 @@ class SliderQuestionPage extends StatefulWidget {
   final OnSendCallback onSend;
 
   const SliderQuestionPage({
-    super.key,
     required this.data,
     required this.onSend,
+    super.key,
   });
 
   @override

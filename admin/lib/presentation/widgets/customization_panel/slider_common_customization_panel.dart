@@ -18,13 +18,13 @@ class SliderCommonCustomizationPanel extends CustomizationPanel {
   final ValueChanged<Color> onButtonDownColorChanged;
 
   const SliderCommonCustomizationPanel({
-    super.key,
     required super.title,
     required this.onButtonDownColorChanged,
     required this.onButtonUpColorChanged,
     required this.onFillColorChanged,
     required this.onSubtitleColorChanged,
     required this.onTitleColorChanged,
+    super.key,
   });
 
   @override

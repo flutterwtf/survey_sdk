@@ -6,8 +6,8 @@ class QuestionSettingsTabBar extends StatefulWidget {
   final List<CustomizationPanel> panels;
 
   const QuestionSettingsTabBar({
-    super.key,
     required this.panels,
+    super.key,
   });
 
   @override

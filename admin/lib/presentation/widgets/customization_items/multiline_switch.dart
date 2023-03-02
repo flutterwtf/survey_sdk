@@ -10,10 +10,10 @@ import 'package:survey_admin/presentation/widgets/customization_items/switch_cus
 
 class MultilineSwitch extends StatefulWidget {
   const MultilineSwitch({
-    super.key,
     required this.onChanged,
     this.isMultiline = false,
     this.defaultLineAmount = 3,
+    super.key,
   });
 
   /// if [isMultiline] equals `false` then `lineAmount` is always equals 1.

@@ -14,9 +14,9 @@ class ChoiceQuestionPage extends StatefulWidget {
   final OnSendCallback onSend;
 
   const ChoiceQuestionPage({
-    super.key,
     required this.data,
     required this.onSend,
+    super.key,
   });
 
   @override

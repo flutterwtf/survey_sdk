@@ -10,10 +10,10 @@ class SwitchCustomizationItem extends StatelessWidget {
   final void Function(bool isToggled)? onChanged;
 
   const SwitchCustomizationItem({
-    super.key,
     required this.title,
     this.initialValue,
     this.onChanged,
+    super.key,
   });
 
   @override

@@ -20,7 +20,6 @@ class VectorImage extends StatelessWidget {
   final String? package;
 
   const VectorImage({
-    super.key,
     required this.assetName,
     this.width,
     this.height,
@@ -37,6 +36,7 @@ class VectorImage extends StatelessWidget {
     this.colorFilter,
     this.bundle,
     this.package,
+    super.key,
   });
 
   @override

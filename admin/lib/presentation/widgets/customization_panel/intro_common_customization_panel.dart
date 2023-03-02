@@ -20,7 +20,6 @@ class IntroCommonCustomizationPanel extends CustomizationPanel {
   final ValueChanged<int?> onButtonRadiusChanged;
 
   const IntroCommonCustomizationPanel({
-    super.key,
     required super.title,
     required this.onFillColorPicked,
     required this.onTitleColorPicked,
@@ -31,6 +30,7 @@ class IntroCommonCustomizationPanel extends CustomizationPanel {
     required this.onButtonTextColorPicked,
     required this.onButtonFontSizeChanged,
     required this.onButtonRadiusChanged,
+    super.key,
   });
 
   @override

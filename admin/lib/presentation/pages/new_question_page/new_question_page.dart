@@ -34,8 +34,8 @@ class NewQuestionPage extends StatefulWidget {
   final ValueChanged<String> onSubmit;
 
   const NewQuestionPage({
-    super.key,
     required this.onSubmit,
+    super.key,
   });
 
   @override

@@ -19,17 +19,17 @@ class ColorWithTextFieldCustomizationItem extends StatelessWidget {
   final InputDecoration? decoration;
 
   const ColorWithTextFieldCustomizationItem({
-    super.key,
-    this.initialColor,
     required this.onColorPicked,
     required this.initialText,
-    this.inputFormatters,
     required this.onTextChanged,
+    this.initialColor,
+    this.inputFormatters,
     this.focusNode,
     this.onEditingComplete,
     this.textEditingController,
     this.fontSize,
     this.decoration,
+    super.key,
   });
 
   @override
