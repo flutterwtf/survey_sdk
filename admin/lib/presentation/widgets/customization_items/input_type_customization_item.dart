@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:survey_admin/presentation/utils/app_fonts.dart';
 import 'package:survey_admin/presentation/utils/asset_strings.dart';
-import 'package:survey_admin/presentation/utils/constants/app_duration.dart';
+import 'package:survey_admin/presentation/utils/constants/app_durations.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
 
 // TODO(dev): localization
@@ -47,7 +47,7 @@ class _InputTypeCustomizationItemState extends State<InputTypeCustomizationItem>
     _selectedType = widget.initialValue;
     _iconAnimationController = AnimationController(
       vsync: this,
-      duration: AppDuration.customizationItemAnimation,
+      duration: AppDurations.customizationItemAnimation,
     );
     _animation = Tween(begin: 0.0, end: .5).animate(
       CurvedAnimation(
@@ -86,7 +86,7 @@ class _InputTypeCustomizationItemState extends State<InputTypeCustomizationItem>
           },
         ),
         AnimatedSize(
-          duration: AppDuration.customizationItemAnimation,
+          duration: AppDurations.customizationItemAnimation,
           child: _isExpanded
               ? Column(
                   children: InputType.values

@@ -1,4 +1,4 @@
-import 'package:survey_core/src/presentation/utils/app_duration.dart';
+import 'package:survey_core/src/presentation/utils/app_durations.dart';
 import 'package:survey_core/src/presentation/utils/app_fonts.dart';
 import 'package:survey_core/src/presentation/utils/constants.dart';
 import 'package:flutter/material.dart';
@@ -36,7 +36,7 @@ class QuestionBottomButton extends StatelessWidget {
             ),
             border: Border.all(color: accentColor),
           ),
-          duration: const Duration(milliseconds: AppDuration.bottomAnimation),
+          duration: AppDurations.questionBottomButtonAnimation,
           child: Padding(
             padding: const EdgeInsets.all(AppDimensions.marginS),
             child: Center(
