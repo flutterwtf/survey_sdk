@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/utils/constants/app_duration.dart';
-import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text.dart';
+import 'package:survey_admin/presentation/widgets/customization_items/customization_item_container.dart';
 
 //TODO: extend every item from CustomizationItem class
 class SwitchCustomizationItem extends StatelessWidget {
@@ -20,7 +20,7 @@ class SwitchCustomizationItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        CustomizationText(title),
+        CustomizationItemContainer(text: title),
         const Spacer(),
         _CustomSwitch(
           initialValue: initialValue ?? false,
@@ -67,9 +67,7 @@ class _CustomSwitchState extends State<_CustomSwitch> {
         height: 18,
         width: 34,
         decoration: BoxDecoration(
-          color: _isToggled
-              ? AppColors.switchBackgroundActive
-              : AppColors.switchBackgroundInactive,
+          color: _isToggled ? AppColors.switchBackgroundActive : AppColors.switchBackgroundInactive,
           borderRadius: BorderRadius.circular(9),
         ),
         duration: AppDuration.customizationItemAnimation,
