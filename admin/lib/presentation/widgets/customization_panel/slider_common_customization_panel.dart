@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:survey_admin/presentation/app/localization/localizations.dart';
 import 'package:survey_admin/presentation/utils/app_fonts.dart';
@@ -16,6 +17,10 @@ class SliderCommonCustomizationPanel extends CustomizationPanel {
   final ValueChanged<Color> onSubtitleColorChanged;
   final ValueChanged<Color> onButtonUpColorChanged;
   final ValueChanged<Color> onButtonDownColorChanged;
+  final ValueChanged<String?> onTitleChanged;
+  final ValueChanged<String?> onSubtitleChanged;
+  final ValueChanged<String?> onButtonDownChanged;
+  final ValueChanged<String?> onButtonBorderChanged;
 
   const SliderCommonCustomizationPanel({
     super.key,
@@ -25,6 +30,10 @@ class SliderCommonCustomizationPanel extends CustomizationPanel {
     required this.onFillColorChanged,
     required this.onSubtitleColorChanged,
     required this.onTitleColorChanged,
+    required this.onTitleChanged,
+    required this.onSubtitleChanged,
+    required this.onButtonDownChanged,
+    required this.onButtonBorderChanged,
   });
 
   @override
@@ -55,6 +64,11 @@ class SliderCommonCustomizationPanel extends CustomizationPanel {
                 Expanded(
                   child: CustomizationTextField(
                     initialValue: AppFonts.sizeL.toString(),
+                    onChanged: onTitleChanged,
+                    inputFormatters: [
+                      FilteringTextInputFormatter.digitsOnly,
+                      LengthLimitingTextInputFormatter(2),
+                    ],
                   ),
                 ),
               ],
@@ -75,6 +89,11 @@ class SliderCommonCustomizationPanel extends CustomizationPanel {
                 Expanded(
                   child: CustomizationTextField(
                     initialValue: AppFonts.sizeL.toString(),
+                    onChanged: onSubtitleChanged,
+                    inputFormatters: [
+                      FilteringTextInputFormatter.digitsOnly,
+                      LengthLimitingTextInputFormatter(2),
+                    ],
                   ),
                 ),
               ],
@@ -99,6 +118,11 @@ class SliderCommonCustomizationPanel extends CustomizationPanel {
                 Expanded(
                   child: CustomizationTextField(
                     initialValue: AppFonts.sizeL.toString(),
+                    onChanged: onButtonDownChanged,
+                    inputFormatters: [
+                      FilteringTextInputFormatter.digitsOnly,
+                      LengthLimitingTextInputFormatter(2),
+                    ],
                   ),
                 ),
               ],
@@ -110,6 +134,11 @@ class SliderCommonCustomizationPanel extends CustomizationPanel {
                 Expanded(
                   child: CustomizationTextField(
                     initialValue: AppFonts.sizeL.toString(),
+                    onChanged: onButtonBorderChanged,
+                    inputFormatters: [
+                      FilteringTextInputFormatter.digitsOnly,
+                      LengthLimitingTextInputFormatter(2),
+                    ],
                   ),
                 ),
               ],

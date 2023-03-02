@@ -62,10 +62,10 @@ class _PaddingCustomizationItemState extends State<PaddingCustomizationItem> {
         ),
         _PaddingItem(
           isHorizontal: false,
-          focusNode: horizontalPaddingFocusNode,
-          initialValue: horizontalPadding.toString(),
+          focusNode: verticalPaddingFocusNode,
+          initialValue: verticalPadding.toString(),
           onChanged: (value) =>
-              setState(() => horizontalPadding = double.parse(value)),
+              setState(() => verticalPadding = double.parse(value)),
         ),
       ],
     );

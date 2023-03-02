@@ -21,6 +21,16 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
+  fonts:
+    - family: Karla
+      fonts:
+        - asset: fonts/Karla-Regular.ttf
+        - asset: fonts/Karla-Bold.ttf
+    - family: Inter
+      fonts:
+        - asset: fonts/Inter-Regular.ttf
+        - asset: fonts/Inter-SemiBold.ttf
+        - asset: fonts/Inter-Medium.ttf
 
   # To add assets to your package, add an assets section, like this:
   # assets:
