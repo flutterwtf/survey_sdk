@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+/// This controller need to navigation on survey and save answer
+/// Function [onNext] navigate to next page and save answer on last page
+/// Function [onBack] navigate to previous page
 class SurveyController {
   final Map<String, dynamic> _answers = {};
   final PageController _pageController = PageController();

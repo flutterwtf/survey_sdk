@@ -7,12 +7,11 @@ import 'package:survey_core/src/domain/entities/survey_data.dart';
 import 'package:survey_core/src/domain/entities/themes/common_theme.dart';
 import 'package:survey_core/src/domain/entities/themes/text_field_theme_data.dart';
 import 'package:survey_core/src/domain/entities/validator/input_validator.dart';
-import 'package:survey_core/src/presentation/utils/colors.dart';
 
 abstract class MockedQuestions {
   static final choice1 = ChoiceQuestionData(
     isMultipleChoice: true,
-    options: ['option 1', 'option 2', 'option 3'],
+    options: const ['option 1', 'option 2', 'option 3'],
     index: 0,
     title: 'title',
     subtitle: 'subtitle',
@@ -21,7 +20,7 @@ abstract class MockedQuestions {
 
   static final choice2 = ChoiceQuestionData(
     isMultipleChoice: false,
-    options: ['option 1', 'option 2'],
+    options: const ['option 1', 'option 2'],
     index: 1,
     title: 'Another title',
     subtitle: 'Another subtitle',

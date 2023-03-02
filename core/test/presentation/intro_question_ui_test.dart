@@ -29,7 +29,7 @@ void main() {
           ),
           onMainButtonTap: completerOnMainButtonTap.complete,
           onSecondaryButtonTap: completerOnSecondaryButtonTap.complete,
-          onSend: (data) {},
+          onSend: ({data, required key}) {},
         ),
       );
 
