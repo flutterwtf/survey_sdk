@@ -1,8 +1,7 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:survey_admin/presentation/app/localization/localizations.dart';
+import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/color_customization_item.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/color_with_text_field_customization_item.dart';
@@ -15,49 +14,49 @@ void main() {
     'Intro common customization panel',
     () {
       const redColorCode = 'FFF44336';
-      const textWidth = '20';
+      const textSizeString = '20';
+      const textSize = 20;
+      const textSizeStringWithLetters = '1LLL';
+      const textSizeWithLetters = 1;
+      const textSizeStringMoreThan2 = '233';
+      const redColor = Color(0xfff44336);
+      Color fillTextColor = AppColors.black;
+      Color titleTextColor = AppColors.black;
+      Color subtitleTextColor = AppColors.black;
+      Color buttonColor = AppColors.black;
+      Color buttonTextColor = AppColors.black;
+      int? titleTextSize = 10;
+      int? subtitleTextSize = 10;
+      int? buttonTextSize = 10;
+      int? radius = 10;
+
+      final introCommonCustomPanel = MaterialApp(
+        supportedLocales: AppLocalizations.supportedLocales,
+        localizationsDelegates: const [
+          AppLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        home: Scaffold(
+          body: IntroCommonCustomizationPanel(
+            title: 'title',
+            onFillColorPicked: (value) => fillTextColor = value,
+            onTitleColorPicked: (value) => titleTextColor = value,
+            onTitleFontSizeChanged: (value) => titleTextSize = value,
+            onSubtitleColorPicked: (value) => subtitleTextColor = value,
+            onSubtitleFontSizeChanged: (value) => subtitleTextSize = value,
+            onButtonColorPicked: (value) => buttonColor = value,
+            onButtonTextColorPicked: (value) => buttonTextColor = value,
+            onButtonFontSizeChanged: (value) => buttonTextSize = value,
+            onButtonRadiusChanged: (value) => radius = value,
+          ),
+        ),
+      );
 
       testWidgets(
         'load widget',
         (tester) async {
-          final completerOnFillColorPicked = Completer<void>();
-          final completerOnButtonColorPicked = Completer<void>();
-          final completerOnTitleColorPicked = Completer<void>();
-          final completerOnTitleFontSizeChanged = Completer<void>();
-          final completerOnSubtitleColorPicked = Completer<void>();
-          final completerOnSubtitleFontSizeChanged = Completer<void>();
-          final completerOnButtonTextColorPicked = Completer<void>();
-          final completerOnButtonFontSizeChanged = Completer<void>();
-          final completerOnButtonRadiusChanged = Completer<void>();
-          final introCommonCustomPanel = MaterialApp(
-            localizationsDelegates: const [
-              AppLocalizations.delegate,
-            ],
-            home: Scaffold(
-              body: Builder(
-                builder: (context) {
-                  return IntroCommonCustomizationPanel(
-                    title: context.localization.common,
-                    onFillColorPicked: completerOnFillColorPicked.complete,
-                    onButtonColorPicked: completerOnButtonColorPicked.complete,
-                    onTitleColorPicked: completerOnTitleColorPicked.complete,
-                    onTitleFontSizeChanged:
-                        completerOnTitleFontSizeChanged.complete,
-                    onSubtitleColorPicked:
-                        completerOnSubtitleColorPicked.complete,
-                    onSubtitleFontSizeChanged:
-                        completerOnSubtitleFontSizeChanged.complete,
-                    onButtonTextColorPicked:
-                        completerOnButtonTextColorPicked.complete,
-                    onButtonFontSizeChanged:
-                        completerOnButtonFontSizeChanged.complete,
-                    onButtonRadiusChanged:
-                        completerOnButtonRadiusChanged.complete,
-                  );
-                },
-              ),
-            ),
-          );
           await tester.pumpWidget(introCommonCustomPanel);
           expect(find.byType(ColorCustomizationItem), findsNWidgets(5));
           expect(find.byType(ColorWithTextFieldCustomizationItem),
@@ -68,44 +67,6 @@ void main() {
       testWidgets(
         'pick colors test',
         (tester) async {
-          final completerOnFillColorPicked = Completer<void>();
-          final completerOnButtonColorPicked = Completer<void>();
-          final completerOnTitleColorPicked = Completer<void>();
-          final completerOnTitleFontSizeChanged = Completer<void>();
-          final completerOnSubtitleColorPicked = Completer<void>();
-          final completerOnSubtitleFontSizeChanged = Completer<void>();
-          final completerOnButtonTextColorPicked = Completer<void>();
-          final completerOnButtonFontSizeChanged = Completer<void>();
-          final completerOnButtonRadiusChanged = Completer<void>();
-          final introCommonCustomPanel = MaterialApp(
-            localizationsDelegates: const [
-              AppLocalizations.delegate,
-            ],
-            home: Scaffold(
-              body: Builder(
-                builder: (context) {
-                  return IntroCommonCustomizationPanel(
-                    title: context.localization.common,
-                    onFillColorPicked: completerOnFillColorPicked.complete,
-                    onButtonColorPicked: completerOnButtonColorPicked.complete,
-                    onTitleColorPicked: completerOnTitleColorPicked.complete,
-                    onTitleFontSizeChanged:
-                        completerOnTitleFontSizeChanged.complete,
-                    onSubtitleColorPicked:
-                        completerOnSubtitleColorPicked.complete,
-                    onSubtitleFontSizeChanged:
-                        completerOnSubtitleFontSizeChanged.complete,
-                    onButtonTextColorPicked:
-                        completerOnButtonTextColorPicked.complete,
-                    onButtonFontSizeChanged:
-                        completerOnButtonFontSizeChanged.complete,
-                    onButtonRadiusChanged:
-                        completerOnButtonRadiusChanged.complete,
-                  );
-                },
-              ),
-            ),
-          );
           await tester.pumpWidget(introCommonCustomPanel);
           await tester.pumpAndSettle();
           final colorTextFields = find.byType(ColorCustomizationItem);
@@ -118,75 +79,103 @@ void main() {
           }
           await tester.pump();
           expect(find.text(redColorCode), findsNWidgets(5));
-          expect(completerOnFillColorPicked.isCompleted, isTrue);
-          expect(completerOnButtonColorPicked.isCompleted, isTrue);
-          expect(completerOnTitleColorPicked.isCompleted, isTrue);
-          expect(completerOnSubtitleColorPicked.isCompleted, isTrue);
-          expect(completerOnButtonTextColorPicked.isCompleted, isTrue);
-          expect(completerOnSubtitleFontSizeChanged.isCompleted, isFalse);
-          expect(completerOnTitleFontSizeChanged.isCompleted, isFalse);
-          expect(completerOnButtonFontSizeChanged.isCompleted, isFalse);
-          expect(completerOnButtonFontSizeChanged.isCompleted, isFalse);
-          expect(completerOnButtonRadiusChanged.isCompleted, isFalse);
+          expect(fillTextColor, redColor);
+          expect(titleTextColor, redColor);
+          expect(subtitleTextColor, redColor);
+          expect(buttonColor, redColor);
+          expect(buttonTextColor, redColor);
         },
       );
       testWidgets(
         'pick text width and radius test',
         (tester) async {
-          final completerOnFillColorPicked = Completer<void>();
-          final completerOnButtonColorPicked = Completer<void>();
-          final completerOnTitleColorPicked = Completer<void>();
-          final completerOnTitleFontSizeChanged = Completer<void>();
-          final completerOnSubtitleColorPicked = Completer<void>();
-          final completerOnSubtitleFontSizeChanged = Completer<void>();
-          final completerOnButtonTextColorPicked = Completer<void>();
-          final completerOnButtonFontSizeChanged = Completer<void>();
-          final completerOnButtonRadiusChanged = Completer<void>();
-          final introCommonCustomPanel = MaterialApp(
-            localizationsDelegates: const [
-              AppLocalizations.delegate,
-            ],
-            home: Scaffold(
-              body: Builder(
-                builder: (context) {
-                  return IntroCommonCustomizationPanel(
-                    title: context.localization.common,
-                    onFillColorPicked: completerOnFillColorPicked.complete,
-                    onButtonColorPicked: completerOnButtonColorPicked.complete,
-                    onTitleColorPicked: completerOnTitleColorPicked.complete,
-                    onTitleFontSizeChanged:
-                        completerOnTitleFontSizeChanged.complete,
-                    onSubtitleColorPicked:
-                        completerOnSubtitleColorPicked.complete,
-                    onSubtitleFontSizeChanged:
-                        completerOnSubtitleFontSizeChanged.complete,
-                    onButtonTextColorPicked:
-                        completerOnButtonTextColorPicked.complete,
-                    onButtonFontSizeChanged:
-                        completerOnButtonFontSizeChanged.complete,
-                    onButtonRadiusChanged:
-                        completerOnButtonRadiusChanged.complete,
-                  );
-                },
-              ),
-            ),
-          );
           await tester.pumpWidget(introCommonCustomPanel);
-          await tester.pumpAndSettle();
-          final textFields = find.byType(CustomizationTextField);
-          for (int i = 0; i < textFields.evaluate().length; i++) {
-            await tester.enterText(
-              textFields.at(i),
-              textWidth,
-            );
-            await tester.testTextInput.receiveAction(TextInputAction.done);
-          }
+
+          await tester.enterText(
+              find.byType(CustomizationTextField).at(2), textSizeString);
+          await tester.testTextInput.receiveAction(TextInputAction.done);
           await tester.pump();
-          expect(find.text(textWidth), findsNWidgets(4));
-          expect(completerOnTitleFontSizeChanged.isCompleted, isTrue);
-          expect(completerOnButtonFontSizeChanged.isCompleted, isTrue);
-          expect(completerOnButtonFontSizeChanged.isCompleted, isTrue);
-          expect(completerOnButtonRadiusChanged.isCompleted, isTrue);
+          expect(titleTextSize, textSize);
+
+          await tester.enterText(
+              find.byType(CustomizationTextField).at(4), textSizeString);
+          await tester.testTextInput.receiveAction(TextInputAction.done);
+          await tester.pump();
+          expect(subtitleTextSize, textSize);
+
+          await tester.enterText(
+              find.byType(CustomizationTextField).at(7), textSizeString);
+          await tester.testTextInput.receiveAction(TextInputAction.done);
+          await tester.pump();
+          expect(buttonTextSize, textSize);
+
+          await tester.enterText(
+              find.byType(CustomizationTextField).at(8), textSizeString);
+          await tester.testTextInput.receiveAction(TextInputAction.done);
+          await tester.pump();
+          expect(radius, textSize);
+
+          expect(find.text(textSizeString), findsNWidgets(4));
+        },
+      );
+      testWidgets(
+        'pick text width and radius with letters',
+        (tester) async {
+          await tester.pumpWidget(introCommonCustomPanel);
+
+          await tester.enterText(find.byType(CustomizationTextField).at(2),
+              textSizeStringWithLetters);
+          await tester.testTextInput.receiveAction(TextInputAction.done);
+          await tester.pump();
+          expect(titleTextSize, textSizeWithLetters);
+
+          await tester.enterText(find.byType(CustomizationTextField).at(4),
+              textSizeStringWithLetters);
+          await tester.testTextInput.receiveAction(TextInputAction.done);
+          await tester.pump();
+          expect(subtitleTextSize, textSizeWithLetters);
+
+          await tester.enterText(find.byType(CustomizationTextField).at(7),
+              textSizeStringWithLetters);
+          await tester.testTextInput.receiveAction(TextInputAction.done);
+          await tester.pump();
+          expect(buttonTextSize, textSizeWithLetters);
+
+          await tester.enterText(find.byType(CustomizationTextField).at(8),
+              textSizeStringWithLetters);
+          await tester.testTextInput.receiveAction(TextInputAction.done);
+          await tester.pump();
+          expect(radius, textSizeWithLetters);
+
+          expect(find.text(textSizeStringWithLetters), findsNothing);
+        },
+      );
+      testWidgets(
+        'pick text width and radius with more than 2 digits',
+            (tester) async {
+          await tester.pumpWidget(introCommonCustomPanel);
+
+          await tester.enterText(find.byType(CustomizationTextField).at(2),
+              textSizeStringMoreThan2);
+          await tester.testTextInput.receiveAction(TextInputAction.done);
+          await tester.pump();
+
+          await tester.enterText(find.byType(CustomizationTextField).at(4),
+              textSizeStringMoreThan2);
+          await tester.testTextInput.receiveAction(TextInputAction.done);
+          await tester.pump();
+
+          await tester.enterText(find.byType(CustomizationTextField).at(7),
+              textSizeStringMoreThan2);
+          await tester.testTextInput.receiveAction(TextInputAction.done);
+          await tester.pump();
+
+          await tester.enterText(find.byType(CustomizationTextField).at(8),
+              textSizeStringMoreThan2);
+          await tester.testTextInput.receiveAction(TextInputAction.done);
+          await tester.pump();
+
+          expect(find.text(textSizeStringMoreThan2), findsNothing);
         },
       );
     },

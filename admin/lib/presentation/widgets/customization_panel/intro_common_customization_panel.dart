@@ -55,7 +55,7 @@ class IntroCommonCustomizationPanel extends CustomizationPanel {
               initialText: '16',
               inputFormatters: [
                 FilteringTextInputFormatter.digitsOnly,
-                LengthLimitingTextInputFormatter(3),
+                LengthLimitingTextInputFormatter(2),
               ],
               onTextChanged: (size) {
                 if (size == null) {
@@ -75,7 +75,7 @@ class IntroCommonCustomizationPanel extends CustomizationPanel {
               initialText: '12',
               inputFormatters: [
                 FilteringTextInputFormatter.digitsOnly,
-                LengthLimitingTextInputFormatter(3),
+                LengthLimitingTextInputFormatter(2),
               ],
               onTextChanged: (size) {
                 if (size == null) {
@@ -100,7 +100,7 @@ class IntroCommonCustomizationPanel extends CustomizationPanel {
               initialText: '12',
               inputFormatters: [
                 FilteringTextInputFormatter.digitsOnly,
-                LengthLimitingTextInputFormatter(3),
+                LengthLimitingTextInputFormatter(2),
               ],
               onTextChanged: (size) {
                 if (size == null) {
