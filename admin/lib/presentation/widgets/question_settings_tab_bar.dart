@@ -35,28 +35,26 @@ class _QuestionSettingsTabBarState extends State<QuestionSettingsTabBar>
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          TabBar(
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        TabBar(
+          controller: _tabController,
+          labelColor: AppColors.black,
+          unselectedLabelColor: AppColors.customizationTabBarInactiveText,
+          indicatorColor: AppColors.black,
+          indicatorSize: TabBarIndicatorSize.label,
+          tabs: [
+            for (var panel in widget.panels) Tab(text: panel.title),
+          ],
+        ),
+        Expanded(
+          child: TabBarView(
             controller: _tabController,
-            labelColor: AppColors.black,
-            unselectedLabelColor: AppColors.customizationTabBarInactiveText,
-            indicatorColor: AppColors.black,
-            indicatorSize: TabBarIndicatorSize.label,
-            tabs: [
-              for (var panel in widget.panels) Tab(text: panel.title),
-            ],
+            children: widget.panels,
           ),
-          Expanded(
-            child: TabBarView(
-              controller: _tabController,
-              children: widget.panels,
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
