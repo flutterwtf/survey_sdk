@@ -66,7 +66,7 @@ void main() {
       );
       await tester.tap(find.byType(DivisionsCustomizationItem));
       await tester.sendKeyEvent(LogicalKeyboardKey.backspace);
-      await tester.enterText(find.byType(TextFormField), '1');
+      await tester.enterText(find.byType(TextField), '1');
       await tester.pump();
       expect(find.text('1'), findsOneWidget);
     });
@@ -87,7 +87,7 @@ void main() {
       );
       await tester.tap(find.byType(DivisionsCustomizationItem));
       await tester.sendKeyEvent(LogicalKeyboardKey.backspace);
-      await tester.enterText(find.byType(TextFormField), '3331');
+      await tester.enterText(find.byType(TextField), '3331');
       await tester.pump();
       expect(find.text('333'), findsOneWidget);
       expect(find.text('3331'), findsNothing);

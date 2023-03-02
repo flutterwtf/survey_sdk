@@ -20,10 +20,9 @@ void main() {
         minValue: 0,
         maxValue: 10,
         initialValue: 5,
-        id: 0,
+        index: 0,
         title: 'title',
         subtitle: 'subtitle',
-        typeQuestion: 'Slider',
         isSkip: false,
       );
       final widget = DataToWidgetUtil.createWidget(mockData, mockOnSend);
@@ -37,10 +36,9 @@ void main() {
       const mockData = ChoiceQuestionData(
         isMultipleChoice: true,
         options: ['option 1', 'option 2', 'option 3'],
-        id: 0,
+        index: 0,
         title: 'title',
         subtitle: 'subtitle',
-        typeQuestion: 'Choice',
         isSkip: false,
       );
       final widget = DataToWidgetUtil.createWidget(mockData, mockOnSend);
@@ -53,11 +51,9 @@ void main() {
     test('Call with InputQuestionData', () async {
       final mockData = InputQuestionData(
         validator: DefaultValidator(),
-        value: 5,
-        id: 0,
+        index: 0,
         title: 'title',
         subtitle: 'subtitle',
-        typeQuestion: 'Input',
         isSkip: false,
       );
       final widget = DataToWidgetUtil.createWidget(mockData, mockOnSend);
@@ -70,10 +66,9 @@ void main() {
     test('Call with IntroQuestionData', () async {
       const mockData = IntroQuestionData(
         mainButtonTitle: 'button title',
-        id: 0,
+        index: 0,
         title: 'title',
         subtitle: 'subtitle',
-        typeQuestion: 'Input',
         isSkip: false,
       );
       final widget = DataToWidgetUtil.createWidget(mockData, mockOnSend);
@@ -85,7 +80,10 @@ void main() {
 
     test('Call with bad QuestionData', () async {
       expect(
-        () => DataToWidgetUtil.createWidget(_BadQuestionData(), mockOnSend),
+        () => DataToWidgetUtil.createWidget(
+          const _BadQuestionData(),
+          mockOnSend,
+        ),
         throwsException,
       );
     });
@@ -93,12 +91,11 @@ void main() {
 }
 
 class _BadQuestionData extends QuestionData {
-  _BadQuestionData()
+  const _BadQuestionData()
       : super(
-          id: 0,
+          index: 0,
           title: 'title',
           subtitle: 'subtitle',
-          typeQuestion: 'Bad',
           isSkip: true,
         );
 
@@ -110,4 +107,7 @@ class _BadQuestionData extends QuestionData {
 
   @override
   String get type => throw UnimplementedError();
+
+  @override
+  List<Object?> get props => [];
 }

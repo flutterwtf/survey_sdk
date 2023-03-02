@@ -1,24 +1,23 @@
+import 'package:equatable/equatable.dart';
 import 'package:survey_core/src/domain/entities/api_object.dart';
 import 'package:survey_core/src/domain/entities/question_types/choice_question_data.dart';
 import 'package:survey_core/src/domain/entities/question_types/input_question_data.dart';
 import 'package:survey_core/src/domain/entities/question_types/intro_question_data.dart';
 import 'package:survey_core/src/domain/entities/question_types/slider_question_data.dart';
 
-abstract class QuestionData<T> implements ApiObject {
-  final int id;
+abstract class QuestionData<T> extends Equatable with ApiObject {
+  final int index;
   final String title;
   final String subtitle;
-  final String? info;
-  final String typeQuestion;
+  final String? content;
   final bool isSkip;
 
   const QuestionData({
-    required this.id,
+    required this.index,
     required this.title,
     required this.subtitle,
-    required this.typeQuestion,
     required this.isSkip,
-    this.info,
+    this.content,
   });
 
   T? get theme;

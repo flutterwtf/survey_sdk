@@ -6,27 +6,43 @@ import 'package:survey_admin/presentation/utils/app_fonts.dart';
 import 'package:survey_admin/presentation/utils/asset_strings.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
-import 'package:survey_admin/presentation/widgets/builder_page/survey_question_list_item.dart';
+import 'package:survey_admin/presentation/widgets/builder_page/question_list_item.dart';
+import 'package:survey_core/survey_core.dart';
 
 // ignore: lines_longer_than_80_chars
-// TODO(dev): do we really need this prefix? If so, why do we have it only in several classes
-class SurveyContentBar extends StatefulWidget {
-  const SurveyContentBar({super.key});
+// TODO(dev): do we really need "Survey" prefix? If so, why do we have it only in several classes
+class QuestionList extends StatefulWidget {
+  final void Function(QuestionData) onSelect;
+
+  const QuestionList({
+    required this.onSelect,
+    super.key,
+  });
 
   @override
-  State<SurveyContentBar> createState() => _SurveyContentBarState();
+  State<QuestionList> createState() => _QuestionListState();
 }
 
-class _SurveyContentBarState extends State<SurveyContentBar> {
-  final _questionsList = [
-    const SurveyQuestionListItem(index: 1, title: 'Intro'),
-    const SurveyQuestionListItem(index: 2, title: 'Title'),
+class _QuestionListState extends State<QuestionList> {
+  final _questionList = [
+    const QuestionListItem(
+      questionData: IntroQuestionData.common(),
+    ),
+    QuestionListItem(
+      questionData: InputQuestionData.common(index: 1),
+    ),
   ];
 
-  void addQuestion(String title) {
-    final index = _questionsList.length;
+  void addQuestion(QuestionData data) {
+    // TODO(dev): use data.copyWith instead of this
+    //final index = _questionList.length;
+    //data.index = index;
     setState(() {
-      _questionsList.add(SurveyQuestionListItem(index: index, title: title));
+      _questionList.add(
+        QuestionListItem(
+          questionData: data,
+        ),
+      );
     });
   }
 
@@ -81,22 +97,29 @@ class _SurveyContentBarState extends State<SurveyContentBar> {
             child: ReorderableListView(
               buildDefaultDragHandles: false,
               children: [
-                for (int index = 0; index < _questionsList.length; index++)
+                for (int index = 0; index < _questionList.length; index++)
                   ReorderableDragStartListener(
                     index: index,
                     key: ValueKey(index),
-                    child: SurveyQuestionListItem(
-                      index: index + 1,
-                      title: _questionsList[index].title,
-                    ),
+                    child: _questionList
+                        .where((item) => item.questionData.index == index)
+                        .first,
                   )
               ],
               onReorder: (oldIndex, newIndex) {
                 setState(() {
-                  if (newIndex > oldIndex) newIndex--;
+                  // TODO(dev): use data.copyWith instead of this
+                  /*
+                  final itemFirst = _questionList
+                      .where((item) => item.questionData.index == oldIndex)
+                      .first;
+                  final itemSecond = _questionList
+                      .where((item) => item.questionData.index == newIndex)
+                      .first;
 
-                  final item = _questionsList.removeAt(oldIndex);
-                  _questionsList.insert(newIndex, item);
+                  itemFirst.questionData.index = newIndex;
+                  itemSecond.questionData.index = oldIndex;
+                   */
                 });
               },
             ),

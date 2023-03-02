@@ -57,7 +57,14 @@ class _SecondaryButtonCustomizationItemState
                   ),
                   child: CustomizationTextField(
                     initialValue: widget.initialText,
-                    onChanged: (text) => widget.onChanged(_isShown, _text),
+                    onChanged: (text) {
+                      if (text != null) {
+                        setState(() {
+                          _text = text;
+                        });
+                      }
+                      widget.onChanged(_isShown, _text);
+                    },
                     decoration: InputDecoration(
                       hintText: context.localization.enter_text,
                       isCollapsed: true,

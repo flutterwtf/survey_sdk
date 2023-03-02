@@ -103,4 +103,19 @@ class InputQuestionTheme extends ThemeExtension<InputQuestionTheme>
     // TODO(dev): implement toJson
     throw UnimplementedError();
   }
+
+  // TODO(dev): implement props
+  List<Object?> get props => [
+        backgroundColor,
+        borderColor,
+        borderWidth,
+        hintColor,
+        hintSize,
+        textColor,
+        textSize,
+        minLines,
+        maxLines,
+        verticalPadding,
+        horizontalPadding,
+      ];
 }

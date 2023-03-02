@@ -179,4 +179,24 @@ class TextFieldThemeData extends ThemeExtension<TextFieldThemeData>
       buttonTextColor: Color.lerp(buttonTextColor, other.buttonTextColor, t)!,
     );
   }
+
+  List<Object?> get props => [
+        fillCommonColor,
+        fillInputColor,
+        borderColor,
+        borderWidth,
+        verticalPadding,
+        horizontalPadding,
+        hintColor,
+        hintSize,
+        textColor,
+        textSize,
+        titleColor,
+        titleSize,
+        subtitleColor,
+        subtitleSize,
+        buttonTextSize,
+        buttonColor,
+        buttonTextColor,
+      ];
 }

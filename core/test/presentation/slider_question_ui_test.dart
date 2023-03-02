@@ -15,7 +15,6 @@ void main() {
       final completerOnSendButtonTap = Completer<void>();
       const title = 'Question widget';
       const subTitle = 'Question widget subtitle';
-      const typeQuestion = 'SliderQuestion';
       const minValue = 1.0;
       const maxValue = 2.0;
       const initialValue = 1.0;
@@ -35,10 +34,9 @@ void main() {
             data: const SliderQuestionData(
               minValue: minValue,
               maxValue: maxValue,
-              id: id,
+              index: id,
               title: title,
               subtitle: subTitle,
-              typeQuestion: typeQuestion,
               isSkip: isSkip,
               initialValue: initialValue,
             ),

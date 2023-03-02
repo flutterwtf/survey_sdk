@@ -8,6 +8,7 @@ analyzer:
     strict-casts: false
     strict-inference: false
     strict-raw-types: false
+    enableSuperMixins: true
 
   errors:
     close_sinks: error
@@ -18,6 +19,7 @@ analyzer:
     sort_pub_dependencies: ignore
     unawaited_futures: ignore
     sort_constructors_first: ignore
+    mixin_inherits_from_not_object: ignore
 
   exclude:
     - "build/**"

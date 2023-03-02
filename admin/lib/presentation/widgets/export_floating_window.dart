@@ -92,6 +92,7 @@ class _ExportFloatingWindow extends StatelessWidget {
                   vertical: AppDimensions.marginM,
                 ),
                 child: Icon(
+                  // TODO(dev): replace with the one from figma maybe???
                   Icons.task_rounded,
                   size: AppDimensions.sizeXL,
                   color: AppColors.black,
