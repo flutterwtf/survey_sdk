@@ -2,19 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:survey_admin/presentation/pages/new_question_page/new_question_page.dart';
 import 'package:mockito/mockito.dart';
+import 'package:survey_admin/presentation/utils/constants/image_constants.dart';
+import 'package:survey_admin/presentation/widgets/vector_image.dart';
+
+import '../../widgets/app_test.dart';
 
 class MockNavigatorObserver extends Mock implements NavigatorObserver {}
 
 void main() {
   group('Tests for NewQuestionPage', () {
     final mockObserver = MockNavigatorObserver();
-    final page = MaterialApp(
-      home: Scaffold(
-        body: NewQuestionPage(
-          onSubmit: (value) {},
-        ),
-      ),
+    final page = AppTest(
       navigatorObservers: [mockObserver],
+      child: const NewQuestionPage(),
     );
 
     testWidgets('Load widget', (tester) async {
@@ -28,7 +28,7 @@ void main() {
 
     testWidgets('Close widget', (tester) async {
       await tester.pumpWidget(page);
-      await tester.tap(find.byKey(const Key('Close')));
+      await tester.tap(find.byType(VectorImage).last);
       await tester.pumpAndSettle();
       expect(find.text('New screen'), findsNothing);
     });
