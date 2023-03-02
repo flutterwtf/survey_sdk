@@ -31,7 +31,7 @@ class _QuestionListState extends State<QuestionList> {
 
   void addQuestion(QuestionData data) {
     final index = _questionList.length;
-    data.index = index;
+    data = data.copyWith(index: index);
     setState(() {
       _questionList.add(QuestionListItem(questionData: data));
     });
@@ -67,13 +67,16 @@ class _QuestionListState extends State<QuestionList> {
                   width: AppDimensions.margin4XL + AppDimensions.margin3XL,
                 ),
                 GestureDetector(
-                  onTap: () => Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => NewQuestionPage(
-                        onSubmit: addQuestion,
+                  onTap: () async {
+                    QuestionData? questionData = await Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const NewQuestionPage(),
                       ),
-                    ),
-                  ),
+                    );
+                    if (questionData != null) {
+                      addQuestion(questionData);
+                    }
+                  },
                   child: SizedBox(
                     height: AppDimensions.sizeL,
                     width: AppDimensions.sizeL,
@@ -95,14 +98,23 @@ class _QuestionListState extends State<QuestionList> {
                   )
               ],
               onReorder: (oldIndex, newIndex) {
-                setState(() {
-                  final itemFirst =
-                      _questionList.where((item) => item.questionData.index == oldIndex).first;
-                  final itemSecond =
-                      _questionList.where((item) => item.questionData.index == newIndex).first;
-                  itemFirst.questionData.index = newIndex;
-                  itemSecond.questionData.index = oldIndex;
-                });
+                if (newIndex > oldIndex) newIndex--;
+                setState(
+                  () {
+                    final itemFirstIndex =
+                        _questionList.indexWhere((item) => item.questionData.index == oldIndex);
+                    final itemSecondIndex =
+                        _questionList.indexWhere((item) => item.questionData.index == newIndex);
+                    _questionList[itemFirstIndex] = QuestionListItem(
+                      questionData:
+                          _questionList[itemFirstIndex].questionData.copyWith(index: newIndex),
+                    );
+                    _questionList[itemSecondIndex] = QuestionListItem(
+                      questionData:
+                          _questionList[itemSecondIndex].questionData.copyWith(index: oldIndex),
+                    );
+                  },
+                );
               },
             ),
           ),

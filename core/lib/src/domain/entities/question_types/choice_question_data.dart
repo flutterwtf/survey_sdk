@@ -29,6 +29,26 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
         );
 
   @override
+  QuestionData copyWith({
+    bool? isMultipleChoice,
+    List<String>? options,
+    int? index,
+    String? title,
+    String? subtitle,
+    String? content,
+    bool? isSkip,
+  }) {
+    return ChoiceQuestionData(
+      isMultipleChoice: isMultipleChoice ?? this.isMultipleChoice,
+      options: options ?? this.options,
+      index: index ?? this.index,
+      title: title ?? this.title,
+      subtitle: subtitle ?? this.subtitle,
+      isSkip: isSkip ?? this.isSkip,
+    );
+  }
+
+  @override
   ChoiceQuestionTheme? get theme => const ChoiceQuestionTheme.common();
 
   @override
