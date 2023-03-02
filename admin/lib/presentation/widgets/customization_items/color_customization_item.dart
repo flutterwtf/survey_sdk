@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
-import 'package:survey_admin/presentation/widgets/customization_items/customization_text_field.dart';
+import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
 
 class ColorCustomizationItem extends StatefulWidget {
   final Color initialColor;
@@ -37,6 +37,7 @@ class _ColorCustomizationItemState extends State<ColorCustomizationItem> {
     super.dispose();
   }
 
+  // TODO(dev): Why is it "public"? Need to check all other places.
   void onChangedTextField(String? value) {
     if (value != null) {
       final color = int.tryParse(value.padRight(8, '0'), radix: 16);

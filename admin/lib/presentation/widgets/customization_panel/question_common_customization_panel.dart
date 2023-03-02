@@ -4,7 +4,7 @@ import 'package:survey_admin/presentation/app/localization/localizations.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/color_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
-import 'package:survey_admin/presentation/widgets/customization_items/customization_text_field.dart';
+import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/customization_panel.dart';
 
 class QuestionCommonCustomizationPanel extends CustomizationPanel {
@@ -57,10 +57,11 @@ class QuestionCommonCustomizationPanel extends CustomizationPanel {
                 ),
                 Flexible(
                   child: CustomizationTextField(
+                    // TODO(dev): we should fix it everywhere
                     initialValue: '16',
                     inputFormatters: [
                       FilteringTextInputFormatter.digitsOnly,
-                      LengthLimitingTextInputFormatter(3),
+                      LengthLimitingTextInputFormatter(2),
                     ],
                     onChanged: (size) {
                       if (size == null) {
@@ -91,7 +92,7 @@ class QuestionCommonCustomizationPanel extends CustomizationPanel {
                     initialValue: '12',
                     inputFormatters: [
                       FilteringTextInputFormatter.digitsOnly,
-                      LengthLimitingTextInputFormatter(3),
+                      LengthLimitingTextInputFormatter(2),
                     ],
                     onChanged: (size) {
                       if (size == null) {
@@ -126,7 +127,7 @@ class QuestionCommonCustomizationPanel extends CustomizationPanel {
                     initialValue: '12',
                     inputFormatters: [
                       FilteringTextInputFormatter.digitsOnly,
-                      LengthLimitingTextInputFormatter(3),
+                      LengthLimitingTextInputFormatter(2),
                     ],
                     onChanged: (size) {
                       if (size == null) {

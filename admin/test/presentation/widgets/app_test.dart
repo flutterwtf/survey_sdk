@@ -4,10 +4,12 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AppTest extends StatelessWidget {
   final Widget child;
+  final List<NavigatorObserver> navigatorObservers;
 
   const AppTest({
     Key? key,
     required this.child,
+    this.navigatorObservers = const [],
   }) : super(key: key);
 
   @override

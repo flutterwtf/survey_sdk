@@ -6,6 +6,7 @@ import 'package:survey_admin/presentation/widgets/customization_title.dart';
 import 'package:survey_admin/presentation/widgets/hex_color_field.dart';
 import 'package:survey_admin/presentation/widgets/text_width_field.dart';
 
+// TODO(dev): do we need this widget?
 class TextCustomizeItem extends StatefulWidget {
   final String title;
   final int initialTextWidth;
@@ -29,6 +30,7 @@ class TextCustomizeItem extends StatefulWidget {
 class _TextCustomizeItemState extends State<TextCustomizeItem> {
   late final TextEditingController _colorTextController;
   late final TextEditingController _textWidthTextController;
+  final stickyKey = GlobalKey();
 
   @override
   void initState() {
@@ -89,18 +91,24 @@ class _TextCustomizeItemState extends State<TextCustomizeItem> {
   }
 
   void pickColor(BuildContext context) {
-    showDialog(
-      context: context,
+    final overlayState = Overlay.of(context);
+    OverlayEntry? overlayEntry;
+    overlayEntry = OverlayEntry(
       builder: (context) {
-        return ColorPickerDialog(
-          onColorPicked: (color) {
-            setState(() {
-              widget.onColorPicked(color);
-            });
-          },
-          colorTextController: _colorTextController,
+        return Positioned(
+          left: Offset.zero.dx,
+          child: ColorPickerDialog(
+            onColorPicked: (color) {
+              setState(() {
+                widget.onColorPicked(color);
+              });
+            },
+            colorTextController: _colorTextController,
+            onClose: overlayEntry!.remove,
+          ),
         );
       },
     );
+    overlayState.insert(overlayEntry);
   }
 }

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:survey_admin/presentation/widgets/customization_items/customization_text_field.dart';
+import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
 
 void main() {
   testWidgets('initialValue property', (tester) async {
@@ -49,10 +48,10 @@ void main() {
       ),
     );
 
-    await tester.enterText(find.byType(FormBuilderTextField), 'test');
+    await tester.enterText(find.byType(TextFormField), 'test');
     expect(text, 'test');
 
-    await tester.enterText(find.byType(FormBuilderTextField), '');
+    await tester.enterText(find.byType(TextFormField), '');
     expect(text, '');
   });
 
@@ -74,8 +73,8 @@ void main() {
       ),
     );
 
-    final textField = tester.widget<FormBuilderTextField>(
-      find.byType(FormBuilderTextField),
+    final textField = tester.widget<TextField>(
+      find.byType(TextField),
     );
     expect(textField.style!.fontSize, 14);
   });
@@ -101,7 +100,7 @@ void main() {
       ),
     );
 
-    await tester.enterText(find.byType(FormBuilderTextField), 'fd13sd234');
+    await tester.enterText(find.byType(TextFormField), 'fd13sd234');
     expect(find.text('132'), findsOneWidget);
   });
 
@@ -124,8 +123,8 @@ void main() {
       ),
     );
 
-    final textField = tester.widget<FormBuilderTextField>(
-      find.byType(FormBuilderTextField),
+    final textField = tester.widget<CustomizationTextField>(
+      find.byType(CustomizationTextField),
     );
     expect(textField.focusNode, focusNode);
   });
@@ -153,13 +152,13 @@ void main() {
 
     expect(amountOfChanges, 0);
 
-    await tester.enterText(find.byType(FormBuilderTextField), 'text1');
+    await tester.enterText(find.byType(TextFormField), 'text1');
     expect(amountOfChanges, 0);
 
     await tester.testTextInput.receiveAction(TextInputAction.done);
     expect(amountOfChanges, 1);
 
-    await tester.enterText(find.byType(FormBuilderTextField), 'text2');
+    await tester.enterText(find.byType(TextFormField), 'text2');
     await tester.testTextInput.receiveAction(TextInputAction.done);
     expect(amountOfChanges, 2);
   });
@@ -186,7 +185,7 @@ void main() {
     controller.text = 'test';
     expect(find.text('test'), findsOneWidget);
 
-    await tester.enterText(find.byType(FormBuilderTextField), 'text');
+    await tester.enterText(find.byType(TextFormField), 'text');
     expect(controller.text, 'text');
   });
 
@@ -213,8 +212,8 @@ void main() {
       ),
     );
 
-    final textField = tester.widget<FormBuilderTextField>(
-      find.byType(FormBuilderTextField),
+    final textField = tester.widget<CustomizationTextField>(
+      find.byType(CustomizationTextField),
     );
     expect(textField.decoration, decoration);
   });

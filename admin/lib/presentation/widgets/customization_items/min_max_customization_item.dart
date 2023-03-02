@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:survey_admin/presentation/app/localization/localizations.dart';
 import 'package:survey_admin/presentation/utils/app_fonts.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
-import 'package:survey_admin/presentation/widgets/customization_items/customization_text_field.dart';
+import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
 
 class MinMaxCustomizationItem extends StatefulWidget {
   final int initialMin;
@@ -19,8 +18,7 @@ class MinMaxCustomizationItem extends StatefulWidget {
   }) : assert(initialMax > initialMin);
 
   @override
-  State<MinMaxCustomizationItem> createState() =>
-      _MinMaxCustomizationItemState();
+  State<MinMaxCustomizationItem> createState() => _MinMaxCustomizationItemState();
 }
 
 class _MinMaxCustomizationItemState extends State<MinMaxCustomizationItem> {
@@ -43,43 +41,42 @@ class _MinMaxCustomizationItemState extends State<MinMaxCustomizationItem> {
 
   @override
   Widget build(BuildContext context) {
-    return FormBuilder(
-      child: Row(
-        children: [
-          Expanded(
-            flex: 2,
-            child: _MinMaxInputField(
-              name: 'min_input_field',
-              prefix: context.localization.min,
-              initialValue: widget.initialMin,
-              minValue: null,
-              maxValue: _max,
-              onChanged: (value) {
-                setState(() => _min = value);
-                if (_canCallParentOnChanged()) {
-                  widget.onChanged(_min, _max);
-                }
-              },
-            ),
+    return Row(
+      children: [
+        Expanded(
+          flex: 2,
+          child: _MinMaxInputField(
+            // TODO(dev): looks like a constant. Need to check all other parts.
+            name: 'min_input_field',
+            prefix: context.localization.min,
+            initialValue: widget.initialMin,
+            minValue: null,
+            maxValue: _max,
+            onChanged: (value) {
+              setState(() => _min = value);
+              if (_canCallParentOnChanged()) {
+                widget.onChanged(_min, _max);
+              }
+            },
           ),
-          Expanded(
-            flex: 3,
-            child: _MinMaxInputField(
-              name: 'max_input_field',
-              prefix: context.localization.max,
-              initialValue: widget.initialMax,
-              minValue: _min,
-              maxValue: null,
-              onChanged: (value) {
-                setState(() => _max = value);
-                if (_canCallParentOnChanged()) {
-                  widget.onChanged(_min, _max);
-                }
-              },
-            ),
+        ),
+        Expanded(
+          flex: 3,
+          child: _MinMaxInputField(
+            name: 'max_input_field',
+            prefix: context.localization.max,
+            initialValue: widget.initialMax,
+            minValue: _min,
+            maxValue: null,
+            onChanged: (value) {
+              setState(() => _max = value);
+              if (_canCallParentOnChanged()) {
+                widget.onChanged(_min, _max);
+              }
+            },
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
@@ -144,7 +141,7 @@ class _MinMaxInputField extends StatelessWidget {
         ),
         Expanded(
           child: CustomizationTextField(
-            name: name,
+            key: ValueKey(prefix),
             initialValue: initialValue.toString(),
             inputFormatters: [
               FilteringTextInputFormatter.digitsOnly,

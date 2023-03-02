@@ -50,4 +50,11 @@ class ChoiceQuestionTheme extends ThemeExtension<ChoiceQuestionTheme> with ApiOb
         'activeColor': activeColor.value,
         'inactiveColor': inactiveColor.value,
       };
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [
+        activeColor,
+        inactiveColor,
+      ];
 }
