@@ -40,5 +40,10 @@
   "copy": "COPY",
   "download": "DOWNLOAD",
   "export_floating_window_title": "Save generated json-file with all settings to use in your app",
-  "slider": "Slider"
+  "slider": "Slider",
+  "number": "Number",
+  "date": "Date",
+  "email": "Email",
+  "password": "Password",
+  "phone": "Phone"
 }

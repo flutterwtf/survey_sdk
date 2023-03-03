@@ -1,22 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:survey_admin/presentation/app/localization/localizations.dart';
 import 'package:survey_admin/presentation/utils/app_fonts.dart';
 import 'package:survey_admin/presentation/utils/asset_strings.dart';
 import 'package:survey_admin/presentation/utils/constants/app_duration.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
 
-// TODO(dev): localization
 enum InputType {
-  text('Text'),
-  number('Number'),
-  date('Date'),
-  email('Email'),
-  password('Password'),
-  phone('Phone');
-
-  final String name;
-
-  const InputType(this.name);
+  text,
+  number,
+  date,
+  email,
+  password,
+  phone;
 }
 
 class InputTypeCustomizationItem extends StatefulWidget {
@@ -69,6 +65,7 @@ class _InputTypeCustomizationItemState extends State<InputTypeCustomizationItem>
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _InputTypeItem(
+          key: UniqueKey(),
           inputType: _selectedType,
           trailing: RotationTransition(
             turns: _animation,
@@ -93,6 +90,7 @@ class _InputTypeCustomizationItemState extends State<InputTypeCustomizationItem>
                       .where((inputType) => inputType != _selectedType)
                       .map(
                         (inputType) => _InputTypeItem(
+                          key: UniqueKey(),
                           inputType: inputType,
                           onTap: () {
                             setState(() {
@@ -100,11 +98,9 @@ class _InputTypeCustomizationItemState extends State<InputTypeCustomizationItem>
                               _selectedType = inputType;
                             });
                             widget.onChanged?.call(inputType);
-                            if (_isExpanded) {
-                              _iconAnimationController.forward();
-                            } else {
-                              _iconAnimationController.reverse();
-                            }
+                            _isExpanded
+                                ? _iconAnimationController.forward()
+                                : _iconAnimationController.reverse();
                           },
                         ),
                       )
@@ -118,18 +114,36 @@ class _InputTypeCustomizationItemState extends State<InputTypeCustomizationItem>
 }
 
 class _InputTypeItem extends StatelessWidget {
+  final InputType inputType;
+  final VoidCallback onTap;
+  final Widget? trailing;
+
   const _InputTypeItem({
+    required super.key,
     required this.inputType,
     required this.onTap,
     this.trailing,
   });
 
-  final InputType inputType;
-  final VoidCallback onTap;
-  final Widget? trailing;
-
   @override
   Widget build(BuildContext context) {
+    String inputNameResolver() {
+      switch (inputType) {
+        case InputType.number:
+          return context.localization.number;
+        case InputType.date:
+          return context.localization.date;
+        case InputType.email:
+          return context.localization.email;
+        case InputType.password:
+          return context.localization.password;
+        case InputType.phone:
+          return context.localization.phone;
+        default:
+          return context.localization.text;
+      }
+    }
+
     return Material(
       child: InkWell(
         onTap: onTap,
@@ -142,7 +156,7 @@ class _InputTypeItem extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                inputType.name,
+                inputNameResolver(),
                 style: const TextStyle(
                   fontSize: AppFonts.sizeL,
                   fontWeight: AppFonts.weightRegular,
