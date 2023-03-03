@@ -4,18 +4,20 @@ import 'package:survey_admin/presentation/utils/constants/constants.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/create_text_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/option_customization_item.dart';
+import 'package:survey_admin/presentation/widgets/customization_panel/customization_panel.dart';
 
-class ChoiceContentCustomizationPanel extends StatelessWidget {
+class ChoiceContentCustomizationTab extends CustomizationPanel {
   final ValueChanged<String> onTitleChanged;
   final ValueChanged<String> onSubTitleChanged;
   final ValueChanged<List<String>> onOptionsChanged;
 
-  const ChoiceContentCustomizationPanel({
-    Key? key,
+  const ChoiceContentCustomizationTab({
+    super.key,
+    required super.title,
     required this.onTitleChanged,
     required this.onSubTitleChanged,
     required this.onOptionsChanged,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

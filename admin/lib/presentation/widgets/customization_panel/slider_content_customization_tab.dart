@@ -7,13 +7,13 @@ import 'package:survey_admin/presentation/widgets/customization_items/divisions_
 import 'package:survey_admin/presentation/widgets/customization_items/min_max_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/customization_panel.dart';
 
-class SliderContentCustomizationPanel extends CustomizationPanel {
+class SliderContentCustomizationTab extends CustomizationPanel {
   final ValueChanged<String> onTitleChanged;
   final ValueChanged<String> onSubtitleChanged;
   final void Function(int? min, int? max) onMinMaxChanged;
   final ValueChanged<int?> onDivisionsChanged;
 
-  const SliderContentCustomizationPanel({
+  const SliderContentCustomizationTab({
     super.key,
     required super.title,
     required this.onDivisionsChanged,

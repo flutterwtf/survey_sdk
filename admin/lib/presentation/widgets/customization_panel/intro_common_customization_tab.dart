@@ -8,7 +8,7 @@ import 'package:survey_admin/presentation/widgets/customization_items/customizat
 import 'package:survey_admin/presentation/widgets/customization_items/radius_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/customization_panel.dart';
 
-class IntroCommonCustomizationPanel extends CustomizationPanel {
+class IntroCommonCustomizationTab extends CustomizationPanel {
   final ValueChanged<Color> onFillColorPicked;
   final ValueChanged<Color> onTitleColorPicked;
   final ValueChanged<int?> onTitleFontSizeChanged;
@@ -19,7 +19,7 @@ class IntroCommonCustomizationPanel extends CustomizationPanel {
   final ValueChanged<int?> onButtonFontSizeChanged;
   final ValueChanged<int?> onButtonRadiusChanged;
 
-  const IntroCommonCustomizationPanel({
+  const IntroCommonCustomizationTab({
     super.key,
     required super.title,
     required this.onFillColorPicked,

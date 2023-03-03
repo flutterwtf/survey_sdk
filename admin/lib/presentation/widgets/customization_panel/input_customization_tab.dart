@@ -12,7 +12,7 @@ import 'package:survey_admin/presentation/widgets/customization_items/multiline_
 import 'package:survey_admin/presentation/widgets/customization_items/padding_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/customization_panel.dart';
 
-class QuestionInputCustomizationPanel extends CustomizationPanel {
+class InputCustomizationTab extends CustomizationPanel {
   final void Function(bool isMultiline, int lineAmount) onMultilineChanged;
   final ValueChanged<Color> onFillColorChanged;
   final ValueChanged<Color> onBorderColorChanged;
@@ -26,7 +26,7 @@ class QuestionInputCustomizationPanel extends CustomizationPanel {
   final ValueChanged<int?> onTextFontSizeChanged;
   final ValueChanged<InputType> onInputTypeChanged;
 
-  const QuestionInputCustomizationPanel({
+  const InputCustomizationTab({
     super.key,
     required super.title,
     required this.onMultilineChanged,

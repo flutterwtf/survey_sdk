@@ -1,25 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:survey_admin/presentation/app/localization/localizations.dart';
-import 'package:survey_admin/presentation/utils/constants/constants.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/create_text_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
-import 'package:survey_admin/presentation/widgets/customization_items/secondary_button_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/customization_panel.dart';
 
-class IntroContentCustomizationPanel extends CustomizationPanel {
+class InputContentCustomizationTab extends CustomizationPanel {
   final ValueChanged<String> onTitleChanged;
   final ValueChanged<String> onSubtitleChanged;
-  final ValueChanged<String> onPrimaryButtonTextChanged;
-  final void Function(bool isShown, String text) onSecondaryButtonChanged;
+  final ValueChanged<String> onHintTextChanged;
+  final ValueChanged<String> onButtonTextChanged;
 
-  const IntroContentCustomizationPanel({
+  const InputContentCustomizationTab({
     super.key,
     required super.title,
     required this.onTitleChanged,
     required this.onSubtitleChanged,
-    required this.onPrimaryButtonTextChanged,
-    required this.onSecondaryButtonChanged,
+    required this.onHintTextChanged,
+    required this.onButtonTextChanged,
   });
+
+  static const double _maxInputTextHeight = 100;
 
   @override
   Widget build(BuildContext context) {
@@ -30,36 +30,35 @@ class IntroContentCustomizationPanel extends CustomizationPanel {
           isTopDividerShown: true,
           children: [
             CreateTextCustomizationItem(
-              maxHeight: AppDimensions.sizeL,
+              maxHeight: _maxInputTextHeight,
               onChanged: onTitleChanged,
-            )
+            ),
           ],
         ),
         CustomizationItemsContainer(
           title: context.localization.subtitle,
           children: [
             CreateTextCustomizationItem(
-              maxHeight: AppDimensions.sizeL,
+              maxHeight: _maxInputTextHeight,
               onChanged: onSubtitleChanged,
             ),
           ],
         ),
         CustomizationItemsContainer(
-          title: context.localization.primary_button,
+          title: context.localization.hint,
           children: [
             CreateTextCustomizationItem(
-              maxHeight: AppDimensions.sizeL,
-              onChanged: onPrimaryButtonTextChanged,
-            )
+              maxHeight: _maxInputTextHeight,
+              onChanged: onHintTextChanged,
+            ),
           ],
         ),
         CustomizationItemsContainer(
-          itemsPadding: const EdgeInsets.all(
-            AppDimensions.marginM,
-          ),
+          title: context.localization.button,
           children: [
-            SecondaryButtonCustomizationItem(
-              onChanged: onSecondaryButtonChanged,
+            CreateTextCustomizationItem(
+              maxHeight: _maxInputTextHeight,
+              onChanged: onButtonTextChanged,
             ),
           ],
         ),

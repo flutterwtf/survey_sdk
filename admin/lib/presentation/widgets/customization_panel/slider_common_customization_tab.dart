@@ -10,14 +10,14 @@ import 'package:survey_admin/presentation/widgets/customization_items/customizat
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/customization_panel.dart';
 
-class SliderCommonCustomizationPanel extends CustomizationPanel {
+class SliderCommonCustomizationTab extends CustomizationPanel {
   final ValueChanged<Color> onFillColorChanged;
   final ValueChanged<Color> onTitleColorChanged;
   final ValueChanged<Color> onSubtitleColorChanged;
   final ValueChanged<Color> onButtonUpColorChanged;
   final ValueChanged<Color> onButtonDownColorChanged;
 
-  const SliderCommonCustomizationPanel({
+  const SliderCommonCustomizationTab({
     super.key,
     required super.title,
     required this.onButtonDownColorChanged,

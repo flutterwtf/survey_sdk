@@ -7,7 +7,7 @@ import 'package:survey_admin/presentation/widgets/customization_items/customizat
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/customization_panel.dart';
 
-class QuestionCommonCustomizationPanel extends CustomizationPanel {
+class InputCommonCustomizationTab extends CustomizationPanel {
   final ValueChanged<Color> onFillColorPicked;
   final ValueChanged<Color> onTitleColorPicked;
   final ValueChanged<int?> onTitleFontSizeChanged;
@@ -17,7 +17,7 @@ class QuestionCommonCustomizationPanel extends CustomizationPanel {
   final ValueChanged<Color> onButtonSecondColorPicked;
   final ValueChanged<int?> onButtonFontSizeChanged;
 
-  const QuestionCommonCustomizationPanel({
+  const InputCommonCustomizationTab({
     super.key,
     required super.title,
     required this.onFillColorPicked,

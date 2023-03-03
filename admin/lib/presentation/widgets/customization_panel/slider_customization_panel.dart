@@ -1,81 +1,41 @@
 import 'package:flutter/material.dart';
 import 'package:survey_admin/presentation/app/localization/localizations.dart';
-import 'package:survey_admin/presentation/utils/app_fonts.dart';
-import 'package:survey_admin/presentation/utils/colors.dart';
-import 'package:survey_admin/presentation/widgets/customization_items/color_customization_item.dart';
-import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
-import 'package:survey_admin/presentation/widgets/customization_items/thickness_customization_item.dart';
-import 'package:survey_admin/presentation/widgets/customization_panel/customization_panel.dart';
+import 'package:survey_admin/presentation/widgets/customization_panel/slider_common_customization_tab.dart';
+import 'package:survey_admin/presentation/widgets/customization_panel/slider_content_customization_tab.dart';
+import 'package:survey_admin/presentation/widgets/customization_panel/slider_customization_tab.dart';
+import 'package:survey_admin/presentation/widgets/question_settings_tab_bar.dart';
 
-class SliderCustomizationPanel extends CustomizationPanel {
-  final ValueChanged<String?> onThicknessChanged;
-  final ValueChanged<Color> onActiveColorChanged;
-  final ValueChanged<Color> onInactiveColorChanged;
-  final ValueChanged<Color> onThumbColorChanged;
-  final ValueChanged<String?> onThumbChanged;
-
+class SliderCustomizationPanel extends StatelessWidget {
   const SliderCustomizationPanel({
     super.key,
-    required super.title,
-    required this.onActiveColorChanged,
-    required this.onInactiveColorChanged,
-    required this.onThicknessChanged,
-    required this.onThumbChanged,
-    required this.onThumbColorChanged,
   });
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: [
-        CustomizationItemsContainer(
-          title: context.localization.thickness,
-          isTopDividerShown: true,
-          children: [
-            ThicknessCustomizationItem(
-              onThicknessChanged: onThicknessChanged,
-              initialSize: AppFonts.sizeL,
-            ),
-          ],
+    return QuestionSettingsTabBar(
+      tabs: [
+        SliderCommonCustomizationTab(
+          title: context.localization.common,
+          onButtonDownColorChanged: (value) {},
+          onButtonUpColorChanged: (value) {},
+          onFillColorChanged: (value) {},
+          onSubtitleColorChanged: (value) {},
+          onTitleColorChanged: (value) {},
         ),
-        CustomizationItemsContainer(
-          title: context.localization.active,
-          children: [
-            ColorCustomizationItem(
-              initialColor: AppColors.switchBackgroundActive,
-              onColorPicked: onActiveColorChanged,
-            )
-          ],
+        SliderCustomizationTab(
+          title: context.localization.slider,
+          onActiveColorChanged: (value) {},
+          onInactiveColorChanged: (value) {},
+          onThicknessChanged: (value) {},
+          onThumbChanged: (value) {},
+          onThumbColorChanged: (value) {},
         ),
-        CustomizationItemsContainer(
-          title: context.localization.inactive,
-          children: [
-            ColorCustomizationItem(
-              initialColor: AppColors.switchBackgroundInactive,
-              onColorPicked: onInactiveColorChanged,
-            )
-          ],
-        ),
-        CustomizationItemsContainer(
-          title: context.localization.thumb,
-          children: [
-            Row(
-              children: [
-                Expanded(
-                  child: ColorCustomizationItem(
-                    initialColor: AppColors.switchBackgroundActive,
-                    onColorPicked: onThumbColorChanged,
-                  ),
-                ),
-                Expanded(
-                  child: ThicknessCustomizationItem(
-                    onThicknessChanged: onThumbChanged,
-                    initialSize: AppFonts.sizeL,
-                  ),
-                ),
-              ],
-            ),
-          ],
+        SliderContentCustomizationTab(
+          title: context.localization.content,
+          onDivisionsChanged: (value) {},
+          onMinMaxChanged: (min, max) {},
+          onSubtitleChanged: (value) {},
+          onTitleChanged: (value) {},
         ),
       ],
     );
