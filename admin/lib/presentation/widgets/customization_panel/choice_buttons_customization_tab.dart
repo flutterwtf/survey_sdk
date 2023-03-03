@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:survey_admin/presentation/app/localization/localizations.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/color_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
@@ -19,9 +20,9 @@ class ChoiceButtonsCustomizationTab extends CustomizationPanel {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        // TODO: localizations
         CustomizationItemsContainer(
-          title: 'Active',
+          title: context.localization.active,
+          isTopDividerShown: true,
           children: [
             ColorCustomizationItem(
               initialColor: AppColors.black,
@@ -29,9 +30,8 @@ class ChoiceButtonsCustomizationTab extends CustomizationPanel {
             ),
           ],
         ),
-        // TODO: localizations
         CustomizationItemsContainer(
-          title: 'Inactive',
+          title: context.localization.inactive,
           children: [
             ColorCustomizationItem(
               initialColor: AppColors.inactiveElementGrey,

@@ -23,9 +23,9 @@ class ChoiceContentCustomizationTab extends CustomizationPanel {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        // TODO(dev): localization. We should fix it ASAP.
         CustomizationItemsContainer(
           title: context.localization.title,
+          isTopDividerShown: true,
           children: [
             CreateTextCustomizationItem(
               maxHeight: AppDimensions.sizeXL,
@@ -43,7 +43,7 @@ class ChoiceContentCustomizationTab extends CustomizationPanel {
           ],
         ),
         CustomizationItemsContainer(
-          title: 'Options', //TODO: change to context.localization
+          title: context.localization.options,
           children: [
             OptionCustomizationItem(
               options: const [],
