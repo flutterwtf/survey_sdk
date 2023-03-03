@@ -47,7 +47,7 @@ class _BuilderPageState extends State<BuilderPage> {
               ),
             ),
             EditorBar(
-              questionData: state.selected,
+              editableQuestion: state.selectedQuestion,
             ),
           ],
         ),

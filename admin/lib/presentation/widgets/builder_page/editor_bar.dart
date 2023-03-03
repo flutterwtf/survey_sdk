@@ -9,10 +9,10 @@ import 'package:survey_core/survey_core.dart';
 
 // TODO(dev): will we use this?
 class EditorBar extends StatelessWidget {
-  final QuestionData? questionData;
+  final QuestionData? editableQuestion;
 
   const EditorBar({
-    required this.questionData,
+    required this.editableQuestion,
     super.key,
   });
 
@@ -23,7 +23,7 @@ class EditorBar extends StatelessWidget {
       width: AppDimensions.surveyEditorBarWidth,
       child: Builder(
         builder: (context) {
-          switch (questionData?.type ?? '') {
+          switch (editableQuestion?.type ?? '') {
             case QuestionTypes.choice:
               return const ChoiceCustomizationPanel();
             case QuestionTypes.input:
