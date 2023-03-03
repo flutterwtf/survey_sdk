@@ -82,7 +82,6 @@ class InputQuestionData extends QuestionData<InputQuestionTheme> {
   }
 
   @override
-  // TODO(dev): implement props
   List<Object?> get props => [
         validator,
         index,

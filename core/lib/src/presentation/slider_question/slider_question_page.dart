@@ -8,7 +8,6 @@ import 'package:survey_core/src/presentation/widgets/question_bottom_button.dart
 import 'package:survey_core/src/presentation/widgets/question_subtitle.dart';
 import 'package:survey_core/src/presentation/widgets/question_title.dart';
 
-// TODO(dev): extend from one superclass maybe?
 class SliderQuestionPage extends StatefulWidget {
   final SliderQuestionData data;
   final OnSendCallback onSend;

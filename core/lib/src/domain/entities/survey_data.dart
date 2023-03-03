@@ -32,7 +32,6 @@ class SurveyData extends ApiObject {
     );
   }
 
-  // TODO(dev): implement props
   List<Object?> get props => [
         ...questions,
         commonTheme,

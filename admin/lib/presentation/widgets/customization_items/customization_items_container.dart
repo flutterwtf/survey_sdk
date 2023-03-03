@@ -3,7 +3,6 @@ import 'package:survey_admin/presentation/utils/app_fonts.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/item_divider.dart';
 
-// TODO(dev): leave and remove customization title or remove this
 class CustomizationItemsContainer extends StatefulWidget {
   final String? title;
   final EdgeInsets? titlePadding;

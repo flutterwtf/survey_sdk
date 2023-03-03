@@ -52,7 +52,6 @@ class ChoiceQuestionTheme extends ThemeExtension<ChoiceQuestionTheme>
         'inactiveColor': inactiveColor.value,
       };
 
-  // TODO(dev): implement props
   List<Object?> get props => [
         activeColor,
         inactiveColor,

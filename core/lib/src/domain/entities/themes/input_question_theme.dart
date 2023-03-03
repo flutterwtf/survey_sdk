@@ -104,7 +104,6 @@ class InputQuestionTheme extends ThemeExtension<InputQuestionTheme>
     throw UnimplementedError();
   }
 
-  // TODO(dev): implement props
   List<Object?> get props => [
         backgroundColor,
         borderColor,

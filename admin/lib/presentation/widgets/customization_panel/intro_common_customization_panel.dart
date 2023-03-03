@@ -3,9 +3,9 @@ import 'package:flutter/services.dart';
 import 'package:survey_admin/presentation/app/localization/localizations.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/color_customization_item.dart';
-import 'package:survey_admin/presentation/widgets/customization_items/color_with_text_field_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/radius_customization_item.dart';
+import 'package:survey_admin/presentation/widgets/customization_items/text_style_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/customization_panel.dart';
 
 class IntroCommonCustomizationPanel extends CustomizationPanel {
@@ -50,7 +50,7 @@ class IntroCommonCustomizationPanel extends CustomizationPanel {
         CustomizationItemsContainer(
           title: context.localization.title,
           children: [
-            ColorWithTextFieldCustomizationItem(
+            TextStyleCustomizationItem(
               onColorPicked: onTitleColorPicked,
               // TODO(dev): what are the magic Strings here and in items below?
               initialText: '16',
@@ -71,7 +71,7 @@ class IntroCommonCustomizationPanel extends CustomizationPanel {
         CustomizationItemsContainer(
           title: context.localization.subtitle,
           children: [
-            ColorWithTextFieldCustomizationItem(
+            TextStyleCustomizationItem(
               onColorPicked: onSubtitleColorPicked,
               initialText: '12',
               inputFormatters: [
@@ -95,7 +95,7 @@ class IntroCommonCustomizationPanel extends CustomizationPanel {
               initialColor: AppColors.black,
               onColorPicked: onButtonColorPicked,
             ),
-            ColorWithTextFieldCustomizationItem(
+            TextStyleCustomizationItem(
               initialColor: AppColors.white,
               onColorPicked: onButtonTextColorPicked,
               initialText: '12',

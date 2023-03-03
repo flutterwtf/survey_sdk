@@ -47,7 +47,6 @@ class _PaddingCustomizationItemState extends State<PaddingCustomizationItem> {
     super.initState();
   }
 
-  // TODO(dev): split to widgets please
   @override
   Widget build(BuildContext context) {
     return Row(

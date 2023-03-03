@@ -11,7 +11,6 @@ abstract class AppDimensions {
   static const double margin4XL = 50;
   static const double margin5XL = 55;
 
-
   static const double sizeS = 12;
   static const double sizeM = 24;
   static const double sizeL = 28;

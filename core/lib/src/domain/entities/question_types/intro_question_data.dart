@@ -79,7 +79,6 @@ class IntroQuestionData extends QuestionData {
   }
 
   @override
-  // TODO(dev): implement props
   List<Object?> get props => [
         mainButtonTitle,
         index,

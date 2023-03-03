@@ -1,5 +1,3 @@
-// TODO(dev): rewrite this to TextFieldTheme PLS
-
 import 'dart:ui';
 
 import 'package:flutter/material.dart';

@@ -44,7 +44,6 @@ class _SurveyState extends State<Survey> {
                 data: state.surveyData!.commonTheme.toThemeData(),
                 child: PageView(
                   children: state.surveyData!.questions
-                      // TODO(dev): <Widget> to superclass maybe
                       .map<Widget>(
                         (question) => DataToWidgetUtil.createWidget(
                           question,

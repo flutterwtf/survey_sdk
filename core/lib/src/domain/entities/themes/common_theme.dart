@@ -36,7 +36,6 @@ class CommonTheme extends ApiObject {
     );
   }
 
-  // TODO(dev): implement props
   List<Object?> get props => [
         sliderThemeData,
         textFieldThemeData,

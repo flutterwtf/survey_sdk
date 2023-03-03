@@ -92,7 +92,6 @@ class SliderQuestionData extends QuestionData<SliderThemeData> {
   }
 
   @override
-  // TODO(dev): implement props
   List<Object?> get props => [
         minValue,
         maxValue,

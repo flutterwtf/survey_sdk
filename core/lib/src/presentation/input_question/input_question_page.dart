@@ -62,7 +62,6 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
           ),
           Padding(
             padding: const EdgeInsets.only(top: AppDimensions.marginM),
-            // TODO(dev): add validator?
             child: TextFormField(
               minLines: theme.minLines,
               maxLines: theme.maxLines,

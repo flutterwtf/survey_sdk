@@ -9,8 +9,6 @@ import 'package:survey_admin/presentation/utils/constants/constants.dart';
 import 'package:survey_admin/presentation/widgets/builder_page/question_list_item.dart';
 import 'package:survey_core/survey_core.dart';
 
-// ignore: lines_longer_than_80_chars
-// TODO(dev): do we really need "Survey" prefix? If so, why do we have it only in several classes
 class QuestionList extends StatefulWidget {
   final void Function(QuestionData) onSelect;
 

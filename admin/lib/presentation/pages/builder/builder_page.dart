@@ -7,9 +7,9 @@ import 'package:survey_admin/presentation/pages/builder/builder_state.dart';
 import 'package:survey_admin/presentation/utils/app_fonts.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
+import 'package:survey_admin/presentation/widgets/builder_page/editor_bar.dart';
 import 'package:survey_admin/presentation/widgets/builder_page/phone_view.dart';
 import 'package:survey_admin/presentation/widgets/builder_page/question_list.dart';
-import 'package:survey_admin/presentation/widgets/builder_page/survey_editor_bar.dart';
 import 'package:survey_admin/presentation/widgets/export_floating_window.dart';
 
 class BuilderPage extends StatefulWidget {
@@ -26,31 +26,30 @@ class _BuilderPageState extends State<BuilderPage> {
   Widget build(BuildContext context) {
     return BlocBuilder<BuilderCubit, BuilderState>(
       bloc: _cubit,
-      builder: (context, state) =>
-          Scaffold(
-            appBar: AppBar(
-              toolbarHeight: AppDimensions.appbarSize,
-              backgroundColor: AppColors.white,
-              shadowColor: AppColors.transparentW,
-              centerTitle: true,
-              title: const _BuilderPageTabBar(),
-              actions: const [
-                _CreateTab(),
-                _PreviewTab(),
-              ],
+      builder: (context, state) => Scaffold(
+        appBar: AppBar(
+          toolbarHeight: AppDimensions.appbarSize,
+          backgroundColor: AppColors.white,
+          shadowColor: AppColors.transparentW,
+          centerTitle: true,
+          title: const _BuilderPageTabBar(),
+          actions: const [
+            _CreateTab(),
+            _PreviewTab(),
+          ],
+        ),
+        body: Row(
+          children: [
+            QuestionList(onSelect: _cubit.select),
+            Expanded(
+              child: PhoneView(
+                child: Container(),
+              ),
             ),
-            body: Row(
-              children: [
-                QuestionList(onSelect: _cubit.select),
-                Expanded(
-                  child: PhoneView(
-                    child: Container(),
-                  ),
-                ),
-                const SurveyEditorBar(),
-              ],
-            ),
-          ),
+            const EditorBar(),
+          ],
+        ),
+      ),
     );
   }
 }

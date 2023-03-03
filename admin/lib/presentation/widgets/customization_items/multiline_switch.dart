@@ -68,7 +68,6 @@ class _MultilineSwitchState extends State<MultilineSwitch> {
   }
 }
 
-// TODO(dev): combine with other input fields maybe?
 class _LineAmountInputField extends StatelessWidget {
   const _LineAmountInputField({
     required this.onChanged,

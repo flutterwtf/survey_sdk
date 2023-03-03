@@ -85,7 +85,6 @@ class _MinMaxCustomizationItemState extends State<MinMaxCustomizationItem> {
   }
 }
 
-// TODO(dev): combine with default input field
 class _MinMaxInputField extends StatelessWidget {
   final String name;
   final String prefix;

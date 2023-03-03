@@ -4,7 +4,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/color_customization_item.dart';
 
-// TODO(dev): why is this file not in the `customization_items` folder
 void main() {
   group('Color customization item widget', () {
     const redColorCode = 'FFF44336';

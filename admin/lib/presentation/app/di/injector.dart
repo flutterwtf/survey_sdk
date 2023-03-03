@@ -1,5 +1,3 @@
-// ignore_for_file: cascade_invocations
-
 import 'package:get_it/get_it.dart';
 import 'package:survey_admin/presentation/app/app_cubit.dart';
 import 'package:survey_admin/presentation/pages/builder/builder_cubit.dart';
@@ -16,9 +14,10 @@ Future<void> initInjector() async {
 Future<void> _initDataSources() async {}
 
 void _initCubits() {
-  i.registerFactory<AppCubit>(AppCubit.new);
-  i.registerFactory<BuilderCubit>(BuilderCubit.new);
-  i.registerFactory<NewQuestionCubit>(NewQuestionCubit.new);
+  i
+    ..registerFactory<AppCubit>(AppCubit.new)
+    ..registerFactory<BuilderCubit>(BuilderCubit.new)
+    ..registerFactory<NewQuestionCubit>(NewQuestionCubit.new);
 }
 
 void _initRepositories() {}
