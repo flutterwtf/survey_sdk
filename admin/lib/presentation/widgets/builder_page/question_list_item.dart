@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:survey_admin/presentation/app/localization/localizations.dart';
 import 'package:survey_admin/presentation/utils/app_fonts.dart';
 import 'package:survey_admin/presentation/utils/asset_strings.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
 import 'package:survey_admin/presentation/widgets/vector_image.dart';
 import 'package:survey_core/survey_core.dart';
+import 'package:survey_core/src/domain/entities/constants/question_types.dart';
 
 class QuestionListItem extends StatelessWidget {
   final QuestionData questionData;
@@ -17,13 +17,13 @@ class QuestionListItem extends StatelessWidget {
 
   Widget _questionImage(QuestionData questionData) {
     switch (questionData.type) {
-      case 'Intro':
+      case QuestionTypes.intro:
         return const VectorImage(assetName: AssetStrings.intro);
-      case 'Input':
+      case QuestionTypes.input:
         return const VectorImage(assetName: AssetStrings.input);
-      case 'Slider':
+      case QuestionTypes.slider:
         return const VectorImage(assetName: AssetStrings.slider);
-      case 'Choice':
+      case QuestionTypes.choice:
         return (questionData as ChoiceQuestionData).isMultipleChoice
             ? const VectorImage(assetName: AssetStrings.multipleChoice)
             : const VectorImage(assetName: AssetStrings.singleChoice);
