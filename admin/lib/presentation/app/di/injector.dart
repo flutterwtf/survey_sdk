@@ -14,15 +14,10 @@ Future<void> initInjector() async {
 Future<void> _initDataSources() async {}
 
 void _initCubits() {
-  i.registerFactory<AppCubit>(
-    () => AppCubit(),
-  );
-  i.registerFactory<BuilderCubit>(
-    () => BuilderCubit(),
-  );
-  i.registerFactory<NewQuestionCubit>(
-    () => NewQuestionCubit(),
-  );
+  i
+    ..registerFactory<AppCubit>(AppCubit.new)
+    ..registerFactory<BuilderCubit>(BuilderCubit.new)
+    ..registerFactory<NewQuestionCubit>(NewQuestionCubit.new);
 }
 
 void _initRepositories() {}

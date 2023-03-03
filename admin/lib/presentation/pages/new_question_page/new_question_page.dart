@@ -10,7 +10,7 @@ import 'package:survey_admin/presentation/widgets/vector_image.dart';
 const _title = 'New screen';
 
 class NewQuestionPage extends StatefulWidget {
-  const NewQuestionPage({Key? key}) : super(key: key);
+  const NewQuestionPage({super.key});
 
   @override
   State<NewQuestionPage> createState() => _NewQuestionPageState();
@@ -28,7 +28,7 @@ class _NewQuestionPageState extends State<NewQuestionPage> {
           () => _selectedTab = tab,
         );
       },
-      isSelected: _selectedTab == tab ? true : false,
+      isSelected: _selectedTab == tab,
     );
   }
 
@@ -85,7 +85,7 @@ class _NewQuestionPageState extends State<NewQuestionPage> {
 }
 
 class _BackButton extends StatelessWidget {
-  const _BackButton({Key? key}) : super(key: key);
+  const _BackButton();
 
   @override
   Widget build(BuildContext context) {
@@ -103,7 +103,7 @@ class _BackButton extends StatelessWidget {
 }
 
 class _AppBarTitle extends StatelessWidget {
-  const _AppBarTitle({Key? key}) : super(key: key);
+  const _AppBarTitle();
 
   @override
   Widget build(BuildContext context) {
@@ -127,11 +127,10 @@ class _TabButton extends StatelessWidget {
   final bool isSelected;
 
   const _TabButton({
-    Key? key,
     required this.title,
     required this.onTap,
     required this.isSelected,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -159,10 +158,9 @@ class _QuestionOptionsListView extends StatelessWidget {
   final String selectedOption;
 
   const _QuestionOptionsListView({
-    Key? key,
     required this.options,
     required this.selectedOption,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -186,10 +184,9 @@ class _AssetTextOption extends StatelessWidget {
   final String titleText;
 
   const _AssetTextOption({
-    Key? key,
     required this.assetName,
     required this.titleText,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -218,9 +215,8 @@ class _AddButton extends StatelessWidget {
   final VoidCallback onPressed;
 
   const _AddButton({
-    Key? key,
     required this.onPressed,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

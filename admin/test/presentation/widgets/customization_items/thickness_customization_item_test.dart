@@ -44,7 +44,10 @@ void main() {
 
       testWidgets('Validation input length', (tester) async {
         await tester.pumpWidget(page);
-        await tester.enterText(find.byType(CustomizationTextField), inputValidation);
+        await tester.enterText(
+          find.byType(CustomizationTextField),
+          inputValidation,
+        );
         expect(find.text(inputValidation), findsNothing);
       });
 

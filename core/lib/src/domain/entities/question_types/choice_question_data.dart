@@ -1,3 +1,4 @@
+import 'package:survey_core/src/domain/entities/constants/question_types.dart';
 import 'package:survey_core/src/domain/entities/question_types/question_data.dart';
 import 'package:survey_core/src/domain/entities/themes/choice_question_theme.dart';
 
@@ -5,7 +6,7 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
   final bool isMultipleChoice;
   final List<String> options;
 
-  ChoiceQuestionData({
+  const ChoiceQuestionData({
     required this.isMultipleChoice,
     required this.options,
     required super.index,
@@ -15,16 +16,20 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
     super.content,
   });
 
-  ChoiceQuestionData.common({int index = 0})
+  const ChoiceQuestionData.common({int index = 0})
       : this(
-          //TODO: to localization somehow
+          // TODO(dev): to localization somehow
           isMultipleChoice: false,
-          options: ['First option', 'Second option', 'Third option'],
+          options: const ['First option', 'Second option', 'Third option'],
           title: 'Title',
           subtitle: '',
           isSkip: false,
           content:
-              'You may simply need a single, brief answer without discussion. Other times, you may want to talk through a scenario, evaluate how well a group is learning new material or solicit feedback. The types of questions you ask directly impact the type of answer you receive.',
+              'You may simply need a single, brief answer without discussion. '
+              'Other times, you may want to talk through a scenario, evaluate '
+              'how well a group is learning new material or solicit feedback. '
+              'The types of questions you ask directly impact the type of '
+              'answer you receive.',
           index: index,
         );
 
@@ -52,7 +57,7 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
   ChoiceQuestionTheme? get theme => const ChoiceQuestionTheme.common();
 
   @override
-  String get type => 'Choice';
+  String get type => QuestionTypes.choice;
 
   @override
   Map<String, dynamic> toJson() => {
@@ -68,8 +73,8 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
         }
       };
 
-  static ChoiceQuestionData fromJson(Map<String, dynamic> json) {
-    final payload = json['payload'];
+  factory ChoiceQuestionData.fromJson(Map<String, dynamic> json) {
+    final payload = json['payload'] as Map<String, dynamic>;
     return ChoiceQuestionData(
       index: json['index'],
       title: json['title'],

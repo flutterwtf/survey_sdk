@@ -11,11 +11,11 @@ class ColorPickerDialog extends StatelessWidget {
   final VoidCallback onClose;
 
   const ColorPickerDialog({
-    Key? key,
     required this.onColorPicked,
     required this.colorTextController,
     required this.onClose,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,6 @@ class ColorPickerDialog extends StatelessWidget {
             ColorPicker(
               pickerColor: colorFromHex(
                 colorTextController.value.text,
-                enableAlpha: true,
               )!,
               hexInputController: colorTextController,
               portraitOnly: true,
@@ -67,7 +66,6 @@ class ColorPickerDialog extends StatelessWidget {
             onColorPicked(
               colorFromHex(
                 colorTextController.value.text,
-                enableAlpha: true,
               )!,
             );
             onClose.call();
