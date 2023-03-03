@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:survey_admin/presentation/utils/app_fonts.dart';
-import 'package:survey_admin/presentation/utils/app_text_styles.dart';
 import 'package:survey_admin/presentation/utils/theme_extension.dart';
 
 class CustomizationTextField extends StatelessWidget {
@@ -44,7 +43,7 @@ class CustomizationTextField extends StatelessWidget {
       onEditingComplete: onEditingComplete,
       focusNode: focusNode,
       decoration: decoration,
-      style: context.theme.textTheme.bodyMedium!.copyWith(fontSize: fontSize),
+      style: context.theme.textTheme.bodyMedium?.copyWith(fontSize: fontSize),
       inputFormatters: inputFormatters,
     );
   }

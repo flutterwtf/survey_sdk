@@ -5,7 +5,6 @@ import 'package:survey_admin/presentation/app/localization/localizations.dart';
 import 'package:survey_admin/presentation/pages/builder/builder_cubit.dart';
 import 'package:survey_admin/presentation/pages/builder/builder_state.dart';
 import 'package:survey_admin/presentation/utils/app_fonts.dart';
-import 'package:survey_admin/presentation/utils/app_text_styles.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
 import 'package:survey_admin/presentation/utils/theme_extension.dart';
@@ -78,7 +77,7 @@ class _BuilderPageTabBar extends StatelessWidget {
           unselectedLabelColor: AppColors.textGrey,
           indicatorColor: AppColors.black,
           labelColor: AppColors.text,
-          labelStyle: context.theme.textTheme.titleMedium!.copyWith(
+          labelStyle: context.theme.textTheme.titleMedium?.copyWith(
             fontWeight: AppFonts.weightBold,
           ),
           tabs: [
@@ -116,7 +115,7 @@ class _CreateTab extends StatelessWidget {
           ),
           child: Text(
             context.localization.import,
-            style: context.theme.textTheme.labelLarge!.copyWith(
+            style: context.theme.textTheme.labelLarge?.copyWith(
               fontFamily: AppFonts.karla,
               color: AppColors.text,
             ),
@@ -155,7 +154,7 @@ class _PreviewTab extends StatelessWidget {
           ),
           child: Text(
             context.localization.export,
-            style: context.theme.textTheme.labelLarge!.copyWith(
+            style: context.theme.textTheme.labelLarge?.copyWith(
               fontFamily: AppFonts.karla,
               color: AppColors.white,
             ),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:survey_admin/presentation/utils/app_text_styles.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
 import 'package:survey_admin/presentation/utils/theme_extension.dart';
@@ -25,7 +24,7 @@ class QuestionListItem extends StatelessWidget {
               padding: const EdgeInsets.only(top: AppDimensions.marginXS),
               child: Text(
                 questionData.index.toString(),
-                style: context.theme.textTheme.bodySmall!.copyWith(
+                style: context.theme.textTheme.bodySmall?.copyWith(
                   color: AppColors.textGrey,
                 ),
               ),

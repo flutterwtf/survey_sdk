@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:survey_admin/presentation/utils/app_fonts.dart';
-import 'package:survey_admin/presentation/utils/app_text_styles.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
 import 'package:survey_admin/presentation/utils/constants/image_constants.dart';
@@ -149,7 +148,7 @@ class _AppBarTitle extends StatelessWidget {
       alignment: Alignment.centerLeft,
       child: Text(
         _title,
-        style: context.theme.textTheme.labelLarge!.copyWith(
+        style: context.theme.textTheme.labelLarge?.copyWith(
           fontWeight: AppFonts.weightRegular,
         ),
       ),
@@ -179,10 +178,10 @@ class _TabButton extends StatelessWidget {
         child: Text(
           title,
           style: isSelected
-              ? context.theme.textTheme.titleMedium!.copyWith(
+              ? context.theme.textTheme.titleMedium?.copyWith(
                   fontWeight: AppFonts.weightSemiBold,
                 )
-              : context.theme.textTheme.titleMedium!.copyWith(
+              : context.theme.textTheme.titleMedium?.copyWith(
                   fontWeight: AppFonts.weightRegular,
                 ),
         ),
@@ -270,7 +269,7 @@ class _AddButton extends StatelessWidget {
         child: Center(
           child: Text(
             'ADD',
-            style: context.theme.textTheme.labelLarge!.copyWith(
+            style: context.theme.textTheme.labelLarge?.copyWith(
               fontFamily: AppFonts.karla,
               color: AppColors.white,
             ),

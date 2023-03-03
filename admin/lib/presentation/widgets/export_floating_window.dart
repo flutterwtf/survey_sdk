@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:survey_admin/presentation/app/localization/localizations.dart';
 import 'package:survey_admin/presentation/utils/app_fonts.dart';
-import 'package:survey_admin/presentation/utils/app_text_styles.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
 import 'package:survey_admin/presentation/utils/theme_extension.dart';
@@ -83,7 +82,7 @@ class _ExportFloatingWindow extends StatelessWidget {
                 child: Text(
                   context.localization.export_floating_window_title,
                   textAlign: TextAlign.center,
-                  style: context.theme.textTheme.bodyMedium!.copyWith(
+                  style: context.theme.textTheme.bodyMedium?.copyWith(
                     fontWeight: AppFonts.weightMedium,
                   ),
                 ),
@@ -127,7 +126,7 @@ class _ExportFloatingWindow extends StatelessWidget {
                         ),
                         child: Text(
                           context.localization.copy,
-                          style: context.theme.textTheme.labelLarge!.copyWith(
+                          style: context.theme.textTheme.labelLarge?.copyWith(
                             fontFamily: AppFonts.karla,
                           ),
                         ),
@@ -154,7 +153,7 @@ class _ExportFloatingWindow extends StatelessWidget {
                         ),
                         child: Text(
                           context.localization.download,
-                          style: context.theme.textTheme.labelLarge!.copyWith(
+                          style: context.theme.textTheme.labelLarge?.copyWith(
                             fontFamily: AppFonts.karla,
                             color: AppColors.white,
                           ),

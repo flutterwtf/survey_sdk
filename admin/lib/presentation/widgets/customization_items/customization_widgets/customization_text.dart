@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:survey_admin/presentation/utils/app_text_styles.dart';
 import 'package:survey_admin/presentation/utils/theme_extension.dart';
 
 // TODO(dev): Why is this class in a separate folder?
