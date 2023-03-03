@@ -10,10 +10,10 @@ class ChoiceButtonsCustomizationTab extends CustomizationTab {
   final ValueChanged<Color> onInactiveColorPicked;
 
   const ChoiceButtonsCustomizationTab({
-    super.key,
     required super.title,
     required this.onActiveColorPicked,
     required this.onInactiveColorPicked,
+    super.key,
   });
 
   @override
