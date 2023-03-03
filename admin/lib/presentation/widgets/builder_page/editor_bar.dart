@@ -24,13 +24,13 @@ class EditorBar extends StatelessWidget {
       child: Builder(
         builder: (context) {
           switch (questionData?.type ?? '') {
-            case 'Choice':
+            case QuestionTypes.choice:
               return const ChoiceCustomizationPanel();
-            case 'Input':
+            case QuestionTypes.input:
               return const InputCustomizationPanel();
-            case 'Intro':
+            case QuestionTypes.intro:
               return const IntroCustomizationPanel();
-            case 'Slider':
+            case QuestionTypes.slider:
               return const SliderCustomizationPanel();
             default:
               return const SizedBox.shrink();
