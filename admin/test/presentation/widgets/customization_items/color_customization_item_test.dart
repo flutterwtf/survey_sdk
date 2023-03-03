@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/color_customization_item.dart';
+
+import '../app_test.dart';
 
 void main() {
   group('Color customization item widget', () {
@@ -10,19 +11,10 @@ void main() {
     const redColor = Colors.red;
     testWidgets('load widget', (tester) async {
       await tester.pumpWidget(
-        MaterialApp(
-          localizationsDelegates: const [
-            AppLocalizations.delegate,
-          ],
-          home: Scaffold(
-            body: Builder(
-              builder: (context) {
-                return ColorCustomizationItem(
-                  initialColor: redColor,
-                  onColorPicked: (Color value) {},
-                );
-              },
-            ),
+        AppTest(
+          child: ColorCustomizationItem(
+            initialColor: redColor,
+            onColorPicked: (Color value) {},
           ),
         ),
       );
@@ -31,19 +23,10 @@ void main() {
 
     testWidgets('open color picker', (tester) async {
       await tester.pumpWidget(
-        MaterialApp(
-          localizationsDelegates: const [
-            AppLocalizations.delegate,
-          ],
-          home: Scaffold(
-            body: Builder(
-              builder: (context) {
-                return ColorCustomizationItem(
-                  initialColor: redColor,
-                  onColorPicked: (Color value) {},
-                );
-              },
-            ),
+        AppTest(
+          child: ColorCustomizationItem(
+            initialColor: redColor,
+            onColorPicked: (Color value) {},
           ),
         ),
       );
@@ -54,19 +37,10 @@ void main() {
 
     testWidgets('pick color', (tester) async {
       await tester.pumpWidget(
-        MaterialApp(
-          localizationsDelegates: const [
-            AppLocalizations.delegate,
-          ],
-          home: Scaffold(
-            body: Builder(
-              builder: (context) {
-                return ColorCustomizationItem(
-                  initialColor: redColor,
-                  onColorPicked: (Color value) {},
-                );
-              },
-            ),
+        AppTest(
+          child: ColorCustomizationItem(
+            initialColor: redColor,
+            onColorPicked: (Color value) {},
           ),
         ),
       );
