@@ -11,11 +11,14 @@ class MinMaxCustomizationItem extends StatefulWidget {
   final void Function(int? min, int? max) onChanged;
 
   const MinMaxCustomizationItem({
-    super.key,
+    required this.onChanged,
     this.initialMin = 0,
     this.initialMax = 10,
-    required this.onChanged,
-  }) : assert(initialMax > initialMin);
+    super.key,
+  }) : assert(
+          initialMax > initialMin,
+          'initialMax must be greater then initialMin',
+        );
 
   @override
   State<MinMaxCustomizationItem> createState() =>
@@ -82,7 +85,6 @@ class _MinMaxCustomizationItemState extends State<MinMaxCustomizationItem> {
   }
 }
 
-//TODO: combine with default input field
 class _MinMaxInputField extends StatelessWidget {
   final String name;
   final String prefix;
@@ -142,6 +144,7 @@ class _MinMaxInputField extends StatelessWidget {
         ),
         Expanded(
           child: CustomizationTextField(
+            key: ValueKey(prefix),
             initialValue: initialValue.toString(),
             inputFormatters: [
               FilteringTextInputFormatter.digitsOnly,

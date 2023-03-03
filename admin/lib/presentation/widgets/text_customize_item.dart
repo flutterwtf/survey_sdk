@@ -20,8 +20,8 @@ class TextCustomizeItem extends StatefulWidget {
     required this.initialColor,
     required this.onColorPicked,
     required this.onTextWidthPicked,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   State<TextCustomizeItem> createState() => _TextCustomizeItemState();
@@ -30,13 +30,18 @@ class TextCustomizeItem extends StatefulWidget {
 class _TextCustomizeItemState extends State<TextCustomizeItem> {
   late final TextEditingController _colorTextController;
   late final TextEditingController _textWidthTextController;
+  final stickyKey = GlobalKey();
 
   @override
   void initState() {
     _colorTextController = TextEditingController(
-      text: widget.initialColor.value.toRadixString(16).padLeft(6, '0').toUpperCase(),
+      text: widget.initialColor.value
+          .toRadixString(16)
+          .padLeft(6, '0')
+          .toUpperCase(),
     );
-    _textWidthTextController = TextEditingController(text: widget.initialTextWidth.toString());
+    _textWidthTextController =
+        TextEditingController(text: widget.initialTextWidth.toString());
     super.initState();
   }
 
@@ -62,8 +67,7 @@ class _TextCustomizeItemState extends State<TextCustomizeItem> {
                   decoration: BoxDecoration(
                     color: colorFromHex(
                       _colorTextController.value.text,
-                      enableAlpha: true,
-                    )!,
+                    ),
                   ),
                   width: AppDimensions.sizeM,
                   height: AppDimensions.sizeM,
@@ -80,8 +84,8 @@ class _TextCustomizeItemState extends State<TextCustomizeItem> {
               const SizedBox(width: AppDimensions.sizeM),
               TextWidthField(
                 textWidthTextController: _textWidthTextController,
-                onTextWidthPicked: (textWidth) => widget.onTextWidthPicked(textWidth),
-              )
+                onTextWidthPicked: widget.onTextWidthPicked,
+              ),
             ],
           ),
         ],
@@ -90,18 +94,24 @@ class _TextCustomizeItemState extends State<TextCustomizeItem> {
   }
 
   void pickColor(BuildContext context) {
-    showDialog(
-      context: context,
+    final overlayState = Overlay.of(context);
+    OverlayEntry? overlayEntry;
+    overlayEntry = OverlayEntry(
       builder: (context) {
-        return ColorPickerDialog(
-          onColorPicked: (color) {
-            setState(() {
-              widget.onColorPicked(color);
-            });
-          },
-          colorTextController: _colorTextController,
+        return Positioned(
+          left: Offset.zero.dx,
+          child: ColorPickerDialog(
+            onColorPicked: (color) {
+              setState(() {
+                widget.onColorPicked(color);
+              });
+            },
+            colorTextController: _colorTextController,
+            onClose: overlayEntry!.remove,
+          ),
         );
       },
     );
+    overlayState.insert(overlayEntry);
   }
 }

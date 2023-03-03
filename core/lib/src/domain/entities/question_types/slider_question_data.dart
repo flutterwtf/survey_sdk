@@ -1,13 +1,13 @@
+import 'package:flutter/material.dart';
 import 'package:survey_core/src/domain/entities/constants/question_types.dart';
 import 'package:survey_core/src/domain/entities/question_types/question_data.dart';
-import 'package:flutter/material.dart';
 
 class SliderQuestionData extends QuestionData<SliderThemeData> {
   final num minValue;
   final num maxValue;
   final num initialValue;
 
-  SliderQuestionData({
+  const SliderQuestionData({
     required this.minValue,
     required this.maxValue,
     required this.initialValue,
@@ -18,9 +18,9 @@ class SliderQuestionData extends QuestionData<SliderThemeData> {
     super.content,
   });
 
-  SliderQuestionData.common({int index = 0})
+  const SliderQuestionData.common({int index = 0})
       : this(
-          //TODO: to localization somehow
+          // TODO(dev): to localization somehow
           minValue: 0,
           maxValue: 10,
           initialValue: 5,
@@ -29,11 +29,37 @@ class SliderQuestionData extends QuestionData<SliderThemeData> {
           subtitle: '',
           isSkip: false,
           content:
-              'You may simply need a single, brief answer without discussion. Other times, you may want to talk through a scenario, evaluate how well a group is learning new material or solicit feedback. The types of questions you ask directly impact the type of answer you receive.',
+              'You may simply need a single, brief answer without discussion. '
+              'Other times, you may want to talk through a scenario, evaluate '
+              'how well a group is learning new material or solicit feedback. '
+              'The types of questions you ask directly impact the type of '
+              'answer you receive.',
         );
 
-  //TODO: do like this in every question widget
-  //TODO: implement theme
+  @override
+  SliderQuestionData copyWith({
+    num? minValue,
+    num? maxValue,
+    num? initialValue,
+    int? index,
+    String? title,
+    String? subtitle,
+    String? content,
+    bool? isSkip,
+  }) {
+    return SliderQuestionData(
+      minValue: minValue ?? this.minValue,
+      maxValue: maxValue ?? this.maxValue,
+      initialValue: initialValue ?? this.initialValue,
+      index: index ?? this.index,
+      title: title ?? this.title,
+      subtitle: subtitle ?? this.subtitle,
+      isSkip: isSkip ?? this.isSkip,
+    );
+  }
+
+  // TODO(dev): do like this in every question widget
+  // TODO(dev): implement theme
   @override
   SliderThemeData? get theme => null;
 
@@ -53,7 +79,7 @@ class SliderQuestionData extends QuestionData<SliderThemeData> {
         'content': content,
       };
 
-  static SliderQuestionData fromJson(Map<String, dynamic> json) {
+  factory SliderQuestionData.fromJson(Map<String, dynamic> json) {
     return SliderQuestionData(
       index: json['index'],
       minValue: json['minValue'],
@@ -67,7 +93,6 @@ class SliderQuestionData extends QuestionData<SliderThemeData> {
   }
 
   @override
-  // TODO: implement props
   List<Object?> get props => [
         minValue,
         maxValue,

@@ -30,7 +30,8 @@ class InputTypeCustomizationItem extends StatefulWidget {
   final void Function(InputType inputType)? onChanged;
 
   @override
-  State<InputTypeCustomizationItem> createState() => _InputTypeCustomizationItemState();
+  State<InputTypeCustomizationItem> createState() =>
+      _InputTypeCustomizationItemState();
 }
 
 class _InputTypeCustomizationItemState extends State<InputTypeCustomizationItem>
@@ -49,6 +50,7 @@ class _InputTypeCustomizationItemState extends State<InputTypeCustomizationItem>
       vsync: this,
       duration: AppDuration.customizationItemAnimation,
     );
+    // ignore: prefer_int_literals
     _animation = Tween(begin: 0.0, end: .5).animate(
       CurvedAnimation(
         parent: _iconAnimationController,

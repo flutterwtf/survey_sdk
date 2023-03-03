@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:survey_core/src/domain/entities/question_types/slider_question_data.dart';
 import 'package:survey_core/src/presentation/localization/localizations.dart';
 import 'package:survey_core/src/presentation/utils/app_fonts.dart';
@@ -6,17 +7,15 @@ import 'package:survey_core/src/presentation/utils/data_to_widget_util.dart';
 import 'package:survey_core/src/presentation/widgets/question_bottom_button.dart';
 import 'package:survey_core/src/presentation/widgets/question_subtitle.dart';
 import 'package:survey_core/src/presentation/widgets/question_title.dart';
-import 'package:flutter/material.dart';
 
-//TODO: extend from one superclass maybe?
 class SliderQuestionPage extends StatefulWidget {
   final SliderQuestionData data;
   final OnSendCallback onSend;
 
   const SliderQuestionPage({
-    super.key,
     required this.data,
     required this.onSend,
+    super.key,
   });
 
   @override
@@ -72,7 +71,7 @@ class _SliderQuestionPageState extends State<SliderQuestionPage> {
           const Spacer(),
           QuestionBottomButton(
             text: context.localization.next,
-            //TODO: replace '' with data
+            // TODO(dev): replace '' with data
             onPressed: () => widget.onSend(''),
           ),
         ],
@@ -89,13 +88,12 @@ class _QuestionSlider extends StatefulWidget {
   final SliderThemeData theme;
 
   const _QuestionSlider({
-    Key? key,
     required this.minValue,
     required this.maxValue,
     required this.onChanged,
     required this.theme,
     required this.initialValue,
-  }) : super(key: key);
+  });
 
   @override
   State<_QuestionSlider> createState() => _QuestionSliderState();
@@ -104,12 +102,15 @@ class _QuestionSlider extends StatefulWidget {
 class _QuestionSliderState extends State<_QuestionSlider> {
   late double _value;
   late final bool _onlyInt;
+
   @override
   void initState() {
     _value = widget.initialValue.toDouble();
-    _onlyInt = widget.initialValue.ceilToDouble() == widget.initialValue.floorToDouble();
+    _onlyInt = widget.initialValue.ceilToDouble() ==
+        widget.initialValue.floorToDouble();
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return SliderTheme(

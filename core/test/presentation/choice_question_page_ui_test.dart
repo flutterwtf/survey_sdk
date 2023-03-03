@@ -1,45 +1,48 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:survey_core/src/domain/entities/question_types/choice_question_data.dart';
 import 'package:survey_core/src/presentation/choice_question/choice_question_page.dart';
 
+import 'widget/app_test.dart';
+
+void _mockOnSend(dynamic data) {}
+
 void main() {
+  const usualMockChoiceData = ChoiceQuestionData(
+    title: 'title',
+    content: 'content',
+    options: ['option', 'option', 'option'],
+    isMultipleChoice: false,
+    isSkip: false,
+    index: 0,
+    subtitle: '',
+  );
   group('components of Choice Question widget', () {
     testWidgets('Load widget', (tester) async {
-      final completer = Completer<void>();
       await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: ChoiceQuestionPage(
-              title: 'title',
-              content: 'content',
-              onSend: () {},
-              options: const ['option', 'option', 'option'],
-              isMultipleChoice: false,
-              canBeSkipped: false,
-            ),
+        const AppTest(
+          child: ChoiceQuestionPage(
+            data: usualMockChoiceData,
+            onSend: _mockOnSend,
           ),
         ),
       );
       expect(find.text('title'), findsOneWidget);
       expect(find.text('content'), findsOneWidget);
-      expect(find.text('option'), findsNWidgets(3));
+      expect(
+        find.text('option'),
+        findsNWidgets(usualMockChoiceData.options.length),
+      );
     });
 
     testWidgets('Non skippable without answer', (tester) async {
       final completer = Completer<void>();
       await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: ChoiceQuestionPage(
-              title: 'title',
-              content: 'content',
-              onSend: completer.complete,
-              options: const ['option', 'option', 'option'],
-              isMultipleChoice: false,
-              canBeSkipped: false,
-            ),
+        AppTest(
+          child: ChoiceQuestionPage(
+            data: usualMockChoiceData,
+            onSend: (_) => completer.complete(),
           ),
         ),
       );
@@ -50,16 +53,10 @@ void main() {
     testWidgets('Skippable without answer', (tester) async {
       final completer = Completer<void>();
       await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: ChoiceQuestionPage(
-              title: 'title',
-              content: 'content',
-              onSend: completer.complete,
-              options: const ['option', 'option', 'option'],
-              isMultipleChoice: false,
-              canBeSkipped: true,
-            ),
+        AppTest(
+          child: ChoiceQuestionPage(
+            data: usualMockChoiceData.copyWith(isSkip: true),
+            onSend: (_) => completer.complete(),
           ),
         ),
       );
@@ -71,15 +68,10 @@ void main() {
   testWidgets('Single choice without answer', (tester) async {
     final completer = Completer<void>();
     await tester.pumpWidget(
-      MaterialApp(
-        home: Scaffold(
-          body: ChoiceQuestionPage(
-            title: 'title',
-            content: 'content',
-            onSend: completer.complete,
-            options: const ['option', 'option', 'option'],
-            isMultipleChoice: false,
-          ),
+      const AppTest(
+        child: ChoiceQuestionPage(
+          data: usualMockChoiceData,
+          onSend: _mockOnSend,
         ),
       ),
     );
@@ -90,15 +82,10 @@ void main() {
   testWidgets('Single choice with answer', (tester) async {
     final completer = Completer<void>();
     await tester.pumpWidget(
-      MaterialApp(
-        home: Scaffold(
-          body: ChoiceQuestionPage(
-            title: 'title',
-            content: 'content',
-            onSend: completer.complete,
-            options: const ['option', 'option', 'option'],
-            isMultipleChoice: false,
-          ),
+      AppTest(
+        child: ChoiceQuestionPage(
+          data: usualMockChoiceData,
+          onSend: (_) => completer.complete(),
         ),
       ),
     );
@@ -111,15 +98,10 @@ void main() {
   testWidgets('Single choice with 2 taps option answer', (tester) async {
     final completer = Completer<void>();
     await tester.pumpWidget(
-      MaterialApp(
-        home: Scaffold(
-          body: ChoiceQuestionPage(
-            title: 'title',
-            content: 'content',
-            onSend: completer.complete,
-            options: const ['option', 'option', 'option'],
-            isMultipleChoice: false,
-          ),
+      AppTest(
+        child: ChoiceQuestionPage(
+          data: usualMockChoiceData,
+          onSend: (_) => completer.complete(),
         ),
       ),
     );
@@ -134,15 +116,10 @@ void main() {
   testWidgets('Multiple choice without answer', (tester) async {
     final completer = Completer<void>();
     await tester.pumpWidget(
-      MaterialApp(
-        home: Scaffold(
-          body: ChoiceQuestionPage(
-            title: 'title',
-            content: 'content',
-            onSend: completer.complete,
-            options: const ['option', 'option'],
-            isMultipleChoice: true,
-          ),
+      AppTest(
+        child: ChoiceQuestionPage(
+          data: usualMockChoiceData.copyWith(isMultipleChoice: true),
+          onSend: (_) => completer.complete(),
         ),
       ),
     );
@@ -153,15 +130,10 @@ void main() {
   testWidgets('Multiple choice with 1 answer', (tester) async {
     final completer = Completer<void>();
     await tester.pumpWidget(
-      MaterialApp(
-        home: Scaffold(
-          body: ChoiceQuestionPage(
-            title: 'title',
-            content: 'content',
-            onSend: completer.complete,
-            options: const ['option', 'option'],
-            isMultipleChoice: true,
-          ),
+      AppTest(
+        child: ChoiceQuestionPage(
+          data: usualMockChoiceData.copyWith(isMultipleChoice: true),
+          onSend: (_) => completer.complete(),
         ),
       ),
     );
@@ -174,15 +146,10 @@ void main() {
   testWidgets('Multiple choice with 2 taps option answer', (tester) async {
     final completer = Completer<void>();
     await tester.pumpWidget(
-      MaterialApp(
-        home: Scaffold(
-          body: ChoiceQuestionPage(
-            title: 'title',
-            content: 'content',
-            onSend: completer.complete,
-            options: const ['option', 'option'],
-            isMultipleChoice: true,
-          ),
+      AppTest(
+        child: ChoiceQuestionPage(
+          data: usualMockChoiceData.copyWith(isMultipleChoice: true),
+          onSend: (_) => completer.complete(),
         ),
       ),
     );
@@ -197,15 +164,10 @@ void main() {
   testWidgets('Multiple choice with 2 answers', (tester) async {
     final completer = Completer<void>();
     await tester.pumpWidget(
-      MaterialApp(
-        home: Scaffold(
-          body: ChoiceQuestionPage(
-            title: 'title',
-            content: 'content',
-            onSend: completer.complete,
-            options: const ['option', 'option'],
-            isMultipleChoice: true,
-          ),
+      AppTest(
+        child: ChoiceQuestionPage(
+          data: usualMockChoiceData.copyWith(isMultipleChoice: true),
+          onSend: (_) => completer.complete(),
         ),
       ),
     );

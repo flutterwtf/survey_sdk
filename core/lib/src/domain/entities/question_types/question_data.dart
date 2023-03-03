@@ -6,15 +6,14 @@ import 'package:survey_core/src/domain/entities/question_types/input_question_da
 import 'package:survey_core/src/domain/entities/question_types/intro_question_data.dart';
 import 'package:survey_core/src/domain/entities/question_types/slider_question_data.dart';
 
-//TODO make immutable?
 abstract class QuestionData<T> extends Equatable with ApiObject {
-  int index;
+  final int index;
   final String title;
   final String subtitle;
   final String? content;
   final bool isSkip;
 
-  QuestionData({
+  const QuestionData({
     required this.index,
     required this.title,
     required this.subtitle,
@@ -22,7 +21,16 @@ abstract class QuestionData<T> extends Equatable with ApiObject {
     this.content,
   });
 
+  QuestionData copyWith({
+    int? index,
+    String? title,
+    String? subtitle,
+    String? content,
+    bool? isSkip,
+  });
+
   T? get theme;
+
   String get type;
 
   static QuestionData fromType(Map<String, dynamic> json) {
