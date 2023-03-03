@@ -8,12 +8,14 @@ import 'package:survey_admin/presentation/utils/constants/constants.dart';
 class ColorPickerDialog extends StatelessWidget {
   final ValueChanged<Color> onColorPicked;
   final TextEditingController colorTextController;
+  final VoidCallback onClose;
 
   const ColorPickerDialog({
-    Key? key,
     required this.onColorPicked,
     required this.colorTextController,
-  }) : super(key: key);
+    required this.onClose,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +29,6 @@ class ColorPickerDialog extends StatelessWidget {
             ColorPicker(
               pickerColor: colorFromHex(
                 colorTextController.value.text,
-                enableAlpha: true,
               )!,
               hexInputController: colorTextController,
               portraitOnly: true,
@@ -65,10 +66,9 @@ class ColorPickerDialog extends StatelessWidget {
             onColorPicked(
               colorFromHex(
                 colorTextController.value.text,
-                enableAlpha: true,
               )!,
             );
-            Navigator.of(context).pop();
+            onClose.call();
           },
           child: Container(
             padding: const EdgeInsets.symmetric(

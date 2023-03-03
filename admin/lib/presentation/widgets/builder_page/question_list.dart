@@ -9,43 +9,37 @@ import 'package:survey_admin/presentation/utils/constants/constants.dart';
 import 'package:survey_admin/presentation/widgets/builder_page/question_list_item.dart';
 import 'package:survey_core/survey_core.dart';
 
-// TODO(dev): do we really need "Survey" prefix? If so, why do we have it only in several classes
 class QuestionList extends StatefulWidget {
   final void Function(QuestionData) onSelect;
 
-  const QuestionList({super.key, required this.onSelect});
+  const QuestionList({
+    required this.onSelect,
+    super.key,
+  });
 
   @override
   State<QuestionList> createState() => _QuestionListState();
 }
 
 class _QuestionListState extends State<QuestionList> {
-  late final List<QuestionListItem> _questionList;
-
-  @override
-  void initState() {
-    super.initState();
-    _questionList = [
-      QuestionListItem(
-        questionData: IntroQuestionData.common(index: 0),
-        onTap: widget.onSelect,
-        isSelected: true,
-      ),
-      QuestionListItem(
-        questionData: InputQuestionData.common(index: 1),
-        onTap: widget.onSelect,
-      ),
-    ];
-  }
+  final _questionList = [
+    QuestionListItem(
+      questionData: IntroQuestionData.common(),
+      onTap: (data) {},
+    ),
+    QuestionListItem(
+      questionData: InputQuestionData.common(index: 1),
+      onTap: (data) {},
+    ),
+  ];
 
   void addQuestion(QuestionData data) {
     final index = _questionList.length;
-    data.index = index;
     setState(() {
       _questionList.add(
         QuestionListItem(
-          questionData: data,
-          onTap: widget.onSelect,
+          questionData: data.copyWith(index: index),
+          onTap: (data) {},
         ),
       );
     });
@@ -81,13 +75,16 @@ class _QuestionListState extends State<QuestionList> {
                   width: AppDimensions.margin4XL + AppDimensions.margin3XL,
                 ),
                 GestureDetector(
-                  onTap: () => Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => NewQuestionPage(
-                        onSubmit: addQuestion,
+                  onTap: () async {
+                    final questionData = await Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const NewQuestionPage(),
                       ),
-                    ),
-                  ),
+                    );
+                    if (questionData != null) {
+                      addQuestion(questionData);
+                    }
+                  },
                   child: SizedBox(
                     height: AppDimensions.sizeL,
                     width: AppDimensions.sizeL,
@@ -111,16 +108,29 @@ class _QuestionListState extends State<QuestionList> {
                   )
               ],
               onReorder: (oldIndex, newIndex) {
-                setState(() {
-                  final itemFirst = _questionList
-                      .where((item) => item.questionData.index == oldIndex)
-                      .first;
-                  final itemSecond = _questionList
-                      .where((item) => item.questionData.index == newIndex)
-                      .first;
-                  itemFirst.questionData.index = newIndex;
-                  itemSecond.questionData.index = oldIndex;
-                });
+                if (newIndex > oldIndex) newIndex--;
+                setState(
+                  () {
+                    final itemFirstIndex = _questionList.indexWhere(
+                      (item) => item.questionData.index == oldIndex,
+                    );
+                    final itemSecondIndex = _questionList.indexWhere(
+                      (item) => item.questionData.index == newIndex,
+                    );
+                    _questionList[itemFirstIndex] = QuestionListItem(
+                      questionData: _questionList[itemFirstIndex]
+                          .questionData
+                          .copyWith(index: newIndex),
+                      onTap: (data) {},
+                    );
+                    _questionList[itemSecondIndex] = QuestionListItem(
+                      questionData: _questionList[itemSecondIndex]
+                          .questionData
+                          .copyWith(index: oldIndex),
+                      onTap: (data) {},
+                    );
+                  },
+                );
               },
             ),
           ),

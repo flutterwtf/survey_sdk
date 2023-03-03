@@ -21,6 +21,10 @@ class SliderCustomizationPanel extends StatelessWidget {
           onFillColorChanged: (value) {},
           onSubtitleColorChanged: (value) {},
           onTitleColorChanged: (value) {},
+          onTitleChanged: (String? value) {},
+          onSubtitleChanged: (String? value) {},
+          onButtonDownChanged: (String? value) {},
+          onButtonBorderChanged: (String? value) {},
         ),
         SliderCustomizationTab(
           title: context.localization.slider,

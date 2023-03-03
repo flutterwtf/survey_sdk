@@ -14,12 +14,12 @@ class SliderContentCustomizationTab extends CustomizationPanel {
   final ValueChanged<int?> onDivisionsChanged;
 
   const SliderContentCustomizationTab({
-    super.key,
     required super.title,
     required this.onDivisionsChanged,
     required this.onMinMaxChanged,
     required this.onSubtitleChanged,
     required this.onTitleChanged,
+    super.key,
   });
 
   @override

@@ -7,12 +7,13 @@ import 'package:survey_admin/presentation/widgets/customization_panel/intro_cust
 import 'package:survey_admin/presentation/widgets/customization_panel/slider_customization_panel.dart';
 import 'package:survey_core/survey_core.dart';
 
-class SurveyEditorBar extends StatelessWidget {
+// TODO(dev): will we use this?
+class EditorBar extends StatelessWidget {
   final QuestionData? questionData;
 
-  const SurveyEditorBar({
-    super.key,
+  const EditorBar({
     required this.questionData,
+    super.key,
   });
 
   @override

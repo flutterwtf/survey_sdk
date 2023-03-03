@@ -7,9 +7,9 @@ class DivisionsCustomizationItem extends StatelessWidget {
   final void Function(int? divisions) onChanged;
 
   const DivisionsCustomizationItem({
-    super.key,
-    this.initialValue = 10,
     required this.onChanged,
+    this.initialValue = 10,
+    super.key,
   });
 
   @override

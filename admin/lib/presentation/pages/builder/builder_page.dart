@@ -7,9 +7,9 @@ import 'package:survey_admin/presentation/pages/builder/builder_state.dart';
 import 'package:survey_admin/presentation/utils/app_fonts.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
+import 'package:survey_admin/presentation/widgets/builder_page/editor_bar.dart';
 import 'package:survey_admin/presentation/widgets/builder_page/phone_view.dart';
 import 'package:survey_admin/presentation/widgets/builder_page/question_list.dart';
-import 'package:survey_admin/presentation/widgets/builder_page/survey_editor_bar.dart';
 import 'package:survey_admin/presentation/widgets/export_floating_window.dart';
 
 class BuilderPage extends StatefulWidget {
@@ -46,7 +46,7 @@ class _BuilderPageState extends State<BuilderPage> {
                 child: Container(),
               ),
             ),
-            SurveyEditorBar(
+            EditorBar(
               questionData: state.selected,
             ),
           ],
@@ -57,7 +57,7 @@ class _BuilderPageState extends State<BuilderPage> {
 }
 
 class _BuilderPageTabBar extends StatelessWidget {
-  const _BuilderPageTabBar({Key? key}) : super(key: key);
+  const _BuilderPageTabBar();
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +70,7 @@ class _BuilderPageTabBar extends StatelessWidget {
             right: AppDimensions.tabBarPadding,
           ),
           indicator: const UnderlineTabIndicator(
-            borderSide: BorderSide(width: 1.0),
+            borderSide: BorderSide(),
             insets: EdgeInsets.symmetric(
               horizontal: AppDimensions.margin4XL + AppDimensions.sizeM,
             ),
@@ -90,7 +90,7 @@ class _BuilderPageTabBar extends StatelessWidget {
 }
 
 class _CreateTab extends StatelessWidget {
-  const _CreateTab({Key? key}) : super(key: key);
+  const _CreateTab();
 
   @override
   Widget build(BuildContext context) {
@@ -103,10 +103,7 @@ class _CreateTab extends StatelessWidget {
       child: OutlinedButton(
         onPressed: () {},
         style: OutlinedButton.styleFrom(
-          side: const BorderSide(
-            width: 1.0,
-            color: AppColors.black,
-          ),
+          side: const BorderSide(),
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(
@@ -126,7 +123,7 @@ class _CreateTab extends StatelessWidget {
 }
 
 class _PreviewTab extends StatelessWidget {
-  const _PreviewTab({Key? key}) : super(key: key);
+  const _PreviewTab();
 
   @override
   Widget build(BuildContext context) {

@@ -12,11 +12,11 @@ class ChoiceContentCustomizationTab extends CustomizationPanel {
   final ValueChanged<List<String>> onOptionsChanged;
 
   const ChoiceContentCustomizationTab({
-    super.key,
     required super.title,
     required this.onTitleChanged,
     required this.onSubTitleChanged,
     required this.onOptionsChanged,
+    super.key,
   });
 
   @override

@@ -11,12 +11,12 @@ class InputContentCustomizationTab extends CustomizationPanel {
   final ValueChanged<String> onButtonTextChanged;
 
   const InputContentCustomizationTab({
-    super.key,
     required super.title,
     required this.onTitleChanged,
     required this.onSubtitleChanged,
     required this.onHintTextChanged,
     required this.onButtonTextChanged,
+    super.key,
   });
 
   static const double _maxInputTextHeight = 100;

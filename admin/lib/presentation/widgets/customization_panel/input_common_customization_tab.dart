@@ -18,7 +18,6 @@ class InputCommonCustomizationTab extends CustomizationPanel {
   final ValueChanged<int?> onButtonFontSizeChanged;
 
   const InputCommonCustomizationTab({
-    super.key,
     required super.title,
     required this.onFillColorPicked,
     required this.onTitleColorPicked,
@@ -28,6 +27,7 @@ class InputCommonCustomizationTab extends CustomizationPanel {
     required this.onButtonFirstColorPicked,
     required this.onButtonSecondColorPicked,
     required this.onButtonFontSizeChanged,
+    super.key,
   });
 
   @override
@@ -61,7 +61,7 @@ class InputCommonCustomizationTab extends CustomizationPanel {
                     initialValue: '16',
                     inputFormatters: [
                       FilteringTextInputFormatter.digitsOnly,
-                      LengthLimitingTextInputFormatter(3),
+                      LengthLimitingTextInputFormatter(2),
                     ],
                     onChanged: (size) {
                       if (size == null) {
@@ -92,7 +92,7 @@ class InputCommonCustomizationTab extends CustomizationPanel {
                     initialValue: '12',
                     inputFormatters: [
                       FilteringTextInputFormatter.digitsOnly,
-                      LengthLimitingTextInputFormatter(3),
+                      LengthLimitingTextInputFormatter(2),
                     ],
                     onChanged: (size) {
                       if (size == null) {
@@ -127,7 +127,7 @@ class InputCommonCustomizationTab extends CustomizationPanel {
                     initialValue: '12',
                     inputFormatters: [
                       FilteringTextInputFormatter.digitsOnly,
-                      LengthLimitingTextInputFormatter(3),
+                      LengthLimitingTextInputFormatter(2),
                     ],
                     onChanged: (size) {
                       if (size == null) {
