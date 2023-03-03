@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:survey_core/src/domain/entities/constants/question_types.dart';
 import 'package:survey_core/src/domain/entities/question_types/question_data.dart';
 
 class SliderQuestionData extends QuestionData<SliderThemeData> {
@@ -63,7 +64,7 @@ class SliderQuestionData extends QuestionData<SliderThemeData> {
   SliderThemeData? get theme => null;
 
   @override
-  String get type => 'Slider';
+  String get type => QuestionTypes.slider;
 
   @override
   Map<String, dynamic> toJson() => {

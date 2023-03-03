@@ -1,3 +1,4 @@
+import 'package:survey_core/src/domain/entities/constants/question_types.dart';
 import 'package:survey_core/src/domain/entities/question_types/question_data.dart';
 import 'package:survey_core/src/domain/entities/themes/intro_question_theme.dart';
 
@@ -51,7 +52,7 @@ class IntroQuestionData extends QuestionData {
   IntroQuestionTheme? get theme => const IntroQuestionTheme.common();
 
   @override
-  String get type => 'Intro';
+  String get type => QuestionTypes.intro;
 
   @override
   Map<String, dynamic> toJson() => {
