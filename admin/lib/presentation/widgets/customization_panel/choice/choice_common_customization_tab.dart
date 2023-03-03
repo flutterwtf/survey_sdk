@@ -56,7 +56,7 @@ class ChoiceCommonCustomizationTab extends CustomizationTab {
               initialText: '16',
               inputFormatters: [
                 FilteringTextInputFormatter.digitsOnly,
-                LengthLimitingTextInputFormatter(3),
+                LengthLimitingTextInputFormatter(2),
               ],
               onTextChanged: (size) {
                 if (size == null) {
@@ -76,7 +76,7 @@ class ChoiceCommonCustomizationTab extends CustomizationTab {
               initialText: '12',
               inputFormatters: [
                 FilteringTextInputFormatter.digitsOnly,
-                LengthLimitingTextInputFormatter(3),
+                LengthLimitingTextInputFormatter(2),
               ],
               onTextChanged: (size) {
                 if (size == null) {
@@ -101,7 +101,7 @@ class ChoiceCommonCustomizationTab extends CustomizationTab {
               initialText: '12',
               inputFormatters: [
                 FilteringTextInputFormatter.digitsOnly,
-                LengthLimitingTextInputFormatter(3),
+                LengthLimitingTextInputFormatter(2),
               ],
               onTextChanged: (size) {
                 if (size == null) {
