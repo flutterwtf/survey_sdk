@@ -8,7 +8,7 @@ import 'package:survey_admin/presentation/widgets/customization_items/customizat
 import 'package:survey_admin/presentation/widgets/customization_panel/slider_common_customization_tab.dart';
 
 void main() {
-  group('Tests for SliderCommonCustomizationPanel', () {
+  group('Tests for SliderCommonCustomizationTab', () {
     Color fill = Colors.red;
     Color buttonDownColor = Colors.red;
     Color buttonUpColor = Colors.red;

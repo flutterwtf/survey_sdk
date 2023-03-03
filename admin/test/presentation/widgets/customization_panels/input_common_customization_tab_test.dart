@@ -10,7 +10,7 @@ import 'package:survey_admin/presentation/widgets/customization_panel/input_comm
 
 void main() {
   group(
-    'Question common customization panel',
+    'Input common customization tab',
     () {
       const redColorCode = 'FFF44336';
       const textSizeString = '20';
@@ -28,7 +28,7 @@ void main() {
       int? subtitleTextSize = 10;
       int? buttonTextSize = 10;
 
-      final questionCommonCustomPanel = MaterialApp(
+      final inputCommonCustomizationTab = MaterialApp(
         supportedLocales: AppLocalizations.supportedLocales,
         localizationsDelegates: const [
           AppLocalizations.delegate,
@@ -54,7 +54,7 @@ void main() {
       testWidgets(
         'All content widget test',
         (tester) async {
-          await tester.pumpWidget(questionCommonCustomPanel);
+          await tester.pumpWidget(inputCommonCustomizationTab);
           expect(
             find.widgetWithText(CustomizationItemsContainer, 'Fill'),
             findsOneWidget,
@@ -78,7 +78,7 @@ void main() {
       testWidgets(
         'Pick colors test',
         (tester) async {
-          await tester.pumpWidget(questionCommonCustomPanel);
+          await tester.pumpWidget(inputCommonCustomizationTab);
           await tester.pumpAndSettle();
           final colorTextFields = find.byType(ColorCustomizationItem);
           for (var i = 0; i < colorTextFields.evaluate().length; i++) {
@@ -102,7 +102,7 @@ void main() {
       testWidgets(
         'Pick text size',
         (tester) async {
-          await tester.pumpWidget(questionCommonCustomPanel);
+          await tester.pumpWidget(inputCommonCustomizationTab);
 
           await tester.enterText(
             find.byType(CustomizationTextField).at(2),
@@ -134,7 +134,7 @@ void main() {
       testWidgets(
         'Pick text size with letters',
         (tester) async {
-          await tester.pumpWidget(questionCommonCustomPanel);
+          await tester.pumpWidget(inputCommonCustomizationTab);
 
           await tester.enterText(
             find.byType(CustomizationTextField).at(2),
@@ -166,7 +166,7 @@ void main() {
       testWidgets(
         'Pick text size with more than 2 digits',
         (tester) async {
-          await tester.pumpWidget(questionCommonCustomPanel);
+          await tester.pumpWidget(inputCommonCustomizationTab);
 
           await tester.enterText(
             find.byType(CustomizationTextField).at(2),

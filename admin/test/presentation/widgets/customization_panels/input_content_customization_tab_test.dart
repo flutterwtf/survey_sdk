@@ -8,7 +8,7 @@ import 'package:survey_admin/presentation/widgets/customization_panel/input_cont
 
 void main() {
   group(
-    'Question content customization panel tests',
+    'Input content customization tab tests',
     () {
       const testText = 'Text for test';
       var textTitle = '';

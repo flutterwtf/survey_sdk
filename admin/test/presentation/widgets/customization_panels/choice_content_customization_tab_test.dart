@@ -7,7 +7,7 @@ import 'package:survey_admin/presentation/widgets/customization_panel/choice_con
 
 void main() {
   group(
-    'Choice content customization panel tests',
+    'Choice content customization tab tests',
     () {
       var options = <String>[];
       var title = '';

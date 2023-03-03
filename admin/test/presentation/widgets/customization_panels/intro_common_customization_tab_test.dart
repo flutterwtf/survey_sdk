@@ -7,7 +7,7 @@ import 'package:survey_admin/presentation/widgets/customization_panel/intro_comm
 
 void main() {
   group(
-    'Intro common customization panel tests',
+    'Intro common customization tab tests',
     () {
       final introCommonCustomPanel = MaterialApp(
         supportedLocales: AppLocalizations.supportedLocales,

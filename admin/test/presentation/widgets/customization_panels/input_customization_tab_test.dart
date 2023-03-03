@@ -12,9 +12,9 @@ import 'package:survey_admin/presentation/widgets/customization_panel/input_cust
 
 void main() {
   group(
-    'Question input customization panel tests',
+    'Input customization tab tests',
     () {
-      final questionInputCustomizationPanel = MaterialApp(
+      final inputCustomizationTab = MaterialApp(
         supportedLocales: AppLocalizations.supportedLocales,
         localizationsDelegates: const [
           AppLocalizations.delegate,
@@ -44,7 +44,7 @@ void main() {
       testWidgets(
         'widget initialized correctly',
         (widgetTester) async {
-          await widgetTester.pumpWidget(questionInputCustomizationPanel);
+          await widgetTester.pumpWidget(inputCustomizationTab);
           await widgetTester.pumpAndSettle();
           expect(find.text('test'), findsNothing);
 
@@ -82,10 +82,10 @@ void main() {
       testWidgets(
         'initial values',
         (widgetTester) async {
-          await widgetTester.pumpWidget(questionInputCustomizationPanel);
+          await widgetTester.pumpWidget(inputCustomizationTab);
           await widgetTester.pumpAndSettle();
 
-          ///Multiline widget switch is off
+          // Multiline widget switch is off
           expect(
             find.widgetWithText(CustomizationItemsContainer, 'Lines'),
             findsNothing,
@@ -120,7 +120,7 @@ void main() {
       testWidgets(
         'panel contains all the widgets',
         (widgetTester) async {
-          await widgetTester.pumpWidget(questionInputCustomizationPanel);
+          await widgetTester.pumpWidget(inputCustomizationTab);
           await widgetTester.pumpAndSettle();
 
           expect(find.byType(CustomizationItemsContainer), findsNWidgets(7));

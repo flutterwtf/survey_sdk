@@ -6,7 +6,7 @@ import 'package:survey_admin/presentation/widgets/customization_items/customizat
 import 'package:survey_admin/presentation/widgets/customization_panel/slider_content_customization_tab.dart';
 
 void main() {
-  group('Tests for IntroContentCustomizationPanel', () {
+  group('Tests for SliderContentCustomizationTab', () {
     int? min;
     int? max;
     var title = '';
