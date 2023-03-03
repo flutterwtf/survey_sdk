@@ -4,9 +4,11 @@ import 'package:survey_admin/presentation/app/di/injector.dart';
 import 'package:survey_admin/presentation/app/localization/localizations.dart';
 import 'package:survey_admin/presentation/pages/builder/builder_cubit.dart';
 import 'package:survey_admin/presentation/pages/builder/builder_state.dart';
+import 'package:survey_admin/presentation/utils/app_fonts.dart';
 import 'package:survey_admin/presentation/utils/app_text_styles.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
+import 'package:survey_admin/presentation/utils/theme_extension.dart';
 import 'package:survey_admin/presentation/widgets/builder_page/phone_view.dart';
 import 'package:survey_admin/presentation/widgets/builder_page/question_list.dart';
 import 'package:survey_admin/presentation/widgets/builder_page/survey_editor_bar.dart';
@@ -76,7 +78,9 @@ class _BuilderPageTabBar extends StatelessWidget {
           unselectedLabelColor: AppColors.textGrey,
           indicatorColor: AppColors.black,
           labelColor: AppColors.text,
-          labelStyle: AppTextStyles.interLBold,
+          labelStyle: context.theme.textTheme.titleMedium!.copyWith(
+            fontWeight: AppFonts.weightBold,
+          ),
           tabs: [
             Tab(text: context.localization.create),
             Tab(text: context.localization.preview),
@@ -112,7 +116,10 @@ class _CreateTab extends StatelessWidget {
           ),
           child: Text(
             context.localization.import,
-            style: AppTextStyles.karlaMBoldBlack,
+            style: context.theme.textTheme.labelLarge!.copyWith(
+              fontFamily: AppFonts.karla,
+              color: AppColors.text,
+            ),
           ),
         ),
       ),
@@ -148,7 +155,10 @@ class _PreviewTab extends StatelessWidget {
           ),
           child: Text(
             context.localization.export,
-            style: AppTextStyles.karlaMBoldWhite,
+            style: context.theme.textTheme.labelLarge!.copyWith(
+              fontFamily: AppFonts.karla,
+              color: AppColors.white,
+            ),
           ),
         ),
       ),

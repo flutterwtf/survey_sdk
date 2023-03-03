@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:survey_admin/presentation/utils/app_text_styles.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
+import 'package:survey_admin/presentation/utils/theme_extension.dart';
 import 'package:survey_core/survey_core.dart';
 
 class QuestionListItem extends StatelessWidget {
@@ -24,7 +25,9 @@ class QuestionListItem extends StatelessWidget {
               padding: const EdgeInsets.only(top: AppDimensions.marginXS),
               child: Text(
                 questionData.index.toString(),
-                style: AppTextStyles.interSGrey,
+                style: context.theme.textTheme.bodySmall!.copyWith(
+                  color: AppColors.textGrey,
+                ),
               ),
             ),
             const SizedBox(width: AppDimensions.marginXS),
@@ -40,7 +43,7 @@ class QuestionListItem extends StatelessWidget {
             const SizedBox(width: AppDimensions.marginXS),
             Text(
               questionData.type,
-              style: AppTextStyles.interM,
+              style: context.theme.textTheme.bodyMedium,
             ),
           ],
         ),

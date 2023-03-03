@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:survey_admin/presentation/app/localization/localizations.dart';
 import 'package:survey_admin/presentation/utils/app_text_styles.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
+import 'package:survey_admin/presentation/utils/theme_extension.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
 
 class MinMaxCustomizationItem extends StatefulWidget {
@@ -18,7 +19,8 @@ class MinMaxCustomizationItem extends StatefulWidget {
   }) : assert(initialMax > initialMin);
 
   @override
-  State<MinMaxCustomizationItem> createState() => _MinMaxCustomizationItemState();
+  State<MinMaxCustomizationItem> createState() =>
+      _MinMaxCustomizationItemState();
 }
 
 class _MinMaxCustomizationItemState extends State<MinMaxCustomizationItem> {
@@ -133,7 +135,7 @@ class _MinMaxInputField extends StatelessWidget {
           ),
           child: Text(
             prefix,
-            style: AppTextStyles.interL,
+            style: context.theme.textTheme.bodyLarge,
           ),
         ),
         Expanded(

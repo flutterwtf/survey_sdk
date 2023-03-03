@@ -5,6 +5,7 @@ import 'package:survey_admin/presentation/utils/app_fonts.dart';
 import 'package:survey_admin/presentation/utils/app_text_styles.dart';
 import 'package:survey_admin/presentation/utils/constants/app_duration.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
+import 'package:survey_admin/presentation/utils/theme_extension.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/switch_customization_item.dart';
 
@@ -88,7 +89,7 @@ class _LineAmountInputField extends StatelessWidget {
         children: [
           Text(
             context.localization.lines,
-            style: AppTextStyles.interMBlack,
+            style: context.theme.textTheme.bodyMedium,
           ),
           Expanded(
             child: CustomizationTextField(

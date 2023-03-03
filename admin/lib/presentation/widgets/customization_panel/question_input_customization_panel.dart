@@ -4,6 +4,7 @@ import 'package:survey_admin/presentation/app/localization/localizations.dart';
 import 'package:survey_admin/presentation/utils/app_text_styles.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
+import 'package:survey_admin/presentation/utils/theme_extension.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/color_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
@@ -91,7 +92,7 @@ class QuestionInputCustomizationPanel extends CustomizationPanel {
                         isCollapsed: true,
                         border: InputBorder.none,
                         suffixText: context.localization.px,
-                        suffixStyle: AppTextStyles.interL,
+                        suffixStyle: context.theme.textTheme.bodyLarge,
                       ),
                       onChanged: (size) {
                         if (size == null) {

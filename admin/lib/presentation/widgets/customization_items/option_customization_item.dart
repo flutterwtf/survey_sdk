@@ -3,6 +3,7 @@ import 'package:survey_admin/presentation/app/localization/localizations.dart';
 import 'package:survey_admin/presentation/utils/app_text_styles.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
+import 'package:survey_admin/presentation/utils/theme_extension.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
 
 class OptionCustomizationItem extends StatefulWidget {
@@ -16,7 +17,8 @@ class OptionCustomizationItem extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<OptionCustomizationItem> createState() => _OptionCustomizationItemState();
+  State<OptionCustomizationItem> createState() =>
+      _OptionCustomizationItemState();
 }
 
 class _OptionCustomizationItemState extends State<OptionCustomizationItem> {
@@ -112,7 +114,7 @@ class _Option extends StatelessWidget {
         Expanded(
           child: Text(
             option,
-            style: AppTextStyles.interL,
+            style: context.theme.textTheme.bodyLarge,
           ),
         ),
         IconButton(

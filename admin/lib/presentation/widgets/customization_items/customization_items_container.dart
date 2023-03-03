@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:survey_admin/presentation/utils/app_text_styles.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
+import 'package:survey_admin/presentation/utils/theme_extension.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/item_divider.dart';
 
 //TODO: leave and remove customization title or remove this
@@ -25,10 +26,12 @@ class CustomizationItemsContainer extends StatefulWidget {
   }) : assert(children.isNotEmpty);
 
   @override
-  State<CustomizationItemsContainer> createState() => _CustomizationItemsContainerState();
+  State<CustomizationItemsContainer> createState() =>
+      _CustomizationItemsContainerState();
 }
 
-class _CustomizationItemsContainerState extends State<CustomizationItemsContainer> {
+class _CustomizationItemsContainerState
+    extends State<CustomizationItemsContainer> {
   final List<Widget> _items = [];
 
   @override
@@ -66,7 +69,7 @@ class _CustomizationItemsContainerState extends State<CustomizationItemsContaine
                 ),
             child: Text(
               widget.title!,
-              style: AppTextStyles.interMSemiBold,
+              style: context.theme.textTheme.titleSmall,
             ),
           ),
         Padding(

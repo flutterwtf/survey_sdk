@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:survey_admin/presentation/app/localization/localizations.dart';
 import 'package:survey_admin/presentation/pages/new_question_page/new_question_page.dart';
+import 'package:survey_admin/presentation/utils/app_fonts.dart';
 import 'package:survey_admin/presentation/utils/app_text_styles.dart';
 import 'package:survey_admin/presentation/utils/asset_strings.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
+import 'package:survey_admin/presentation/utils/theme_extension.dart';
 import 'package:survey_admin/presentation/widgets/builder_page/question_list_item.dart';
 import 'package:survey_core/survey_core.dart';
 
@@ -58,7 +60,9 @@ class _QuestionListState extends State<QuestionList> {
               children: [
                 Text(
                   context.localization.survey,
-                  style: AppTextStyles.interLBoldBlack,
+                  style: context.theme.textTheme.titleMedium!.copyWith(
+                    fontWeight: AppFonts.weightBold,
+                  ),
                 ),
                 const SizedBox(
                   width: AppDimensions.margin4XL + AppDimensions.margin3XL,
@@ -88,15 +92,19 @@ class _QuestionListState extends State<QuestionList> {
                   ReorderableDragStartListener(
                     index: index,
                     key: ValueKey(index),
-                    child: _questionList.where((item) => item.questionData.index == index).first,
+                    child: _questionList
+                        .where((item) => item.questionData.index == index)
+                        .first,
                   )
               ],
               onReorder: (oldIndex, newIndex) {
                 setState(() {
-                  final itemFirst =
-                      _questionList.where((item) => item.questionData.index == oldIndex).first;
-                  final itemSecond =
-                      _questionList.where((item) => item.questionData.index == newIndex).first;
+                  final itemFirst = _questionList
+                      .where((item) => item.questionData.index == oldIndex)
+                      .first;
+                  final itemSecond = _questionList
+                      .where((item) => item.questionData.index == newIndex)
+                      .first;
                   itemFirst.questionData.index = newIndex;
                   itemSecond.questionData.index = oldIndex;
                 });

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:survey_admin/presentation/utils/app_fonts.dart';
 import 'package:survey_admin/presentation/utils/app_text_styles.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
 import 'package:survey_admin/presentation/utils/constants/image_constants.dart';
+import 'package:survey_admin/presentation/utils/theme_extension.dart';
 import 'package:survey_admin/presentation/widgets/vector_image.dart';
 import 'package:survey_core/survey_core.dart';
 
@@ -147,7 +149,9 @@ class _AppBarTitle extends StatelessWidget {
       alignment: Alignment.centerLeft,
       child: Text(
         _title,
-        style: AppTextStyles.interMBlack,
+        style: context.theme.textTheme.labelLarge!.copyWith(
+          fontWeight: AppFonts.weightRegular,
+        ),
       ),
     );
   }
@@ -174,7 +178,13 @@ class _TabButton extends StatelessWidget {
         padding: const EdgeInsets.only(top: AppDimensions.sizeM),
         child: Text(
           title,
-          style: isSelected ? AppTextStyles.interLSemiBoldBlack : AppTextStyles.interLBlack,
+          style: isSelected
+              ? context.theme.textTheme.titleMedium!.copyWith(
+                  fontWeight: AppFonts.weightSemiBold,
+                )
+              : context.theme.textTheme.titleMedium!.copyWith(
+                  fontWeight: AppFonts.weightRegular,
+                ),
         ),
       ),
     );
@@ -230,7 +240,7 @@ class _AssetTextOption extends StatelessWidget {
           const SizedBox(height: AppDimensions.marginXL),
           Text(
             titleText,
-            style: AppTextStyles.interLMedium,
+            style: context.theme.textTheme.titleMedium,
           ),
         ],
       ),
@@ -260,7 +270,10 @@ class _AddButton extends StatelessWidget {
         child: Center(
           child: Text(
             'ADD',
-            style: AppTextStyles.karlaMBoldWhite,
+            style: context.theme.textTheme.labelLarge!.copyWith(
+              fontFamily: AppFonts.karla,
+              color: AppColors.white,
+            ),
           ),
         ),
       ),
