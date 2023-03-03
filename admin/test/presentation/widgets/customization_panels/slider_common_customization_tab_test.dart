@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/color_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/slider/slider_common_customization_tab.dart';
+
+import '../app_test.dart';
 
 void main() {
   group('Tests for SliderCommonCustomizationTab', () {
@@ -18,45 +18,36 @@ void main() {
     String? subtitleSize = '';
     String? buttonDownSize = '';
     String? buttonBorder = '';
-    final page = MaterialApp(
-      supportedLocales: AppLocalizations.supportedLocales,
-      localizationsDelegates: const [
-        AppLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      home: Scaffold(
-        body: SliderCommonCustomizationTab(
-          title: 'Common',
-          onButtonDownColorChanged: (newButtonDownColor) {
-            buttonDownColor = newButtonDownColor;
-          },
-          onButtonUpColorChanged: (newButtonUpColor) {
-            buttonUpColor = newButtonUpColor;
-          },
-          onFillColorChanged: (newFill) {
-            fill = newFill;
-          },
-          onSubtitleColorChanged: (newSubtitleColor) {
-            subtitleColor = newSubtitleColor;
-          },
-          onTitleColorChanged: (newTitleColor) {
-            titleColor = newTitleColor;
-          },
-          onTitleChanged: (newTitleSize) {
-            titleSize = newTitleSize;
-          },
-          onSubtitleChanged: (newSubtitleSize) {
-            subtitleSize = newSubtitleSize;
-          },
-          onButtonDownChanged: (newButtonDownSize) {
-            buttonDownSize = newButtonDownSize;
-          },
-          onButtonBorderChanged: (newButtonBorder) {
-            buttonBorder = newButtonBorder;
-          },
-        ),
+    final page = AppTest(
+      child: SliderCommonCustomizationTab(
+        title: 'Common',
+        onButtonDownColorChanged: (newButtonDownColor) {
+          buttonDownColor = newButtonDownColor;
+        },
+        onButtonUpColorChanged: (newButtonUpColor) {
+          buttonUpColor = newButtonUpColor;
+        },
+        onFillColorChanged: (newFill) {
+          fill = newFill;
+        },
+        onSubtitleColorChanged: (newSubtitleColor) {
+          subtitleColor = newSubtitleColor;
+        },
+        onTitleColorChanged: (newTitleColor) {
+          titleColor = newTitleColor;
+        },
+        onTitleChanged: (newTitleSize) {
+          titleSize = newTitleSize;
+        },
+        onSubtitleChanged: (newSubtitleSize) {
+          subtitleSize = newSubtitleSize;
+        },
+        onButtonDownChanged: (newButtonDownSize) {
+          buttonDownSize = newButtonDownSize;
+        },
+        onButtonBorderChanged: (newButtonBorder) {
+          buttonBorder = newButtonBorder;
+        },
       ),
     );
 

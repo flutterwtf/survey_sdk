@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/color_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/thickness_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/slider/slider_customization_tab.dart';
+
+import '../app_test.dart';
 
 void main() {
   group('Tests for SliderCustomizationTab', () {
@@ -14,33 +14,24 @@ void main() {
     Color active = Colors.red;
     Color inactive = Colors.red;
     Color colorThumb = Colors.red;
-    final page = MaterialApp(
-      supportedLocales: AppLocalizations.supportedLocales,
-      localizationsDelegates: const [
-        AppLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      home: Scaffold(
-        body: SliderCustomizationTab(
-          title: 'Slider',
-          onActiveColorChanged: (newActive) {
-            active = newActive;
-          },
-          onInactiveColorChanged: (newInactive) {
-            inactive = newInactive;
-          },
-          onThicknessChanged: (newThickness) {
-            thickness = newThickness;
-          },
-          onThumbChanged: (newNumThumb) {
-            numThumb = newNumThumb;
-          },
-          onThumbColorChanged: (newColorThumb) {
-            colorThumb = newColorThumb;
-          },
-        ),
+    final page = AppTest(
+      child: SliderCustomizationTab(
+        title: 'Slider',
+        onActiveColorChanged: (newActive) {
+          active = newActive;
+        },
+        onInactiveColorChanged: (newInactive) {
+          inactive = newInactive;
+        },
+        onThicknessChanged: (newThickness) {
+          thickness = newThickness;
+        },
+        onThumbChanged: (newNumThumb) {
+          numThumb = newNumThumb;
+        },
+        onThumbColorChanged: (newColorThumb) {
+          colorThumb = newColorThumb;
+        },
       ),
     );
 

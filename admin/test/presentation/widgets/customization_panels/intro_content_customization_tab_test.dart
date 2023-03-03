@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/intro/intro_content_customization_tab.dart';
+
+import '../app_test.dart';
 
 void main() {
   group('Tests for IntroContentCustomizationTab', () {
@@ -12,31 +12,22 @@ void main() {
     var textTitle = '';
     var textSubtitle = '';
     var textPrimaryButton = '';
-    final page = MaterialApp(
-      supportedLocales: AppLocalizations.supportedLocales,
-      localizationsDelegates: const [
-        AppLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      home: Scaffold(
-        body: IntroContentCustomizationTab(
-          title: 'Content',
-          onTitleChanged: (newTitle) {
-            textTitle = newTitle;
-          },
-          onPrimaryButtonTextChanged: (newTextPrimaryButton) {
-            textPrimaryButton = newTextPrimaryButton;
-          },
-          onSecondaryButtonChanged: (isShown, text) {
-            isVisible = isShown;
-            textSecondaryButton = text;
-          },
-          onSubtitleChanged: (newSubtitle) {
-            textSubtitle = newSubtitle;
-          },
-        ),
+    final page = AppTest(
+      child: IntroContentCustomizationTab(
+        title: 'Content',
+        onTitleChanged: (newTitle) {
+          textTitle = newTitle;
+        },
+        onPrimaryButtonTextChanged: (newTextPrimaryButton) {
+          textPrimaryButton = newTextPrimaryButton;
+        },
+        onSecondaryButtonChanged: (isShown, text) {
+          isVisible = isShown;
+          textSecondaryButton = text;
+        },
+        onSubtitleChanged: (newSubtitle) {
+          textSubtitle = newSubtitle;
+        },
       ),
     );
 

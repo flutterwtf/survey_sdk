@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/slider/slider_content_customization_tab.dart';
+
+import '../app_test.dart';
 
 void main() {
   group('Tests for SliderContentCustomizationTab', () {
@@ -12,31 +12,22 @@ void main() {
     var title = '';
     var subtitle = '';
     int? value;
-    final page = MaterialApp(
-      supportedLocales: AppLocalizations.supportedLocales,
-      localizationsDelegates: const [
-        AppLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      home: Scaffold(
-        body: SliderContentCustomizationTab(
-          title: 'Content',
-          onDivisionsChanged: (newValue) {
-            value = newValue;
-          },
-          onMinMaxChanged: (newMin, newMax) {
-            min = newMin;
-            max = newMax;
-          },
-          onSubtitleChanged: (newSubtitle) {
-            subtitle = newSubtitle;
-          },
-          onTitleChanged: (newTitle) {
-            title = newTitle;
-          },
-        ),
+    final page = AppTest(
+      child: SliderContentCustomizationTab(
+        title: 'Content',
+        onDivisionsChanged: (newValue) {
+          value = newValue;
+        },
+        onMinMaxChanged: (newMin, newMax) {
+          min = newMin;
+          max = newMax;
+        },
+        onSubtitleChanged: (newSubtitle) {
+          subtitle = newSubtitle;
+        },
+        onTitleChanged: (newTitle) {
+          title = newTitle;
+        },
       ),
     );
 
