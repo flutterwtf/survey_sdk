@@ -10,10 +10,10 @@ class QuestionListItem extends StatelessWidget {
   final bool isSelected;
 
   const QuestionListItem({
-    super.key,
     required this.questionData,
     required this.onTap,
     this.isSelected = false,
+    super.key,
   });
 
   @override
