@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:survey_core/src/presentation/utils/app_text_styles.dart';
+import 'package:survey_core/src/presentation/utils/theme_extension.dart';
 
 class QuestionContent extends StatelessWidget {
   const QuestionContent({
@@ -13,7 +13,7 @@ class QuestionContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       content,
-      style: AppTextStyles.karlaSBlack,
+      style: context.theme.textTheme.bodySmall,
     );
   }
 }

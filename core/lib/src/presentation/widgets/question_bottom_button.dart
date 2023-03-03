@@ -1,7 +1,7 @@
 import 'package:survey_core/src/presentation/utils/app_duration.dart';
-import 'package:survey_core/src/presentation/utils/app_text_styles.dart';
 import 'package:survey_core/src/presentation/utils/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:survey_core/src/presentation/utils/theme_extension.dart';
 
 class QuestionBottomButton extends StatelessWidget {
   const QuestionBottomButton({
@@ -43,8 +43,10 @@ class QuestionBottomButton extends StatelessWidget {
               child: Text(
                 text,
                 style: isOutlined
-                    ? AppTextStyles.karlaMBoldWhite.copyWith(color: accentColor)
-                    : AppTextStyles.karlaMBoldWhite,
+                    ? context.theme.textTheme.labelLarge?.copyWith(
+                        color: accentColor,
+                      )
+                    : context.theme.textTheme.labelLarge,
                 textAlign: TextAlign.center,
               ),
             ),

@@ -1,8 +1,9 @@
 import 'package:survey_core/src/domain/entities/question_types/slider_question_data.dart';
 import 'package:survey_core/src/presentation/localization/localizations.dart';
-import 'package:survey_core/src/presentation/utils/app_text_styles.dart';
+import 'package:survey_core/src/presentation/utils/app_fonts.dart';
 import 'package:survey_core/src/presentation/utils/constants.dart';
 import 'package:survey_core/src/presentation/utils/data_to_widget_util.dart';
+import 'package:survey_core/src/presentation/utils/theme_extension.dart';
 import 'package:survey_core/src/presentation/widgets/question_bottom_button.dart';
 import 'package:survey_core/src/presentation/widgets/question_subtitle.dart';
 import 'package:survey_core/src/presentation/widgets/question_title.dart';
@@ -107,7 +108,8 @@ class _QuestionSliderState extends State<_QuestionSlider> {
   @override
   void initState() {
     _value = widget.initialValue.toDouble();
-    _onlyInt = widget.initialValue.ceilToDouble() == widget.initialValue.floorToDouble();
+    _onlyInt = widget.initialValue.ceilToDouble() ==
+        widget.initialValue.floorToDouble();
     super.initState();
   }
 
@@ -131,12 +133,16 @@ class _QuestionSliderState extends State<_QuestionSlider> {
             children: [
               Text(
                 widget.minValue.toString(),
-                style: AppTextStyles.interM,
+                style: context.theme.textTheme.bodyMedium?.copyWith(
+                  fontFamily: AppFonts.inter,
+                ),
               ),
               const Spacer(),
               Text(
                 widget.maxValue.toString(),
-                style: AppTextStyles.interM,
+                style: context.theme.textTheme.bodyMedium?.copyWith(
+                  fontFamily: AppFonts.inter,
+                ),
               ),
             ],
           ),
