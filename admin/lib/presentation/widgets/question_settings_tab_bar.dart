@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
-import 'package:survey_admin/presentation/widgets/customization_panel/customization_panel.dart';
+import 'package:survey_admin/presentation/widgets/customization_panel/customization_tab.dart';
 
 class QuestionSettingsTabBar extends StatefulWidget {
-  final List<CustomizationPanel> tabs;
+  final List<CustomizationTab> tabs;
 
   const QuestionSettingsTabBar({
     required this.tabs,

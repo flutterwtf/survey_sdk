@@ -5,9 +5,9 @@ import 'package:survey_admin/presentation/widgets/customization_items/create_tex
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/divisions_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/min_max_customization_item.dart';
-import 'package:survey_admin/presentation/widgets/customization_panel/customization_panel.dart';
+import 'package:survey_admin/presentation/widgets/customization_panel/customization_tab.dart';
 
-class SliderContentCustomizationTab extends CustomizationPanel {
+class SliderContentCustomizationTab extends CustomizationTab {
   final ValueChanged<String> onTitleChanged;
   final ValueChanged<String> onSubtitleChanged;
   final void Function(int? min, int? max) onMinMaxChanged;

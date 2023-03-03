@@ -10,9 +10,9 @@ import 'package:survey_admin/presentation/widgets/customization_items/customizat
 import 'package:survey_admin/presentation/widgets/customization_items/input_type_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/multiline_switch.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/padding_customization_item.dart';
-import 'package:survey_admin/presentation/widgets/customization_panel/customization_panel.dart';
+import 'package:survey_admin/presentation/widgets/customization_panel/customization_tab.dart';
 
-class InputCustomizationTab extends CustomizationPanel {
+class InputCustomizationTab extends CustomizationTab {
   final void Function(bool isMultiline, int lineAmount) onMultilineChanged;
   final ValueChanged<Color> onFillColorChanged;
   final ValueChanged<Color> onBorderColorChanged;

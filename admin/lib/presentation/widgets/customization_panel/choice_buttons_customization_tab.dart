@@ -3,9 +3,9 @@ import 'package:survey_admin/presentation/app/localization/localizations.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/color_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
-import 'package:survey_admin/presentation/widgets/customization_panel/customization_panel.dart';
+import 'package:survey_admin/presentation/widgets/customization_panel/customization_tab.dart';
 
-class ChoiceButtonsCustomizationTab extends CustomizationPanel {
+class ChoiceButtonsCustomizationTab extends CustomizationTab {
   final ValueChanged<Color> onActiveColorPicked;
   final ValueChanged<Color> onInactiveColorPicked;
 

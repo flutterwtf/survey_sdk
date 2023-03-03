@@ -9,9 +9,9 @@ import 'package:survey_admin/presentation/utils/constants/constants.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/color_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
-import 'package:survey_admin/presentation/widgets/customization_panel/customization_panel.dart';
+import 'package:survey_admin/presentation/widgets/customization_panel/customization_tab.dart';
 
-class SliderCommonCustomizationTab extends CustomizationPanel {
+class SliderCommonCustomizationTab extends CustomizationTab {
   final ValueChanged<Color> onFillColorChanged;
   final ValueChanged<Color> onTitleColorChanged;
   final ValueChanged<Color> onSubtitleColorChanged;
