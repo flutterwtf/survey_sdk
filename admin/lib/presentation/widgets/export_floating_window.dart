@@ -42,7 +42,7 @@ class _ExportFloatingWindow extends StatelessWidget {
     required this.onCopyPressed,
   });
 
-  // TODO don't use explicit width
+  // TODO(dev): don't use explicit width
   static const double _windowWidth = 420;
 
   @override
@@ -92,7 +92,7 @@ class _ExportFloatingWindow extends StatelessWidget {
                   vertical: AppDimensions.marginM,
                 ),
                 child: Icon(
-                  //TODO: replace with the one from figma maybe???
+                  // TODO(dev): replace with the one from figma maybe???
                   Icons.task_rounded,
                   size: AppDimensions.sizeXL,
                   color: AppColors.black,
@@ -112,9 +112,7 @@ class _ExportFloatingWindow extends StatelessWidget {
                             AppColors.white,
                           ),
                           side: const MaterialStatePropertyAll(
-                            BorderSide(
-                              color: AppColors.black,
-                            ),
+                            BorderSide(),
                           ),
                           shape: MaterialStatePropertyAll(
                             RoundedRectangleBorder(

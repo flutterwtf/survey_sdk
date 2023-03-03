@@ -11,9 +11,9 @@ class ThicknessCustomizationItem extends StatelessWidget {
   final double initialSize;
 
   const ThicknessCustomizationItem({
-    super.key,
     required this.initialSize,
     required this.onThicknessChanged,
+    super.key,
   });
 
   @override

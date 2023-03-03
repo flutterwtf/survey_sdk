@@ -12,7 +12,7 @@ abstract class QuestionData<T> extends Equatable with ApiObject {
   final String? content;
   final bool isSkip;
 
-  QuestionData({
+  const QuestionData({
     required this.index,
     required this.title,
     required this.subtitle,
@@ -32,7 +32,7 @@ abstract class QuestionData<T> extends Equatable with ApiObject {
 
   String get type;
 
-  //TODO: to constants maybe?
+  // TODO(dev): to constants maybe?
   static QuestionData fromType(Map<String, dynamic> json) {
     switch (json['typeQuestion']) {
       case 'Slider':

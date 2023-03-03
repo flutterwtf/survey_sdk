@@ -5,7 +5,7 @@ import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/color_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
 
-// TODO use a better name?
+// TODO(dev): use a better name?
 class ColorWithTextFieldCustomizationItem extends StatelessWidget {
   final Color? initialColor;
   final ValueChanged<Color> onColorPicked;
@@ -19,17 +19,17 @@ class ColorWithTextFieldCustomizationItem extends StatelessWidget {
   final InputDecoration? decoration;
 
   const ColorWithTextFieldCustomizationItem({
-    super.key,
-    this.initialColor,
     required this.onColorPicked,
     required this.initialText,
-    this.inputFormatters,
     required this.onTextChanged,
+    this.initialColor,
+    this.inputFormatters,
     this.focusNode,
     this.onEditingComplete,
     this.textEditingController,
     this.fontSize,
     this.decoration,
+    super.key,
   });
 
   @override

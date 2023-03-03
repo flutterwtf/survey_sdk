@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/color_customization_item.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/question_common_customization_panel.dart';
@@ -19,11 +19,11 @@ void main() {
       const textSizeWithLetters = 1;
       const textSizeStringMoreThan2 = '233';
       const redColor = Color(0xfff44336);
-      Color fillTextColor = AppColors.black;
-      Color titleTextColor = AppColors.black;
-      Color subtitleTextColor = AppColors.black;
-      Color buttonColor = AppColors.black;
-      Color buttonTextColor = AppColors.black;
+      var fillTextColor = AppColors.black;
+      var titleTextColor = AppColors.black;
+      var subtitleTextColor = AppColors.black;
+      var buttonColor = AppColors.black;
+      var buttonTextColor = AppColors.black;
       int? titleTextSize = 10;
       int? subtitleTextSize = 10;
       int? buttonTextSize = 10;
@@ -55,14 +55,22 @@ void main() {
         'All content widget test',
         (tester) async {
           await tester.pumpWidget(questionCommonCustomPanel);
-          expect(find.widgetWithText(CustomizationItemsContainer, 'Fill'),
-              findsOneWidget);
-          expect(find.widgetWithText(CustomizationItemsContainer, 'Title'),
-              findsOneWidget);
-          expect(find.widgetWithText(CustomizationItemsContainer, 'Subtitle'),
-              findsOneWidget);
-          expect(find.widgetWithText(CustomizationItemsContainer, 'Button'),
-              findsOneWidget);
+          expect(
+            find.widgetWithText(CustomizationItemsContainer, 'Fill'),
+            findsOneWidget,
+          );
+          expect(
+            find.widgetWithText(CustomizationItemsContainer, 'Title'),
+            findsOneWidget,
+          );
+          expect(
+            find.widgetWithText(CustomizationItemsContainer, 'Subtitle'),
+            findsOneWidget,
+          );
+          expect(
+            find.widgetWithText(CustomizationItemsContainer, 'Button'),
+            findsOneWidget,
+          );
           expect(find.byType(ColorCustomizationItem), findsNWidgets(5));
           expect(find.byType(CustomizationTextField), findsNWidgets(8));
         },
@@ -73,7 +81,7 @@ void main() {
           await tester.pumpWidget(questionCommonCustomPanel);
           await tester.pumpAndSettle();
           final colorTextFields = find.byType(ColorCustomizationItem);
-          for (int i = 0; i < colorTextFields.evaluate().length; i++) {
+          for (var i = 0; i < colorTextFields.evaluate().length; i++) {
             await tester.enterText(
               colorTextFields.at(i),
               redColorCode,
@@ -97,19 +105,25 @@ void main() {
           await tester.pumpWidget(questionCommonCustomPanel);
 
           await tester.enterText(
-              find.byType(CustomizationTextField).at(2), textSizeString);
+            find.byType(CustomizationTextField).at(2),
+            textSizeString,
+          );
           await tester.testTextInput.receiveAction(TextInputAction.done);
           await tester.pump();
           expect(titleTextSize, textSize);
 
           await tester.enterText(
-              find.byType(CustomizationTextField).at(4), textSizeString);
+            find.byType(CustomizationTextField).at(4),
+            textSizeString,
+          );
           await tester.testTextInput.receiveAction(TextInputAction.done);
           await tester.pump();
           expect(subtitleTextSize, textSize);
 
           await tester.enterText(
-              find.byType(CustomizationTextField).at(7), textSizeString);
+            find.byType(CustomizationTextField).at(7),
+            textSizeString,
+          );
           await tester.testTextInput.receiveAction(TextInputAction.done);
           await tester.pump();
           expect(buttonTextSize, textSize);
@@ -122,20 +136,26 @@ void main() {
         (tester) async {
           await tester.pumpWidget(questionCommonCustomPanel);
 
-          await tester.enterText(find.byType(CustomizationTextField).at(2),
-              textSizeStringWithLetters);
+          await tester.enterText(
+            find.byType(CustomizationTextField).at(2),
+            textSizeStringWithLetters,
+          );
           await tester.testTextInput.receiveAction(TextInputAction.done);
           await tester.pump();
           expect(titleTextSize, textSizeWithLetters);
 
-          await tester.enterText(find.byType(CustomizationTextField).at(4),
-              textSizeStringWithLetters);
+          await tester.enterText(
+            find.byType(CustomizationTextField).at(4),
+            textSizeStringWithLetters,
+          );
           await tester.testTextInput.receiveAction(TextInputAction.done);
           await tester.pump();
           expect(subtitleTextSize, textSizeWithLetters);
 
-          await tester.enterText(find.byType(CustomizationTextField).at(7),
-              textSizeStringWithLetters);
+          await tester.enterText(
+            find.byType(CustomizationTextField).at(7),
+            textSizeStringWithLetters,
+          );
           await tester.testTextInput.receiveAction(TextInputAction.done);
           await tester.pump();
           expect(buttonTextSize, textSizeWithLetters);
@@ -148,18 +168,24 @@ void main() {
         (tester) async {
           await tester.pumpWidget(questionCommonCustomPanel);
 
-          await tester.enterText(find.byType(CustomizationTextField).at(2),
-              textSizeStringMoreThan2);
+          await tester.enterText(
+            find.byType(CustomizationTextField).at(2),
+            textSizeStringMoreThan2,
+          );
           await tester.testTextInput.receiveAction(TextInputAction.done);
           await tester.pump();
 
-          await tester.enterText(find.byType(CustomizationTextField).at(4),
-              textSizeStringMoreThan2);
+          await tester.enterText(
+            find.byType(CustomizationTextField).at(4),
+            textSizeStringMoreThan2,
+          );
           await tester.testTextInput.receiveAction(TextInputAction.done);
           await tester.pump();
 
-          await tester.enterText(find.byType(CustomizationTextField).at(7),
-              textSizeStringMoreThan2);
+          await tester.enterText(
+            find.byType(CustomizationTextField).at(7),
+            textSizeStringMoreThan2,
+          );
           await tester.testTextInput.receiveAction(TextInputAction.done);
           await tester.pump();
 

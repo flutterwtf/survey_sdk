@@ -6,7 +6,7 @@ class InputQuestionData extends QuestionData<InputQuestionTheme> {
   final InputValidator validator;
   final String? hintText;
 
-  InputQuestionData({
+  const InputQuestionData({
     required this.validator,
     required super.index,
     required super.title,
@@ -16,16 +16,16 @@ class InputQuestionData extends QuestionData<InputQuestionTheme> {
     this.hintText,
   });
 
-  InputQuestionData.common({int index = 0})
+  const InputQuestionData.common({int index = 0})
       : this(
-          //TODO: to localization somehow
-          validator: NumberValidator(),
+          // TODO(dev): to localization somehow
+          validator: const NumberValidator(),
           index: index,
           title: 'Why is asking the right type of questions important?',
           subtitle: '',
           isSkip: false,
-          content:
-              'Doing so can help you gather the information most relevant and useful to you',
+          content: 'Doing so can help you gather the information most '
+              'relevant and useful to you',
         );
 
   @override
@@ -68,8 +68,8 @@ class InputQuestionData extends QuestionData<InputQuestionTheme> {
         }
       };
 
-  static InputQuestionData fromJson(Map<String, dynamic> json) {
-    final payload = json['payload'];
+  factory InputQuestionData.fromJson(Map<String, dynamic> json) {
+    final payload = json['payload'] as Map<String, dynamic>;
     return InputQuestionData(
       index: json['index'],
       title: json['title'],
@@ -82,7 +82,7 @@ class InputQuestionData extends QuestionData<InputQuestionTheme> {
   }
 
   @override
-  // TODO: implement props
+  // TODO(dev): implement props
   List<Object?> get props => [
         validator,
         index,
@@ -92,6 +92,4 @@ class InputQuestionData extends QuestionData<InputQuestionTheme> {
         content,
         hintText,
       ];
-
-
 }

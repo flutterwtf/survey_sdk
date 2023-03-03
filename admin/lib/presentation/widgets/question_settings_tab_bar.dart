@@ -6,8 +6,8 @@ class QuestionSettingsTabBar extends StatefulWidget {
   final List<CustomizationPanel> panels;
 
   const QuestionSettingsTabBar({
-    super.key,
     required this.panels,
+    super.key,
   });
 
   @override
@@ -36,7 +36,6 @@ class _QuestionSettingsTabBarState extends State<QuestionSettingsTabBar>
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
       children: [
         TabBar(
           controller: _tabController,

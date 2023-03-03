@@ -9,7 +9,10 @@ import 'package:survey_core/src/presentation/utils/data_to_widget_util.dart';
 class Survey extends StatefulWidget {
   final String surveyDataAsset;
 
-  Survey({Key? key, required this.surveyDataAsset}) : super(key: key) {
+  Survey({
+    required this.surveyDataAsset,
+    super.key,
+  }) {
     Injector().init();
   }
 
@@ -41,7 +44,7 @@ class _SurveyState extends State<Survey> {
                 data: state.surveyData!.commonTheme.toThemeData(),
                 child: PageView(
                   children: state.surveyData!.questions
-                      //TODO: <Widget> to superclass maybe
+                      // TODO(dev): <Widget> to superclass maybe
                       .map<Widget>(
                         (question) => DataToWidgetUtil.createWidget(
                           question,

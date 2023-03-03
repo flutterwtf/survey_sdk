@@ -10,13 +10,14 @@ class OptionCustomizationItem extends StatefulWidget {
   final ValueChanged<List<String>> onChanged;
 
   const OptionCustomizationItem({
-    Key? key,
     required this.options,
     required this.onChanged,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
-  State<OptionCustomizationItem> createState() => _OptionCustomizationItemState();
+  State<OptionCustomizationItem> createState() =>
+      _OptionCustomizationItemState();
 }
 
 class _OptionCustomizationItemState extends State<OptionCustomizationItem> {
@@ -93,10 +94,9 @@ class _Option extends StatelessWidget {
   final VoidCallback delete;
 
   const _Option({
-    Key? key,
     required this.option,
     required this.delete,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

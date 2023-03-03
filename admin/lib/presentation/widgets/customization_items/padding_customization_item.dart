@@ -15,8 +15,8 @@ class PaddingCustomizationItem extends StatefulWidget {
     required this.initialVerticalPadding,
     required this.onHorizontalPaddingChange,
     required this.onVerticalPaddingChange,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   State<PaddingCustomizationItem> createState() =>
@@ -47,7 +47,7 @@ class _PaddingCustomizationItemState extends State<PaddingCustomizationItem> {
     super.initState();
   }
 
-  //TODO: split to widgets please
+  // TODO(dev): split to widgets please
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -79,33 +79,25 @@ class _PaddingItem extends StatelessWidget {
   final ValueChanged<String> onChanged;
 
   const _PaddingItem({
-    Key? key,
     required this.focusNode,
     required this.initialValue,
     required this.onChanged,
     required this.isHorizontal,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
             decoration: BoxDecoration(
               border: isHorizontal
                   ? const Border.symmetric(
-                      horizontal: BorderSide(
-                        width: 1.0,
-                        color: AppColors.black,
-                      ),
+                      horizontal: BorderSide(),
                     )
                   : const Border.symmetric(
-                      vertical: BorderSide(
-                        width: 1.0,
-                        color: AppColors.black,
-                      ),
+                      vertical: BorderSide(),
                     ),
               color: AppColors.white,
             ),

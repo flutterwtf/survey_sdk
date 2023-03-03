@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/color_customization_item.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 // TODO(dev): why is this file not in the `customization_items` folder
 void main() {
@@ -16,12 +16,14 @@ void main() {
             AppLocalizations.delegate,
           ],
           home: Scaffold(
-            body: Builder(builder: (context) {
-              return ColorCustomizationItem(
-                initialColor: redColor,
-                onColorPicked: (Color value) {},
-              );
-            }),
+            body: Builder(
+              builder: (context) {
+                return ColorCustomizationItem(
+                  initialColor: redColor,
+                  onColorPicked: (Color value) {},
+                );
+              },
+            ),
           ),
         ),
       );
@@ -35,12 +37,14 @@ void main() {
             AppLocalizations.delegate,
           ],
           home: Scaffold(
-            body: Builder(builder: (context) {
-              return ColorCustomizationItem(
-                initialColor: redColor,
-                onColorPicked: (Color value) {},
-              );
-            }),
+            body: Builder(
+              builder: (context) {
+                return ColorCustomizationItem(
+                  initialColor: redColor,
+                  onColorPicked: (Color value) {},
+                );
+              },
+            ),
           ),
         ),
       );
@@ -56,12 +60,14 @@ void main() {
             AppLocalizations.delegate,
           ],
           home: Scaffold(
-            body: Builder(builder: (context) {
-              return ColorCustomizationItem(
-                initialColor: redColor,
-                onColorPicked: (Color value) {},
-              );
-            }),
+            body: Builder(
+              builder: (context) {
+                return ColorCustomizationItem(
+                  initialColor: redColor,
+                  onColorPicked: (Color value) {},
+                );
+              },
+            ),
           ),
         ),
       );

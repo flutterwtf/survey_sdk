@@ -31,12 +31,21 @@ void main() {
 
       testWidgets(
         'All content widget test',
-            (widgetTester) async {
+        (widgetTester) async {
           await widgetTester.pumpWidget(choiceContentCustomPanel);
           await widgetTester.pumpAndSettle();
-          expect(find.widgetWithText(CustomizationItemsContainer, 'Title'), findsOneWidget);
-          expect(find.widgetWithText(CustomizationItemsContainer, 'Subtitle'), findsOneWidget);
-          expect(find.widgetWithText(CustomizationItemsContainer, 'Options'), findsOneWidget);
+          expect(
+            find.widgetWithText(CustomizationItemsContainer, 'Title'),
+            findsOneWidget,
+          );
+          expect(
+            find.widgetWithText(CustomizationItemsContainer, 'Subtitle'),
+            findsOneWidget,
+          );
+          expect(
+            find.widgetWithText(CustomizationItemsContainer, 'Options'),
+            findsOneWidget,
+          );
         },
       );
 

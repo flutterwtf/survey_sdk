@@ -9,11 +9,15 @@ import 'package:survey_admin/presentation/utils/constants/constants.dart';
 import 'package:survey_admin/presentation/widgets/builder_page/question_list_item.dart';
 import 'package:survey_core/survey_core.dart';
 
+// ignore: lines_longer_than_80_chars
 // TODO(dev): do we really need "Survey" prefix? If so, why do we have it only in several classes
 class QuestionList extends StatefulWidget {
   final void Function(QuestionData) onSelect;
 
-  const QuestionList({super.key, required this.onSelect});
+  const QuestionList({
+    required this.onSelect,
+    super.key,
+  });
 
   @override
   State<QuestionList> createState() => _QuestionListState();
@@ -21,19 +25,22 @@ class QuestionList extends StatefulWidget {
 
 class _QuestionListState extends State<QuestionList> {
   final _questionList = [
-    QuestionListItem(
-      questionData: IntroQuestionData.common(index: 0),
+    const QuestionListItem(
+      questionData: IntroQuestionData.common(),
     ),
-    QuestionListItem(
+    const QuestionListItem(
       questionData: InputQuestionData.common(index: 1),
     ),
   ];
 
   void addQuestion(QuestionData data) {
     final index = _questionList.length;
-    data = data.copyWith(index: index);
     setState(() {
-      _questionList.add(QuestionListItem(questionData: data));
+      _questionList.add(
+        QuestionListItem(
+          questionData: data.copyWith(index: index),
+        ),
+      );
     });
   }
 
@@ -68,7 +75,7 @@ class _QuestionListState extends State<QuestionList> {
                 ),
                 GestureDetector(
                   onTap: () async {
-                    QuestionData? questionData = await Navigator.of(context).push(
+                    final questionData = await Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) => const NewQuestionPage(),
                       ),
@@ -94,24 +101,30 @@ class _QuestionListState extends State<QuestionList> {
                   ReorderableDragStartListener(
                     index: index,
                     key: ValueKey(index),
-                    child: _questionList.where((item) => item.questionData.index == index).first,
+                    child: _questionList
+                        .where((item) => item.questionData.index == index)
+                        .first,
                   )
               ],
               onReorder: (oldIndex, newIndex) {
                 if (newIndex > oldIndex) newIndex--;
                 setState(
                   () {
-                    final itemFirstIndex =
-                        _questionList.indexWhere((item) => item.questionData.index == oldIndex);
-                    final itemSecondIndex =
-                        _questionList.indexWhere((item) => item.questionData.index == newIndex);
+                    final itemFirstIndex = _questionList.indexWhere(
+                      (item) => item.questionData.index == oldIndex,
+                    );
+                    final itemSecondIndex = _questionList.indexWhere(
+                      (item) => item.questionData.index == newIndex,
+                    );
                     _questionList[itemFirstIndex] = QuestionListItem(
-                      questionData:
-                          _questionList[itemFirstIndex].questionData.copyWith(index: newIndex),
+                      questionData: _questionList[itemFirstIndex]
+                          .questionData
+                          .copyWith(index: newIndex),
                     );
                     _questionList[itemSecondIndex] = QuestionListItem(
-                      questionData:
-                          _questionList[itemSecondIndex].questionData.copyWith(index: oldIndex),
+                      questionData: _questionList[itemSecondIndex]
+                          .questionData
+                          .copyWith(index: oldIndex),
                     );
                   },
                 );

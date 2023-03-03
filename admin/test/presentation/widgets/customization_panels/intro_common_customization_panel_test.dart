@@ -35,13 +35,25 @@ void main() {
 
       testWidgets(
         'All content widget test',
-            (widgetTester) async {
+        (widgetTester) async {
           await widgetTester.pumpWidget(introCommonCustomPanel);
           await widgetTester.pumpAndSettle();
-          expect(find.widgetWithText(CustomizationItemsContainer, 'Fill'), findsOneWidget);
-          expect(find.widgetWithText(CustomizationItemsContainer, 'Title'), findsOneWidget);
-          expect(find.widgetWithText(CustomizationItemsContainer, 'Subtitle'), findsOneWidget);
-          expect(find.widgetWithText(CustomizationItemsContainer, 'Button'), findsOneWidget);
+          expect(
+            find.widgetWithText(CustomizationItemsContainer, 'Fill'),
+            findsOneWidget,
+          );
+          expect(
+            find.widgetWithText(CustomizationItemsContainer, 'Title'),
+            findsOneWidget,
+          );
+          expect(
+            find.widgetWithText(CustomizationItemsContainer, 'Subtitle'),
+            findsOneWidget,
+          );
+          expect(
+            find.widgetWithText(CustomizationItemsContainer, 'Button'),
+            findsOneWidget,
+          );
         },
       );
     },

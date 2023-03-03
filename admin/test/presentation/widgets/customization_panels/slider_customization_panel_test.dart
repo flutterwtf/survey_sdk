@@ -46,29 +46,50 @@ void main() {
 
     testWidgets('Load widget', (tester) async {
       await tester.pumpWidget(page);
-      expect(find.widgetWithText(CustomizationItemsContainer, 'Thickness'), findsOneWidget);
-      expect(find.widgetWithText(CustomizationItemsContainer, 'Active'), findsOneWidget);
-      expect(find.widgetWithText(CustomizationItemsContainer, 'Inactive'), findsOneWidget);
-      expect(find.widgetWithText(CustomizationItemsContainer, 'Thumb'), findsOneWidget);
+      expect(
+        find.widgetWithText(CustomizationItemsContainer, 'Thickness'),
+        findsOneWidget,
+      );
+      expect(
+        find.widgetWithText(CustomizationItemsContainer, 'Active'),
+        findsOneWidget,
+      );
+      expect(
+        find.widgetWithText(CustomizationItemsContainer, 'Inactive'),
+        findsOneWidget,
+      );
+      expect(
+        find.widgetWithText(CustomizationItemsContainer, 'Thumb'),
+        findsOneWidget,
+      );
     });
 
     testWidgets('Input num for Thickness', (tester) async {
       await tester.pumpWidget(page);
-      await tester.enterText(find.widgetWithText(CustomizationItemsContainer, 'Thickness'), '10');
+      await tester.enterText(
+        find.widgetWithText(CustomizationItemsContainer, 'Thickness'),
+        '10',
+      );
       expect(find.text('10'), findsOneWidget);
       expect(thickness, '10');
     });
 
     testWidgets('Input string for Thickness', (tester) async {
       await tester.pumpWidget(page);
-      await tester.enterText(find.widgetWithText(CustomizationItemsContainer, 'Thickness'), 'qw1');
+      await tester.enterText(
+        find.widgetWithText(CustomizationItemsContainer, 'Thickness'),
+        'qw1',
+      );
       expect(find.text('qw'), findsNothing);
       expect(thickness, '1');
     });
 
     testWidgets('Validate input length > 2 for Thickness', (tester) async {
       await tester.pumpWidget(page);
-      await tester.enterText(find.widgetWithText(CustomizationItemsContainer, 'Thickness'), '123');
+      await tester.enterText(
+        find.widgetWithText(CustomizationItemsContainer, 'Thickness'),
+        '123',
+      );
       expect(find.text('123'), findsNothing);
       expect(thickness, '12');
     });
@@ -76,19 +97,27 @@ void main() {
     testWidgets('Input color for Active', (tester) async {
       await tester.pumpWidget(page);
       await tester.enterText(
-          find.widgetWithText(CustomizationItemsContainer, 'Active'), 'FFF44336');
+        find.widgetWithText(CustomizationItemsContainer, 'Active'),
+        'FFF44336',
+      );
       await tester.testTextInput.receiveAction(TextInputAction.done);
       await tester.pump();
       expect(find.text('FFF44336'), findsOneWidget);
       expect(active, const Color(0xFFF44336));
 
-      await tester.enterText(find.widgetWithText(CustomizationItemsContainer, 'Active'), 'F');
+      await tester.enterText(
+        find.widgetWithText(CustomizationItemsContainer, 'Active'),
+        'F',
+      );
       await tester.testTextInput.receiveAction(TextInputAction.done);
       await tester.pump();
       expect(find.text('F0000000'), findsOneWidget);
       expect(active, const Color(0xF0000000));
 
-      await tester.enterText(find.widgetWithText(CustomizationItemsContainer, 'Active'), '');
+      await tester.enterText(
+        find.widgetWithText(CustomizationItemsContainer, 'Active'),
+        '',
+      );
       await tester.testTextInput.receiveAction(TextInputAction.done);
       await tester.pump();
       expect(find.text('0'), findsOneWidget);
@@ -98,19 +127,27 @@ void main() {
     testWidgets('Input color for Inactive', (tester) async {
       await tester.pumpWidget(page);
       await tester.enterText(
-          find.widgetWithText(CustomizationItemsContainer, 'Inactive'), 'FFD9D9D9');
+        find.widgetWithText(CustomizationItemsContainer, 'Inactive'),
+        'FFD9D9D9',
+      );
       await tester.testTextInput.receiveAction(TextInputAction.done);
       await tester.pump();
       expect(find.text('FFD9D9D9'), findsOneWidget);
       expect(inactive, const Color(0xFFD9D9D9));
 
-      await tester.enterText(find.widgetWithText(CustomizationItemsContainer, 'Inactive'), 'D');
+      await tester.enterText(
+        find.widgetWithText(CustomizationItemsContainer, 'Inactive'),
+        'D',
+      );
       await tester.testTextInput.receiveAction(TextInputAction.done);
       await tester.pump();
       expect(find.text('D0000000'), findsOneWidget);
       expect(inactive, const Color(0xD0000000));
 
-      await tester.enterText(find.widgetWithText(CustomizationItemsContainer, 'Inactive'), '');
+      await tester.enterText(
+        find.widgetWithText(CustomizationItemsContainer, 'Inactive'),
+        '',
+      );
       await tester.testTextInput.receiveAction(TextInputAction.done);
       await tester.pump();
       expect(find.text('0'), findsOneWidget);
@@ -119,7 +156,10 @@ void main() {
 
     testWidgets('Input color and num for Thumb', (tester) async {
       await tester.pumpWidget(page);
-      await tester.enterText(find.byType(ColorCustomizationItem).last, 'FF717171');
+      await tester.enterText(
+        find.byType(ColorCustomizationItem).last,
+        'FF717171',
+      );
       await tester.testTextInput.receiveAction(TextInputAction.done);
       await tester.pump();
       expect(find.text('FF717171'), findsOneWidget);
@@ -144,14 +184,20 @@ void main() {
 
     testWidgets('Validate input string for Thumb', (tester) async {
       await tester.pumpWidget(page);
-      await tester.enterText(find.byType(ThicknessCustomizationItem).last, 'q3');
+      await tester.enterText(
+        find.byType(ThicknessCustomizationItem).last,
+        'q3',
+      );
       expect(find.text('3'), findsOneWidget);
       expect(numThumb, '3');
     });
 
     testWidgets('Validate input length > 2 for Thumb', (tester) async {
       await tester.pumpWidget(page);
-      await tester.enterText(find.byType(ThicknessCustomizationItem).last, '873');
+      await tester.enterText(
+        find.byType(ThicknessCustomizationItem).last,
+        '873',
+      );
       expect(find.text('87'), findsOneWidget);
       expect(numThumb, '87');
     });

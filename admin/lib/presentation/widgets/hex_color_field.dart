@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
-import 'package:survey_admin/presentation/utils/constants/constants.dart';
-
 import 'package:survey_admin/presentation/utils/app_fonts.dart';
+import 'package:survey_admin/presentation/utils/constants/constants.dart';
 
 class HexColorField extends StatelessWidget {
   final TextEditingController colorTextController;
   final ValueChanged<Color> onColorPicked;
 
   const HexColorField({
-    Key? key,
     required this.colorTextController,
     required this.onColorPicked,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +32,6 @@ class HexColorField extends StatelessWidget {
           onChanged: (str) => onColorPicked(
             colorFromHex(
               str,
-              enableAlpha: true,
             )!,
           ),
         ), //

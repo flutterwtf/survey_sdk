@@ -9,8 +9,8 @@ void main() {
   group('Tests for IntroContentCustomizationPanel', () {
     int? min;
     int? max;
-    String title = '';
-    String subtitle = '';
+    var title = '';
+    var subtitle = '';
     int? value;
     final page = MaterialApp(
       supportedLocales: AppLocalizations.supportedLocales,
@@ -50,35 +50,50 @@ void main() {
 
     testWidgets('Input text for Title', (tester) async {
       await tester.pumpWidget(page);
-      await tester.enterText(find.widgetWithText(CustomizationItemsContainer, 'Title'), 'title');
+      await tester.enterText(
+        find.widgetWithText(CustomizationItemsContainer, 'Title'),
+        'title',
+      );
       expect(find.text('title'), findsOneWidget);
       expect(title, 'title');
     });
 
     testWidgets('Input text for Subtitle', (tester) async {
       await tester.pumpWidget(page);
-      await tester.enterText(find.widgetWithText(CustomizationItemsContainer, 'Subtitle'), 'sub');
+      await tester.enterText(
+        find.widgetWithText(CustomizationItemsContainer, 'Subtitle'),
+        'sub',
+      );
       expect(find.text('sub'), findsOneWidget);
       expect(subtitle, 'sub');
     });
 
     testWidgets('Input num for Divisions', (tester) async {
       await tester.pumpWidget(page);
-      await tester.enterText(find.widgetWithText(CustomizationItemsContainer, 'Divisions'), '1');
+      await tester.enterText(
+        find.widgetWithText(CustomizationItemsContainer, 'Divisions'),
+        '1',
+      );
       expect(find.text('1'), findsOneWidget);
       expect(value, 1);
     });
 
     testWidgets('Input text for Divisions', (tester) async {
       await tester.pumpWidget(page);
-      await tester.enterText(find.widgetWithText(CustomizationItemsContainer, 'Divisions'), 'q');
+      await tester.enterText(
+        find.widgetWithText(CustomizationItemsContainer, 'Divisions'),
+        'q',
+      );
       expect(find.text('q'), findsNothing);
       expect(value, null);
     });
 
     testWidgets('Validate length > 3 input for Divisions', (tester) async {
       await tester.pumpWidget(page);
-      await tester.enterText(find.widgetWithText(CustomizationItemsContainer, 'Divisions'), '1234');
+      await tester.enterText(
+        find.widgetWithText(CustomizationItemsContainer, 'Divisions'),
+        '1234',
+      );
       expect(find.text('1234'), findsNothing);
       expect(value, 123);
     });

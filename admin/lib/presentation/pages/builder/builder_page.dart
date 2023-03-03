@@ -56,7 +56,7 @@ class _BuilderPageState extends State<BuilderPage> {
 }
 
 class _BuilderPageTabBar extends StatelessWidget {
-  const _BuilderPageTabBar({Key? key}) : super(key: key);
+  const _BuilderPageTabBar();
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +69,7 @@ class _BuilderPageTabBar extends StatelessWidget {
             right: AppDimensions.tabBarPadding,
           ),
           indicator: const UnderlineTabIndicator(
-            borderSide: BorderSide(width: 1.0),
+            borderSide: BorderSide(),
             insets: EdgeInsets.symmetric(
               horizontal: AppDimensions.margin4XL + AppDimensions.sizeM,
             ),
@@ -89,7 +89,7 @@ class _BuilderPageTabBar extends StatelessWidget {
 }
 
 class _CreateTab extends StatelessWidget {
-  const _CreateTab({Key? key}) : super(key: key);
+  const _CreateTab();
 
   @override
   Widget build(BuildContext context) {
@@ -102,10 +102,7 @@ class _CreateTab extends StatelessWidget {
       child: OutlinedButton(
         onPressed: () {},
         style: OutlinedButton.styleFrom(
-          side: const BorderSide(
-            width: 1.0,
-            color: AppColors.black,
-          ),
+          side: const BorderSide(),
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(
@@ -125,7 +122,7 @@ class _CreateTab extends StatelessWidget {
 }
 
 class _PreviewTab extends StatelessWidget {
-  const _PreviewTab({Key? key}) : super(key: key);
+  const _PreviewTab();
 
   @override
   Widget build(BuildContext context) {

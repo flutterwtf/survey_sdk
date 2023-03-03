@@ -3,17 +3,17 @@ import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/utils/constants/app_duration.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text.dart';
 
-//TODO: extend every item from CustomizationItem class
+// TODO(dev): extend every item from CustomizationItem class
 class SwitchCustomizationItem extends StatelessWidget {
   final String title;
   final bool? initialValue;
   final void Function(bool isToggled)? onChanged;
 
   const SwitchCustomizationItem({
-    super.key,
     required this.title,
     this.initialValue,
     this.onChanged,
+    super.key,
   });
 
   @override
