@@ -6,15 +6,21 @@ import 'package:survey_core/survey_core.dart';
 
 class QuestionListItem extends StatelessWidget {
   final QuestionData questionData;
+  final void Function(QuestionData data) onTap;
+  final bool isSelected;
 
   const QuestionListItem({
-    required this.questionData,
     super.key,
+    required this.questionData,
+    required this.onTap,
+    this.isSelected = false,
   });
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      onTap: () => onTap(questionData),
+      selected: isSelected,
       title: Padding(
         padding: const EdgeInsets.all(AppDimensions.margin2XS),
         child: Row(

@@ -20,20 +20,34 @@ class QuestionList extends StatefulWidget {
 }
 
 class _QuestionListState extends State<QuestionList> {
-  final _questionList = [
-    QuestionListItem(
-      questionData: IntroQuestionData.common(index: 0),
-    ),
-    QuestionListItem(
-      questionData: InputQuestionData.common(index: 1),
-    ),
-  ];
+  late final List<QuestionListItem> _questionList;
+
+  @override
+  void initState() {
+    super.initState();
+    _questionList = [
+      QuestionListItem(
+        questionData: IntroQuestionData.common(index: 0),
+        onTap: widget.onSelect,
+        isSelected: true,
+      ),
+      QuestionListItem(
+        questionData: InputQuestionData.common(index: 1),
+        onTap: widget.onSelect,
+      ),
+    ];
+  }
 
   void addQuestion(QuestionData data) {
     final index = _questionList.length;
     data.index = index;
     setState(() {
-      _questionList.add(QuestionListItem(questionData: data));
+      _questionList.add(
+        QuestionListItem(
+          questionData: data,
+          onTap: widget.onSelect,
+        ),
+      );
     });
   }
 
@@ -91,15 +105,19 @@ class _QuestionListState extends State<QuestionList> {
                   ReorderableDragStartListener(
                     index: index,
                     key: ValueKey(index),
-                    child: _questionList.where((item) => item.questionData.index == index).first,
+                    child: _questionList
+                        .where((item) => item.questionData.index == index)
+                        .first,
                   )
               ],
               onReorder: (oldIndex, newIndex) {
                 setState(() {
-                  final itemFirst =
-                      _questionList.where((item) => item.questionData.index == oldIndex).first;
-                  final itemSecond =
-                      _questionList.where((item) => item.questionData.index == newIndex).first;
+                  final itemFirst = _questionList
+                      .where((item) => item.questionData.index == oldIndex)
+                      .first;
+                  final itemSecond = _questionList
+                      .where((item) => item.questionData.index == newIndex)
+                      .first;
                   itemFirst.questionData.index = newIndex;
                   itemSecond.questionData.index = oldIndex;
                 });
