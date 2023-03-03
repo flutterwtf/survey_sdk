@@ -24,6 +24,7 @@ dependencies:
     path: ../core
   flutter_svg: ^2.0.1
 
+  path_provider: ^2.0.13
 dev_dependencies:
   flutter_test:
     sdk: flutter
