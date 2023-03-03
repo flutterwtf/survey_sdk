@@ -33,11 +33,11 @@ flutter:
 
   fonts:
     - family: Inter
-        fonts:
-            - asset: fonts/Inter-Regular.ttf
-              - asset: fonts/Inter-SemiBold.ttf
-              - asset: fonts/Inter-Medium.ttf
+      fonts:
+        - asset: fonts/Inter-Regular.ttf
+        - asset: fonts/Inter-SemiBold.ttf
+        - asset: fonts/Inter-Medium.ttf
     - family: Karla
       fonts:
-        - asset: fonts/Karla-Regular.ttf
-        - asset: fonts/Karla-Bold.ttf
+      - asset: fonts/Karla-Regular.ttf
+      - asset: fonts/Karla-Bold.ttf
