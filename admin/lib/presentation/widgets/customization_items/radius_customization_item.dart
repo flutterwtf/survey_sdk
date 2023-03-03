@@ -10,9 +10,9 @@ class RadiusCustomizationItem extends StatelessWidget {
   final ValueChanged<int?> onRadiusChanged;
 
   const RadiusCustomizationItem({
-    super.key,
     required this.initialValue,
     required this.onRadiusChanged,
+    super.key,
   });
 
   @override

@@ -11,17 +11,19 @@ class SecondaryButtonCustomizationItem extends StatefulWidget {
   final bool isShown;
 
   const SecondaryButtonCustomizationItem({
-    super.key,
     required this.onChanged,
     this.initialText = '',
     this.isShown = false,
+    super.key,
   });
 
   @override
-  State<SecondaryButtonCustomizationItem> createState() => _SecondaryButtonCustomizationItemState();
+  State<SecondaryButtonCustomizationItem> createState() =>
+      _SecondaryButtonCustomizationItemState();
 }
 
-class _SecondaryButtonCustomizationItemState extends State<SecondaryButtonCustomizationItem> {
+class _SecondaryButtonCustomizationItemState
+    extends State<SecondaryButtonCustomizationItem> {
   late bool _isShown;
   late String _text;
 

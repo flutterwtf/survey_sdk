@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
-import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
 
@@ -10,9 +9,9 @@ class ColorCustomizationItem extends StatefulWidget {
   final ValueChanged<Color> onColorPicked;
 
   const ColorCustomizationItem({
-    super.key,
     required this.initialColor,
     required this.onColorPicked,
+    super.key,
   });
 
   @override
@@ -49,7 +48,7 @@ class _ColorCustomizationItemState extends State<ColorCustomizationItem> {
     }
   }
 
-  void onColorChanged(color) {
+  void onColorChanged(Color color) {
     widget.onColorPicked(color);
     setState(() {
       _pickedColor = color;
@@ -77,7 +76,7 @@ class _ColorCustomizationItemState extends State<ColorCustomizationItem> {
               onTap: () => setState(() => _isPickerOpened = !_isPickerOpened),
               child: Container(
                 decoration: BoxDecoration(
-                  border: Border.all(color: AppColors.black),
+                  border: Border.all(),
                   color: _pickedColor,
                 ),
                 width: AppDimensions.sizeM,

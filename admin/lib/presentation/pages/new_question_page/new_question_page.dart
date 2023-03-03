@@ -15,10 +15,10 @@ const _tabs = [
   'Custom input',
 ];
 final Map<String, QuestionData> _dataMap = {
-  'Intro': IntroQuestionData.common(),
-  'Choice': ChoiceQuestionData.common(),
-  'Slider': SliderQuestionData.common(),
-  'Custom input': InputQuestionData.common(),
+  'Intro': const IntroQuestionData.common(),
+  'Choice': const ChoiceQuestionData.common(),
+  'Slider': const SliderQuestionData.common(),
+  'Custom input': const InputQuestionData.common(),
 };
 const _optionsInTabs = {
   'Intro': ['Title', 'Image intro'],
@@ -38,7 +38,7 @@ const Map<String, String> _optionsAssets = {
 };
 
 class NewQuestionPage extends StatefulWidget {
-  const NewQuestionPage({Key? key}) : super(key: key);
+  const NewQuestionPage({super.key});
 
   @override
   State<NewQuestionPage> createState() => _NewQuestionPageState();
@@ -56,7 +56,7 @@ class _NewQuestionPageState extends State<NewQuestionPage> {
           () => _selectedTab = tabTitle,
         );
       },
-      isSelected: _selectedTab == tabTitle ? true : false,
+      isSelected: _selectedTab == tabTitle,
     );
   }
 
@@ -113,7 +113,7 @@ class _NewQuestionPageState extends State<NewQuestionPage> {
 }
 
 class _BackButton extends StatelessWidget {
-  const _BackButton({Key? key}) : super(key: key);
+  const _BackButton();
 
   @override
   Widget build(BuildContext context) {
@@ -131,7 +131,7 @@ class _BackButton extends StatelessWidget {
 }
 
 class _AppBarTitle extends StatelessWidget {
-  const _AppBarTitle({Key? key}) : super(key: key);
+  const _AppBarTitle();
 
   @override
   Widget build(BuildContext context) {
@@ -155,11 +155,10 @@ class _TabButton extends StatelessWidget {
   final bool isSelected;
 
   const _TabButton({
-    Key? key,
     required this.title,
     required this.onTap,
     required this.isSelected,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -173,7 +172,8 @@ class _TabButton extends StatelessWidget {
           style: TextStyle(
             color: AppColors.black,
             fontSize: AppFonts.sizeL,
-            fontWeight: isSelected ? AppFonts.weightBold : AppFonts.weightRegular,
+            fontWeight:
+                isSelected ? AppFonts.weightBold : AppFonts.weightRegular,
           ),
         ),
       ),
@@ -186,10 +186,9 @@ class _QuestionOptionsListView extends StatelessWidget {
   final String selectedOption;
 
   const _QuestionOptionsListView({
-    Key? key,
     required this.options,
     required this.selectedOption,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -213,10 +212,9 @@ class _AssetTextOption extends StatelessWidget {
   final String titleText;
 
   const _AssetTextOption({
-    Key? key,
     required this.assetName,
     required this.titleText,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -245,9 +243,8 @@ class _AddButton extends StatelessWidget {
   final VoidCallback onPressed;
 
   const _AddButton({
-    Key? key,
     required this.onPressed,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

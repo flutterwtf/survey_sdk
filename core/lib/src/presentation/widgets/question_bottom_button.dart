@@ -1,9 +1,8 @@
+import 'package:flutter/material.dart';
 import 'package:survey_core/src/presentation/utils/app_duration.dart';
 import 'package:survey_core/src/presentation/utils/app_fonts.dart';
-import 'package:survey_core/src/presentation/utils/constants.dart';
-import 'package:flutter/material.dart';
-
 import 'package:survey_core/src/presentation/utils/colors.dart';
+import 'package:survey_core/src/presentation/utils/constants.dart';
 
 class QuestionBottomButton extends StatelessWidget {
   final String text;
@@ -15,7 +14,6 @@ class QuestionBottomButton extends StatelessWidget {
   final bool isEnabled;
 
   const QuestionBottomButton({
-    super.key,
     required this.text,
     required this.onPressed,
     this.isEnabled = true,
@@ -23,6 +21,7 @@ class QuestionBottomButton extends StatelessWidget {
     this.textColor,
     this.textSize,
     this.radius,
+    super.key,
   });
 
   @override

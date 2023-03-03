@@ -56,7 +56,7 @@ class QuestionListItem extends StatelessWidget {
                 color: AppColors.switchBackgroundActive,
                 borderRadius: BorderRadius.all(Radius.circular(10)),
               ),
-              //TODO: to const maybe???
+              // TODO(dev): to const maybe???
               height: 40,
               width: 40,
               child: _questionImage(questionData),
