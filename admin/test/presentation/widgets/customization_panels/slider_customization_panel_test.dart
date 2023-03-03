@@ -3,7 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
-import 'package:survey_admin/presentation/widgets/customization_panel/slider_customization_panel.dart';
+import 'package:survey_admin/presentation/widgets/customization_panel/slider/slider_customization_panel.dart';
 
 void main() {
   final sliderCustomizationPage = MaterialApp(

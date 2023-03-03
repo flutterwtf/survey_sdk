@@ -4,7 +4,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/create_text_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
-import 'package:survey_admin/presentation/widgets/customization_panel/input_content_customization_tab.dart';
+import 'package:survey_admin/presentation/widgets/customization_panel/input/input_content_customization_tab.dart';
 
 void main() {
   group(

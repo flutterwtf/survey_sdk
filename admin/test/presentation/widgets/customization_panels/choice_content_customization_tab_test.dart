@@ -3,7 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
-import 'package:survey_admin/presentation/widgets/customization_panel/choice_content_customization_tab.dart';
+import 'package:survey_admin/presentation/widgets/customization_panel/choice/choice_content_customization_tab.dart';
 
 void main() {
   group(
