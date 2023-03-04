@@ -16,7 +16,7 @@ class CustomizationTextField extends StatelessWidget {
   final InputDecoration decoration;
 
   const CustomizationTextField({
-    Key? key,
+    super.key,
     this.onChanged,
     this.initialValue,
     this.inputFormatters,
@@ -30,7 +30,7 @@ class CustomizationTextField extends StatelessWidget {
       isCollapsed: true,
       border: InputBorder.none,
     ),
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

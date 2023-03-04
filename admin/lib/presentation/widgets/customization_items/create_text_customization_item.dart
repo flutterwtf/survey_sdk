@@ -7,9 +7,9 @@ class CreateTextCustomizationItem extends StatelessWidget {
   final void Function(String text) onChanged;
 
   const CreateTextCustomizationItem({
-    super.key,
     required this.maxHeight,
     required this.onChanged,
+    super.key,
   });
 
   @override

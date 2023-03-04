@@ -9,7 +9,7 @@ import 'package:survey_core/src/presentation/input_question/input_question_page.
 import 'package:survey_core/src/presentation/intro_question/intro_question_page.dart';
 import 'package:survey_core/src/presentation/slider_question/slider_question_page.dart';
 
-//TODO: dynamic to survey result
+// TODO(dev): dynamic to survey result
 typedef OnSendCallback = void Function(dynamic data);
 
 abstract class DataToWidgetUtil {

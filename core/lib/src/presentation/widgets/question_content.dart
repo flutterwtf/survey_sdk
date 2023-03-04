@@ -1,19 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:survey_core/src/presentation/utils/app_fonts.dart';
+import 'package:survey_core/src/presentation/utils/colors.dart';
 import 'package:survey_core/src/presentation/utils/theme_extension.dart';
 
 class QuestionContent extends StatelessWidget {
-  const QuestionContent({
-    super.key,
-    required this.content,
-  });
-
   final String content;
+  final Color? textColor;
+  final double? textSize;
+
+  const QuestionContent({
+    required this.content,
+    this.textColor,
+    this.textSize,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Text(
       content,
-      style: context.theme.textTheme.bodySmall,
+      // TODO(dev): replace with theme text style?
+      style: TextStyle(
+        color: textColor ?? AppColors.black,
+        fontSize: textSize ?? AppFonts.sizeS,
+      ),
     );
   }
 }

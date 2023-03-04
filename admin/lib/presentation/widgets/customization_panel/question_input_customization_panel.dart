@@ -27,7 +27,6 @@ class QuestionInputCustomizationPanel extends CustomizationPanel {
   final ValueChanged<InputType> onInputTypeChanged;
 
   const QuestionInputCustomizationPanel({
-    super.key,
     required super.title,
     required this.onMultilineChanged,
     required this.onFillColorChanged,
@@ -41,6 +40,7 @@ class QuestionInputCustomizationPanel extends CustomizationPanel {
     required this.onTextColorChanged,
     required this.onTextFontSizeChanged,
     required this.onInputTypeChanged,
+    super.key,
   });
 
   @override

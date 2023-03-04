@@ -8,8 +8,8 @@ class PhoneView extends StatelessWidget {
   final Widget child;
 
   const PhoneView({
-    super.key,
     required this.child,
+    super.key,
   });
 
   @override

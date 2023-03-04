@@ -50,6 +50,7 @@ class _InputTypeCustomizationItemState extends State<InputTypeCustomizationItem>
       vsync: this,
       duration: AppDuration.customizationItemAnimation,
     );
+    // ignore: prefer_int_literals
     _animation = Tween(begin: 0.0, end: .5).animate(
       CurvedAnimation(
         parent: _iconAnimationController,

@@ -3,7 +3,6 @@ import 'package:survey_admin/presentation/utils/constants/constants.dart';
 import 'package:survey_admin/presentation/utils/theme_extension.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/item_divider.dart';
 
-//TODO: leave and remove customization title or remove this
 class CustomizationItemsContainer extends StatefulWidget {
   final String? title;
   final EdgeInsets? titlePadding;
@@ -14,15 +13,15 @@ class CustomizationItemsContainer extends StatefulWidget {
   final List<Widget> children;
 
   CustomizationItemsContainer({
-    super.key,
+    required this.children,
     this.title,
     this.titlePadding,
     this.itemsPadding,
     this.itemsSeparatorHeight = AppDimensions.marginS,
     this.isTopDividerShown = false,
     this.isBottomDividerShown = true,
-    required this.children,
-  }) : assert(children.isNotEmpty);
+    super.key,
+  }) : assert(children.isNotEmpty, 'children must not be empty');
 
   @override
   State<CustomizationItemsContainer> createState() =>
@@ -41,9 +40,10 @@ class _CustomizationItemsContainerState
     if (widget.children.length > 1) {
       _items.add(_itemSeparator());
 
-      for (int i = 1; i < widget.children.length - 1; i++) {
-        _items.add(widget.children[i]);
-        _items.add(_itemSeparator());
+      for (var i = 1; i < widget.children.length - 1; i++) {
+        _items
+          ..add(widget.children[i])
+          ..add(_itemSeparator());
       }
       _items.add(widget.children.last);
     }

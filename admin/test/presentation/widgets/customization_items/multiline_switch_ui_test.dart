@@ -58,7 +58,8 @@ void main() {
       await tester.enterText(find.byType(CustomizationTextField), inputText);
       expect(find.text(inputText), findsNothing);
     });
-    testWidgets('Check widget with parameters isMultiline = true', (tester) async {
+    testWidgets('Check widget with parameters isMultiline = true',
+        (tester) async {
       await tester.pumpWidget(
         MaterialApp(
           supportedLocales: AppLocalizations.supportedLocales,
