@@ -16,7 +16,7 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
     super.content,
   });
 
-  const ChoiceQuestionData.common({int index = 0})
+  const ChoiceQuestionData.common({required int index})
       : this(
           // TODO(dev): to localization somehow
           isMultipleChoice: false,
