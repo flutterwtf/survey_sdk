@@ -1,6 +1,9 @@
 part of 'input_validator.dart';
 
 class PhoneValidator implements InputValidator {
+  const PhoneValidator();
+
+  // TODO(dev): check regex
   RegExp get _reg => RegExp(r'^(?:[+0])?[0-9]{10,12}$');
 
   @override

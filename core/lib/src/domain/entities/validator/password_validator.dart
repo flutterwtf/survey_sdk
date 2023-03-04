@@ -1,6 +1,8 @@
 part of 'input_validator.dart';
 
 class PasswordValidator implements InputValidator {
+  const PasswordValidator();
+
   RegExp get _reg => RegExp(
         r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$',
       );

@@ -25,13 +25,13 @@ abstract class InputValidator implements ApiObject {
       case AppValidators.number:
         return const NumberValidator();
       case AppValidators.date:
-        return DateValidator();
+        return const DateValidator();
       case AppValidators.email:
-        return EmailValidator();
+        return const EmailValidator();
       case AppValidators.password:
-        return PasswordValidator();
+        return const PasswordValidator();
       case AppValidators.phone:
-        return PhoneValidator();
+        return const PhoneValidator();
       default:
         return const DefaultValidator();
     }
