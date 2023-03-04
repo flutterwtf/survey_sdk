@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:survey_admin/presentation/utils/constants/app_assets.dart';
-import 'package:survey_admin/presentation/utils/constants/app_duration.dart';
-import 'package:survey_admin/presentation/utils/app_fonts.dart';
-import 'package:survey_admin/presentation/utils/asset_strings.dart';
 import 'package:survey_admin/presentation/utils/constants/app_durations.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
 import 'package:survey_admin/presentation/utils/theme_extension.dart';

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:survey_core/src/presentation/utils/app_duration.dart';
 import 'package:survey_core/src/presentation/utils/app_durations.dart';
 import 'package:survey_core/src/presentation/utils/app_fonts.dart';
 import 'package:survey_core/src/presentation/utils/colors.dart';
