@@ -4,7 +4,7 @@ import 'package:survey_core/src/data/data_sources/interfaces/filesystem_data_sou
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
-  FilesystemDataSource dataSource = FilesystemDataSourceImpl();
+  final FilesystemDataSource dataSource = FilesystemDataSourceImpl();
 
   group('getSurveyData method', () {
     test('Call with empty parameter', () {
@@ -27,7 +27,7 @@ void main() {
         'test/assets/test_survey_data.json',
       );
 
-      // TODO compare SurveyData from assets with mock SurveyData
+      // TODO(dev): compare SurveyData from assets with mock SurveyData
     });
   });
 }

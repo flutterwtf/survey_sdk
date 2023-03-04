@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_test/flutter_test.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/divisions_customization_item.dart';
 
 void main() {
@@ -14,7 +14,6 @@ void main() {
           ],
           home: Scaffold(
             body: DivisionsCustomizationItem(
-              initialValue: 10,
               onChanged: (int? divisions) {},
             ),
           ),

@@ -62,27 +62,48 @@ void main() {
 
     testWidgets('Load widget', (tester) async {
       await tester.pumpWidget(page);
-      expect(find.widgetWithText(CustomizationItemsContainer, 'Fill'), findsOneWidget);
-      expect(find.widgetWithText(CustomizationItemsContainer, 'Title'), findsOneWidget);
-      expect(find.widgetWithText(CustomizationItemsContainer, 'Subtitle'), findsOneWidget);
-      expect(find.widgetWithText(CustomizationItemsContainer, 'Button'), findsOneWidget);
+      expect(
+        find.widgetWithText(CustomizationItemsContainer, 'Fill'),
+        findsOneWidget,
+      );
+      expect(
+        find.widgetWithText(CustomizationItemsContainer, 'Title'),
+        findsOneWidget,
+      );
+      expect(
+        find.widgetWithText(CustomizationItemsContainer, 'Subtitle'),
+        findsOneWidget,
+      );
+      expect(
+        find.widgetWithText(CustomizationItemsContainer, 'Button'),
+        findsOneWidget,
+      );
     });
 
     testWidgets('Input color for Fill', (tester) async {
       await tester.pumpWidget(page);
-      await tester.enterText(find.widgetWithText(CustomizationItemsContainer, 'Fill'), 'F7272799');
+      await tester.enterText(
+        find.widgetWithText(CustomizationItemsContainer, 'Fill'),
+        'F7272799',
+      );
       await tester.testTextInput.receiveAction(TextInputAction.done);
       await tester.pump();
       expect(find.text('F7272799'), findsOneWidget);
       expect(fill, const Color(0xF7272799));
 
-      await tester.enterText(find.widgetWithText(CustomizationItemsContainer, 'Fill'), 'F');
+      await tester.enterText(
+        find.widgetWithText(CustomizationItemsContainer, 'Fill'),
+        'F',
+      );
       await tester.testTextInput.receiveAction(TextInputAction.done);
       await tester.pump();
       expect(find.text('F0000000'), findsOneWidget);
       expect(fill, const Color(0xF0000000));
 
-      await tester.enterText(find.widgetWithText(CustomizationItemsContainer, 'Fill'), '');
+      await tester.enterText(
+        find.widgetWithText(CustomizationItemsContainer, 'Fill'),
+        '',
+      );
       await tester.testTextInput.receiveAction(TextInputAction.done);
       await tester.pump();
       expect(find.text('0'), findsOneWidget);
@@ -91,7 +112,10 @@ void main() {
 
     testWidgets('Input color for Title', (tester) async {
       await tester.pumpWidget(page);
-      await tester.enterText(find.byType(ColorCustomizationItem).at(1), 'F1234567');
+      await tester.enterText(
+        find.byType(ColorCustomizationItem).at(1),
+        'F1234567',
+      );
       await tester.testTextInput.receiveAction(TextInputAction.done);
       await tester.pump();
       expect(find.text('F1234567'), findsOneWidget);
@@ -133,7 +157,10 @@ void main() {
 
     testWidgets('Input color for Subtitle', (tester) async {
       await tester.pumpWidget(page);
-      await tester.enterText(find.byType(ColorCustomizationItem).at(2), 'F7654321');
+      await tester.enterText(
+        find.byType(ColorCustomizationItem).at(2),
+        'F7654321',
+      );
       await tester.testTextInput.receiveAction(TextInputAction.done);
       await tester.pump();
       expect(find.text('F7654321'), findsOneWidget);
@@ -175,7 +202,10 @@ void main() {
 
     testWidgets('Input color for UpButton', (tester) async {
       await tester.pumpWidget(page);
-      await tester.enterText(find.byType(ColorCustomizationItem).at(3), 'F1234321');
+      await tester.enterText(
+        find.byType(ColorCustomizationItem).at(3),
+        'F1234321',
+      );
       await tester.testTextInput.receiveAction(TextInputAction.done);
       await tester.pump();
       expect(find.text('F1234321'), findsOneWidget);
@@ -196,7 +226,10 @@ void main() {
 
     testWidgets('Input color for DownButton', (tester) async {
       await tester.pumpWidget(page);
-      await tester.enterText(find.byType(ColorCustomizationItem).last, 'F4321234');
+      await tester.enterText(
+        find.byType(ColorCustomizationItem).last,
+        'F4321234',
+      );
       await tester.testTextInput.receiveAction(TextInputAction.done);
       await tester.pump();
       expect(find.text('F4321234'), findsOneWidget);
@@ -229,7 +262,8 @@ void main() {
       expect(buttonDownSize, '4');
     });
 
-    testWidgets('Validate input size length > 2 for DownButton', (tester) async {
+    testWidgets('Validate input size length > 2 for DownButton',
+        (tester) async {
       await tester.pumpWidget(page);
       await tester.enterText(find.byType(CustomizationTextField).at(7), '143');
       expect(find.text('143'), findsNothing);
@@ -250,7 +284,8 @@ void main() {
       expect(buttonBorder, '8');
     });
 
-    testWidgets('Validate input size length > 2 for BorderButton', (tester) async {
+    testWidgets('Validate input size length > 2 for BorderButton',
+        (tester) async {
       await tester.pumpWidget(page);
       await tester.enterText(find.byType(CustomizationTextField).at(8), '198');
       expect(find.text('198'), findsNothing);

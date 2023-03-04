@@ -23,7 +23,6 @@ class SliderCommonCustomizationPanel extends CustomizationPanel {
   final ValueChanged<String?> onButtonBorderChanged;
 
   const SliderCommonCustomizationPanel({
-    super.key,
     required super.title,
     required this.onButtonDownColorChanged,
     required this.onButtonUpColorChanged,
@@ -34,6 +33,7 @@ class SliderCommonCustomizationPanel extends CustomizationPanel {
     required this.onSubtitleChanged,
     required this.onButtonDownChanged,
     required this.onButtonBorderChanged,
+    super.key,
   });
 
   @override

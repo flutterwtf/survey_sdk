@@ -14,12 +14,12 @@ class SliderContentCustomizationPanel extends CustomizationPanel {
   final ValueChanged<int?> onDivisionsChanged;
 
   const SliderContentCustomizationPanel({
-    super.key,
     required super.title,
     required this.onDivisionsChanged,
     required this.onMinMaxChanged,
     required this.onSubtitleChanged,
     required this.onTitleChanged,
+    super.key,
   });
 
   @override

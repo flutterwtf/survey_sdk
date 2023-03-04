@@ -60,7 +60,7 @@ void main() {
       );
       testWidgets(
         'Width text input test',
-            (widgetTester) async {
+        (widgetTester) async {
           await widgetTester.pumpWidget(textCustomizationItem);
           await widgetTester.pumpAndSettle();
           await widgetTester.enterText(find.byType(TextWidthField), newWidth);

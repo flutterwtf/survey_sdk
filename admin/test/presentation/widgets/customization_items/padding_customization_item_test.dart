@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/padding_customization_item.dart';
 
@@ -50,11 +50,15 @@ void main() {
     await tester.pumpWidget(paddingCustomizationItemPage);
 
     await tester.enterText(
-        find.text('$initialHorizontalPadding'), tooLongNumber);
+      find.text('$initialHorizontalPadding'),
+      tooLongNumber,
+    );
     expect(find.text('123'), findsOneWidget);
 
     await tester.enterText(
-        find.text('$initialVerticalPadding'), textWithNumber);
+      find.text('$initialVerticalPadding'),
+      textWithNumber,
+    );
     expect(find.text('18'), findsOneWidget);
   });
 
@@ -84,7 +88,9 @@ void main() {
     );
 
     await tester.enterText(
-        find.text('$initialHorizontalPadding'), '$inputPadding');
+      find.text('$initialHorizontalPadding'),
+      '$inputPadding',
+    );
     await tester.testTextInput.receiveAction(TextInputAction.done);
     await tester.pump();
 
@@ -117,7 +123,9 @@ void main() {
     );
 
     await tester.enterText(
-        find.text('$initialVerticalPadding'), '$inputPadding');
+      find.text('$initialVerticalPadding'),
+      '$inputPadding',
+    );
     await tester.testTextInput.receiveAction(TextInputAction.done);
     await tester.pump();
 

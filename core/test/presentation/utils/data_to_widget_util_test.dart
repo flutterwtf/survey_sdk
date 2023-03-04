@@ -14,7 +14,7 @@ import 'package:survey_core/src/presentation/utils/data_to_widget_util.dart';
 void _mockOnSend(dynamic data) {}
 
 void main() {
-  final mockSliderData = SliderQuestionData(
+  const mockSliderData = SliderQuestionData(
     minValue: 0,
     maxValue: 10,
     initialValue: 5,
@@ -23,22 +23,22 @@ void main() {
     subtitle: 'subtitle',
     isSkip: false,
   );
-  final mockChoiceData = ChoiceQuestionData(
+  const mockChoiceData = ChoiceQuestionData(
     isMultipleChoice: true,
-    options: const ['option 1', 'option 2', 'option 3'],
+    options: ['option 1', 'option 2', 'option 3'],
     index: 0,
     title: 'title',
     subtitle: 'subtitle',
     isSkip: false,
   );
-  final mockInputData = InputQuestionData(
+  const mockInputData = InputQuestionData(
     validator: DefaultValidator(),
     index: 0,
     title: 'title',
     subtitle: 'subtitle',
     isSkip: false,
   );
-  final mockIntroData = IntroQuestionData(
+  const mockIntroData = IntroQuestionData(
     mainButtonTitle: 'button title',
     index: 0,
     title: 'title',
@@ -80,7 +80,10 @@ void main() {
 
     test('Call with bad QuestionData', () async {
       expect(
-        () => DataToWidgetUtil.createWidget(_BadQuestionData(), _mockOnSend),
+        () => DataToWidgetUtil.createWidget(
+          const _BadQuestionData(),
+          _mockOnSend,
+        ),
         throwsException,
       );
     });
@@ -88,7 +91,7 @@ void main() {
 }
 
 class _BadQuestionData extends QuestionData {
-  _BadQuestionData()
+  const _BadQuestionData()
       : super(
           index: 0,
           title: 'title',
@@ -97,7 +100,7 @@ class _BadQuestionData extends QuestionData {
         );
 
   @override
-  get theme => throw UnimplementedError();
+  Never get theme => throw UnimplementedError();
 
   @override
   Map<String, dynamic> toJson() => throw UnimplementedError();
