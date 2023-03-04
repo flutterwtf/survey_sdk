@@ -29,7 +29,8 @@ class PhoneView extends StatelessWidget {
                     horizontal: AppDimensions.margin5XL,
                   ),
                   child: ClipRRect(
-                    borderRadius: BorderRadius.circular(AppDimensions.circularRadiusXL),
+                    borderRadius:
+                        BorderRadius.circular(AppDimensions.circularRadiusXL),
                     child: child,
                   ),
                 ),
