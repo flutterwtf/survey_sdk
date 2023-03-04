@@ -13,12 +13,12 @@ class IntroContentCustomizationPanel extends CustomizationPanel {
   final void Function(bool isShown, String text) onSecondaryButtonChanged;
 
   const IntroContentCustomizationPanel({
-    super.key,
     required super.title,
     required this.onTitleChanged,
     required this.onSubtitleChanged,
     required this.onPrimaryButtonTextChanged,
     required this.onSecondaryButtonChanged,
+    super.key,
   });
 
   @override

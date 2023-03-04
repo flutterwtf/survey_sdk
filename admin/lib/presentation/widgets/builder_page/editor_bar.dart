@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
 
-class SurveyEditorBar extends StatelessWidget {
-  const SurveyEditorBar({super.key});
+// TODO(dev): will we use this?
+class EditorBar extends StatelessWidget {
+  const EditorBar({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -33,13 +33,13 @@ void main() {
 
     testWidgets('Tap button(active)', (tester) async {
       await tester.pumpWidget(pageActiveButton);
-      await tester.tap(find.byKey(const Key('QBB')));
+      await tester.tap(find.byType(InkWell));
       expect(completerActive.isCompleted, isTrue);
     });
 
     testWidgets('Tap button(inactive)', (tester) async {
       await tester.pumpWidget(pageInactiveButton);
-      await tester.tap(find.byKey(const Key('QBB')));
+      await tester.tap(find.byType(InkWell));
       expect(completerInactive.isCompleted, isFalse);
     });
   });

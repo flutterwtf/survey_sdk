@@ -48,13 +48,34 @@ void main() {
           await widgetTester.pumpAndSettle();
           expect(find.text('test'), findsNothing);
 
-          expect(find.widgetWithText(CustomizationItemsContainer, 'Multiline'), findsOneWidget);
-          expect(find.widgetWithText(CustomizationItemsContainer, 'Fill'), findsOneWidget);
-          expect(find.widgetWithText(CustomizationItemsContainer, 'Border'), findsOneWidget);
-          expect(find.widgetWithText(CustomizationItemsContainer, 'Padding'), findsOneWidget);
-          expect(find.widgetWithText(CustomizationItemsContainer, 'Hint'), findsOneWidget);
-          expect(find.widgetWithText(CustomizationItemsContainer, 'Text'), findsNWidgets(2));
-          expect(find.widgetWithText(CustomizationItemsContainer, 'Input type'), findsOneWidget);
+          expect(
+            find.widgetWithText(CustomizationItemsContainer, 'Multiline'),
+            findsOneWidget,
+          );
+          expect(
+            find.widgetWithText(CustomizationItemsContainer, 'Fill'),
+            findsOneWidget,
+          );
+          expect(
+            find.widgetWithText(CustomizationItemsContainer, 'Border'),
+            findsOneWidget,
+          );
+          expect(
+            find.widgetWithText(CustomizationItemsContainer, 'Padding'),
+            findsOneWidget,
+          );
+          expect(
+            find.widgetWithText(CustomizationItemsContainer, 'Hint'),
+            findsOneWidget,
+          );
+          expect(
+            find.widgetWithText(CustomizationItemsContainer, 'Text'),
+            findsNWidgets(2),
+          );
+          expect(
+            find.widgetWithText(CustomizationItemsContainer, 'Input type'),
+            findsOneWidget,
+          );
         },
       );
 
@@ -65,13 +86,34 @@ void main() {
           await widgetTester.pumpAndSettle();
 
           ///Multiline widget switch is off
-          expect(find.widgetWithText(CustomizationItemsContainer, 'Lines'), findsNothing);
-          expect(find.widgetWithText(CustomizationItemsContainer, 'FFFFFFFF'), findsOneWidget);
-          expect(find.widgetWithText(CustomizationItemsContainer, 'FF000000'), findsNWidgets(2));
-          expect(find.widgetWithText(CustomizationItemsContainer, 'FF929292'), findsOneWidget);
-          expect(find.widgetWithText(CustomizationItemsContainer, '1'), findsOneWidget);
-          expect(find.widgetWithText(CustomizationItemsContainer, '16'), findsNWidgets(2));
-          expect(find.widgetWithText(InputTypeCustomizationItem, 'Text'), findsOneWidget);
+          expect(
+            find.widgetWithText(CustomizationItemsContainer, 'Lines'),
+            findsNothing,
+          );
+          expect(
+            find.widgetWithText(CustomizationItemsContainer, 'FFFFFFFF'),
+            findsOneWidget,
+          );
+          expect(
+            find.widgetWithText(CustomizationItemsContainer, 'FF000000'),
+            findsNWidgets(2),
+          );
+          expect(
+            find.widgetWithText(CustomizationItemsContainer, 'FF929292'),
+            findsOneWidget,
+          );
+          expect(
+            find.widgetWithText(CustomizationItemsContainer, '1'),
+            findsOneWidget,
+          );
+          expect(
+            find.widgetWithText(CustomizationItemsContainer, '16'),
+            findsNWidgets(2),
+          );
+          expect(
+            find.widgetWithText(InputTypeCustomizationItem, 'Text'),
+            findsOneWidget,
+          );
         },
       );
 

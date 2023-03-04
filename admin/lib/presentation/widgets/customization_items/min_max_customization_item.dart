@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:survey_admin/presentation/app/localization/localizations.dart';
-import 'package:survey_admin/presentation/utils/app_fonts.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
+import 'package:survey_admin/presentation/utils/theme_extension.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
 
 class MinMaxCustomizationItem extends StatefulWidget {
@@ -11,14 +11,18 @@ class MinMaxCustomizationItem extends StatefulWidget {
   final void Function(int? min, int? max) onChanged;
 
   const MinMaxCustomizationItem({
-    super.key,
+    required this.onChanged,
     this.initialMin = 0,
     this.initialMax = 10,
-    required this.onChanged,
-  }) : assert(initialMax > initialMin);
+    super.key,
+  }) : assert(
+          initialMax > initialMin,
+          'initialMax must be greater then initialMin',
+        );
 
   @override
-  State<MinMaxCustomizationItem> createState() => _MinMaxCustomizationItemState();
+  State<MinMaxCustomizationItem> createState() =>
+      _MinMaxCustomizationItemState();
 }
 
 class _MinMaxCustomizationItemState extends State<MinMaxCustomizationItem> {
@@ -81,7 +85,6 @@ class _MinMaxCustomizationItemState extends State<MinMaxCustomizationItem> {
   }
 }
 
-//TODO: combine with default input field
 class _MinMaxInputField extends StatelessWidget {
   final String name;
   final String prefix;
@@ -133,15 +136,11 @@ class _MinMaxInputField extends StatelessWidget {
           ),
           child: Text(
             prefix,
-            style: const TextStyle(
-              fontSize: AppFonts.sizeL,
-              fontWeight: AppFonts.weightRegular,
-            ),
+            style: context.theme.textTheme.bodyLarge,
           ),
         ),
         Expanded(
           child: CustomizationTextField(
-            key: ValueKey(prefix),
             initialValue: initialValue.toString(),
             inputFormatters: [
               FilteringTextInputFormatter.digitsOnly,

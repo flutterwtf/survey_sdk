@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_test/flutter_test.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/input_type_customization_item.dart';
 
 void main() {
@@ -16,7 +16,6 @@ void main() {
           ],
           home: Scaffold(
             body: InputTypeCustomizationItem(
-              initialValue: InputType.text,
               onChanged: (res) => res,
             ),
           ),
@@ -34,8 +33,8 @@ void main() {
           ],
           home: Scaffold(
             body: SizedBox(
-              width: 400.0,
-              height: 400.0,
+              width: 400,
+              height: 400,
               child: InputTypeCustomizationItem(
                 initialValue: InputType.date,
                 onChanged: (res) => res,
@@ -60,8 +59,8 @@ void main() {
           ],
           home: Scaffold(
             body: SizedBox(
-              width: 400.0,
-              height: 400.0,
+              width: 400,
+              height: 400,
               child: InputTypeCustomizationItem(
                 initialValue: InputType.number,
                 onChanged: (res) => res,
