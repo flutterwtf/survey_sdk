@@ -1,4 +1,4 @@
-import 'package:survey_admin/presentation/utils/constants/image_constants.dart';
+import 'package:survey_admin/presentation/utils/constants/app_assets.dart';
 import 'package:survey_core/survey_core.dart';
 
 enum NewQuestionTabs {
@@ -25,13 +25,13 @@ extension NewQuestionTabsExt on NewQuestionTabs {
   QuestionData get data {
     switch (this) {
       case NewQuestionTabs.intro:
-        return IntroQuestionData.common();
+        return const IntroQuestionData.common();
       case NewQuestionTabs.choice:
-        return ChoiceQuestionData.common();
+        return const ChoiceQuestionData.common();
       case NewQuestionTabs.slider:
-        return SliderQuestionData.common();
+        return const SliderQuestionData.common();
       case NewQuestionTabs.customInput:
-        return InputQuestionData.common();
+        return const InputQuestionData.common();
     }
   }
 
