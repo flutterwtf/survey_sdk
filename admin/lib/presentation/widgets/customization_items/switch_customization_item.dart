@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
-import 'package:survey_admin/presentation/utils/constants/app_duration.dart';
+import 'package:survey_admin/presentation/utils/constants/app_durations.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text.dart';
 
 class SwitchCustomizationItem extends StatelessWidget {
@@ -70,10 +70,10 @@ class _CustomSwitchState extends State<_CustomSwitch> {
               : AppColors.switchBackgroundInactive,
           borderRadius: BorderRadius.circular(9),
         ),
-        duration: AppDuration.customizationItemAnimation,
+        duration: AppDurations.customizationItemAnimation,
         child: AnimatedAlign(
           alignment: _isToggled ? Alignment.centerRight : Alignment.centerLeft,
-          duration: AppDuration.customizationItemAnimation,
+          duration: AppDurations.customizationItemAnimation,
           child: Padding(
             padding: const EdgeInsets.all(2),
             child: Container(
