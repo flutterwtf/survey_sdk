@@ -15,11 +15,12 @@ void main() {
       const title = 'Intro widget';
       const mainButtonTitle = 'NEXT';
       const secondaryButtonTitle = 'SKIP';
-      const content = 'You may simply need a single, brief answer without discussion.';
+      const content =
+          'You may simply need a single, brief answer without discussion.';
 
       final introQuestionPage = AppTest(
         child: IntroQuestionPage(
-          data: IntroQuestionData(
+          data: const IntroQuestionData(
             mainButtonTitle: mainButtonTitle,
             index: 1,
             title: title,

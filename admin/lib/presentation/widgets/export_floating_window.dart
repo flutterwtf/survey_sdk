@@ -3,6 +3,7 @@ import 'package:survey_admin/presentation/app/localization/localizations.dart';
 import 'package:survey_admin/presentation/utils/app_fonts.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
+import 'package:survey_admin/presentation/utils/theme_extension.dart';
 
 void showExportFloatingWindow(
   BuildContext context, {
@@ -42,7 +43,7 @@ class _ExportFloatingWindow extends StatelessWidget {
     required this.onCopyPressed,
   });
 
-  // TODO don't use explicit width
+  // TODO(dev): don't use explicit width
   static const double _windowWidth = 420;
 
   @override
@@ -81,8 +82,7 @@ class _ExportFloatingWindow extends StatelessWidget {
                 child: Text(
                   context.localization.export_floating_window_title,
                   textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    fontSize: AppFonts.sizeL,
+                  style: context.theme.textTheme.bodyMedium?.copyWith(
                     fontWeight: AppFonts.weightMedium,
                   ),
                 ),
@@ -92,7 +92,7 @@ class _ExportFloatingWindow extends StatelessWidget {
                   vertical: AppDimensions.marginM,
                 ),
                 child: Icon(
-                  //TODO: replace with the one from figma maybe???
+                  // TODO(dev): replace with the one from figma maybe???
                   Icons.task_rounded,
                   size: AppDimensions.sizeXL,
                   color: AppColors.black,
@@ -112,9 +112,7 @@ class _ExportFloatingWindow extends StatelessWidget {
                             AppColors.white,
                           ),
                           side: const MaterialStatePropertyAll(
-                            BorderSide(
-                              color: AppColors.black,
-                            ),
+                            BorderSide(),
                           ),
                           shape: MaterialStatePropertyAll(
                             RoundedRectangleBorder(
@@ -126,10 +124,8 @@ class _ExportFloatingWindow extends StatelessWidget {
                         ),
                         child: Text(
                           context.localization.copy,
-                          style: const TextStyle(
-                            fontSize: AppFonts.sizeM,
-                            fontWeight: AppFonts.weightBold,
-                            color: AppColors.black,
+                          style: context.theme.textTheme.labelLarge?.copyWith(
+                            fontFamily: AppFonts.karla,
                           ),
                         ),
                       ),
@@ -155,9 +151,8 @@ class _ExportFloatingWindow extends StatelessWidget {
                         ),
                         child: Text(
                           context.localization.download,
-                          style: const TextStyle(
-                            fontSize: AppFonts.sizeM,
-                            fontWeight: AppFonts.weightBold,
+                          style: context.theme.textTheme.labelLarge?.copyWith(
+                            fontFamily: AppFonts.karla,
                             color: AppColors.white,
                           ),
                         ),
