@@ -1,3 +1,4 @@
 class AppDuration {
-  static const Duration customizationItemAnimation = Duration(milliseconds: 100);
+  static const Duration customizationItemAnimation =
+      Duration(milliseconds: 100);
 }

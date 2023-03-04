@@ -7,11 +7,11 @@ import 'package:survey_admin/presentation/widgets/customization_panel/intro_cont
 
 void main() {
   group('Tests for IntroContentCustomizationPanel', () {
-    bool isVisible = false;
-    String textSecondaryButton = '';
-    String textTitle = '';
-    String textSubtitle = '';
-    String textPrimaryButton = '';
+    var isVisible = false;
+    var textSecondaryButton = '';
+    var textTitle = '';
+    var textSubtitle = '';
+    var textPrimaryButton = '';
     final page = MaterialApp(
       supportedLocales: AppLocalizations.supportedLocales,
       localizationsDelegates: const [
@@ -50,14 +50,20 @@ void main() {
 
     testWidgets('Input text for Title', (tester) async {
       await tester.pumpWidget(page);
-      await tester.enterText(find.widgetWithText(CustomizationItemsContainer, 'Title'), 'Intro');
+      await tester.enterText(
+        find.widgetWithText(CustomizationItemsContainer, 'Title'),
+        'Intro',
+      );
       expect(find.text('Intro'), findsOneWidget);
       expect(textTitle, 'Intro');
     });
 
     testWidgets('Input text for Subtitle', (tester) async {
       await tester.pumpWidget(page);
-      await tester.enterText(find.widgetWithText(CustomizationItemsContainer, 'Subtitle'), 'sub');
+      await tester.enterText(
+        find.widgetWithText(CustomizationItemsContainer, 'Subtitle'),
+        'sub',
+      );
       expect(find.text('sub'), findsOneWidget);
       expect(textSubtitle, 'sub');
     });
@@ -65,7 +71,9 @@ void main() {
     testWidgets('Input text for Primary button', (tester) async {
       await tester.pumpWidget(page);
       await tester.enterText(
-          find.widgetWithText(CustomizationItemsContainer, 'Primary button'), 'primary');
+        find.widgetWithText(CustomizationItemsContainer, 'Primary button'),
+        'primary',
+      );
       expect(find.text('primary'), findsOneWidget);
       expect(textPrimaryButton, 'primary');
     });
@@ -91,7 +99,9 @@ void main() {
       await tester.tap(find.byType(InkWell));
       await tester.pump();
       await tester.enterText(
-          find.widgetWithText(CustomizationItemsContainer, 'Secondary button'), 'qq');
+        find.widgetWithText(CustomizationItemsContainer, 'Secondary button'),
+        'qq',
+      );
       expect(find.text('qq'), findsOneWidget);
       expect(textSecondaryButton, 'qq');
     });

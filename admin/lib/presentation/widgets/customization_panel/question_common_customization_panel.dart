@@ -18,7 +18,6 @@ class QuestionCommonCustomizationPanel extends CustomizationPanel {
   final ValueChanged<int?> onButtonFontSizeChanged;
 
   const QuestionCommonCustomizationPanel({
-    super.key,
     required super.title,
     required this.onFillColorPicked,
     required this.onTitleColorPicked,
@@ -28,6 +27,7 @@ class QuestionCommonCustomizationPanel extends CustomizationPanel {
     required this.onButtonFirstColorPicked,
     required this.onButtonSecondColorPicked,
     required this.onButtonFontSizeChanged,
+    super.key,
   });
 
   @override

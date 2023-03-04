@@ -23,7 +23,7 @@ void main() {
 
       final sliderQuestionPage = AppTest(
         child: SliderQuestionPage(
-          data: SliderQuestionData(
+          data: const SliderQuestionData(
             minValue: minValue,
             maxValue: maxValue,
             index: id,
@@ -60,7 +60,7 @@ void main() {
         'Slider test',
         (widgetTester) async {
           await widgetTester.pumpWidget(sliderQuestionPage);
-          await widgetTester.drag(find.byType(Slider), const Offset(50.0, 0.0));
+          await widgetTester.drag(find.byType(Slider), const Offset(50, 0));
           await widgetTester.pumpAndSettle();
           expect(find.byType(Slider), findsOneWidget);
         },

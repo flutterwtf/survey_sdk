@@ -15,13 +15,13 @@ class SliderCustomizationPanel extends CustomizationPanel {
   final ValueChanged<String?> onThumbChanged;
 
   const SliderCustomizationPanel({
-    super.key,
     required super.title,
     required this.onActiveColorChanged,
     required this.onInactiveColorChanged,
     required this.onThicknessChanged,
     required this.onThumbChanged,
     required this.onThumbColorChanged,
+    super.key,
   });
 
   @override
