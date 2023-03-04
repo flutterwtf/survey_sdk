@@ -35,6 +35,10 @@ class _ChoiceQuestionPageState extends State<ChoiceQuestionPage>
   @override
   void initState() {
     super.initState();
+    if (widget.data.selectedOptions != null) {
+      _selectedItems = widget.data.selectedOptions!;
+      _canBeSend = true;
+    }
   }
 
   void _onInputChanged(List<String>? selectedItems) {
