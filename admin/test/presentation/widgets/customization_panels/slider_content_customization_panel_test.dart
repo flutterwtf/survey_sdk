@@ -3,6 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
+import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/slider_content_customization_panel.dart';
 
 void main() {
@@ -100,49 +101,55 @@ void main() {
 
     testWidgets('Input min,max for Value(num)', (tester) async {
       await tester.pumpWidget(page);
-      await tester.enterText(find.byKey(const ValueKey('min')), '5');
+      await tester.enterText(find.byType(CustomizationTextField).first, '5');
       expect(find.text('5'), findsOneWidget);
       expect(min, 5);
 
-      await tester.enterText(find.byKey(const ValueKey('max')), '15');
+      await tester.enterText(find.byType(CustomizationTextField).at(1), '15');
       expect(find.text('15'), findsOneWidget);
       expect(max, 15);
     });
 
     testWidgets('Input min,max for Value(string)', (tester) async {
       await tester.pumpWidget(page);
-      await tester.enterText(find.byKey(const ValueKey('min')), 'qw');
+      await tester.enterText(find.byType(CustomizationTextField).first, 'qw');
       expect(find.text('qw'), findsNothing);
       expect(min, null);
 
-      await tester.enterText(find.byKey(const ValueKey('max')), 'qw');
+      await tester.enterText(find.byType(CustomizationTextField).at(1), 'qw');
       expect(find.text('qw'), findsNothing);
       expect(max, null);
     });
 
     testWidgets('Validate length > 6 input min,max for Value', (tester) async {
       await tester.pumpWidget(page);
-      await tester.enterText(find.byKey(const ValueKey('max')), '9876543');
+      await tester.enterText(
+        find.byType(CustomizationTextField).at(1),
+        '9876543',
+      );
       expect(find.text('987654'), findsOneWidget);
       expect(max, 987654);
 
-      await tester.enterText(find.byKey(const ValueKey('min')), '2345678');
+      await tester.enterText(
+        find.byType(CustomizationTextField).first,
+        '2345678',
+      );
       expect(find.text('234567'), findsOneWidget);
       expect(min, 234567);
     });
 
     testWidgets('Validate min>max for Value', (tester) async {
       await tester.pumpWidget(page);
-      await tester.enterText(find.byKey(const ValueKey('max')), '100');
+      await tester.enterText(find.byType(CustomizationTextField).at(1), '100');
       expect(max, 100);
 
-      await tester.enterText(find.byKey(const ValueKey('min')), '101');
+      await tester.enterText(find.byType(CustomizationTextField).first, '101');
       expect(min, 0);
 
-      await tester.enterText(find.byKey(const ValueKey('min')), '505');
+      await tester.enterText(find.byType(CustomizationTextField).first, '505');
       expect(min, 0);
 
-      await tester.enterText(find.byKey(const ValueKey('min')), '99');
+      await tester.enterText(find.byType(CustomizationTextField).first, '99');
       expect(min, 99);
     });
   });

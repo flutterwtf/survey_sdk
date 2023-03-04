@@ -80,23 +80,23 @@ void main() {
 
     testWidgets('Unlock Secondary button', (tester) async {
       await tester.pumpWidget(page);
-      await tester.tap(find.byKey(const Key('Switch')));
+      await tester.tap(find.byType(InkWell));
       await tester.pump();
       expect(isVisible, isTrue);
     });
 
     testWidgets('Lock Secondary button', (tester) async {
       await tester.pumpWidget(page);
-      await tester.tap(find.byKey(const Key('Switch')));
+      await tester.tap(find.byType(InkWell));
       await tester.pump();
-      await tester.tap(find.byKey(const Key('Switch')));
+      await tester.tap(find.byType(InkWell));
       await tester.pump();
       expect(isVisible, isFalse);
     });
 
     testWidgets('Input text for Secondary button', (tester) async {
       await tester.pumpWidget(page);
-      await tester.tap(find.byKey(const Key('Switch')));
+      await tester.tap(find.byType(InkWell));
       await tester.pump();
       await tester.enterText(
         find.widgetWithText(CustomizationItemsContainer, 'Secondary button'),

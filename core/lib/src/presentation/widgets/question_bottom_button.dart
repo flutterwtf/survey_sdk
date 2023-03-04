@@ -33,7 +33,6 @@ class QuestionBottomButton extends StatelessWidget {
     return SizedBox(
       width: double.infinity,
       child: InkWell(
-        key: const Key('QBB'),
         onTap: isEnabled ? onPressed : null,
         borderRadius: BorderRadius.circular(
           radius ?? AppDimensions.circularRadiusXS,

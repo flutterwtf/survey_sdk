@@ -55,7 +55,6 @@ class _CustomSwitchState extends State<_CustomSwitch> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      key: const Key('Switch'),
       onTap: () {
         setState(() {
           _isToggled = !_isToggled;
