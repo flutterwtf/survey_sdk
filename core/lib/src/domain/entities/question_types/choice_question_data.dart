@@ -19,7 +19,10 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
   }) : assert(
           selectedOptions == null ||
               (!isMultipleChoice && selectedOptions.length == 1) ||
-              (isMultipleChoice && selectedOptions.length != 0),
+              (isMultipleChoice && selectedOptions.length > 0),
+          'Selected options should be null, or in case of single '
+          'choice buttons have the length of 1, and in '
+          'case of multiple choice higher than zero',
         );
 
   const ChoiceQuestionData.common({int index = 0})

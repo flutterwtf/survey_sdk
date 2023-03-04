@@ -123,11 +123,17 @@ void main() {
 
     testWidgets('Validate length > 6 input min,max for Value', (tester) async {
       await tester.pumpWidget(page);
-      await tester.enterText(find.byType(CustomizationTextField).at(1), '9876543');
+      await tester.enterText(
+        find.byType(CustomizationTextField).at(1),
+        '9876543',
+      );
       expect(find.text('987654'), findsOneWidget);
       expect(max, 987654);
 
-      await tester.enterText(find.byType(CustomizationTextField).first, '2345678');
+      await tester.enterText(
+        find.byType(CustomizationTextField).first,
+        '2345678',
+      );
       expect(find.text('234567'), findsOneWidget);
       expect(min, 234567);
     });
