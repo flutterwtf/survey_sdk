@@ -1,6 +1,8 @@
 part of 'input_validator.dart';
 
 class NumberValidator implements InputValidator {
+  const NumberValidator();
+
   RegExp get _reg => RegExp(r'^[0-9]+$');
 
   @override

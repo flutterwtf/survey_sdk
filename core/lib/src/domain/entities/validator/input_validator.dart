@@ -20,10 +20,10 @@ abstract class InputValidator implements ApiObject {
   Map<String, dynamic> toJson();
 
   static InputValidator fromJson(Map<String, dynamic> json) {
-    String type = json[_validatorName];
+    final type = json[_validatorName];
     switch (type) {
       case AppValidators.number:
-        return NumberValidator();
+        return const NumberValidator();
       case AppValidators.date:
         return DateValidator();
       case AppValidators.email:
@@ -33,7 +33,7 @@ abstract class InputValidator implements ApiObject {
       case AppValidators.phone:
         return PhoneValidator();
       default:
-        return DefaultValidator();
+        return const DefaultValidator();
     }
   }
 }
