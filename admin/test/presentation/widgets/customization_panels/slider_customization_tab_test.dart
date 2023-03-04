@@ -9,8 +9,8 @@ import '../app_test.dart';
 
 void main() {
   group('Tests for SliderCustomizationTab', () {
-    String? thickness = '';
-    String? numThumb = '';
+    var thickness = 0;
+    var numThumb = 0;
     Color active = Colors.red;
     Color inactive = Colors.red;
     Color colorThumb = Colors.red;
@@ -26,7 +26,7 @@ void main() {
         onThicknessChanged: (newThickness) {
           thickness = newThickness;
         },
-        onThumbChanged: (newNumThumb) {
+        onThumbSizeChanged: (newNumThumb) {
           numThumb = newNumThumb;
         },
         onThumbColorChanged: (newColorThumb) {
@@ -62,7 +62,7 @@ void main() {
         '10',
       );
       expect(find.text('10'), findsOneWidget);
-      expect(thickness, '10');
+      expect(thickness, 10);
     });
 
     testWidgets('Input string for Thickness', (tester) async {
@@ -72,7 +72,7 @@ void main() {
         'qw1',
       );
       expect(find.text('qw'), findsNothing);
-      expect(thickness, '1');
+      expect(thickness, 1);
     });
 
     testWidgets('Validate input length > 2 for Thickness', (tester) async {
@@ -82,7 +82,7 @@ void main() {
         '123',
       );
       expect(find.text('123'), findsNothing);
-      expect(thickness, '12');
+      expect(thickness, 12);
     });
 
     testWidgets('Input color for Active', (tester) async {
@@ -170,7 +170,7 @@ void main() {
 
       await tester.enterText(find.byType(ThicknessCustomizationItem).last, '8');
       expect(find.text('8'), findsOneWidget);
-      expect(numThumb, '8');
+      expect(numThumb, 8);
     });
 
     testWidgets('Validate input string for Thumb', (tester) async {
@@ -180,7 +180,7 @@ void main() {
         'q3',
       );
       expect(find.text('3'), findsOneWidget);
-      expect(numThumb, '3');
+      expect(numThumb, 3);
     });
 
     testWidgets('Validate input length > 2 for Thumb', (tester) async {
@@ -190,7 +190,7 @@ void main() {
         '873',
       );
       expect(find.text('87'), findsOneWidget);
-      expect(numThumb, '87');
+      expect(numThumb, 87);
     });
   });
 }

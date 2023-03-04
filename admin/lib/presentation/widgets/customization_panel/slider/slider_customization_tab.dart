@@ -8,18 +8,18 @@ import 'package:survey_admin/presentation/widgets/customization_items/thickness_
 import 'package:survey_admin/presentation/widgets/customization_panel/customization_tab.dart';
 
 class SliderCustomizationTab extends CustomizationTab {
-  final ValueChanged<String?> onThicknessChanged;
+  final ValueChanged<int> onThicknessChanged;
   final ValueChanged<Color> onActiveColorChanged;
   final ValueChanged<Color> onInactiveColorChanged;
   final ValueChanged<Color> onThumbColorChanged;
-  final ValueChanged<String?> onThumbChanged;
+  final ValueChanged<int> onThumbSizeChanged;
 
   const SliderCustomizationTab({
     required super.title,
     required this.onActiveColorChanged,
     required this.onInactiveColorChanged,
     required this.onThicknessChanged,
-    required this.onThumbChanged,
+    required this.onThumbSizeChanged,
     required this.onThumbColorChanged,
     super.key,
   });
@@ -33,7 +33,14 @@ class SliderCustomizationTab extends CustomizationTab {
           isTopDividerShown: true,
           children: [
             ThicknessCustomizationItem(
-              onThicknessChanged: onThicknessChanged,
+              onThicknessChanged: (value) {
+                if (value == null) return;
+
+                final thickness = int.tryParse(value);
+                if (thickness != null) {
+                  onThicknessChanged(thickness);
+                }
+              },
               initialSize: AppFonts.sizeL,
             ),
           ],
@@ -69,7 +76,14 @@ class SliderCustomizationTab extends CustomizationTab {
                 ),
                 Expanded(
                   child: ThicknessCustomizationItem(
-                    onThicknessChanged: onThumbChanged,
+                    onThicknessChanged: (value) {
+                      if (value == null) return;
+
+                      final size = int.tryParse(value);
+                      if (size != null) {
+                        onThumbSizeChanged(size);
+                      }
+                    },
                     initialSize: AppFonts.sizeL,
                   ),
                 ),

@@ -10,8 +10,8 @@ import 'package:survey_admin/presentation/widgets/customization_panel/customizat
 class SliderContentCustomizationTab extends CustomizationTab {
   final ValueChanged<String> onTitleChanged;
   final ValueChanged<String> onSubtitleChanged;
-  final void Function(int? min, int? max) onMinMaxChanged;
-  final ValueChanged<int?> onDivisionsChanged;
+  final void Function(int min, int max) onMinMaxChanged;
+  final ValueChanged<int> onDivisionsChanged;
 
   const SliderContentCustomizationTab({
     required super.title,

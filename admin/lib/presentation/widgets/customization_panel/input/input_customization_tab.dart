@@ -16,14 +16,14 @@ class InputCustomizationTab extends CustomizationTab {
   final void Function(bool isMultiline, int lineAmount) onMultilineChanged;
   final ValueChanged<Color> onFillColorChanged;
   final ValueChanged<Color> onBorderColorChanged;
-  final ValueChanged<int?> onBorderSizeChanged;
-  final ValueChanged<int?> onBorderWidthChanged;
+  final ValueChanged<int> onBorderSizeChanged;
+  final ValueChanged<int> onBorderWidthChanged;
   final void Function(double size) onHorizontalPaddingChanged;
   final void Function(double size) onVerticalPaddingChanged;
   final ValueChanged<Color> onHintColorChanged;
-  final ValueChanged<int?> onHintFontSizeChanged;
+  final ValueChanged<int> onHintFontSizeChanged;
   final ValueChanged<Color> onTextColorChanged;
-  final ValueChanged<int?> onTextFontSizeChanged;
+  final ValueChanged<int> onTextFontSizeChanged;
   final ValueChanged<InputType> onInputTypeChanged;
 
   const InputCustomizationTab({
@@ -96,11 +96,12 @@ class InputCustomizationTab extends CustomizationTab {
                           fontWeight: AppFonts.weightRegular,
                         ),
                       ),
-                      onChanged: (size) {
-                        if (size == null) {
-                          onBorderWidthChanged(null);
-                        } else {
-                          onBorderWidthChanged(int.tryParse(size));
+                      onChanged: (value) {
+                        if (value == null) return;
+
+                        final size = int.tryParse(value);
+                        if (size != null) {
+                          onBorderWidthChanged(size);
                         }
                       },
                     ),
@@ -139,11 +140,12 @@ class InputCustomizationTab extends CustomizationTab {
                       FilteringTextInputFormatter.digitsOnly,
                       LengthLimitingTextInputFormatter(3),
                     ],
-                    onChanged: (size) {
-                      if (size == null) {
-                        onHintFontSizeChanged(null);
-                      } else {
-                        onHintFontSizeChanged(int.tryParse(size));
+                    onChanged: (value) {
+                      if (value == null) return;
+
+                      final size = int.tryParse(value);
+                      if (size != null) {
+                        onHintFontSizeChanged(size);
                       }
                     },
                   ),
@@ -170,11 +172,12 @@ class InputCustomizationTab extends CustomizationTab {
                       FilteringTextInputFormatter.digitsOnly,
                       LengthLimitingTextInputFormatter(3),
                     ],
-                    onChanged: (size) {
-                      if (size == null) {
-                        onTextFontSizeChanged(null);
-                      } else {
-                        onTextFontSizeChanged(int.tryParse(size));
+                    onChanged: (value) {
+                      if (value == null) return;
+
+                      final size = int.tryParse(value);
+                      if (size != null) {
+                        onTextFontSizeChanged(size);
                       }
                     },
                   ),

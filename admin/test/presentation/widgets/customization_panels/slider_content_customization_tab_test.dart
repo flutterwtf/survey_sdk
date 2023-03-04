@@ -7,16 +7,16 @@ import '../app_test.dart';
 
 void main() {
   group('Tests for SliderContentCustomizationTab', () {
-    int? min;
-    int? max;
+    late int min;
+    late int max;
     var title = '';
     var subtitle = '';
-    int? value;
+    late int divisions;
     final page = AppTest(
       child: SliderContentCustomizationTab(
         title: 'Content',
         onDivisionsChanged: (newValue) {
-          value = newValue;
+          divisions = newValue;
         },
         onMinMaxChanged: (newMin, newMax) {
           min = newMin;
@@ -66,7 +66,7 @@ void main() {
         '1',
       );
       expect(find.text('1'), findsOneWidget);
-      expect(value, 1);
+      expect(divisions, 1);
     });
 
     testWidgets('Input text for Divisions', (tester) async {
@@ -75,8 +75,9 @@ void main() {
         find.widgetWithText(CustomizationItemsContainer, 'Divisions'),
         'q',
       );
+      final divisionsBeforeEnter = divisions;
       expect(find.text('q'), findsNothing);
-      expect(value, null);
+      expect(divisions, divisionsBeforeEnter);
     });
 
     testWidgets('Validate length > 3 input for Divisions', (tester) async {
@@ -86,7 +87,7 @@ void main() {
         '1234',
       );
       expect(find.text('1234'), findsNothing);
-      expect(value, 123);
+      expect(divisions, 123);
     });
 
     testWidgets('Input min,max for Value(num)', (tester) async {
@@ -102,13 +103,16 @@ void main() {
 
     testWidgets('Input min,max for Value(string)', (tester) async {
       await tester.pumpWidget(page);
+
+      final minBeforeEnter = min;
       await tester.enterText(find.byKey(const ValueKey('min')), 'qw');
       expect(find.text('qw'), findsNothing);
-      expect(min, null);
+      expect(min, minBeforeEnter);
 
+      final maxBeforeEnter = max;
       await tester.enterText(find.byKey(const ValueKey('max')), 'qw');
       expect(find.text('qw'), findsNothing);
-      expect(max, null);
+      expect(max, maxBeforeEnter);
     });
 
     testWidgets('Validate length > 6 input min,max for Value', (tester) async {

@@ -14,10 +14,10 @@ void main() {
     Color buttonUpColor = Colors.red;
     Color titleColor = Colors.red;
     Color subtitleColor = Colors.red;
-    String? titleSize = '';
-    String? subtitleSize = '';
-    String? buttonDownSize = '';
-    String? buttonBorder = '';
+    var titleSize = 0;
+    var subtitleSize = 0;
+    var buttonDownSize = 0;
+    var buttonBorder = 0;
     final page = AppTest(
       child: SliderCommonCustomizationTab(
         title: 'Common',
@@ -36,16 +36,16 @@ void main() {
         onTitleColorChanged: (newTitleColor) {
           titleColor = newTitleColor;
         },
-        onTitleChanged: (newTitleSize) {
+        onTitleFontSizeChanged: (newTitleSize) {
           titleSize = newTitleSize;
         },
-        onSubtitleChanged: (newSubtitleSize) {
+        onSubtitleFontSizeChanged: (newSubtitleSize) {
           subtitleSize = newSubtitleSize;
         },
-        onButtonDownChanged: (newButtonDownSize) {
+        onButtonFontSizeChanged: (newButtonDownSize) {
           buttonDownSize = newButtonDownSize;
         },
-        onButtonBorderChanged: (newButtonBorder) {
+        onButtonRadiusChanged: (newButtonBorder) {
           buttonBorder = newButtonBorder;
         },
       ),
@@ -129,21 +129,21 @@ void main() {
       await tester.pumpWidget(page);
       await tester.enterText(find.byType(CustomizationTextField).at(2), '10');
       expect(find.text('10'), findsOneWidget);
-      expect(titleSize, '10');
+      expect(titleSize, 10);
     });
 
     testWidgets('Input size(string) for Title', (tester) async {
       await tester.pumpWidget(page);
       await tester.enterText(find.byType(CustomizationTextField).at(2), 'q1');
       expect(find.text('q1'), findsNothing);
-      expect(titleSize, '1');
+      expect(titleSize, 1);
     });
 
     testWidgets('Validate input size length > 2 for Title', (tester) async {
       await tester.pumpWidget(page);
       await tester.enterText(find.byType(CustomizationTextField).at(2), '112');
       expect(find.text('112'), findsNothing);
-      expect(titleSize, '11');
+      expect(titleSize, 11);
     });
 
     testWidgets('Input color for Subtitle', (tester) async {
@@ -174,21 +174,21 @@ void main() {
       await tester.pumpWidget(page);
       await tester.enterText(find.byType(CustomizationTextField).at(4), '8');
       expect(find.text('8'), findsOneWidget);
-      expect(subtitleSize, '8');
+      expect(subtitleSize, 8);
     });
 
     testWidgets('Input size(string) for Subtitle', (tester) async {
       await tester.pumpWidget(page);
       await tester.enterText(find.byType(CustomizationTextField).at(4), 'q9');
       expect(find.text('q9'), findsNothing);
-      expect(subtitleSize, '9');
+      expect(subtitleSize, 9);
     });
 
     testWidgets('Validate input size length > 2 for Subtitle', (tester) async {
       await tester.pumpWidget(page);
       await tester.enterText(find.byType(CustomizationTextField).at(4), '123');
       expect(find.text('123'), findsNothing);
-      expect(subtitleSize, '12');
+      expect(subtitleSize, 12);
     });
 
     testWidgets('Input color for UpButton', (tester) async {
@@ -243,14 +243,14 @@ void main() {
       await tester.pumpWidget(page);
       await tester.enterText(find.byType(CustomizationTextField).at(7), '14');
       expect(find.text('14'), findsOneWidget);
-      expect(buttonDownSize, '14');
+      expect(buttonDownSize, 14);
     });
 
     testWidgets('Input size(string) for DownButton', (tester) async {
       await tester.pumpWidget(page);
       await tester.enterText(find.byType(CustomizationTextField).at(7), 'q4');
       expect(find.text('q4'), findsNothing);
-      expect(buttonDownSize, '4');
+      expect(buttonDownSize, 4);
     });
 
     testWidgets('Validate input size length > 2 for DownButton',
@@ -258,21 +258,21 @@ void main() {
       await tester.pumpWidget(page);
       await tester.enterText(find.byType(CustomizationTextField).at(7), '143');
       expect(find.text('143'), findsNothing);
-      expect(buttonDownSize, '14');
+      expect(buttonDownSize, 14);
     });
 
     testWidgets('Input size(num) for BorderButton', (tester) async {
       await tester.pumpWidget(page);
       await tester.enterText(find.byType(CustomizationTextField).at(8), '18');
       expect(find.text('18'), findsOneWidget);
-      expect(buttonBorder, '18');
+      expect(buttonBorder, 18);
     });
 
     testWidgets('Input size(string) for BorderButton', (tester) async {
       await tester.pumpWidget(page);
       await tester.enterText(find.byType(CustomizationTextField).at(8), 'q8');
       expect(find.text('q8'), findsNothing);
-      expect(buttonBorder, '8');
+      expect(buttonBorder, 8);
     });
 
     testWidgets('Validate input size length > 2 for BorderButton',
@@ -280,7 +280,7 @@ void main() {
       await tester.pumpWidget(page);
       await tester.enterText(find.byType(CustomizationTextField).at(8), '198');
       expect(find.text('198'), findsNothing);
-      expect(buttonBorder, '19');
+      expect(buttonBorder, 19);
     });
   });
 }

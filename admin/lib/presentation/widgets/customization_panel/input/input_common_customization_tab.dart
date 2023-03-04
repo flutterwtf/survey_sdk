@@ -10,12 +10,12 @@ import 'package:survey_admin/presentation/widgets/customization_panel/customizat
 class InputCommonCustomizationTab extends CustomizationTab {
   final ValueChanged<Color> onFillColorPicked;
   final ValueChanged<Color> onTitleColorPicked;
-  final ValueChanged<int?> onTitleFontSizeChanged;
+  final ValueChanged<int> onTitleFontSizeChanged;
   final ValueChanged<Color> onSubtitleColorPicked;
-  final ValueChanged<int?> onSubtitleFontSizeChanged;
+  final ValueChanged<int> onSubtitleFontSizeChanged;
   final ValueChanged<Color> onButtonFirstColorPicked;
   final ValueChanged<Color> onButtonSecondColorPicked;
-  final ValueChanged<int?> onButtonFontSizeChanged;
+  final ValueChanged<int> onButtonFontSizeChanged;
 
   const InputCommonCustomizationTab({
     required super.title,
@@ -63,11 +63,12 @@ class InputCommonCustomizationTab extends CustomizationTab {
                       FilteringTextInputFormatter.digitsOnly,
                       LengthLimitingTextInputFormatter(2),
                     ],
-                    onChanged: (size) {
-                      if (size == null) {
-                        onTitleFontSizeChanged(null);
-                      } else {
-                        onTitleFontSizeChanged(int.tryParse(size));
+                    onChanged: (value) {
+                      if (value == null) return;
+
+                      final size = int.tryParse(value);
+                      if (size != null) {
+                        onTitleFontSizeChanged(size);
                       }
                     },
                   ),
@@ -94,11 +95,12 @@ class InputCommonCustomizationTab extends CustomizationTab {
                       FilteringTextInputFormatter.digitsOnly,
                       LengthLimitingTextInputFormatter(2),
                     ],
-                    onChanged: (size) {
-                      if (size == null) {
-                        onSubtitleFontSizeChanged(null);
-                      } else {
-                        onSubtitleFontSizeChanged(int.tryParse(size));
+                    onChanged: (value) {
+                      if (value == null) return;
+
+                      final size = int.tryParse(value);
+                      if (size != null) {
+                        onSubtitleFontSizeChanged(size);
                       }
                     },
                   ),
@@ -129,11 +131,12 @@ class InputCommonCustomizationTab extends CustomizationTab {
                       FilteringTextInputFormatter.digitsOnly,
                       LengthLimitingTextInputFormatter(2),
                     ],
-                    onChanged: (size) {
-                      if (size == null) {
-                        onButtonFontSizeChanged(null);
-                      } else {
-                        onButtonFontSizeChanged(int.tryParse(size));
+                    onChanged: (value) {
+                      if (value == null) return;
+
+                      final size = int.tryParse(value);
+                      if (size != null) {
+                        onButtonFontSizeChanged(size);
                       }
                     },
                   ),

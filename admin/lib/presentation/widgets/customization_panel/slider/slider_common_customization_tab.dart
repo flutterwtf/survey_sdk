@@ -17,10 +17,10 @@ class SliderCommonCustomizationTab extends CustomizationTab {
   final ValueChanged<Color> onSubtitleColorChanged;
   final ValueChanged<Color> onButtonUpColorChanged;
   final ValueChanged<Color> onButtonDownColorChanged;
-  final ValueChanged<String?> onTitleChanged;
-  final ValueChanged<String?> onSubtitleChanged;
-  final ValueChanged<String?> onButtonDownChanged;
-  final ValueChanged<String?> onButtonBorderChanged;
+  final ValueChanged<int> onTitleFontSizeChanged;
+  final ValueChanged<int> onSubtitleFontSizeChanged;
+  final ValueChanged<int> onButtonFontSizeChanged;
+  final ValueChanged<int> onButtonRadiusChanged;
 
   const SliderCommonCustomizationTab({
     required super.title,
@@ -29,10 +29,10 @@ class SliderCommonCustomizationTab extends CustomizationTab {
     required this.onFillColorChanged,
     required this.onSubtitleColorChanged,
     required this.onTitleColorChanged,
-    required this.onTitleChanged,
-    required this.onSubtitleChanged,
-    required this.onButtonDownChanged,
-    required this.onButtonBorderChanged,
+    required this.onTitleFontSizeChanged,
+    required this.onSubtitleFontSizeChanged,
+    required this.onButtonFontSizeChanged,
+    required this.onButtonRadiusChanged,
     super.key,
   });
 
@@ -64,7 +64,14 @@ class SliderCommonCustomizationTab extends CustomizationTab {
                 Expanded(
                   child: CustomizationTextField(
                     initialValue: AppFonts.sizeL.toString(),
-                    onChanged: onTitleChanged,
+                    onChanged: (value) {
+                      if (value == null) return;
+
+                      final size = int.tryParse(value);
+                      if (size != null) {
+                        onTitleFontSizeChanged(size);
+                      }
+                    },
                     inputFormatters: [
                       FilteringTextInputFormatter.digitsOnly,
                       LengthLimitingTextInputFormatter(2),
@@ -89,7 +96,14 @@ class SliderCommonCustomizationTab extends CustomizationTab {
                 Expanded(
                   child: CustomizationTextField(
                     initialValue: AppFonts.sizeL.toString(),
-                    onChanged: onSubtitleChanged,
+                    onChanged: (value) {
+                      if (value == null) return;
+
+                      final size = int.tryParse(value);
+                      if (size != null) {
+                        onSubtitleFontSizeChanged(size);
+                      }
+                    },
                     inputFormatters: [
                       FilteringTextInputFormatter.digitsOnly,
                       LengthLimitingTextInputFormatter(2),
@@ -118,7 +132,14 @@ class SliderCommonCustomizationTab extends CustomizationTab {
                 Expanded(
                   child: CustomizationTextField(
                     initialValue: AppFonts.sizeL.toString(),
-                    onChanged: onButtonDownChanged,
+                    onChanged: (value) {
+                      if (value == null) return;
+
+                      final size = int.tryParse(value);
+                      if (size != null) {
+                        onButtonFontSizeChanged(size);
+                      }
+                    },
                     inputFormatters: [
                       FilteringTextInputFormatter.digitsOnly,
                       LengthLimitingTextInputFormatter(2),
@@ -134,7 +155,14 @@ class SliderCommonCustomizationTab extends CustomizationTab {
                 Expanded(
                   child: CustomizationTextField(
                     initialValue: AppFonts.sizeL.toString(),
-                    onChanged: onButtonBorderChanged,
+                    onChanged: (value) {
+                      if (value == null) return;
+
+                      final radius = int.tryParse(value);
+                      if (radius != null) {
+                        onButtonRadiusChanged(radius);
+                      }
+                    },
                     inputFormatters: [
                       FilteringTextInputFormatter.digitsOnly,
                       LengthLimitingTextInputFormatter(2),
