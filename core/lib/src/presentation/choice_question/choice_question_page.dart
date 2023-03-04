@@ -128,37 +128,39 @@ class _QuestionCheckboxes extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: options
-          .map((option) => CheckboxListTile(
-                controlAffinity: ListTileControlAffinity.leading,
-                title: Text(
-                  option,
-                  style: context.theme.textTheme.bodyMedium,
-                ),
-                value: selectedOptions.contains(option),
-                activeColor: Colors.transparent,
-                checkColor: AppColors.black,
-                side: MaterialStateBorderSide.resolveWith((states) {
-                  if (states.contains(MaterialState.selected)) {
-                    return BorderSide(color: activeColor);
+          .map(
+            (option) => CheckboxListTile(
+              controlAffinity: ListTileControlAffinity.leading,
+              title: Text(
+                option,
+                style: context.theme.textTheme.bodyMedium,
+              ),
+              value: selectedOptions.contains(option),
+              activeColor: Colors.transparent,
+              checkColor: AppColors.black,
+              side: MaterialStateBorderSide.resolveWith((states) {
+                if (states.contains(MaterialState.selected)) {
+                  return BorderSide(color: activeColor);
+                } else {
+                  return BorderSide(color: inactiveColor);
+                }
+              }),
+              checkboxShape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(5),
+              ),
+              onChanged: (shouldAdd) {
+                if (shouldAdd != null) {
+                  var options = selectedOptions;
+                  if (shouldAdd) {
+                    options = [...selectedOptions, option];
                   } else {
-                    return BorderSide(color: inactiveColor);
+                    options.remove(option);
                   }
-                }),
-                checkboxShape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(5),
-                ),
-                onChanged: (shouldAdd) {
-                  if (shouldAdd != null) {
-                    var options = selectedOptions;
-                    if (shouldAdd) {
-                      options = [...selectedOptions, option];
-                    } else {
-                      options.remove(option);
-                    }
-                    onChanged(options);
-                  }
-                },
-              ))
+                  onChanged(options);
+                }
+              },
+            ),
+          )
           .toList(),
     );
   }
@@ -187,17 +189,19 @@ class _QuestionRadioButtons extends StatelessWidget {
       ),
       child: Column(
         children: options
-            .map((option) => RadioListTile<String?>(
-                  groupValue: selectedOption,
-                  controlAffinity: ListTileControlAffinity.leading,
-                  title: Text(
-                    option,
-                    style: context.theme.textTheme.bodyMedium,
-                  ),
-                  value: option,
-                  activeColor: activeColor,
-                  onChanged: onChanged,
-                ))
+            .map(
+              (option) => RadioListTile<String?>(
+                groupValue: selectedOption,
+                controlAffinity: ListTileControlAffinity.leading,
+                title: Text(
+                  option,
+                  style: context.theme.textTheme.bodyMedium,
+                ),
+                value: option,
+                activeColor: activeColor,
+                onChanged: onChanged,
+              ),
+            )
             .toList(),
       ),
     );
