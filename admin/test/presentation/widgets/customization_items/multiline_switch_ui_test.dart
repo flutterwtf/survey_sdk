@@ -8,7 +8,6 @@ import 'package:survey_admin/presentation/widgets/customization_items/multiline_
 void main() {
   group('Tests for MultilineSwitch', () {
     const title = 'Multiline';
-    const buttonKey = Key('Switch');
     const inputNum = '12';
     const inputText = 'qwe';
     const inputTitle = 'Lines';
@@ -26,39 +25,46 @@ void main() {
         ),
       ),
     );
+
     testWidgets('Load widget', (tester) async {
       await tester.pumpWidget(multilineSwitchPage);
       expect(find.text(title), findsOneWidget);
     });
+
     testWidgets('Open multiline input(tap on switch)', (tester) async {
       await tester.pumpWidget(multilineSwitchPage);
-      await tester.tap(find.byKey(buttonKey));
+      await tester.tap(find.byType(InkWell));
       await tester.pump();
       expect(find.text(inputTitle), findsOneWidget);
     });
+
     testWidgets('Close multiline input(double tap on switch)', (tester) async {
       await tester.pumpWidget(multilineSwitchPage);
-      await tester.tap(find.byKey(buttonKey));
+      await tester.tap(find.byType(InkWell));
       await tester.pump();
-      await tester.tap(find.byKey(buttonKey));
+      await tester.tap(find.byType(InkWell));
       await tester.pump();
       expect(find.text(inputTitle), findsNothing);
     });
+
     testWidgets('Input count lines(num)', (tester) async {
       await tester.pumpWidget(multilineSwitchPage);
-      await tester.tap(find.byKey(buttonKey));
+      await tester.tap(find.byType(InkWell));
       await tester.pump();
       await tester.enterText(find.byType(CustomizationTextField), inputNum);
       expect(find.text(inputNum), findsOneWidget);
     });
+
     testWidgets('Input count lines(not num)', (tester) async {
       await tester.pumpWidget(multilineSwitchPage);
-      await tester.tap(find.byKey(buttonKey));
+      await tester.tap(find.byType(InkWell));
       await tester.pump();
       await tester.enterText(find.byType(CustomizationTextField), inputText);
       expect(find.text(inputText), findsNothing);
     });
-    testWidgets('Check widget with parameters isMultiline = true', (tester) async {
+
+    testWidgets('Check widget with parameters isMultiline = true',
+        (tester) async {
       await tester.pumpWidget(
         MaterialApp(
           supportedLocales: AppLocalizations.supportedLocales,

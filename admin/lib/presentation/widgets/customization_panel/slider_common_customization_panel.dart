@@ -3,8 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:survey_admin/presentation/app/localization/localizations.dart';
 import 'package:survey_admin/presentation/utils/app_fonts.dart';
-import 'package:survey_admin/presentation/utils/asset_strings.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
+import 'package:survey_admin/presentation/utils/constants/app_assets.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/color_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
@@ -23,7 +23,6 @@ class SliderCommonCustomizationPanel extends CustomizationPanel {
   final ValueChanged<String?> onButtonBorderChanged;
 
   const SliderCommonCustomizationPanel({
-    super.key,
     required super.title,
     required this.onButtonDownColorChanged,
     required this.onButtonUpColorChanged,
@@ -34,6 +33,7 @@ class SliderCommonCustomizationPanel extends CustomizationPanel {
     required this.onSubtitleChanged,
     required this.onButtonDownChanged,
     required this.onButtonBorderChanged,
+    super.key,
   });
 
   @override
@@ -129,7 +129,7 @@ class SliderCommonCustomizationPanel extends CustomizationPanel {
             ),
             Row(
               children: [
-                SvgPicture.asset(AssetStrings.arc),
+                SvgPicture.asset(AppAssets.arcIcon),
                 const SizedBox(width: AppDimensions.margin2XS),
                 Expanded(
                   child: CustomizationTextField(

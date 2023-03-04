@@ -11,10 +11,10 @@ void main() {
     'Question content customization panel tests',
     () {
       const testText = 'Text for test';
-      String textTitle = '';
-      String textSubtitle = '';
-      String textHint = '';
-      String textButton = '';
+      var textTitle = '';
+      var textSubtitle = '';
+      var textHint = '';
+      var textButton = '';
       final page = MaterialApp(
         supportedLocales: AppLocalizations.supportedLocales,
         localizationsDelegates: const [
@@ -51,26 +51,30 @@ void main() {
         (tester) async {
           await tester.pumpWidget(page);
           await tester.enterText(
-              find.widgetWithText(CustomizationItemsContainer, 'Title'),
-              testText);
+            find.widgetWithText(CustomizationItemsContainer, 'Title'),
+            testText,
+          );
           expect(textTitle, testText);
 
           await tester.pumpWidget(page);
           await tester.enterText(
-              find.widgetWithText(CustomizationItemsContainer, 'Subtitle'),
-              testText);
+            find.widgetWithText(CustomizationItemsContainer, 'Subtitle'),
+            testText,
+          );
           expect(textSubtitle, testText);
 
           await tester.pumpWidget(page);
           await tester.enterText(
-              find.widgetWithText(CustomizationItemsContainer, 'Hint'),
-              testText);
+            find.widgetWithText(CustomizationItemsContainer, 'Hint'),
+            testText,
+          );
           expect(textHint, testText);
 
           await tester.pumpWidget(page);
           await tester.enterText(
-              find.widgetWithText(CustomizationItemsContainer, 'Button'),
-              testText);
+            find.widgetWithText(CustomizationItemsContainer, 'Button'),
+            testText,
+          );
           expect(textButton, testText);
 
           expect(find.text(testText), findsNWidgets(4));

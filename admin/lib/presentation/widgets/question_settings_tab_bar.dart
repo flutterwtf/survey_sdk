@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:survey_admin/presentation/utils/app_fonts.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
+import 'package:survey_admin/presentation/utils/theme_extension.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/customization_panel.dart';
 
 class QuestionSettingsTabBar extends StatefulWidget {
   final List<CustomizationPanel> panels;
 
   const QuestionSettingsTabBar({
-    super.key,
     required this.panels,
+    super.key,
   });
 
   @override
@@ -36,7 +38,6 @@ class _QuestionSettingsTabBarState extends State<QuestionSettingsTabBar>
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
       children: [
         TabBar(
           controller: _tabController,
@@ -44,6 +45,10 @@ class _QuestionSettingsTabBarState extends State<QuestionSettingsTabBar>
           unselectedLabelColor: AppColors.customizationTabBarInactiveText,
           indicatorColor: AppColors.black,
           indicatorSize: TabBarIndicatorSize.label,
+          // TODO(dev): do we need this field?
+          labelStyle: context.theme.textTheme.bodyMedium?.copyWith(
+            fontWeight: AppFonts.weightMedium,
+          ),
           tabs: [
             for (var panel in widget.panels) Tab(text: panel.title),
           ],

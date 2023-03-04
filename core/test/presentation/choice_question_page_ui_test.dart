@@ -9,10 +9,10 @@ import 'widget/app_test.dart';
 void _mockOnSend(dynamic data) {}
 
 void main() {
-  final usualMockChoiceData = ChoiceQuestionData(
+  const usualMockChoiceData = ChoiceQuestionData(
     title: 'title',
     content: 'content',
-    options: const ['option', 'option', 'option'],
+    options: ['option', 'option', 'option'],
     isMultipleChoice: false,
     isSkip: false,
     index: 0,
@@ -21,7 +21,7 @@ void main() {
   group('components of Choice Question widget', () {
     testWidgets('Load widget', (tester) async {
       await tester.pumpWidget(
-        AppTest(
+        const AppTest(
           child: ChoiceQuestionPage(
             data: usualMockChoiceData,
             onSend: _mockOnSend,
@@ -30,7 +30,10 @@ void main() {
       );
       expect(find.text('title'), findsOneWidget);
       expect(find.text('content'), findsOneWidget);
-      expect(find.text('option'), findsNWidgets(usualMockChoiceData.options.length));
+      expect(
+        find.text('option'),
+        findsNWidgets(usualMockChoiceData.options.length),
+      );
     });
 
     testWidgets('Non skippable without answer', (tester) async {
@@ -65,7 +68,7 @@ void main() {
   testWidgets('Single choice without answer', (tester) async {
     final completer = Completer<void>();
     await tester.pumpWidget(
-      AppTest(
+      const AppTest(
         child: ChoiceQuestionPage(
           data: usualMockChoiceData,
           onSend: _mockOnSend,

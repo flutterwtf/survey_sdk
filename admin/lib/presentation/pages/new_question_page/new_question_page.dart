@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:survey_admin/presentation/utils/app_fonts.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
+import 'package:survey_admin/presentation/utils/constants/app_assets.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
-import 'package:survey_admin/presentation/utils/constants/image_constants.dart';
+import 'package:survey_admin/presentation/utils/theme_extension.dart';
 import 'package:survey_admin/presentation/widgets/vector_image.dart';
 import 'package:survey_core/survey_core.dart';
 
@@ -15,10 +16,10 @@ const _tabs = [
   'Custom input',
 ];
 final Map<String, QuestionData> _dataMap = {
-  'Intro': IntroQuestionData.common(),
-  'Choice': ChoiceQuestionData.common(),
-  'Slider': SliderQuestionData.common(),
-  'Custom input': InputQuestionData.common(),
+  'Intro': const IntroQuestionData.common(),
+  'Choice': const ChoiceQuestionData.common(),
+  'Slider': const SliderQuestionData.common(),
+  'Custom input': const InputQuestionData.common(),
 };
 const _optionsInTabs = {
   'Intro': ['Title', 'Image intro'],
@@ -38,7 +39,7 @@ const Map<String, String> _optionsAssets = {
 };
 
 class NewQuestionPage extends StatefulWidget {
-  const NewQuestionPage({Key? key}) : super(key: key);
+  const NewQuestionPage({super.key});
 
   @override
   State<NewQuestionPage> createState() => _NewQuestionPageState();
@@ -56,7 +57,7 @@ class _NewQuestionPageState extends State<NewQuestionPage> {
           () => _selectedTab = tabTitle,
         );
       },
-      isSelected: _selectedTab == tabTitle ? true : false,
+      isSelected: _selectedTab == tabTitle,
     );
   }
 
@@ -113,7 +114,7 @@ class _NewQuestionPageState extends State<NewQuestionPage> {
 }
 
 class _BackButton extends StatelessWidget {
-  const _BackButton({Key? key}) : super(key: key);
+  const _BackButton();
 
   @override
   Widget build(BuildContext context) {
@@ -131,17 +132,15 @@ class _BackButton extends StatelessWidget {
 }
 
 class _AppBarTitle extends StatelessWidget {
-  const _AppBarTitle({Key? key}) : super(key: key);
+  const _AppBarTitle();
 
   @override
   Widget build(BuildContext context) {
-    return const Align(
+    return Align(
       alignment: Alignment.centerLeft,
       child: Text(
         _title,
-        style: TextStyle(
-          color: AppColors.black,
-          fontSize: AppFonts.sizeM,
+        style: context.theme.textTheme.labelLarge?.copyWith(
           fontWeight: AppFonts.weightRegular,
         ),
       ),
@@ -155,11 +154,10 @@ class _TabButton extends StatelessWidget {
   final bool isSelected;
 
   const _TabButton({
-    Key? key,
     required this.title,
     required this.onTap,
     required this.isSelected,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -170,11 +168,13 @@ class _TabButton extends StatelessWidget {
         padding: const EdgeInsets.only(top: AppDimensions.sizeM),
         child: Text(
           title,
-          style: TextStyle(
-            color: AppColors.black,
-            fontSize: AppFonts.sizeL,
-            fontWeight: isSelected ? AppFonts.weightBold : AppFonts.weightRegular,
-          ),
+          style: isSelected
+              ? context.theme.textTheme.titleMedium?.copyWith(
+                  fontWeight: AppFonts.weightSemiBold,
+                )
+              : context.theme.textTheme.titleMedium?.copyWith(
+                  fontWeight: AppFonts.weightRegular,
+                ),
         ),
       ),
     );
@@ -186,10 +186,9 @@ class _QuestionOptionsListView extends StatelessWidget {
   final String selectedOption;
 
   const _QuestionOptionsListView({
-    Key? key,
     required this.options,
     required this.selectedOption,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -213,10 +212,9 @@ class _AssetTextOption extends StatelessWidget {
   final String titleText;
 
   const _AssetTextOption({
-    Key? key,
     required this.assetName,
     required this.titleText,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -230,10 +228,7 @@ class _AssetTextOption extends StatelessWidget {
           const SizedBox(height: AppDimensions.marginXL),
           Text(
             titleText,
-            style: const TextStyle(
-              fontSize: AppFonts.sizeL,
-              fontWeight: AppFonts.weightMedium,
-            ),
+            style: context.theme.textTheme.titleMedium,
           ),
         ],
       ),
@@ -245,9 +240,8 @@ class _AddButton extends StatelessWidget {
   final VoidCallback onPressed;
 
   const _AddButton({
-    Key? key,
     required this.onPressed,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -260,12 +254,12 @@ class _AddButton extends StatelessWidget {
           color: AppColors.black,
           borderRadius: BorderRadius.circular(AppDimensions.circularRadiusXS),
         ),
-        child: const Center(
+        child: Center(
           child: Text(
             'ADD',
-            style: TextStyle(
+            style: context.theme.textTheme.labelLarge?.copyWith(
+              fontFamily: AppFonts.karla,
               color: AppColors.white,
-              fontWeight: AppFonts.weightBold,
             ),
           ),
         ),

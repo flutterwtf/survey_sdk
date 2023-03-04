@@ -1,11 +1,13 @@
+import 'package:survey_core/src/domain/entities/constants/question_types.dart';
 import 'package:survey_core/src/domain/entities/question_types/question_data.dart';
 import 'package:survey_core/src/domain/entities/themes/choice_question_theme.dart';
 
 class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
   final bool isMultipleChoice;
   final List<String> options;
+  final List<String>? selectedOptions;
 
-  ChoiceQuestionData({
+  const ChoiceQuestionData({
     required this.isMultipleChoice,
     required this.options,
     required super.index,
@@ -13,18 +15,30 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
     required super.subtitle,
     required super.isSkip,
     super.content,
-  });
+    this.selectedOptions,
+  }) : assert(
+          selectedOptions == null ||
+              (!isMultipleChoice && selectedOptions.length == 1) ||
+              (isMultipleChoice && selectedOptions.length > 0),
+          'Selected options should be null, or in case of single '
+          'choice buttons have the length of 1, and in '
+          'case of multiple choice higher than zero',
+        );
 
-  ChoiceQuestionData.common({int index = 0})
+  const ChoiceQuestionData.common({int index = 0})
       : this(
-          //TODO: to localization somehow
+          // TODO(dev): to localization somehow
           isMultipleChoice: false,
-          options: ['First option', 'Second option', 'Third option'],
+          options: const ['First option', 'Second option', 'Third option'],
           title: 'Title',
           subtitle: '',
           isSkip: false,
           content:
-              'You may simply need a single, brief answer without discussion. Other times, you may want to talk through a scenario, evaluate how well a group is learning new material or solicit feedback. The types of questions you ask directly impact the type of answer you receive.',
+              'You may simply need a single, brief answer without discussion. '
+              'Other times, you may want to talk through a scenario, evaluate '
+              'how well a group is learning new material or solicit feedback. '
+              'The types of questions you ask directly impact the type of '
+              'answer you receive.',
           index: index,
         );
 
@@ -37,6 +51,7 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
     String? subtitle,
     String? content,
     bool? isSkip,
+    List<String>? selectedOptions,
   }) {
     return ChoiceQuestionData(
       isMultipleChoice: isMultipleChoice ?? this.isMultipleChoice,
@@ -45,6 +60,7 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
       title: title ?? this.title,
       subtitle: subtitle ?? this.subtitle,
       isSkip: isSkip ?? this.isSkip,
+      selectedOptions: selectedOptions ?? this.selectedOptions,
     );
   }
 
@@ -52,7 +68,7 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
   ChoiceQuestionTheme? get theme => const ChoiceQuestionTheme.common();
 
   @override
-  String get type => 'Choice';
+  String get type => QuestionTypes.choice;
 
   @override
   Map<String, dynamic> toJson() => {
@@ -65,11 +81,12 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
         'payload': {
           'isMultipleChoice': isMultipleChoice,
           'options': options,
+          'selectedOptions': selectedOptions,
         }
       };
 
-  static ChoiceQuestionData fromJson(Map<String, dynamic> json) {
-    final payload = json['payload'];
+  factory ChoiceQuestionData.fromJson(Map<String, dynamic> json) {
+    final payload = json['payload'] as Map<String, dynamic>;
     return ChoiceQuestionData(
       index: json['index'],
       title: json['title'],
@@ -78,6 +95,7 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
       content: json['content'],
       isMultipleChoice: payload['isMultipleChoice'],
       options: payload['options'],
+      selectedOptions: payload['selectedOptions'],
     );
   }
 
@@ -90,5 +108,6 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
         subtitle,
         isSkip,
         content,
+        selectedOptions,
       ];
 }
