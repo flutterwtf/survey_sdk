@@ -52,6 +52,7 @@ class QuestionBottomButton extends StatelessWidget {
             child: Center(
               child: Text(
                 text,
+                // TODO(dev): replace with theme text style maybe?
                 style: TextStyle(
                   color: buttonTextColor,
                   fontWeight: AppFonts.weightBold,

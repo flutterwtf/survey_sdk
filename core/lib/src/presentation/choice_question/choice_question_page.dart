@@ -5,6 +5,7 @@ import 'package:survey_core/src/presentation/localization/localizations.dart';
 import 'package:survey_core/src/presentation/utils/colors.dart';
 import 'package:survey_core/src/presentation/utils/constants.dart';
 import 'package:survey_core/src/presentation/utils/data_to_widget_util.dart';
+import 'package:survey_core/src/presentation/utils/theme_extension.dart';
 import 'package:survey_core/src/presentation/widgets/question_bottom_button.dart';
 import 'package:survey_core/src/presentation/widgets/question_content.dart';
 import 'package:survey_core/src/presentation/widgets/question_title.dart';
@@ -130,7 +131,10 @@ class _QuestionCheckboxes extends StatelessWidget {
           .map(
             (option) => CheckboxListTile(
               controlAffinity: ListTileControlAffinity.leading,
-              title: Text(option),
+              title: Text(
+                option,
+                style: context.theme.textTheme.bodyMedium,
+              ),
               value: selectedOptions.contains(option),
               activeColor: Colors.transparent,
               checkColor: AppColors.black,
@@ -189,7 +193,10 @@ class _QuestionRadioButtons extends StatelessWidget {
               (option) => RadioListTile<String?>(
                 groupValue: selectedOption,
                 controlAffinity: ListTileControlAffinity.leading,
-                title: Text(option),
+                title: Text(
+                  option,
+                  style: context.theme.textTheme.bodyMedium,
+                ),
                 value: option,
                 activeColor: activeColor,
                 onChanged: onChanged,
