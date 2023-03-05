@@ -42,7 +42,7 @@ void main() {
         AppTest(
           child: ChoiceQuestionPage(
             data: usualMockChoiceData,
-            onSend: ({data, required key}) {
+            onSend: ({data, String? key}) {
               completer.complete();
             },
           ),
@@ -58,7 +58,7 @@ void main() {
         AppTest(
           child: ChoiceQuestionPage(
             data: usualMockChoiceData.copyWith(isSkip: true),
-            onSend: ({data, required key}) => completer.complete(),
+            onSend: ({data, String? key}) => completer.complete(),
           ),
         ),
       );
@@ -87,7 +87,7 @@ void main() {
       AppTest(
         child: ChoiceQuestionPage(
           data: usualMockChoiceData,
-          onSend: ({data, required key}) => completer.complete(),
+          onSend: ({data, String? key}) => completer.complete(),
         ),
       ),
     );
@@ -103,7 +103,7 @@ void main() {
       AppTest(
         child: ChoiceQuestionPage(
           data: usualMockChoiceData,
-          onSend: ({data, required key}) => completer.complete(),
+          onSend: ({data, String? key}) => completer.complete(),
         ),
       ),
     );
@@ -121,7 +121,7 @@ void main() {
       AppTest(
         child: ChoiceQuestionPage(
           data: usualMockChoiceData.copyWith(isMultipleChoice: true),
-          onSend: ({data, required key}) => completer.complete(),
+          onSend: ({data, String? key}) => completer.complete(),
         ),
       ),
     );
@@ -135,7 +135,7 @@ void main() {
       AppTest(
         child: ChoiceQuestionPage(
           data: usualMockChoiceData.copyWith(isMultipleChoice: true),
-          onSend: ({data, required key}) => completer.complete(),
+          onSend: ({data, String? key}) => completer.complete(),
         ),
       ),
     );
@@ -151,7 +151,7 @@ void main() {
       AppTest(
         child: ChoiceQuestionPage(
           data: usualMockChoiceData.copyWith(isMultipleChoice: true),
-          onSend: ({data, required key}) => completer.complete(),
+          onSend: ({data, String? key}) => completer.complete(),
         ),
       ),
     );
@@ -169,7 +169,7 @@ void main() {
       AppTest(
         child: ChoiceQuestionPage(
           data: usualMockChoiceData.copyWith(isMultipleChoice: true),
-          onSend: ({data, required key}) => completer.complete(),
+          onSend: ({data, String? key}) => completer.complete(),
         ),
       ),
     );

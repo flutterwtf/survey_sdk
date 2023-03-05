@@ -80,7 +80,7 @@ class _SliderQuestionPageState extends State<SliderQuestionPage> {
           QuestionBottomButton(
             text: context.localization.next,
             onPressed: () {
-              widget.onSend.call(key: widget.data.type,data: _answer);
+              widget.onSend.call(key: widget.data.type, data: _answer);
             },
           ),
         ],
@@ -115,7 +115,8 @@ class _QuestionSliderState extends State<_QuestionSlider> {
   @override
   void initState() {
     _value = widget.initialValue.toDouble();
-    _onlyInt = widget.initialValue.ceilToDouble() == widget.initialValue.floorToDouble();
+    _onlyInt = widget.initialValue.ceilToDouble() ==
+        widget.initialValue.floorToDouble();
     super.initState();
   }
 

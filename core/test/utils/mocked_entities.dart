@@ -11,7 +11,7 @@ import 'package:survey_core/src/domain/entities/validator/input_validator.dart';
 abstract class MockedQuestions {
   static const choice1 = ChoiceQuestionData(
     isMultipleChoice: true,
-    options: const ['option 1', 'option 2', 'option 3'],
+    options: ['option 1', 'option 2', 'option 3'],
     index: 0,
     title: 'title',
     subtitle: 'subtitle',
@@ -20,7 +20,7 @@ abstract class MockedQuestions {
 
   static const choice2 = ChoiceQuestionData(
     isMultipleChoice: false,
-    options: const ['option 1', 'option 2'],
+    options: ['option 1', 'option 2'],
     index: 1,
     title: 'Another title',
     subtitle: 'Another subtitle',

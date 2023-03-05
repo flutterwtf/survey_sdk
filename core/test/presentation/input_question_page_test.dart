@@ -60,7 +60,7 @@ void main() {
             AppTest(
               child: InputQuestionPage(
                 data: mockInputData.copyWith(isSkip: true),
-                onSend: ({data, required key}) => isPressed = true,
+                onSend: ({data, String? key}) => isPressed = true,
               ),
             ),
           );
@@ -79,7 +79,7 @@ void main() {
             AppTest(
               child: InputQuestionPage(
                 data: mockInputData.copyWith(isSkip: true),
-                onSend: ({data, required key}) => sentData = data,
+                onSend: ({data, String? key}) => sentData = data,
               ),
             ),
           );

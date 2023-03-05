@@ -30,7 +30,7 @@ void main() {
           ),
           onMainButtonTap: completerOnMainButtonTap.complete,
           onSecondaryButtonTap: completerOnSecondaryButtonTap.complete,
-          onSend: ({data, required key}) {},
+          onSend: ({data, String? key}) {},
         ),
       );
 

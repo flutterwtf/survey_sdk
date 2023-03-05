@@ -32,7 +32,7 @@ void main() {
             isSkip: isSkip,
             initialValue: initialValue,
           ),
-          onSend: ({data, required key}) {
+          onSend: ({data, String? key}) {
             completerOnSendButtonTap.complete();
           },
         ),

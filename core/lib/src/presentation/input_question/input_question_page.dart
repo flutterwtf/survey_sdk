@@ -75,7 +75,8 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
                   fontSize: theme.textSize,
                 ),
                 autovalidateMode: AutovalidateMode.onUserInteraction,
-                validator: (text) => _canBeSkipped ? null : widget.data.validator.validate(text),
+                validator: (text) =>
+                    _canBeSkipped ? null : widget.data.validator.validate(text),
                 onChanged: (input) => setState(() => _input = input),
                 decoration: InputDecoration(
                   fillColor: theme.backgroundColor,
@@ -95,11 +96,13 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
           QuestionBottomButton(
             text: context.localization.next,
             onPressed: () {
-              if ((_formKey.currentState?.validate() ?? false) || widget.data.isSkip) {
+              if ((_textFieldKey.currentState?.validate() ?? false) ||
+                  widget.data.isSkip) {
                 widget.onSend(key: widget.data.type, data: _input);
               }
             },
-            isEnabled: _canBeSkipped || (_textFieldKey.currentState?.isValid ?? false),
+            isEnabled:
+                _canBeSkipped || (_textFieldKey.currentState?.isValid ?? false),
           ),
         ],
       ),

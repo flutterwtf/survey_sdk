@@ -29,7 +29,8 @@ class _ChoiceQuestionPageState extends State<ChoiceQuestionPage>
   bool _canBeSend = false;
   List<String> _selectedItems = List.empty();
 
-  ChoiceQuestionTheme get _theme => widget.data.theme ?? const ChoiceQuestionTheme.common();
+  ChoiceQuestionTheme get _theme =>
+      widget.data.theme ?? const ChoiceQuestionTheme.common();
 
   @override
   void initState() {
@@ -90,7 +91,8 @@ class _ChoiceQuestionPageState extends State<ChoiceQuestionPage>
                     selectedOptions: _selectedItems,
                   )
                 : _QuestionRadioButtons(
-                    selectedOption: _selectedItems.isEmpty ? null : _selectedItems.first,
+                    selectedOption:
+                        _selectedItems.isEmpty ? null : _selectedItems.first,
                     options: widget.data.options,
                     onChanged: (selectedItem) => _onInputChanged(
                       selectedItem == null ? null : [selectedItem],
