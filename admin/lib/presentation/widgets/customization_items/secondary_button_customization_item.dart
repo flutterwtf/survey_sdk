@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:survey_admin/presentation/app/localization/localizations.dart';
-import 'package:survey_admin/presentation/utils/constants/app_duration.dart';
+import 'package:survey_admin/presentation/utils/constants/app_durations.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/switch_customization_item.dart';
@@ -11,17 +11,19 @@ class SecondaryButtonCustomizationItem extends StatefulWidget {
   final bool isShown;
 
   const SecondaryButtonCustomizationItem({
-    super.key,
     required this.onChanged,
     this.initialText = '',
     this.isShown = false,
+    super.key,
   });
 
   @override
-  State<SecondaryButtonCustomizationItem> createState() => _SecondaryButtonCustomizationItemState();
+  State<SecondaryButtonCustomizationItem> createState() =>
+      _SecondaryButtonCustomizationItemState();
 }
 
-class _SecondaryButtonCustomizationItemState extends State<SecondaryButtonCustomizationItem> {
+class _SecondaryButtonCustomizationItemState
+    extends State<SecondaryButtonCustomizationItem> {
   late bool _isShown;
   late String _text;
 
@@ -47,7 +49,7 @@ class _SecondaryButtonCustomizationItemState extends State<SecondaryButtonCustom
           },
         ),
         AnimatedSize(
-          duration: AppDuration.customizationItemAnimation,
+          duration: AppDurations.customizationItemAnimation,
           child: _isShown
               ? Padding(
                   padding: const EdgeInsets.only(

@@ -2,22 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:survey_admin/presentation/app/localization/localizations.dart';
 import 'package:survey_admin/presentation/utils/app_fonts.dart';
-import 'package:survey_admin/presentation/utils/colors.dart';
-import 'package:survey_admin/presentation/utils/constants/app_duration.dart';
+import 'package:survey_admin/presentation/utils/constants/app_durations.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
+import 'package:survey_admin/presentation/utils/theme_extension.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/switch_customization_item.dart';
 
 class MultilineSwitch extends StatefulWidget {
   const MultilineSwitch({
-    super.key,
     required this.onChanged,
     this.isMultiline = false,
     this.defaultLineAmount = 3,
+    super.key,
   });
 
-  /// if [isMultiline] equals `false` then [lineAmount] is always equals 1.
-  /// In case of any input error [lineAmount] is always equals 1.
+  /// if [isMultiline] equals `false` then `lineAmount` is always equals 1.
+  /// In case of any input error `lineAmount` is always equals 1.
   final void Function(bool isMultiline, int lineAmount) onChanged;
   final bool isMultiline;
   final int defaultLineAmount;
@@ -52,7 +52,7 @@ class _MultilineSwitchState extends State<MultilineSwitch> {
           },
         ),
         AnimatedSize(
-          duration: AppDuration.customizationItemAnimation,
+          duration: AppDurations.customizationItemAnimation,
           child: _isMultiline
               ? _LineAmountInputField(
                   defaultLineAmount: widget.defaultLineAmount,
@@ -68,7 +68,6 @@ class _MultilineSwitchState extends State<MultilineSwitch> {
   }
 }
 
-//TODO: combine with other input fields maybe?
 class _LineAmountInputField extends StatelessWidget {
   const _LineAmountInputField({
     required this.onChanged,
@@ -88,10 +87,7 @@ class _LineAmountInputField extends StatelessWidget {
         children: [
           Text(
             context.localization.lines,
-            style: const TextStyle(
-              fontSize: AppFonts.sizeM,
-              color: AppColors.black,
-            ),
+            style: context.theme.textTheme.bodyMedium,
           ),
           Expanded(
             child: CustomizationTextField(

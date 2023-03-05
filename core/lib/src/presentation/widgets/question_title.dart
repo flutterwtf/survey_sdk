@@ -1,5 +1,5 @@
-import 'package:survey_core/src/presentation/utils/app_fonts.dart';
 import 'package:flutter/material.dart';
+import 'package:survey_core/src/presentation/utils/app_fonts.dart';
 import 'package:survey_core/src/presentation/utils/colors.dart';
 
 class QuestionTitle extends StatelessWidget {
@@ -8,16 +8,17 @@ class QuestionTitle extends StatelessWidget {
   final double? textSize;
 
   const QuestionTitle({
-    super.key,
     required this.title,
     this.textColor,
     this.textSize,
+    super.key,
   });
 
   @override
   Widget build(BuildContext context) {
     return Text(
       title,
+      // TODO(dev): use text theme?
       style: TextStyle(
         color: textColor ?? AppColors.black,
         fontSize: textSize ?? AppFonts.sizeL,
