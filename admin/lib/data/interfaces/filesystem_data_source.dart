@@ -1,3 +1,3 @@
-abstract class FileSystemDataSource{
-   void downloadSurveyData(Map<String, dynamic> exportJson);
+abstract class FileSystemDataSource {
+  void downloadSurveyData(Map<String, dynamic> exportJson);
 }

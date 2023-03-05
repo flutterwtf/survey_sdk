@@ -28,3 +28,4 @@ analyzer:
 linter:
   rules:
     library_private_types_in_public_api: false
+    one_member_abstracts: false
