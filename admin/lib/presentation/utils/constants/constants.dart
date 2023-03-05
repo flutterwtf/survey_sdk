@@ -17,6 +17,8 @@ abstract class AppDimensions {
   static const double sizeXL = 48;
   static const double size3XL = 96;
 
+  static const double imageSizeM = 150;
+
   static const double circularRadiusXS = 6;
   static const double circularRadiusS = 10;
   static const double circularRadiusM = 14;

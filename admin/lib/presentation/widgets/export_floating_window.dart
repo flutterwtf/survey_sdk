@@ -45,7 +45,7 @@ class _ExportFloatingWindow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: Colors.black.withOpacity(0.2),
+      color: AppColors.black.withOpacity(0.2),
       child: Center(
         child: Container(
           decoration: const BoxDecoration(
@@ -76,16 +76,13 @@ class _ExportFloatingWindow extends StatelessWidget {
                 child: Text(
                   context.localization.export_floating_window_title,
                   textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    fontSize: AppFonts.sizeL,
-                    fontWeight: AppFonts.weightBold,
-                  ),
+                  style: context.textTheme.headLineMediumBold,
                 ),
               ),
               const Image(
                 image: AssetImage('images/task_completed.png'),
-                width: 150.0,
-                height: 150.0,
+                width: AppDimensions.imageSizeM,
+                height: AppDimensions.imageSizeM,
               ),
               Padding(
                 padding: const EdgeInsets.all(AppDimensions.marginL),
@@ -99,9 +96,7 @@ class _ExportFloatingWindow extends StatelessWidget {
                           AppColors.white,
                         ),
                         side: const MaterialStatePropertyAll(
-                          BorderSide(
-                            color: AppColors.black,
-                          ),
+                          BorderSide(),
                         ),
                         shape: MaterialStatePropertyAll(
                           RoundedRectangleBorder(
@@ -112,14 +107,12 @@ class _ExportFloatingWindow extends StatelessWidget {
                         ),
                       ),
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: AppDimensions.sizeL),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: AppDimensions.sizeL,
+                        ),
                         child: Text(
                           context.localization.copy,
-                          style: const TextStyle(
-                            fontSize: AppFonts.sizeM,
-                            fontWeight: AppFonts.weightBold,
-                            color: AppColors.black,
-                          ),
+                          style: context.textTheme.buttonNameLight,
                         ),
                       ),
                     ),
@@ -138,15 +131,12 @@ class _ExportFloatingWindow extends StatelessWidget {
                         ),
                       ),
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: AppDimensions.margin5XL),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: AppDimensions.margin5XL,
+                        ),
                         child: Text(
                           context.localization.download,
-                          style: const TextStyle(
-                            fontSize: AppFonts.sizeM,
-                            fontWeight: AppFonts.weightMedium,
-                            color: AppColors.white,
-                            letterSpacing: 0.1,
-                          ),
+                          style: context.textTheme.buttonNameDark,
                         ),
                       ),
                     ),
