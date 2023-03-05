@@ -18,6 +18,7 @@ class QuestionTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       title,
+      // TODO(dev): use text theme?
       style: TextStyle(
         color: textColor ?? AppColors.black,
         fontSize: textSize ?? AppFonts.sizeL,

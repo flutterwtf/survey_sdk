@@ -13,7 +13,10 @@ class DefaultValidator implements InputValidator {
 
   @override
   String? validate(String? input) {
-    return input == null || input.isNotEmpty ? null : 'Error';
+    // TODO(dev): move strings to locale
+    return input == null || input.isNotEmpty
+        ? null
+        : 'This field cannot be empty';
   }
 }
 
@@ -27,7 +30,11 @@ class NumberValidator implements InputValidator {
 
   @override
   String? validate(String? input) {
-    return input == null || _reg.hasMatch(input) ? null : 'Error';
+    // TODO(dev): move strings to locale
+    if (input == null || input.isEmpty) {
+      return 'This field cannot be empty';
+    }
+    return _reg.hasMatch(input) ? null : 'Please enter a valid number';
   }
 }
 

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:survey_admin/presentation/utils/app_fonts.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
+import 'package:survey_admin/presentation/utils/theme_extension.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/customization_tab.dart';
 
 class QuestionSettingsTabBar extends StatefulWidget {
@@ -43,6 +45,10 @@ class _QuestionSettingsTabBarState extends State<QuestionSettingsTabBar>
           unselectedLabelColor: AppColors.customizationTabBarInactiveText,
           indicatorColor: AppColors.black,
           indicatorSize: TabBarIndicatorSize.label,
+          // TODO(dev): do we need this field?
+          labelStyle: context.theme.textTheme.bodyMedium?.copyWith(
+            fontWeight: AppFonts.weightMedium,
+          ),
           tabs: [
             for (var tab in widget.tabs) Tab(text: tab.title),
           ],

@@ -5,6 +5,8 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:survey_admin/presentation/app/app_cubit.dart';
 import 'package:survey_admin/presentation/app/app_state.dart';
 import 'package:survey_admin/presentation/pages/builder/builder_page.dart';
+import 'package:survey_admin/presentation/utils/app_fonts.dart';
+import 'package:survey_admin/presentation/utils/colors.dart';
 
 class App extends StatefulWidget {
   const App({super.key});
@@ -20,15 +22,32 @@ class _AppState extends State<App> {
       create: (context) => AppCubit(),
       child: BlocBuilder<AppCubit, AppState>(
         builder: (context, state) {
-          return const MaterialApp(
+          return MaterialApp(
             supportedLocales: AppLocalizations.supportedLocales,
-            localizationsDelegates: [
+            localizationsDelegates: const [
               AppLocalizations.delegate,
               GlobalMaterialLocalizations.delegate,
               GlobalWidgetsLocalizations.delegate,
               GlobalCupertinoLocalizations.delegate,
             ],
-            home: BuilderPage(),
+            theme: ThemeData(
+              fontFamily: AppFonts.inter,
+              textTheme: const TextTheme(
+                titleMedium: TextStyle(color: AppColors.black),
+                titleSmall: TextStyle(
+                  color: AppColors.black,
+                  fontWeight: AppFonts.weightSemiBold,
+                ),
+                labelLarge: TextStyle(
+                  fontWeight: AppFonts.weightBold,
+                  color: AppColors.black,
+                ),
+                bodyLarge: TextStyle(color: AppColors.black),
+                bodyMedium: TextStyle(color: AppColors.black),
+                bodySmall: TextStyle(color: AppColors.black),
+              ),
+            ),
+            home: const BuilderPage(),
           );
         },
       ),

@@ -23,7 +23,10 @@ class InputQuestionPage extends StatefulWidget {
 }
 
 class _InputQuestionPageState extends State<InputQuestionPage> {
+  final _textFieldKey = GlobalKey<FormFieldState>();
   String _input = '';
+
+  bool get _canBeSkipped => widget.data.isSkip && _input.isEmpty;
 
   @override
   Widget build(BuildContext context) {
@@ -63,13 +66,16 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
           Padding(
             padding: const EdgeInsets.only(top: AppDimensions.marginM),
             child: TextFormField(
+              key: _textFieldKey,
               minLines: theme.minLines,
               maxLines: theme.maxLines,
               style: TextStyle(
                 color: theme.textColor,
                 fontSize: theme.textSize,
               ),
-              validator: widget.data.validator.validate,
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              validator: (text) =>
+                  _canBeSkipped ? null : widget.data.validator.validate(text),
               onChanged: (input) => setState(() => _input = input),
               decoration: InputDecoration(
                 fillColor: theme.backgroundColor,
@@ -88,7 +94,8 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
           QuestionBottomButton(
             text: context.localization.next,
             onPressed: () => widget.onSend(_input),
-            isEnabled: widget.data.isSkip,
+            isEnabled:
+                _canBeSkipped || (_textFieldKey.currentState?.isValid ?? false),
           ),
         ],
       ),

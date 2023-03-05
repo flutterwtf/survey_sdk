@@ -8,7 +8,6 @@ import '../app_test.dart';
 void main() {
   group('Tests for MultilineSwitch', () {
     const title = 'Multiline';
-    const buttonKey = Key('Switch');
     const inputNum = '12';
     const inputText = 'qwe';
     const inputTitle = 'Lines';
@@ -25,23 +24,23 @@ void main() {
 
     testWidgets('Open multiline input(tap on switch)', (tester) async {
       await tester.pumpWidget(page);
-      await tester.tap(find.byKey(buttonKey));
+      await tester.tap(find.byType(InkWell));
       await tester.pump();
       expect(find.text(inputTitle), findsOneWidget);
     });
 
     testWidgets('Close multiline input(double tap on switch)', (tester) async {
       await tester.pumpWidget(page);
-      await tester.tap(find.byKey(buttonKey));
+      await tester.tap(find.byType(InkWell));
       await tester.pump();
-      await tester.tap(find.byKey(buttonKey));
+      await tester.tap(find.byType(InkWell));
       await tester.pump();
       expect(find.text(inputTitle), findsNothing);
     });
 
     testWidgets('Input count lines(num)', (tester) async {
       await tester.pumpWidget(page);
-      await tester.tap(find.byKey(buttonKey));
+      await tester.tap(find.byType(InkWell));
       await tester.pump();
       await tester.enterText(find.byType(CustomizationTextField), inputNum);
       expect(find.text(inputNum), findsOneWidget);
@@ -49,7 +48,7 @@ void main() {
 
     testWidgets('Input count lines(not num)', (tester) async {
       await tester.pumpWidget(page);
-      await tester.tap(find.byKey(buttonKey));
+      await tester.tap(find.byType(InkWell));
       await tester.pump();
       await tester.enterText(find.byType(CustomizationTextField), inputText);
       expect(find.text(inputText), findsNothing);

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:survey_admin/presentation/utils/app_fonts.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
+import 'package:survey_admin/presentation/utils/theme_extension.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/item_divider.dart';
 
 class CustomizationItemsContainer extends StatefulWidget {
@@ -68,10 +68,7 @@ class _CustomizationItemsContainerState
                 ),
             child: Text(
               widget.title!,
-              style: const TextStyle(
-                fontSize: AppFonts.sizeM,
-                fontWeight: AppFonts.weightSemiBold,
-              ),
+              style: context.theme.textTheme.titleSmall,
             ),
           ),
         Padding(
