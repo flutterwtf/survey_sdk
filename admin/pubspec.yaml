@@ -23,6 +23,7 @@ dependencies:
   survey_core:
     path: ../core
 
+  path_provider: ^2.0.13
 dev_dependencies:
   flutter_test:
     sdk: flutter
