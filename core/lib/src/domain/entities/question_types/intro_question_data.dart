@@ -1,57 +1,91 @@
+import 'package:survey_core/src/domain/entities/constants/question_types.dart';
 import 'package:survey_core/src/domain/entities/question_types/question_data.dart';
-import 'package:flutter/material.dart';
+import 'package:survey_core/src/domain/entities/themes/intro_question_theme.dart';
 
 class IntroQuestionData extends QuestionData {
-  final String? content;
   final String mainButtonTitle;
-  final String? secondaryButtonTitle;
 
   const IntroQuestionData({
     required this.mainButtonTitle,
-    required super.id,
+    required super.index,
     required super.title,
     required super.subtitle,
-    required super.typeQuestion,
     required super.isSkip,
-    super.info,
-    this.secondaryButtonTitle,
-    this.content,
+    super.content,
   });
 
-  @override
-  // TODO: implement theme
-  Theme? get theme => throw UnimplementedError();
+  const IntroQuestionData.common({int index = 0})
+      : this(
+          // TODO(dev): to localization somehow
+          mainButtonTitle: 'NEXT',
+          title: 'Intro',
+          index: index,
+          subtitle: '',
+          isSkip: false,
+          content:
+              'You may simply need a single, brief answer without discussion. '
+              'Other times, you may want to talk through a scenario, evaluate '
+              'how well a group is learning new material or solicit feedback. '
+              'The types of questions you ask directly impact the type of '
+              'answer you receive.',
+        );
 
   @override
-  String get type => 'Intro';
+  IntroQuestionData copyWith({
+    String? mainButtonTitle,
+    int? index,
+    String? title,
+    String? subtitle,
+    String? content,
+    bool? isSkip,
+  }) {
+    return IntroQuestionData(
+      mainButtonTitle: mainButtonTitle ?? this.mainButtonTitle,
+      index: index ?? this.index,
+      title: title ?? this.title,
+      subtitle: subtitle ?? this.subtitle,
+      isSkip: isSkip ?? this.isSkip,
+    );
+  }
+
+  @override
+  IntroQuestionTheme? get theme => const IntroQuestionTheme.common();
+
+  @override
+  String get type => QuestionTypes.intro;
 
   @override
   Map<String, dynamic> toJson() => {
-    'id': id,
-    'title': title,
-    'subtitle': subtitle,
-    'typeQuestion': typeQuestion,
-    'isSkip': isSkip,
-    'info': info,
-    'payload': {
-      'mainButtonTitle': mainButtonTitle,
-      'secondaryButtonTitle': secondaryButtonTitle,
-      'content': content,
-    },
-  };
+        'index': index,
+        'title': title,
+        'subtitle': subtitle,
+        'type': type,
+        'isSkip': isSkip,
+        'content': content,
+        'payload': {
+          'mainButtonTitle': mainButtonTitle,
+        },
+      };
 
-  static IntroQuestionData fromJson(Map<String, dynamic> json) {
-    final payload = json['payload'];
+  factory IntroQuestionData.fromJson(Map<String, dynamic> json) {
+    final payload = json['payload'] as Map<String, dynamic>;
     return IntroQuestionData(
-      id: json['id'],
+      index: json['index'],
       title: json['title'],
       subtitle: json['subtitle'],
-      typeQuestion: json['typeQuestion'],
       isSkip: json['isSkip'],
-      info: json['info'],
+      content: json['content'],
       mainButtonTitle: payload['mainButtonTitle'],
-      secondaryButtonTitle: payload['secondaryButtonTitle'],
-      content: payload['content'],
     );
   }
+
+  @override
+  List<Object?> get props => [
+        mainButtonTitle,
+        index,
+        title,
+        subtitle,
+        isSkip,
+        content,
+      ];
 }

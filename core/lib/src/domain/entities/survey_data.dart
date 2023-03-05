@@ -2,7 +2,7 @@ import 'package:survey_core/src/domain/entities/api_object.dart';
 import 'package:survey_core/src/domain/entities/question_types/question_data.dart';
 import 'package:survey_core/src/domain/entities/themes/common_theme.dart';
 
-class SurveyData implements ApiObject {
+class SurveyData extends ApiObject {
   final List<QuestionData> questions;
   final CommonTheme commonTheme;
 
@@ -21,9 +21,9 @@ class SurveyData implements ApiObject {
     };
   }
 
-  static SurveyData fromJson(Map<String, dynamic> json) {
-    final List<QuestionData> questions = [];
-    for (var questionJson in json['questions']) {
+  factory SurveyData.fromJson(Map<String, dynamic> json) {
+    final questions = <QuestionData>[];
+    for (final questionJson in json['questions']) {
       questions.add(QuestionData.fromType(questionJson));
     }
     return SurveyData(
@@ -31,4 +31,9 @@ class SurveyData implements ApiObject {
       commonTheme: CommonTheme.fromJson(json['commonTheme']),
     );
   }
+
+  List<Object?> get props => [
+        ...questions,
+        commonTheme,
+      ];
 }

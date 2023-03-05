@@ -1,12 +1,12 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:survey_core/src/domain/entities/question_types/slider_question_data.dart';
 import 'package:survey_core/src/presentation/slider_question/slider_question_page.dart';
 import 'package:survey_core/src/presentation/widgets/question_bottom_button.dart';
+
+import 'widget/app_test.dart';
 
 void main() {
   group(
@@ -15,35 +15,24 @@ void main() {
       final completerOnSendButtonTap = Completer<void>();
       const title = 'Question widget';
       const subTitle = 'Question widget subtitle';
-      const typeQuestion = 'SliderQuestion';
       const minValue = 1.0;
       const maxValue = 2.0;
       const initialValue = 1.0;
       const id = 1;
       const isSkip = false;
 
-      final sliderQuestionPage = MaterialApp(
-        supportedLocales: AppLocalizations.supportedLocales,
-        localizationsDelegates: const [
-          AppLocalizations.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        home: Scaffold(
-          body: SliderQuestionPage(
-            data: const SliderQuestionData(
-              minValue: minValue,
-              maxValue: maxValue,
-              id: id,
-              title: title,
-              subtitle: subTitle,
-              typeQuestion: typeQuestion,
-              isSkip: isSkip,
-              initialValue: initialValue,
-            ),
-            onSend: completerOnSendButtonTap.complete,
+      final sliderQuestionPage = AppTest(
+        child: SliderQuestionPage(
+          data: const SliderQuestionData(
+            minValue: minValue,
+            maxValue: maxValue,
+            index: id,
+            title: title,
+            subtitle: subTitle,
+            isSkip: isSkip,
+            initialValue: initialValue,
           ),
+          onSend: completerOnSendButtonTap.complete,
         ),
       );
 
@@ -69,9 +58,9 @@ void main() {
       );
       testWidgets(
         'Slider test',
-            (widgetTester) async {
+        (widgetTester) async {
           await widgetTester.pumpWidget(sliderQuestionPage);
-          await widgetTester.drag(find.byType(Slider), const Offset(50.0, 0.0));
+          await widgetTester.drag(find.byType(Slider), const Offset(50, 0));
           await widgetTester.pumpAndSettle();
           expect(find.byType(Slider), findsOneWidget);
         },

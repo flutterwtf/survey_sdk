@@ -1,3 +1,4 @@
+// TODO(dev): Rewrite. Not a good solution
 abstract class InputValidator {
   String get type;
 
@@ -5,6 +6,8 @@ abstract class InputValidator {
 }
 
 class DefaultValidator implements InputValidator {
+  const DefaultValidator();
+
   @override
   String get type => 'default';
 
@@ -15,6 +18,8 @@ class DefaultValidator implements InputValidator {
 }
 
 class NumberValidator implements InputValidator {
+  const NumberValidator();
+
   RegExp get _reg => RegExp(r'^[0-9]+$');
 
   @override
@@ -27,10 +32,12 @@ class NumberValidator implements InputValidator {
 }
 
 abstract class JsonValidator {
+  const JsonValidator();
+
   static InputValidator fromJson(Map<String, dynamic> json) {
     final type = json['validator'];
-    if (type == 'number') return NumberValidator();
-    return DefaultValidator();
+    if (type == 'number') return const NumberValidator();
+    return const DefaultValidator();
   }
 
   static Map<String, dynamic> toJson(InputValidator validator) {

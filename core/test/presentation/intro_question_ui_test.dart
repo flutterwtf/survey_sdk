@@ -1,9 +1,10 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:survey_core/src/domain/entities/question_types/intro_question_data.dart';
 import 'package:survey_core/src/presentation/intro_question/intro_question_page.dart';
+
+import 'widget/app_test.dart';
 
 void main() {
   group(
@@ -12,28 +13,24 @@ void main() {
       final completerOnMainButtonTap = Completer<void>();
       final completerOnSecondaryButtonTap = Completer<void>();
       const title = 'Intro widget';
-      const mainButtonTitle = 'Next';
-      const secondaryButtonTitle = 'Previous';
+      const mainButtonTitle = 'NEXT';
+      const secondaryButtonTitle = 'SKIP';
       const content =
           'You may simply need a single, brief answer without discussion.';
 
-      final introQuestionPage = MaterialApp(
-        home: Scaffold(
-          body: IntroQuestionPage(
-            data: const IntroQuestionData(
-              mainButtonTitle: mainButtonTitle,
-              secondaryButtonTitle: secondaryButtonTitle,
-              id: 1,
-              title: title,
-              content: content,
-              subtitle: '',
-              typeQuestion: 'type',
-              isSkip: false,
-            ),
-            onMainButtonTap: completerOnMainButtonTap.complete,
-            onSecondaryButtonTap: completerOnSecondaryButtonTap.complete,
-            onSend: (data) {},
+      final introQuestionPage = AppTest(
+        child: IntroQuestionPage(
+          data: const IntroQuestionData(
+            mainButtonTitle: mainButtonTitle,
+            index: 1,
+            title: title,
+            content: content,
+            subtitle: '',
+            isSkip: false,
           ),
+          onMainButtonTap: completerOnMainButtonTap.complete,
+          onSecondaryButtonTap: completerOnSecondaryButtonTap.complete,
+          onSend: (data) {},
         ),
       );
 
