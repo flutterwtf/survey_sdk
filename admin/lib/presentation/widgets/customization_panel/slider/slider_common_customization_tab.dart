@@ -9,30 +9,30 @@ import 'package:survey_admin/presentation/utils/constants/constants.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/color_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
-import 'package:survey_admin/presentation/widgets/customization_panel/customization_panel.dart';
+import 'package:survey_admin/presentation/widgets/customization_panel/customization_tab.dart';
 
-class SliderCommonCustomizationPanel extends CustomizationPanel {
+class SliderCommonCustomizationTab extends CustomizationTab {
   final ValueChanged<Color> onFillColorChanged;
   final ValueChanged<Color> onTitleColorChanged;
   final ValueChanged<Color> onSubtitleColorChanged;
   final ValueChanged<Color> onButtonUpColorChanged;
   final ValueChanged<Color> onButtonDownColorChanged;
-  final ValueChanged<String?> onTitleChanged;
-  final ValueChanged<String?> onSubtitleChanged;
-  final ValueChanged<String?> onButtonDownChanged;
-  final ValueChanged<String?> onButtonBorderChanged;
+  final ValueChanged<int> onTitleFontSizeChanged;
+  final ValueChanged<int> onSubtitleFontSizeChanged;
+  final ValueChanged<int> onButtonFontSizeChanged;
+  final ValueChanged<int> onButtonRadiusChanged;
 
-  const SliderCommonCustomizationPanel({
+  const SliderCommonCustomizationTab({
     required super.title,
     required this.onButtonDownColorChanged,
     required this.onButtonUpColorChanged,
     required this.onFillColorChanged,
     required this.onSubtitleColorChanged,
     required this.onTitleColorChanged,
-    required this.onTitleChanged,
-    required this.onSubtitleChanged,
-    required this.onButtonDownChanged,
-    required this.onButtonBorderChanged,
+    required this.onTitleFontSizeChanged,
+    required this.onSubtitleFontSizeChanged,
+    required this.onButtonFontSizeChanged,
+    required this.onButtonRadiusChanged,
     super.key,
   });
 
@@ -64,7 +64,14 @@ class SliderCommonCustomizationPanel extends CustomizationPanel {
                 Expanded(
                   child: CustomizationTextField(
                     initialValue: AppFonts.sizeL.toString(),
-                    onChanged: onTitleChanged,
+                    onChanged: (value) {
+                      if (value == null) return;
+
+                      final size = int.tryParse(value);
+                      if (size != null) {
+                        onTitleFontSizeChanged(size);
+                      }
+                    },
                     inputFormatters: [
                       FilteringTextInputFormatter.digitsOnly,
                       LengthLimitingTextInputFormatter(2),
@@ -89,7 +96,14 @@ class SliderCommonCustomizationPanel extends CustomizationPanel {
                 Expanded(
                   child: CustomizationTextField(
                     initialValue: AppFonts.sizeL.toString(),
-                    onChanged: onSubtitleChanged,
+                    onChanged: (value) {
+                      if (value == null) return;
+
+                      final size = int.tryParse(value);
+                      if (size != null) {
+                        onSubtitleFontSizeChanged(size);
+                      }
+                    },
                     inputFormatters: [
                       FilteringTextInputFormatter.digitsOnly,
                       LengthLimitingTextInputFormatter(2),
@@ -118,7 +132,14 @@ class SliderCommonCustomizationPanel extends CustomizationPanel {
                 Expanded(
                   child: CustomizationTextField(
                     initialValue: AppFonts.sizeL.toString(),
-                    onChanged: onButtonDownChanged,
+                    onChanged: (value) {
+                      if (value == null) return;
+
+                      final size = int.tryParse(value);
+                      if (size != null) {
+                        onButtonFontSizeChanged(size);
+                      }
+                    },
                     inputFormatters: [
                       FilteringTextInputFormatter.digitsOnly,
                       LengthLimitingTextInputFormatter(2),
@@ -134,7 +155,14 @@ class SliderCommonCustomizationPanel extends CustomizationPanel {
                 Expanded(
                   child: CustomizationTextField(
                     initialValue: AppFonts.sizeL.toString(),
-                    onChanged: onButtonBorderChanged,
+                    onChanged: (value) {
+                      if (value == null) return;
+
+                      final radius = int.tryParse(value);
+                      if (radius != null) {
+                        onButtonRadiusChanged(radius);
+                      }
+                    },
                     inputFormatters: [
                       FilteringTextInputFormatter.digitsOnly,
                       LengthLimitingTextInputFormatter(2),

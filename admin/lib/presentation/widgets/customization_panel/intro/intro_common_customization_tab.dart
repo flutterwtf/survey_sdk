@@ -6,20 +6,20 @@ import 'package:survey_admin/presentation/widgets/customization_items/color_cust
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/radius_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/text_style_customization_item.dart';
-import 'package:survey_admin/presentation/widgets/customization_panel/customization_panel.dart';
+import 'package:survey_admin/presentation/widgets/customization_panel/customization_tab.dart';
 
-class IntroCommonCustomizationPanel extends CustomizationPanel {
+class IntroCommonCustomizationTab extends CustomizationTab {
   final ValueChanged<Color> onFillColorPicked;
   final ValueChanged<Color> onTitleColorPicked;
-  final ValueChanged<int?> onTitleFontSizeChanged;
+  final ValueChanged<int> onTitleFontSizeChanged;
   final ValueChanged<Color> onSubtitleColorPicked;
-  final ValueChanged<int?> onSubtitleFontSizeChanged;
+  final ValueChanged<int> onSubtitleFontSizeChanged;
   final ValueChanged<Color> onButtonColorPicked;
   final ValueChanged<Color> onButtonTextColorPicked;
-  final ValueChanged<int?> onButtonFontSizeChanged;
-  final ValueChanged<int?> onButtonRadiusChanged;
+  final ValueChanged<int> onButtonFontSizeChanged;
+  final ValueChanged<int> onButtonRadiusChanged;
 
-  const IntroCommonCustomizationPanel({
+  const IntroCommonCustomizationTab({
     required super.title,
     required this.onFillColorPicked,
     required this.onTitleColorPicked,
@@ -56,13 +56,14 @@ class IntroCommonCustomizationPanel extends CustomizationPanel {
               initialText: '16',
               inputFormatters: [
                 FilteringTextInputFormatter.digitsOnly,
-                LengthLimitingTextInputFormatter(2),
+                LengthLimitingTextInputFormatter(3),
               ],
-              onTextChanged: (size) {
-                if (size == null) {
-                  onTitleFontSizeChanged(null);
-                } else {
-                  onTitleFontSizeChanged(int.tryParse(size));
+              onTextChanged: (value) {
+                if (value == null) return;
+
+                final size = int.tryParse(value);
+                if (size != null) {
+                  onTitleFontSizeChanged(size);
                 }
               },
             ),
@@ -76,13 +77,14 @@ class IntroCommonCustomizationPanel extends CustomizationPanel {
               initialText: '12',
               inputFormatters: [
                 FilteringTextInputFormatter.digitsOnly,
-                LengthLimitingTextInputFormatter(2),
+                LengthLimitingTextInputFormatter(3),
               ],
-              onTextChanged: (size) {
-                if (size == null) {
-                  onSubtitleFontSizeChanged(null);
-                } else {
-                  onSubtitleFontSizeChanged(int.tryParse(size));
+              onTextChanged: (value) {
+                if (value == null) return;
+
+                final size = int.tryParse(value);
+                if (size != null) {
+                  onSubtitleFontSizeChanged(size);
                 }
               },
             ),
@@ -101,13 +103,14 @@ class IntroCommonCustomizationPanel extends CustomizationPanel {
               initialText: '12',
               inputFormatters: [
                 FilteringTextInputFormatter.digitsOnly,
-                LengthLimitingTextInputFormatter(2),
+                LengthLimitingTextInputFormatter(3),
               ],
-              onTextChanged: (size) {
-                if (size == null) {
-                  onButtonFontSizeChanged(null);
-                } else {
-                  onButtonFontSizeChanged(int.tryParse(size));
+              onTextChanged: (value) {
+                if (value == null) return;
+
+                final size = int.tryParse(value);
+                if (size != null) {
+                  onButtonFontSizeChanged(size);
                 }
               },
             ),

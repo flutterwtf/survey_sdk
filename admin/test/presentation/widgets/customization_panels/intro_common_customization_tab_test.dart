@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/color_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/radius_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/text_style_customization_item.dart';
-import 'package:survey_admin/presentation/widgets/customization_panel/intro_common_customization_panel.dart';
+import 'package:survey_admin/presentation/widgets/customization_panel/intro/intro_common_customization_tab.dart';
+
+import '../app_test.dart';
 
 void main() {
   group(
@@ -30,27 +30,18 @@ void main() {
       int? buttonTextSize = 10;
       int? radius = 10;
 
-      final introCommonCustomPanel = MaterialApp(
-        supportedLocales: AppLocalizations.supportedLocales,
-        localizationsDelegates: const [
-          AppLocalizations.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        home: Scaffold(
-          body: IntroCommonCustomizationPanel(
-            title: 'title',
-            onFillColorPicked: (value) => fillTextColor = value,
-            onTitleColorPicked: (value) => titleTextColor = value,
-            onTitleFontSizeChanged: (value) => titleTextSize = value,
-            onSubtitleColorPicked: (value) => subtitleTextColor = value,
-            onSubtitleFontSizeChanged: (value) => subtitleTextSize = value,
-            onButtonColorPicked: (value) => buttonColor = value,
-            onButtonTextColorPicked: (value) => buttonTextColor = value,
-            onButtonFontSizeChanged: (value) => buttonTextSize = value,
-            onButtonRadiusChanged: (value) => radius = value,
-          ),
+      final introCommonCustomPanel = AppTest(
+        child: IntroCommonCustomizationTab(
+          title: 'title',
+          onFillColorPicked: (value) => fillTextColor = value,
+          onTitleColorPicked: (value) => titleTextColor = value,
+          onTitleFontSizeChanged: (value) => titleTextSize = value,
+          onSubtitleColorPicked: (value) => subtitleTextColor = value,
+          onSubtitleFontSizeChanged: (value) => subtitleTextSize = value,
+          onButtonColorPicked: (value) => buttonColor = value,
+          onButtonTextColorPicked: (value) => buttonTextColor = value,
+          onButtonFontSizeChanged: (value) => buttonTextSize = value,
+          onButtonRadiusChanged: (value) => radius = value,
         ),
       );
 

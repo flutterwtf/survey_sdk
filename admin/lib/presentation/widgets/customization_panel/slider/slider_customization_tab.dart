@@ -5,21 +5,21 @@ import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/color_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/thickness_customization_item.dart';
-import 'package:survey_admin/presentation/widgets/customization_panel/customization_panel.dart';
+import 'package:survey_admin/presentation/widgets/customization_panel/customization_tab.dart';
 
-class SliderCustomizationPanel extends CustomizationPanel {
-  final ValueChanged<String?> onThicknessChanged;
+class SliderCustomizationTab extends CustomizationTab {
+  final ValueChanged<int> onThicknessChanged;
   final ValueChanged<Color> onActiveColorChanged;
   final ValueChanged<Color> onInactiveColorChanged;
   final ValueChanged<Color> onThumbColorChanged;
-  final ValueChanged<String?> onThumbChanged;
+  final ValueChanged<int> onThumbSizeChanged;
 
-  const SliderCustomizationPanel({
+  const SliderCustomizationTab({
     required super.title,
     required this.onActiveColorChanged,
     required this.onInactiveColorChanged,
     required this.onThicknessChanged,
-    required this.onThumbChanged,
+    required this.onThumbSizeChanged,
     required this.onThumbColorChanged,
     super.key,
   });
@@ -33,7 +33,14 @@ class SliderCustomizationPanel extends CustomizationPanel {
           isTopDividerShown: true,
           children: [
             ThicknessCustomizationItem(
-              onThicknessChanged: onThicknessChanged,
+              onThicknessChanged: (value) {
+                if (value == null) return;
+
+                final thickness = int.tryParse(value);
+                if (thickness != null) {
+                  onThicknessChanged(thickness);
+                }
+              },
               initialSize: AppFonts.sizeL,
             ),
           ],
@@ -69,7 +76,14 @@ class SliderCustomizationPanel extends CustomizationPanel {
                 ),
                 Expanded(
                   child: ThicknessCustomizationItem(
-                    onThicknessChanged: onThumbChanged,
+                    onThicknessChanged: (value) {
+                      if (value == null) return;
+
+                      final size = int.tryParse(value);
+                      if (size != null) {
+                        onThumbSizeChanged(size);
+                      }
+                    },
                     initialSize: AppFonts.sizeL,
                   ),
                 ),

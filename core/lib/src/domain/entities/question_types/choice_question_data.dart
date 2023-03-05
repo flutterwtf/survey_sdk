@@ -25,7 +25,7 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
           'case of multiple choice higher than zero',
         );
 
-  const ChoiceQuestionData.common({int index = 0})
+  const ChoiceQuestionData.common({required int index})
       : this(
           // TODO(dev): to localization somehow
           isMultipleChoice: false,

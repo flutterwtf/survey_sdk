@@ -1,43 +1,33 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
-import 'package:survey_admin/presentation/widgets/customization_panel/slider_content_customization_panel.dart';
+import 'package:survey_admin/presentation/widgets/customization_panel/slider/slider_content_customization_tab.dart';
+
+import '../app_test.dart';
 
 void main() {
-  group('Tests for IntroContentCustomizationPanel', () {
-    int? min;
-    int? max;
+  group('Tests for SliderContentCustomizationTab', () {
+    late int min;
+    late int max;
     var title = '';
     var subtitle = '';
-    int? value;
-    final page = MaterialApp(
-      supportedLocales: AppLocalizations.supportedLocales,
-      localizationsDelegates: const [
-        AppLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      home: Scaffold(
-        body: SliderContentCustomizationPanel(
-          title: 'Content',
-          onDivisionsChanged: (newValue) {
-            value = newValue;
-          },
-          onMinMaxChanged: (newMin, newMax) {
-            min = newMin;
-            max = newMax;
-          },
-          onSubtitleChanged: (newSubtitle) {
-            subtitle = newSubtitle;
-          },
-          onTitleChanged: (newTitle) {
-            title = newTitle;
-          },
-        ),
+    late int divisions;
+    final page = AppTest(
+      child: SliderContentCustomizationTab(
+        title: 'Content',
+        onDivisionsChanged: (newValue) {
+          divisions = newValue;
+        },
+        onMinMaxChanged: (newMin, newMax) {
+          min = newMin;
+          max = newMax;
+        },
+        onSubtitleChanged: (newSubtitle) {
+          subtitle = newSubtitle;
+        },
+        onTitleChanged: (newTitle) {
+          title = newTitle;
+        },
       ),
     );
 
@@ -76,7 +66,7 @@ void main() {
         '1',
       );
       expect(find.text('1'), findsOneWidget);
-      expect(value, 1);
+      expect(divisions, 1);
     });
 
     testWidgets('Input text for Divisions', (tester) async {
@@ -85,8 +75,9 @@ void main() {
         find.widgetWithText(CustomizationItemsContainer, 'Divisions'),
         'q',
       );
+      final divisionsBeforeEnter = divisions;
       expect(find.text('q'), findsNothing);
-      expect(value, null);
+      expect(divisions, divisionsBeforeEnter);
     });
 
     testWidgets('Validate length > 3 input for Divisions', (tester) async {
@@ -96,7 +87,7 @@ void main() {
         '1234',
       );
       expect(find.text('1234'), findsNothing);
-      expect(value, 123);
+      expect(divisions, 123);
     });
 
     testWidgets('Input min,max for Value(num)', (tester) async {
@@ -112,13 +103,16 @@ void main() {
 
     testWidgets('Input min,max for Value(string)', (tester) async {
       await tester.pumpWidget(page);
+
+      final minBeforeEnter = min;
       await tester.enterText(find.byType(CustomizationTextField).first, 'qw');
       expect(find.text('qw'), findsNothing);
-      expect(min, null);
+      expect(min, minBeforeEnter);
 
       await tester.enterText(find.byType(CustomizationTextField).at(1), 'qw');
+      final maxBeforeEnter = max;
       expect(find.text('qw'), findsNothing);
-      expect(max, null);
+      expect(max, maxBeforeEnter);
     });
 
     testWidgets('Validate length > 6 input min,max for Value', (tester) async {

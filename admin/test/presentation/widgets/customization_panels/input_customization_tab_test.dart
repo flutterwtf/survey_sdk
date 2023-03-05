@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/color_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
@@ -8,43 +6,36 @@ import 'package:survey_admin/presentation/widgets/customization_items/customizat
 import 'package:survey_admin/presentation/widgets/customization_items/input_type_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/multiline_switch.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/padding_customization_item.dart';
-import 'package:survey_admin/presentation/widgets/customization_panel/question_input_customization_panel.dart';
+import 'package:survey_admin/presentation/widgets/customization_panel/input/input_customization_tab.dart';
+
+import '../app_test.dart';
 
 void main() {
   group(
-    'Question input customization panel tests',
+    'Input customization tab tests',
     () {
-      final questionInputCustomizationPanel = MaterialApp(
-        supportedLocales: AppLocalizations.supportedLocales,
-        localizationsDelegates: const [
-          AppLocalizations.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        home: Scaffold(
-          body: QuestionInputCustomizationPanel(
-            onBorderColorChanged: (Color value) {},
-            onBorderSizeChanged: (int? value) {},
-            onBorderWidthChanged: (int? value) {},
-            onFillColorChanged: (Color value) {},
-            onHintColorChanged: (Color value) {},
-            onHintFontSizeChanged: (int? value) {},
-            onHorizontalPaddingChanged: (double size) {},
-            onInputTypeChanged: (InputType value) {},
-            onMultilineChanged: (bool isMultiline, int lineAmount) {},
-            onTextColorChanged: (Color value) {},
-            onTextFontSizeChanged: (int? value) {},
-            onVerticalPaddingChanged: (double size) {},
-            title: 'test',
-          ),
+      final page = AppTest(
+        child: InputCustomizationTab(
+          onBorderColorChanged: (Color value) {},
+          onBorderSizeChanged: (int? value) {},
+          onBorderWidthChanged: (int? value) {},
+          onFillColorChanged: (Color value) {},
+          onHintColorChanged: (Color value) {},
+          onHintFontSizeChanged: (int? value) {},
+          onHorizontalPaddingChanged: (double size) {},
+          onInputTypeChanged: (InputType value) {},
+          onMultilineChanged: (bool isMultiline, int lineAmount) {},
+          onTextColorChanged: (Color value) {},
+          onTextFontSizeChanged: (int? value) {},
+          onVerticalPaddingChanged: (double size) {},
+          title: 'test',
         ),
       );
 
       testWidgets(
         'widget initialized correctly',
         (widgetTester) async {
-          await widgetTester.pumpWidget(questionInputCustomizationPanel);
+          await widgetTester.pumpWidget(page);
           await widgetTester.pumpAndSettle();
           expect(find.text('test'), findsNothing);
 
@@ -82,10 +73,10 @@ void main() {
       testWidgets(
         'initial values',
         (widgetTester) async {
-          await widgetTester.pumpWidget(questionInputCustomizationPanel);
+          await widgetTester.pumpWidget(page);
           await widgetTester.pumpAndSettle();
 
-          ///Multiline widget switch is off
+          // Multiline widget switch is off
           expect(
             find.widgetWithText(CustomizationItemsContainer, 'Lines'),
             findsNothing,
@@ -120,7 +111,7 @@ void main() {
       testWidgets(
         'panel contains all the widgets',
         (widgetTester) async {
-          await widgetTester.pumpWidget(questionInputCustomizationPanel);
+          await widgetTester.pumpWidget(page);
           await widgetTester.pumpAndSettle();
 
           expect(find.byType(CustomizationItemsContainer), findsNWidgets(7));

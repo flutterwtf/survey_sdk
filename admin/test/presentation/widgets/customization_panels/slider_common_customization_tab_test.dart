@@ -1,62 +1,53 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/color_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
-import 'package:survey_admin/presentation/widgets/customization_panel/slider_common_customization_panel.dart';
+import 'package:survey_admin/presentation/widgets/customization_panel/slider/slider_common_customization_tab.dart';
+
+import '../app_test.dart';
 
 void main() {
-  group('Tests for SliderCommonCustomizationPanel', () {
+  group('Tests for SliderCommonCustomizationTab', () {
     Color fill = Colors.red;
     Color buttonDownColor = Colors.red;
     Color buttonUpColor = Colors.red;
     Color titleColor = Colors.red;
     Color subtitleColor = Colors.red;
-    String? titleSize = '';
-    String? subtitleSize = '';
-    String? buttonDownSize = '';
-    String? buttonBorder = '';
-    final page = MaterialApp(
-      supportedLocales: AppLocalizations.supportedLocales,
-      localizationsDelegates: const [
-        AppLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      home: Scaffold(
-        body: SliderCommonCustomizationPanel(
-          title: 'Common',
-          onButtonDownColorChanged: (newButtonDownColor) {
-            buttonDownColor = newButtonDownColor;
-          },
-          onButtonUpColorChanged: (newButtonUpColor) {
-            buttonUpColor = newButtonUpColor;
-          },
-          onFillColorChanged: (newFill) {
-            fill = newFill;
-          },
-          onSubtitleColorChanged: (newSubtitleColor) {
-            subtitleColor = newSubtitleColor;
-          },
-          onTitleColorChanged: (newTitleColor) {
-            titleColor = newTitleColor;
-          },
-          onTitleChanged: (newTitleSize) {
-            titleSize = newTitleSize;
-          },
-          onSubtitleChanged: (newSubtitleSize) {
-            subtitleSize = newSubtitleSize;
-          },
-          onButtonDownChanged: (newButtonDownSize) {
-            buttonDownSize = newButtonDownSize;
-          },
-          onButtonBorderChanged: (newButtonBorder) {
-            buttonBorder = newButtonBorder;
-          },
-        ),
+    var titleSize = 0;
+    var subtitleSize = 0;
+    var buttonDownSize = 0;
+    var buttonBorder = 0;
+    final page = AppTest(
+      child: SliderCommonCustomizationTab(
+        title: 'Common',
+        onButtonDownColorChanged: (newButtonDownColor) {
+          buttonDownColor = newButtonDownColor;
+        },
+        onButtonUpColorChanged: (newButtonUpColor) {
+          buttonUpColor = newButtonUpColor;
+        },
+        onFillColorChanged: (newFill) {
+          fill = newFill;
+        },
+        onSubtitleColorChanged: (newSubtitleColor) {
+          subtitleColor = newSubtitleColor;
+        },
+        onTitleColorChanged: (newTitleColor) {
+          titleColor = newTitleColor;
+        },
+        onTitleFontSizeChanged: (newTitleSize) {
+          titleSize = newTitleSize;
+        },
+        onSubtitleFontSizeChanged: (newSubtitleSize) {
+          subtitleSize = newSubtitleSize;
+        },
+        onButtonFontSizeChanged: (newButtonDownSize) {
+          buttonDownSize = newButtonDownSize;
+        },
+        onButtonRadiusChanged: (newButtonBorder) {
+          buttonBorder = newButtonBorder;
+        },
       ),
     );
 
@@ -138,21 +129,21 @@ void main() {
       await tester.pumpWidget(page);
       await tester.enterText(find.byType(CustomizationTextField).at(2), '10');
       expect(find.text('10'), findsOneWidget);
-      expect(titleSize, '10');
+      expect(titleSize, 10);
     });
 
     testWidgets('Input size(string) for Title', (tester) async {
       await tester.pumpWidget(page);
       await tester.enterText(find.byType(CustomizationTextField).at(2), 'q1');
       expect(find.text('q1'), findsNothing);
-      expect(titleSize, '1');
+      expect(titleSize, 1);
     });
 
     testWidgets('Validate input size length > 2 for Title', (tester) async {
       await tester.pumpWidget(page);
       await tester.enterText(find.byType(CustomizationTextField).at(2), '112');
       expect(find.text('112'), findsNothing);
-      expect(titleSize, '11');
+      expect(titleSize, 11);
     });
 
     testWidgets('Input color for Subtitle', (tester) async {
@@ -183,21 +174,21 @@ void main() {
       await tester.pumpWidget(page);
       await tester.enterText(find.byType(CustomizationTextField).at(4), '8');
       expect(find.text('8'), findsOneWidget);
-      expect(subtitleSize, '8');
+      expect(subtitleSize, 8);
     });
 
     testWidgets('Input size(string) for Subtitle', (tester) async {
       await tester.pumpWidget(page);
       await tester.enterText(find.byType(CustomizationTextField).at(4), 'q9');
       expect(find.text('q9'), findsNothing);
-      expect(subtitleSize, '9');
+      expect(subtitleSize, 9);
     });
 
     testWidgets('Validate input size length > 2 for Subtitle', (tester) async {
       await tester.pumpWidget(page);
       await tester.enterText(find.byType(CustomizationTextField).at(4), '123');
       expect(find.text('123'), findsNothing);
-      expect(subtitleSize, '12');
+      expect(subtitleSize, 12);
     });
 
     testWidgets('Input color for UpButton', (tester) async {
@@ -252,14 +243,14 @@ void main() {
       await tester.pumpWidget(page);
       await tester.enterText(find.byType(CustomizationTextField).at(7), '14');
       expect(find.text('14'), findsOneWidget);
-      expect(buttonDownSize, '14');
+      expect(buttonDownSize, 14);
     });
 
     testWidgets('Input size(string) for DownButton', (tester) async {
       await tester.pumpWidget(page);
       await tester.enterText(find.byType(CustomizationTextField).at(7), 'q4');
       expect(find.text('q4'), findsNothing);
-      expect(buttonDownSize, '4');
+      expect(buttonDownSize, 4);
     });
 
     testWidgets('Validate input size length > 2 for DownButton',
@@ -267,21 +258,21 @@ void main() {
       await tester.pumpWidget(page);
       await tester.enterText(find.byType(CustomizationTextField).at(7), '143');
       expect(find.text('143'), findsNothing);
-      expect(buttonDownSize, '14');
+      expect(buttonDownSize, 14);
     });
 
     testWidgets('Input size(num) for BorderButton', (tester) async {
       await tester.pumpWidget(page);
       await tester.enterText(find.byType(CustomizationTextField).at(8), '18');
       expect(find.text('18'), findsOneWidget);
-      expect(buttonBorder, '18');
+      expect(buttonBorder, 18);
     });
 
     testWidgets('Input size(string) for BorderButton', (tester) async {
       await tester.pumpWidget(page);
       await tester.enterText(find.byType(CustomizationTextField).at(8), 'q8');
       expect(find.text('q8'), findsNothing);
-      expect(buttonBorder, '8');
+      expect(buttonBorder, 8);
     });
 
     testWidgets('Validate input size length > 2 for BorderButton',
@@ -289,7 +280,7 @@ void main() {
       await tester.pumpWidget(page);
       await tester.enterText(find.byType(CustomizationTextField).at(8), '198');
       expect(find.text('198'), findsNothing);
-      expect(buttonBorder, '19');
+      expect(buttonBorder, 19);
     });
   });
 }

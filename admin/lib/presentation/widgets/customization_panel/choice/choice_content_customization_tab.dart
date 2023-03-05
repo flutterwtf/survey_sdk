@@ -4,13 +4,15 @@ import 'package:survey_admin/presentation/utils/constants/constants.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/create_text_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/option_customization_item.dart';
+import 'package:survey_admin/presentation/widgets/customization_panel/customization_tab.dart';
 
-class ChoiceContentCustomizationPanel extends StatelessWidget {
+class ChoiceContentCustomizationTab extends CustomizationTab {
   final ValueChanged<String> onTitleChanged;
   final ValueChanged<String> onSubTitleChanged;
   final ValueChanged<List<String>> onOptionsChanged;
 
-  const ChoiceContentCustomizationPanel({
+  const ChoiceContentCustomizationTab({
+    required super.title,
     required this.onTitleChanged,
     required this.onSubTitleChanged,
     required this.onOptionsChanged,
@@ -21,9 +23,9 @@ class ChoiceContentCustomizationPanel extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        // TODO(dev): localization. We should fix it ASAP.
         CustomizationItemsContainer(
           title: context.localization.title,
+          isTopDividerShown: true,
           children: [
             CreateTextCustomizationItem(
               maxHeight: AppDimensions.sizeXL,
@@ -41,7 +43,7 @@ class ChoiceContentCustomizationPanel extends StatelessWidget {
           ],
         ),
         CustomizationItemsContainer(
-          title: 'Options', // TODO(dev): change to context.localization
+          title: context.localization.options,
           children: [
             OptionCustomizationItem(
               options: const [],

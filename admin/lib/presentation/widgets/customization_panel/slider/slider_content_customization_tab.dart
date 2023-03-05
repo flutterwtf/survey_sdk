@@ -3,21 +3,22 @@ import 'package:survey_admin/presentation/app/localization/localizations.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/create_text_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
-import 'package:survey_admin/presentation/widgets/customization_items/secondary_button_customization_item.dart';
-import 'package:survey_admin/presentation/widgets/customization_panel/customization_panel.dart';
+import 'package:survey_admin/presentation/widgets/customization_items/divisions_customization_item.dart';
+import 'package:survey_admin/presentation/widgets/customization_items/min_max_customization_item.dart';
+import 'package:survey_admin/presentation/widgets/customization_panel/customization_tab.dart';
 
-class IntroContentCustomizationPanel extends CustomizationPanel {
+class SliderContentCustomizationTab extends CustomizationTab {
   final ValueChanged<String> onTitleChanged;
   final ValueChanged<String> onSubtitleChanged;
-  final ValueChanged<String> onPrimaryButtonTextChanged;
-  final void Function(bool isShown, String text) onSecondaryButtonChanged;
+  final void Function(int min, int max) onMinMaxChanged;
+  final ValueChanged<int> onDivisionsChanged;
 
-  const IntroContentCustomizationPanel({
+  const SliderContentCustomizationTab({
     required super.title,
-    required this.onTitleChanged,
+    required this.onDivisionsChanged,
+    required this.onMinMaxChanged,
     required this.onSubtitleChanged,
-    required this.onPrimaryButtonTextChanged,
-    required this.onSecondaryButtonChanged,
+    required this.onTitleChanged,
     super.key,
   });
 
@@ -30,7 +31,7 @@ class IntroContentCustomizationPanel extends CustomizationPanel {
           isTopDividerShown: true,
           children: [
             CreateTextCustomizationItem(
-              maxHeight: AppDimensions.sizeL,
+              maxHeight: AppDimensions.sizeXL,
               onChanged: onTitleChanged,
             )
           ],
@@ -39,27 +40,24 @@ class IntroContentCustomizationPanel extends CustomizationPanel {
           title: context.localization.subtitle,
           children: [
             CreateTextCustomizationItem(
-              maxHeight: AppDimensions.sizeL,
+              maxHeight: AppDimensions.sizeXL,
               onChanged: onSubtitleChanged,
             ),
           ],
         ),
         CustomizationItemsContainer(
-          title: context.localization.primary_button,
+          title: context.localization.value,
           children: [
-            CreateTextCustomizationItem(
-              maxHeight: AppDimensions.sizeL,
-              onChanged: onPrimaryButtonTextChanged,
-            )
+            MinMaxCustomizationItem(
+              onChanged: onMinMaxChanged,
+            ),
           ],
         ),
         CustomizationItemsContainer(
-          itemsPadding: const EdgeInsets.all(
-            AppDimensions.marginM,
-          ),
+          title: context.localization.divisions,
           children: [
-            SecondaryButtonCustomizationItem(
-              onChanged: onSecondaryButtonChanged,
+            DivisionsCustomizationItem(
+              onChanged: onDivisionsChanged,
             ),
           ],
         ),

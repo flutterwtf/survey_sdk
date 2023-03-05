@@ -39,5 +39,5 @@ flutter:
         - asset: fonts/Inter-Medium.ttf
     - family: Karla
       fonts:
-        - asset: fonts/Karla-Regular.ttf
-        - asset: fonts/Karla-Bold.ttf
+      - asset: fonts/Karla-Regular.ttf
+      - asset: fonts/Karla-Bold.ttf

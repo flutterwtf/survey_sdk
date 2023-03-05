@@ -16,10 +16,10 @@ const _tabs = [
   'Custom input',
 ];
 final Map<String, QuestionData> _dataMap = {
-  'Intro': const IntroQuestionData.common(),
-  'Choice': const ChoiceQuestionData.common(),
-  'Slider': const SliderQuestionData.common(),
-  'Custom input': const InputQuestionData.common(),
+  'Intro': const IntroQuestionData.common(index: 0),
+  'Choice': const ChoiceQuestionData.common(index: 0),
+  'Slider': const SliderQuestionData.common(index: 0),
+  'Custom input': const InputQuestionData.common(index: 0),
 };
 const _optionsInTabs = {
   'Intro': ['Title', 'Image intro'],

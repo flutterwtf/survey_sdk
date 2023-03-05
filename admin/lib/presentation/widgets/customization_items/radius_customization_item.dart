@@ -7,7 +7,7 @@ import 'package:survey_admin/presentation/widgets/customization_items/customizat
 
 class RadiusCustomizationItem extends StatelessWidget {
   final int initialValue;
-  final ValueChanged<int?> onRadiusChanged;
+  final ValueChanged<int> onRadiusChanged;
 
   const RadiusCustomizationItem({
     required this.initialValue,
@@ -28,11 +28,12 @@ class RadiusCustomizationItem extends StatelessWidget {
               FilteringTextInputFormatter.digitsOnly,
               LengthLimitingTextInputFormatter(2),
             ],
-            onChanged: (size) {
-              if (size == null) {
-                onRadiusChanged(null);
-              } else {
-                onRadiusChanged(int.tryParse(size));
+            onChanged: (value) {
+              if (value == null) return;
+
+              final radius = int.tryParse(value);
+              if (radius != null) {
+                onRadiusChanged(radius);
               }
             },
           ),

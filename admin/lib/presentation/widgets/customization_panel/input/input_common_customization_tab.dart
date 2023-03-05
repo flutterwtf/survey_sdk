@@ -5,19 +5,19 @@ import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/color_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
-import 'package:survey_admin/presentation/widgets/customization_panel/customization_panel.dart';
+import 'package:survey_admin/presentation/widgets/customization_panel/customization_tab.dart';
 
-class QuestionCommonCustomizationPanel extends CustomizationPanel {
+class InputCommonCustomizationTab extends CustomizationTab {
   final ValueChanged<Color> onFillColorPicked;
   final ValueChanged<Color> onTitleColorPicked;
-  final ValueChanged<int?> onTitleFontSizeChanged;
+  final ValueChanged<int> onTitleFontSizeChanged;
   final ValueChanged<Color> onSubtitleColorPicked;
-  final ValueChanged<int?> onSubtitleFontSizeChanged;
+  final ValueChanged<int> onSubtitleFontSizeChanged;
   final ValueChanged<Color> onButtonFirstColorPicked;
   final ValueChanged<Color> onButtonSecondColorPicked;
-  final ValueChanged<int?> onButtonFontSizeChanged;
+  final ValueChanged<int> onButtonFontSizeChanged;
 
-  const QuestionCommonCustomizationPanel({
+  const InputCommonCustomizationTab({
     required super.title,
     required this.onFillColorPicked,
     required this.onTitleColorPicked,
@@ -63,11 +63,12 @@ class QuestionCommonCustomizationPanel extends CustomizationPanel {
                       FilteringTextInputFormatter.digitsOnly,
                       LengthLimitingTextInputFormatter(2),
                     ],
-                    onChanged: (size) {
-                      if (size == null) {
-                        onTitleFontSizeChanged(null);
-                      } else {
-                        onTitleFontSizeChanged(int.tryParse(size));
+                    onChanged: (value) {
+                      if (value == null) return;
+
+                      final size = int.tryParse(value);
+                      if (size != null) {
+                        onTitleFontSizeChanged(size);
                       }
                     },
                   ),
@@ -94,11 +95,12 @@ class QuestionCommonCustomizationPanel extends CustomizationPanel {
                       FilteringTextInputFormatter.digitsOnly,
                       LengthLimitingTextInputFormatter(2),
                     ],
-                    onChanged: (size) {
-                      if (size == null) {
-                        onSubtitleFontSizeChanged(null);
-                      } else {
-                        onSubtitleFontSizeChanged(int.tryParse(size));
+                    onChanged: (value) {
+                      if (value == null) return;
+
+                      final size = int.tryParse(value);
+                      if (size != null) {
+                        onSubtitleFontSizeChanged(size);
                       }
                     },
                   ),
@@ -129,11 +131,12 @@ class QuestionCommonCustomizationPanel extends CustomizationPanel {
                       FilteringTextInputFormatter.digitsOnly,
                       LengthLimitingTextInputFormatter(2),
                     ],
-                    onChanged: (size) {
-                      if (size == null) {
-                        onButtonFontSizeChanged(null);
-                      } else {
-                        onButtonFontSizeChanged(int.tryParse(size));
+                    onChanged: (value) {
+                      if (value == null) return;
+
+                      final size = int.tryParse(value);
+                      if (size != null) {
+                        onButtonFontSizeChanged(size);
                       }
                     },
                   ),

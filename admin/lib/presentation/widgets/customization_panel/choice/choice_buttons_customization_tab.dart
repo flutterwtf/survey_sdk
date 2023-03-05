@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:survey_admin/presentation/app/localization/localizations.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/color_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
+import 'package:survey_admin/presentation/widgets/customization_panel/customization_tab.dart';
 
-class ChoiceCustomizationPanel extends StatelessWidget {
+class ChoiceButtonsCustomizationTab extends CustomizationTab {
   final ValueChanged<Color> onActiveColorPicked;
   final ValueChanged<Color> onInactiveColorPicked;
 
-  const ChoiceCustomizationPanel({
+  const ChoiceButtonsCustomizationTab({
+    required super.title,
     required this.onActiveColorPicked,
     required this.onInactiveColorPicked,
     super.key,
@@ -18,7 +21,8 @@ class ChoiceCustomizationPanel extends StatelessWidget {
     return Column(
       children: [
         CustomizationItemsContainer(
-          title: 'Active',
+          title: context.localization.active,
+          isTopDividerShown: true,
           children: [
             ColorCustomizationItem(
               initialColor: AppColors.black,
@@ -27,7 +31,7 @@ class ChoiceCustomizationPanel extends StatelessWidget {
           ],
         ),
         CustomizationItemsContainer(
-          title: 'Inactive',
+          title: context.localization.inactive,
           children: [
             ColorCustomizationItem(
               initialColor: AppColors.inactiveElementGrey,

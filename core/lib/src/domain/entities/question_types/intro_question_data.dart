@@ -14,7 +14,7 @@ class IntroQuestionData extends QuestionData {
     super.content,
   });
 
-  const IntroQuestionData.common({int index = 0})
+  const IntroQuestionData.common({required int index})
       : this(
           // TODO(dev): to localization somehow
           mainButtonTitle: 'NEXT',

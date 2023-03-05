@@ -17,7 +17,7 @@ class InputQuestionData extends QuestionData<InputQuestionTheme> {
     this.hintText,
   });
 
-  const InputQuestionData.common({int index = 0})
+  const InputQuestionData.common({required int index})
       : this(
           // TODO(dev): to localization somehow
           validator: const NumberValidator(),
