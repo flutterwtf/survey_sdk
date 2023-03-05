@@ -1,8 +1,23 @@
-include: package:flutter_lints/flutter.yaml
+include: package:very_good_analysis/analysis_options.yaml
 
 analyzer:
   plugins:
     - dart_code_metrics
+
+  language:
+    strict-casts: false
+    strict-inference: false
+    strict-raw-types: false
+
+  errors:
+    close_sinks: error
+    missing_required_param: error
+    missing_return: error
+    public_member_api_docs: ignore
+    sort_pub_dependencies: ignore
+    unawaited_futures: ignore
+    sort_constructors_first: ignore
+
   exclude:
     - "build/**"
     - "**/*.g.dart"

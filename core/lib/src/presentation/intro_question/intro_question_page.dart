@@ -1,17 +1,18 @@
+import 'package:flutter/material.dart';
 import 'package:survey_core/src/domain/entities/question_types/intro_question_data.dart';
+import 'package:survey_core/src/domain/entities/themes/intro_question_theme.dart';
 import 'package:survey_core/src/presentation/localization/localizations.dart';
 import 'package:survey_core/src/presentation/utils/constants.dart';
 import 'package:survey_core/src/presentation/utils/data_to_widget_util.dart';
 import 'package:survey_core/src/presentation/widgets/question_bottom_button.dart';
 import 'package:survey_core/src/presentation/widgets/question_content.dart';
 import 'package:survey_core/src/presentation/widgets/question_title.dart';
-import 'package:flutter/material.dart';
 
 class IntroQuestionPage extends StatelessWidget {
   final IntroQuestionData data;
   final OnSendCallback onSend;
   final VoidCallback? onMainButtonTap;
-  //TODO: onSkip
+  // TODO(dev): onSkip
   final VoidCallback? onSecondaryButtonTap;
 
   const IntroQuestionPage({
@@ -21,6 +22,9 @@ class IntroQuestionPage extends StatelessWidget {
     this.onSecondaryButtonTap,
     super.key,
   });
+
+  IntroQuestionTheme get _theme =>
+      data.theme ?? const IntroQuestionTheme.common();
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +42,8 @@ class IntroQuestionPage extends StatelessWidget {
         children: [
           QuestionTitle(
             title: data.title,
+            textColor: _theme.titleTextColor,
+            textSize: _theme.titleTextSize,
           ),
           if (content != null)
             Padding(
@@ -46,31 +52,31 @@ class IntroQuestionPage extends StatelessWidget {
               ),
               child: QuestionContent(
                 content: content,
+                textColor: _theme.subTitleTextColor,
+                textSize: _theme.subTitleTextSize,
               ),
             ),
           const Spacer(),
           Row(
-            mainAxisSize: MainAxisSize.max,
             children: [
               if (onSecondaryButtonTap != null)
                 Flexible(
-                  fit: FlexFit.loose,
                   child: Padding(
                     padding: const EdgeInsets.only(right: 8),
                     child: QuestionBottomButton(
                       text: context.localization.skip,
                       onPressed: onSecondaryButtonTap,
-                      isEnabled: true,
-                      isOutlined: true,
                     ),
                   ),
                 ),
               Flexible(
-                fit: FlexFit.loose,
                 child: QuestionBottomButton(
                   text: data.mainButtonTitle,
+                  color: _theme.mainButtonColor,
+                  textColor: _theme.mainButtonTextColor,
+                  textSize: _theme.mainButtonTextSize,
+                  radius: _theme.mainButtonRadius,
                   onPressed: onMainButtonTap ?? () {},
-                  isEnabled: true,
                 ),
               ),
             ],

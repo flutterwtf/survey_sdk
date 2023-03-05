@@ -11,11 +11,11 @@ class ChoiceContentCustomizationPanel extends StatelessWidget {
   final ValueChanged<List<String>> onOptionsChanged;
 
   const ChoiceContentCustomizationPanel({
-    Key? key,
     required this.onTitleChanged,
     required this.onSubTitleChanged,
     required this.onOptionsChanged,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +41,7 @@ class ChoiceContentCustomizationPanel extends StatelessWidget {
           ],
         ),
         CustomizationItemsContainer(
-          title: 'Options', //TODO: change to context.localization
+          title: 'Options', // TODO(dev): change to context.localization
           children: [
             OptionCustomizationItem(
               options: const [],

@@ -1,22 +1,22 @@
+import 'package:flutter/material.dart';
 import 'package:survey_core/src/domain/entities/question_types/slider_question_data.dart';
 import 'package:survey_core/src/presentation/localization/localizations.dart';
 import 'package:survey_core/src/presentation/utils/app_fonts.dart';
 import 'package:survey_core/src/presentation/utils/constants.dart';
 import 'package:survey_core/src/presentation/utils/data_to_widget_util.dart';
+import 'package:survey_core/src/presentation/utils/theme_extension.dart';
 import 'package:survey_core/src/presentation/widgets/question_bottom_button.dart';
 import 'package:survey_core/src/presentation/widgets/question_subtitle.dart';
 import 'package:survey_core/src/presentation/widgets/question_title.dart';
-import 'package:flutter/material.dart';
 
-//TODO: extend from one superclass maybe?
 class SliderQuestionPage extends StatefulWidget {
   final SliderQuestionData data;
   final OnSendCallback onSend;
 
   const SliderQuestionPage({
-    super.key,
     required this.data,
     required this.onSend,
+    super.key,
   });
 
   @override
@@ -97,13 +97,12 @@ class _QuestionSlider extends StatefulWidget {
   final SliderThemeData theme;
 
   const _QuestionSlider({
-    Key? key,
     required this.minValue,
     required this.maxValue,
     required this.onChanged,
     required this.theme,
     required this.initialValue,
-  }) : super(key: key);
+  });
 
   @override
   State<_QuestionSlider> createState() => _QuestionSliderState();
@@ -130,7 +129,7 @@ class _QuestionSliderState extends State<_QuestionSlider> {
             value: _value,
             onChanged: (newValue) => setState(() {
               _value = _onlyInt ? newValue.roundToDouble() : newValue;
-              widget.onChanged(_value);
+              widget.onChanged(newValue);
             }),
             min: widget.minValue.toDouble(),
             max: widget.maxValue.toDouble(),
@@ -140,12 +139,16 @@ class _QuestionSliderState extends State<_QuestionSlider> {
             children: [
               Text(
                 widget.minValue.toString(),
-                style: const TextStyle(fontSize: AppFonts.sizeM),
+                style: context.theme.textTheme.bodyMedium?.copyWith(
+                  fontFamily: AppFonts.inter,
+                ),
               ),
               const Spacer(),
               Text(
                 widget.maxValue.toString(),
-                style: const TextStyle(fontSize: AppFonts.sizeM),
+                style: context.theme.textTheme.bodyMedium?.copyWith(
+                  fontFamily: AppFonts.inter,
+                ),
               ),
             ],
           ),

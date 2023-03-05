@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:survey_core/src/domain/entities/question_types/input_question_data.dart';
 import 'package:survey_core/src/domain/entities/themes/input_question_theme.dart';
 import 'package:survey_core/src/presentation/localization/localizations.dart';
@@ -6,16 +7,15 @@ import 'package:survey_core/src/presentation/utils/data_to_widget_util.dart';
 import 'package:survey_core/src/presentation/widgets/question_bottom_button.dart';
 import 'package:survey_core/src/presentation/widgets/question_subtitle.dart';
 import 'package:survey_core/src/presentation/widgets/question_title.dart';
-import 'package:flutter/material.dart';
 
 class InputQuestionPage extends StatefulWidget {
   final InputQuestionData data;
   final OnSendCallback onSend;
 
   const InputQuestionPage({
-    super.key,
     required this.data,
     required this.onSend,
+    super.key,
   });
 
   @override
@@ -23,8 +23,10 @@ class InputQuestionPage extends StatefulWidget {
 }
 
 class _InputQuestionPageState extends State<InputQuestionPage> {
-  final _formKey = GlobalKey<FormState>();
+  final _textFieldKey = GlobalKey<FormFieldState>();
   String _input = '';
+
+  bool get _canBeSkipped => widget.data.isSkip && _input.isEmpty;
 
   @override
   Widget build(BuildContext context) {
@@ -63,9 +65,8 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
           ),
           Padding(
             padding: const EdgeInsets.only(top: AppDimensions.marginM),
-            //TODO: add validator?
             child: Form(
-              key: _formKey,
+              key: _textFieldKey,
               child: TextFormField(
                 minLines: theme.minLines,
                 maxLines: theme.maxLines,
@@ -73,7 +74,8 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
                   color: theme.textColor,
                   fontSize: theme.textSize,
                 ),
-                validator: widget.data.validator.validate,
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                validator: (text) => _canBeSkipped ? null : widget.data.validator.validate(text),
                 onChanged: (input) => setState(() => _input = input),
                 decoration: InputDecoration(
                   fillColor: theme.backgroundColor,
@@ -97,7 +99,7 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
                 widget.onSend(key: widget.data.type, data: _input);
               }
             },
-            isEnabled: widget.data.isSkip,
+            isEnabled: _canBeSkipped || (_textFieldKey.currentState?.isValid ?? false),
           ),
         ],
       ),

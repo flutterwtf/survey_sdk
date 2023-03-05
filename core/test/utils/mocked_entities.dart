@@ -9,7 +9,7 @@ import 'package:survey_core/src/domain/entities/themes/text_field_theme_data.dar
 import 'package:survey_core/src/domain/entities/validator/input_validator.dart';
 
 abstract class MockedQuestions {
-  static final choice1 = ChoiceQuestionData(
+  static const choice1 = ChoiceQuestionData(
     isMultipleChoice: true,
     options: const ['option 1', 'option 2', 'option 3'],
     index: 0,
@@ -18,7 +18,7 @@ abstract class MockedQuestions {
     isSkip: true,
   );
 
-  static final choice2 = ChoiceQuestionData(
+  static const choice2 = ChoiceQuestionData(
     isMultipleChoice: false,
     options: const ['option 1', 'option 2'],
     index: 1,
@@ -28,7 +28,7 @@ abstract class MockedQuestions {
     content: 'content',
   );
 
-  final input1 = InputQuestionData(
+  static const input1 = InputQuestionData(
     validator: DefaultValidator(),
     index: 0,
     title: 'title',
@@ -36,7 +36,7 @@ abstract class MockedQuestions {
     isSkip: false,
   );
 
-  final input2 = InputQuestionData(
+  static const input2 = InputQuestionData(
     validator: NumberValidator(),
     index: 1,
     title: 'Another title',
@@ -45,7 +45,7 @@ abstract class MockedQuestions {
     hintText: 'hint',
   );
 
-  static final intro1 = IntroQuestionData(
+  static const intro1 = IntroQuestionData(
     mainButtonTitle: 'Next',
     index: 0,
     title: 'title',
@@ -53,7 +53,7 @@ abstract class MockedQuestions {
     isSkip: false,
   );
 
-  static final intro2 = IntroQuestionData(
+  static const intro2 = IntroQuestionData(
     mainButtonTitle: 'Next',
     index: 1,
     title: 'Another title',
@@ -62,7 +62,7 @@ abstract class MockedQuestions {
     content: 'content',
   );
 
-  static final slider1 = SliderQuestionData(
+  static const slider1 = SliderQuestionData(
     minValue: 0,
     maxValue: 10,
     initialValue: 1,
@@ -72,7 +72,7 @@ abstract class MockedQuestions {
     isSkip: false,
   );
 
-  static final slider2 = SliderQuestionData(
+  static const slider2 = SliderQuestionData(
     minValue: 10,
     maxValue: 100,
     initialValue: 50,

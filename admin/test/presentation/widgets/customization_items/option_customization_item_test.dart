@@ -9,7 +9,7 @@ void main() {
   group('option customization item ->', () {
     testWidgets('OptionCustomizationItem adds new option when text is entered',
         (WidgetTester tester) async {
-      List<String> options = ['Option 1', 'Option 2'];
+      var options = <String>['Option 1', 'Option 2'];
       await tester.pumpWidget(
         MaterialApp(
           localizationsDelegates: const [
@@ -41,7 +41,7 @@ void main() {
     testWidgets(
         'OptionCustomizationItem deletes option when delete button is pressed',
         (WidgetTester tester) async {
-      List<String> options = ['Option 1', 'Option 2', 'Option 3'];
+      var options = <String>['Option 1', 'Option 2', 'Option 3'];
       await tester.pumpWidget(
         MaterialApp(
           localizationsDelegates: const [
