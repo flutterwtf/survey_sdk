@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:survey_admin/presentation/app/localization/localizations.dart';
+import 'package:survey_admin/presentation/utils/question_data_transformers.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/input/input_common_customization_tab.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/input/input_content_customization_tab.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/input/input_customization_tab.dart';
 import 'package:survey_admin/presentation/widgets/question_settings_tab_bar.dart';
 
-// TODO(dev): why do we have pages in this folder?
 class InputCustomizationPanel extends StatelessWidget {
-  const InputCustomizationPanel({super.key});
+  final InputQuestionTransformers transformers;
+
+  const InputCustomizationPanel({
+    required this.transformers,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -15,36 +20,36 @@ class InputCustomizationPanel extends StatelessWidget {
       tabs: [
         InputCommonCustomizationTab(
           title: context.localization.common,
-          onFillColorPicked: (color) {},
-          onTitleColorPicked: (color) {},
-          onTitleFontSizeChanged: (size) {},
-          onSubtitleColorPicked: (color) {},
-          onSubtitleFontSizeChanged: (size) {},
-          onButtonFirstColorPicked: (color) {},
-          onButtonSecondColorPicked: (color) {},
-          onButtonFontSizeChanged: (size) {},
+          onFillColorPicked: transformers.updateFillColor,
+          onTitleColorPicked: transformers.updateTitleColor,
+          onTitleFontSizeChanged: transformers.updateTitleFontSize,
+          onSubtitleColorPicked: transformers.updateSubtitleColor,
+          onSubtitleFontSizeChanged: transformers.updateSubtitleFontSize,
+          onButtonFirstColorPicked: transformers.updateButtonFirstColor,
+          onButtonSecondColorPicked: transformers.updateButtonSecondColor,
+          onButtonFontSizeChanged: transformers.updateButtonFontSize,
         ),
         InputCustomizationTab(
           title: context.localization.input,
-          onMultilineChanged: (isMultiline, lineAmount) {},
-          onFillColorChanged: (color) {},
-          onBorderColorChanged: (color) {},
-          onBorderSizeChanged: (size) {},
-          onBorderWidthChanged: (size) {},
-          onHorizontalPaddingChanged: (size) {},
-          onVerticalPaddingChanged: (size) {},
-          onHintColorChanged: (color) {},
-          onHintFontSizeChanged: (size) {},
-          onTextColorChanged: (color) {},
-          onTextFontSizeChanged: (size) {},
-          onInputTypeChanged: (inputType) {},
+          onMultilineChanged: transformers.updateMultiline,
+          onFillColorChanged: transformers.updateFillColor,
+          onBorderColorChanged: transformers.updateBorderColor,
+          onBorderSizeChanged: transformers.updateBorderSize,
+          onBorderWidthChanged: transformers.updateBorderWidth,
+          onHorizontalPaddingChanged: transformers.updateHorizontalPadding,
+          onVerticalPaddingChanged: transformers.updateVerticalPadding,
+          onHintColorChanged: transformers.updateHintColor,
+          onHintFontSizeChanged: transformers.updateHintFontSize,
+          onTextColorChanged: transformers.updateTextColor,
+          onTextFontSizeChanged: transformers.updateTextFontSize,
+          onInputTypeChanged: transformers.updateInputType,
         ),
         InputContentCustomizationTab(
           title: context.localization.content,
-          onTitleChanged: (text) {},
-          onSubtitleChanged: (text) {},
-          onHintTextChanged: (text) {},
-          onButtonTextChanged: (text) {},
+          onTitleChanged: transformers.updateTitle,
+          onSubtitleChanged: transformers.updateSubtitle,
+          onHintTextChanged: transformers.updateHintText,
+          onButtonTextChanged: transformers.updateButtonText,
         ),
       ],
     );

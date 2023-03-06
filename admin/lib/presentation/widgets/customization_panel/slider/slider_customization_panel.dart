@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:survey_admin/presentation/app/localization/localizations.dart';
+import 'package:survey_admin/presentation/utils/question_data_transformers.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/slider/slider_common_customization_tab.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/slider/slider_content_customization_tab.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/slider/slider_customization_tab.dart';
 import 'package:survey_admin/presentation/widgets/question_settings_tab_bar.dart';
 
 class SliderCustomizationPanel extends StatelessWidget {
+  final SliderQuestionTransformers transformers;
+
   const SliderCustomizationPanel({
+    required this.transformers,
     super.key,
   });
 
@@ -16,30 +20,30 @@ class SliderCustomizationPanel extends StatelessWidget {
       tabs: [
         SliderCommonCustomizationTab(
           title: context.localization.common,
-          onButtonDownColorChanged: (value) {},
-          onButtonUpColorChanged: (value) {},
-          onFillColorChanged: (value) {},
-          onSubtitleColorChanged: (value) {},
-          onTitleColorChanged: (value) {},
-          onTitleFontSizeChanged: (size) {},
-          onSubtitleFontSizeChanged: (size) {},
-          onButtonFontSizeChanged: (size) {},
-          onButtonRadiusChanged: (radius) {},
+          onButtonDownColorChanged: transformers.updateButtonDownColor,
+          onButtonUpColorChanged: transformers.updateButtonUpColor,
+          onFillColorChanged: transformers.updateFillColor,
+          onSubtitleColorChanged: transformers.updateSubtitleColor,
+          onTitleColorChanged: transformers.updateTitleColor,
+          onTitleFontSizeChanged: transformers.updateTitleFontSize,
+          onSubtitleFontSizeChanged: transformers.updateSubtitleFontSize,
+          onButtonFontSizeChanged: transformers.updateButtonFontSize,
+          onButtonRadiusChanged: transformers.updateButtonRadius,
         ),
         SliderCustomizationTab(
           title: context.localization.slider,
-          onActiveColorChanged: (color) {},
-          onInactiveColorChanged: (color) {},
-          onThicknessChanged: (thickness) {},
-          onThumbSizeChanged: (size) {},
-          onThumbColorChanged: (color) {},
+          onActiveColorChanged: transformers.updateActiveColor,
+          onInactiveColorChanged: transformers.updateInactiveColor,
+          onThicknessChanged: transformers.updateThickness,
+          onThumbSizeChanged: transformers.updateThumbSize,
+          onThumbColorChanged: transformers.updateThumbColor,
         ),
         SliderContentCustomizationTab(
           title: context.localization.content,
-          onDivisionsChanged: (value) {},
-          onMinMaxChanged: (min, max) {},
-          onSubtitleChanged: (value) {},
-          onTitleChanged: (value) {},
+          onDivisionsChanged: transformers.updateDivisions,
+          onMinMaxChanged: transformers.updateMinMax,
+          onSubtitleChanged: transformers.updateSubtitle,
+          onTitleChanged: transformers.updateTitle,
         ),
       ],
     );

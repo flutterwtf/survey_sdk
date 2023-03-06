@@ -12,6 +12,7 @@ import 'package:survey_admin/presentation/widgets/builder_page/editor_bar.dart';
 import 'package:survey_admin/presentation/widgets/builder_page/phone_view.dart';
 import 'package:survey_admin/presentation/widgets/builder_page/question_list.dart';
 import 'package:survey_admin/presentation/widgets/export_floating_window.dart';
+import 'package:survey_core/survey_core.dart';
 
 class BuilderPage extends StatefulWidget {
   const BuilderPage({super.key});
@@ -41,14 +42,50 @@ class _BuilderPageState extends State<BuilderPage> {
         ),
         body: Row(
           children: [
-            QuestionList(onSelect: _cubit.select),
+            QuestionList(
+              cubit: _cubit,
+            ),
             Expanded(
               child: PhoneView(
-                child: Container(),
+                child: DecoratedBox(
+                  decoration: const BoxDecoration(
+                    color: Colors.red,
+                  ),
+                  child: Builder(
+                    builder: (context) {
+                      switch (state.selectedQuestion?.type ?? '') {
+                        case QuestionTypes.slider:
+                          return SliderQuestionPage(
+                            data: state.selectedQuestion as SliderQuestionData,
+                            onSend: (_) {},
+                          );
+                        case QuestionTypes.choice:
+                          return ChoiceQuestionPage(
+                            data: state.selectedQuestion as ChoiceQuestionData,
+                            onSend: (_) {},
+                          );
+                        case QuestionTypes.intro:
+                          return IntroQuestionPage(
+                            data: state.selectedQuestion as IntroQuestionData,
+                            onSend: (_) {},
+                          );
+                        case QuestionTypes.input:
+                          return InputQuestionPage(
+                            data: state.selectedQuestion as InputQuestionData,
+                            onSend: (_) {},
+                          );
+                        default:
+                          return Container(
+                            color: Colors.red,
+                          );
+                      }
+                    },
+                  ),
+                ),
               ),
             ),
             EditorBar(
-              editableQuestion: state.selectedQuestion,
+              cubit: _cubit,
             ),
           ],
         ),
