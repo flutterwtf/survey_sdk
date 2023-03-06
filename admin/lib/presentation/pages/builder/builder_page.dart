@@ -44,7 +44,7 @@ class _BuilderPageState extends State<BuilderPage> {
           title: const _BuilderPageTabBar(),
           actions: [
             const _CreateTab(),
-            _PreviewTab(state.questionsList),
+            _PreviewTab(_cubit.downloadExportedQuestions),
           ],
         ),
         body: Row(
@@ -135,9 +135,9 @@ class _CreateTab extends StatelessWidget {
 }
 
 class _PreviewTab extends StatelessWidget {
-  final List<QuestionData>? questionsList;
+  final VoidCallback downloadExportedQuestions;
 
-  const _PreviewTab(this.questionsList);
+  const _PreviewTab(this.downloadExportedQuestions);
 
   @override
   Widget build(BuildContext context) {
@@ -151,16 +151,7 @@ class _PreviewTab extends StatelessWidget {
         onPressed: () {
           showExportFloatingWindow(
             context,
-            onDownloadPressed: () {
-              final file = FileSystemDataSource();
-              if (questionsList != null) {
-                final rawMap = <String, dynamic>{};
-                for (final element in questionsList!) {
-                  rawMap[element.index.toString()] = element.toJson();
-                }
-                file.downloadSurveyData(rawMap);
-              }
-            },
+            onDownloadPressed: downloadExportedQuestions,
             onCopyPressed: () {},
           );
         },

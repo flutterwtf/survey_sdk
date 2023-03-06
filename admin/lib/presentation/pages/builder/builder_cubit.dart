@@ -1,8 +1,10 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:survey_admin/data/filesystem_data_source.dart';
 import 'package:survey_admin/presentation/pages/builder/builder_state.dart';
 import 'package:survey_core/survey_core.dart';
 
 class BuilderCubit extends Cubit<BuilderState> {
+  final FileSystemDataSource _fileSystemDataSource = FileSystemDataSource();
   BuilderCubit()
       : super(
           const BuilderState(
@@ -20,6 +22,16 @@ class BuilderCubit extends Cubit<BuilderState> {
         ],
       ),
     );
+  }
+
+  void downloadExportedQuestions() {
+    if (state.questionsList.isNotEmpty) {
+      final rawMap = <String, dynamic>{};
+      for (final element in state.questionsList) {
+        rawMap[element.index.toString()] = element.toJson();
+      }
+      _fileSystemDataSource.downloadSurveyData(rawMap);
+    }
   }
 
   void select(QuestionData data) => emit(
