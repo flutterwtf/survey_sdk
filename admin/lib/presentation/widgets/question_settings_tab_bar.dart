@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:survey_admin/presentation/utils/app_fonts.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/utils/theme_extension.dart';
-import 'package:survey_admin/presentation/widgets/customization_panel/customization_panel.dart';
+import 'package:survey_admin/presentation/widgets/customization_panel/customization_tab.dart';
 
 class QuestionSettingsTabBar extends StatefulWidget {
-  final List<CustomizationPanel> panels;
+  final List<CustomizationTab> tabs;
 
   const QuestionSettingsTabBar({
-    required this.panels,
+    required this.tabs,
     super.key,
   });
 
@@ -24,7 +24,7 @@ class _QuestionSettingsTabBarState extends State<QuestionSettingsTabBar>
   void initState() {
     super.initState();
     _tabController = TabController(
-      length: widget.panels.length,
+      length: widget.tabs.length,
       vsync: this,
     );
   }
@@ -50,13 +50,13 @@ class _QuestionSettingsTabBarState extends State<QuestionSettingsTabBar>
             fontWeight: AppFonts.weightMedium,
           ),
           tabs: [
-            for (var panel in widget.panels) Tab(text: panel.title),
+            for (var tab in widget.tabs) Tab(text: tab.title),
           ],
         ),
         Expanded(
           child: TabBarView(
             controller: _tabController,
-            children: widget.panels,
+            children: widget.tabs,
           ),
         ),
       ],

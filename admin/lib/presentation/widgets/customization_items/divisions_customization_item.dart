@@ -4,7 +4,7 @@ import 'package:survey_admin/presentation/widgets/customization_items/customizat
 
 class DivisionsCustomizationItem extends StatelessWidget {
   final int initialValue;
-  final void Function(int? divisions) onChanged;
+  final void Function(int divisions) onChanged;
 
   const DivisionsCustomizationItem({
     required this.onChanged,
@@ -20,11 +20,12 @@ class DivisionsCustomizationItem extends StatelessWidget {
         FilteringTextInputFormatter.digitsOnly,
         LengthLimitingTextInputFormatter(3),
       ],
-      onChanged: (divisions) {
+      onChanged: (value) {
+        if (value == null) return;
+
+        final divisions = int.tryParse(value);
         if (divisions != null) {
-          onChanged(int.tryParse(divisions));
-        } else {
-          onChanged(null);
+          onChanged(divisions);
         }
       },
     );

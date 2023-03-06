@@ -1,12 +1,12 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:survey_admin/presentation/widgets/hex_color_field.dart';
 import 'package:survey_admin/presentation/widgets/text_customize_item.dart';
 import 'package:survey_admin/presentation/widgets/text_width_field.dart';
+
+import '../app_test.dart';
 
 void main() {
   group(
@@ -20,22 +20,13 @@ void main() {
       const newColorHex = 'FFC91515';
       const newWidth = '12';
 
-      final textCustomizationItem = MaterialApp(
-        supportedLocales: AppLocalizations.supportedLocales,
-        localizationsDelegates: const [
-          AppLocalizations.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        home: Scaffold(
-          body: TextCustomizeItem(
-            title: title,
-            initialTextWidth: initialTextWidth,
-            initialColor: initialColor,
-            onColorPicked: completerOnColorPicked.complete,
-            onTextWidthPicked: completerOnTextWidthPicked.complete,
-          ),
+      final textCustomizationItem = AppTest(
+        child: TextCustomizeItem(
+          title: title,
+          initialTextWidth: initialTextWidth,
+          initialColor: initialColor,
+          onColorPicked: completerOnColorPicked.complete,
+          onTextWidthPicked: completerOnTextWidthPicked.complete,
         ),
       );
 

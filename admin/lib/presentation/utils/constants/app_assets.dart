@@ -10,6 +10,13 @@ abstract class AppAssets {
   static const String addCircleIcon = '${_iconsFolder}add_circle_icon.svg';
   static const String arcIcon = '${_iconsFolder}arc_icon.svg';
   static const String arrowIcon = '${_iconsFolder}arrow_icon.svg';
+  static const String sliderIcon = '${_iconsFolder}slider_icon.svg';
+  static const String inputIcon = '${_iconsFolder}input_icon.svg';
+  static const String introIcon = '${_iconsFolder}intro_icon.svg';
+  static const String singleChoiceIcon =
+      '${_iconsFolder}single_choice_icon.svg';
+  static const String multipleChoiceIcon =
+      '${_iconsFolder}multiple_choice_icon.svg';
 
   ///images
   static const String checkBoxImage = '${_imagesFolder}check_box_image.svg';

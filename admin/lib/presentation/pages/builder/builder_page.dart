@@ -47,7 +47,9 @@ class _BuilderPageState extends State<BuilderPage> {
                 child: Container(),
               ),
             ),
-            const EditorBar(),
+            EditorBar(
+              editableQuestion: state.selectedQuestion,
+            ),
           ],
         ),
       ),
