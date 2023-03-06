@@ -71,7 +71,7 @@ class _RulesLimitedCustomizationItemState
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _RulesLimitedItem(
-          inputType: _selectedRuleLimited,
+          ruleLimited: _selectedRuleLimited,
           trailing: RotationTransition(
             turns: _animation,
             child: SvgPicture.asset(AppAssets.arrowIcon),
@@ -92,16 +92,17 @@ class _RulesLimitedCustomizationItemState
           child: _isExpanded
               ? Column(
                   children: _rulesLimitedList
-                      .where((inputType) => inputType != _selectedRuleLimited)
+                      .where(
+                          (ruleLimited) => ruleLimited != _selectedRuleLimited)
                       .map(
-                        (inputType) => _RulesLimitedItem(
-                          inputType: inputType,
+                        (ruleLimited) => _RulesLimitedItem(
+                          ruleLimited: ruleLimited,
                           onTap: () {
                             setState(() {
                               _isExpanded = false;
-                              _selectedRuleLimited = inputType;
+                              _selectedRuleLimited = ruleLimited;
                             });
-                            widget.onChanged?.call(inputType);
+                            widget.onChanged?.call(ruleLimited);
                             if (_isExpanded) {
                               _iconAnimationController.forward();
                             } else {
@@ -121,12 +122,12 @@ class _RulesLimitedCustomizationItemState
 
 class _RulesLimitedItem extends StatelessWidget {
   const _RulesLimitedItem({
-    required this.inputType,
+    required this.ruleLimited,
     required this.onTap,
     this.trailing,
   });
 
-  final int inputType;
+  final int ruleLimited;
   final VoidCallback onTap;
   final Widget? trailing;
 
@@ -144,7 +145,7 @@ class _RulesLimitedItem extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                inputType.toString(),
+                ruleLimited.toString(),
                 style: context.theme.textTheme.bodyLarge,
               ),
               if (trailing != null) trailing!,

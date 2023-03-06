@@ -71,7 +71,7 @@ class _RulesCustomizationItemState extends State<RulesCustomizationItem>
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _RulesItem(
-          inputType: _selectedRule,
+          ruleType: _selectedRule,
           trailing: RotationTransition(
             turns: _animation,
             child: SvgPicture.asset(AppAssets.arrowIcon),
@@ -92,16 +92,16 @@ class _RulesCustomizationItemState extends State<RulesCustomizationItem>
           child: _isExpanded
               ? Column(
                   children: RuleType.values
-                      .where((inputType) => inputType != _selectedRule)
+                      .where((ruleType) => ruleType != _selectedRule)
                       .map(
-                        (inputType) => _RulesItem(
-                          inputType: inputType,
+                        (ruleType) => _RulesItem(
+                          ruleType: ruleType,
                           onTap: () {
                             setState(() {
                               _isExpanded = false;
-                              _selectedRule = inputType;
+                              _selectedRule = ruleType;
                             });
-                            widget.onChanged?.call(inputType);
+                            widget.onChanged?.call(ruleType);
                             if (_isExpanded) {
                               _iconAnimationController.forward();
                             } else {
@@ -121,12 +121,12 @@ class _RulesCustomizationItemState extends State<RulesCustomizationItem>
 
 class _RulesItem extends StatelessWidget {
   const _RulesItem({
-    required this.inputType,
+    required this.ruleType,
     required this.onTap,
     this.trailing,
   });
 
-  final RuleType inputType;
+  final RuleType ruleType;
   final VoidCallback onTap;
   final Widget? trailing;
 
@@ -144,7 +144,7 @@ class _RulesItem extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                inputType.name,
+                ruleType.name,
                 style: context.theme.textTheme.bodyLarge,
               ),
               if (trailing != null) trailing!,

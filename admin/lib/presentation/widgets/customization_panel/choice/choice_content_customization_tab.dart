@@ -71,6 +71,7 @@ class ChoiceContentCustomizationTab extends CustomizationTab {
             title: context.localization.rule,
             children: [
               Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Expanded(
                     child: RulesCustomizationItem(
@@ -84,7 +85,7 @@ class ChoiceContentCustomizationTab extends CustomizationTab {
                             onChanged: onRuleLimitedChanged,
                             initialValue: limitedRule,
                             rulesLimitedList:
-                                listOptions.isEmpty ? 1 : listOptions.length,
+                                listOptions.isEmpty ? 0 : listOptions.length,
                           )
                         : const SizedBox(),
                   ),
