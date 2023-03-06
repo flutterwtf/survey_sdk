@@ -23,6 +23,7 @@ dependencies:
   survey_core:
     path: ../core
 
+  path_provider: ^2.0.13
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -36,6 +37,7 @@ flutter:
   assets:
     - assets/
     - assets/images/
+    - assets/icons/
   fonts:
     - family: Inter
       fonts:
@@ -43,6 +45,6 @@ flutter:
         - asset: fonts/Inter-SemiBold.ttf
         - asset: fonts/Inter-Medium.ttf
     - family: Karla
-        fonts:
-            - asset: fonts/Karla-Regular.ttf
-              - asset: fonts/Karla-Bold.ttf
+      fonts:
+        - asset: fonts/Karla-Regular.ttf
+        - asset: fonts/Karla-Bold.ttf

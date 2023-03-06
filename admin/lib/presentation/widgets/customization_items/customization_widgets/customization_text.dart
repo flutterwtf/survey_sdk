@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:survey_admin/presentation/utils/app_fonts.dart';
+import 'package:survey_admin/presentation/utils/theme_extension.dart';
 
 // TODO(dev): Why is this class in a separate folder?
 class CustomizationText extends StatelessWidget {
@@ -14,10 +14,7 @@ class CustomizationText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
-      style: const TextStyle(
-        fontSize: AppFonts.sizeM,
-        fontWeight: AppFonts.weightSemiBold,
-      ),
+      style: context.theme.textTheme.titleSmall,
     );
   }
 }

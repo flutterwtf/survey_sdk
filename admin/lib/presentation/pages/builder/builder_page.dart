@@ -7,6 +7,7 @@ import 'package:survey_admin/presentation/pages/builder/builder_state.dart';
 import 'package:survey_admin/presentation/utils/app_fonts.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
+import 'package:survey_admin/presentation/utils/theme_extension.dart';
 import 'package:survey_admin/presentation/widgets/builder_page/editor_bar.dart';
 import 'package:survey_admin/presentation/widgets/builder_page/phone_view.dart';
 import 'package:survey_admin/presentation/widgets/builder_page/question_list.dart';
@@ -46,7 +47,9 @@ class _BuilderPageState extends State<BuilderPage> {
                 child: Container(),
               ),
             ),
-            const EditorBar(),
+            EditorBar(
+              editableQuestion: state.selectedQuestion,
+            ),
           ],
         ),
       ),
@@ -76,7 +79,9 @@ class _BuilderPageTabBar extends StatelessWidget {
           unselectedLabelColor: AppColors.textGrey,
           indicatorColor: AppColors.black,
           labelColor: AppColors.text,
-          labelStyle: const TextStyle(fontWeight: AppFonts.weightBold),
+          labelStyle: context.theme.textTheme.titleMedium?.copyWith(
+            fontWeight: AppFonts.weightBold,
+          ),
           tabs: [
             Tab(text: context.localization.create),
             Tab(text: context.localization.preview),
@@ -109,9 +114,9 @@ class _CreateTab extends StatelessWidget {
           ),
           child: Text(
             context.localization.import,
-            style: const TextStyle(
+            style: context.theme.textTheme.labelLarge?.copyWith(
+              fontFamily: AppFonts.karla,
               color: AppColors.text,
-              fontWeight: AppFonts.weightSemiBold,
             ),
           ),
         ),
@@ -148,9 +153,9 @@ class _PreviewTab extends StatelessWidget {
           ),
           child: Text(
             context.localization.export,
-            style: const TextStyle(
+            style: context.theme.textTheme.labelLarge?.copyWith(
+              fontFamily: AppFonts.karla,
               color: AppColors.white,
-              fontWeight: AppFonts.weightSemiBold,
             ),
           ),
         ),
