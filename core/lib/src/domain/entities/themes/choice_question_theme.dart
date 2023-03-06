@@ -1,8 +1,9 @@
+import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:survey_core/src/domain/entities/api_object.dart';
 
 class ChoiceQuestionTheme extends ThemeExtension<ChoiceQuestionTheme>
-    with ApiObject {
+    with ApiObject, EquatableMixin {
   final Color activeColor;
   final Color inactiveColor;
 
@@ -52,6 +53,7 @@ class ChoiceQuestionTheme extends ThemeExtension<ChoiceQuestionTheme>
         'inactiveColor': inactiveColor.value,
       };
 
+  @override
   List<Object?> get props => [
         activeColor,
         inactiveColor,
