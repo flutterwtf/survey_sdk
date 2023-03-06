@@ -18,6 +18,11 @@ class FilesystemDataSourceImpl implements FilesystemDataSource {
     } else {
       json = await rootBundle.loadString(asset);
     }
+    return getSurveyDataFromJson(json);
+  }
+
+  @override
+  SurveyData getSurveyDataFromJson(String json) {
     final map = jsonDecode(json);
     return SurveyData.fromJson(map);
   }

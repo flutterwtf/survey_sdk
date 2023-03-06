@@ -34,8 +34,8 @@ class _BuilderPageState extends State<BuilderPage> {
           shadowColor: AppColors.transparentW,
           centerTitle: true,
           title: const _BuilderPageTabBar(),
-          actions: const [
-            _CreateTab(),
+          actions: [
+            _CreateTab(onPressed: _cubit.importData),
             _PreviewTab(),
           ],
         ),
@@ -93,7 +93,9 @@ class _BuilderPageTabBar extends StatelessWidget {
 }
 
 class _CreateTab extends StatelessWidget {
-  const _CreateTab();
+  final VoidCallback onPressed;
+
+  const _CreateTab({required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -104,7 +106,7 @@ class _CreateTab extends StatelessWidget {
         right: AppDimensions.margin2XL,
       ),
       child: OutlinedButton(
-        onPressed: () {},
+        onPressed: onPressed,
         style: OutlinedButton.styleFrom(
           side: const BorderSide(),
         ),

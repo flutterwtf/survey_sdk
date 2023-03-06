@@ -10,4 +10,8 @@ class SurveyDataRepositoryImpl implements SurveyDataRepository {
   @override
   Future<SurveyData> getSurveyData(String asset) =>
       _fileSystemDataSource.getSurveyData(asset);
+
+  @override
+  SurveyData getSurveyDataFromJson(String json) =>
+      _fileSystemDataSource.getSurveyDataFromJson(json);
 }
