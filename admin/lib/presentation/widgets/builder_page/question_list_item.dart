@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
+import 'package:survey_admin/presentation/utils/constants/app_assets.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
 import 'package:survey_admin/presentation/utils/theme_extension.dart';
+import 'package:survey_admin/presentation/widgets/vector_image.dart';
 import 'package:survey_core/survey_core.dart';
 
 class QuestionListItem extends StatelessWidget {
@@ -15,6 +17,23 @@ class QuestionListItem extends StatelessWidget {
     this.isSelected = false,
     super.key,
   });
+
+  Widget _questionImage(QuestionData questionData) {
+    switch (questionData.type) {
+      case QuestionTypes.intro:
+        return const VectorImage(assetName: AppAssets.introIcon);
+      case QuestionTypes.input:
+        return const VectorImage(assetName: AppAssets.inputIcon);
+      case QuestionTypes.slider:
+        return const VectorImage(assetName: AppAssets.sliderIcon);
+      case QuestionTypes.choice:
+        return (questionData as ChoiceQuestionData).isMultipleChoice
+            ? const VectorImage(assetName: AppAssets.multipleChoiceIcon)
+            : const VectorImage(assetName: AppAssets.singleChoiceIcon);
+      default:
+        throw Exception('Unimplemented error');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,13 +59,19 @@ class QuestionListItem extends StatelessWidget {
               ),
               const SizedBox(width: AppDimensions.marginXS),
               Container(
-                decoration: const BoxDecoration(
-                  color: AppColors.switchBackgroundActive,
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                decoration: BoxDecoration(
+                  color: AppColors.white,
+                  borderRadius: const BorderRadius.all(Radius.circular(10)),
+                  border: Border.all(
+                    width: 0.5,
+                  ),
                 ),
                 // TODO(dev): to const maybe???
                 height: 40,
                 width: 40,
+                child: Center(
+                  child: _questionImage(questionData),
+                ),
               ),
               const SizedBox(width: AppDimensions.marginXS),
               Text(
