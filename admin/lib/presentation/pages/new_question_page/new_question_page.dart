@@ -70,9 +70,9 @@ class _NewQuestionPageState extends State<NewQuestionPage> {
       child: Scaffold(
         backgroundColor: AppColors.white,
         appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(AppDimensions.appbarSize),
+          preferredSize: const Size.fromHeight(AppDimensions.appBarSize),
           child: AppBar(
-            toolbarHeight: AppDimensions.appbarSize,
+            toolbarHeight: AppDimensions.appBarSize,
             backgroundColor: AppColors.white,
             shadowColor: AppColors.transparentW,
             automaticallyImplyLeading: false,

@@ -11,9 +11,11 @@ import 'package:survey_admin/presentation/widgets/builder_page/question_list_ite
 import 'package:survey_core/survey_core.dart';
 
 class QuestionList extends StatefulWidget {
+  final List<QuestionData> questionsList;
   final void Function(QuestionData) onSelect;
 
   const QuestionList({
+    required this.questionsList,
     required this.onSelect,
     super.key,
   });
@@ -23,23 +25,19 @@ class QuestionList extends StatefulWidget {
 }
 
 class _QuestionListState extends State<QuestionList> {
-  late List<QuestionData> _questionList;
   int _selectedIndex = 0;
 
   @override
   void initState() {
     super.initState();
-    _questionList = [
-      const IntroQuestionData.common(index: 0),
-      const InputQuestionData.common(index: 1),
-    ];
-    widget.onSelect(_questionList.first);
+
+    widget.onSelect(widget.questionsList.first);
   }
 
   void addQuestion(QuestionData data) {
-    final index = _questionList.length;
+    final index = widget.questionsList.length;
     setState(() {
-      _questionList.add(
+      widget.questionsList.add(
         data.copyWith(index: index),
       );
     });
@@ -97,13 +95,15 @@ class _QuestionListState extends State<QuestionList> {
             child: ReorderableListView(
               buildDefaultDragHandles: false,
               children: [
-                for (int index = 0; index < _questionList.length; index++)
+                for (int index = 0;
+                    index < widget.questionsList.length;
+                    index++)
                   ReorderableDragStartListener(
                     index: index,
                     key: ValueKey(index),
                     child: QuestionListItem(
                       isSelected: index == _selectedIndex,
-                      questionData: _questionList[index],
+                      questionData: widget.questionsList[index],
                       onTap: (data) {
                         widget.onSelect(data);
                         setState(() {
@@ -122,11 +122,14 @@ class _QuestionListState extends State<QuestionList> {
                     } else if (_selectedIndex == newIndex) {
                       _selectedIndex = oldIndex;
                     }
-
-                    final oldItem = _questionList[oldIndex];
-                    final newItem = _questionList[newIndex];
-                    _questionList[newIndex] = oldItem.copyWith(index: newIndex);
-                    _questionList[oldIndex] = newItem.copyWith(index: oldIndex);
+                    final oldItem = widget.questionsList[oldIndex];
+                    final newItem = widget.questionsList[newIndex];
+                    widget.questionsList[newIndex] = oldItem.copyWith(
+                      index: newIndex,
+                    );
+                    widget.questionsList[oldIndex] = newItem.copyWith(
+                      index: oldIndex,
+                    );
                   },
                 );
               },

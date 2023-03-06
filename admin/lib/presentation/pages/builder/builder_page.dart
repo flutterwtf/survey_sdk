@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:survey_admin/data/filesystem_data_source.dart';
 import 'package:survey_admin/presentation/app/di/injector.dart';
 import 'package:survey_admin/presentation/app/localization/localizations.dart';
 import 'package:survey_admin/presentation/pages/builder/builder_cubit.dart';
@@ -12,6 +13,7 @@ import 'package:survey_admin/presentation/widgets/builder_page/editor_bar.dart';
 import 'package:survey_admin/presentation/widgets/builder_page/phone_view.dart';
 import 'package:survey_admin/presentation/widgets/builder_page/question_list.dart';
 import 'package:survey_admin/presentation/widgets/export_floating_window.dart';
+import 'package:survey_core/survey_core.dart';
 
 class BuilderPage extends StatefulWidget {
   const BuilderPage({super.key});
@@ -24,32 +26,39 @@ class _BuilderPageState extends State<BuilderPage> {
   final _cubit = i.get<BuilderCubit>();
 
   @override
+  void initState() {
+    super.initState();
+    _cubit.setInitialQuestions();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return BlocBuilder<BuilderCubit, BuilderState>(
       bloc: _cubit,
       builder: (context, state) => Scaffold(
         appBar: AppBar(
-          toolbarHeight: AppDimensions.appbarSize,
+          toolbarHeight: AppDimensions.appBarSize,
           backgroundColor: AppColors.white,
           shadowColor: AppColors.transparentW,
           centerTitle: true,
           title: const _BuilderPageTabBar(),
-          actions: const [
-            _CreateTab(),
-            _PreviewTab(),
+          actions: [
+            const _CreateTab(),
+            _PreviewTab(state.questionsList),
           ],
         ),
         body: Row(
           children: [
-            QuestionList(onSelect: _cubit.select),
+            QuestionList(
+              questionsList: state.questionsList,
+              onSelect: _cubit.select,
+            ),
             Expanded(
               child: PhoneView(
                 child: Container(),
               ),
             ),
-            EditorBar(
-              editableQuestion: state.selectedQuestion,
-            ),
+            EditorBar(editableQuestion: state.selectedQuestion),
           ],
         ),
       ),
@@ -126,7 +135,9 @@ class _CreateTab extends StatelessWidget {
 }
 
 class _PreviewTab extends StatelessWidget {
-  const _PreviewTab();
+  final List<QuestionData>? questionsList;
+
+  const _PreviewTab(this.questionsList);
 
   @override
   Widget build(BuildContext context) {
@@ -140,7 +151,16 @@ class _PreviewTab extends StatelessWidget {
         onPressed: () {
           showExportFloatingWindow(
             context,
-            onDownloadPressed: () {},
+            onDownloadPressed: () {
+              final file = FileSystemDataSource();
+              if (questionsList != null) {
+                final rawMap = <String, dynamic>{};
+                for (final element in questionsList!) {
+                  rawMap[element.index.toString()] = element.toJson();
+                }
+                file.downloadSurveyData(rawMap);
+              }
+            },
             onCopyPressed: () {},
           );
         },
