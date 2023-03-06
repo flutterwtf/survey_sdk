@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:survey_admin/presentation/app/localization/localizations.dart';
-import 'package:survey_admin/presentation/utils/app_fonts.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
+import 'package:survey_admin/presentation/utils/theme_extension.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
 
 class MinMaxCustomizationItem extends StatefulWidget {
   final int initialMin;
   final int initialMax;
-  final void Function(int? min, int? max) onChanged;
+  final void Function(int min, int max) onChanged;
 
   const MinMaxCustomizationItem({
     required this.onChanged,
@@ -26,8 +26,8 @@ class MinMaxCustomizationItem extends StatefulWidget {
 }
 
 class _MinMaxCustomizationItemState extends State<MinMaxCustomizationItem> {
-  int? _min;
-  int? _max;
+  late int _min;
+  late int _max;
 
   @override
   void initState() {
@@ -36,12 +36,7 @@ class _MinMaxCustomizationItemState extends State<MinMaxCustomizationItem> {
     _max = widget.initialMax;
   }
 
-  bool _canCallParentOnChanged() {
-    if (_min != null && _max != null) {
-      return _min! < _max!;
-    }
-    return true;
-  }
+  bool _canCallParentOnChanged() => _min < _max;
 
   @override
   Widget build(BuildContext context) {
@@ -91,7 +86,7 @@ class _MinMaxInputField extends StatelessWidget {
   final int initialValue;
   final int? minValue;
   final int? maxValue;
-  final void Function(int? value) onChanged;
+  final void Function(int value) onChanged;
 
   const _MinMaxInputField({
     required this.name,
@@ -119,10 +114,11 @@ class _MinMaxInputField extends StatelessWidget {
   }
 
   void _onChanged(String? value) {
-    if (value != null) {
-      onChanged(int.tryParse(value));
-    } else {
-      onChanged(null);
+    if (value == null) return;
+
+    final size = int.tryParse(value);
+    if (size != null) {
+      onChanged(size);
     }
   }
 
@@ -136,15 +132,11 @@ class _MinMaxInputField extends StatelessWidget {
           ),
           child: Text(
             prefix,
-            style: const TextStyle(
-              fontSize: AppFonts.sizeL,
-              fontWeight: AppFonts.weightRegular,
-            ),
+            style: context.theme.textTheme.bodyLarge,
           ),
         ),
         Expanded(
           child: CustomizationTextField(
-            key: ValueKey(prefix),
             initialValue: initialValue.toString(),
             inputFormatters: [
               FilteringTextInputFormatter.digitsOnly,

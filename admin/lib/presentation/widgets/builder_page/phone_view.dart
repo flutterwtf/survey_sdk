@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:survey_admin/presentation/utils/asset_strings.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
+import 'package:survey_admin/presentation/utils/constants/app_assets.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
 
 class PhoneView extends StatelessWidget {
@@ -21,7 +21,7 @@ class PhoneView extends StatelessWidget {
           padding: const EdgeInsets.all(AppDimensions.sizeL),
           child: Stack(
             children: [
-              SvgPicture.asset(AssetStrings.iphone),
+              SvgPicture.asset(AppAssets.iphoneImage),
               Positioned.fill(
                 child: Container(
                   margin: const EdgeInsets.symmetric(

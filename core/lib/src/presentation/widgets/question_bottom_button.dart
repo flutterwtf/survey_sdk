@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:survey_core/src/presentation/utils/app_duration.dart';
+import 'package:survey_core/src/presentation/utils/app_durations.dart';
 import 'package:survey_core/src/presentation/utils/app_fonts.dart';
 import 'package:survey_core/src/presentation/utils/colors.dart';
 import 'package:survey_core/src/presentation/utils/constants.dart';
@@ -33,7 +33,6 @@ class QuestionBottomButton extends StatelessWidget {
     return SizedBox(
       width: double.infinity,
       child: InkWell(
-        key: const Key('QBB'),
         onTap: isEnabled ? onPressed : null,
         borderRadius: BorderRadius.circular(
           radius ?? AppDimensions.circularRadiusXS,
@@ -46,12 +45,13 @@ class QuestionBottomButton extends StatelessWidget {
             ),
             border: Border.all(color: buttonColor),
           ),
-          duration: const Duration(milliseconds: AppDuration.bottomAnimation),
+          duration: AppDurations.questionBottomButtonAnimation,
           child: Padding(
             padding: const EdgeInsets.all(AppDimensions.marginS),
             child: Center(
               child: Text(
                 text,
+                // TODO(dev): replace with theme text style maybe?
                 style: TextStyle(
                   color: buttonTextColor,
                   fontWeight: AppFonts.weightBold,

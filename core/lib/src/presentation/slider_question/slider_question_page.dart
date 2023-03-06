@@ -4,6 +4,7 @@ import 'package:survey_core/src/presentation/localization/localizations.dart';
 import 'package:survey_core/src/presentation/utils/app_fonts.dart';
 import 'package:survey_core/src/presentation/utils/constants.dart';
 import 'package:survey_core/src/presentation/utils/data_to_widget_util.dart';
+import 'package:survey_core/src/presentation/utils/theme_extension.dart';
 import 'package:survey_core/src/presentation/widgets/question_bottom_button.dart';
 import 'package:survey_core/src/presentation/widgets/question_subtitle.dart';
 import 'package:survey_core/src/presentation/widgets/question_title.dart';
@@ -131,12 +132,16 @@ class _QuestionSliderState extends State<_QuestionSlider> {
             children: [
               Text(
                 widget.minValue.toString(),
-                style: const TextStyle(fontSize: AppFonts.sizeM),
+                style: context.theme.textTheme.bodyMedium?.copyWith(
+                  fontFamily: AppFonts.inter,
+                ),
               ),
               const Spacer(),
               Text(
                 widget.maxValue.toString(),
-                style: const TextStyle(fontSize: AppFonts.sizeM),
+                style: context.theme.textTheme.bodyMedium?.copyWith(
+                  fontFamily: AppFonts.inter,
+                ),
               ),
             ],
           ),

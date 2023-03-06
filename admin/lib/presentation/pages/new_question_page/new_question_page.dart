@@ -1,41 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:survey_admin/presentation/pages/new_question_page/new_question_tabs.dart';
 import 'package:survey_admin/presentation/utils/app_fonts.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
+import 'package:survey_admin/presentation/utils/constants/app_assets.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
-import 'package:survey_admin/presentation/utils/constants/image_constants.dart';
+import 'package:survey_admin/presentation/utils/theme_extension.dart';
 import 'package:survey_admin/presentation/widgets/vector_image.dart';
-import 'package:survey_core/survey_core.dart';
 
 // TODO(dev): check localization
 const _title = 'New screen';
-const _tabs = [
-  'Intro',
-  'Choice',
-  'Slider',
-  'Custom input',
-];
-final Map<String, QuestionData> _dataMap = {
-  'Intro': const IntroQuestionData.common(),
-  'Choice': const ChoiceQuestionData.common(),
-  'Slider': const SliderQuestionData.common(),
-  'Custom input': const InputQuestionData.common(),
-};
-const _optionsInTabs = {
-  'Intro': ['Title', 'Image intro'],
-  'Choice': ['Radio button', 'Check box'],
-  'Slider': ['Slider'],
-  'Custom input': ['Single-line input', 'Multi-line input'],
-};
-
-const Map<String, String> _optionsAssets = {
-  'Title': AppAssets.introImage,
-  'Image intro': AppAssets.imageIntroImage,
-  'Radio button': AppAssets.radioButtonImage,
-  'Slider': AppAssets.sliderImage,
-  'Check box': AppAssets.checkBoxImage,
-  'Single-line input': AppAssets.singleLineInputImage,
-  'Multi-line input': AppAssets.multiLineInputImage,
-};
 
 class NewQuestionPage extends StatefulWidget {
   const NewQuestionPage({super.key});
@@ -45,18 +18,18 @@ class NewQuestionPage extends StatefulWidget {
 }
 
 class _NewQuestionPageState extends State<NewQuestionPage> {
-  String _selectedTab = _tabs[0];
+  NewQuestionTabs _selectedTab = NewQuestionTabs.intro;
   String? _selectedOption;
 
-  Widget _questionTab(String tabTitle) {
+  Widget _questionTab(NewQuestionTabs tab) {
     return _TabButton(
-      title: tabTitle,
+      title: tab.name(context),
       onTap: () {
         setState(
-          () => _selectedTab = tabTitle,
+          () => _selectedTab = tab,
         );
       },
-      isSelected: _selectedTab == tabTitle,
+      isSelected: _selectedTab == tab,
     );
   }
 
@@ -91,10 +64,10 @@ class _NewQuestionPageState extends State<NewQuestionPage> {
             children: [
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: _tabs.map(_questionTab).toList(),
+                children: NewQuestionTabs.values.map(_questionTab).toList(),
               ),
               _QuestionOptionsListView(
-                options: _optionsInTabs[_selectedTab] ?? [],
+                options: _selectedTab.options,
                 selectedOption: _selectedOption ?? '',
               ),
             ],
@@ -103,7 +76,7 @@ class _NewQuestionPageState extends State<NewQuestionPage> {
         persistentFooterButtons: [
           _AddButton(
             onPressed: () {
-              Navigator.pop(context, _dataMap[_selectedTab]);
+              Navigator.pop(context, _selectedTab.data);
             },
           ),
         ],
@@ -135,13 +108,11 @@ class _AppBarTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Align(
+    return Align(
       alignment: Alignment.centerLeft,
       child: Text(
         _title,
-        style: TextStyle(
-          color: AppColors.black,
-          fontSize: AppFonts.sizeM,
+        style: context.theme.textTheme.labelLarge?.copyWith(
           fontWeight: AppFonts.weightRegular,
         ),
       ),
@@ -169,12 +140,13 @@ class _TabButton extends StatelessWidget {
         padding: const EdgeInsets.only(top: AppDimensions.sizeM),
         child: Text(
           title,
-          style: TextStyle(
-            color: AppColors.black,
-            fontSize: AppFonts.sizeL,
-            fontWeight:
-                isSelected ? AppFonts.weightBold : AppFonts.weightRegular,
-          ),
+          style: isSelected
+              ? context.theme.textTheme.titleMedium?.copyWith(
+                  fontWeight: AppFonts.weightSemiBold,
+                )
+              : context.theme.textTheme.titleMedium?.copyWith(
+                  fontWeight: AppFonts.weightRegular,
+                ),
         ),
       ),
     );
@@ -182,7 +154,7 @@ class _TabButton extends StatelessWidget {
 }
 
 class _QuestionOptionsListView extends StatelessWidget {
-  final List<String> options;
+  final List<NewQuestionOptions> options;
   final String selectedOption;
 
   const _QuestionOptionsListView({
@@ -198,8 +170,8 @@ class _QuestionOptionsListView extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
           return _AssetTextOption(
-            assetName: _optionsAssets[options[index]] ?? '',
-            titleText: options[index],
+            assetName: options[index].asset,
+            titleText: options[index].name(context),
           );
         },
       ),
@@ -228,10 +200,7 @@ class _AssetTextOption extends StatelessWidget {
           const SizedBox(height: AppDimensions.marginXL),
           Text(
             titleText,
-            style: const TextStyle(
-              fontSize: AppFonts.sizeL,
-              fontWeight: AppFonts.weightMedium,
-            ),
+            style: context.theme.textTheme.titleMedium,
           ),
         ],
       ),
@@ -257,12 +226,12 @@ class _AddButton extends StatelessWidget {
           color: AppColors.black,
           borderRadius: BorderRadius.circular(AppDimensions.circularRadiusXS),
         ),
-        child: const Center(
+        child: Center(
           child: Text(
             'ADD',
-            style: TextStyle(
+            style: context.theme.textTheme.labelLarge?.copyWith(
+              fontFamily: AppFonts.karla,
               color: AppColors.white,
-              fontWeight: AppFonts.weightBold,
             ),
           ),
         ),

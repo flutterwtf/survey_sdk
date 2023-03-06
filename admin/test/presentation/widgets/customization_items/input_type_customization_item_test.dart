@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/input_type_customization_item.dart';
+
+import '../app_test.dart';
 
 void main() {
   group('Input type customization item widget', () {
@@ -10,14 +11,9 @@ void main() {
     const number = 'Number';
     testWidgets('load widget with dif initial values', (tester) async {
       await tester.pumpWidget(
-        MaterialApp(
-          localizationsDelegates: const [
-            AppLocalizations.delegate,
-          ],
-          home: Scaffold(
-            body: InputTypeCustomizationItem(
-              onChanged: (res) => res,
-            ),
+        AppTest(
+          child: InputTypeCustomizationItem(
+            onChanged: (res) => res,
           ),
         ),
       );
@@ -27,18 +23,13 @@ void main() {
 
     testWidgets('tap and show all 3 items', (tester) async {
       await tester.pumpWidget(
-        MaterialApp(
-          localizationsDelegates: const [
-            AppLocalizations.delegate,
-          ],
-          home: Scaffold(
-            body: SizedBox(
-              width: 400,
-              height: 400,
-              child: InputTypeCustomizationItem(
-                initialValue: InputType.date,
-                onChanged: (res) => res,
-              ),
+        AppTest(
+          child: SizedBox(
+            width: 400,
+            height: 400,
+            child: InputTypeCustomizationItem(
+              initialValue: InputType.date,
+              onChanged: (res) => res,
             ),
           ),
         ),
@@ -53,19 +44,10 @@ void main() {
 
     testWidgets('change item', (tester) async {
       await tester.pumpWidget(
-        MaterialApp(
-          localizationsDelegates: const [
-            AppLocalizations.delegate,
-          ],
-          home: Scaffold(
-            body: SizedBox(
-              width: 400,
-              height: 400,
-              child: InputTypeCustomizationItem(
-                initialValue: InputType.number,
-                onChanged: (res) => res,
-              ),
-            ),
+        AppTest(
+          child: InputTypeCustomizationItem(
+            initialValue: InputType.number,
+            onChanged: (res) => res,
           ),
         ),
       );
