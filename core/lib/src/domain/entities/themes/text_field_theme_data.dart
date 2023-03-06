@@ -2,13 +2,15 @@
 
 import 'dart:ui';
 
+import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:survey_core/src/domain/entities/api_object.dart';
 import 'package:survey_core/src/presentation/utils/colors.dart';
 import 'package:survey_core/src/presentation/utils/constants.dart';
 
 @immutable
-class TextFieldThemeData extends ThemeExtension<TextFieldThemeData> with ApiObject {
+class TextFieldThemeData extends ThemeExtension<TextFieldThemeData>
+    with ApiObject, EquatableMixin {
   final Color fillCommonColor;
   final Color fillInputColor;
   final Color borderColor;
@@ -161,7 +163,8 @@ class TextFieldThemeData extends ThemeExtension<TextFieldThemeData> with ApiObje
       borderColor: Color.lerp(borderColor, other.borderColor, t)!,
       borderWidth: lerpDouble(borderWidth, other.borderWidth, t)!,
       verticalPadding: lerpDouble(verticalPadding, other.verticalPadding, t)!,
-      horizontalPadding: lerpDouble(horizontalPadding, other.horizontalPadding, t)!,
+      horizontalPadding:
+          lerpDouble(horizontalPadding, other.horizontalPadding, t)!,
       hintColor: Color.lerp(hintColor, other.hintColor, t)!,
       hintSize: lerpDouble(hintSize, other.hintSize, t)!,
       textColor: Color.lerp(textColor, other.textColor, t)!,

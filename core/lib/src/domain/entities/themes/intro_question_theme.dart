@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:survey_core/src/domain/entities/api_object.dart';
 import 'package:survey_core/src/presentation/utils/app_fonts.dart';
@@ -7,7 +8,7 @@ import 'package:survey_core/src/presentation/utils/colors.dart';
 import 'package:survey_core/src/presentation/utils/constants.dart';
 
 class IntroQuestionTheme extends ThemeExtension<IntroQuestionTheme>
-    with ApiObject {
+    with ApiObject, EquatableMixin {
   final Color fillColor;
   final Color titleTextColor;
   final double titleTextSize;
@@ -120,4 +121,17 @@ class IntroQuestionTheme extends ThemeExtension<IntroQuestionTheme>
         'mainButtonTextSize': mainButtonTextSize,
         'mainButtonRadius': mainButtonRadius,
       };
+
+  @override
+  List<Object?> get props => [
+        fillColor,
+        titleTextColor,
+        titleTextSize,
+        subTitleTextColor,
+        subTitleTextSize,
+        mainButtonColor,
+        mainButtonTextColor,
+        mainButtonTextSize,
+        mainButtonRadius,
+      ];
 }
