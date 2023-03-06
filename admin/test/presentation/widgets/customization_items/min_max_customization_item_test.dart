@@ -1,36 +1,26 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/min_max_customization_item.dart';
 
+import '../app_test.dart';
+
 void main() {
-  final minMaxCustomizationItemPage = MaterialApp(
-    supportedLocales: AppLocalizations.supportedLocales,
-    localizationsDelegates: const [
-      AppLocalizations.delegate,
-      GlobalMaterialLocalizations.delegate,
-      GlobalWidgetsLocalizations.delegate,
-      GlobalCupertinoLocalizations.delegate,
-    ],
-    home: Scaffold(
-      body: MinMaxCustomizationItem(
-        initialMin: 50,
-        initialMax: 100,
-        onChanged: (_, __) {},
-      ),
+  final page = AppTest(
+    child: MinMaxCustomizationItem(
+      initialMin: 50,
+      initialMax: 100,
+      onChanged: (_, __) {},
     ),
   );
 
   testWidgets('Load widget with initial values', (tester) async {
-    await tester.pumpWidget(minMaxCustomizationItemPage);
+    await tester.pumpWidget(page);
 
     expect(find.text('50'), findsOneWidget);
     expect(find.text('100'), findsOneWidget);
   });
 
   testWidgets('Check input', (tester) async {
-    await tester.pumpWidget(minMaxCustomizationItemPage);
+    await tester.pumpWidget(page);
 
     await tester.enterText(find.text('50'), '0');
     expect(find.text('0'), findsOneWidget);
@@ -46,23 +36,14 @@ void main() {
     int? min;
     int? max;
     await tester.pumpWidget(
-      MaterialApp(
-        supportedLocales: AppLocalizations.supportedLocales,
-        localizationsDelegates: const [
-          AppLocalizations.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        home: Scaffold(
-          body: MinMaxCustomizationItem(
-            initialMin: 50,
-            initialMax: 100,
-            onChanged: (newMin, newMax) {
-              min = newMin;
-              max = newMax;
-            },
-          ),
+      AppTest(
+        child: MinMaxCustomizationItem(
+          initialMin: 50,
+          initialMax: 100,
+          onChanged: (newMin, newMax) {
+            min = newMin;
+            max = newMax;
+          },
         ),
       ),
     );
@@ -81,23 +62,14 @@ void main() {
     int? min = 50;
     int? max = 100;
     await tester.pumpWidget(
-      MaterialApp(
-        supportedLocales: AppLocalizations.supportedLocales,
-        localizationsDelegates: const [
-          AppLocalizations.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        home: Scaffold(
-          body: MinMaxCustomizationItem(
-            initialMin: min,
-            initialMax: max,
-            onChanged: (newMin, newMax) {
-              min = newMin;
-              max = newMax;
-            },
-          ),
+      AppTest(
+        child: MinMaxCustomizationItem(
+          initialMin: min,
+          initialMax: max,
+          onChanged: (newMin, newMax) {
+            min = newMin;
+            max = newMax;
+          },
         ),
       ),
     );

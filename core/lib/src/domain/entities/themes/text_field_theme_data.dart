@@ -1,5 +1,3 @@
-//TODO: rewrite this to TextFieldTheme PLS
-
 import 'dart:ui';
 
 import 'package:equatable/equatable.dart';
@@ -153,7 +151,9 @@ class TextFieldThemeData extends ThemeExtension<TextFieldThemeData>
 
   @override
   ThemeExtension<TextFieldThemeData> lerp(
-      covariant ThemeExtension<TextFieldThemeData>? other, double t) {
+    covariant ThemeExtension<TextFieldThemeData>? other,
+    double t,
+  ) {
     if (other is! TextFieldThemeData) {
       return this;
     }
@@ -179,7 +179,6 @@ class TextFieldThemeData extends ThemeExtension<TextFieldThemeData>
     );
   }
 
-  @override
   List<Object?> get props => [
         fillCommonColor,
         fillInputColor,

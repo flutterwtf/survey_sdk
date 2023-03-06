@@ -5,8 +5,10 @@ import 'package:survey_core/survey_core.dart';
 class BuilderCubit extends Cubit<BuilderState> {
   BuilderCubit()
       : super(
-          const BuilderState(selected: null),
+          const BuilderState(selectedQuestion: null),
         );
 
-  void select(QuestionData data) => emit(state.copyWith(data: data));
+  void select(QuestionData data) => emit(
+        state.copyWith(selectedQuestion: data),
+      );
 }

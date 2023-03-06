@@ -129,6 +129,11 @@ class InputQuestionTheme extends ThemeExtension<InputQuestionTheme>
   }
 
   @override
+  Map<String, dynamic> toJson() {
+    // TODO(dev): implement toJson
+    throw UnimplementedError();
+  }
+
   List<Object?> get props => [
         backgroundColor,
         borderColor,
