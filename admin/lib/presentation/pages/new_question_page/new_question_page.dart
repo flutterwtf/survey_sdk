@@ -23,7 +23,7 @@ class _NewQuestionPageState extends State<NewQuestionPage> {
 
   Widget _questionTab(NewQuestionTabs tab) {
     return _TabButton(
-      title: tab.name,
+      title: tab.name(context),
       onTap: () {
         setState(
           () => _selectedTab = tab,
@@ -171,7 +171,7 @@ class _QuestionOptionsListView extends StatelessWidget {
         itemBuilder: (context, index) {
           return _AssetTextOption(
             assetName: options[index].asset,
-            titleText: options[index].name,
+            titleText: options[index].name(context),
           );
         },
       ),

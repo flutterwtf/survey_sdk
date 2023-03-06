@@ -1,3 +1,5 @@
+import 'package:flutter/cupertino.dart';
+import 'package:survey_admin/presentation/app/localization/localizations.dart';
 import 'package:survey_admin/presentation/utils/constants/app_assets.dart';
 import 'package:survey_core/survey_core.dart';
 
@@ -9,16 +11,16 @@ enum NewQuestionTabs {
 }
 
 extension NewQuestionTabsExt on NewQuestionTabs {
-  String get name {
+  String name (BuildContext context){
     switch (this) {
       case NewQuestionTabs.intro:
-        return 'Intro';
+        return context.localization.intro;
       case NewQuestionTabs.choice:
-        return 'Choice';
+        return context.localization.choice;
       case NewQuestionTabs.slider:
-        return 'Slider';
+        return context.localization.slider;
       case NewQuestionTabs.customInput:
-        return 'Custom input';
+        return context.localization.custom_input;
     }
   }
 
@@ -63,22 +65,22 @@ enum NewQuestionOptions {
 }
 
 extension NewQuestionOptionsExt on NewQuestionOptions {
-  String get name {
+  String name (BuildContext context){
     switch (this) {
       case NewQuestionOptions.title:
-        return 'Title';
+        return context.localization.title;
       case NewQuestionOptions.imageIntro:
-        return 'Image intro';
+        return context.localization.image_intro;
       case NewQuestionOptions.radioButton:
-        return 'Radio button';
+        return context.localization.radio_button;
       case NewQuestionOptions.slider:
-        return 'Slider';
+        return context.localization.slider;
       case NewQuestionOptions.checkBox:
-        return 'Check box';
+        return context.localization.check_box;
       case NewQuestionOptions.singleLineInput:
-        return 'Single-line input';
+        return context.localization.single_line_input;
       case NewQuestionOptions.multiLineInput:
-        return 'Multi-line input';
+        return context.localization.multi_line_input;
     }
   }
 
