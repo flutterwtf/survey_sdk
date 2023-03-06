@@ -129,7 +129,6 @@ class InputQuestionTheme extends ThemeExtension<InputQuestionTheme>
   }
 
   @override
-  // TODO: implement props
   List<Object?> get props => [
         backgroundColor,
         borderColor,
