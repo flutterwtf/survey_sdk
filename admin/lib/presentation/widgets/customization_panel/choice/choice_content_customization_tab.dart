@@ -68,7 +68,7 @@ class ChoiceContentCustomizationTab extends CustomizationTab {
         ),
         if ((editableQuestion as ChoiceQuestionData).isMultipleChoice)
           CustomizationItemsContainer(
-            title: 'Rule',
+            title: context.localization.rule,
             children: [
               Row(
                 children: [
