@@ -122,18 +122,13 @@ class InputQuestionTheme extends ThemeExtension<InputQuestionTheme>
       textSize: lerpDouble(textSize, other.textSize, t)!,
       minLines: lerpDouble(minLines, other.minLines, t)?.toInt(),
       maxLines: lerpDouble(maxLines, other.maxLines, t)?.toInt(),
-      verticalPadding: lerpDouble(verticalPadding, other.verticalPadding, t)!,
+      verticalPadding: lerpDouble(verticalPadding, other.verticalPadding, t),
       horizontalPadding:
-          lerpDouble(horizontalPadding, other.horizontalPadding, t)!,
+          lerpDouble(horizontalPadding, other.horizontalPadding, t),
     );
   }
 
   @override
-  Map<String, dynamic> toJson() {
-    // TODO(dev): implement toJson
-    throw UnimplementedError();
-  }
-
   List<Object?> get props => [
         backgroundColor,
         borderColor,

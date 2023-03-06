@@ -179,6 +179,7 @@ class TextFieldThemeData extends ThemeExtension<TextFieldThemeData>
     );
   }
 
+  @override
   List<Object?> get props => [
         fillCommonColor,
         fillInputColor,
