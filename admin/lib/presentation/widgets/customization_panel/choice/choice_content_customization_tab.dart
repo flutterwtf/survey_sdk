@@ -66,7 +66,7 @@ class ChoiceContentCustomizationTab extends CustomizationTab {
             )
           ],
         ),
-        if (!(editableQuestion as ChoiceQuestionData).isMultipleChoice)
+        if ((editableQuestion as ChoiceQuestionData).isMultipleChoice)
           CustomizationItemsContainer(
             title: 'Rule',
             children: [
