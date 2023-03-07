@@ -14,7 +14,7 @@ void showExportFloatingWindow(
 
   overlayEntry = OverlayEntry(
     builder: (context) {
-      return _ExportFloatingWindow(
+      return ExportFloatingWindow(
         onClosePressed: overlayEntry.remove,
         onDownloadPressed: () {
           onDownloadPressed();
@@ -31,15 +31,17 @@ void showExportFloatingWindow(
   overlayState.insert(overlayEntry);
 }
 
-class _ExportFloatingWindow extends StatelessWidget {
+@visibleForTesting
+class ExportFloatingWindow extends StatelessWidget {
   final VoidCallback onClosePressed;
   final VoidCallback onDownloadPressed;
   final VoidCallback onCopyPressed;
 
-  const _ExportFloatingWindow({
+  const ExportFloatingWindow({
     required this.onClosePressed,
     required this.onDownloadPressed,
     required this.onCopyPressed,
+    super.key,
   });
 
   @override
@@ -80,7 +82,7 @@ class _ExportFloatingWindow extends StatelessWidget {
                 ),
               ),
               const Image(
-                image: AssetImage('images/task_completed.png'),
+                image: AssetImage('assets/images/task_completed.png'),
                 width: AppDimensions.imageSizeM,
                 height: AppDimensions.imageSizeM,
               ),
