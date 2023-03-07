@@ -1,33 +1,29 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/padding_customization_item.dart';
+
+import '../app_test.dart';
 
 void main() {
   const initialHorizontalPadding = 12.0;
   const initialVerticalPadding = 16.0;
+  double? horizontalPadding;
+  double? verticalPadding;
 
-  final paddingCustomizationItemPage = MaterialApp(
-    supportedLocales: AppLocalizations.supportedLocales,
-    localizationsDelegates: const [
-      AppLocalizations.delegate,
-      GlobalMaterialLocalizations.delegate,
-      GlobalWidgetsLocalizations.delegate,
-      GlobalCupertinoLocalizations.delegate,
-    ],
-    home: Scaffold(
-      body: PaddingCustomizationItem(
-        initialHorizontalPadding: initialHorizontalPadding,
-        initialVerticalPadding: initialVerticalPadding,
-        onHorizontalPaddingChange: (_) {},
-        onVerticalPaddingChange: (_) {},
-      ),
+  final page = AppTest(
+    child: PaddingCustomizationItem(
+      initialHorizontalPadding: initialHorizontalPadding,
+      initialVerticalPadding: initialVerticalPadding,
+      onHorizontalPaddingChange: (padding) {
+        horizontalPadding = padding;
+      },
+      onVerticalPaddingChange: (padding) {
+        verticalPadding = padding;
+      },
     ),
   );
 
   testWidgets('Load widget with initial values', (tester) async {
-    await tester.pumpWidget(paddingCustomizationItemPage);
+    await tester.pumpWidget(page);
 
     expect(find.text('$initialHorizontalPadding'), findsWidgets);
     expect(find.text('$initialVerticalPadding'), findsWidgets);
@@ -36,7 +32,7 @@ void main() {
   testWidgets('Check input', (tester) async {
     const inputNumber = '18';
 
-    await tester.pumpWidget(paddingCustomizationItemPage);
+    await tester.pumpWidget(page);
 
     await tester.enterText(find.text('$initialHorizontalPadding'), inputNumber);
     await tester.enterText(find.text('$initialVerticalPadding'), inputNumber);
@@ -47,7 +43,7 @@ void main() {
     const tooLongNumber = '1234';
     const textWithNumber = '18px';
 
-    await tester.pumpWidget(paddingCustomizationItemPage);
+    await tester.pumpWidget(page);
 
     await tester.enterText(
       find.text('$initialHorizontalPadding'),
@@ -63,29 +59,8 @@ void main() {
   });
 
   testWidgets('Check onHorizontalPaddingChange', (tester) async {
-    double? horizontalPadding;
     const inputPadding = 18;
-    await tester.pumpWidget(
-      MaterialApp(
-        supportedLocales: AppLocalizations.supportedLocales,
-        localizationsDelegates: const [
-          AppLocalizations.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        home: Scaffold(
-          body: PaddingCustomizationItem(
-            initialHorizontalPadding: initialHorizontalPadding,
-            initialVerticalPadding: initialVerticalPadding,
-            onHorizontalPaddingChange: (padding) {
-              horizontalPadding = padding;
-            },
-            onVerticalPaddingChange: (_) {},
-          ),
-        ),
-      ),
-    );
+    await tester.pumpWidget(page);
 
     await tester.enterText(
       find.text('$initialHorizontalPadding'),
@@ -98,29 +73,8 @@ void main() {
   });
 
   testWidgets('Check onVerticalPaddingChange', (tester) async {
-    double? verticalPadding;
     const inputPadding = 18;
-    await tester.pumpWidget(
-      MaterialApp(
-        supportedLocales: AppLocalizations.supportedLocales,
-        localizationsDelegates: const [
-          AppLocalizations.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        home: Scaffold(
-          body: PaddingCustomizationItem(
-            initialHorizontalPadding: initialHorizontalPadding,
-            initialVerticalPadding: initialVerticalPadding,
-            onHorizontalPaddingChange: (_) {},
-            onVerticalPaddingChange: (padding) {
-              verticalPadding = padding;
-            },
-          ),
-        ),
-      ),
-    );
+    await tester.pumpWidget(page);
 
     await tester.enterText(
       find.text('$initialVerticalPadding'),

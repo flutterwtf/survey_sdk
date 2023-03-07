@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/multiline_switch.dart';
+
+import '../app_test.dart';
 
 void main() {
   group('Tests for MultilineSwitch', () {
@@ -11,35 +11,26 @@ void main() {
     const inputNum = '12';
     const inputText = 'qwe';
     const inputTitle = 'Lines';
-    final multilineSwitchPage = MaterialApp(
-      supportedLocales: AppLocalizations.supportedLocales,
-      localizationsDelegates: const [
-        AppLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      home: Scaffold(
-        body: MultilineSwitch(
-          onChanged: (bool isMultiline, int lineAmount) {},
-        ),
+    final page = AppTest(
+      child: MultilineSwitch(
+        onChanged: (bool isMultiline, int lineAmount) {},
       ),
     );
 
     testWidgets('Load widget', (tester) async {
-      await tester.pumpWidget(multilineSwitchPage);
+      await tester.pumpWidget(page);
       expect(find.text(title), findsOneWidget);
     });
 
     testWidgets('Open multiline input(tap on switch)', (tester) async {
-      await tester.pumpWidget(multilineSwitchPage);
+      await tester.pumpWidget(page);
       await tester.tap(find.byType(InkWell));
       await tester.pump();
       expect(find.text(inputTitle), findsOneWidget);
     });
 
     testWidgets('Close multiline input(double tap on switch)', (tester) async {
-      await tester.pumpWidget(multilineSwitchPage);
+      await tester.pumpWidget(page);
       await tester.tap(find.byType(InkWell));
       await tester.pump();
       await tester.tap(find.byType(InkWell));
@@ -48,7 +39,7 @@ void main() {
     });
 
     testWidgets('Input count lines(num)', (tester) async {
-      await tester.pumpWidget(multilineSwitchPage);
+      await tester.pumpWidget(page);
       await tester.tap(find.byType(InkWell));
       await tester.pump();
       await tester.enterText(find.byType(CustomizationTextField), inputNum);
@@ -56,7 +47,7 @@ void main() {
     });
 
     testWidgets('Input count lines(not num)', (tester) async {
-      await tester.pumpWidget(multilineSwitchPage);
+      await tester.pumpWidget(page);
       await tester.tap(find.byType(InkWell));
       await tester.pump();
       await tester.enterText(find.byType(CustomizationTextField), inputText);
@@ -66,19 +57,10 @@ void main() {
     testWidgets('Check widget with parameters isMultiline = true',
         (tester) async {
       await tester.pumpWidget(
-        MaterialApp(
-          supportedLocales: AppLocalizations.supportedLocales,
-          localizationsDelegates: const [
-            AppLocalizations.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          home: Scaffold(
-            body: MultilineSwitch(
-              isMultiline: true,
-              onChanged: (bool isMultiline, int lineAmount) {},
-            ),
+        AppTest(
+          child: MultilineSwitch(
+            isMultiline: true,
+            onChanged: (bool isMultiline, int lineAmount) {},
           ),
         ),
       );

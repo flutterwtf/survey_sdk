@@ -23,22 +23,24 @@ class QuestionList extends StatefulWidget {
 }
 
 class _QuestionListState extends State<QuestionList> {
-  final _questionList = [
-    const QuestionListItem(
-      questionData: IntroQuestionData.common(),
-    ),
-    const QuestionListItem(
-      questionData: InputQuestionData.common(index: 1),
-    ),
-  ];
+  late List<QuestionData> _questionList;
+  int _selectedIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _questionList = [
+      const IntroQuestionData.common(),
+      const InputQuestionData.common(index: 1),
+    ];
+    widget.onSelect(_questionList.first);
+  }
 
   void addQuestion(QuestionData data) {
     final index = _questionList.length;
     setState(() {
       _questionList.add(
-        QuestionListItem(
-          questionData: data.copyWith(index: index),
-        ),
+        data.copyWith(index: index),
       );
     });
   }
@@ -99,31 +101,32 @@ class _QuestionListState extends State<QuestionList> {
                   ReorderableDragStartListener(
                     index: index,
                     key: ValueKey(index),
-                    child: _questionList
-                        .where((item) => item.questionData.index == index)
-                        .first,
+                    child: QuestionListItem(
+                      isSelected: index == _selectedIndex,
+                      questionData: _questionList[index],
+                      onTap: (data) {
+                        widget.onSelect(data);
+                        setState(() {
+                          _selectedIndex = index;
+                        });
+                      },
+                    ),
                   )
               ],
               onReorder: (oldIndex, newIndex) {
                 if (newIndex > oldIndex) newIndex--;
                 setState(
                   () {
-                    final itemFirstIndex = _questionList.indexWhere(
-                      (item) => item.questionData.index == oldIndex,
-                    );
-                    final itemSecondIndex = _questionList.indexWhere(
-                      (item) => item.questionData.index == newIndex,
-                    );
-                    _questionList[itemFirstIndex] = QuestionListItem(
-                      questionData: _questionList[itemFirstIndex]
-                          .questionData
-                          .copyWith(index: newIndex),
-                    );
-                    _questionList[itemSecondIndex] = QuestionListItem(
-                      questionData: _questionList[itemSecondIndex]
-                          .questionData
-                          .copyWith(index: oldIndex),
-                    );
+                    if (_selectedIndex == oldIndex) {
+                      _selectedIndex = newIndex;
+                    } else if (_selectedIndex == newIndex) {
+                      _selectedIndex = oldIndex;
+                    }
+
+                    final oldItem = _questionList[oldIndex];
+                    final newItem = _questionList[newIndex];
+                    _questionList[newIndex] = oldItem.copyWith(index: newIndex);
+                    _questionList[oldIndex] = newItem.copyWith(index: oldIndex);
                   },
                 );
               },

@@ -18,8 +18,8 @@
   "value": "Value",
   "lines": "Lines",
   "type_new_option_here": "Type new option here",
+  "options": "Options",
   "px": "px",
-  "title": "Title",
   "subtitle": "Subtitle",
   "button": "Button",
   "thickness": "Thickness",
@@ -46,4 +46,13 @@
   "email": "Email",
   "password": "Password",
   "phone": "Phone"
+  "intro": "Intro",
+  "choice":"Choice",
+  "custom_input":"Custom input",
+  "title":"Title",
+  "image_intro":"Image intro",
+  "radio_button":"Radio button",
+  "check_box":"Check box",
+  "single_line_input":"Single-line input",
+  "multi_line_input":"Multi-line input"
 }
