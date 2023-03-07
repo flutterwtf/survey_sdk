@@ -45,7 +45,7 @@
   "date": "Date",
   "email": "Email",
   "password": "Password",
-  "phone": "Phone"
+  "phone": "Phone",
   "intro": "Intro",
   "choice":"Choice",
   "custom_input":"Custom input",

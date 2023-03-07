@@ -9,7 +9,7 @@ part 'password_validator.dart';
 part 'phone_validator.dart';
 
 const String _validatorName = 'validator';
-const String _validatorErrorText = 'validator';
+const String _validatorErrorText = 'error';
 
 abstract class InputValidator implements ApiObject {
   String get type;

@@ -129,23 +129,6 @@ class _InputTypeItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String inputNameResolver() {
-      switch (inputType) {
-        case InputType.number:
-          return context.localization.number;
-        case InputType.date:
-          return context.localization.date;
-        case InputType.email:
-          return context.localization.email;
-        case InputType.password:
-          return context.localization.password;
-        case InputType.phone:
-          return context.localization.phone;
-        case InputType.text:
-          return context.localization.text;
-      }
-    }
-
     return Material(
       child: InkWell(
         onTap: onTap,
@@ -158,7 +141,7 @@ class _InputTypeItem extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                inputNameResolver(),
+                context.inputNameResolver(inputType),
                 style: context.theme.textTheme.bodyLarge,
               ),
               if (trailing != null) trailing!,
