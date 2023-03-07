@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/utils/constants/app_durations.dart';
-import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text.dart';
+import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
 
 class SwitchCustomizationItem extends StatelessWidget {
   final String title;
