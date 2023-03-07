@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:survey_admin/presentation/app/localization/localizations.dart';
-import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/color_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/radius_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/text_style_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/customization_tab.dart';
+import 'package:survey_core/survey_core.dart';
 
 class IntroCommonCustomizationTab extends CustomizationTab {
+  final IntroQuestionTheme initialTheme; 
   final ValueChanged<Color> onFillColorPicked;
   final ValueChanged<Color> onTitleColorPicked;
   final ValueChanged<int> onTitleFontSizeChanged;
@@ -21,6 +22,7 @@ class IntroCommonCustomizationTab extends CustomizationTab {
 
   const IntroCommonCustomizationTab({
     required super.title,
+    required this.initialTheme,
     required this.onFillColorPicked,
     required this.onTitleColorPicked,
     required this.onTitleFontSizeChanged,
@@ -42,7 +44,7 @@ class IntroCommonCustomizationTab extends CustomizationTab {
           isTopDividerShown: true,
           children: [
             ColorCustomizationItem(
-              initialColor: AppColors.white,
+              initialColor: initialTheme.fillColor,
               onColorPicked: onFillColorPicked,
             ),
           ],
@@ -52,8 +54,8 @@ class IntroCommonCustomizationTab extends CustomizationTab {
           children: [
             TextStyleCustomizationItem(
               onColorPicked: onTitleColorPicked,
-              // TODO(dev): what are the magic Strings here and in items below?
-              initialText: '16',
+              initialText: initialTheme.titleTextSize.toString(),
+              initialColor: initialTheme.titleTextColor,
               inputFormatters: [
                 FilteringTextInputFormatter.digitsOnly,
                 LengthLimitingTextInputFormatter(3),
@@ -74,7 +76,8 @@ class IntroCommonCustomizationTab extends CustomizationTab {
           children: [
             TextStyleCustomizationItem(
               onColorPicked: onSubtitleColorPicked,
-              initialText: '12',
+              initialText: initialTheme.subTitleTextSize.toString(),
+              initialColor: initialTheme.subTitleTextColor,
               inputFormatters: [
                 FilteringTextInputFormatter.digitsOnly,
                 LengthLimitingTextInputFormatter(3),
@@ -94,13 +97,13 @@ class IntroCommonCustomizationTab extends CustomizationTab {
           title: context.localization.button,
           children: [
             ColorCustomizationItem(
-              initialColor: AppColors.black,
+              initialColor: initialTheme.mainButtonColor,
               onColorPicked: onButtonColorPicked,
             ),
             TextStyleCustomizationItem(
-              initialColor: AppColors.white,
+              initialColor: initialTheme.mainButtonTextColor,
               onColorPicked: onButtonTextColorPicked,
-              initialText: '12',
+              initialText: initialTheme.mainButtonTextSize.toString(),
               inputFormatters: [
                 FilteringTextInputFormatter.digitsOnly,
                 LengthLimitingTextInputFormatter(3),
@@ -115,7 +118,7 @@ class IntroCommonCustomizationTab extends CustomizationTab {
               },
             ),
             RadiusCustomizationItem(
-              initialValue: 10,
+              initialValue: initialTheme.mainButtonRadius.toInt(),
               onRadiusChanged: onButtonRadiusChanged,
             ),
           ],

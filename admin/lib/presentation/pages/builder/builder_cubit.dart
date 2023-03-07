@@ -6,7 +6,7 @@ class BuilderCubit extends Cubit<BuilderState> {
   BuilderCubit()
       : super(
           const BuilderState(
-            selectedQuestion: null,
+            selectedQuestionId: 0,
             questions: [
               IntroQuestionData.common(index: 0),
               IntroQuestionData.common(index: 1),
@@ -14,8 +14,8 @@ class BuilderCubit extends Cubit<BuilderState> {
           ),
         );
 
-  void select(QuestionData data) => emit(
-        state.copyWith(selectedQuestion: data),
+  void select(int id) => emit(
+        state.copyWith(selectedQuestionId: id),
       );
 
   void add(QuestionData data) {
@@ -46,30 +46,11 @@ class BuilderCubit extends Cubit<BuilderState> {
     );
   }
 
-  void updateSelectedQuestion(QuestionData question) => emit(
-        state.copyWith(selectedQuestion: question),
-      );
-
-  void updateSelectedQuestionWithTitle(String title) {
-    updateSelectedQuestion(
-      state.selectedQuestion!.copyWith(title: title),
+  void updateSelectedQuestion(QuestionData question) {
+    final questions = [...state.questions];
+    questions[state.selectedQuestionId] = question;
+    emit(
+      state.copyWith(questions: questions),
     );
-  }
-
-  void updateSelectedQuestionWithSubtitle(String subtitle) {
-    updateSelectedQuestion(
-      state.selectedQuestion!.copyWith(subtitle: subtitle),
-    );
-  }
-
-  void updateSelectedQuestionWithHint({
-    required String hint,
-    required String type,
-  }) {}
-
-  void updateSelectedQuestionWithButtonText({
-    required String text,
-    required String type,
-  }) {
   }
 }

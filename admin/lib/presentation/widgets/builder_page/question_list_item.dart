@@ -8,7 +8,7 @@ import 'package:survey_core/survey_core.dart';
 
 class QuestionListItem extends StatelessWidget {
   final QuestionData questionData;
-  final void Function(QuestionData data) onTap;
+  final void Function(int questionIndex) onTap;
   final bool isSelected;
 
   const QuestionListItem({
@@ -39,7 +39,7 @@ class QuestionListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
       child: ListTile(
-        onTap: () => onTap(questionData),
+        onTap: () => onTap(questionData.index),
         selected: isSelected,
         selectedColor: AppColors.black,
         selectedTileColor: AppColors.greyBackground,

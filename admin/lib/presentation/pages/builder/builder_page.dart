@@ -53,7 +53,7 @@ class _BuilderPageState extends State<BuilderPage> {
                   ),
                   child: Builder(
                     builder: (context) {
-                      switch (state.selectedQuestion?.type ?? '') {
+                      switch (state.selectedQuestion.type) {
                         case QuestionTypes.slider:
                           return SliderQuestionPage(
                             data: state.selectedQuestion as SliderQuestionData,

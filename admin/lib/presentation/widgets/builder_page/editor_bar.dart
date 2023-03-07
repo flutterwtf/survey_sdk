@@ -25,32 +25,32 @@ class EditorBar extends StatelessWidget {
       width: AppDimensions.surveyEditorBarWidth,
       child: Builder(
         builder: (context) {
-          switch (cubit.state.selectedQuestion?.type ?? '') {
+          switch (cubit.state.selectedQuestion.type) {
             case QuestionTypes.choice:
               return ChoiceCustomizationPanel(
                 transformers: ChoiceQuestionTransformers(
-                  question: cubit.state.selectedQuestion!,
+                  question: cubit.state.selectedQuestion,
                   onTransformed: cubit.updateSelectedQuestion,
                 ),
               );
             case QuestionTypes.input:
               return InputCustomizationPanel(
                 transformers: InputQuestionTransformers(
-                  question: cubit.state.selectedQuestion!,
+                  question: cubit.state.selectedQuestion,
                   onTransformed: cubit.updateSelectedQuestion,
                 ),
               );
             case QuestionTypes.intro:
               return IntroCustomizationPanel(
                 transformers: IntroQuestionTransformers(
-                  question: cubit.state.selectedQuestion!,
+                  question: cubit.state.selectedQuestion,
                   onTransformed: cubit.updateSelectedQuestion,
                 ),
               );
             case QuestionTypes.slider:
               return SliderCustomizationPanel(
                 transformers: SliderQuestionTransformers(
-                  question: cubit.state.selectedQuestion!,
+                  question: cubit.state.selectedQuestion,
                   onTransformed: cubit.updateSelectedQuestion,
                 ),
               );

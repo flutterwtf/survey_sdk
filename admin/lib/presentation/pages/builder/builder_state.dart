@@ -2,27 +2,29 @@ import 'package:equatable/equatable.dart';
 import 'package:survey_core/survey_core.dart';
 
 class BuilderState extends Equatable {
-  final QuestionData? selectedQuestion;
+  final int selectedQuestionId;
   final List<QuestionData> questions;
 
   const BuilderState({
-    required this.selectedQuestion,
+    required this.selectedQuestionId,
     required this.questions,
   });
 
   BuilderState copyWith({
-    QuestionData? selectedQuestion,
+    int? selectedQuestionId,
     List<QuestionData>? questions,
   }) {
     return BuilderState(
-      selectedQuestion: selectedQuestion ?? this.selectedQuestion,
+      selectedQuestionId: selectedQuestionId ?? this.selectedQuestionId,
       questions: questions ?? this.questions,
     );
   }
 
+  QuestionData get selectedQuestion => questions[selectedQuestionId];
+
   @override
   List<Object?> get props => [
-        selectedQuestion,
+        selectedQuestionId,
         questions,
       ];
 }

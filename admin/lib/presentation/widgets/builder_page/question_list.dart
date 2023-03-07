@@ -25,7 +25,6 @@ class QuestionList extends StatefulWidget {
 }
 
 class _QuestionListState extends State<QuestionList> {
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<BuilderCubit, BuilderState>(
@@ -50,7 +49,9 @@ class _QuestionListState extends State<QuestionList> {
                   children: [
                     Text(
                       context.localization.survey,
-                      style: context.theme.textTheme.titleMedium?.copyWith(fontWeight: AppFonts.weightBold,),
+                      style: context.theme.textTheme.titleMedium?.copyWith(
+                        fontWeight: AppFonts.weightBold,
+                      ),
                     ),
                     const SizedBox(
                       width: AppDimensions.margin4XL + AppDimensions.margin3XL,

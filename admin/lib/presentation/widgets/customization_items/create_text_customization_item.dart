@@ -5,10 +5,12 @@ import 'package:survey_admin/presentation/utils/theme_extension.dart';
 class CreateTextCustomizationItem extends StatelessWidget {
   final double maxHeight;
   final void Function(String text) onChanged;
+  final String? initialText;
 
   const CreateTextCustomizationItem({
     required this.maxHeight,
     required this.onChanged,
+    this.initialText,
     super.key,
   });
 
@@ -18,7 +20,8 @@ class CreateTextCustomizationItem extends StatelessWidget {
     // this TextField expandable
     return LimitedBox(
       maxHeight: maxHeight,
-      child: TextField(
+      child: TextFormField(
+        initialValue: initialText,
         decoration: InputDecoration(
           border: InputBorder.none,
           hintText: context.localization.enter_text,
