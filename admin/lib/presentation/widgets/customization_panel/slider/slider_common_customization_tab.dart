@@ -15,8 +15,8 @@ class SliderCommonCustomizationTab extends CustomizationTab {
   final ValueChanged<Color> onFillColorChanged;
   final ValueChanged<Color> onTitleColorChanged;
   final ValueChanged<Color> onSubtitleColorChanged;
-  final ValueChanged<Color> onButtonUpColorChanged;
-  final ValueChanged<Color> onButtonDownColorChanged;
+  final ValueChanged<Color> onButtonColorChanged;
+  final ValueChanged<Color> onButtonTextColorChanged;
   final ValueChanged<int> onTitleFontSizeChanged;
   final ValueChanged<int> onSubtitleFontSizeChanged;
   final ValueChanged<int> onButtonFontSizeChanged;
@@ -24,8 +24,8 @@ class SliderCommonCustomizationTab extends CustomizationTab {
 
   const SliderCommonCustomizationTab({
     required super.title,
-    required this.onButtonDownColorChanged,
-    required this.onButtonUpColorChanged,
+    required this.onButtonTextColorChanged,
+    required this.onButtonColorChanged,
     required this.onFillColorChanged,
     required this.onSubtitleColorChanged,
     required this.onTitleColorChanged,
@@ -119,14 +119,14 @@ class SliderCommonCustomizationTab extends CustomizationTab {
           children: [
             ColorCustomizationItem(
               initialColor: AppColors.black,
-              onColorPicked: onButtonUpColorChanged,
+              onColorPicked: onButtonColorChanged,
             ),
             Row(
               children: [
                 Expanded(
                   child: ColorCustomizationItem(
                     initialColor: AppColors.white,
-                    onColorPicked: onButtonDownColorChanged,
+                    onColorPicked: onButtonTextColorChanged,
                   ),
                 ),
                 Expanded(

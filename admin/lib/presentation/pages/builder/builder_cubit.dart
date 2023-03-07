@@ -18,12 +18,12 @@ class BuilderCubit extends Cubit<BuilderState> {
         state.copyWith(selectedQuestionId: id),
       );
 
-  void add(QuestionData data) {
+  void add(QuestionData questionData) {
     emit(
       state.copyWith(
         questions: [
           ...state.questions,
-          data.copyWith(index: state.questions.length),
+          questionData.copyWith(index: state.questions.length),
         ],
       ),
     );
@@ -50,7 +50,9 @@ class BuilderCubit extends Cubit<BuilderState> {
     final questions = [...state.questions];
     questions[state.selectedQuestionId] = question;
     emit(
-      state.copyWith(questions: questions),
+      state.copyWith(
+        questions: questions,
+      ),
     );
   }
 }

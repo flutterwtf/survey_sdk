@@ -21,10 +21,10 @@ void main() {
     final page = AppTest(
       child: SliderCommonCustomizationTab(
         title: 'Common',
-        onButtonDownColorChanged: (newButtonDownColor) {
+        onButtonTextColorChanged: (newButtonDownColor) {
           buttonDownColor = newButtonDownColor;
         },
-        onButtonUpColorChanged: (newButtonUpColor) {
+        onButtonColorChanged: (newButtonUpColor) {
           buttonUpColor = newButtonUpColor;
         },
         onFillColorChanged: (newFill) {

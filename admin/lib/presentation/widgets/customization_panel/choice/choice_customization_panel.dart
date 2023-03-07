@@ -7,6 +7,7 @@ import 'package:survey_admin/presentation/widgets/customization_panel/choice/cho
 import 'package:survey_admin/presentation/widgets/question_settings_tab_bar.dart';
 
 class ChoiceCustomizationPanel extends StatelessWidget {
+  // TODO(dev): may be we can find a better name?
   final ChoiceQuestionTransformers transformers;
 
   const ChoiceCustomizationPanel({

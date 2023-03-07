@@ -7,7 +7,7 @@ import 'package:survey_admin/presentation/widgets/question_settings_tab_bar.dart
 import 'package:survey_core/survey_core.dart';
 
 class IntroCustomizationPanel extends StatelessWidget {
-  // TODO(dev): rename
+  // TODO(dev): may be we can find a better name?
   final IntroQuestionTransformers transformers;
 
   const IntroCustomizationPanel({
@@ -37,6 +37,7 @@ class IntroCustomizationPanel extends StatelessWidget {
           onTitleChanged: transformers.updateTitle,
           onSubtitleChanged: transformers.updateSubtitle,
           onPrimaryButtonTextChanged: transformers.updatePrimaryButtonText,
+          // TODO(dev): better name for callback and property?
           onSecondaryButtonChanged: transformers.updateSecondaryButton,
         ),
       ],

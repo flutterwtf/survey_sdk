@@ -7,6 +7,7 @@ import 'package:survey_admin/presentation/widgets/customization_panel/slider/sli
 import 'package:survey_admin/presentation/widgets/question_settings_tab_bar.dart';
 
 class SliderCustomizationPanel extends StatelessWidget {
+  // TODO(dev): may be we can find a better name?
   final SliderQuestionTransformers transformers;
 
   const SliderCustomizationPanel({
@@ -20,8 +21,8 @@ class SliderCustomizationPanel extends StatelessWidget {
       tabs: [
         SliderCommonCustomizationTab(
           title: context.localization.common,
-          onButtonDownColorChanged: transformers.updateButtonDownColor,
-          onButtonUpColorChanged: transformers.updateButtonUpColor,
+          onButtonTextColorChanged: transformers.updateButtonTextColor,
+          onButtonColorChanged: transformers.updateButtonUpColor,
           onFillColorChanged: transformers.updateFillColor,
           onSubtitleColorChanged: transformers.updateSubtitleColor,
           onTitleColorChanged: transformers.updateTitleColor,

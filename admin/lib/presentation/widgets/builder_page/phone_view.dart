@@ -4,6 +4,7 @@ import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/utils/constants/app_assets.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
 
+// TODO(dev): doesn't work well if we resize the app
 class PhoneView extends StatelessWidget {
   final Widget child;
 

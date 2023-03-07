@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/input_type_customization_item.dart';
 import 'package:survey_core/survey_core.dart';
 
+// TODO(dev): may be we can find a better name?
 abstract class QuestionDataTransformers {
   QuestionData question;
   final ValueChanged<QuestionData> onTransformed;
@@ -32,6 +33,7 @@ abstract class QuestionDataTransformers {
   }
 }
 
+// TODO(dev): may be we can find a better name?
 class IntroQuestionTransformers extends QuestionDataTransformers {
   IntroQuestionTransformers({
     required super.question,
@@ -45,17 +47,17 @@ class IntroQuestionTransformers extends QuestionDataTransformers {
 
   void updateTitleColor(Color color) => throw UnimplementedError();
 
-  void updateTitleFontSize(int? size) => throw UnimplementedError();
+  void updateTitleFontSize(int size) => throw UnimplementedError();
 
   void updateSubtitleColor(Color color) => throw UnimplementedError();
 
-  void updateSubtitleFontSize(int? size) => throw UnimplementedError();
+  void updateSubtitleFontSize(int size) => throw UnimplementedError();
 
   void updateButtonTextColor(Color color) => throw UnimplementedError();
 
-  void updateButtonFontSize(int? size) => throw UnimplementedError();
+  void updateButtonFontSize(int size) => throw UnimplementedError();
 
-  void updateButtonRadius(int? radius) => throw UnimplementedError();
+  void updateButtonRadius(int radius) => throw UnimplementedError();
 
   // Content
   void updatePrimaryButtonText(String text) {
@@ -63,10 +65,12 @@ class IntroQuestionTransformers extends QuestionDataTransformers {
     onTransformed(question);
   }
 
+  // ignore: avoid_positional_boolean_parameters
   void updateSecondaryButton(bool isShown, String text) =>
       throw UnimplementedError();
 }
 
+// TODO(dev): may be we can find a better name?
 class ChoiceQuestionTransformers extends QuestionDataTransformers {
   ChoiceQuestionTransformers({
     required super.question,
@@ -82,15 +86,15 @@ class ChoiceQuestionTransformers extends QuestionDataTransformers {
 
   void updateSubtitleColor(Color color) => throw UnimplementedError();
 
-  void updateSubtitleFontSize(int? size) => throw UnimplementedError();
+  void updateSubtitleFontSize(int size) => throw UnimplementedError();
 
   void updateButtonColor(Color color) => throw UnimplementedError();
 
   void updateButtonTextColor(Color color) => throw UnimplementedError();
 
-  void updateButtonFontSize(int? size) => throw UnimplementedError();
+  void updateButtonFontSize(int size) => throw UnimplementedError();
 
-  void updateButtonRadius(int? radius) => throw UnimplementedError();
+  void updateButtonRadius(int radius) => throw UnimplementedError();
 
   // Buttons
   void updateActiveColor(Color color) => throw UnimplementedError();
@@ -105,6 +109,7 @@ class ChoiceQuestionTransformers extends QuestionDataTransformers {
   }
 }
 
+// TODO(dev): may be we can find a better name?
 class InputQuestionTransformers extends QuestionDataTransformers {
   InputQuestionTransformers({
     required super.question,
@@ -116,41 +121,43 @@ class InputQuestionTransformers extends QuestionDataTransformers {
 
   void updateTitleColor(Color color) => throw UnimplementedError();
 
-  void updateTitleFontSize(int? size) => throw UnimplementedError();
+  void updateTitleFontSize(int size) => throw UnimplementedError();
 
   void updateSubtitleColor(Color color) => throw UnimplementedError();
 
-  void updateSubtitleFontSize(int? size) => throw UnimplementedError();
+  void updateSubtitleFontSize(int size) => throw UnimplementedError();
 
   void updateButtonFirstColor(Color color) => throw UnimplementedError();
 
   void updateButtonSecondColor(Color color) => throw UnimplementedError();
 
-  void updateButtonFontSize(int? size) => throw UnimplementedError();
+  void updateButtonFontSize(int size) => throw UnimplementedError();
 
   // Input
-  void updateMultiline(bool isMultiline, int? lineAmount) =>
+  // TODO(dev): may be we can find a better name?
+  // ignore: avoid_positional_boolean_parameters
+  void updateMultiline(bool isMultiline, int lineAmount) =>
       throw UnimplementedError();
 
   void updateInputFillColor(Color color) => throw UnimplementedError();
 
   void updateBorderColor(Color color) => throw UnimplementedError();
 
-  void updateBorderSize(int? size) => throw UnimplementedError();
+  void updateBorderSize(int size) => throw UnimplementedError();
 
-  void updateBorderWidth(int? width) => throw UnimplementedError();
+  void updateBorderWidth(int width) => throw UnimplementedError();
 
-  void updateHorizontalPadding(double? size) => throw UnimplementedError();
+  void updateHorizontalPadding(double size) => throw UnimplementedError();
 
-  void updateVerticalPadding(double? size) => throw UnimplementedError();
+  void updateVerticalPadding(double size) => throw UnimplementedError();
 
   void updateHintColor(Color color) => throw UnimplementedError();
 
-  void updateHintFontSize(int? size) => throw UnimplementedError();
+  void updateHintFontSize(int size) => throw UnimplementedError();
 
   void updateTextColor(Color color) => throw UnimplementedError();
 
-  void updateTextFontSize(int? size) => throw UnimplementedError();
+  void updateTextFontSize(int size) => throw UnimplementedError();
 
   void updateInputType(InputType inputType) => throw UnimplementedError();
 
@@ -162,6 +169,7 @@ class InputQuestionTransformers extends QuestionDataTransformers {
   void updateButtonText(String text) => throw UnimplementedError();
 }
 
+// TODO(dev): may be we can find a better name?
 class SliderQuestionTransformers extends QuestionDataTransformers {
   SliderQuestionTransformers({
     required super.question,
@@ -169,7 +177,7 @@ class SliderQuestionTransformers extends QuestionDataTransformers {
   });
 
   // Common
-  void updateButtonDownColor(Color color) => throw UnimplementedError();
+  void updateButtonTextColor(Color color) => throw UnimplementedError();
 
   void updateButtonUpColor(Color color) => throw UnimplementedError();
 
@@ -199,13 +207,12 @@ class SliderQuestionTransformers extends QuestionDataTransformers {
   void updateThumbColor(Color color) => throw UnimplementedError();
 
   // Content
-  void updateDivisions(int? divisions) => throw UnimplementedError();
+  void updateDivisions(int divisions) => throw UnimplementedError();
 
-  void updateMinMax(int? min, int? max) {
-    // TODO(dev): not updates state
+  void updateMinMax(int min, int max) {
     question = (question as SliderQuestionData).copyWith(
-      minValue: min ?? 0,
-      maxValue: max ?? 10,
+      minValue: min,
+      maxValue: max,
     );
     onTransformed(question);
   }

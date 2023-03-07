@@ -47,40 +47,35 @@ class _BuilderPageState extends State<BuilderPage> {
             ),
             Expanded(
               child: PhoneView(
-                child: DecoratedBox(
-                  decoration: const BoxDecoration(
-                    color: Colors.red,
-                  ),
-                  child: Builder(
-                    builder: (context) {
-                      switch (state.selectedQuestion.type) {
-                        case QuestionTypes.slider:
-                          return SliderQuestionPage(
-                            data: state.selectedQuestion as SliderQuestionData,
-                            onSend: (_) {},
-                          );
-                        case QuestionTypes.choice:
-                          return ChoiceQuestionPage(
-                            data: state.selectedQuestion as ChoiceQuestionData,
-                            onSend: (_) {},
-                          );
-                        case QuestionTypes.intro:
-                          return IntroQuestionPage(
-                            data: state.selectedQuestion as IntroQuestionData,
-                            onSend: (_) {},
-                          );
-                        case QuestionTypes.input:
-                          return InputQuestionPage(
-                            data: state.selectedQuestion as InputQuestionData,
-                            onSend: (_) {},
-                          );
-                        default:
-                          return Container(
-                            color: Colors.red,
-                          );
-                      }
-                    },
-                  ),
+                child: Builder(
+                  builder: (context) {
+                    switch (state.selectedQuestion.type) {
+                      case QuestionTypes.slider:
+                        return SliderQuestionPage(
+                          data: state.selectedQuestion as SliderQuestionData,
+                          onSend: (_) {},
+                        );
+                      case QuestionTypes.choice:
+                        return ChoiceQuestionPage(
+                          data: state.selectedQuestion as ChoiceQuestionData,
+                          onSend: (_) {},
+                        );
+                      case QuestionTypes.intro:
+                        return IntroQuestionPage(
+                          data: state.selectedQuestion as IntroQuestionData,
+                          onSend: (_) {},
+                        );
+                      case QuestionTypes.input:
+                        return InputQuestionPage(
+                          data: state.selectedQuestion as InputQuestionData,
+                          onSend: (_) {},
+                        );
+                      default:
+                        // it should never throw because selectedQuestion is
+                        // non-nullable type
+                        throw UnimplementedError();
+                    }
+                  },
                 ),
               ),
             ),
