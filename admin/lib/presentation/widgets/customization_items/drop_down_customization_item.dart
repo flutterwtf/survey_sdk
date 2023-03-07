@@ -5,29 +5,28 @@ import 'package:survey_admin/presentation/utils/constants/app_durations.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
 import 'package:survey_admin/presentation/utils/theme_extension.dart';
 
-class RulesLimitedCustomizationItem extends StatefulWidget {
-  const RulesLimitedCustomizationItem({
+class DropDownCustomizationItem<T> extends StatefulWidget {
+  final T initialValue;
+  final List<T> itemList;
+  final void Function(T changeValue)? onChanged;
+
+  const DropDownCustomizationItem({
+    required this.initialValue,
+    required this.onChanged,
+    required this.itemList,
     super.key,
-    this.onChanged,
-    this.rulesLimitedList = 0,
-    this.initialValue = 0,
   });
 
-  final int rulesLimitedList;
-  final int initialValue;
-  final void Function(int ruleLimited)? onChanged;
-
   @override
-  State<RulesLimitedCustomizationItem> createState() =>
-      _RulesLimitedCustomizationItemState();
+  State<DropDownCustomizationItem<T>> createState() =>
+      _DropDownCustomizationItemState<T>();
 }
 
-class _RulesLimitedCustomizationItemState
-    extends State<RulesLimitedCustomizationItem>
+class _DropDownCustomizationItemState<T>
+    extends State<DropDownCustomizationItem<T>>
     with SingleTickerProviderStateMixin {
   late bool _isExpanded;
-  late int _selectedRuleLimited;
-  late List<int> _rulesLimitedList;
+  late T _selectedRule;
   late final AnimationController _iconAnimationController;
   late final Animation<double> _animation;
 
@@ -35,8 +34,7 @@ class _RulesLimitedCustomizationItemState
   void initState() {
     super.initState();
     _isExpanded = false;
-    _rulesLimitedList = _initrulesLimitedList(widget.rulesLimitedList);
-    _selectedRuleLimited = widget.initialValue;
+    _selectedRule = widget.initialValue;
     _iconAnimationController = AnimationController(
       vsync: this,
       duration: AppDurations.customizationItemAnimation,
@@ -56,22 +54,15 @@ class _RulesLimitedCustomizationItemState
     super.dispose();
   }
 
-  List<int> _initrulesLimitedList(int count) {
-    final rulesLimitedList = <int>[];
-    // ignore: omit_local_variable_types
-    for (int i = 0; i <= count; i++) {
-      rulesLimitedList.add(i);
-    }
-    return rulesLimitedList;
-  }
-
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _RulesLimitedItem(
-          ruleLimited: _selectedRuleLimited,
+        _RulesItem(
+          ruleType: (_selectedRule is Enum)
+              ? (_selectedRule as Enum).name
+              : _selectedRule.toString(),
           trailing: RotationTransition(
             turns: _animation,
             child: SvgPicture.asset(AppAssets.arrowIcon),
@@ -91,18 +82,17 @@ class _RulesLimitedCustomizationItemState
           duration: AppDurations.customizationItemAnimation,
           child: _isExpanded
               ? Column(
-                  children: _rulesLimitedList
-                      .where(
-                          (ruleLimited) => ruleLimited != _selectedRuleLimited)
+                  children: widget.itemList
+                      .where((ruleType) => ruleType != _selectedRule)
                       .map(
-                        (ruleLimited) => _RulesLimitedItem(
-                          ruleLimited: ruleLimited,
+                        (ruleType) => _RulesItem(
+                          ruleType: ruleType.toString(),
                           onTap: () {
                             setState(() {
                               _isExpanded = false;
-                              _selectedRuleLimited = ruleLimited;
+                              _selectedRule = ruleType;
                             });
-                            widget.onChanged?.call(ruleLimited);
+                            widget.onChanged?.call(ruleType);
                             if (_isExpanded) {
                               _iconAnimationController.forward();
                             } else {
@@ -120,16 +110,27 @@ class _RulesLimitedCustomizationItemState
   }
 }
 
-class _RulesLimitedItem extends StatelessWidget {
-  const _RulesLimitedItem({
-    required this.ruleLimited,
+class _RulesItem extends StatelessWidget {
+  const _RulesItem({
+    required this.ruleType,
     required this.onTap,
     this.trailing,
   });
 
-  final int ruleLimited;
+  final String ruleType;
   final VoidCallback onTap;
   final Widget? trailing;
+
+  // String _naming(T ruleType) {
+  //   switch (ruleType.runtimeType) {
+  //     case int:
+  //       return ruleType.toString();
+  //     case RuleType:
+  //       return (ruleType as RuleType).name;
+  //     default:
+  //       return '';
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -145,7 +146,8 @@ class _RulesLimitedItem extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                ruleLimited.toString(),
+                ruleType,
+                // _naming(ruleType),
                 style: context.theme.textTheme.bodyLarge,
               ),
               if (trailing != null) trailing!,

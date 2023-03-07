@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/choice/choice_content_customization_tab.dart';
+import 'package:survey_core/survey_core.dart';
 
 import '../app_test.dart';
 
@@ -18,6 +19,12 @@ void main() {
           onOptionsChanged: (newOptions) => options = newOptions,
           onSubTitleChanged: (newSubtitle) => subtitle = newSubtitle,
           onTitleChanged: (newTitle) => title = newTitle,
+          onRuleChanged: (value) {},
+          ruleType: RuleType.none,
+          limitedRule: 0,
+          listOptions: const [],
+          onRuleLimitedChanged: (value) {},
+          editableQuestion: const IntroQuestionData.common(index: 0),
         ),
       );
 

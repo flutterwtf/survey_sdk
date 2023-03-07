@@ -3,11 +3,25 @@ import 'package:survey_admin/presentation/app/localization/localizations.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/create_text_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
+import 'package:survey_admin/presentation/widgets/customization_items/drop_down_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/option_customization_item.dart';
-import 'package:survey_admin/presentation/widgets/customization_items/rules_customization_item.dart';
-import 'package:survey_admin/presentation/widgets/customization_items/rules_limited_customiaztion_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/customization_tab.dart';
 import 'package:survey_core/survey_core.dart';
+
+enum RuleType {
+  none('None'),
+  more('>'),
+  less('<'),
+  moreOrEqual('>='),
+  lessOrEqual('<='),
+  equal('=');
+
+  const RuleType(
+    this.name,
+  );
+
+  final String name;
+}
 
 class ChoiceContentCustomizationTab extends CustomizationTab {
   final ValueChanged<String> onTitleChanged;
@@ -33,6 +47,18 @@ class ChoiceContentCustomizationTab extends CustomizationTab {
     required this.limitedRule,
     super.key,
   });
+
+  List<int> initialLimitedList(List<String> listOptions) {
+    final listLimited = <int>[];
+    if (listOptions.isEmpty) {
+      listLimited.add(0);
+    } else {
+      for (var i = 0; i <= listOptions.length; i++) {
+        listLimited.add(i);
+      }
+    }
+    return listLimited;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +92,7 @@ class ChoiceContentCustomizationTab extends CustomizationTab {
             )
           ],
         ),
-        if ((editableQuestion as ChoiceQuestionData).isMultipleChoice)
+        if (!(editableQuestion as ChoiceQuestionData).isMultipleChoice)
           CustomizationItemsContainer(
             title: context.localization.rule,
             children: [
@@ -74,18 +100,18 @@ class ChoiceContentCustomizationTab extends CustomizationTab {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Expanded(
-                    child: RulesCustomizationItem(
+                    child: DropDownCustomizationItem<RuleType>(
                       initialValue: ruleType,
                       onChanged: onRuleChanged,
+                      itemList: RuleType.values,
                     ),
                   ),
                   Expanded(
                     child: ruleType != RuleType.none
-                        ? RulesLimitedCustomizationItem(
+                        ? DropDownCustomizationItem<int>(
                             onChanged: onRuleLimitedChanged,
+                            itemList: initialLimitedList(listOptions),
                             initialValue: limitedRule,
-                            rulesLimitedList:
-                                listOptions.isEmpty ? 0 : listOptions.length,
                           )
                         : const SizedBox(),
                   ),
