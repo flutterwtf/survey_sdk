@@ -1,12 +1,13 @@
 import 'dart:ui';
 
+import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:survey_core/src/domain/entities/api_object.dart';
 import 'package:survey_core/src/presentation/utils/app_fonts.dart';
 import 'package:survey_core/src/presentation/utils/colors.dart';
 
 class InputQuestionTheme extends ThemeExtension<InputQuestionTheme>
-    with ApiObject {
+    with ApiObject, EquatableMixin {
   final Color backgroundColor;
   final Color borderColor;
   final double borderWidth;
@@ -32,6 +33,35 @@ class InputQuestionTheme extends ThemeExtension<InputQuestionTheme>
     this.verticalPadding,
     this.horizontalPadding,
   });
+
+  InputQuestionTheme.fromJson(Map<String, dynamic> json)
+      : backgroundColor = Color(int.parse(json['backgroundColor'].toString())),
+        borderColor = Color(int.parse(json['borderColor'].toString())),
+        borderWidth = double.parse(json['borderWidth'].toString()),
+        hintColor = Color(int.parse(json['hintColor'].toString())),
+        hintSize = double.parse(json['hintSize'].toString()),
+        textColor = Color(int.parse(json['textColor'].toString())),
+        textSize = double.parse(json['textSize'].toString()),
+        minLines = int.parse(json['minLines'].toString()),
+        maxLines = int.parse(json['maxLines'].toString()),
+        verticalPadding = double.parse(json['verticalPadding'].toString()),
+        horizontalPadding = double.parse(json['horizontalPadding'].toString());
+
+  @override
+  Map<String, dynamic> toJson() => {
+    'backgroundColor': backgroundColor.value,
+    'borderColor': borderColor.value,
+    'borderWidth': borderWidth,
+    'hintColor': hintColor.value,
+    'hintSize': hintSize,
+    'textColor': textColor.value,
+    'textSize': textSize,
+    'minLines': minLines,
+    'maxLines': maxLines,
+    'verticalPadding': verticalPadding,
+    'horizontalPadding': horizontalPadding,
+  };
+
 
   const InputQuestionTheme.common()
       : this(
@@ -99,11 +129,6 @@ class InputQuestionTheme extends ThemeExtension<InputQuestionTheme>
   }
 
   @override
-  Map<String, dynamic> toJson() {
-    // TODO(dev): implement toJson
-    throw UnimplementedError();
-  }
-
   List<Object?> get props => [
         backgroundColor,
         borderColor,

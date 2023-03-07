@@ -30,7 +30,6 @@ class _QuestionListState extends State<QuestionList> {
   @override
   void initState() {
     super.initState();
-
     widget.onSelect(widget.questionsList.first);
   }
 
