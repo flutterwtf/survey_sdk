@@ -5,6 +5,7 @@ import 'package:survey_core/src/domain/entities/themes/choice_question_theme.dar
 class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
   final bool isMultipleChoice;
   final List<String> options;
+  final List<String>? selectedOptions;
 
   const ChoiceQuestionData({
     required this.isMultipleChoice,
@@ -14,7 +15,15 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
     required super.subtitle,
     required super.isSkip,
     super.content,
-  });
+    this.selectedOptions,
+  }) : assert(
+          selectedOptions == null ||
+              (!isMultipleChoice && selectedOptions.length == 1) ||
+              (isMultipleChoice && selectedOptions.length > 0),
+          'Selected options should be null, or in case of single '
+          'choice buttons have the length of 1, and in '
+          'case of multiple choice higher than zero',
+        );
 
   const ChoiceQuestionData.common({int index = 0})
       : this(
@@ -42,6 +51,7 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
     String? subtitle,
     String? content,
     bool? isSkip,
+    List<String>? selectedOptions,
   }) {
     return ChoiceQuestionData(
       isMultipleChoice: isMultipleChoice ?? this.isMultipleChoice,
@@ -50,6 +60,7 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
       title: title ?? this.title,
       subtitle: subtitle ?? this.subtitle,
       isSkip: isSkip ?? this.isSkip,
+      selectedOptions: selectedOptions ?? this.selectedOptions,
     );
   }
 
@@ -70,6 +81,7 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
         'payload': {
           'isMultipleChoice': isMultipleChoice,
           'options': options,
+          'selectedOptions': selectedOptions,
         }
       };
 
@@ -83,6 +95,7 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
       content: json['content'],
       isMultipleChoice: payload['isMultipleChoice'],
       options: payload['options'],
+      selectedOptions: payload['selectedOptions'],
     );
   }
 
@@ -95,5 +108,6 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
         subtitle,
         isSkip,
         content,
+        selectedOptions,
       ];
 }

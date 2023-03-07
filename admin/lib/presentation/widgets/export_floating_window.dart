@@ -3,6 +3,7 @@ import 'package:survey_admin/presentation/app/localization/localizations.dart';
 import 'package:survey_admin/presentation/utils/app_fonts.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
+import 'package:survey_admin/presentation/utils/theme_extension.dart';
 
 void showExportFloatingWindow(
   BuildContext context, {
@@ -114,7 +115,9 @@ class ExportFloatingWindow extends StatelessWidget {
                         ),
                         child: Text(
                           context.localization.copy,
-                          style: context.textTheme.buttonNameLight,
+                          style: context.theme.textTheme.labelLarge?.copyWith(
+                            fontFamily: AppFonts.karla,
+                          ),
                         ),
                       ),
                     ),
@@ -138,7 +141,10 @@ class ExportFloatingWindow extends StatelessWidget {
                         ),
                         child: Text(
                           context.localization.download,
-                          style: context.textTheme.buttonNameDark,
+                          style: context.theme.textTheme.labelLarge?.copyWith(
+                            fontFamily: AppFonts.karla,
+                            color: AppColors.white,
+                          ),
                         ),
                       ),
                     ),

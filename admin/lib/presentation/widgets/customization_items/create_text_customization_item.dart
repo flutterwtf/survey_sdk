@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:survey_admin/presentation/app/localization/localizations.dart';
-import 'package:survey_admin/presentation/utils/app_fonts.dart';
-import 'package:survey_admin/presentation/utils/colors.dart';
+import 'package:survey_admin/presentation/utils/theme_extension.dart';
 
 class CreateTextCustomizationItem extends StatelessWidget {
   final double maxHeight;
@@ -26,11 +25,7 @@ class CreateTextCustomizationItem extends StatelessWidget {
           isCollapsed: true,
         ),
         maxLines: null,
-        style: const TextStyle(
-          fontSize: AppFonts.sizeL,
-          fontWeight: AppFonts.weightRegular,
-          color: AppColors.black,
-        ),
+        style: context.theme.textTheme.bodyLarge,
         onChanged: onChanged,
       ),
     );

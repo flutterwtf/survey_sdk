@@ -32,7 +32,7 @@ abstract class AppDimensions {
   static const double surveyEditorBarWidth = 300;
   static const double surveyEditorTabBarHeight = 37;
 
-  static const double tabBarPadding = 126.0;
-  static const double tabBarWidth = 500.0;
+  static const double tabBarPadding = 126;
+  static const double tabBarWidth = 500;
   static const double exportWindowWidth = 420;
 }
