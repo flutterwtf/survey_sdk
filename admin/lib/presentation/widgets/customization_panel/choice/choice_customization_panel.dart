@@ -4,9 +4,13 @@ import 'package:survey_admin/presentation/widgets/customization_panel/choice/cho
 import 'package:survey_admin/presentation/widgets/customization_panel/choice/choice_common_customization_tab.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/choice/choice_content_customization_tab.dart';
 import 'package:survey_admin/presentation/widgets/question_settings_tab_bar.dart';
+import 'package:survey_core/survey_core.dart';
 
 class ChoiceCustomizationPanel extends StatelessWidget {
+  final ChoiceQuestionData choiceQuestionData;
+
   const ChoiceCustomizationPanel({
+    required this.choiceQuestionData,
     super.key,
   });
 
@@ -27,7 +31,9 @@ class ChoiceCustomizationPanel extends StatelessWidget {
           onButtonRadiusChanged: (buttonRadius) {},
         ),
         ChoiceButtonsCustomizationTab(
-          title: context.localization.radio_button,
+          title: choiceQuestionData.isMultipleChoice
+              ? context.localization.check_box
+              : context.localization.radio_button,
           onActiveColorPicked: (activeColor) {},
           onInactiveColorPicked: (inactiveColor) {},
         ),
