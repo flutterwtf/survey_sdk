@@ -1,4 +1,6 @@
+import 'package:context_menus/context_menus.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:survey_admin/presentation/app/localization/localizations.dart';
 import 'package:survey_admin/presentation/pages/new_question_page/new_question_page.dart';
@@ -34,6 +36,22 @@ class _QuestionListState extends State<QuestionList> {
       const InputQuestionData.common(index: 1),
     ];
     widget.onSelect(_questionList.first);
+    RawKeyboard.instance.addListener(_handleKeyDown);
+  }
+
+  void _handleKeyDown(RawKeyEvent value) {
+    if (value is RawKeyDownEvent) {
+      final key = value.logicalKey;
+      if (key == LogicalKeyboardKey.delete) {
+        setState(() => _questionList.removeAt(_selectedIndex));
+      }
+    }
+  }
+
+  @override
+  void dispose() {
+    RawKeyboard.instance.removeListener(_handleKeyDown);
+    super.dispose();
   }
 
   void addQuestion(QuestionData data) {
@@ -94,42 +112,68 @@ class _QuestionListState extends State<QuestionList> {
             ),
           ),
           Expanded(
-            child: ReorderableListView(
-              buildDefaultDragHandles: false,
-              children: [
-                for (int index = 0; index < _questionList.length; index++)
-                  ReorderableDragStartListener(
-                    index: index,
-                    key: ValueKey(index),
-                    child: QuestionListItem(
-                      isSelected: index == _selectedIndex,
-                      questionData: _questionList[index],
-                      onTap: (data) {
-                        widget.onSelect(data);
-                        setState(() {
-                          _selectedIndex = index;
-                        });
-                      },
+            child: ContextMenuOverlay(
+              cardBuilder: (_, children) => Container(
+                  decoration: BoxDecoration(
+                    color: AppColors.white,
+                    borderRadius: BorderRadius.circular(
+                      AppDimensions.circularRadiusXS,
                     ),
-                  )
-              ],
-              onReorder: (oldIndex, newIndex) {
-                if (newIndex > oldIndex) newIndex--;
-                setState(
-                  () {
-                    if (_selectedIndex == oldIndex) {
-                      _selectedIndex = newIndex;
-                    } else if (_selectedIndex == newIndex) {
-                      _selectedIndex = oldIndex;
-                    }
+                    border: Border.all(
+                      width: 0.5,
+                    ),
+                  ),
+                  child: Column(children: children)),
+              child: ReorderableListView(
+                buildDefaultDragHandles: false,
+                children: [
+                  for (int index = 0; index < _questionList.length; index++)
+                    ReorderableDragStartListener(
+                      index: index,
+                      key: ValueKey(index),
+                      child: ContextMenuRegion(
+                        contextMenu: GenericContextMenu(
+                          buttonConfigs: [
+                            ContextMenuButtonConfig(
+                              context.localization.delete_question,
+                              onPressed: () =>
+                                  setState(() => _questionList.removeAt(index)),
+                            ),
+                          ],
+                        ),
+                        child: QuestionListItem(
+                          isSelected: index == _selectedIndex,
+                          questionData: _questionList[index],
+                          onTap: (data) {
+                            widget.onSelect(data);
+                            setState(() {
+                              _selectedIndex = index;
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+                ],
+                onReorder: (oldIndex, newIndex) {
+                  if (newIndex > oldIndex) newIndex--;
+                  setState(
+                    () {
+                      if (_selectedIndex == oldIndex) {
+                        _selectedIndex = newIndex;
+                      } else if (_selectedIndex == newIndex) {
+                        _selectedIndex = oldIndex;
+                      }
 
-                    final oldItem = _questionList[oldIndex];
-                    final newItem = _questionList[newIndex];
-                    _questionList[newIndex] = oldItem.copyWith(index: newIndex);
-                    _questionList[oldIndex] = newItem.copyWith(index: oldIndex);
-                  },
-                );
-              },
+                      final oldItem = _questionList[oldIndex];
+                      final newItem = _questionList[newIndex];
+                      _questionList[newIndex] =
+                          oldItem.copyWith(index: newIndex);
+                      _questionList[oldIndex] =
+                          newItem.copyWith(index: oldIndex);
+                    },
+                  );
+                },
+              ),
             ),
           ),
         ],

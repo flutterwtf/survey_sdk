@@ -14,12 +14,13 @@ dependencies:
   flutter_localizations:
     sdk: flutter
 
+  context_menus: ^1.0.2
   equatable: ^2.0.3
   flutter_bloc: ^8.0.1
   flutter_colorpicker: ^1.0.3
   flutter_svg: ^2.0.1
   get_it: ^7.2.0
-  intl: ^0.17.0
+  intl: ^0.18.0
   survey_core:
     path: ../core
 
