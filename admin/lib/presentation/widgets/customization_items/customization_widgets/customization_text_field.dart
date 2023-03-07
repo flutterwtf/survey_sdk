@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:survey_admin/presentation/utils/app_fonts.dart';
-import 'package:survey_admin/presentation/utils/colors.dart';
+import 'package:survey_admin/presentation/utils/theme_extension.dart';
 
 class CustomizationTextField extends StatelessWidget {
   final String? initialValue;
@@ -16,7 +16,7 @@ class CustomizationTextField extends StatelessWidget {
   final InputDecoration decoration;
 
   const CustomizationTextField({
-    Key? key,
+    super.key,
     this.onChanged,
     this.initialValue,
     this.inputFormatters,
@@ -30,7 +30,7 @@ class CustomizationTextField extends StatelessWidget {
       isCollapsed: true,
       border: InputBorder.none,
     ),
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -43,11 +43,7 @@ class CustomizationTextField extends StatelessWidget {
       onEditingComplete: onEditingComplete,
       focusNode: focusNode,
       decoration: decoration,
-      style: TextStyle(
-        fontSize: fontSize,
-        fontWeight: AppFonts.weightRegular,
-        color: AppColors.black,
-      ),
+      style: context.theme.textTheme.bodyMedium?.copyWith(fontSize: fontSize),
       inputFormatters: inputFormatters,
     );
   }

@@ -1,25 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
+
+import '../app_test.dart';
 
 void main() {
   testWidgets('initialValue property', (tester) async {
     await tester.pumpWidget(
-      const MaterialApp(
-        supportedLocales: AppLocalizations.supportedLocales,
-        localizationsDelegates: [
-          AppLocalizations.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        home: Scaffold(
-          body: CustomizationTextField(
-            initialValue: 'initialValue',
-          ),
+      const AppTest(
+        child: CustomizationTextField(
+          initialValue: 'initialValue',
         ),
       ),
     );
@@ -30,20 +21,11 @@ void main() {
   testWidgets('onChanged property', (tester) async {
     String? text;
     await tester.pumpWidget(
-      MaterialApp(
-        supportedLocales: AppLocalizations.supportedLocales,
-        localizationsDelegates: const [
-          AppLocalizations.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        home: Scaffold(
-          body: CustomizationTextField(
-            onChanged: (newText) {
-              text = newText;
-            },
-          ),
+      AppTest(
+        child: CustomizationTextField(
+          onChanged: (newText) {
+            text = newText;
+          },
         ),
       ),
     );
@@ -57,18 +39,9 @@ void main() {
 
   testWidgets('fontSize property', (tester) async {
     await tester.pumpWidget(
-      const MaterialApp(
-        supportedLocales: AppLocalizations.supportedLocales,
-        localizationsDelegates: [
-          AppLocalizations.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        home: Scaffold(
-          body: CustomizationTextField(
-            fontSize: 14,
-          ),
+      const AppTest(
+        child: CustomizationTextField(
+          fontSize: 14,
         ),
       ),
     );
@@ -81,21 +54,12 @@ void main() {
 
   testWidgets('inputFormatters property', (tester) async {
     await tester.pumpWidget(
-      MaterialApp(
-        supportedLocales: AppLocalizations.supportedLocales,
-        localizationsDelegates: const [
-          AppLocalizations.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        home: Scaffold(
-          body: CustomizationTextField(
-            inputFormatters: [
-              FilteringTextInputFormatter.digitsOnly,
-              LengthLimitingTextInputFormatter(3),
-            ],
-          ),
+      AppTest(
+        child: CustomizationTextField(
+          inputFormatters: [
+            FilteringTextInputFormatter.digitsOnly,
+            LengthLimitingTextInputFormatter(3),
+          ],
         ),
       ),
     );
@@ -107,15 +71,8 @@ void main() {
   testWidgets('focusNode property', (tester) async {
     final focusNode = FocusNode();
     await tester.pumpWidget(
-      MaterialApp(
-        supportedLocales: AppLocalizations.supportedLocales,
-        localizationsDelegates: const [
-          AppLocalizations.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        home: Scaffold(
+      AppTest(
+        child: Scaffold(
           body: CustomizationTextField(
             focusNode: focusNode,
           ),
@@ -132,20 +89,11 @@ void main() {
   testWidgets('onEditingComplete property', (tester) async {
     var amountOfChanges = 0;
     await tester.pumpWidget(
-      MaterialApp(
-        supportedLocales: AppLocalizations.supportedLocales,
-        localizationsDelegates: const [
-          AppLocalizations.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        home: Scaffold(
-          body: CustomizationTextField(
-            onEditingComplete: () {
-              amountOfChanges++;
-            },
-          ),
+      AppTest(
+        child: CustomizationTextField(
+          onEditingComplete: () {
+            amountOfChanges++;
+          },
         ),
       ),
     );
@@ -166,18 +114,9 @@ void main() {
   testWidgets('controller property', (tester) async {
     final controller = TextEditingController();
     await tester.pumpWidget(
-      MaterialApp(
-        supportedLocales: AppLocalizations.supportedLocales,
-        localizationsDelegates: const [
-          AppLocalizations.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        home: Scaffold(
-          body: CustomizationTextField(
-            controller: controller,
-          ),
+      AppTest(
+        child: CustomizationTextField(
+          controller: controller,
         ),
       ),
     );
@@ -196,18 +135,9 @@ void main() {
       fillColor: Colors.black,
     );
     await tester.pumpWidget(
-      const MaterialApp(
-        supportedLocales: AppLocalizations.supportedLocales,
-        localizationsDelegates: [
-          AppLocalizations.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        home: Scaffold(
-          body: CustomizationTextField(
-            decoration: decoration,
-          ),
+      const AppTest(
+        child: CustomizationTextField(
+          decoration: decoration,
         ),
       ),
     );

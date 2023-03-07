@@ -20,8 +20,8 @@ class TextCustomizeItem extends StatefulWidget {
     required this.initialColor,
     required this.onColorPicked,
     required this.onTextWidthPicked,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   State<TextCustomizeItem> createState() => _TextCustomizeItemState();
@@ -70,8 +70,7 @@ class _TextCustomizeItemState extends State<TextCustomizeItem> {
                   decoration: BoxDecoration(
                     color: colorFromHex(
                       _colorTextController.value.text,
-                      enableAlpha: true,
-                    )!,
+                    ),
                   ),
                   width: AppDimensions.sizeM,
                   height: AppDimensions.sizeM,

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:survey_admin/presentation/utils/app_fonts.dart';
-import 'package:survey_admin/presentation/utils/asset_strings.dart';
-import 'package:survey_admin/presentation/utils/constants/app_duration.dart';
+import 'package:survey_admin/presentation/utils/constants/app_assets.dart';
+import 'package:survey_admin/presentation/utils/constants/app_durations.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
+import 'package:survey_admin/presentation/utils/theme_extension.dart';
 
 // TODO(dev): localization
 // TODO(dev): add email, password, phone
@@ -30,7 +30,8 @@ class InputTypeCustomizationItem extends StatefulWidget {
   final void Function(InputType inputType)? onChanged;
 
   @override
-  State<InputTypeCustomizationItem> createState() => _InputTypeCustomizationItemState();
+  State<InputTypeCustomizationItem> createState() =>
+      _InputTypeCustomizationItemState();
 }
 
 class _InputTypeCustomizationItemState extends State<InputTypeCustomizationItem>
@@ -47,8 +48,9 @@ class _InputTypeCustomizationItemState extends State<InputTypeCustomizationItem>
     _selectedType = widget.initialValue;
     _iconAnimationController = AnimationController(
       vsync: this,
-      duration: AppDuration.customizationItemAnimation,
+      duration: AppDurations.customizationItemAnimation,
     );
+    // ignore: prefer_int_literals
     _animation = Tween(begin: 0.0, end: .5).animate(
       CurvedAnimation(
         parent: _iconAnimationController,
@@ -72,7 +74,7 @@ class _InputTypeCustomizationItemState extends State<InputTypeCustomizationItem>
           inputType: _selectedType,
           trailing: RotationTransition(
             turns: _animation,
-            child: SvgPicture.asset(AssetStrings.arrow),
+            child: SvgPicture.asset(AppAssets.arrowIcon),
           ),
           onTap: () {
             setState(() {
@@ -86,7 +88,7 @@ class _InputTypeCustomizationItemState extends State<InputTypeCustomizationItem>
           },
         ),
         AnimatedSize(
-          duration: AppDuration.customizationItemAnimation,
+          duration: AppDurations.customizationItemAnimation,
           child: _isExpanded
               ? Column(
                   children: InputType.values
@@ -143,10 +145,7 @@ class _InputTypeItem extends StatelessWidget {
             children: [
               Text(
                 inputType.name,
-                style: const TextStyle(
-                  fontSize: AppFonts.sizeL,
-                  fontWeight: AppFonts.weightRegular,
-                ),
+                style: context.theme.textTheme.bodyLarge,
               ),
               if (trailing != null) trailing!,
             ],

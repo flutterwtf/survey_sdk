@@ -1,11 +1,13 @@
 import 'dart:ui';
 
+import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:survey_core/src/domain/entities/api_object.dart';
 import 'package:survey_core/src/presentation/utils/app_fonts.dart';
 import 'package:survey_core/src/presentation/utils/colors.dart';
 
-class InputQuestionTheme extends ThemeExtension<InputQuestionTheme> with ApiObject {
+class InputQuestionTheme extends ThemeExtension<InputQuestionTheme>
+    with ApiObject, EquatableMixin {
   final Color backgroundColor;
   final Color borderColor;
   final double borderWidth;
@@ -31,6 +33,35 @@ class InputQuestionTheme extends ThemeExtension<InputQuestionTheme> with ApiObje
     this.verticalPadding,
     this.horizontalPadding,
   });
+
+  InputQuestionTheme.fromJson(Map<String, dynamic> json)
+      : backgroundColor = Color(int.parse(json['backgroundColor'].toString())),
+        borderColor = Color(int.parse(json['borderColor'].toString())),
+        borderWidth = double.parse(json['borderWidth'].toString()),
+        hintColor = Color(int.parse(json['hintColor'].toString())),
+        hintSize = double.parse(json['hintSize'].toString()),
+        textColor = Color(int.parse(json['textColor'].toString())),
+        textSize = double.parse(json['textSize'].toString()),
+        minLines = int.parse(json['minLines'].toString()),
+        maxLines = int.parse(json['maxLines'].toString()),
+        verticalPadding = double.parse(json['verticalPadding'].toString()),
+        horizontalPadding = double.parse(json['horizontalPadding'].toString());
+
+  @override
+  Map<String, dynamic> toJson() => {
+    'backgroundColor': backgroundColor.value,
+    'borderColor': borderColor.value,
+    'borderWidth': borderWidth,
+    'hintColor': hintColor.value,
+    'hintSize': hintSize,
+    'textColor': textColor.value,
+    'textSize': textSize,
+    'minLines': minLines,
+    'maxLines': maxLines,
+    'verticalPadding': verticalPadding,
+    'horizontalPadding': horizontalPadding,
+  };
+
 
   const InputQuestionTheme.common()
       : this(
@@ -91,19 +122,13 @@ class InputQuestionTheme extends ThemeExtension<InputQuestionTheme> with ApiObje
       textSize: lerpDouble(textSize, other.textSize, t)!,
       minLines: lerpDouble(minLines, other.minLines, t)?.toInt(),
       maxLines: lerpDouble(maxLines, other.maxLines, t)?.toInt(),
-      verticalPadding: lerpDouble(verticalPadding, other.verticalPadding, t)!,
-      horizontalPadding: lerpDouble(horizontalPadding, other.horizontalPadding, t)!,
+      verticalPadding: lerpDouble(verticalPadding, other.verticalPadding, t),
+      horizontalPadding:
+          lerpDouble(horizontalPadding, other.horizontalPadding, t),
     );
   }
 
   @override
-  Map<String, dynamic> toJson() {
-    // TODO: implement toJson
-    throw UnimplementedError();
-  }
-
-  @override
-  // TODO: implement props
   List<Object?> get props => [
         backgroundColor,
         borderColor,

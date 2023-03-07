@@ -3,37 +3,45 @@ import 'package:flutter_svg/svg.dart';
 import 'package:survey_admin/presentation/app/localization/localizations.dart';
 import 'package:survey_admin/presentation/pages/new_question_page/new_question_page.dart';
 import 'package:survey_admin/presentation/utils/app_fonts.dart';
-import 'package:survey_admin/presentation/utils/asset_strings.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
+import 'package:survey_admin/presentation/utils/constants/app_assets.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
+import 'package:survey_admin/presentation/utils/theme_extension.dart';
 import 'package:survey_admin/presentation/widgets/builder_page/question_list_item.dart';
 import 'package:survey_core/survey_core.dart';
 
-// TODO(dev): do we really need "Survey" prefix? If so, why do we have it only in several classes
 class QuestionList extends StatefulWidget {
   final void Function(QuestionData) onSelect;
 
-  const QuestionList({super.key, required this.onSelect});
+  const QuestionList({
+    required this.onSelect,
+    super.key,
+  });
 
   @override
   State<QuestionList> createState() => _QuestionListState();
 }
 
 class _QuestionListState extends State<QuestionList> {
-  final _questionList = [
-    QuestionListItem(
-      questionData: IntroQuestionData.common(index: 0),
-    ),
-    QuestionListItem(
-      questionData: InputQuestionData.common(index: 1),
-    ),
-  ];
+  late List<QuestionData> _questionList;
+  int _selectedIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _questionList = [
+      const IntroQuestionData.common(),
+      const InputQuestionData.common(index: 1),
+    ];
+    widget.onSelect(_questionList.first);
+  }
 
   void addQuestion(QuestionData data) {
     final index = _questionList.length;
-    data = data.copyWith(index: index);
     setState(() {
-      _questionList.add(QuestionListItem(questionData: data));
+      _questionList.add(
+        data.copyWith(index: index),
+      );
     });
   }
 
@@ -58,8 +66,7 @@ class _QuestionListState extends State<QuestionList> {
               children: [
                 Text(
                   context.localization.survey,
-                  style: const TextStyle(
-                    color: AppColors.text,
+                  style: context.theme.textTheme.titleMedium?.copyWith(
                     fontWeight: AppFonts.weightBold,
                   ),
                 ),
@@ -68,7 +75,7 @@ class _QuestionListState extends State<QuestionList> {
                 ),
                 GestureDetector(
                   onTap: () async {
-                    QuestionData? questionData = await Navigator.of(context).push(
+                    final questionData = await Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) => const NewQuestionPage(),
                       ),
@@ -80,7 +87,7 @@ class _QuestionListState extends State<QuestionList> {
                   child: SizedBox(
                     height: AppDimensions.sizeL,
                     width: AppDimensions.sizeL,
-                    child: SvgPicture.asset(AssetStrings.addCircle),
+                    child: SvgPicture.asset(AppAssets.addCircleIcon),
                   ),
                 ),
               ],
@@ -94,25 +101,32 @@ class _QuestionListState extends State<QuestionList> {
                   ReorderableDragStartListener(
                     index: index,
                     key: ValueKey(index),
-                    child: _questionList.where((item) => item.questionData.index == index).first,
+                    child: QuestionListItem(
+                      isSelected: index == _selectedIndex,
+                      questionData: _questionList[index],
+                      onTap: (data) {
+                        widget.onSelect(data);
+                        setState(() {
+                          _selectedIndex = index;
+                        });
+                      },
+                    ),
                   )
               ],
               onReorder: (oldIndex, newIndex) {
                 if (newIndex > oldIndex) newIndex--;
                 setState(
                   () {
-                    final itemFirstIndex =
-                        _questionList.indexWhere((item) => item.questionData.index == oldIndex);
-                    final itemSecondIndex =
-                        _questionList.indexWhere((item) => item.questionData.index == newIndex);
-                    _questionList[itemFirstIndex] = QuestionListItem(
-                      questionData:
-                          _questionList[itemFirstIndex].questionData.copyWith(index: newIndex),
-                    );
-                    _questionList[itemSecondIndex] = QuestionListItem(
-                      questionData:
-                          _questionList[itemSecondIndex].questionData.copyWith(index: oldIndex),
-                    );
+                    if (_selectedIndex == oldIndex) {
+                      _selectedIndex = newIndex;
+                    } else if (_selectedIndex == newIndex) {
+                      _selectedIndex = oldIndex;
+                    }
+
+                    final oldItem = _questionList[oldIndex];
+                    final newItem = _questionList[newIndex];
+                    _questionList[newIndex] = oldItem.copyWith(index: newIndex);
+                    _questionList[oldIndex] = newItem.copyWith(index: oldIndex);
                   },
                 );
               },
