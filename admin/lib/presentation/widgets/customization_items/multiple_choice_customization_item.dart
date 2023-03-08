@@ -3,12 +3,12 @@ import 'package:survey_admin/presentation/app/localization/localizations.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/switch_customization_item.dart';
 
 class MultipleChoiceCustomizationItem extends StatefulWidget {
-  final void Function(bool isMultipleChoice) onChanged;
+  final ValueChanged<bool> onChanged;
   final bool isMultipleChoice;
 
   const MultipleChoiceCustomizationItem({
     required this.onChanged,
-    required this.isMultipleChoice,
+    this.isMultipleChoice = false,
     super.key,
   });
 

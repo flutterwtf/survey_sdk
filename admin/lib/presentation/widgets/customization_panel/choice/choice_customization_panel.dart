@@ -33,8 +33,7 @@ class ChoiceCustomizationPanel extends StatelessWidget {
           title: isMultipleChoice
               ? context.localization.check_box
               : context.localization.radio_button,
-          isMultipleChoice: isMultipleChoice,
-          onMultipleChoiceUpdate: (isMultipleChoice){},
+          onMultipleChoiceUpdate: (isMultipleChoice) {},
           onActiveColorPicked: (activeColor) {},
           onInactiveColorPicked: (inactiveColor) {},
         ),

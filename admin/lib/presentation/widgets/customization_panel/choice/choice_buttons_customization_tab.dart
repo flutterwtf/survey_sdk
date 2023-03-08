@@ -8,14 +8,12 @@ import 'package:survey_admin/presentation/widgets/customization_items/multiple_c
 import 'package:survey_admin/presentation/widgets/customization_panel/customization_tab.dart';
 
 class ChoiceButtonsCustomizationTab extends CustomizationTab {
-  final void Function(bool isMultipleChoice) onMultipleChoiceUpdate;
+  final ValueChanged<bool> onMultipleChoiceUpdate;
   final ValueChanged<Color> onActiveColorPicked;
   final ValueChanged<Color> onInactiveColorPicked;
-  final bool isMultipleChoice;
 
   const ChoiceButtonsCustomizationTab({
     required super.title,
-    required this.isMultipleChoice,
     required this.onMultipleChoiceUpdate,
     required this.onActiveColorPicked,
     required this.onInactiveColorPicked,
@@ -34,7 +32,6 @@ class ChoiceButtonsCustomizationTab extends CustomizationTab {
           children: [
             MultipleChoiceCustomizationItem(
               onChanged: onMultipleChoiceUpdate,
-              isMultipleChoice: isMultipleChoice,
             ),
           ],
         ),
