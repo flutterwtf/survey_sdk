@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:survey_core/src/domain/entities/api_object.dart';
 import 'package:survey_core/src/presentation/utils/colors.dart';
@@ -7,7 +8,7 @@ import 'package:survey_core/src/presentation/utils/constants.dart';
 
 @immutable
 class TextFieldThemeData extends ThemeExtension<TextFieldThemeData>
-    with ApiObject {
+    with ApiObject, EquatableMixin {
   final Color fillCommonColor;
   final Color fillInputColor;
   final Color borderColor;
@@ -178,6 +179,7 @@ class TextFieldThemeData extends ThemeExtension<TextFieldThemeData>
     );
   }
 
+  @override
   List<Object?> get props => [
         fillCommonColor,
         fillInputColor,

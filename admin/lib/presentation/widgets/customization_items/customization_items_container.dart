@@ -7,6 +7,7 @@ class CustomizationItemsContainer extends StatefulWidget {
   final String? title;
   final EdgeInsets? titlePadding;
   final EdgeInsets? itemsPadding;
+  final bool isFontBold;
   final double itemsSeparatorHeight;
   final bool isTopDividerShown;
   final bool isBottomDividerShown;
@@ -17,6 +18,7 @@ class CustomizationItemsContainer extends StatefulWidget {
     this.title,
     this.titlePadding,
     this.itemsPadding,
+    this.isFontBold = false,
     this.itemsSeparatorHeight = AppDimensions.marginS,
     this.isTopDividerShown = false,
     this.isBottomDividerShown = true,

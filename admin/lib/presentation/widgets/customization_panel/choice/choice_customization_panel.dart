@@ -23,9 +23,11 @@ enum RuleType {
 
 class ChoiceCustomizationPanel extends StatefulWidget {
   final QuestionData editableQuestion;
+  final bool isMultipleChoice;
 
   const ChoiceCustomizationPanel({
     required this.editableQuestion,
+    required this.isMultipleChoice,
     super.key,
   });
 
@@ -56,7 +58,10 @@ class _ChoiceCustomizationPanelState extends State<ChoiceCustomizationPanel> {
           onButtonRadiusChanged: (buttonRadius) {},
         ),
         ChoiceButtonsCustomizationTab(
-          title: context.localization.radio_button,
+          title: widget.isMultipleChoice
+              ? context.localization.check_box
+              : context.localization.radio_button,
+          onMultipleChoiceUpdate: (isMultipleChoice) {},
           onActiveColorPicked: (activeColor) {},
           onInactiveColorPicked: (inactiveColor) {},
         ),

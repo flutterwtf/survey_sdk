@@ -18,7 +18,7 @@ class SliderQuestionData extends QuestionData<SliderThemeData> {
     super.content,
   });
 
-  const SliderQuestionData.common({required int index})
+  const SliderQuestionData.common({int index = 0})
       : this(
           // TODO(dev): to localization somehow
           minValue: 0,
