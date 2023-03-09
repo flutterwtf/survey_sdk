@@ -1,27 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:survey_admin/presentation/app/localization/localizations.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
+import 'package:survey_admin/presentation/utils/theme_extension.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/create_text_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
+import 'package:survey_admin/presentation/widgets/customization_items/drop_down_customization_button.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/drop_down_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/option_customization_item.dart';
+import 'package:survey_admin/presentation/widgets/customization_panel/choice/choice_customization_panel.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/customization_tab.dart';
 import 'package:survey_core/survey_core.dart';
-
-enum RuleType {
-  none('None'),
-  more('>'),
-  less('<'),
-  moreOrEqual('>='),
-  lessOrEqual('<='),
-  equal('=');
-
-  const RuleType(
-    this.name,
-  );
-
-  final String name;
-}
 
 class ChoiceContentCustomizationTab extends CustomizationTab {
   final ValueChanged<String> onTitleChanged;
@@ -100,18 +88,46 @@ class ChoiceContentCustomizationTab extends CustomizationTab {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Expanded(
-                    child: DropDownCustomizationItem<RuleType>(
-                      initialValue: ruleType,
-                      onChanged: onRuleChanged,
-                      itemList: RuleType.values,
+                    child: DropdownCustomizationButton<RuleType>(
+                      items: RuleType.values
+                          .where((type) => type != ruleType)
+                          .map(
+                            (e) => DropdownCustomizationItem<RuleType>(
+                              value: e,
+                              onChange: onRuleChanged,
+                              child: Text(
+                                e.name,
+                                style: context.theme.textTheme.bodyLarge,
+                              ),
+                            ),
+                          )
+                          .toList(),
+                      child: Text(
+                        ruleType.name,
+                        style: context.theme.textTheme.bodyLarge,
+                      ),
                     ),
                   ),
                   Expanded(
                     child: ruleType != RuleType.none
-                        ? DropDownCustomizationItem<int>(
-                            onChanged: onRuleLimitedChanged,
-                            itemList: initialLimitedList(listOptions),
-                            initialValue: limitedRule,
+                        ? DropdownCustomizationButton<int>(
+                            items: initialLimitedList(listOptions)
+                                .where((limited) => limited != limitedRule)
+                                .map(
+                                  (e) => DropdownCustomizationItem<int>(
+                                    value: e,
+                                    onChange: onRuleLimitedChanged,
+                                    child: Text(
+                                      e.toString(),
+                                      style: context.theme.textTheme.bodyLarge,
+                                    ),
+                                  ),
+                                )
+                                .toList(),
+                            child: Text(
+                              limitedRule.toString(),
+                              style: context.theme.textTheme.bodyLarge,
+                            ),
                           )
                         : const SizedBox(),
                   ),

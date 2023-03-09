@@ -7,10 +7,12 @@ import 'package:survey_admin/presentation/utils/theme_extension.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/color_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
-import 'package:survey_admin/presentation/widgets/customization_items/input_type_customization_item.dart';
+import 'package:survey_admin/presentation/widgets/customization_items/drop_down_customization_button.dart';
+import 'package:survey_admin/presentation/widgets/customization_items/drop_down_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/multiline_switch.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/padding_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/customization_tab.dart';
+import 'package:survey_admin/presentation/widgets/customization_panel/input/input_customization_panel.dart';
 
 class InputCustomizationTab extends CustomizationTab {
   final void Function(bool isMultiline, int lineAmount) onMultilineChanged;
@@ -25,6 +27,7 @@ class InputCustomizationTab extends CustomizationTab {
   final ValueChanged<Color> onTextColorChanged;
   final ValueChanged<int> onTextFontSizeChanged;
   final ValueChanged<InputType> onInputTypeChanged;
+  final InputType inputType;
 
   const InputCustomizationTab({
     required super.title,
@@ -40,6 +43,7 @@ class InputCustomizationTab extends CustomizationTab {
     required this.onTextColorChanged,
     required this.onTextFontSizeChanged,
     required this.onInputTypeChanged,
+    required this.inputType,
     super.key,
   });
 
@@ -189,8 +193,24 @@ class InputCustomizationTab extends CustomizationTab {
             bottom: AppDimensions.marginM,
           ),
           children: [
-            InputTypeCustomizationItem(
-              onChanged: onInputTypeChanged,
+            DropdownCustomizationButton<InputType>(
+              items: InputType.values
+                  .where((type) => type != inputType)
+                  .map(
+                    (e) => DropdownCustomizationItem<InputType>(
+                      value: e,
+                      onChange: onInputTypeChanged,
+                      child: Text(
+                        e.name,
+                        style: context.theme.textTheme.bodyLarge,
+                      ),
+                    ),
+                  )
+                  .toList(),
+              child: Text(
+                inputType.name,
+                style: context.theme.textTheme.bodyLarge,
+              ),
             ),
           ],
         ),
