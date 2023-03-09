@@ -1,5 +1,4 @@
 import 'dart:io';
-//import 'localization_sort.dart';
 import 'localization_test.dart';
 
 const filePath = 'lib/presentation/app/localization/l10n/app_en.arb';
@@ -12,14 +11,6 @@ void main() async {
   final file = File(filePath);
 
   final arbContents = await file.readAsString();
-
-  // final arbContentsSorted = sortARB(
-  //   arbContents,
-  //   caseInsensitive: true,
-  //   naturalOrdering: false,
-  //   descendingOrdering: false,
-  // );
-  // await file.writeAsString(arbContentsSorted);
 
   final arbIsSorted = isSorted(arbContents);
   if (!arbIsSorted) throw (('Test Failed. Arb File is not sorted.'));
