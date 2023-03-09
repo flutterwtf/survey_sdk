@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:survey_core/src/domain/entities/question_answer.dart';
 import 'package:survey_core/src/domain/entities/question_types/choice_question_data.dart';
 import 'package:survey_core/src/domain/entities/question_types/input_question_data.dart';
 import 'package:survey_core/src/domain/entities/question_types/intro_question_data.dart';
@@ -9,28 +10,23 @@ import 'package:survey_core/src/presentation/input_question/input_question_page.
 import 'package:survey_core/src/presentation/intro_question/intro_question_page.dart';
 import 'package:survey_core/src/presentation/slider_question/slider_question_page.dart';
 
-typedef OnSendCallback = void Function({
-  required String key,
-  required dynamic data,
-});
-
 abstract class DataToWidgetUtil {
-  static Widget createWidget(QuestionData data, OnSendCallback onSend) {
+  static Widget createWidget(QuestionData data, QuestionAnswer onSend) {
     switch (data.runtimeType) {
       case SliderQuestionData:
         return SliderQuestionPage(
           data: data as SliderQuestionData,
-          onSend: onSend,
+          onSend: onSend as SliderQuestionAnswer,
         );
       case ChoiceQuestionData:
         return ChoiceQuestionPage(
           data: data as ChoiceQuestionData,
-          onSend: onSend,
+          onSend: onSend as ChoiceQuestionAnswer,
         );
       case InputQuestionData:
         return InputQuestionPage(
           data: data as InputQuestionData,
-          onSend: onSend,
+          onSend: onSend as InputQuestionAnswer,
         );
       case IntroQuestionData:
         return IntroQuestionPage(

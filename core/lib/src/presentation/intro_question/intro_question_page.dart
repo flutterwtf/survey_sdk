@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:survey_core/src/domain/entities/question_answer.dart';
 import 'package:survey_core/src/domain/entities/question_types/intro_question_data.dart';
 import 'package:survey_core/src/domain/entities/themes/intro_question_theme.dart';
 import 'package:survey_core/src/presentation/localization/localizations.dart';
@@ -10,7 +11,7 @@ import 'package:survey_core/src/presentation/widgets/question_title.dart';
 
 class IntroQuestionPage extends StatelessWidget {
   final IntroQuestionData data;
-  final OnSendCallback onSend;
+  final QuestionAnswer onSend;
   final VoidCallback? onMainButtonTap;
 
   // TODO(dev): onSkip

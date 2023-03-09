@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:survey_core/src/domain/entities/question_answer.dart';
 import 'package:survey_core/src/domain/entities/question_types/choice_question_data.dart';
 import 'package:survey_core/src/domain/entities/themes/choice_question_theme.dart';
 import 'package:survey_core/src/presentation/localization/localizations.dart';
@@ -12,7 +13,7 @@ import 'package:survey_core/src/presentation/widgets/question_title.dart';
 
 class ChoiceQuestionPage extends StatefulWidget {
   final ChoiceQuestionData data;
-  final OnSendCallback onSend;
+  final ChoiceQuestionAnswer onSend;
 
   const ChoiceQuestionPage({
     required this.data,
@@ -105,7 +106,7 @@ class _ChoiceQuestionPageState extends State<ChoiceQuestionPage>
           QuestionBottomButton(
             text: context.localization.next,
             onPressed: () {
-              widget.onSend.call(key: widget.data.type, data: _selectedItems);
+              widget.onSend.toJson(widget.data.type, _selectedItems);
             },
             isEnabled: widget.data.isSkip || _canBeSend,
           ),

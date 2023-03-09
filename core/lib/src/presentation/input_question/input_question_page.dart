@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:survey_core/src/domain/entities/question_answer.dart';
 import 'package:survey_core/src/domain/entities/question_types/input_question_data.dart';
 import 'package:survey_core/src/domain/entities/themes/input_question_theme.dart';
 import 'package:survey_core/src/presentation/localization/localizations.dart';
@@ -10,7 +11,7 @@ import 'package:survey_core/src/presentation/widgets/question_title.dart';
 
 class InputQuestionPage extends StatefulWidget {
   final InputQuestionData data;
-  final OnSendCallback onSend;
+  final InputQuestionAnswer onSend;
 
   const InputQuestionPage({
     required this.data,
@@ -98,7 +99,7 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
             onPressed: () {
               if ((_textFieldKey.currentState?.validate() ?? false) ||
                   widget.data.isSkip) {
-                widget.onSend(key: widget.data.type, data: _input);
+                widget.onSend.toJson(widget.data.type, _input);
               }
             },
             isEnabled:

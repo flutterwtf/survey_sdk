@@ -12,4 +12,6 @@ class SurveyCubit extends Cubit<SurveyState> {
           (data) => emit(state.copyWith(surveyData: data)),
         );
   }
+
+  saveAnswer(json) {}
 }

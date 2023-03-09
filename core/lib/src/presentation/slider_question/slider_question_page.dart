@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:survey_core/src/domain/entities/question_answer.dart';
 import 'package:survey_core/src/domain/entities/question_types/slider_question_data.dart';
 import 'package:survey_core/src/presentation/localization/localizations.dart';
 import 'package:survey_core/src/presentation/utils/app_fonts.dart';
@@ -11,7 +12,7 @@ import 'package:survey_core/src/presentation/widgets/question_title.dart';
 
 class SliderQuestionPage extends StatefulWidget {
   final SliderQuestionData data;
-  final OnSendCallback onSend;
+  final SliderQuestionAnswer onSend;
 
   const SliderQuestionPage({
     required this.data,
@@ -80,7 +81,7 @@ class _SliderQuestionPageState extends State<SliderQuestionPage> {
           QuestionBottomButton(
             text: context.localization.next,
             onPressed: () {
-              widget.onSend.call(key: widget.data.type, data: _answer);
+              widget.onSend.toJson(widget.data.type, _answer);
             },
           ),
         ],
