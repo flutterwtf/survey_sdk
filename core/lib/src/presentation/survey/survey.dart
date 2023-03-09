@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:survey_core/src/domain/entities/survey_data.dart';
 import 'package:survey_core/src/presentation/di/injector.dart';
 import 'package:survey_core/src/presentation/survey/controller/survey_controller.dart';
 import 'package:survey_core/src/presentation/survey/survey_cubit.dart';
@@ -9,11 +10,13 @@ import 'package:survey_core/src/presentation/utils/colors.dart';
 import 'package:survey_core/src/presentation/utils/data_to_widget_util.dart';
 
 class Survey extends StatefulWidget {
-  final String surveyDataAsset;
+  final String? surveyDataAsset;
   final SurveyController? surveyController;
+  final SurveyData surveyData;
 
   Survey({
     required this.surveyDataAsset,
+    required this.surveyData,
     this.surveyController,
     super.key,
   }) {
@@ -32,7 +35,7 @@ class _SurveyState extends State<Survey> {
   void initState() {
     super.initState();
     _surveyController = widget.surveyController ?? SurveyController();
-    _cubit.initData(widget.surveyDataAsset);
+    _cubit.initData(widget.surveyDataAsset, widget.surveyData);
   }
 
   @override
