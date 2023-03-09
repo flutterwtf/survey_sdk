@@ -9,8 +9,10 @@ import 'package:survey_core/src/presentation/input_question/input_question_page.
 import 'package:survey_core/src/presentation/intro_question/intro_question_page.dart';
 import 'package:survey_core/src/presentation/slider_question/slider_question_page.dart';
 
-// TODO(dev): dynamic to survey result
-typedef OnSendCallback = void Function(dynamic data);
+typedef OnSendCallback = void Function({
+  required String key,
+  required dynamic data,
+});
 
 abstract class DataToWidgetUtil {
   static Widget createWidget(QuestionData data, OnSendCallback onSend) {
