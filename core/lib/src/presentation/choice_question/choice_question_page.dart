@@ -104,7 +104,9 @@ class _ChoiceQuestionPageState extends State<ChoiceQuestionPage>
           const Spacer(),
           QuestionBottomButton(
             text: context.localization.next,
-            onPressed: () => widget.onSend.call(_selectedItems),
+            onPressed: () {
+              widget.onSend.call(key: widget.data.type, data: _selectedItems);
+            },
             isEnabled: widget.data.isSkip || _canBeSend,
           ),
         ],
