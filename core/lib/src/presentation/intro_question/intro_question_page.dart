@@ -12,6 +12,7 @@ class IntroQuestionPage extends StatelessWidget {
   final IntroQuestionData data;
   final OnSendCallback onSend;
   final VoidCallback? onMainButtonTap;
+
   // TODO(dev): onSkip
   final VoidCallback? onSecondaryButtonTap;
 

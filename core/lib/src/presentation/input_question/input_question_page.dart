@@ -65,35 +65,42 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
           ),
           Padding(
             padding: const EdgeInsets.only(top: AppDimensions.marginM),
-            child: TextFormField(
+            child: Form(
               key: _textFieldKey,
-              minLines: theme.minLines,
-              maxLines: theme.maxLines,
-              style: TextStyle(
-                color: theme.textColor,
-                fontSize: theme.textSize,
-              ),
-              autovalidateMode: AutovalidateMode.onUserInteraction,
-              validator: (text) =>
-                  _canBeSkipped ? null : widget.data.validator.validate(text),
-              onChanged: (input) => setState(() => _input = input),
-              decoration: InputDecoration(
-                fillColor: theme.backgroundColor,
-                hintText: widget.data.hintText ?? '',
-                hintStyle: TextStyle(
-                  color: theme.hintColor,
-                  fontSize: theme.hintSize,
+              child: TextFormField(
+                minLines: theme.minLines,
+                maxLines: theme.maxLines,
+                style: TextStyle(
+                  color: theme.textColor,
+                  fontSize: theme.textSize,
                 ),
-                enabledBorder: border,
-                focusedBorder: border,
-                border: border,
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                validator: (text) =>
+                    _canBeSkipped ? null : widget.data.validator.validate(text),
+                onChanged: (input) => setState(() => _input = input),
+                decoration: InputDecoration(
+                  fillColor: theme.backgroundColor,
+                  hintText: widget.data.hintText ?? '',
+                  hintStyle: TextStyle(
+                    color: theme.hintColor,
+                    fontSize: theme.hintSize,
+                  ),
+                  enabledBorder: border,
+                  focusedBorder: border,
+                  border: border,
+                ),
               ),
             ),
           ),
           const Spacer(),
           QuestionBottomButton(
             text: context.localization.next,
-            onPressed: () => widget.onSend(_input),
+            onPressed: () {
+              if ((_textFieldKey.currentState?.validate() ?? false) ||
+                  widget.data.isSkip) {
+                widget.onSend(key: widget.data.type, data: _input);
+              }
+            },
             isEnabled:
                 _canBeSkipped || (_textFieldKey.currentState?.isValid ?? false),
           ),

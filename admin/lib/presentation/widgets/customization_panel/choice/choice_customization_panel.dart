@@ -6,7 +6,10 @@ import 'package:survey_admin/presentation/widgets/customization_panel/choice/cho
 import 'package:survey_admin/presentation/widgets/question_settings_tab_bar.dart';
 
 class ChoiceCustomizationPanel extends StatelessWidget {
+  final bool isMultipleChoice;
+
   const ChoiceCustomizationPanel({
+    required this.isMultipleChoice,
     super.key,
   });
 
@@ -27,7 +30,10 @@ class ChoiceCustomizationPanel extends StatelessWidget {
           onButtonRadiusChanged: (buttonRadius) {},
         ),
         ChoiceButtonsCustomizationTab(
-          title: context.localization.radio_button,
+          title: isMultipleChoice
+              ? context.localization.check_box
+              : context.localization.radio_button,
+          onMultipleChoiceUpdate: (isMultipleChoice) {},
           onActiveColorPicked: (activeColor) {},
           onInactiveColorPicked: (inactiveColor) {},
         ),

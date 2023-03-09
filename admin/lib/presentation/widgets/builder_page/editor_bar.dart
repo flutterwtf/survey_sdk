@@ -25,7 +25,11 @@ class EditorBar extends StatelessWidget {
         builder: (context) {
           switch (editableQuestion?.type ?? '') {
             case QuestionTypes.choice:
-              return const ChoiceCustomizationPanel();
+              return ChoiceCustomizationPanel(
+                isMultipleChoice: (editableQuestion as ChoiceQuestionData?)
+                        ?.isMultipleChoice ??
+                    false,
+              );
             case QuestionTypes.input:
               return const InputCustomizationPanel();
             case QuestionTypes.intro:
