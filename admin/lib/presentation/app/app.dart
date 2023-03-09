@@ -7,6 +7,7 @@ import 'package:survey_admin/presentation/app/app_state.dart';
 import 'package:survey_admin/presentation/pages/builder/builder_page.dart';
 import 'package:survey_admin/presentation/utils/app_fonts.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
+import 'package:survey_admin/presentation/widgets/customization_items/input_type_customization_item.dart';
 
 class App extends StatefulWidget {
   const App({super.key});
@@ -47,7 +48,7 @@ class _AppState extends State<App> {
                 bodySmall: TextStyle(color: AppColors.black),
               ),
             ),
-            home: const BuilderPage(),
+            home: const InputTypeCustomizationItem(),
           );
         },
       ),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:survey_admin/presentation/app/localization/localizations.dart';
 import 'package:survey_admin/presentation/utils/constants/app_assets.dart';
 import 'package:survey_admin/presentation/utils/constants/app_durations.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
@@ -129,6 +128,9 @@ class _InputTypeItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final capitalizedInputName = inputType.name[0].toUpperCase() +
+        inputType.name.substring(1).toLowerCase();
+
     return Material(
       child: InkWell(
         onTap: onTap,
@@ -141,7 +143,7 @@ class _InputTypeItem extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                context.inputNameResolver(inputType),
+                capitalizedInputName,
                 style: context.theme.textTheme.bodyLarge,
               ),
               if (trailing != null) trailing!,
