@@ -11,7 +11,7 @@ import 'package:survey_core/src/presentation/intro_question/intro_question_page.
 import 'package:survey_core/src/presentation/slider_question/slider_question_page.dart';
 import 'package:survey_core/src/presentation/utils/data_to_widget_util.dart';
 
-void _mockOnSend(dynamic data) {}
+void _mockOnSend({required String key, required dynamic data}) {}
 
 void main() {
   const mockSliderData = SliderQuestionData(
