@@ -9,10 +9,13 @@ part 'password_validator.dart';
 part 'phone_validator.dart';
 
 const String _validatorName = 'validator';
+const String _regexName = 'regex';
+const String _isHiddenInputName = 'is_hidden_input';
 const String _validatorErrorText = 'error';
 
 abstract class InputValidator implements ApiObject {
   String get type;
+  bool get isHiddenInputFormat;
 
   String? validate(String? input);
 
@@ -20,18 +23,36 @@ abstract class InputValidator implements ApiObject {
   Map<String, dynamic> toJson();
 
   static InputValidator fromJson(Map<String, dynamic> json) {
-    final type = json[_validatorName];
+    final String? type = json[_validatorName];
+    final String? regex = json[_regexName];
+    final bool? isHiddenInput = json[_isHiddenInputName];
+
     switch (type) {
       case AppValidators.number:
-        return const NumberValidator();
+        return NumberValidator.custom(
+          regex,
+          isHiddenInput: isHiddenInput ?? false,
+        );
       case AppValidators.date:
-        return const DateValidator();
+        return DateValidator.custom(
+          regex,
+          isHiddenInput: isHiddenInput ?? false,
+        );
       case AppValidators.email:
-        return const EmailValidator();
+        return EmailValidator.custom(
+          regex,
+          isHiddenInput: isHiddenInput ?? false,
+        );
       case AppValidators.password:
-        return const PasswordValidator();
+        return PasswordValidator.custom(
+          regex,
+          isHiddenInput: isHiddenInput ?? true,
+        );
       case AppValidators.phone:
-        return const PhoneValidator();
+        return PhoneValidator.custom(
+          regex,
+          isHiddenInput: isHiddenInput ?? false,
+        );
       default:
         return const DefaultValidator();
     }

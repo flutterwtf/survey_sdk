@@ -7,6 +7,9 @@ class DefaultValidator implements InputValidator {
   String get type => AppValidators.defaultName;
 
   @override
+  bool get isHiddenInputFormat => false;
+
+  @override
   String? validate(String? input) {
     return input == null || input.isNotEmpty ? null : _validatorErrorText;
   }

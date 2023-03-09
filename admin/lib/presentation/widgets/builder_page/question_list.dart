@@ -31,7 +31,7 @@ class _QuestionListState extends State<QuestionList> {
     super.initState();
     _questionList = [
       const IntroQuestionData.common(),
-      const InputQuestionData.common(index: 1),
+      InputQuestionData.common(index: 1),
     ];
     widget.onSelect(_questionList.first);
   }

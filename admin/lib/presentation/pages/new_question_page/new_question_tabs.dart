@@ -11,7 +11,7 @@ enum NewQuestionTabs {
 }
 
 extension NewQuestionTabsExt on NewQuestionTabs {
-  String name (BuildContext context){
+  String name(BuildContext context) {
     switch (this) {
       case NewQuestionTabs.intro:
         return context.localization.intro;
@@ -33,7 +33,7 @@ extension NewQuestionTabsExt on NewQuestionTabs {
       case NewQuestionTabs.slider:
         return const SliderQuestionData.common();
       case NewQuestionTabs.customInput:
-        return const InputQuestionData.common();
+        return InputQuestionData.common();
     }
   }
 
@@ -65,7 +65,7 @@ enum NewQuestionOptions {
 }
 
 extension NewQuestionOptionsExt on NewQuestionOptions {
-  String name (BuildContext context){
+  String name(BuildContext context) {
     switch (this) {
       case NewQuestionOptions.title:
         return context.localization.title;

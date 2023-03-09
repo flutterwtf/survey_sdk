@@ -1,12 +1,22 @@
 part of 'input_validator.dart';
 
-class NumberValidator implements InputValidator {
-  const NumberValidator();
+const String _defaultNumberValidatorRegExpStr = r'^[0-9]+$';
 
-  RegExp get _reg => RegExp(r'^[0-9]+$');
+class NumberValidator implements InputValidator {
+  String? _regex;
+  bool? isHiddenInput;
+
+  NumberValidator();
+
+  NumberValidator.custom(this._regex, {this.isHiddenInput});
+
+  RegExp get _reg => RegExp(_regex ?? _defaultNumberValidatorRegExpStr);
 
   @override
   String get type => AppValidators.number;
+
+  @override
+  bool get isHiddenInputFormat => false;
 
   @override
   String? validate(String? input) {

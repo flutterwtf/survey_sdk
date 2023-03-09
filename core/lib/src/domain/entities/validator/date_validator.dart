@@ -1,14 +1,23 @@
 part of 'input_validator.dart';
 
-class DateValidator implements InputValidator {
-  const DateValidator();
+const String _defaultDateValidatorRegExpStr =
+    r'^(3[01]|[12][0-9]|0?[1-9])/(1[0-2]|0?[1-9])/(?:[0-9]{2})?[0-9]{2}$';
 
-  RegExp get _reg => RegExp(
-        r'^(3[01]|[12][0-9]|0?[1-9])/(1[0-2]|0?[1-9])/(?:[0-9]{2})?[0-9]{2}$',
-      );
+class DateValidator implements InputValidator {
+  String? _regex;
+  bool? isHiddenInput;
+
+  DateValidator();
+
+  DateValidator.custom(this._regex, {this.isHiddenInput});
+
+  RegExp get _reg => RegExp(_regex ?? _defaultDateValidatorRegExpStr);
 
   @override
   String get type => AppValidators.date;
+
+  @override
+  bool get isHiddenInputFormat => isHiddenInput ?? false;
 
   @override
   String? validate(String? input) {

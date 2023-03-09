@@ -1,13 +1,24 @@
 part of 'input_validator.dart';
 
-class PhoneValidator implements InputValidator {
-  const PhoneValidator();
+// TODO(dev): check rege
+const String _defaultPhoneValidatorRegExpStr =
+    r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
 
-  // TODO(dev): check regex
-  RegExp get _reg => RegExp(r'^(?:[+0])?[0-9]{10,12}$');
+class PhoneValidator implements InputValidator {
+  String? _regex;
+  bool? isHiddenInput;
+
+  PhoneValidator();
+
+  PhoneValidator.custom(this._regex, {this.isHiddenInput});
+
+  RegExp get _reg => RegExp(_regex ?? _defaultPhoneValidatorRegExpStr);
 
   @override
   String get type => AppValidators.phone;
+
+  @override
+  bool get isHiddenInputFormat => isHiddenInput ?? false;
 
   @override
   String? validate(String? input) {
