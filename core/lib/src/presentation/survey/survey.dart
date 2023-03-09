@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:survey_core/src/presentation/di/injector.dart';
+import 'package:survey_core/src/presentation/survey/controller/survey_controller.dart';
 import 'package:survey_core/src/presentation/survey/survey_cubit.dart';
 import 'package:survey_core/src/presentation/survey/survey_state.dart';
 import 'package:survey_core/src/presentation/utils/app_fonts.dart';
@@ -9,9 +10,11 @@ import 'package:survey_core/src/presentation/utils/data_to_widget_util.dart';
 
 class Survey extends StatefulWidget {
   final String surveyDataAsset;
+  final SurveyController? surveyController;
 
   Survey({
     required this.surveyDataAsset,
+    this.surveyController,
     super.key,
   }) {
     Injector().init();
@@ -23,11 +26,13 @@ class Survey extends StatefulWidget {
 
 class _SurveyState extends State<Survey> {
   final _cubit = Injector().surveyCubit;
+  late final SurveyController _surveyController;
 
   @override
   void initState() {
-    _cubit.initData(widget.surveyDataAsset);
     super.initState();
+    _surveyController = widget.surveyController ?? SurveyController();
+    _cubit.initData(widget.surveyDataAsset);
   }
 
   @override
@@ -35,14 +40,15 @@ class _SurveyState extends State<Survey> {
     return BlocBuilder<SurveyCubit, SurveyState>(
       bloc: _cubit,
       builder: (BuildContext context, state) {
-        return state.surveyData == null
+        final surveyData = state.surveyData;
+        return surveyData == null
             ? const Center(
                 child: CircularProgressIndicator(
                   color: AppColors.black,
                 ),
               )
             : Theme(
-                data: state.surveyData!.commonTheme.toThemeData().copyWith(
+                data: surveyData.commonTheme.toThemeData().copyWith(
                       textTheme: const TextTheme(
                         titleMedium: TextStyle(
                           color: AppColors.black,
@@ -72,15 +78,22 @@ class _SurveyState extends State<Survey> {
                         ),
                       ),
                     ),
-                child: PageView(
-                  children: state.surveyData!.questions
-                      .map<Widget>(
-                        (question) => DataToWidgetUtil.createWidget(
-                          question,
-                          (data) {},
-                        ),
-                      )
-                      .toList(),
+                child: WillPopScope(
+                  onWillPop: () async {
+                    _surveyController.onBack();
+                    return false;
+                  },
+                  child: PageView(
+                    physics: const NeverScrollableScrollPhysics(),
+                    children: surveyData.questions
+                        .map<Widget>(
+                          (question) => DataToWidgetUtil.createWidget(
+                            question,
+                            _surveyController.onNext,
+                          ),
+                        )
+                        .toList(),
+                  ),
                 ),
               );
       },
