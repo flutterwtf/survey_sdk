@@ -1,7 +1,7 @@
 import 'package:survey_core/src/domain/entities/constants/question_types.dart';
+import 'package:survey_core/src/domain/entities/input_validator.dart';
 import 'package:survey_core/src/domain/entities/question_types/question_data.dart';
 import 'package:survey_core/src/domain/entities/themes/input_question_theme.dart';
-import 'package:survey_core/src/domain/entities/validator/input_validator.dart';
 
 class InputQuestionData extends QuestionData<InputQuestionTheme> {
   final InputValidator validator;
@@ -20,7 +20,7 @@ class InputQuestionData extends QuestionData<InputQuestionTheme> {
   InputQuestionData.common({int index = 0})
       : this(
           // TODO(dev): to localization somehow
-          validator: NumberValidator(),
+          validator: InputValidator.number(),
           index: index,
           title: 'Why is asking the right type of questions important?',
           subtitle: '',
