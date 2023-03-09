@@ -1,9 +1,9 @@
 import 'dart:convert';
 // ignore: avoid_web_libraries_in_flutter
 import 'dart:html' as html;
-import 'package:survey_admin/data/interfaces/i_filesystem_data_source.dart';
+import 'package:survey_admin/data/interfaces/filesystem_data_source.dart';
 
-class FileSystemDataSource implements IFileSystemDataSource {
+class WebFileSystemDataSourceImpl implements FileSystemDataSource {
   @override
   Future<void> downloadSurveyData(Map<String, dynamic> exportJson) async {
     final json = <String, dynamic>{}..addAll(exportJson);
