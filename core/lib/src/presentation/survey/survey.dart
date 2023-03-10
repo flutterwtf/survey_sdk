@@ -19,7 +19,10 @@ class Survey extends StatefulWidget {
     this.surveyData,
     this.surveyController,
     super.key,
-  }) : assert(surveyDataAsset != null || surveyData != null);
+  }) : assert(
+          surveyDataAsset != null || surveyData != null,
+          'Two parameters are empty',
+        );
 
   @override
   State<Survey> createState() => _SurveyState();
