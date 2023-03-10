@@ -1,6 +1,26 @@
+import 'dart:io';
 import 'dart:convert';
-
 import 'package:collection/collection.dart';
+
+const filePath = 'lib/presentation/app/localization/l10n/app_en.arb';
+
+void main() async {
+  if (filePath.isEmpty) {
+    throw (('Expected filepath to arb file.'));
+  }
+
+  final file = File(filePath);
+
+  final arbContents = await file.readAsString();
+
+  final arbIsSorted = isSorted(arbContents);
+  if (!arbIsSorted) throw (('Test Failed. Arb File is not sorted.'));
+
+  final notInCamelCaseList = notInCamelCase(arbContents);
+  if (notInCamelCaseList.isNotEmpty) {
+    throw (('Test Failed. Arb File contains not camelCase keys:\n $notInCamelCaseList'));
+  }
+}
 
 List<String> notInCamelCase(String arbContents) {
   RegExp camelCaseExp = RegExp(r'[a-z]+((\d)|([A-Z0-9][a-z0-9]+))*([A-Z])?');
@@ -13,11 +33,11 @@ List<String> notInCamelCase(String arbContents) {
 }
 
 bool isSorted(
-  String arbContents, {
-  bool caseInsensitive = false,
-  bool naturalOrdering = false,
-  bool descendingOrdering = false,
-}) {
+    String arbContents, {
+      bool caseInsensitive = false,
+      bool naturalOrdering = false,
+      bool descendingOrdering = false,
+    }) {
   compareFunction(a, b) => _commonCompareFunction(
       a, b, caseInsensitive, naturalOrdering, descendingOrdering);
 
