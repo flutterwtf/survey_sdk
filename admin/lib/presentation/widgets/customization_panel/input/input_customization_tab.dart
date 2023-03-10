@@ -7,6 +7,7 @@ import 'package:survey_admin/presentation/utils/theme_extension.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/color_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
+import 'package:survey_admin/presentation/widgets/customization_items/input_date_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/input_type_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/multiline_switch.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/padding_customization_item.dart';
@@ -25,6 +26,9 @@ class InputCustomizationTab extends CustomizationTab {
   final ValueChanged<Color> onTextColorChanged;
   final ValueChanged<int> onTextFontSizeChanged;
   final ValueChanged<InputType> onInputTypeChanged;
+  final ValueChanged<DateTime> onDateTimeChanged;
+  final InputType inputType;
+  final DateTime dateTime;
 
   const InputCustomizationTab({
     required super.title,
@@ -40,6 +44,9 @@ class InputCustomizationTab extends CustomizationTab {
     required this.onTextColorChanged,
     required this.onTextFontSizeChanged,
     required this.onInputTypeChanged,
+    required this.inputType,
+    required this.dateTime,
+    required this.onDateTimeChanged,
     super.key,
   });
 
@@ -194,6 +201,18 @@ class InputCustomizationTab extends CustomizationTab {
             ),
           ],
         ),
+        if (inputType == InputType.date)
+          CustomizationItemsContainer(
+            title: context.localization.input_date,
+            children: [
+              InputDateCustomizationItem(
+                dateTime: dateTime,
+                onDateTimeChanged: onDateTimeChanged,
+              ),
+            ],
+          )
+        else
+          const SizedBox.shrink(),
       ],
     );
   }

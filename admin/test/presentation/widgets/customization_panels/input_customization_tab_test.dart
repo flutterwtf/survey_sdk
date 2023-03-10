@@ -10,6 +10,7 @@ import 'package:survey_admin/presentation/widgets/customization_panel/input/inpu
 
 import '../app_test.dart';
 
+//TODO: rebuild test
 void main() {
   group(
     'Input customization tab tests',
@@ -28,6 +29,9 @@ void main() {
           onTextColorChanged: (Color value) {},
           onTextFontSizeChanged: (int? value) {},
           onVerticalPaddingChanged: (double size) {},
+          inputType: InputType.text,
+          dateTime: DateTime.now(),
+          onDateTimeChanged: (value) {},
           title: 'test',
         ),
       );

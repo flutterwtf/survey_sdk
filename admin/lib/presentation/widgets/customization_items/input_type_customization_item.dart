@@ -61,8 +61,8 @@ class _InputTypeCustomizationItemState extends State<InputTypeCustomizationItem>
 
   @override
   void dispose() {
-    super.dispose();
     _iconAnimationController.dispose();
+    super.dispose();
   }
 
   @override
