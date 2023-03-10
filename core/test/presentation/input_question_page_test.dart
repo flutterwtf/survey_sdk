@@ -8,9 +8,9 @@ import 'package:survey_core/src/presentation/widgets/question_bottom_button.dart
 import 'widget/app_test.dart';
 
 void main() {
-  String testValidDefaultValidator = 'test string1';
-  String testInvalidNumberValidator = 'test string2';
-  String testValidNumberValidator = '12';
+  final testValidDefaultValidator = 'test string1';
+  final testInvalidNumberValidator = 'test string2';
+  final testValidNumberValidator = '12';
 
   const mockInputData = InputQuestionData(
     validator: DefaultValidator(),
@@ -32,14 +32,14 @@ void main() {
     'input question page ->',
     () {
       test('Valid string returns null', () {
-        var result = DefaultValidator().validate(
+        final result = DefaultValidator().validate(
           testValidDefaultValidator,
         );
         expect(result, null);
       });
 
       test('Valid number returns null', () {
-        var result = NumberValidator().validate(
+        final result = NumberValidator().validate(
           testValidNumberValidator,
         );
         expect(result, null);
