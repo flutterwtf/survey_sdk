@@ -133,11 +133,15 @@ class _TabButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
       onTap: onTap,
+      borderRadius: BorderRadius.circular(5),
       child: Container(
         alignment: Alignment.centerLeft,
-        padding: const EdgeInsets.only(top: AppDimensions.sizeM),
+        padding: const EdgeInsets.symmetric(
+          vertical: AppDimensions.sizeS,
+          horizontal: AppDimensions.sizeS,
+        ),
         child: Text(
           title,
           style: isSelected
