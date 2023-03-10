@@ -1,19 +1,19 @@
+import 'package:flutter/material.dart';
 import 'package:survey_core/src/domain/entities/question_types/intro_question_data.dart';
+import 'package:survey_core/src/domain/entities/themes/intro_question_theme.dart';
 import 'package:survey_core/src/presentation/localization/localizations.dart';
 import 'package:survey_core/src/presentation/utils/constants.dart';
 import 'package:survey_core/src/presentation/utils/data_to_widget_util.dart';
 import 'package:survey_core/src/presentation/widgets/question_bottom_button.dart';
 import 'package:survey_core/src/presentation/widgets/question_content.dart';
 import 'package:survey_core/src/presentation/widgets/question_title.dart';
-import 'package:flutter/material.dart';
-
-import 'package:survey_core/src/domain/entities/themes/intro_question_theme.dart';
 
 class IntroQuestionPage extends StatelessWidget {
   final IntroQuestionData data;
   final OnSendCallback onSend;
   final VoidCallback? onMainButtonTap;
-  //TODO: onSkip
+
+  // TODO(dev): onSkip
   final VoidCallback? onSecondaryButtonTap;
 
   const IntroQuestionPage({
@@ -59,22 +59,18 @@ class IntroQuestionPage extends StatelessWidget {
             ),
           const Spacer(),
           Row(
-            mainAxisSize: MainAxisSize.max,
             children: [
               if (onSecondaryButtonTap != null)
                 Flexible(
-                  fit: FlexFit.loose,
                   child: Padding(
                     padding: const EdgeInsets.only(right: 8),
                     child: QuestionBottomButton(
                       text: context.localization.skip,
                       onPressed: onSecondaryButtonTap,
-                      isEnabled: true,
                     ),
                   ),
                 ),
               Flexible(
-                fit: FlexFit.loose,
                 child: QuestionBottomButton(
                   text: data.mainButtonTitle,
                   color: _theme.mainButtonColor,
@@ -82,7 +78,6 @@ class IntroQuestionPage extends StatelessWidget {
                   textSize: _theme.mainButtonTextSize,
                   radius: _theme.mainButtonRadius,
                   onPressed: onMainButtonTap ?? () {},
-                  isEnabled: true,
                 ),
               ),
             ],

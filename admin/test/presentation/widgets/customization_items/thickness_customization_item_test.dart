@@ -1,9 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/thickness_customization_item.dart';
+
+import '../app_test.dart';
 
 void main() {
   group(
@@ -14,19 +13,10 @@ void main() {
       const inputNum = '10';
       const inputText = 'qwe';
       const inputValidation = '100';
-      final page = MaterialApp(
-        supportedLocales: AppLocalizations.supportedLocales,
-        localizationsDelegates: const [
-          AppLocalizations.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        home: Scaffold(
-          body: ThicknessCustomizationItem(
-            initialSize: initialSize,
-            onThicknessChanged: (value) {},
-          ),
+      final page = AppTest(
+        child: ThicknessCustomizationItem(
+          initialSize: initialSize,
+          onThicknessChanged: (value) {},
         ),
       );
 
@@ -44,7 +34,10 @@ void main() {
 
       testWidgets('Validation input length', (tester) async {
         await tester.pumpWidget(page);
-        await tester.enterText(find.byType(CustomizationTextField), inputValidation);
+        await tester.enterText(
+          find.byType(CustomizationTextField),
+          inputValidation,
+        );
         expect(find.text(inputValidation), findsNothing);
       });
 

@@ -7,10 +7,10 @@ import 'package:survey_core/src/presentation/widgets/question_bottom_button.dart
 
 import 'widget/app_test.dart';
 
-void _mockOnSend(dynamic data) {}
+void _mockOnSend({required String key, required dynamic data}) {}
 
 void main() {
-  final mockInputData = InputQuestionData(
+  const mockInputData = InputQuestionData(
     validator: DefaultValidator(),
     index: 0,
     title: 'title',
@@ -24,7 +24,7 @@ void main() {
         'InputQuestionPage displays title',
         (WidgetTester tester) async {
           await tester.pumpWidget(
-            AppTest(
+            const AppTest(
               child: InputQuestionPage(
                 data: mockInputData,
                 onSend: _mockOnSend,
@@ -40,7 +40,7 @@ void main() {
         'InputQuestionPage displays subtitle',
         (WidgetTester tester) async {
           await tester.pumpWidget(
-            AppTest(
+            const AppTest(
               child: InputQuestionPage(
                 data: mockInputData,
                 onSend: _mockOnSend,
@@ -60,7 +60,7 @@ void main() {
             AppTest(
               child: InputQuestionPage(
                 data: mockInputData.copyWith(isSkip: true),
-                onSend: (_) => isPressed = true,
+                onSend: ({data, String? key}) => isPressed = true,
               ),
             ),
           );
@@ -79,7 +79,7 @@ void main() {
             AppTest(
               child: InputQuestionPage(
                 data: mockInputData.copyWith(isSkip: true),
-                onSend: (data) => sentData = data,
+                onSend: ({data, String? key}) => sentData = data,
               ),
             ),
           );

@@ -1,22 +1,22 @@
+import 'package:flutter/material.dart';
 import 'package:survey_core/src/domain/entities/question_types/slider_question_data.dart';
 import 'package:survey_core/src/presentation/localization/localizations.dart';
 import 'package:survey_core/src/presentation/utils/app_fonts.dart';
 import 'package:survey_core/src/presentation/utils/constants.dart';
 import 'package:survey_core/src/presentation/utils/data_to_widget_util.dart';
+import 'package:survey_core/src/presentation/utils/theme_extension.dart';
 import 'package:survey_core/src/presentation/widgets/question_bottom_button.dart';
 import 'package:survey_core/src/presentation/widgets/question_subtitle.dart';
 import 'package:survey_core/src/presentation/widgets/question_title.dart';
-import 'package:flutter/material.dart';
 
-//TODO: extend from one superclass maybe?
 class SliderQuestionPage extends StatefulWidget {
   final SliderQuestionData data;
   final OnSendCallback onSend;
 
   const SliderQuestionPage({
-    super.key,
     required this.data,
     required this.onSend,
+    super.key,
   });
 
   @override
@@ -25,6 +25,13 @@ class SliderQuestionPage extends StatefulWidget {
 
 class _SliderQuestionPageState extends State<SliderQuestionPage> {
   late final SliderThemeData _theme;
+  late double _answer;
+
+  @override
+  void initState() {
+    super.initState();
+    _answer = widget.data.initialValue.toDouble();
+  }
 
   @override
   void didChangeDependencies() {
@@ -65,15 +72,16 @@ class _SliderQuestionPageState extends State<SliderQuestionPage> {
               minValue: widget.data.minValue,
               maxValue: widget.data.maxValue,
               initialValue: widget.data.initialValue,
-              onChanged: (double? currentSliderValue) {},
+              onChanged: (value) => setState(() => _answer = value),
               theme: _theme,
             ),
           ),
           const Spacer(),
           QuestionBottomButton(
             text: context.localization.next,
-            //TODO: replace '' with data
-            onPressed: () => widget.onSend(''),
+            onPressed: () {
+              widget.onSend.call(key: widget.data.type, data: _answer);
+            },
           ),
         ],
       ),
@@ -85,17 +93,16 @@ class _QuestionSlider extends StatefulWidget {
   final num minValue;
   final num maxValue;
   final num initialValue;
-  final void Function(double? currentSliderValue) onChanged;
+  final ValueChanged<double> onChanged;
   final SliderThemeData theme;
 
   const _QuestionSlider({
-    Key? key,
     required this.minValue,
     required this.maxValue,
     required this.onChanged,
     required this.theme,
     required this.initialValue,
-  }) : super(key: key);
+  });
 
   @override
   State<_QuestionSlider> createState() => _QuestionSliderState();
@@ -104,12 +111,15 @@ class _QuestionSlider extends StatefulWidget {
 class _QuestionSliderState extends State<_QuestionSlider> {
   late double _value;
   late final bool _onlyInt;
+
   @override
   void initState() {
     _value = widget.initialValue.toDouble();
-    _onlyInt = widget.initialValue.ceilToDouble() == widget.initialValue.floorToDouble();
+    _onlyInt = widget.initialValue.ceilToDouble() ==
+        widget.initialValue.floorToDouble();
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return SliderTheme(
@@ -130,12 +140,16 @@ class _QuestionSliderState extends State<_QuestionSlider> {
             children: [
               Text(
                 widget.minValue.toString(),
-                style: const TextStyle(fontSize: AppFonts.sizeM),
+                style: context.theme.textTheme.bodyMedium?.copyWith(
+                  fontFamily: AppFonts.inter,
+                ),
               ),
               const Spacer(),
               Text(
                 widget.maxValue.toString(),
-                style: const TextStyle(fontSize: AppFonts.sizeM),
+                style: context.theme.textTheme.bodyMedium?.copyWith(
+                  fontFamily: AppFonts.inter,
+                ),
               ),
             ],
           ),
