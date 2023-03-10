@@ -6,10 +6,10 @@ import 'package:survey_core/src/presentation/survey/survey_state.dart';
 class SurveyCubit extends Cubit<SurveyState> {
   final SurveyDataRepository _surveyDataRepository;
 
-  SurveyCubit(this._surveyDataRepository) : super(SurveyState());
+  SurveyCubit(this._surveyDataRepository) : super(const SurveyState());
 
   //TODO: rebuild this moment
-  void initData(String? surveyDataAsset, SurveyData surveyData) {
+  void initData(String? surveyDataAsset, SurveyData? surveyData) {
     if (surveyDataAsset != null) {
       _surveyDataRepository.getSurveyData(surveyDataAsset).then(
             (data) => emit(state.copyWith(surveyData: data)),

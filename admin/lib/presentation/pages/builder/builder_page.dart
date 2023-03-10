@@ -12,9 +12,6 @@ import 'package:survey_admin/presentation/widgets/builder_page/editor_bar.dart';
 import 'package:survey_admin/presentation/widgets/builder_page/phone_view.dart';
 import 'package:survey_admin/presentation/widgets/builder_page/question_list.dart';
 import 'package:survey_admin/presentation/widgets/export_floating_window.dart';
-import 'package:survey_core/src/domain/entities/survey_data.dart';
-import 'package:survey_core/src/domain/entities/themes/common_theme.dart';
-import 'package:survey_core/src/domain/entities/themes/text_field_theme_data.dart';
 import 'package:survey_core/survey_core.dart';
 
 class BuilderPage extends StatefulWidget {
@@ -49,25 +46,7 @@ class _BuilderPageState extends State<BuilderPage> {
             Expanded(
               child: PhoneView(
                 child: Survey(
-                  surveyDataAsset: '',
-                  surveyData: SurveyData(
-                    questions: [
-                      state.selectedQuestion ??
-                          const SliderQuestionData(
-                            minValue: 10,
-                            maxValue: 100,
-                            initialValue: 50,
-                            index: 1,
-                            title: 'Another title',
-                            subtitle: 'Another subtitle',
-                            isSkip: true,
-                          ),
-                    ],
-                    commonTheme: CommonTheme(
-                      textFieldThemeData: const TextFieldThemeData.common(),
-                      sliderThemeData: const SliderThemeData(),
-                    ),
-                  ),
+                  surveyData: state.surveyData,
                 ),
               ),
             ),

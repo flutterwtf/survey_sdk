@@ -12,28 +12,28 @@ import 'package:survey_core/src/presentation/utils/data_to_widget_util.dart';
 class Survey extends StatefulWidget {
   final String? surveyDataAsset;
   final SurveyController? surveyController;
-  final SurveyData surveyData;
+  final SurveyData? surveyData;
 
-  Survey({
-    required this.surveyDataAsset,
-    required this.surveyData,
+  const Survey({
+    this.surveyDataAsset,
+    this.surveyData,
     this.surveyController,
     super.key,
-  }) {
-    Injector().init();
-  }
+  }) : assert(surveyDataAsset != null || surveyData != null);
 
   @override
   State<Survey> createState() => _SurveyState();
 }
 
 class _SurveyState extends State<Survey> {
-  final _cubit = Injector().surveyCubit;
+  late final SurveyCubit _cubit;
   late final SurveyController _surveyController;
 
   @override
   void initState() {
     super.initState();
+    Injector().init();
+    _cubit = Injector().surveyCubit;
     _surveyController = widget.surveyController ?? SurveyController();
     _cubit.initData(widget.surveyDataAsset, widget.surveyData);
   }
