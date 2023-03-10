@@ -42,14 +42,17 @@ class _MultilineSwitchState extends State<MultilineSwitch> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SwitchCustomizationItem(
-          title: context.localization.multiline,
-          onChanged: (isToggled) {
-            setState(() {
-              _isMultiline = isToggled;
-            });
-            widget.onChanged(_isMultiline, _isMultiline ? _lineAmount : 1);
-          },
+        Padding(
+          padding: const EdgeInsets.only(top: AppDimensions.marginS),
+          child: SwitchCustomizationItem(
+            title: context.localization.multiline,
+            onChanged: (isToggled) {
+              setState(() {
+                _isMultiline = isToggled;
+              });
+              widget.onChanged(_isMultiline, _isMultiline ? _lineAmount : 1);
+            },
+          ),
         ),
         AnimatedSize(
           duration: AppDurations.customizationItemAnimation,
@@ -89,6 +92,7 @@ class _LineAmountInputField extends StatelessWidget {
             context.localization.lines,
             style: context.theme.textTheme.bodyMedium,
           ),
+          const SizedBox(width: AppDimensions.margin2XS),
           Expanded(
             child: CustomizationTextField(
               inputFormatters: [
