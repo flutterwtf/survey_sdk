@@ -23,22 +23,26 @@ class EditorBar extends StatelessWidget {
       width: AppDimensions.surveyEditorBarWidth,
       child: Builder(
         builder: (context) {
-          switch (editableQuestion?.type ?? '') {
-            case QuestionTypes.choice:
-              return ChoiceCustomizationPanel(
-                editableQuestion: editableQuestion!,
-                isMultipleChoice: (editableQuestion as ChoiceQuestionData?)
-                        ?.isMultipleChoice ??
-                    false,
-              );
-            case QuestionTypes.input:
-              return const InputCustomizationPanel();
-            case QuestionTypes.intro:
-              return const IntroCustomizationPanel();
-            case QuestionTypes.slider:
-              return const SliderCustomizationPanel();
-            default:
-              return const SizedBox.shrink();
+          final questionData = editableQuestion;
+          if (questionData != null) {
+            switch (questionData.type) {
+              case QuestionTypes.choice:
+                return ChoiceCustomizationPanel(
+                  editableQuestion: questionData,
+                  isMultipleChoice:
+                      (questionData as ChoiceQuestionData).isMultipleChoice,
+                );
+              case QuestionTypes.input:
+                return const InputCustomizationPanel();
+              case QuestionTypes.intro:
+                return const IntroCustomizationPanel();
+              case QuestionTypes.slider:
+                return const SliderCustomizationPanel();
+              default:
+                return const SizedBox.shrink();
+            }
+          } else {
+            return const SizedBox.shrink();
           }
         },
       ),

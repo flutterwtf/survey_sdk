@@ -5,7 +5,6 @@ import 'package:survey_admin/presentation/utils/theme_extension.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/create_text_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/drop_down_customization_button.dart';
-import 'package:survey_admin/presentation/widgets/customization_items/drop_down_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/option_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/choice/choice_customization_panel.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/customization_tab.dart';
@@ -80,7 +79,7 @@ class ChoiceContentCustomizationTab extends CustomizationTab {
             )
           ],
         ),
-        if ((editableQuestion as ChoiceQuestionData).isMultipleChoice)
+        if (!(editableQuestion as ChoiceQuestionData).isMultipleChoice)
           CustomizationItemsContainer(
             title: context.localization.rule,
             children: [
@@ -90,7 +89,6 @@ class ChoiceContentCustomizationTab extends CustomizationTab {
                   Expanded(
                     child: DropdownCustomizationButton<RuleType>(
                       items: RuleType.values
-                          .where((type) => type != ruleType)
                           .map(
                             (e) => DropdownCustomizationItem<RuleType>(
                               value: e,
@@ -102,17 +100,13 @@ class ChoiceContentCustomizationTab extends CustomizationTab {
                             ),
                           )
                           .toList(),
-                      child: Text(
-                        ruleType.name,
-                        style: context.theme.textTheme.bodyLarge,
-                      ),
+                      initialValue: ruleType,
                     ),
                   ),
                   Expanded(
                     child: ruleType != RuleType.none
                         ? DropdownCustomizationButton<int>(
                             items: initialLimitedList(listOptions)
-                                .where((limited) => limited != limitedRule)
                                 .map(
                                   (e) => DropdownCustomizationItem<int>(
                                     value: e,
@@ -124,10 +118,7 @@ class ChoiceContentCustomizationTab extends CustomizationTab {
                                   ),
                                 )
                                 .toList(),
-                            child: Text(
-                              limitedRule.toString(),
-                              style: context.theme.textTheme.bodyLarge,
-                            ),
+                            initialValue: limitedRule,
                           )
                         : const SizedBox(),
                   ),

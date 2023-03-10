@@ -3,14 +3,13 @@ import 'package:flutter_svg/svg.dart';
 import 'package:survey_admin/presentation/utils/constants/app_assets.dart';
 import 'package:survey_admin/presentation/utils/constants/app_durations.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
-import 'package:survey_admin/presentation/widgets/customization_items/drop_down_customization_item.dart';
 
 class DropdownCustomizationButton<T> extends StatefulWidget {
-  final Widget child;
+  final T initialValue;
   final List<DropdownCustomizationItem<T>> items;
 
   const DropdownCustomizationButton({
-    required this.child,
+    required this.initialValue,
     required this.items,
     super.key,
   });
@@ -56,21 +55,21 @@ class _DropdownCustomizationButtonState<T>
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         InkWell(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(
-              vertical: AppDimensions.margin2XS,
-              horizontal: AppDimensions.marginM,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                widget.child,
-                RotationTransition(
-                  turns: _animation,
-                  child: SvgPicture.asset(AppAssets.arrowIcon),
-                ),
-              ],
-            ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              DropdownCustomizationItem<T>(
+                value: widget.initialValue,
+                child: widget.items
+                    .where((element) => element.value == widget.initialValue)
+                    .map((e) => e.child)
+                    .first,
+              ),
+              RotationTransition(
+                turns: _animation,
+                child: SvgPicture.asset(AppAssets.arrowIcon),
+              ),
+            ],
           ),
           onTap: () {
             setState(() {
@@ -88,11 +87,40 @@ class _DropdownCustomizationButtonState<T>
           child: _isOpen
               ? Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: widget.items,
+                  children: widget.items
+                      .where((element) => element.value != widget.initialValue)
+                      .toList(),
                 )
               : const SizedBox.shrink(),
         ),
       ],
+    );
+  }
+}
+
+class DropdownCustomizationItem<T> extends StatelessWidget {
+  final Widget child;
+  final T value;
+  final void Function(T value)? onChange;
+
+  const DropdownCustomizationItem({
+    required this.child,
+    required this.value,
+    this.onChange,
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () => onChange?.call(value),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+          vertical: AppDimensions.margin2XS,
+          horizontal: AppDimensions.marginM,
+        ),
+        child: child,
+      ),
     );
   }
 }
