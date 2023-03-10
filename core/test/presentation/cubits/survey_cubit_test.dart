@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
@@ -12,12 +10,12 @@ import '../../utils/shared_mocks.mocks.dart';
 void main() {
   group(
     'Survey cubit tests',
-        () {
+    () {
       final mockedSurveyRepo = MockSurveyDataRepositoryImpl();
       final surveyCubit = SurveyCubit(mockedSurveyRepo);
       test(
         'Get survey data',
-            () async {
+        () async {
           final surveyData = SurveyData(
             questions: [],
             commonTheme: CommonTheme(
@@ -25,8 +23,9 @@ void main() {
               sliderThemeData: const SliderThemeData(),
             ),
           );
-          when(mockedSurveyRepo.getSurveyData('')).thenAnswer((_) => Future.value(surveyData));
-          await surveyCubit.initData('');
+          when(mockedSurveyRepo.getSurveyData(''))
+              .thenAnswer((_) => Future.value(surveyData));
+          surveyCubit.initData('');
           expect(surveyCubit.state.surveyData, surveyData);
         },
       );
