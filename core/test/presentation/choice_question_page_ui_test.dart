@@ -43,6 +43,7 @@ void main() {
           child: ChoiceQuestionPage(
             data: usualMockChoiceData,
             onSend: ({data, String? key}) {
+              expect((data as List).isEmpty, true);
               completer.complete();
             },
           ),
@@ -58,7 +59,10 @@ void main() {
         AppTest(
           child: ChoiceQuestionPage(
             data: usualMockChoiceData.copyWith(isSkip: true),
-            onSend: ({data, String? key}) => completer.complete(),
+            onSend: ({data, String? key}) {
+              expect((data as List).isEmpty, true);
+              completer.complete();
+            },
           ),
         ),
       );
@@ -70,10 +74,12 @@ void main() {
   testWidgets('Single choice without answer', (tester) async {
     final completer = Completer<void>();
     await tester.pumpWidget(
-      const AppTest(
+      AppTest(
         child: ChoiceQuestionPage(
           data: usualMockChoiceData,
-          onSend: _mockOnSend,
+          onSend: ({data, String? key}) {
+            expect((data as List).isEmpty, true);
+          },
         ),
       ),
     );
@@ -87,7 +93,10 @@ void main() {
       AppTest(
         child: ChoiceQuestionPage(
           data: usualMockChoiceData,
-          onSend: ({data, String? key}) => completer.complete(),
+          onSend: ({data, String? key}) {
+            expect((data as List).length, 1);
+            completer.complete();
+          },
         ),
       ),
     );
@@ -103,7 +112,10 @@ void main() {
       AppTest(
         child: ChoiceQuestionPage(
           data: usualMockChoiceData,
-          onSend: ({data, String? key}) => completer.complete(),
+          onSend: ({data, String? key}) {
+            expect((data as List).length, 1);
+            completer.complete();
+          },
         ),
       ),
     );
@@ -121,7 +133,10 @@ void main() {
       AppTest(
         child: ChoiceQuestionPage(
           data: usualMockChoiceData.copyWith(isMultipleChoice: true),
-          onSend: ({data, String? key}) => completer.complete(),
+          onSend: ({data, String? key}) {
+            expect((data as List).isEmpty, true);
+            completer.complete();
+          },
         ),
       ),
     );
@@ -135,7 +150,10 @@ void main() {
       AppTest(
         child: ChoiceQuestionPage(
           data: usualMockChoiceData.copyWith(isMultipleChoice: true),
-          onSend: ({data, String? key}) => completer.complete(),
+          onSend: ({data, String? key}) {
+            expect((data as List).length, 1);
+            completer.complete();
+          },
         ),
       ),
     );
@@ -151,7 +169,10 @@ void main() {
       AppTest(
         child: ChoiceQuestionPage(
           data: usualMockChoiceData.copyWith(isMultipleChoice: true),
-          onSend: ({data, String? key}) => completer.complete(),
+          onSend: ({data, String? key}) {
+            expect((data as List).isEmpty, true);
+            completer.complete();
+          },
         ),
       ),
     );
@@ -169,7 +190,10 @@ void main() {
       AppTest(
         child: ChoiceQuestionPage(
           data: usualMockChoiceData.copyWith(isMultipleChoice: true),
-          onSend: ({data, String? key}) => completer.complete(),
+          onSend: ({data, String? key}) {
+            expect((data as List).length, 2);
+            completer.complete();
+          },
         ),
       ),
     );
