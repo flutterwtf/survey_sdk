@@ -27,6 +27,10 @@ analyzer:
     - "**/*.config.dart"
 
 dart_code_metrics:
+  metrics:
+    - cyclomatic-complexity: 10
+    - maximum-nesting-level: 5
+    - source-lines-of-code: 50
   rules:
     - avoid-cascade-after-if-null
     - avoid-collection-methods-with-unrelated-types
