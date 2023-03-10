@@ -27,6 +27,34 @@ analyzer:
     - "**/*.freezed.dart"
     - "**/*.config.dart"
 
+dart_code_metrics:
+  rules:
+    - avoid-cascade-after-if-null
+    - avoid-collection-methods-with-unrelated-types
+    - avoid-double-slash-imports
+    - avoid-duplicate-exports
+    - avoid-nested-conditional-expressions:
+        acceptable-level: 2
+    - avoid-passing-async-when-sync-expected
+    - avoid-unnecessary-conditionals
+    - avoid-unnecessary-type-assertions
+    - avoid-unrelated-type-assertions
+    - double-literal-format
+    - missing-test-assertion
+    - no-boolean-literal-compare
+    - no-equal-then-else
+    - prefer-last
+    - always-remove-listener
+    - avoid-throw-in-catch-block
+    - no-magic-number
+    - prefer-correct-identifier-length:
+        max-identifier-length: 25
+        min-identifier-length: 1
+    - prefer-match-file-name
+    - prefer-moving-to-variable
+    - avoid-unnecessary-setstate
+    - avoid-expanded-as-spacer
+
 linter:
   rules:
     library_private_types_in_public_api: false
