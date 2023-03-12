@@ -113,45 +113,35 @@ class _QuestionListState extends State<QuestionList> {
           ),
           Expanded(
             child: ContextMenuOverlay(
-              cardBuilder: (_, children) => Container(
-                  decoration: BoxDecoration(
-                    color: AppColors.white,
-                    borderRadius: BorderRadius.circular(
-                      AppDimensions.circularRadiusXS,
-                    ),
-                    border: Border.all(
-                      width: 0.5,
-                    ),
+              cardBuilder: (_, children) => DecoratedBox(
+                decoration: BoxDecoration(
+                  color: AppColors.white,
+                  borderRadius: BorderRadius.circular(
+                    AppDimensions.circularRadiusXS,
                   ),
-                  child: Column(children: children)),
+                  border: Border.all(
+                    width: 0.5,
+                  ),
+                ),
+                child: Column(children: children),
+              ),
               child: ReorderableListView(
                 buildDefaultDragHandles: false,
                 children: [
                   for (int index = 0; index < _questionList.length; index++)
-                    ReorderableDragStartListener(
-                      index: index,
+                    _Question(
                       key: ValueKey(index),
-                      child: ContextMenuRegion(
-                        contextMenu: GenericContextMenu(
-                          buttonConfigs: [
-                            ContextMenuButtonConfig(
-                              context.localization.delete_question,
-                              onPressed: () =>
-                                  setState(() => _questionList.removeAt(index)),
-                            ),
-                          ],
-                        ),
-                        child: QuestionListItem(
-                          isSelected: index == _selectedIndex,
-                          questionData: _questionList[index],
-                          onTap: (data) {
-                            widget.onSelect(data);
-                            setState(() {
-                              _selectedIndex = index;
-                            });
-                          },
-                        ),
-                      ),
+                      index: index,
+                      isSelected: index == _selectedIndex,
+                      onDeleteButtonPressed: () =>
+                          setState(() => _questionList.removeAt(index)),
+                      question: _questionList[index],
+                      onQuestionTap: (data) {
+                        widget.onSelect(data);
+                        setState(() {
+                          _selectedIndex = index;
+                        });
+                      },
                     ),
                 ],
                 onReorder: (oldIndex, newIndex) {
@@ -177,6 +167,45 @@ class _QuestionListState extends State<QuestionList> {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class _Question extends StatelessWidget {
+  final int index;
+  final bool isSelected;
+  final VoidCallback onDeleteButtonPressed;
+  final ValueChanged<QuestionData> onQuestionTap;
+  final QuestionData question;
+
+  const _Question({
+    required this.index,
+    required this.isSelected,
+    required this.onDeleteButtonPressed,
+    required this.question,
+    required this.onQuestionTap,
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ReorderableDragStartListener(
+      index: index,
+      child: ContextMenuRegion(
+        contextMenu: GenericContextMenu(
+          buttonConfigs: [
+            ContextMenuButtonConfig(
+              context.localization.delete_question,
+              onPressed: onDeleteButtonPressed,
+            ),
+          ],
+        ),
+        child: QuestionListItem(
+          isSelected: isSelected,
+          questionData: question,
+          onTap: onQuestionTap,
+        ),
       ),
     );
   }
