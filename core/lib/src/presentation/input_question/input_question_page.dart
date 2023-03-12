@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:survey_core/src/domain/entities/question_types/input_question_data.dart';
 import 'package:survey_core/src/domain/entities/themes/input_question_theme.dart';
 import 'package:survey_core/src/presentation/localization/localizations.dart';
@@ -24,6 +25,7 @@ class InputQuestionPage extends StatefulWidget {
 
 class _InputQuestionPageState extends State<InputQuestionPage> {
   final _textFieldKey = GlobalKey<FormFieldState>();
+  DateTime dateTime = DateTime.now();
   String _input = '';
 
   bool get _canBeSkipped => widget.data.isSkip && _input.isEmpty;
@@ -65,32 +67,60 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
           ),
           Padding(
             padding: const EdgeInsets.only(top: AppDimensions.marginM),
-            child: Form(
-              key: _textFieldKey,
-              child: TextFormField(
-                minLines: theme.minLines,
-                maxLines: theme.maxLines,
-                style: TextStyle(
-                  color: theme.textColor,
-                  fontSize: theme.textSize,
+            child: Container(
+              padding: const EdgeInsets.all(AppDimensions.marginS),
+              decoration: BoxDecoration(
+                border: Border.all(),
+                borderRadius: const BorderRadius.all(Radius.circular(20)),
+              ),
+              child: InkWell(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(DateFormat.yMd().format(dateTime)),
+                    const Icon(Icons.date_range),
+                  ],
                 ),
-                autovalidateMode: AutovalidateMode.onUserInteraction,
-                validator: (text) =>
-                    _canBeSkipped ? null : widget.data.validator.validate(text),
-                onChanged: (input) => setState(() => _input = input),
-                decoration: InputDecoration(
-                  fillColor: theme.backgroundColor,
-                  hintText: widget.data.hintText ?? '',
-                  hintStyle: TextStyle(
-                    color: theme.hintColor,
-                    fontSize: theme.hintSize,
-                  ),
-                  enabledBorder: border,
-                  focusedBorder: border,
-                  border: border,
+                onTap: () => showDatePicker(
+                  context: context,
+                  initialDate: dateTime,
+                  firstDate: DateTime(2000),
+                  lastDate: DateTime(3000),
+                ).then(
+                  (value) {
+                    if (value != null) {
+                      setState(() => dateTime = value);
+                    }
+                  },
                 ),
               ),
             ),
+            // Form(
+            //   key: _textFieldKey,
+            //   child: TextFormField(
+            //     minLines: theme.minLines,
+            //     maxLines: theme.maxLines,
+            //     style: TextStyle(
+            //       color: theme.textColor,
+            //       fontSize: theme.textSize,
+            //     ),
+            //     autovalidateMode: AutovalidateMode.onUserInteraction,
+            //     validator: (text) =>
+            //         _canBeSkipped ? null : widget.data.validator.validate(text),
+            //     onChanged: (input) => setState(() => _input = input),
+            //     decoration: InputDecoration(
+            //       fillColor: theme.backgroundColor,
+            //       hintText: widget.data.hintText ?? '',
+            //       hintStyle: TextStyle(
+            //         color: theme.hintColor,
+            //         fontSize: theme.hintSize,
+            //       ),
+            //       enabledBorder: border,
+            //       focusedBorder: border,
+            //       border: border,
+            //     ),
+            //   ),
+            // ),
           ),
           const Spacer(),
           QuestionBottomButton(

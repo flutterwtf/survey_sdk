@@ -7,17 +7,8 @@ import 'package:survey_admin/presentation/widgets/customization_panel/input/inpu
 import 'package:survey_admin/presentation/widgets/question_settings_tab_bar.dart';
 
 // TODO(dev): why do we have pages in this folder?
-class InputCustomizationPanel extends StatefulWidget {
+class InputCustomizationPanel extends StatelessWidget {
   const InputCustomizationPanel({super.key});
-
-  @override
-  State<InputCustomizationPanel> createState() =>
-      _InputCustomizationPanelState();
-}
-
-class _InputCustomizationPanelState extends State<InputCustomizationPanel> {
-  InputType inputType = InputType.text;
-  DateTime dateTime = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +26,6 @@ class _InputCustomizationPanelState extends State<InputCustomizationPanel> {
           onButtonFontSizeChanged: (size) {},
         ),
         InputCustomizationTab(
-          key: UniqueKey(),
           title: context.localization.input,
           onMultilineChanged: (isMultiline, lineAmount) {},
           onFillColorChanged: (color) {},
@@ -48,18 +38,7 @@ class _InputCustomizationPanelState extends State<InputCustomizationPanel> {
           onHintFontSizeChanged: (size) {},
           onTextColorChanged: (color) {},
           onTextFontSizeChanged: (size) {},
-          onInputTypeChanged: (newInputType) {
-            setState(() {
-              inputType = newInputType;
-            });
-          },
-          onDateTimeChanged: (newDateTime) {
-            setState(() {
-              dateTime = newDateTime;
-            });
-          },
-          inputType: inputType,
-          dateTime: dateTime,
+          onInputTypeChanged: (newInputType) {},
         ),
         InputContentCustomizationTab(
           title: context.localization.content,
