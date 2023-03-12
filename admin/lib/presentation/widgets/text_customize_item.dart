@@ -59,8 +59,8 @@ class _TextCustomizeItemState extends State<TextCustomizeItem> {
       child: Column(
         children: [
           CustomizationItemsContainer(
-            children: [Text(widget.title)],
             isFontBold: true,
+            children: [Text(widget.title)],
           ),
           Row(
             children: [
