@@ -3,6 +3,15 @@ import 'package:survey_core/src/domain/entities/input_validator.dart';
 import 'package:survey_core/src/domain/entities/question_types/question_data.dart';
 import 'package:survey_core/src/domain/entities/themes/input_question_theme.dart';
 
+enum InputType {
+  text,
+  number,
+  date,
+  email,
+  password,
+  phone;
+}
+
 class InputQuestionData extends QuestionData<InputQuestionTheme> {
   final InputValidator validator;
   final String? hintText;

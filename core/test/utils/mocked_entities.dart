@@ -29,7 +29,7 @@ abstract class MockedQuestions {
   );
 
   static final input1 = InputQuestionData(
-    validator: InputValidator.defaultInput(),
+    validator: InputValidator.text(),
     index: 0,
     title: 'title',
     subtitle: 'subtitle',
@@ -37,7 +37,7 @@ abstract class MockedQuestions {
   );
 
   static final input2 = InputQuestionData(
-    validator: InputValidator.defaultInput(),
+    validator: InputValidator.text(),
     index: 1,
     title: 'Another title',
     subtitle: 'Another subtitle',

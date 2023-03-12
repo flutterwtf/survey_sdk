@@ -11,7 +11,7 @@ void _mockOnSend({required String key, required dynamic data}) {}
 
 void main() {
   final mockInputData = InputQuestionData(
-    validator: InputValidator.defaultInput(),
+    validator: InputValidator.text(),
     index: 0,
     title: 'title',
     subtitle: 'subtitle',

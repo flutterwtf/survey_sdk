@@ -32,7 +32,7 @@ void main() {
     isSkip: false,
   );
   final mockInputData = InputQuestionData(
-    validator: InputValidator.defaultInput(),
+    validator: InputValidator.text(),
     index: 0,
     title: 'title',
     subtitle: 'subtitle',

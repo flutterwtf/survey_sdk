@@ -1,103 +1,117 @@
 import 'package:survey_core/src/domain/entities/api_object.dart';
 import 'package:survey_core/src/domain/entities/constants/validator_regexes.dart';
-import 'package:survey_core/src/domain/entities/constants/validator_types.dart';
+import 'package:survey_core/src/domain/entities/question_types/input_question_data.dart';
 
-const String _validatorName = 'validator';
-const String _regexName = 'regex';
-const String _isHiddenInputName = 'is_hidden_input';
+const String _validatorKey = 'validator';
+const String _regexKey = 'regex';
+const String _isObscuredKey = 'is_obscured';
+// TODO(dev): show error text
 const String _validatorErrorText = 'error';
 
 class InputValidator implements ApiObject {
-  late final String _regex;
-  late final String name;
-  late final bool isHiddenInput;
+  late final String? _regex;
+  late final InputType type;
+  late final bool? isObscured;
 
   InputValidator.number({
     String? regex,
-    bool? isHiddenInput,
+    bool? isObscured,
   }) {
-    name = ValidatorTypes.number;
+    type = InputType.number;
     _regex = regex ?? ValidatorDefaultRegexStrings.number;
-    isHiddenInput = isHiddenInput ?? false;
+    isObscured = isObscured ?? false;
   }
 
   InputValidator.date({
     String? regex,
-    bool? isHiddenInput,
+    bool? isObscured,
   }) {
-    name = ValidatorTypes.date;
-    _regex = regex ?? ValidatorDefaultRegexStrings.date;
-    isHiddenInput = isHiddenInput ?? false;
+    type = InputType.date;
+    _regex = regex ?? ValidatorDefaultRegexStrings.text;
+    isObscured = isObscured ?? false;
   }
 
-  InputValidator.email({
-    String? regex,
-    bool? isHiddenInput,
-  }) {
-    name = ValidatorTypes.email;
-    _regex = regex ?? ValidatorDefaultRegexStrings.email;
-    isHiddenInput = isHiddenInput ?? false;
+  InputValidator.email() {
+    type = InputType.email;
+    _regex = null;
+    isObscured = null;
   }
 
   InputValidator.password({
     String? regex,
-    bool? isHiddenInput,
+    bool? isObscured,
   }) {
-    name = ValidatorTypes.password;
+    type = InputType.password;
     _regex = regex ?? ValidatorDefaultRegexStrings.password;
-    isHiddenInput = isHiddenInput ?? true;
+    isObscured = isObscured ?? true;
   }
 
   InputValidator.phone({
     String? regex,
-    bool? isHiddenInput,
+    bool? isObscured,
   }) {
-    name = ValidatorTypes.phone;
+    type = InputType.phone;
     _regex = regex ?? ValidatorDefaultRegexStrings.phone;
-    isHiddenInput = isHiddenInput ?? false;
+    isObscured = isObscured ?? false;
   }
 
-  InputValidator.defaultInput({
+  InputValidator.text({
     String? regex,
-    bool? isHiddenInput,
+    bool? isObscured,
   }) {
-    name = ValidatorTypes.defaultName;
-    _regex = regex ?? ValidatorDefaultRegexStrings.defaultRegex;
-    isHiddenInput = isHiddenInput ?? false;
+    type = InputType.text;
+    _regex = regex ?? ValidatorDefaultRegexStrings.text;
+    isObscured = isObscured ?? false;
   }
 
-  InputValidator.fromJson(Map<String, dynamic> json) {
-    final String? type = json[_validatorName];
-    final String? regex = json[_regexName];
-    final bool? isHidden = json[_isHiddenInputName];
+  factory InputValidator.fromType({
+    required InputType type,
+    String? regex,
+    bool? isObscured,
+  }) {
     switch (type) {
-      case 'number':
-        InputValidator.number(regex: regex, isHiddenInput: isHidden);
-        break;
-      case 'date':
-        InputValidator.date(regex: regex, isHiddenInput: isHidden);
-        break;
-      case 'email':
-        InputValidator.email(regex: regex, isHiddenInput: isHidden);
-        break;
-      case 'password':
-        InputValidator.password(regex: regex, isHiddenInput: isHidden);
-        break;
-      case 'phone':
-        InputValidator.phone(regex: regex, isHiddenInput: isHidden);
-        break;
-      default:
-        InputValidator.defaultInput(regex: regex, isHiddenInput: isHidden);
-        break;
+      case InputType.text:
+        return InputValidator.text(regex: regex, isObscured: isObscured);
+      case InputType.date:
+        return InputValidator.date(regex: regex, isObscured: isObscured);
+      case InputType.email:
+        return InputValidator.email();
+      case InputType.phone:
+        return InputValidator.phone(regex: regex, isObscured: isObscured);
+      case InputType.number:
+        return InputValidator.number(
+          regex: regex,
+          isObscured: isObscured,
+        );
+      case InputType.password:
+        return InputValidator.password(
+          regex: regex,
+          isObscured: isObscured,
+        );
     }
   }
 
-  RegExp get _reg => RegExp(_regex);
+  factory InputValidator.fromJson(Map<String, dynamic> json) {
+    final type = InputType.values[json[_validatorKey]];
+    final String? regex = json[_regexKey];
+    final bool? isObscured = json[_isObscuredKey];
+    return InputValidator.fromType(
+      type: type,
+      regex: regex,
+      isObscured: isObscured,
+    );
+  }
+
+  RegExp get _reg => RegExp(_regex ?? ValidatorDefaultRegexStrings.text);
 
   String? validate(String? input) {
     return input == null || _reg.hasMatch(input) ? null : _validatorErrorText;
   }
 
   @override
-  Map<String, dynamic> toJson() => {_validatorName: name};
+  Map<String, dynamic> toJson() => {
+        _validatorKey: type.index,
+        _regexKey: _regex,
+        _isObscuredKey: isObscured,
+      };
 }

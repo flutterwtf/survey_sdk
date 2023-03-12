@@ -48,7 +48,7 @@ extension NewQuestionTabsExt on NewQuestionTabs {
       case NewQuestionTabs.customInput:
         return [
           NewQuestionOptions.singleLineInput,
-          NewQuestionOptions.multiLineInput
+          NewQuestionOptions.multiLineInput,
         ];
     }
   }
