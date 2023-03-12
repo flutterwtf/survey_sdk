@@ -1,27 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:survey_core/src/domain/entities/input_validator.dart';
 import 'package:survey_core/src/domain/entities/question_types/input_question_data.dart';
-import 'package:survey_core/src/domain/entities/validator/input_validator.dart';
 import 'package:survey_core/src/presentation/input_question/input_question_page.dart';
 import 'package:survey_core/src/presentation/widgets/question_bottom_button.dart';
 
 import 'widget/app_test.dart';
 
 void main() {
-  final testValidDefaultValidator = 'test string1';
-  final testInvalidNumberValidator = 'test string2';
-  final testValidNumberValidator = '12';
+  const testValidTextString = 'test string1';
+  const testInvalidNumberString = 'test string2';
+  const testValidNumberString = '12';
 
-  const mockInputData = InputQuestionData(
-    validator: DefaultValidator(),
+  final mockInputData = InputQuestionData(
+    validator: InputValidator.text(),
     index: 0,
     title: 'title',
     subtitle: 'subtitle',
     isSkip: true,
   );
 
-  const mockInputDataWithNumberValidator = InputQuestionData(
-    validator: NumberValidator(),
+  final mockInputDataWithNumberValidator = InputQuestionData(
+    validator: InputValidator.number(),
     index: 0,
     title: 'title',
     subtitle: 'subtitle',
@@ -32,33 +32,33 @@ void main() {
     'input question page ->',
     () {
       test('Valid string returns null', () {
-        final result = DefaultValidator().validate(
-          testValidDefaultValidator,
+        final result = InputValidator.text().validate(
+          testValidTextString,
         );
         expect(result, null);
       });
 
       test('Valid number returns null', () {
-        final result = NumberValidator().validate(
-          testValidNumberValidator,
+        final result = InputValidator.number().validate(
+          testValidNumberString,
         );
         expect(result, null);
       });
 
       testWidgets(
         'DefaultValidator should tell when input is not valid',
-            (WidgetTester tester) async {
-          String? sentData;
+        (WidgetTester tester) async {
           await tester.pumpWidget(
             AppTest(
               child: InputQuestionPage(
                 data: mockInputData.copyWith(isSkip: true),
-                onSend: ({data, String? key}) => sentData = data,
+                // TODO(dev): check send data properly everywhere
+                onSend: ({data, String? key}) => data,
               ),
             ),
           );
           final inputField = find.byType(TextFormField);
-          await tester.enterText(inputField, testValidDefaultValidator);
+          await tester.enterText(inputField, testValidTextString);
           await tester.pumpAndSettle();
           expect(find.text('This field cannot be empty'), findsNothing);
         },
@@ -67,18 +67,17 @@ void main() {
       testWidgets(
         'NumberValidator should tell when number is not valid',
         (WidgetTester tester) async {
-          String? sentData;
           await tester.pumpWidget(
             AppTest(
               child: InputQuestionPage(
                 data: mockInputDataWithNumberValidator.copyWith(isSkip: true),
-                onSend: ({data, String? key}) => sentData = data,
+                onSend: ({data, String? key}) => data,
               ),
             ),
           );
 
           final inputField = find.byType(TextFormField);
-          await tester.enterText(inputField, testInvalidNumberValidator);
+          await tester.enterText(inputField, testInvalidNumberString);
           await tester.pumpAndSettle();
           expect(find.text('Please enter a valid number'), findsOneWidget);
         },

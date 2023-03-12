@@ -11,6 +11,7 @@ import 'package:survey_admin/presentation/widgets/customization_items/input_type
 import 'package:survey_admin/presentation/widgets/customization_items/multiline_switch.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/padding_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/customization_tab.dart';
+import 'package:survey_core/survey_core.dart';
 
 class InputCustomizationTab extends CustomizationTab {
   final void Function(bool isMultiline, int lineAmount) onMultilineChanged;
