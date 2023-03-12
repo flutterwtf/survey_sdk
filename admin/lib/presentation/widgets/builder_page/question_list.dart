@@ -113,18 +113,20 @@ class _QuestionListState extends State<QuestionList> {
           ),
           Expanded(
             child: ContextMenuOverlay(
-              cardBuilder: (_, children) => DecoratedBox(
-                decoration: BoxDecoration(
-                  color: AppColors.white,
-                  borderRadius: BorderRadius.circular(
-                    AppDimensions.circularRadiusXS,
+              cardBuilder: (_, children) {
+                return DecoratedBox(
+                  decoration: BoxDecoration(
+                    color: AppColors.white,
+                    borderRadius: BorderRadius.circular(
+                      AppDimensions.circularRadiusXS,
+                    ),
+                    border: Border.all(
+                      width: 0.5,
+                    ),
                   ),
-                  border: Border.all(
-                    width: 0.5,
-                  ),
-                ),
-                child: Column(children: children),
-              ),
+                  child: Column(children: children),
+                );
+              },
               child: ReorderableListView(
                 buildDefaultDragHandles: false,
                 children: [
