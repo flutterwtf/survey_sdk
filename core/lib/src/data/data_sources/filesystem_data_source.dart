@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
@@ -18,11 +17,6 @@ class FilesystemDataSourceImpl implements FilesystemDataSource {
     } else {
       json = await rootBundle.loadString(asset);
     }
-    return getSurveyDataFromJson(json);
-  }
-
-  @override
-  SurveyData getSurveyDataFromJson(String json) {
     final map = jsonDecode(json);
     return SurveyData.fromJson(map);
   }

@@ -1,15 +1,15 @@
-import 'dart:convert';
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:survey_admin/domain/repository_interfaces/local_storage_data_repository.dart';
 import 'package:survey_admin/presentation/pages/builder/builder_state.dart';
 import 'package:survey_core/survey_core.dart';
 
 class BuilderCubit extends Cubit<BuilderState> {
-  final SurveyDataRepository _surveyDataRepository;
+  final LocalStorageDataRepository _localStorageDataRepository;
 
-  BuilderCubit(this._surveyDataRepository)
-      : super(
-          const BuilderState(selectedQuestion: null, surveyData: null),
+  BuilderCubit(
+    this._localStorageDataRepository,
+  ) : super(
+          const BuilderState(selectedQuestion: null, questions: []),
         );
 
   void select(QuestionData data) => emit(
@@ -17,16 +17,12 @@ class BuilderCubit extends Cubit<BuilderState> {
       );
 
   Future<void> importData() async {
-    final result = await FilePicker.platform.pickFiles();
-    if (result != null) {
-      final bytes = result.files.single.bytes;
-      if (bytes != null) {
-        final json = const Utf8Decoder().convert(bytes);
-        final surveyData = _surveyDataRepository.getSurveyDataFromJson(json);
-        emit(
-          state.copyWith(surveyData: surveyData),
-        );
-      }
+    final surveyData = await _localStorageDataRepository.surveyData();
+    if (surveyData != null) {
+      final questions = surveyData.questions;
+      emit(
+        state.copyWith(questions: questions),
+      );
     }
   }
 }

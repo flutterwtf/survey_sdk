@@ -1,8 +1,11 @@
 import 'package:get_it/get_it.dart';
+import 'package:survey_admin/data/data_sources/local_storage_data_source.dart';
+import 'package:survey_admin/data/interfaces/local_storage_data_source.dart';
+import 'package:survey_admin/data/repositories/local_storage_data_repository.dart';
+import 'package:survey_admin/domain/repository_interfaces/local_storage_data_repository.dart';
 import 'package:survey_admin/presentation/app/app_cubit.dart';
 import 'package:survey_admin/presentation/pages/builder/builder_cubit.dart';
 import 'package:survey_admin/presentation/pages/new_question_page/new_question_cubit.dart';
-import 'package:survey_core/survey_core.dart';
 
 GetIt get i => GetIt.instance;
 
@@ -13,7 +16,7 @@ Future<void> initInjector() async {
 }
 
 Future<void> _initDataSources() async {
-  i.registerFactory<FilesystemDataSource>(FilesystemDataSourceImpl.new);
+  i.registerFactory<LocalStorageDataSource>(LocalStorageDataSourceImpl.new);
 }
 
 void _initCubits() {
@@ -24,7 +27,7 @@ void _initCubits() {
 }
 
 void _initRepositories() {
-  i.registerFactory<SurveyDataRepository>(
-    () => SurveyDataRepositoryImpl(i.get()),
+  i.registerFactory<LocalStorageDataRepository>(
+    () => LocalStorageDataRepositoryImpl(i.get()),
   );
 }

@@ -12,9 +12,11 @@ import 'package:survey_core/survey_core.dart';
 
 class QuestionList extends StatefulWidget {
   final void Function(QuestionData) onSelect;
+  final List<QuestionData> questions;
 
   const QuestionList({
     required this.onSelect,
+    required this.questions,
     super.key,
   });
 
@@ -23,23 +25,20 @@ class QuestionList extends StatefulWidget {
 }
 
 class _QuestionListState extends State<QuestionList> {
-  late List<QuestionData> _questionList;
   int _selectedIndex = 0;
 
   @override
   void initState() {
     super.initState();
-    _questionList = [
-      const IntroQuestionData.common(index: 1),
-      const InputQuestionData.common(index: 2),
-    ];
-    widget.onSelect(_questionList.first);
+    if (widget.questions.isNotEmpty) {
+      widget.onSelect(widget.questions.first);
+    }
   }
 
   void addQuestion(QuestionData data) {
-    final index = _questionList.length;
+    final index = widget.questions.length;
     setState(() {
-      _questionList.add(
+      widget.questions.add(
         data.copyWith(index: index),
       );
     });
@@ -93,45 +92,48 @@ class _QuestionListState extends State<QuestionList> {
               ],
             ),
           ),
-          Expanded(
-            child: ReorderableListView(
-              buildDefaultDragHandles: false,
-              children: [
-                for (int index = 0; index < _questionList.length; index++)
-                  ReorderableDragStartListener(
-                    index: index,
-                    key: ValueKey(index),
-                    child: QuestionListItem(
-                      isSelected: index == _selectedIndex,
-                      questionData: _questionList[index],
-                      onTap: (data) {
-                        widget.onSelect(data);
-                        setState(() {
-                          _selectedIndex = index;
-                        });
-                      },
-                    ),
-                  )
-              ],
-              onReorder: (oldIndex, newIndex) {
-                if (newIndex > oldIndex) newIndex--;
-                setState(
-                  () {
-                    if (_selectedIndex == oldIndex) {
-                      _selectedIndex = newIndex;
-                    } else if (_selectedIndex == newIndex) {
-                      _selectedIndex = oldIndex;
-                    }
+          if (widget.questions.isNotEmpty)
+            Expanded(
+              child: ReorderableListView(
+                buildDefaultDragHandles: false,
+                children: [
+                  for (int index = 0; index < widget.questions.length; index++)
+                    ReorderableDragStartListener(
+                      index: index,
+                      key: ValueKey(index),
+                      child: QuestionListItem(
+                        isSelected: index == _selectedIndex,
+                        questionData: widget.questions[index],
+                        onTap: (data) {
+                          widget.onSelect(data);
+                          setState(() {
+                            _selectedIndex = index;
+                          });
+                        },
+                      ),
+                    )
+                ],
+                onReorder: (oldIndex, newIndex) {
+                  if (newIndex > oldIndex) newIndex--;
+                  setState(
+                    () {
+                      if (_selectedIndex == oldIndex) {
+                        _selectedIndex = newIndex;
+                      } else if (_selectedIndex == newIndex) {
+                        _selectedIndex = oldIndex;
+                      }
 
-                    final oldItem = _questionList[oldIndex];
-                    final newItem = _questionList[newIndex];
-                    _questionList[newIndex] = oldItem.copyWith(index: newIndex);
-                    _questionList[oldIndex] = newItem.copyWith(index: oldIndex);
-                  },
-                );
-              },
+                      final oldItem = widget.questions[oldIndex];
+                      final newItem = widget.questions[newIndex];
+                      widget.questions[newIndex] =
+                          oldItem.copyWith(index: newIndex);
+                      widget.questions[oldIndex] =
+                          newItem.copyWith(index: oldIndex);
+                    },
+                  );
+                },
+              ),
             ),
-          ),
         ],
       ),
     );

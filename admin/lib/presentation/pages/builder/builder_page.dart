@@ -36,12 +36,15 @@ class _BuilderPageState extends State<BuilderPage> {
           title: const _BuilderPageTabBar(),
           actions: [
             _CreateTab(onPressed: _cubit.importData),
-            _PreviewTab(),
+            const _PreviewTab(),
           ],
         ),
         body: Row(
           children: [
-            QuestionList(onSelect: _cubit.select),
+            QuestionList(
+              onSelect: _cubit.select,
+              questions: state.questions,
+            ),
             Expanded(
               child: PhoneView(
                 child: Container(),
