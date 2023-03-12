@@ -4,24 +4,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:survey_core/src/presentation/widgets/question_bottom_button.dart';
 
+import 'widget/app_test.dart';
+
 void main() {
   final completerActive = Completer<void>();
   final completerInactive = Completer<void>();
-  final pageActiveButton = MaterialApp(
-    home: Scaffold(
-      body: QuestionBottomButton(
-        text: 'next',
-        onPressed: completerActive.complete,
-      ),
+  final pageActiveButton = AppTest(
+    child: QuestionBottomButton(
+      text: 'next',
+      onPressed: completerActive.complete,
     ),
   );
-  final pageInactiveButton = MaterialApp(
-    home: Scaffold(
-      body: QuestionBottomButton(
-        text: 'next',
-        isEnabled: false,
-        onPressed: completerInactive.complete,
-      ),
+  final pageInactiveButton = AppTest(
+    child: QuestionBottomButton(
+      text: 'next',
+      isEnabled: false,
+      onPressed: completerInactive.complete,
     ),
   );
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/input_type_customization_item.dart';
+import 'package:survey_core/survey_core.dart';
 
 import '../app_test.dart';
 

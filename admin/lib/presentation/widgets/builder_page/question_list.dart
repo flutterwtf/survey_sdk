@@ -32,8 +32,8 @@ class _QuestionListState extends State<QuestionList> {
   void initState() {
     super.initState();
     _questionList = [
-      const IntroQuestionData.common(),
-      const InputQuestionData.common(index: 1),
+      const IntroQuestionData.common(index: 1),
+      InputQuestionData.common(index: 2),
     ];
     widget.onSelect(_questionList.first);
     RawKeyboard.instance.addListener(_handleKeyDown);

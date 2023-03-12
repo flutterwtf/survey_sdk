@@ -1,54 +1,85 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:survey_core/src/domain/entities/input_validator.dart';
 import 'package:survey_core/src/domain/entities/question_types/input_question_data.dart';
-import 'package:survey_core/src/domain/entities/validator/input_validator.dart';
 import 'package:survey_core/src/presentation/input_question/input_question_page.dart';
 import 'package:survey_core/src/presentation/widgets/question_bottom_button.dart';
 
 import 'widget/app_test.dart';
 
-void _mockOnSend(dynamic data) {}
-
 void main() {
-  const mockInputData = InputQuestionData(
-    validator: DefaultValidator(),
+  const testValidTextString = 'test string1';
+  const testInvalidNumberString = 'test string2';
+  const testValidNumberString = '12';
+
+  final mockInputData = InputQuestionData(
+    validator: InputValidator.text(),
     index: 0,
     title: 'title',
     subtitle: 'subtitle',
     isSkip: true,
   );
+
+  final mockInputDataWithNumberValidator = InputQuestionData(
+    validator: InputValidator.number(),
+    index: 0,
+    title: 'title',
+    subtitle: 'subtitle',
+    isSkip: true,
+  );
+
   group(
     'input question page ->',
     () {
+      test('Valid string returns null', () {
+        final result = InputValidator.text().validate(
+          testValidTextString,
+        );
+        expect(result, null);
+      });
+
+      test('Valid number returns null', () {
+        final result = InputValidator.number().validate(
+          testValidNumberString,
+        );
+        expect(result, null);
+      });
+
       testWidgets(
-        'InputQuestionPage displays title',
+        'DefaultValidator should tell when input is not valid',
         (WidgetTester tester) async {
           await tester.pumpWidget(
-            const AppTest(
+            AppTest(
               child: InputQuestionPage(
-                data: mockInputData,
-                onSend: _mockOnSend,
+                data: mockInputData.copyWith(isSkip: true),
+                // TODO(dev): check send data properly everywhere
+                onSend: ({data, String? key}) => data,
               ),
             ),
           );
-          final titleFinder = find.text('title');
-          expect(titleFinder, findsOneWidget);
+          final inputField = find.byType(TextFormField);
+          await tester.enterText(inputField, testValidTextString);
+          await tester.pumpAndSettle();
+          expect(find.text('This field cannot be empty'), findsNothing);
         },
       );
 
       testWidgets(
-        'InputQuestionPage displays subtitle',
+        'NumberValidator should tell when number is not valid',
         (WidgetTester tester) async {
           await tester.pumpWidget(
-            const AppTest(
+            AppTest(
               child: InputQuestionPage(
-                data: mockInputData,
-                onSend: _mockOnSend,
+                data: mockInputDataWithNumberValidator.copyWith(isSkip: true),
+                onSend: ({data, String? key}) => data,
               ),
             ),
           );
-          final subtitleFinder = find.text('subtitle');
-          expect(subtitleFinder, findsOneWidget);
+
+          final inputField = find.byType(TextFormField);
+          await tester.enterText(inputField, testInvalidNumberString);
+          await tester.pumpAndSettle();
+          expect(find.text('Please enter a valid number'), findsOneWidget);
         },
       );
 
@@ -60,7 +91,7 @@ void main() {
             AppTest(
               child: InputQuestionPage(
                 data: mockInputData.copyWith(isSkip: true),
-                onSend: (_) => isPressed = true,
+                onSend: ({data, String? key}) => isPressed = true,
               ),
             ),
           );
@@ -79,7 +110,7 @@ void main() {
             AppTest(
               child: InputQuestionPage(
                 data: mockInputData.copyWith(isSkip: true),
-                onSend: (data) => sentData = data,
+                onSend: ({data, String? key}) => sentData = data,
               ),
             ),
           );

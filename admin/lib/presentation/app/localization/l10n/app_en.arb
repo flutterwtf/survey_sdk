@@ -50,5 +50,6 @@
   "check_box":"Check box",
   "single_line_input":"Single-line input",
   "multi_line_input":"Multi-line input",
-  "delete_question": "Delete question"
+  "delete_question": "Delete question",
+  "multiple_choice":"Multiple choice"
 }

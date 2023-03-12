@@ -25,6 +25,13 @@ class SliderQuestionPage extends StatefulWidget {
 
 class _SliderQuestionPageState extends State<SliderQuestionPage> {
   late final SliderThemeData _theme;
+  late double _answer;
+
+  @override
+  void initState() {
+    super.initState();
+    _answer = widget.data.initialValue.toDouble();
+  }
 
   @override
   void didChangeDependencies() {
@@ -65,15 +72,16 @@ class _SliderQuestionPageState extends State<SliderQuestionPage> {
               minValue: widget.data.minValue,
               maxValue: widget.data.maxValue,
               initialValue: widget.data.initialValue,
-              onChanged: (double? currentSliderValue) {},
+              onChanged: (value) => setState(() => _answer = value),
               theme: _theme,
             ),
           ),
           const Spacer(),
           QuestionBottomButton(
             text: context.localization.next,
-            // TODO(dev): replace '' with data
-            onPressed: () => widget.onSend(''),
+            onPressed: () {
+              widget.onSend.call(key: widget.data.type, data: _answer);
+            },
           ),
         ],
       ),
@@ -85,7 +93,7 @@ class _QuestionSlider extends StatefulWidget {
   final num minValue;
   final num maxValue;
   final num initialValue;
-  final void Function(double? currentSliderValue) onChanged;
+  final ValueChanged<double> onChanged;
   final SliderThemeData theme;
 
   const _QuestionSlider({
