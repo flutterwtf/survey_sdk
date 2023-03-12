@@ -38,7 +38,7 @@ class InputCustomizationPanel extends StatelessWidget {
           onHintFontSizeChanged: (size) {},
           onTextColorChanged: (color) {},
           onTextFontSizeChanged: (size) {},
-          onInputTypeChanged: (newInputType) {},
+          onInputTypeChanged: (inputType) {},
         ),
         InputContentCustomizationTab(
           title: context.localization.content,
