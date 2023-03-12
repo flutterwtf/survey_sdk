@@ -9,9 +9,9 @@ class SurveyCubit extends Cubit<SurveyState> {
   SurveyCubit(this._surveyDataRepository) : super(const SurveyState());
 
   //TODO: rebuild this moment
-  void initData(String? surveyDataAsset, SurveyData? surveyData) {
-    if (surveyDataAsset != null) {
-      _surveyDataRepository.getSurveyData(surveyDataAsset).then(
+  void initData(String? filePath, SurveyData? surveyData) {
+    if (filePath != null) {
+      _surveyDataRepository.getSurveyData(filePath).then(
             (data) => emit(state.copyWith(surveyData: data)),
           );
     } else {
