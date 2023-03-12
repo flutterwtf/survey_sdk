@@ -50,9 +50,6 @@ class InputCustomizationTab extends CustomizationTab {
       children: [
         CustomizationItemsContainer(
           isTopDividerShown: true,
-          itemsPadding: const EdgeInsets.all(
-            AppDimensions.marginM,
-          ),
           children: [
             MultilineSwitch(
               onChanged: onMultilineChanged,

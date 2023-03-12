@@ -7,9 +7,11 @@ import 'package:survey_core/src/presentation/widgets/question_bottom_button.dart
 
 import 'widget/app_test.dart';
 
-void _mockOnSend({required String key, required dynamic data}) {}
-
 void main() {
+  final testValidDefaultValidator = 'test string1';
+  final testInvalidNumberValidator = 'test string2';
+  final testValidNumberValidator = '12';
+
   final mockInputData = InputQuestionData(
     validator: InputValidator.text(),
     index: 0,
@@ -17,38 +19,68 @@ void main() {
     subtitle: 'subtitle',
     isSkip: true,
   );
+
+  const mockInputDataWithNumberValidator = InputQuestionData(
+    validator: NumberValidator(),
+    index: 0,
+    title: 'title',
+    subtitle: 'subtitle',
+    isSkip: true,
+  );
+
   group(
     'input question page ->',
     () {
+      test('Valid string returns null', () {
+        final result = DefaultValidator().validate(
+          testValidDefaultValidator,
+        );
+        expect(result, null);
+      });
+
+      test('Valid number returns null', () {
+        final result = NumberValidator().validate(
+          testValidNumberValidator,
+        );
+        expect(result, null);
+      });
+
       testWidgets(
-        'InputQuestionPage displays title',
-        (WidgetTester tester) async {
+        'DefaultValidator should tell when input is not valid',
+            (WidgetTester tester) async {
+          String? sentData;
           await tester.pumpWidget(
             AppTest(
               child: InputQuestionPage(
-                data: mockInputData,
-                onSend: _mockOnSend,
+                data: mockInputData.copyWith(isSkip: true),
+                onSend: ({data, String? key}) => sentData = data,
               ),
             ),
           );
-          final titleFinder = find.text('title');
-          expect(titleFinder, findsOneWidget);
+          final inputField = find.byType(TextFormField);
+          await tester.enterText(inputField, testValidDefaultValidator);
+          await tester.pumpAndSettle();
+          expect(find.text('This field cannot be empty'), findsNothing);
         },
       );
 
       testWidgets(
-        'InputQuestionPage displays subtitle',
+        'NumberValidator should tell when number is not valid',
         (WidgetTester tester) async {
+          String? sentData;
           await tester.pumpWidget(
             AppTest(
               child: InputQuestionPage(
-                data: mockInputData,
-                onSend: _mockOnSend,
+                data: mockInputDataWithNumberValidator.copyWith(isSkip: true),
+                onSend: ({data, String? key}) => sentData = data,
               ),
             ),
           );
-          final subtitleFinder = find.text('subtitle');
-          expect(subtitleFinder, findsOneWidget);
+
+          final inputField = find.byType(TextFormField);
+          await tester.enterText(inputField, testInvalidNumberValidator);
+          await tester.pumpAndSettle();
+          expect(find.text('Please enter a valid number'), findsOneWidget);
         },
       );
 
