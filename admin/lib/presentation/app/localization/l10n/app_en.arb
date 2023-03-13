@@ -50,5 +50,10 @@
   "check_box":"Check box",
   "single_line_input":"Single-line input",
   "multi_line_input":"Multi-line input",
-  "multiple_choice":"Multiple choice"
+  "multiple_choice":"Multiple choice",
+  "number": "Number",
+  "password": "Password",
+  "date": "Date",
+  "email": "Email",
+  "phone": "Phone"
 }

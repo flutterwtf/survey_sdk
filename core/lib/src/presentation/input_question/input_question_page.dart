@@ -1,3 +1,4 @@
+import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:survey_core/src/domain/entities/question_types/input_question_data.dart';
@@ -9,6 +10,7 @@ import 'package:survey_core/src/presentation/widgets/question_bottom_button.dart
 import 'package:survey_core/src/presentation/widgets/question_subtitle.dart';
 import 'package:survey_core/src/presentation/widgets/question_title.dart';
 
+//TODO: create child<T> widget for date,password,text,number etc
 class InputQuestionPage extends StatefulWidget {
   final InputQuestionData data;
   final OnSendCallback onSend;
@@ -25,10 +27,12 @@ class InputQuestionPage extends StatefulWidget {
 
 class _InputQuestionPageState extends State<InputQuestionPage> {
   final _textFieldKey = GlobalKey<FormFieldState>();
-  DateTime dateTime = DateTime.now();
+  DateTime _dateTime = DateTime.now();
   String _input = '';
+  final format = DateFormat('dd.MM.yyyy');
 
-  bool get _canBeSkipped => widget.data.isSkip && _input.isEmpty;
+  bool get _canBeSkipped => widget.data.isSkip && _dateTime.toString().isEmpty;
+  // bool get _canBeSkipped => widget.data.isSkip && _input.isEmpty;
 
   @override
   Widget build(BuildContext context) {
@@ -67,35 +71,49 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
           ),
           Padding(
             padding: const EdgeInsets.only(top: AppDimensions.marginM),
-            child: Container(
-              padding: const EdgeInsets.all(AppDimensions.marginS),
-              decoration: BoxDecoration(
-                border: Border.all(),
-                borderRadius: const BorderRadius.all(Radius.circular(20)),
+            child: DateTimeField(
+              key: _textFieldKey,
+              style: TextStyle(
+                color: theme.textColor,
+                fontSize: theme.textSize,
               ),
-              child: InkWell(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(DateFormat.yMd().format(dateTime)),
-                    const Icon(Icons.date_range),
-                  ],
+              decoration: InputDecoration(
+                fillColor: theme.backgroundColor,
+                hintText: widget.data.hintText ?? '',
+                hintStyle: TextStyle(
+                  color: theme.hintColor,
+                  fontSize: theme.hintSize,
                 ),
-                onTap: () => showDatePicker(
+                enabledBorder: border,
+                focusedBorder: border,
+                border: border,
+              ),
+              format: format,
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              validator: (dateTime) => _canBeSkipped
+                  ? null
+                  : widget.data.validator.validate(dateTime.toString()),
+              onChanged: (value) {
+                if (value != null) {
+                  setState(() {
+                    _dateTime = value;
+                  });
+                }
+              },
+              onShowPicker: (context, currentValue) async {
+                final date = await showDatePicker(
                   context: context,
-                  initialDate: dateTime,
-                  firstDate: DateTime(2000),
-                  lastDate: DateTime(3000),
-                ).then(
-                  (value) {
-                    if (value != null) {
-                      setState(() => dateTime = value);
-                    }
-                  },
-                ),
-              ),
+                  firstDate: DateTime(1000),
+                  initialDate: _dateTime,
+                  lastDate: DateTime(9000),
+                );
+                if (date != null) {
+                  return date;
+                }
+                return currentValue;
+              },
             ),
-            // Form(
+            //     Form(
             //   key: _textFieldKey,
             //   child: TextFormField(
             //     minLines: theme.minLines,
@@ -128,7 +146,8 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
             onPressed: () {
               if ((_textFieldKey.currentState?.validate() ?? false) ||
                   widget.data.isSkip) {
-                widget.onSend(key: widget.data.type, data: _input);
+                widget.onSend(key: widget.data.type, data: _dateTime);
+                // widget.onSend(key: widget.data.type, data: _input);
               }
             },
             isEnabled:
