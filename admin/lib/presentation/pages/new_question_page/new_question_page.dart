@@ -60,6 +60,7 @@ class _NewQuestionPageState extends State<NewQuestionPage> {
             horizontal: AppDimensions.marginM,
           ),
           child: Row(
+            mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Column(
@@ -136,21 +137,19 @@ class _TabButton extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       borderRadius: BorderRadius.circular(5),
-      child: Container(
-        alignment: Alignment.centerLeft,
-        padding: const EdgeInsets.symmetric(
-          vertical: AppDimensions.sizeS,
-          horizontal: AppDimensions.sizeS,
-        ),
-        child: Text(
-          title,
-          style: isSelected
-              ? context.theme.textTheme.titleMedium?.copyWith(
-                  fontWeight: AppFonts.weightSemiBold,
-                )
-              : context.theme.textTheme.titleMedium?.copyWith(
-                  fontWeight: AppFonts.weightRegular,
-                ),
+      child: SizedBox(
+        width: AppDimensions.surveyContentBarWidth,
+        child: ListTile(
+          title: Text(
+            title,
+            style: isSelected
+                ? context.theme.textTheme.titleMedium?.copyWith(
+                    fontWeight: AppFonts.weightSemiBold,
+                  )
+                : context.theme.textTheme.titleMedium?.copyWith(
+                    fontWeight: AppFonts.weightRegular,
+                  ),
+          ),
         ),
       ),
     );
