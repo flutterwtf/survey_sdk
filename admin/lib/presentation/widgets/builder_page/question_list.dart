@@ -37,7 +37,7 @@ class _QuestionListState extends State<QuestionList> {
   }
 
   void addQuestion(QuestionData data) {
-    final index = _questionList.length;
+    final index = _questionList.length + 1;
     setState(() {
       _questionList.add(
         data.copyWith(index: index),
@@ -117,16 +117,15 @@ class _QuestionListState extends State<QuestionList> {
                 if (newIndex > oldIndex) newIndex--;
                 setState(
                   () {
-                    if (_selectedIndex == oldIndex) {
-                      _selectedIndex = newIndex;
-                    } else if (_selectedIndex == newIndex) {
-                      _selectedIndex = oldIndex;
+                    final itemOld = _questionList.removeAt(oldIndex);
+                    _questionList.insert(
+                      newIndex,
+                      itemOld,
+                    );
+                    for (int i = 0; i < _questionList.length; i++) {
+                      _questionList[i] =
+                          _questionList[i].copyWith(index: i + 1);
                     }
-
-                    final oldItem = _questionList[oldIndex];
-                    final newItem = _questionList[newIndex];
-                    _questionList[newIndex] = oldItem.copyWith(index: newIndex);
-                    _questionList[oldIndex] = newItem.copyWith(index: oldIndex);
                   },
                 );
               },
