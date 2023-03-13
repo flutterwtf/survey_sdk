@@ -92,7 +92,7 @@ class ExportFloatingWindow extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    FilledButton(
+                    OutlinedButton(
                       onPressed: onCopyPressed,
                       style: ButtonStyle(
                         backgroundColor: const MaterialStatePropertyAll(
