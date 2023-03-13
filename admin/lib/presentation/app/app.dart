@@ -4,6 +4,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:survey_admin/presentation/app/app_cubit.dart';
 import 'package:survey_admin/presentation/app/app_state.dart';
+import 'package:survey_admin/presentation/app/di/injector.dart';
+import 'package:survey_admin/presentation/pages/builder/builder_cubit.dart';
 import 'package:survey_admin/presentation/pages/builder/builder_page.dart';
 import 'package:survey_admin/presentation/utils/app_fonts.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
@@ -19,7 +21,7 @@ class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<AppCubit>(
-      create: (context) => AppCubit(),
+      create: (context) => i.get<AppCubit>(),
       child: BlocBuilder<AppCubit, AppState>(
         builder: (context, state) {
           return MaterialApp(
@@ -47,7 +49,10 @@ class _AppState extends State<App> {
                 bodySmall: TextStyle(color: AppColors.black),
               ),
             ),
-            home: const BuilderPage(),
+            home: BlocProvider(
+              create: (context) => i.get<BuilderCubit>(),
+              child: const BuilderPage(),
+            ),
           );
         },
       ),

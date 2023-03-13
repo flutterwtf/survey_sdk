@@ -9,21 +9,13 @@ class BuilderCubit extends Cubit<BuilderState> {
   BuilderCubit(this._surveyDataRepository)
       : super(
           const BuilderState(
-            questionsList: [],
             selectedQuestion: null,
+            questionsList: [
+              IntroQuestionData.common(index: 1),
+              InputQuestionData.common(index: 2),
+            ],
           ),
         );
-
-  void setInitialQuestions() {
-    emit(
-      state.copyWith(
-        questionsList: [
-          const IntroQuestionData.common(),
-          const InputQuestionData.common(index: 1),
-        ],
-      ),
-    );
-  }
 
   void downloadExportedQuestions() {
     if (state.questionsList.isNotEmpty) {
@@ -35,7 +27,7 @@ class BuilderCubit extends Cubit<BuilderState> {
     }
   }
 
-  void select(QuestionData data) => emit(
-        state.copyWith(selectedQuestion: data),
-      );
+  void select(QuestionData data) {
+    return emit(state.copyWith(selectedQuestion: data));
+  }
 }

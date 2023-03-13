@@ -21,18 +21,11 @@ class BuilderPage extends StatefulWidget {
 }
 
 class _BuilderPageState extends State<BuilderPage> {
-  final _cubit = i.get<BuilderCubit>();
-
-  @override
-  void initState() {
-    super.initState();
-    _cubit.setInitialQuestions();
-  }
-
   @override
   Widget build(BuildContext context) {
+    final cubit = BlocProvider.of<BuilderCubit>(context);
+
     return BlocBuilder<BuilderCubit, BuilderState>(
-      bloc: _cubit,
       builder: (context, state) => Scaffold(
         appBar: AppBar(
           toolbarHeight: AppDimensions.appBarSize,
@@ -40,16 +33,16 @@ class _BuilderPageState extends State<BuilderPage> {
           shadowColor: AppColors.transparentW,
           centerTitle: true,
           title: const _BuilderPageTabBar(),
-          actions: [
-            const _CreateTab(),
-            _PreviewTab(_cubit.downloadExportedQuestions),
+          actions: const [
+            _CreateTab(),
+            _PreviewTab(),
           ],
         ),
         body: Row(
           children: [
             QuestionList(
               questionsList: state.questionsList,
-              onSelect: _cubit.select,
+              onSelect: cubit.select,
             ),
             Expanded(
               child: PhoneView(
@@ -133,12 +126,11 @@ class _CreateTab extends StatelessWidget {
 }
 
 class _PreviewTab extends StatelessWidget {
-  final VoidCallback downloadExportedQuestions;
-
-  const _PreviewTab(this.downloadExportedQuestions);
+  const _PreviewTab();
 
   @override
   Widget build(BuildContext context) {
+    final cubit = BlocProvider.of<BuilderCubit>(context);
     return Padding(
       padding: const EdgeInsets.only(
         bottom: AppDimensions.margin2XS,
@@ -149,7 +141,7 @@ class _PreviewTab extends StatelessWidget {
         onPressed: () {
           showExportFloatingWindow(
             context,
-            onDownloadPressed: downloadExportedQuestions,
+            onDownloadPressed: cubit.downloadExportedQuestions,
             onCopyPressed: () {},
           );
         },

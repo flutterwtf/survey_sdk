@@ -7,7 +7,7 @@ class SurveyDataRepositoryImpl implements SurveyDataRepository {
   SurveyDataRepositoryImpl(this._fileSystemDataSource);
 
   @override
-  void downloadSurveyData(Map<String, dynamic> exportJson) {
+  void downloadSurveyData(Object exportJson) {
     _fileSystemDataSource.downloadSurveyData(exportJson);
   }
 }

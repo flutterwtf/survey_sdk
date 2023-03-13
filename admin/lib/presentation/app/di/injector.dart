@@ -17,7 +17,7 @@ Future<void> initInjector() async {
 }
 
 Future<void> _initWebDataSources() async {
-  i.registerSingleton<FileSystemDataSource>(WebFileSystemDataSourceImpl());
+  i.registerFactory<FileSystemDataSource>(WebFileSystemDataSourceImpl.new);
 }
 
 Future<void> _initMobileDataSources() async {
@@ -26,9 +26,7 @@ Future<void> _initMobileDataSources() async {
 
 void _initRepositories() {
   i.registerSingleton<SurveyDataRepository>(
-    SurveyDataRepositoryImpl(
-      kIsWeb ? i.get() : throw UnimplementedError(),
-    ),
+    SurveyDataRepositoryImpl(i.get()),
   );
 }
 
