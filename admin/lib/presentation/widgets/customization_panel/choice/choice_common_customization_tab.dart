@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:survey_admin/presentation/app/localization/localizations.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/color_customization_item.dart';
@@ -51,16 +50,11 @@ class ChoiceCommonCustomizationTab extends CustomizationTab {
           title: context.localization.title,
           children: [
             TextStyleCustomizationItem(
+              initialColor: AppColors.black,
               onColorPicked: onTitleColorPicked,
               // TODO(dev): what are the magic Strings here and in items below?
-              initialText: '16',
-              inputFormatters: [
-                FilteringTextInputFormatter.digitsOnly,
-                LengthLimitingTextInputFormatter(2),
-              ],
-              onTextChanged: (value) {
-                if (value == null) return;
-                
+              initialFontSize: '16',
+              onFontSizeChanged: (value) {
                 final size = int.tryParse(value);
                 if (size != null) {
                   onTitleFontSizeChanged(size);
@@ -73,17 +67,12 @@ class ChoiceCommonCustomizationTab extends CustomizationTab {
           title: context.localization.subtitle,
           children: [
             TextStyleCustomizationItem(
+              initialColor: Colors.black,
               onColorPicked: onSubtitleColorPicked,
-              initialText: '12',
-              inputFormatters: [
-                FilteringTextInputFormatter.digitsOnly,
-                LengthLimitingTextInputFormatter(2),
-              ],
-              onTextChanged: (value) {
-                if (value == null) return;
-                
+              initialFontSize: '12',
+              onFontSizeChanged: (value) {
                 final size = int.tryParse(value);
-                if (size != null){
+                if (size != null) {
                   onSubtitleFontSizeChanged(size);
                 }
               },
@@ -100,14 +89,8 @@ class ChoiceCommonCustomizationTab extends CustomizationTab {
             TextStyleCustomizationItem(
               initialColor: AppColors.white,
               onColorPicked: onButtonTextColorPicked,
-              initialText: '12',
-              inputFormatters: [
-                FilteringTextInputFormatter.digitsOnly,
-                LengthLimitingTextInputFormatter(2),
-              ],
-              onTextChanged: (value) {
-                if (value == null) return;
-
+              initialFontSize: '12',
+              onFontSizeChanged: (value) {
                 final size = int.tryParse(value);
                 if (size != null) {
                   onButtonFontSizeChanged(size);

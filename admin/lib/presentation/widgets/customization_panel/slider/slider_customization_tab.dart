@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:survey_admin/presentation/app/localization/localizations.dart';
 import 'package:survey_admin/presentation/utils/app_fonts.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
+import 'package:survey_admin/presentation/utils/theme_extension.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/color_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
+import 'package:survey_admin/presentation/widgets/customization_items/text_style_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/thickness_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/customization_tab.dart';
 
@@ -66,28 +68,22 @@ class SliderCustomizationTab extends CustomizationTab {
         CustomizationItemsContainer(
           title: context.localization.thumb,
           children: [
-            Row(
-              children: [
-                Expanded(
-                  child: ColorCustomizationItem(
-                    initialColor: AppColors.switchBackgroundActive,
-                    onColorPicked: onThumbColorChanged,
-                  ),
-                ),
-                Expanded(
-                  child: ThicknessCustomizationItem(
-                    onThicknessChanged: (value) {
-                      if (value == null) return;
-
-                      final size = int.tryParse(value);
-                      if (size != null) {
-                        onThumbSizeChanged(size);
-                      }
-                    },
-                    initialSize: AppFonts.sizeL,
-                  ),
-                ),
-              ],
+            TextStyleCustomizationItem(
+              initialColor: AppColors.textHintGrey,
+              onColorPicked: onThumbColorChanged,
+              initialFontSize: AppFonts.sizeL.toString(),
+              decoration: InputDecoration(
+                isCollapsed: true,
+                border: InputBorder.none,
+                suffixText: context.localization.px,
+                suffixStyle: context.theme.textTheme.bodyLarge,
+              ),
+              onFontSizeChanged: (value) {
+                final size = int.tryParse(value);
+                if (size != null) {
+                  onThumbSizeChanged(size);
+                }
+              },
             ),
           ],
         ),

@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:survey_admin/presentation/app/localization/localizations.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
 import 'package:survey_admin/presentation/utils/theme_extension.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/color_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
-import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/input_type_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/multiline_switch.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/padding_customization_item.dart';
+import 'package:survey_admin/presentation/widgets/customization_items/text_style_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/customization_tab.dart';
 import 'package:survey_core/survey_core.dart';
 
@@ -68,41 +67,22 @@ class InputCustomizationTab extends CustomizationTab {
         CustomizationItemsContainer(
           title: context.localization.border,
           children: [
-            Row(
-              children: [
-                Flexible(
-                  child: ColorCustomizationItem(
-                    initialColor: AppColors.black,
-                    onColorPicked: onBorderColorChanged,
-                  ),
-                ),
-                Flexible(
-                  child: SizedBox(
-                    width: AppDimensions.margin4XL,
-                    child: CustomizationTextField(
-                      initialValue: '1',
-                      inputFormatters: [
-                        FilteringTextInputFormatter.digitsOnly,
-                        LengthLimitingTextInputFormatter(3),
-                      ],
-                      decoration: InputDecoration(
-                        isCollapsed: true,
-                        border: InputBorder.none,
-                        suffixText: context.localization.px,
-                        suffixStyle: context.theme.textTheme.bodyLarge,
-                      ),
-                      onChanged: (value) {
-                        if (value == null) return;
-
-                        final size = int.tryParse(value);
-                        if (size != null) {
-                          onBorderWidthChanged(size);
-                        }
-                      },
-                    ),
-                  ),
-                ),
-              ],
+            TextStyleCustomizationItem(
+              initialColor: AppColors.black,
+              onColorPicked: onBorderColorChanged,
+              initialFontSize: '1',
+              onFontSizeChanged: (value) {
+                final size = int.tryParse(value);
+                if (size != null) {
+                  onBorderWidthChanged(size);
+                }
+              },
+              decoration: InputDecoration(
+                isCollapsed: true,
+                border: InputBorder.none,
+                suffixText: context.localization.px,
+                suffixStyle: context.theme.textTheme.bodyLarge,
+              ),
             ),
           ],
         ),
@@ -120,64 +100,32 @@ class InputCustomizationTab extends CustomizationTab {
         CustomizationItemsContainer(
           title: context.localization.hint,
           children: [
-            Row(
-              children: [
-                Flexible(
-                  child: ColorCustomizationItem(
-                    initialColor: AppColors.textLightGrey,
-                    onColorPicked: onHintColorChanged,
-                  ),
-                ),
-                Flexible(
-                  child: CustomizationTextField(
-                    initialValue: '16',
-                    inputFormatters: [
-                      FilteringTextInputFormatter.digitsOnly,
-                      LengthLimitingTextInputFormatter(3),
-                    ],
-                    onChanged: (value) {
-                      if (value == null) return;
-
-                      final size = int.tryParse(value);
-                      if (size != null) {
-                        onHintFontSizeChanged(size);
-                      }
-                    },
-                  ),
-                ),
-              ],
+            TextStyleCustomizationItem(
+              initialColor: AppColors.textLightGrey,
+              onColorPicked: onHintColorChanged,
+              initialFontSize: '16',
+              onFontSizeChanged: (value) {
+                final size = int.tryParse(value);
+                if (size != null) {
+                  onHintFontSizeChanged(size);
+                }
+              },
             ),
           ],
         ),
         CustomizationItemsContainer(
           title: context.localization.text,
           children: [
-            Row(
-              children: [
-                Flexible(
-                  child: ColorCustomizationItem(
-                    initialColor: AppColors.black,
-                    onColorPicked: onTextColorChanged,
-                  ),
-                ),
-                Flexible(
-                  child: CustomizationTextField(
-                    initialValue: '16',
-                    inputFormatters: [
-                      FilteringTextInputFormatter.digitsOnly,
-                      LengthLimitingTextInputFormatter(3),
-                    ],
-                    onChanged: (value) {
-                      if (value == null) return;
-
-                      final size = int.tryParse(value);
-                      if (size != null) {
-                        onTextFontSizeChanged(size);
-                      }
-                    },
-                  ),
-                ),
-              ],
+            TextStyleCustomizationItem(
+              initialColor: AppColors.black,
+              onColorPicked: onTextColorChanged,
+              initialFontSize: '16',
+              onFontSizeChanged: (value) {
+                final size = int.tryParse(value);
+                if (size != null) {
+                  onTextFontSizeChanged(size);
+                }
+              },
             ),
           ],
         ),
