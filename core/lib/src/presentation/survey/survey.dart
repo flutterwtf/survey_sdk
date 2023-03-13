@@ -40,62 +40,65 @@ class _SurveyState extends State<Survey> {
     return BlocBuilder<SurveyCubit, SurveyState>(
       bloc: _cubit,
       builder: (BuildContext context, state) {
-        final surveyData = state.surveyData;
-        return surveyData == null
-            ? const Center(
-                child: CircularProgressIndicator(
-                  color: AppColors.black,
-                ),
-              )
-            : Theme(
-                data: surveyData.commonTheme.toThemeData().copyWith(
-                      textTheme: const TextTheme(
-                        titleMedium: TextStyle(
-                          color: AppColors.black,
-                          fontWeight: AppFonts.weightBold,
-                          fontFamily: AppFonts.karla,
-                        ),
-                        titleSmall: TextStyle(
-                          color: AppColors.black,
-                          fontWeight: AppFonts.weightRegular,
-                          fontFamily: AppFonts.karla,
-                          fontSize: AppFonts.sizeS,
-                        ),
-                        labelLarge: TextStyle(
-                          color: AppColors.white,
-                          fontFamily: AppFonts.karla,
-                          fontWeight: AppFonts.weightBold,
-                        ),
-                        bodyMedium: TextStyle(
-                          color: AppColors.black,
-                          fontFamily: AppFonts.karla,
-                          fontWeight: AppFonts.weightRegular,
-                        ),
-                        bodySmall: TextStyle(
-                          color: AppColors.black,
-                          fontWeight: AppFonts.weightRegular,
-                          fontFamily: AppFonts.karla,
+        if (state is SurveyInitialState) {
+          final surveyData = state.surveyData;
+          return surveyData == null
+              ? const Center(
+                  child: CircularProgressIndicator(
+                    color: AppColors.black,
+                  ),
+                )
+              : Theme(
+                  data: surveyData.commonTheme.toThemeData().copyWith(
+                        textTheme: const TextTheme(
+                          titleMedium: TextStyle(
+                            color: AppColors.black,
+                            fontWeight: AppFonts.weightBold,
+                            fontFamily: AppFonts.karla,
+                          ),
+                          titleSmall: TextStyle(
+                            color: AppColors.black,
+                            fontWeight: AppFonts.weightRegular,
+                            fontFamily: AppFonts.karla,
+                            fontSize: AppFonts.sizeS,
+                          ),
+                          labelLarge: TextStyle(
+                            color: AppColors.white,
+                            fontFamily: AppFonts.karla,
+                            fontWeight: AppFonts.weightBold,
+                          ),
+                          bodyMedium: TextStyle(
+                            color: AppColors.black,
+                            fontFamily: AppFonts.karla,
+                            fontWeight: AppFonts.weightRegular,
+                          ),
+                          bodySmall: TextStyle(
+                            color: AppColors.black,
+                            fontWeight: AppFonts.weightRegular,
+                            fontFamily: AppFonts.karla,
+                          ),
                         ),
                       ),
+                  child: WillPopScope(
+                    onWillPop: () async {
+                      _surveyController.onBack();
+                      return false;
+                    },
+                    child: PageView(
+                      physics: const NeverScrollableScrollPhysics(),
+                      children: surveyData.questions
+                          .map<Widget>(
+                            (question) => DataToWidgetUtil.createWidget(
+                              question,
+                              _surveyController.onNext,
+                            ),
+                          )
+                          .toList(),
                     ),
-                child: WillPopScope(
-                  onWillPop: () async {
-                    _surveyController.onBack();
-                    return false;
-                  },
-                  child: PageView(
-                    physics: const NeverScrollableScrollPhysics(),
-                    children: surveyData.questions
-                        .map<Widget>(
-                          (question) => DataToWidgetUtil.createWidget(
-                            question,
-                            _surveyController.onNext,
-                          ),
-                        )
-                        .toList(),
                   ),
-                ),
-              );
+                );
+        }
+        return const SizedBox.shrink();
       },
     );
   }

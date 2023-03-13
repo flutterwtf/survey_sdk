@@ -1,11 +1,15 @@
 import 'package:survey_core/src/domain/entities/survey_data.dart';
 
-class SurveyState {
+abstract class SurveyState {}
+
+class SurveyInitialState extends SurveyState {
   final SurveyData? surveyData;
 
-  SurveyState({this.surveyData});
+  SurveyInitialState({this.surveyData});
 
-  SurveyState copyWith({SurveyData? surveyData}) {
-    return SurveyState(surveyData: surveyData ?? this.surveyData);
+  SurveyInitialState copyWith({SurveyData? surveyData}) {
+    return SurveyInitialState(surveyData: surveyData ?? this.surveyData);
   }
 }
+
+class SurveyLoadingState extends SurveyState {}
