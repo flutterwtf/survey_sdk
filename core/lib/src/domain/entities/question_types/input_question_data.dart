@@ -1,7 +1,16 @@
 import 'package:survey_core/src/domain/entities/constants/question_types.dart';
+import 'package:survey_core/src/domain/entities/input_validator.dart';
 import 'package:survey_core/src/domain/entities/question_types/question_data.dart';
 import 'package:survey_core/src/domain/entities/themes/input_question_theme.dart';
-import 'package:survey_core/src/domain/entities/validator/input_validator.dart';
+
+enum InputType {
+  text,
+  number,
+  date,
+  email,
+  password,
+  phone;
+}
 
 class InputQuestionData extends QuestionData<InputQuestionTheme> {
   final InputValidator validator;
@@ -17,10 +26,10 @@ class InputQuestionData extends QuestionData<InputQuestionTheme> {
     this.hintText,
   });
 
-  const InputQuestionData.common({int index = 0})
+  InputQuestionData.common({int index = 0})
       : this(
           // TODO(dev): to localization somehow
-          validator: const NumberValidator(),
+          validator: InputValidator.number(),
           index: index,
           title: 'Why is asking the right type of questions important?',
           subtitle: '',
@@ -64,7 +73,7 @@ class InputQuestionData extends QuestionData<InputQuestionTheme> {
         'isSkip': isSkip,
         'content': content,
         'payload': {
-          ...JsonValidator.toJson(validator),
+          ...validator.toJson(),
           'hintText': hintText,
         }
       };
@@ -77,7 +86,7 @@ class InputQuestionData extends QuestionData<InputQuestionTheme> {
       subtitle: json['subtitle'],
       isSkip: json['isSkip'],
       content: json['content'],
-      validator: JsonValidator.fromJson(payload),
+      validator: InputValidator.fromJson(payload),
       hintText: payload['hintText'],
     );
   }
