@@ -48,18 +48,21 @@ void main() {
       testWidgets(
         'DefaultValidator should tell when input is not valid',
         (WidgetTester tester) async {
+          String? sendData;
           await tester.pumpWidget(
             AppTest(
               child: InputQuestionPage(
-                data: mockInputData.copyWith(isSkip: true),
-                // TODO(dev): check send data properly everywhere
-                onSend: ({data, String? key}) => data,
+                data: mockInputData,
+                onSend: ({data, String? key}) => sendData = data,
               ),
             ),
           );
           final inputField = find.byType(TextFormField);
           await tester.enterText(inputField, testValidTextString);
+          await tester.tap(find.byType(QuestionBottomButton));
           await tester.pumpAndSettle();
+
+          expect(sendData, equals(testValidTextString));
           expect(find.text('This field cannot be empty'), findsNothing);
         },
       );
@@ -67,18 +70,22 @@ void main() {
       testWidgets(
         'NumberValidator should tell when number is not valid',
         (WidgetTester tester) async {
+          String? sendData;
           await tester.pumpWidget(
             AppTest(
               child: InputQuestionPage(
-                data: mockInputDataWithNumberValidator.copyWith(isSkip: true),
-                onSend: ({data, String? key}) => data,
+                data: mockInputDataWithNumberValidator,
+                onSend: ({data, String? key}) => sendData = data,
               ),
             ),
           );
 
           final inputField = find.byType(TextFormField);
           await tester.enterText(inputField, testInvalidNumberString);
+          await tester.tap(find.byType(QuestionBottomButton));
           await tester.pumpAndSettle();
+
+          expect(sendData, equals(testInvalidNumberString));
           expect(find.text('Please enter a valid number'), findsOneWidget);
         },
       );
@@ -90,7 +97,7 @@ void main() {
           await tester.pumpWidget(
             AppTest(
               child: InputQuestionPage(
-                data: mockInputData.copyWith(isSkip: true),
+                data: mockInputData,
                 onSend: ({data, String? key}) => isPressed = true,
               ),
             ),
@@ -109,7 +116,7 @@ void main() {
           await tester.pumpWidget(
             AppTest(
               child: InputQuestionPage(
-                data: mockInputData.copyWith(isSkip: true),
+                data: mockInputData,
                 onSend: ({data, String? key}) => sentData = data,
               ),
             ),
