@@ -154,7 +154,7 @@ packages:
     source: hosted
     version: "5.6.0"
   dart_code_metrics_presets:
-    dependency: transitive
+    dependency: "direct dev"
     description:
       name: dart_code_metrics_presets
       sha256: d3c36f97470f478c8432cee163058750db3d167c0a7af9bf291f48dd86c75086
