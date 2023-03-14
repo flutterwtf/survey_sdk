@@ -2,6 +2,8 @@ import 'package:survey_core/src/domain/entities/constants/question_types.dart';
 import 'package:survey_core/src/domain/entities/question_types/question_data.dart';
 import 'package:survey_core/src/domain/entities/themes/choice_question_theme.dart';
 
+import '../constants/question_data_common.dart';
+
 class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
   final bool isMultipleChoice;
   final List<String> options;
@@ -27,18 +29,12 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
 
   const ChoiceQuestionData.common({int index = 0})
       : this(
-          // TODO(dev): to localization somehow
           isMultipleChoice: false,
-          options: const ['First option', 'Second option', 'Third option'],
-          title: 'Title',
-          subtitle: '',
+          options: QuestionDataCommon.choiceQuestionOptions,
+          title: QuestionDataCommon.choiceQuestionTitle,
+          subtitle: QuestionDataCommon.choiceQuestionSubtitle,
           isSkip: false,
-          content:
-              'You may simply need a single, brief answer without discussion. '
-              'Other times, you may want to talk through a scenario, evaluate '
-              'how well a group is learning new material or solicit feedback. '
-              'The types of questions you ask directly impact the type of '
-              'answer you receive.',
+          content: QuestionDataCommon.choiceQuestionContent,
           index: index,
         );
 

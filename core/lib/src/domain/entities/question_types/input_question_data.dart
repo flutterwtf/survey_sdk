@@ -1,3 +1,4 @@
+import 'package:survey_core/src/domain/entities/constants/question_data_common.dart';
 import 'package:survey_core/src/domain/entities/constants/question_types.dart';
 import 'package:survey_core/src/domain/entities/input_validator.dart';
 import 'package:survey_core/src/domain/entities/question_types/question_data.dart';
@@ -28,14 +29,12 @@ class InputQuestionData extends QuestionData<InputQuestionTheme> {
 
   InputQuestionData.common({int index = 0})
       : this(
-          // TODO(dev): to localization somehow
           validator: InputValidator.number(),
           index: index,
-          title: 'Why is asking the right type of questions important?',
-          subtitle: '',
+          title: QuestionDataCommon.inputQuestionTitle,
+          subtitle: QuestionDataCommon.choiceQuestionSubtitle,
           isSkip: false,
-          content: 'Doing so can help you gather the information most '
-              'relevant and useful to you',
+          content: QuestionDataCommon.inputQuestionContent,
         );
 
   @override

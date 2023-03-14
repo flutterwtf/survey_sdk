@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:survey_core/src/domain/entities/constants/question_types.dart';
 import 'package:survey_core/src/domain/entities/question_types/question_data.dart';
 
+import '../constants/question_data_common.dart';
+
 class SliderQuestionData extends QuestionData<SliderThemeData> {
   final num minValue;
   final num maxValue;
@@ -20,20 +22,14 @@ class SliderQuestionData extends QuestionData<SliderThemeData> {
 
   const SliderQuestionData.common({int index = 0})
       : this(
-          // TODO(dev): to localization somehow
           minValue: 0,
           maxValue: 10,
           initialValue: 5,
-          title: 'Intro',
+          title: QuestionDataCommon.sliderQuestionTitle,
           index: index,
-          subtitle: '',
+          subtitle: QuestionDataCommon.sliderQuestionSubtitle,
           isSkip: false,
-          content:
-              'You may simply need a single, brief answer without discussion. '
-              'Other times, you may want to talk through a scenario, evaluate '
-              'how well a group is learning new material or solicit feedback. '
-              'The types of questions you ask directly impact the type of '
-              'answer you receive.',
+          content: QuestionDataCommon.sliderQuestionContent,
         );
 
   @override

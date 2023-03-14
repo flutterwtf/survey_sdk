@@ -1,3 +1,4 @@
+import 'package:survey_core/src/domain/entities/constants/question_data_common.dart';
 import 'package:survey_core/src/domain/entities/constants/question_types.dart';
 import 'package:survey_core/src/domain/entities/question_types/question_data.dart';
 import 'package:survey_core/src/domain/entities/themes/intro_question_theme.dart';
@@ -16,18 +17,12 @@ class IntroQuestionData extends QuestionData {
 
   const IntroQuestionData.common({int index = 0})
       : this(
-          // TODO(dev): to localization somehow
-          mainButtonTitle: 'NEXT',
-          title: 'Intro',
+          mainButtonTitle: QuestionDataCommon.introQuestionMainButtonTitle,
+          title: QuestionDataCommon.introQuestionTitle,
           index: index,
-          subtitle: '',
+          subtitle: QuestionDataCommon.choiceQuestionSubtitle,
           isSkip: false,
-          content:
-              'You may simply need a single, brief answer without discussion. '
-              'Other times, you may want to talk through a scenario, evaluate '
-              'how well a group is learning new material or solicit feedback. '
-              'The types of questions you ask directly impact the type of '
-              'answer you receive.',
+          content: QuestionDataCommon.introQuestionContent,
         );
 
   @override
