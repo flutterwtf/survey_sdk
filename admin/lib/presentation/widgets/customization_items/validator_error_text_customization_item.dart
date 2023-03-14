@@ -22,6 +22,7 @@ class ValidatorErrorTextCustomizationItem extends StatelessWidget {
       ),
       child: TextFormField(
         initialValue: initialValue ?? '',
+        onChanged: onErrorTextChanged,
         decoration: InputDecoration(
           isCollapsed: true,
           border: InputBorder.none,
