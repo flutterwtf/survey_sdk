@@ -29,6 +29,7 @@ void main() {
           onTextColorChanged: (Color value) {},
           onTextFontSizeChanged: (int? value) {},
           onVerticalPaddingChanged: (double size) {},
+          onValidatorErrorTextChanged: (String errorText) {},
           title: 'test',
         ),
       );
