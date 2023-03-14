@@ -8,10 +8,10 @@ class BuilderCubit extends Cubit<BuilderState> {
 
   BuilderCubit(this._surveyDataRepository)
       : super(
-          const BuilderState(
+          BuilderState(
             selectedQuestion: null,
             questionsList: [
-              IntroQuestionData.common(index: 1),
+              const IntroQuestionData.common(index: 1),
               InputQuestionData.common(index: 2),
             ],
           ),
