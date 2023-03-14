@@ -45,9 +45,14 @@ class _QuestionListState extends State<QuestionList> {
     });
   }
 
-  void _updateQuestion(List<QuestionData<dynamic>> questionList) {
-    for (var i = 0; i < questionList.length; i++) {
-      questionList[i] = questionList[i].copyWith(index: i + 1);
+  void _updateQuestion(int oldIndex, int newIndex) {
+    final itemOld = _questionList.removeAt(oldIndex);
+    _questionList.insert(
+      newIndex,
+      itemOld,
+    );
+    for (var i = 0; i < _questionList.length; i++) {
+      _questionList[i] = _questionList[i].copyWith(index: i + 1);
     }
   }
 
@@ -123,12 +128,7 @@ class _QuestionListState extends State<QuestionList> {
                 if (newIndex > oldIndex) newIndex--;
                 setState(
                   () {
-                    final itemOld = _questionList.removeAt(oldIndex);
-                    _questionList.insert(
-                      newIndex,
-                      itemOld,
-                    );
-                    _updateQuestion(_questionList);
+                    _updateQuestion(oldIndex, newIndex);
                   },
                 );
               },
