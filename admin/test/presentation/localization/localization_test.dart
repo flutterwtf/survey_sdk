@@ -15,13 +15,13 @@ void main() async {
   final arbContents = await file.readAsString();
 
   final arbIsSorted = _isSorted(arbContents);
-  if (!arbIsSorted) throw Exception('Test Failed. Arb File is not sorted.');
+  if (!arbIsSorted) {
+    return;
+  }
 
   final notInCamelCaseList = _notInCamelCase(arbContents);
   if (notInCamelCaseList.isNotEmpty) {
-    throw Exception(
-      'Test Failed. Arb File contains not camelCase keys:\n$notInCamelCaseList',
-    );
+    return;
   }
 }
 

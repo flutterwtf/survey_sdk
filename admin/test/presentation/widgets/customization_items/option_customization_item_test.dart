@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/option_customization_item.dart';
 
-import '../app_test.dart';
+import '../app_tester.dart';
 
 void main() {
   group('option customization item ->', () {
@@ -11,7 +11,7 @@ void main() {
         (WidgetTester tester) async {
       var options = <String>['Option 1', 'Option 2'];
       await tester.pumpWidget(
-        AppTest(
+        AppTester(
           child: OptionCustomizationItem(
             options: options,
             onChanged: (newOptions) {
@@ -37,7 +37,7 @@ void main() {
         (WidgetTester tester) async {
       var options = <String>['Option 1', 'Option 2', 'Option 3'];
       await tester.pumpWidget(
-        AppTest(
+        AppTester(
           child: OptionCustomizationItem(
             options: options,
             onChanged: (newOptions) {
