@@ -78,8 +78,6 @@ class _InputTypeCustomizationItemState extends State<InputTypeCustomizationItem>
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _InputTypeItem(
-          // TODO(dev): why do we need these keys
-          key: UniqueKey(),
           inputType: _selectedType,
           trailing: RotationTransition(
             turns: _animation,
@@ -104,8 +102,6 @@ class _InputTypeCustomizationItemState extends State<InputTypeCustomizationItem>
                       .where((inputType) => inputType != _selectedType)
                       .map(
                         (inputType) => _InputTypeItem(
-                          // TODO(dev): why do we need these keys
-                          key: UniqueKey(),
                           inputType: inputType,
                           onTap: () {
                             setState(() {
@@ -134,7 +130,6 @@ class _InputTypeItem extends StatelessWidget {
   final Widget? trailing;
 
   const _InputTypeItem({
-    required super.key,
     required this.inputType,
     required this.onTap,
     this.trailing,

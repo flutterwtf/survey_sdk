@@ -25,7 +25,7 @@ class _ColorCustomizationItemState extends State<ColorCustomizationItem> {
 
   @override
   void initState() {
-    _controller.text = colorToString(widget.initialColor);
+    _controller.text = _colorToString(widget.initialColor);
     _pickedColor = widget.initialColor;
     super.initState();
   }
@@ -36,8 +36,7 @@ class _ColorCustomizationItemState extends State<ColorCustomizationItem> {
     super.dispose();
   }
 
-  // TODO(dev): Why is it "public"? Need to check all other places.
-  void onChangedTextField(String? value) {
+  void _onChangedTextField(String? value) {
     if (value != null) {
       final color = int.tryParse(value.padRight(8, '0'), radix: 16);
       if (color != null) {
@@ -48,21 +47,21 @@ class _ColorCustomizationItemState extends State<ColorCustomizationItem> {
     }
   }
 
-  void onColorChanged(Color color) {
+  void _onColorChanged(Color color) {
     widget.onColorPicked(color);
     setState(() {
       _pickedColor = color;
-      _controller.text = colorToString(color);
+      _controller.text = _colorToString(color);
     });
   }
 
-  String colorToString(Color color) =>
+  String _colorToString(Color color) =>
       color.value.toRadixString(16).toUpperCase();
 
-  void updateTextField() {
+  void _updateTextField() {
     widget.onColorPicked(_pickedColor);
     setState(
-      () => _controller.text = colorToString(_pickedColor),
+      () => _controller.text = _colorToString(_pickedColor),
     );
   }
 
@@ -88,14 +87,14 @@ class _ColorCustomizationItemState extends State<ColorCustomizationItem> {
                 margin: const EdgeInsets.all(AppDimensions.margin2XS),
                 child: CustomizationTextField(
                   controller: _controller,
-                  onEditingComplete: updateTextField,
+                  onEditingComplete: _updateTextField,
                   inputFormatters: [
                     FilteringTextInputFormatter.allow(
                       RegExp('[0-9a-fA-F]'),
                     ),
                     LengthLimitingTextInputFormatter(8),
                   ],
-                  onChanged: onChangedTextField,
+                  onChanged: _onChangedTextField,
                 ),
               ),
             ),
@@ -107,7 +106,7 @@ class _ColorCustomizationItemState extends State<ColorCustomizationItem> {
           ),
           ColorPicker(
             pickerColor: _pickedColor,
-            onColorChanged: onColorChanged,
+            onColorChanged: _onColorChanged,
             portraitOnly: true,
             pickerAreaHeightPercent: 0.4,
           ),
