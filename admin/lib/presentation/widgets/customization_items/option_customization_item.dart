@@ -30,6 +30,12 @@ class _OptionCustomizationItemState extends State<OptionCustomizationItem> {
     _options = widget.options;
   }
 
+  @override
+  void dispose() {
+    super.dispose();
+    _controller.dispose();
+  }
+
   void onEditingComplete() {
     if (_controller.text.isNotEmpty) {
       setState(() {
