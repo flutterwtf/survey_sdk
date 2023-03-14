@@ -1,4 +1,3 @@
-// TODO(dev): rename file
 abstract class AppDimensions {
   static const double margin2XS = 6;
   static const double marginXS = 12;
