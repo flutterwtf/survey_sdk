@@ -6,7 +6,7 @@ import 'package:survey_admin/presentation/utils/constants/app_dimensions.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
 
 class RadiusCustomizationItem extends StatelessWidget {
-  final String initialValue;
+  final double initialValue;
   final ValueChanged<int> onRadiusChanged;
 
   const RadiusCustomizationItem({
@@ -23,7 +23,7 @@ class RadiusCustomizationItem extends StatelessWidget {
         const SizedBox(width: AppDimensions.margin2XS),
         Expanded(
           child: CustomizationTextField(
-            initialValue: initialValue,
+            initialValue: initialValue.toString(),
             inputFormatters: [
               FilteringTextInputFormatter.digitsOnly,
               LengthLimitingTextInputFormatter(2),

@@ -116,7 +116,7 @@ class ChoiceCommonCustomizationTab extends CustomizationTab {
               },
             ),
             RadiusCustomizationItem(
-              initialValue: AppDimensions.circularRadiusS.toString(),
+              initialValue: AppDimensions.circularRadiusS,
               onRadiusChanged: onButtonRadiusChanged,
             ),
           ],

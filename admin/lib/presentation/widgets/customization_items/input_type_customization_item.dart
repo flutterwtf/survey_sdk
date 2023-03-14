@@ -27,14 +27,14 @@ extension InputTypeExt on InputType {
 }
 
 class InputTypeCustomizationItem extends StatefulWidget {
+  final InputType initialValue;
+  final void Function(InputType inputType)? onChanged;
+
   const InputTypeCustomizationItem({
     super.key,
     this.initialValue = InputType.text,
     this.onChanged,
   });
-
-  final InputType initialValue;
-  final void Function(InputType inputType)? onChanged;
 
   @override
   State<InputTypeCustomizationItem> createState() =>

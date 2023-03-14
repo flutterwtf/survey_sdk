@@ -81,7 +81,7 @@ class InputCustomizationTab extends CustomizationTab {
                   child: SizedBox(
                     width: AppDimensions.margin4XL,
                     child: CustomizationTextField(
-                      initialValue: AppDimensions.margin3XS.toString(),
+                      initialValue: AppDimensions.defaultBorderWidth.toString(),
                       inputFormatters: [
                         FilteringTextInputFormatter.digitsOnly,
                         LengthLimitingTextInputFormatter(3),
