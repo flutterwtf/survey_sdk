@@ -12,9 +12,13 @@ import 'package:survey_core/survey_core.dart';
 
 class QuestionList extends StatefulWidget {
   final void Function(QuestionData) onSelect;
+  final void Function(QuestionData) onAdd;
+  final List<QuestionData> questionList;
 
   const QuestionList({
     required this.onSelect,
+    required this.onAdd,
+    required this.questionList,
     super.key,
   });
 
@@ -29,10 +33,7 @@ class _QuestionListState extends State<QuestionList> {
   @override
   void initState() {
     super.initState();
-    _questionList = [
-      const IntroQuestionData.common(index: 1),
-      InputQuestionData.common(index: 2),
-    ];
+    _questionList = widget.questionList;
     widget.onSelect(_questionList.first);
   }
 
@@ -43,6 +44,7 @@ class _QuestionListState extends State<QuestionList> {
         data.copyWith(index: index),
       );
     });
+    widget.onAdd(data.copyWith(index: index));
   }
 
   @override
