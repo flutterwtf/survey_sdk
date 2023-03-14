@@ -14,6 +14,9 @@ class CustomizationTextField extends StatelessWidget {
   final VoidCallback? onEditingComplete;
   final TextEditingController? controller;
   final InputDecoration decoration;
+  final String? hintText;
+  final int? maxLines;
+  final TextStyle? style;
 
   const CustomizationTextField({
     super.key,
@@ -26,6 +29,9 @@ class CustomizationTextField extends StatelessWidget {
     this.onEditingComplete,
     this.controller,
     this.fontSize = AppFonts.sizeL,
+    this.hintText,
+    this.maxLines,
+    this.style,
     this.decoration = const InputDecoration(
       isCollapsed: true,
       border: InputBorder.none,
@@ -39,11 +45,13 @@ class CustomizationTextField extends StatelessWidget {
       initialValue: initialValue,
       validator: validator,
       autovalidateMode: autovalidateMode,
+      maxLines: maxLines,
       onChanged: onChanged,
       onEditingComplete: onEditingComplete,
       focusNode: focusNode,
-      decoration: decoration,
-      style: context.theme.textTheme.bodyMedium?.copyWith(fontSize: fontSize),
+      decoration: decoration.copyWith(hintText: hintText),
+      style: style ??
+          context.theme.textTheme.bodyMedium?.copyWith(fontSize: fontSize),
       inputFormatters: inputFormatters,
     );
   }
