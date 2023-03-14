@@ -45,6 +45,12 @@ class _QuestionListState extends State<QuestionList> {
     });
   }
 
+  void _updateQuestion(List<QuestionData<dynamic>> questionList) {
+    for (var i = 0; i < questionList.length; i++) {
+      questionList[i] = questionList[i].copyWith(index: i + 1);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -122,10 +128,7 @@ class _QuestionListState extends State<QuestionList> {
                       newIndex,
                       itemOld,
                     );
-                    for (int i = 0; i < _questionList.length; i++) {
-                      _questionList[i] =
-                          _questionList[i].copyWith(index: i + 1);
-                    }
+                    _updateQuestion(_questionList);
                   },
                 );
               },
