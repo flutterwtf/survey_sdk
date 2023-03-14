@@ -1,4 +1,5 @@
 abstract class AppDimensions {
+  static const double margin3XS = 1;
   static const double margin2XS = 6;
   static const double marginXS = 12;
   static const double marginS = 14;
