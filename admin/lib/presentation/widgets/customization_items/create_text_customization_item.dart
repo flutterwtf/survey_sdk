@@ -25,6 +25,7 @@ class CreateTextCustomizationItem extends StatelessWidget {
         },
         style: context.theme.textTheme.bodyLarge,
         hintText: context.localization.enter_text,
+        maxLines: null,
       ),
     );
   }

@@ -30,7 +30,7 @@ class CustomizationTextField extends StatelessWidget {
     this.controller,
     this.fontSize = AppFonts.sizeL,
     this.hintText,
-    this.maxLines,
+    this.maxLines = 1,
     this.style,
     this.decoration = const InputDecoration(
       isCollapsed: true,

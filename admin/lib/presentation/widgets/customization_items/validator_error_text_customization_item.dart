@@ -20,6 +20,7 @@ class ValidatorErrorTextCustomizationItem extends StatelessWidget {
         onChanged: (value) {
           if (value != null) onErrorTextChanged(value);
         },
+        maxLines: null,
         hintText: context.localization.validator_error_hint,
       );
 }

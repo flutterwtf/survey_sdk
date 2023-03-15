@@ -80,7 +80,6 @@ class _OptionCustomizationItemState extends State<OptionCustomizationItem> {
               child: CustomizationTextField(
                 controller: _controller,
                 onEditingComplete: onEditingComplete,
-                maxLines: 1,
                 decoration: InputDecoration.collapsed(
                   hintText: context.localization.type_new_option_here,
                   hintStyle: const TextStyle(
