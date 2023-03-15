@@ -64,14 +64,15 @@ class QuestionListItem extends StatelessWidget {
               Container(
                 decoration: BoxDecoration(
                   color: AppColors.white,
-                  borderRadius: const BorderRadius.all(Radius.circular(10)),
+                  borderRadius: const BorderRadius.all(
+                    Radius.circular(AppDimensions.circularRadiusS),
+                  ),
                   border: Border.all(
-                    width: 0.5,
+                    width: AppDimensions.thinBorderWidth,
                   ),
                 ),
-                // TODO(dev): to const maybe???
-                height: 40,
-                width: 40,
+                height: AppDimensions.imageSizeS,
+                width: AppDimensions.imageSizeS,
                 child: Center(
                   child: _questionImage(questionData),
                 ),
