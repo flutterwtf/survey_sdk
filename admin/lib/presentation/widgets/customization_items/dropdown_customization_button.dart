@@ -5,11 +5,11 @@ import 'package:survey_admin/presentation/utils/constants/app_durations.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
 
 class DropdownCustomizationButton<T> extends StatefulWidget {
-  final T initialValue;
+  final T value;
   final List<DropdownCustomizationItem<T>> items;
 
   const DropdownCustomizationButton({
-    required this.initialValue,
+    required this.value,
     required this.items,
     super.key,
   });
@@ -22,14 +22,14 @@ class DropdownCustomizationButton<T> extends StatefulWidget {
 class _DropdownCustomizationButtonState<T>
     extends State<DropdownCustomizationButton<T>>
     with TickerProviderStateMixin {
-  late bool _isOpen;
+  late bool _isExpanded;
   late final AnimationController _iconAnimationController;
   late final Animation<double> _animation;
 
   @override
   void initState() {
     super.initState();
-    _isOpen = false;
+    _isExpanded = false;
     _iconAnimationController = AnimationController(
       vsync: this,
       duration: AppDurations.customizationItemAnimation,
@@ -58,13 +58,10 @@ class _DropdownCustomizationButtonState<T>
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              DropdownCustomizationItem<T>(
-                value: widget.initialValue,
-                child: widget.items
-                    .where((element) => element.value == widget.initialValue)
-                    .map((e) => e.child)
-                    .first,
-              ),
+              widget.items
+                  .where((element) => element.value == widget.value)
+                  .first
+                  .child,
               RotationTransition(
                 turns: _animation,
                 child: SvgPicture.asset(AppAssets.arrowIcon),
@@ -73,9 +70,9 @@ class _DropdownCustomizationButtonState<T>
           ),
           onTap: () {
             setState(() {
-              _isOpen = !_isOpen;
+              _isExpanded = !_isExpanded;
             });
-            if (_isOpen) {
+            if (_isExpanded) {
               _iconAnimationController.forward();
             } else {
               _iconAnimationController.reverse();
@@ -84,11 +81,11 @@ class _DropdownCustomizationButtonState<T>
         ),
         AnimatedSize(
           duration: AppDurations.customizationItemAnimation,
-          child: _isOpen
+          child: _isExpanded
               ? Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: widget.items
-                      .where((element) => element.value != widget.initialValue)
+                      .where((element) => element.value != widget.value)
                       .toList(),
                 )
               : const SizedBox.shrink(),
@@ -99,9 +96,9 @@ class _DropdownCustomizationButtonState<T>
 }
 
 class DropdownCustomizationItem<T> extends StatelessWidget {
-  final Widget child;
   final T value;
-  final void Function(T value)? onChange;
+  final Widget child;
+  final ValueChanged<T>? onChange;
 
   const DropdownCustomizationItem({
     required this.child,

@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/color_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
-import 'package:survey_admin/presentation/widgets/customization_items/drop_down_customization_button.dart';
+import 'package:survey_admin/presentation/widgets/customization_items/dropdown_customization_button.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/multiline_switch.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/padding_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/input/input_customization_panel.dart';
@@ -119,7 +119,10 @@ void main() {
           expect(find.byType(CustomizationItemsContainer), findsNWidgets(7));
 
           expect(find.byType(MultilineSwitch), findsOneWidget);
-          expect(find.byType(DropdownCustomizationButton<InputType>), findsOneWidget);
+          expect(
+            find.byType(DropdownCustomizationButton<InputType>),
+            findsOneWidget,
+          );
           expect(find.byType(ColorCustomizationItem), findsNWidgets(4));
           expect(find.byType(PaddingCustomizationItem), findsNWidgets(1));
           expect(find.byType(CustomizationTextField), findsNWidgets(9));

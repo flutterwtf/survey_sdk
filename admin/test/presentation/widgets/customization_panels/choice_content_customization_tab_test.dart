@@ -25,7 +25,7 @@ void main() {
           limitedRule: 0,
           listOptions: const [],
           onRuleLimitedChanged: (value) {},
-          editableQuestion: const IntroQuestionData.common(index: 0),
+          editableQuestion: const IntroQuestionData.common(),
         ),
       );
 

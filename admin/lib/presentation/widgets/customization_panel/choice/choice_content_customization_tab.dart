@@ -4,7 +4,7 @@ import 'package:survey_admin/presentation/utils/constants/constants.dart';
 import 'package:survey_admin/presentation/utils/theme_extension.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/create_text_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
-import 'package:survey_admin/presentation/widgets/customization_items/drop_down_customization_button.dart';
+import 'package:survey_admin/presentation/widgets/customization_items/dropdown_customization_button.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/option_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/choice/choice_customization_panel.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/customization_tab.dart';
@@ -100,7 +100,7 @@ class ChoiceContentCustomizationTab extends CustomizationTab {
                             ),
                           )
                           .toList(),
-                      initialValue: ruleType,
+                      value: ruleType,
                     ),
                   ),
                   Expanded(
@@ -118,7 +118,7 @@ class ChoiceContentCustomizationTab extends CustomizationTab {
                                   ),
                                 )
                                 .toList(),
-                            initialValue: limitedRule,
+                            value: limitedRule,
                           )
                         : const SizedBox(),
                   ),
