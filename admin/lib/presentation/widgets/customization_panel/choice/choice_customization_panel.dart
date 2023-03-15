@@ -25,7 +25,6 @@ class ChoiceCustomizationPanel extends StatelessWidget {
           onSubtitleColorPicked: (subtitleColor) {},
           onSubtitleFontSizeChanged: (subtitleFontSize) {},
           onButtonColorPicked: (buttonColor) {},
-          onButtonTextColorPicked: (buttonTextColor) {},
           onButtonFontSizeChanged: (buttonFontSize) {},
           onButtonRadiusChanged: (buttonRadius) {},
         ),
