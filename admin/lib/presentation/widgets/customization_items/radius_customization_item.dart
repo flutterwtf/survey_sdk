@@ -29,11 +29,11 @@ class RadiusCustomizationItem extends StatelessWidget {
               LengthLimitingTextInputFormatter(2),
             ],
             onChanged: (value) {
-              if (value == null) return;
-
-              final radius = int.tryParse(value);
-              if (radius != null) {
-                onRadiusChanged(radius);
+              if (value != null) {
+                final radius = int.tryParse(value);
+                if (radius != null) {
+                  onRadiusChanged(radius);
+                }
               }
             },
           ),

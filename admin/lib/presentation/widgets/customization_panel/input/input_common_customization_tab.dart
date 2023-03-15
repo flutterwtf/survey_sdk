@@ -63,14 +63,10 @@ class InputCommonCustomizationTab extends CustomizationTab {
                       FilteringTextInputFormatter.digitsOnly,
                       LengthLimitingTextInputFormatter(2),
                     ],
-                    onChanged: (value) {
-                      if (value == null) return;
-
-                      final size = int.tryParse(value);
-                      if (size != null) {
-                        onTitleFontSizeChanged(size);
-                      }
-                    },
+                    onChanged: (value) => _valueChange(
+                      value,
+                      onTitleFontSizeChanged,
+                    ),
                   ),
                 ),
               ],
@@ -95,14 +91,10 @@ class InputCommonCustomizationTab extends CustomizationTab {
                       FilteringTextInputFormatter.digitsOnly,
                       LengthLimitingTextInputFormatter(2),
                     ],
-                    onChanged: (value) {
-                      if (value == null) return;
-
-                      final size = int.tryParse(value);
-                      if (size != null) {
-                        onSubtitleFontSizeChanged(size);
-                      }
-                    },
+                    onChanged: (value) => _valueChange(
+                      value,
+                      onSubtitleFontSizeChanged,
+                    ),
                   ),
                 ),
               ],
@@ -131,14 +123,10 @@ class InputCommonCustomizationTab extends CustomizationTab {
                       FilteringTextInputFormatter.digitsOnly,
                       LengthLimitingTextInputFormatter(2),
                     ],
-                    onChanged: (value) {
-                      if (value == null) return;
-
-                      final size = int.tryParse(value);
-                      if (size != null) {
-                        onButtonFontSizeChanged(size);
-                      }
-                    },
+                    onChanged: (value) => _valueChange(
+                      value,
+                      onButtonFontSizeChanged,
+                    ),
                   ),
                 ),
               ],
@@ -147,5 +135,14 @@ class InputCommonCustomizationTab extends CustomizationTab {
         ),
       ],
     );
+  }
+
+  void _valueChange(String? value, void Function(int) action) {
+    if (value != null) {
+      final size = int.tryParse(value);
+      if (size != null) {
+        action(size);
+      }
+    }
   }
 }

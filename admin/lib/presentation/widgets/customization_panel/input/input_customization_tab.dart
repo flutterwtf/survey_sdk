@@ -95,14 +95,10 @@ class InputCustomizationTab extends CustomizationTab {
                         suffixText: context.localization.px,
                         suffixStyle: context.theme.textTheme.bodyLarge,
                       ),
-                      onChanged: (value) {
-                        if (value == null) return;
-
-                        final size = int.tryParse(value);
-                        if (size != null) {
-                          onBorderWidthChanged(size);
-                        }
-                      },
+                      onChanged: (value) => _valueChange(
+                        value,
+                        onBorderWidthChanged,
+                      ),
                     ),
                   ),
                 ),
@@ -139,14 +135,10 @@ class InputCustomizationTab extends CustomizationTab {
                       FilteringTextInputFormatter.digitsOnly,
                       LengthLimitingTextInputFormatter(3),
                     ],
-                    onChanged: (value) {
-                      if (value == null) return;
-
-                      final size = int.tryParse(value);
-                      if (size != null) {
-                        onHintFontSizeChanged(size);
-                      }
-                    },
+                    onChanged: (value) => _valueChange(
+                      value,
+                      onHintFontSizeChanged,
+                    ),
                   ),
                 ),
               ],
@@ -171,14 +163,10 @@ class InputCustomizationTab extends CustomizationTab {
                       FilteringTextInputFormatter.digitsOnly,
                       LengthLimitingTextInputFormatter(3),
                     ],
-                    onChanged: (value) {
-                      if (value == null) return;
-
-                      final size = int.tryParse(value);
-                      if (size != null) {
-                        onTextFontSizeChanged(size);
-                      }
-                    },
+                    onChanged: (value) => _valueChange(
+                      value,
+                      onTextFontSizeChanged,
+                    ),
                   ),
                 ),
               ],
@@ -209,5 +197,14 @@ class InputCustomizationTab extends CustomizationTab {
         ),
       ],
     );
+  }
+
+  void _valueChange(String? value, void Function(int) action) {
+    if (value != null) {
+      final size = int.tryParse(value);
+      if (size != null) {
+        action(size);
+      }
+    }
   }
 }

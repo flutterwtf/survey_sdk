@@ -35,9 +35,7 @@ class _MultipleChoiceCustomizationItemState
         SwitchCustomizationItem(
           title: context.localization.multiple_choice,
           onChanged: (isToggled) {
-            setState(() {
-              _isMultipleChoice = isToggled;
-            });
+            setState(() => _isMultipleChoice = isToggled);
             widget.onChanged(_isMultipleChoice);
           },
         ),

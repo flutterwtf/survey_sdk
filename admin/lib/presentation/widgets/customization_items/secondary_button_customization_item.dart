@@ -30,6 +30,7 @@ class _SecondaryButtonCustomizationItemState
   @override
   void initState() {
     super.initState();
+
     _isShown = widget.isShown;
     _text = widget.initialText;
   }
@@ -42,9 +43,7 @@ class _SecondaryButtonCustomizationItemState
         SwitchCustomizationItem(
           title: context.localization.secondary_button,
           onChanged: (isToggled) {
-            setState(() {
-              _isShown = isToggled;
-            });
+            setState(() => _isShown = isToggled);
             widget.onChanged(_isShown, _text);
           },
         ),
@@ -59,9 +58,7 @@ class _SecondaryButtonCustomizationItemState
                     initialValue: widget.initialText,
                     onChanged: (text) {
                       if (text != null) {
-                        setState(() {
-                          _text = text;
-                        });
+                        setState(() => _text = text);
                       }
                       widget.onChanged(_isShown, _text);
                     },

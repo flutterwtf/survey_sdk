@@ -52,6 +52,7 @@ class _CustomSwitchState extends State<_CustomSwitch> {
   @override
   void initState() {
     super.initState();
+
     _isToggled = widget.initialValue;
   }
 
@@ -59,9 +60,7 @@ class _CustomSwitchState extends State<_CustomSwitch> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        setState(() {
-          _isToggled = !_isToggled;
-        });
+        setState(() => _isToggled = !_isToggled);
         widget.onChanged?.call(_isToggled);
       },
       child: AnimatedContainer(

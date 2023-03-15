@@ -92,31 +92,6 @@ class _MinMaxInputField extends StatelessWidget {
     required this.onChanged,
   });
 
-  String? _validator(String? value) {
-    if (value == null) return null;
-
-    final inputNumber = int.tryParse(value);
-    if (inputNumber == null) return null;
-
-    if (minValue != null) {
-      return inputNumber < minValue! ? '$prefix > $minValue' : null;
-    }
-    if (maxValue != null) {
-      return inputNumber > maxValue! ? '$prefix < $maxValue' : null;
-    }
-
-    return null;
-  }
-
-  void _onChanged(String? value) {
-    if (value == null) return;
-
-    final size = int.tryParse(value);
-    if (size != null) {
-      onChanged(size);
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -144,5 +119,31 @@ class _MinMaxInputField extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  String? _validator(String? value) {
+    if (value != null) {
+      final inputNumber = int.tryParse(value);
+
+      if (inputNumber == null) return null;
+
+      if (minValue != null) {
+        return inputNumber < minValue! ? '$prefix > $minValue' : null;
+      }
+      if (maxValue != null) {
+        return inputNumber > maxValue! ? '$prefix < $maxValue' : null;
+      }
+    }
+
+    return null;
+  }
+
+  void _onChanged(String? value) {
+    if (value != null) {
+      final size = int.tryParse(value);
+      if (size != null) {
+        onChanged(size);
+      }
+    }
   }
 }

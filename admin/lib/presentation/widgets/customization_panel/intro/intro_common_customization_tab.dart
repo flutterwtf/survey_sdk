@@ -59,14 +59,10 @@ class IntroCommonCustomizationTab extends CustomizationTab {
                 FilteringTextInputFormatter.digitsOnly,
                 LengthLimitingTextInputFormatter(3),
               ],
-              onTextChanged: (value) {
-                if (value == null) return;
-
-                final size = int.tryParse(value);
-                if (size != null) {
-                  onTitleFontSizeChanged(size);
-                }
-              },
+              onTextChanged: (value) => _valueChange(
+                value,
+                onTitleFontSizeChanged,
+              ),
             ),
           ],
         ),
@@ -80,14 +76,10 @@ class IntroCommonCustomizationTab extends CustomizationTab {
                 FilteringTextInputFormatter.digitsOnly,
                 LengthLimitingTextInputFormatter(3),
               ],
-              onTextChanged: (value) {
-                if (value == null) return;
-
-                final size = int.tryParse(value);
-                if (size != null) {
-                  onSubtitleFontSizeChanged(size);
-                }
-              },
+              onTextChanged: (value) => _valueChange(
+                value,
+                onSubtitleFontSizeChanged,
+              ),
             ),
           ],
         ),
@@ -106,14 +98,10 @@ class IntroCommonCustomizationTab extends CustomizationTab {
                 FilteringTextInputFormatter.digitsOnly,
                 LengthLimitingTextInputFormatter(3),
               ],
-              onTextChanged: (value) {
-                if (value == null) return;
-
-                final size = int.tryParse(value);
-                if (size != null) {
-                  onButtonFontSizeChanged(size);
-                }
-              },
+              onTextChanged: (value) => _valueChange(
+                value,
+                onButtonFontSizeChanged,
+              ),
             ),
             RadiusCustomizationItem(
               initialValue: AppDimensions.circularRadiusS,
@@ -123,5 +111,14 @@ class IntroCommonCustomizationTab extends CustomizationTab {
         ),
       ],
     );
+  }
+
+  void _valueChange(String? value, void Function(int) action) {
+    if (value != null) {
+      final size = int.tryParse(value);
+      if (size != null) {
+        action(size);
+      }
+    }
   }
 }

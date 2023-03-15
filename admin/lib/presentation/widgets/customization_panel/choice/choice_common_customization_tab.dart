@@ -59,14 +59,10 @@ class ChoiceCommonCustomizationTab extends CustomizationTab {
                 FilteringTextInputFormatter.digitsOnly,
                 LengthLimitingTextInputFormatter(2),
               ],
-              onTextChanged: (value) {
-                if (value == null) return;
-                
-                final size = int.tryParse(value);
-                if (size != null) {
-                  onTitleFontSizeChanged(size);
-                }
-              },
+              onTextChanged: (value) => _fontSizeChange(
+                value,
+                onTitleFontSizeChanged,
+              ),
             ),
           ],
         ),
@@ -80,14 +76,10 @@ class ChoiceCommonCustomizationTab extends CustomizationTab {
                 FilteringTextInputFormatter.digitsOnly,
                 LengthLimitingTextInputFormatter(2),
               ],
-              onTextChanged: (value) {
-                if (value == null) return;
-                
-                final size = int.tryParse(value);
-                if (size != null){
-                  onSubtitleFontSizeChanged(size);
-                }
-              },
+              onTextChanged: (value) => _fontSizeChange(
+                value,
+                onSubtitleFontSizeChanged,
+              ),
             ),
           ],
         ),
@@ -106,14 +98,10 @@ class ChoiceCommonCustomizationTab extends CustomizationTab {
                 FilteringTextInputFormatter.digitsOnly,
                 LengthLimitingTextInputFormatter(2),
               ],
-              onTextChanged: (value) {
-                if (value == null) return;
-
-                final size = int.tryParse(value);
-                if (size != null) {
-                  onButtonFontSizeChanged(size);
-                }
-              },
+              onTextChanged: (value) => _fontSizeChange(
+                value,
+                onButtonFontSizeChanged,
+              ),
             ),
             RadiusCustomizationItem(
               initialValue: AppDimensions.circularRadiusS,
@@ -123,5 +111,14 @@ class ChoiceCommonCustomizationTab extends CustomizationTab {
         ),
       ],
     );
+  }
+
+  void _fontSizeChange(String? value, void Function(int) action) {
+    if (value != null) {
+      final size = int.tryParse(value);
+      if (size != null) {
+        action(size);
+      }
+    }
   }
 }

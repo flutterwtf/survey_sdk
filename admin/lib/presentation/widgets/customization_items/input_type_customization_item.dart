@@ -51,6 +51,7 @@ class _InputTypeCustomizationItemState extends State<InputTypeCustomizationItem>
   @override
   void initState() {
     super.initState();
+
     _isExpanded = false;
     _selectedType = widget.initialValue;
     _iconAnimationController = AnimationController(
@@ -68,8 +69,9 @@ class _InputTypeCustomizationItemState extends State<InputTypeCustomizationItem>
 
   @override
   void dispose() {
-    super.dispose();
     _iconAnimationController.dispose();
+
+    super.dispose();
   }
 
   @override
@@ -84,14 +86,10 @@ class _InputTypeCustomizationItemState extends State<InputTypeCustomizationItem>
             child: SvgPicture.asset(AppAssets.arrowIcon),
           ),
           onTap: () {
-            setState(() {
-              _isExpanded = !_isExpanded;
-            });
-            if (_isExpanded) {
-              _iconAnimationController.forward();
-            } else {
-              _iconAnimationController.reverse();
-            }
+            setState(() => _isExpanded = !_isExpanded);
+            _isExpanded
+                ? _iconAnimationController.forward()
+                : _iconAnimationController.reverse();
           },
         ),
         AnimatedSize(

@@ -31,6 +31,8 @@ class _PaddingCustomizationItemState extends State<PaddingCustomizationItem> {
 
   @override
   void initState() {
+    super.initState();
+
     horizontalPadding = widget.initialHorizontalPadding;
     verticalPadding = widget.initialVerticalPadding;
     horizontalPaddingFocusNode.addListener(() {
@@ -43,14 +45,14 @@ class _PaddingCustomizationItemState extends State<PaddingCustomizationItem> {
         widget.onVerticalPaddingChange(verticalPadding);
       }
     });
-    super.initState();
   }
 
   @override
   void dispose() {
-    super.dispose();
     horizontalPaddingFocusNode.dispose();
     verticalPaddingFocusNode.dispose();
+
+    super.dispose();
   }
 
   @override
