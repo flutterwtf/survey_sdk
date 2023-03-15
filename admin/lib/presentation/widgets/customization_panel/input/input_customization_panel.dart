@@ -4,20 +4,8 @@ import 'package:survey_admin/presentation/widgets/customization_panel/input/inpu
 import 'package:survey_admin/presentation/widgets/customization_panel/input/input_content_customization_tab.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/input/input_customization_tab.dart';
 import 'package:survey_admin/presentation/widgets/question_settings_tab_bar.dart';
+import 'package:survey_core/survey_core.dart';
 
-enum InputType {
-  text('Text'),
-  number('Number'),
-  date('Date');
-
-  const InputType(
-    this.name,
-  );
-
-  final String name;
-}
-
-// TODO(dev): why do we have pages in this folder?
 class InputCustomizationPanel extends StatefulWidget {
   const InputCustomizationPanel({super.key});
 
