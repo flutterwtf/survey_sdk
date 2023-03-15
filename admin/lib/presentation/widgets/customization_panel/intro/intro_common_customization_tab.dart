@@ -57,7 +57,7 @@ class IntroCommonCustomizationTab extends CustomizationTab {
               initialText: AppFonts.sizeL.toString(),
               inputFormatters: [
                 FilteringTextInputFormatter.digitsOnly,
-                LengthLimitingTextInputFormatter(3),
+                LengthLimitingTextInputFormatter(2),
               ],
               onTextChanged: (value) {
                 if (value == null) return;
@@ -78,7 +78,7 @@ class IntroCommonCustomizationTab extends CustomizationTab {
               initialText: AppFonts.sizeS.toString(),
               inputFormatters: [
                 FilteringTextInputFormatter.digitsOnly,
-                LengthLimitingTextInputFormatter(3),
+                LengthLimitingTextInputFormatter(2),
               ],
               onTextChanged: (value) {
                 if (value == null) return;
@@ -104,7 +104,7 @@ class IntroCommonCustomizationTab extends CustomizationTab {
               initialText: AppFonts.sizeS.toString(),
               inputFormatters: [
                 FilteringTextInputFormatter.digitsOnly,
-                LengthLimitingTextInputFormatter(3),
+                LengthLimitingTextInputFormatter(2),
               ],
               onTextChanged: (value) {
                 if (value == null) return;

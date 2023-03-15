@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/choice/choice_content_customization_tab.dart';
 
-import '../app_test.dart';
+import '../app_tester.dart';
 
 void main() {
   group(
@@ -12,7 +12,7 @@ void main() {
       var options = <String>[];
       var title = '';
       var subtitle = '';
-      final page = AppTest(
+      final page = AppTester(
         child: ChoiceContentCustomizationTab(
           title: 'Content',
           onOptionsChanged: (newOptions) => options = newOptions,

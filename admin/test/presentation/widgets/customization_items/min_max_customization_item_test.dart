@@ -1,10 +1,10 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/min_max_customization_item.dart';
 
-import '../app_test.dart';
+import '../app_tester.dart';
 
 void main() {
-  final page = AppTest(
+  final page = AppTester(
     child: MinMaxCustomizationItem(
       initialMin: 50,
       initialMax: 100,
@@ -36,7 +36,7 @@ void main() {
     int? min;
     int? max;
     await tester.pumpWidget(
-      AppTest(
+      AppTester(
         child: MinMaxCustomizationItem(
           initialMin: 50,
           initialMax: 100,
@@ -62,7 +62,7 @@ void main() {
     int? min = 50;
     int? max = 100;
     await tester.pumpWidget(
-      AppTest(
+      AppTester(
         child: MinMaxCustomizationItem(
           initialMin: min,
           initialMax: max,

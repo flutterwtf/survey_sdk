@@ -5,7 +5,7 @@ import 'package:survey_admin/presentation/widgets/customization_items/customizat
 import 'package:survey_admin/presentation/widgets/customization_items/thickness_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/slider/slider_customization_tab.dart';
 
-import '../app_test.dart';
+import '../app_tester.dart';
 
 void main() {
   group('Tests for SliderCustomizationTab', () {
@@ -14,7 +14,7 @@ void main() {
     Color active = Colors.red;
     Color inactive = Colors.red;
     Color colorThumb = Colors.red;
-    final page = AppTest(
+    final page = AppTester(
       child: SliderCustomizationTab(
         title: 'Slider',
         onActiveColorChanged: (newActive) {
