@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:survey_admin/presentation/app/localization/localizations.dart';
+import 'package:survey_admin/presentation/utils/app_fonts.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/color_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
@@ -57,8 +58,7 @@ class InputCommonCustomizationTab extends CustomizationTab {
                 ),
                 Flexible(
                   child: CustomizationTextField(
-                    // TODO(dev): we should fix it everywhere
-                    initialValue: '16',
+                    initialValue: AppFonts.sizeL.toString(),
                     inputFormatters: [
                       FilteringTextInputFormatter.digitsOnly,
                       LengthLimitingTextInputFormatter(2),
@@ -90,7 +90,7 @@ class InputCommonCustomizationTab extends CustomizationTab {
                 ),
                 Flexible(
                   child: CustomizationTextField(
-                    initialValue: '12',
+                    initialValue: AppFonts.sizeS.toString(),
                     inputFormatters: [
                       FilteringTextInputFormatter.digitsOnly,
                       LengthLimitingTextInputFormatter(2),
@@ -126,7 +126,7 @@ class InputCommonCustomizationTab extends CustomizationTab {
                 ),
                 Flexible(
                   child: CustomizationTextField(
-                    initialValue: '12',
+                    initialValue: AppFonts.sizeS.toString(),
                     inputFormatters: [
                       FilteringTextInputFormatter.digitsOnly,
                       LengthLimitingTextInputFormatter(2),

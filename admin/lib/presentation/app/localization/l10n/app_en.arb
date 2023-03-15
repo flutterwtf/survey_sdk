@@ -57,5 +57,7 @@
   "single_line_input":"Single-line input",
   "multi_line_input":"Multi-line input",
   "delete_question": "Delete question",
-  "multiple_choice":"Multiple choice"
+  "multiple_choice":"Multiple choice",
+  "validator_error_text_title": "Validation error message",
+  "validator_error_hint": "Error message"
 }

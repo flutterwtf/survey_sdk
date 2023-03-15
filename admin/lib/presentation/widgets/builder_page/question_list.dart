@@ -55,12 +55,23 @@ class _QuestionListState extends State<QuestionList> {
   }
 
   void addQuestion(QuestionData data) {
-    final index = _questionList.length;
+    final index = _questionList.length + 1;
     setState(() {
       _questionList.add(
         data.copyWith(index: index),
       );
     });
+  }
+
+  void _updateQuestion(int oldIndex, int newIndex) {
+    final itemOld = _questionList.removeAt(oldIndex);
+    _questionList.insert(
+      newIndex,
+      itemOld,
+    );
+    for (var i = 0; i < _questionList.length; i++) {
+      _questionList[i] = _questionList[i].copyWith(index: i + 1);
+    }
   }
 
   @override
@@ -112,102 +123,36 @@ class _QuestionListState extends State<QuestionList> {
             ),
           ),
           Expanded(
-            child: ContextMenuOverlay(
-              cardBuilder: (_, children) {
-                return DecoratedBox(
-                  decoration: BoxDecoration(
-                    color: AppColors.white,
-                    borderRadius: BorderRadius.circular(
-                      AppDimensions.circularRadiusXS,
-                    ),
-                    border: Border.all(
-                      width: 0.5,
-                    ),
-                  ),
-                  child: Column(children: children),
-                );
-              },
-              child: ReorderableListView(
-                buildDefaultDragHandles: false,
-                children: [
-                  for (int index = 0; index < _questionList.length; index++)
-                    _Question(
-                      key: ValueKey(index),
-                      index: index,
+            child: ReorderableListView(
+              buildDefaultDragHandles: false,
+              children: [
+                for (int index = 0; index < _questionList.length; index++)
+                  ReorderableDragStartListener(
+                    index: index,
+                    key: ValueKey(index),
+                    child: QuestionListItem(
                       isSelected: index == _selectedIndex,
-                      onDeleteButtonPressed: () =>
-                          setState(() => _questionList.removeAt(index)),
-                      question: _questionList[index],
-                      onQuestionTap: (data) {
+                      questionData: _questionList[index],
+                      onTap: (data) {
                         widget.onSelect(data);
                         setState(() {
                           _selectedIndex = index;
                         });
                       },
                     ),
-                ],
-                onReorder: (oldIndex, newIndex) {
-                  if (newIndex > oldIndex) newIndex--;
-                  setState(
-                    () {
-                      if (_selectedIndex == oldIndex) {
-                        _selectedIndex = newIndex;
-                      } else if (_selectedIndex == newIndex) {
-                        _selectedIndex = oldIndex;
-                      }
-
-                      final oldItem = _questionList[oldIndex];
-                      final newItem = _questionList[newIndex];
-                      _questionList[newIndex] =
-                          oldItem.copyWith(index: newIndex);
-                      _questionList[oldIndex] =
-                          newItem.copyWith(index: oldIndex);
-                    },
-                  );
-                },
-              ),
+                  )
+              ],
+              onReorder: (oldIndex, newIndex) {
+                if (newIndex > oldIndex) newIndex--;
+                setState(
+                  () {
+                    _updateQuestion(oldIndex, newIndex);
+                  },
+                );
+              },
             ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class _Question extends StatelessWidget {
-  final int index;
-  final bool isSelected;
-  final VoidCallback onDeleteButtonPressed;
-  final ValueChanged<QuestionData> onQuestionTap;
-  final QuestionData question;
-
-  const _Question({
-    required this.index,
-    required this.isSelected,
-    required this.onDeleteButtonPressed,
-    required this.question,
-    required this.onQuestionTap,
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return ReorderableDragStartListener(
-      index: index,
-      child: ContextMenuRegion(
-        contextMenu: GenericContextMenu(
-          buttonConfigs: [
-            ContextMenuButtonConfig(
-              context.localization.delete_question,
-              onPressed: onDeleteButtonPressed,
-            ),
-          ],
-        ),
-        child: QuestionListItem(
-          isSelected: isSelected,
-          questionData: question,
-          onTap: onQuestionTap,
-        ),
       ),
     );
   }
