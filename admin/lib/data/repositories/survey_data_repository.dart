@@ -1,8 +1,8 @@
-import 'package:survey_admin/data/interfaces/filesystem_data_source.dart';
+import 'package:survey_admin/data/data_sources/interfaces/filesystem_data_source.dart';
 import 'package:survey_admin/domain/repository_interfaces/survey_data_repository.dart';
 
 class SurveyDataRepositoryImpl implements SurveyDataRepository {
-  final FileSystemDataSource _fileSystemDataSource;
+  final FilesystemDataSource _fileSystemDataSource;
 
   SurveyDataRepositoryImpl(this._fileSystemDataSource);
 
