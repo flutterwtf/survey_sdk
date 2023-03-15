@@ -1,33 +1,23 @@
-abstract class QuestionAnswer<T> {
-  Map<String, dynamic> toJson(String key, T data);
-}
+import 'package:survey_core/src/domain/entities/constants/question_types.dart';
 
-class SliderQuestionAnswer extends QuestionAnswer<double> {
-  @override
-  Map<String, dynamic> toJson(String key, double data) {
-    return {
-      'index': key,
-      'data': data,
-    };
-  }
-}
+abstract class QuestionAnswer<T>{
+  QuestionAnswer(this.index, this.content);
 
-class InputQuestionAnswer extends QuestionAnswer<String> {
-  @override
-  Map<String, dynamic> toJson(String key, String data) {
-    return {
-      'index': key,
-      'data': data,
-    };
-  }
-}
+  final int index;
+  final String? content;
 
-class ChoiceQuestionAnswer extends QuestionAnswer<List<String>> {
-  @override
-  Map<String, dynamic> toJson(String key, List<String> data) {
-    return {
-      'index': key,
-      'data': data,
-    };
+  static QuestionAnswer toJson() {
+    switch ('type') {
+      case QuestionTypes.slider:
+        return toJson();
+      case QuestionTypes.intro:
+        return toJson();
+      case QuestionTypes.input:
+        return toJson();
+      case QuestionTypes.choice:
+        return toJson();
+      default:
+        throw Exception('Unimplemented error');
+    }
   }
 }

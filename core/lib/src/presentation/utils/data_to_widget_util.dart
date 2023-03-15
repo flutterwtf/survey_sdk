@@ -16,17 +16,17 @@ abstract class DataToWidgetUtil {
       case SliderQuestionData:
         return SliderQuestionPage(
           data: data as SliderQuestionData,
-          onSend: onSend as SliderQuestionAnswer,
+          onSend: onSend,
         );
       case ChoiceQuestionData:
         return ChoiceQuestionPage(
           data: data as ChoiceQuestionData,
-          onSend: onSend as ChoiceQuestionAnswer,
+          onSend: onSend,
         );
       case InputQuestionData:
         return InputQuestionPage(
           data: data as InputQuestionData,
-          onSend: onSend as InputQuestionAnswer,
+          onSend: onSend,
         );
       case IntroQuestionData:
         return IntroQuestionPage(

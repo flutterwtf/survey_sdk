@@ -89,7 +89,7 @@ class _SurveyState extends State<Survey> {
                         .map<Widget>(
                           (question) => DataToWidgetUtil.createWidget(
                             question,
-                            _cubit.saveAnswer(question)
+                            _cubit.saveAnswer(question),
                           ),
                         )
                         .toList(),
