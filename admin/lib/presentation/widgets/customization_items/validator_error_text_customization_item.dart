@@ -15,12 +15,17 @@ class ValidatorErrorTextCustomizationItem extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) => CustomizationTextField(
+  Widget build(BuildContext context) {
+    return LimitedBox(
+      maxHeight: AppDimensions.sizeXL,
+      child: CustomizationTextField(
         initialValue: initialValue,
         onChanged: (value) {
           if (value != null) onErrorTextChanged(value);
         },
         maxLines: null,
         hintText: context.localization.validator_error_hint,
-      );
+      ),
+    );
+  }
 }
