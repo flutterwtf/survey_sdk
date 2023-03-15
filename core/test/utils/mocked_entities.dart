@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:survey_core/src/domain/entities/input_validator.dart';
 import 'package:survey_core/src/domain/entities/question_types/choice_question_data.dart';
 import 'package:survey_core/src/domain/entities/question_types/input_question_data.dart';
 import 'package:survey_core/src/domain/entities/question_types/intro_question_data.dart';
@@ -6,7 +7,6 @@ import 'package:survey_core/src/domain/entities/question_types/slider_question_d
 import 'package:survey_core/src/domain/entities/survey_data.dart';
 import 'package:survey_core/src/domain/entities/themes/common_theme.dart';
 import 'package:survey_core/src/domain/entities/themes/text_field_theme_data.dart';
-import 'package:survey_core/src/domain/entities/validator/input_validator.dart';
 
 abstract class MockedQuestions {
   static const choice1 = ChoiceQuestionData(
@@ -38,16 +38,16 @@ abstract class MockedQuestions {
     subtitle: '',
   );
 
-  static const input1 = InputQuestionData(
-    validator: DefaultValidator(),
+  static final input1 = InputQuestionData(
+    validator: InputValidator.text(),
     index: 0,
     title: 'title',
     subtitle: 'subtitle',
     isSkip: false,
   );
 
-  static const input2 = InputQuestionData(
-    validator: NumberValidator(),
+  static final input2 = InputQuestionData(
+    validator: InputValidator.text(),
     index: 1,
     title: 'Another title',
     subtitle: 'Another subtitle',

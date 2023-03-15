@@ -1,33 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:survey_admin/presentation/app/localization/localizations.dart';
 import 'package:survey_admin/presentation/utils/constants/app_assets.dart';
 import 'package:survey_admin/presentation/utils/constants/app_durations.dart';
-import 'package:survey_admin/presentation/utils/constants/constants.dart';
+import 'package:survey_admin/presentation/utils/constants/app_dimensions.dart';
 import 'package:survey_admin/presentation/utils/theme_extension.dart';
+import 'package:survey_core/survey_core.dart';
 
-// TODO(dev): localization
-// TODO(dev): add email, password, phone
-enum InputType {
-  text('Text'),
-  number('Number'),
-  date('Date');
-
-  const InputType(
-    this.name,
-  );
-
-  final String name;
+extension InputTypeExt on InputType {
+  String name(BuildContext context) {
+    switch (this) {
+      case InputType.text:
+        return context.localization.text;
+      case InputType.number:
+        return context.localization.number;
+      case InputType.date:
+        return context.localization.date;
+      case InputType.email:
+        return context.localization.email;
+      case InputType.password:
+        return context.localization.password;
+      case InputType.phone:
+        return context.localization.phone;
+    }
+  }
 }
 
 class InputTypeCustomizationItem extends StatefulWidget {
+  final InputType initialValue;
+  final void Function(InputType inputType)? onChanged;
+
   const InputTypeCustomizationItem({
     super.key,
     this.initialValue = InputType.text,
     this.onChanged,
   });
-
-  final InputType initialValue;
-  final void Function(InputType inputType)? onChanged;
 
   @override
   State<InputTypeCustomizationItem> createState() =>
@@ -71,6 +78,8 @@ class _InputTypeCustomizationItemState extends State<InputTypeCustomizationItem>
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _InputTypeItem(
+          // TODO(dev): why do we need these keys
+          key: UniqueKey(),
           inputType: _selectedType,
           trailing: RotationTransition(
             turns: _animation,
@@ -95,6 +104,8 @@ class _InputTypeCustomizationItemState extends State<InputTypeCustomizationItem>
                       .where((inputType) => inputType != _selectedType)
                       .map(
                         (inputType) => _InputTypeItem(
+                          // TODO(dev): why do we need these keys
+                          key: UniqueKey(),
                           inputType: inputType,
                           onTap: () {
                             setState(() {
@@ -102,11 +113,9 @@ class _InputTypeCustomizationItemState extends State<InputTypeCustomizationItem>
                               _selectedType = inputType;
                             });
                             widget.onChanged?.call(inputType);
-                            if (_isExpanded) {
-                              _iconAnimationController.forward();
-                            } else {
-                              _iconAnimationController.reverse();
-                            }
+                            _isExpanded
+                                ? _iconAnimationController.forward()
+                                : _iconAnimationController.reverse();
                           },
                         ),
                       )
@@ -120,15 +129,16 @@ class _InputTypeCustomizationItemState extends State<InputTypeCustomizationItem>
 }
 
 class _InputTypeItem extends StatelessWidget {
+  final InputType inputType;
+  final VoidCallback onTap;
+  final Widget? trailing;
+
   const _InputTypeItem({
+    required super.key,
     required this.inputType,
     required this.onTap,
     this.trailing,
   });
-
-  final InputType inputType;
-  final VoidCallback onTap;
-  final Widget? trailing;
 
   @override
   Widget build(BuildContext context) {
@@ -144,7 +154,7 @@ class _InputTypeItem extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                inputType.name,
+                inputType.name(context),
                 style: context.theme.textTheme.bodyLarge,
               ),
               if (trailing != null) trailing!,
