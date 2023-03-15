@@ -197,12 +197,6 @@ class InputCustomizationTab extends CustomizationTab {
         ),
         CustomizationItemsContainer(
           title: context.localization.validator_error_text_title,
-          itemsPadding: const EdgeInsets.only(
-            top: AppDimensions.margin2XS,
-            bottom: AppDimensions.marginL,
-            left: AppDimensions.marginM,
-            right: AppDimensions.marginM,
-          ),
           children: [
             ValidatorErrorTextCustomizationItem(
               onErrorTextChanged: onValidatorErrorTextChanged,
