@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:survey_admin/presentation/app/localization/localizations.dart';
+import 'package:survey_admin/presentation/utils/app_fonts.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
-import 'package:survey_admin/presentation/utils/constants/constants.dart';
+import 'package:survey_admin/presentation/utils/constants/app_dimensions.dart';
 import 'package:survey_admin/presentation/utils/theme_extension.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/color_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
+import 'package:survey_admin/presentation/widgets/customization_items/customization_multiline_text_field.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/dropdown_customization_button.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/multiline_switch.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/padding_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/customization_tab.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/input/input_customization_panel.dart';
+import 'package:survey_core/survey_core.dart';
 
 class InputCustomizationTab extends CustomizationTab {
   final void Function(bool isMultiline, int lineAmount) onMultilineChanged;
@@ -27,6 +30,7 @@ class InputCustomizationTab extends CustomizationTab {
   final ValueChanged<int> onTextFontSizeChanged;
   final ValueChanged<InputType> onInputTypeChanged;
   final InputType inputType;
+  final ValueChanged<String> onValidatorErrorTextChanged;
 
   const InputCustomizationTab({
     required super.title,
@@ -43,6 +47,7 @@ class InputCustomizationTab extends CustomizationTab {
     required this.onTextFontSizeChanged,
     required this.onInputTypeChanged,
     required this.inputType,
+    required this.onValidatorErrorTextChanged,
     super.key,
   });
 
@@ -52,9 +57,6 @@ class InputCustomizationTab extends CustomizationTab {
       children: [
         CustomizationItemsContainer(
           isTopDividerShown: true,
-          itemsPadding: const EdgeInsets.all(
-            AppDimensions.marginM,
-          ),
           children: [
             MultilineSwitch(
               onChanged: onMultilineChanged,
@@ -85,7 +87,7 @@ class InputCustomizationTab extends CustomizationTab {
                   child: SizedBox(
                     width: AppDimensions.margin4XL,
                     child: CustomizationTextField(
-                      initialValue: '1',
+                      initialValue: AppDimensions.defaultBorderWidth.toString(),
                       inputFormatters: [
                         FilteringTextInputFormatter.digitsOnly,
                         LengthLimitingTextInputFormatter(3),
@@ -115,8 +117,8 @@ class InputCustomizationTab extends CustomizationTab {
           title: context.localization.padding,
           children: [
             PaddingCustomizationItem(
-              initialHorizontalPadding: 14,
-              initialVerticalPadding: 14,
+              initialHorizontalPadding: AppDimensions.marginS,
+              initialVerticalPadding: AppDimensions.marginS,
               onHorizontalPaddingChange: onHorizontalPaddingChanged,
               onVerticalPaddingChange: onVerticalPaddingChanged,
             ),
@@ -135,7 +137,7 @@ class InputCustomizationTab extends CustomizationTab {
                 ),
                 Flexible(
                   child: CustomizationTextField(
-                    initialValue: '16',
+                    initialValue: AppFonts.sizeL.toString(),
                     inputFormatters: [
                       FilteringTextInputFormatter.digitsOnly,
                       LengthLimitingTextInputFormatter(3),
@@ -167,7 +169,7 @@ class InputCustomizationTab extends CustomizationTab {
                 ),
                 Flexible(
                   child: CustomizationTextField(
-                    initialValue: '16',
+                    initialValue: AppFonts.sizeL.toString(),
                     inputFormatters: [
                       FilteringTextInputFormatter.digitsOnly,
                       LengthLimitingTextInputFormatter(3),
@@ -206,6 +208,15 @@ class InputCustomizationTab extends CustomizationTab {
                   )
                   .toList(),
               value: inputType,
+            ),
+          ],
+        ),
+        CustomizationItemsContainer(
+          title: context.localization.validator_error_text_title,
+          children: [
+            CustomizationMultilineTextField(
+              maxHeight: AppDimensions.sizeXL,
+              onChanged: onValidatorErrorTextChanged,
             ),
           ],
         ),

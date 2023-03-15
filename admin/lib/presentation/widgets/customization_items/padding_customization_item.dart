@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
-import 'package:survey_admin/presentation/utils/constants/constants.dart';
+import 'package:survey_admin/presentation/utils/constants/app_dimensions.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
 
 class PaddingCustomizationItem extends StatefulWidget {
@@ -33,7 +33,6 @@ class _PaddingCustomizationItemState extends State<PaddingCustomizationItem> {
   void initState() {
     horizontalPadding = widget.initialHorizontalPadding;
     verticalPadding = widget.initialVerticalPadding;
-    // TODO(dev): check for dispose everywhere
     horizontalPaddingFocusNode.addListener(() {
       if (!horizontalPaddingFocusNode.hasFocus) {
         widget.onHorizontalPaddingChange(horizontalPadding);
@@ -45,6 +44,13 @@ class _PaddingCustomizationItemState extends State<PaddingCustomizationItem> {
       }
     });
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    horizontalPaddingFocusNode.dispose();
+    verticalPaddingFocusNode.dispose();
   }
 
   @override

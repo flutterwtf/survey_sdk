@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
+import 'package:survey_admin/presentation/utils/constants/app_dimensions.dart';
 import 'package:survey_admin/presentation/utils/constants/app_durations.dart';
-import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
+import 'package:survey_admin/presentation/utils/theme_extension.dart';
 
 class SwitchCustomizationItem extends StatelessWidget {
   final String title;
@@ -18,9 +19,12 @@ class SwitchCustomizationItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        CustomizationItemsContainer(children: [Text(title)]),
-        const Spacer(),
+        Text(
+          title,
+          style: context.theme.textTheme.titleSmall,
+        ),
         _CustomSwitch(
           initialValue: initialValue ?? false,
           onChanged: onChanged,
@@ -62,25 +66,27 @@ class _CustomSwitchState extends State<_CustomSwitch> {
         widget.onChanged?.call(_isToggled);
       },
       child: AnimatedContainer(
-        height: 18,
-        width: 34,
+        height: AppDimensions.switchHeight,
+        width: AppDimensions.switchWidth,
         decoration: BoxDecoration(
           color: _isToggled
               ? AppColors.switchBackgroundActive
               : AppColors.switchBackgroundInactive,
-          borderRadius: BorderRadius.circular(9),
+          borderRadius: BorderRadius.circular(AppDimensions.circularRadiusS),
         ),
         duration: AppDurations.customizationItemAnimation,
         child: AnimatedAlign(
           alignment: _isToggled ? Alignment.centerRight : Alignment.centerLeft,
           duration: AppDurations.customizationItemAnimation,
           child: Padding(
-            padding: const EdgeInsets.all(2),
+            padding: const EdgeInsets.all(AppDimensions.margin3XS),
             child: Container(
-              width: 14,
+              width: AppDimensions.switchIndicatorWidth,
               decoration: BoxDecoration(
                 color: AppColors.black,
-                borderRadius: BorderRadius.circular(7),
+                borderRadius: BorderRadius.circular(
+                  AppDimensions.circularRadiusXS,
+                ),
               ),
             ),
           ),

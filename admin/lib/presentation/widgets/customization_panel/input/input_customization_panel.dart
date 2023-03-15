@@ -64,6 +64,7 @@ class _InputCustomizationPanelState extends State<InputCustomizationPanel> {
             });
           },
           inputType: inputType,
+          onValidatorErrorTextChanged: (errorText) {},
         ),
         InputContentCustomizationTab(
           title: context.localization.content,

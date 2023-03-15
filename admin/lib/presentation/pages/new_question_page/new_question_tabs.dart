@@ -33,7 +33,7 @@ extension NewQuestionTabsExt on NewQuestionTabs {
       case NewQuestionTabs.slider:
         return const SliderQuestionData.common();
       case NewQuestionTabs.customInput:
-        return const InputQuestionData.common();
+        return InputQuestionData.common();
     }
   }
 
@@ -48,7 +48,7 @@ extension NewQuestionTabsExt on NewQuestionTabs {
       case NewQuestionTabs.customInput:
         return [
           NewQuestionOptions.singleLineInput,
-          NewQuestionOptions.multiLineInput
+          NewQuestionOptions.multiLineInput,
         ];
     }
   }

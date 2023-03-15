@@ -8,6 +8,7 @@ import 'package:survey_admin/presentation/widgets/customization_items/multiline_
 import 'package:survey_admin/presentation/widgets/customization_items/padding_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/input/input_customization_panel.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/input/input_customization_tab.dart';
+import 'package:survey_core/survey_core.dart';
 
 import '../app_test.dart';
 
@@ -29,6 +30,7 @@ void main() {
           onTextColorChanged: (Color value) {},
           onTextFontSizeChanged: (int? value) {},
           onVerticalPaddingChanged: (double size) {},
+          onValidatorErrorTextChanged: (String errorText) {},
           title: 'test',
           inputType: InputType.text,
         ),
