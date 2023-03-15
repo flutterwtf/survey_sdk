@@ -1,5 +1,5 @@
 abstract class QuestionDataCommon {
-  static const String choiceQuestionContent = 'You may simply need a single, '
+  static const String questionContent = 'You may simply need a single, '
       'brief answer without discussion. Other times, you may want to talk '
       'through a scenario, evaluate how well a group is learning new material '
       'or solicit feedback. The types of questions you ask directly impact '
@@ -22,19 +22,7 @@ abstract class QuestionDataCommon {
   static const introQuestionMainButtonTitle = 'NEXT';
   static const introQuestionTitle = 'Intro';
   static const introQuestionSubtitle = '';
-  static const introQuestionContent =
-      'You may simply need a single, brief answer without discussion. '
-      'Other times, you may want to talk through a scenario, evaluate '
-      'how well a group is learning new material or solicit feedback. '
-      'The types of questions you ask directly impact the type of '
-      'answer you receive.';
 
   static const sliderQuestionTitle = 'Slider';
   static const sliderQuestionSubtitle = '';
-  static const sliderQuestionContent =
-      'You may simply need a single, brief answer without discussion. '
-      'Other times, you may want to talk through a scenario, evaluate '
-      'how well a group is learning new material or solicit feedback. '
-      'The types of questions you ask directly impact the type of '
-      'answer you receive.';
 }

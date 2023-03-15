@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:survey_core/src/domain/entities/constants/question_data_common.dart';
 import 'package:survey_core/src/domain/entities/constants/question_types.dart';
 import 'package:survey_core/src/domain/entities/question_types/question_data.dart';
-
-import '../constants/question_data_common.dart';
 
 class SliderQuestionData extends QuestionData<SliderThemeData> {
   final num minValue;
@@ -29,7 +28,7 @@ class SliderQuestionData extends QuestionData<SliderThemeData> {
           index: index,
           subtitle: QuestionDataCommon.sliderQuestionSubtitle,
           isSkip: false,
-          content: QuestionDataCommon.sliderQuestionContent,
+          content: QuestionDataCommon.questionContent,
         );
 
   @override

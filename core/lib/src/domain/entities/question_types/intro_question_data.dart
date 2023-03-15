@@ -22,7 +22,7 @@ class IntroQuestionData extends QuestionData {
           index: index,
           subtitle: QuestionDataCommon.choiceQuestionSubtitle,
           isSkip: false,
-          content: QuestionDataCommon.introQuestionContent,
+          content: QuestionDataCommon.questionContent,
         );
 
   @override

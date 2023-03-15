@@ -1,8 +1,7 @@
+import 'package:survey_core/src/domain/entities/constants/question_data_common.dart';
 import 'package:survey_core/src/domain/entities/constants/question_types.dart';
 import 'package:survey_core/src/domain/entities/question_types/question_data.dart';
 import 'package:survey_core/src/domain/entities/themes/choice_question_theme.dart';
-
-import '../constants/question_data_common.dart';
 
 class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
   final bool isMultipleChoice;
@@ -34,7 +33,7 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
           title: QuestionDataCommon.choiceQuestionTitle,
           subtitle: QuestionDataCommon.choiceQuestionSubtitle,
           isSkip: false,
-          content: QuestionDataCommon.choiceQuestionContent,
+          content: QuestionDataCommon.questionContent,
           index: index,
         );
 
