@@ -25,35 +25,38 @@ class _BuilderPageState extends State<BuilderPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<BuilderCubit, BuilderState>(
-      bloc: _cubit,
-      builder: (context, state) => Scaffold(
-        appBar: AppBar(
-          toolbarHeight: AppDimensions.appbarHeight,
-          backgroundColor: AppColors.white,
-          shadowColor: AppColors.transparentW,
-          centerTitle: true,
-          title: const _BuilderPageTabBar(),
-          actions: [
-            _CreateTab(onPressed: _cubit.importData),
-            const _PreviewTab(),
-          ],
-        ),
-        body: Row(
-          children: [
-            QuestionList(
-              onSelect: _cubit.select,
-              questions: state.questions,
-            ),
-            Expanded(
-              child: PhoneView(
-                child: Container(),
+    return BlocProvider<BuilderCubit>(
+      create: (context) => _cubit,
+      child: BlocBuilder<BuilderCubit, BuilderState>(
+        bloc: _cubit,
+        builder: (context, state) => Scaffold(
+          appBar: AppBar(
+            toolbarHeight: AppDimensions.appbarHeight,
+            backgroundColor: AppColors.white,
+            shadowColor: AppColors.transparentW,
+            centerTitle: true,
+            title: const _BuilderPageTabBar(),
+            actions: const [
+              _CreateTab(),
+              _PreviewTab(),
+            ],
+          ),
+          body: Row(
+            children: [
+              QuestionList(
+                onSelect: _cubit.select,
+                questions: state.questions,
               ),
-            ),
-            EditorBar(
-              editableQuestion: state.selectedQuestion,
-            ),
-          ],
+              Expanded(
+                child: PhoneView(
+                  child: Container(),
+                ),
+              ),
+              EditorBar(
+                editableQuestion: state.selectedQuestion,
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -96,9 +99,7 @@ class _BuilderPageTabBar extends StatelessWidget {
 }
 
 class _CreateTab extends StatelessWidget {
-  final VoidCallback onPressed;
-
-  const _CreateTab({required this.onPressed});
+  const _CreateTab();
 
   @override
   Widget build(BuildContext context) {
@@ -109,7 +110,7 @@ class _CreateTab extends StatelessWidget {
         right: AppDimensions.margin2XL,
       ),
       child: OutlinedButton(
-        onPressed: onPressed,
+        onPressed: BlocProvider.of<BuilderCubit>(context).importData,
         style: OutlinedButton.styleFrom(
           side: const BorderSide(),
         ),
