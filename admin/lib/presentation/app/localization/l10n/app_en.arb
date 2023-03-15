@@ -30,6 +30,7 @@
   "input": "Input",
   "content": "Content",
   "number": "Number",
+  "new_screen": "New screen",
   "date": "Date",
   "email": "Email",
   "phone": "Phone",
@@ -55,5 +56,7 @@
   "check_box":"Check box",
   "single_line_input":"Single-line input",
   "multi_line_input":"Multi-line input",
-  "multiple_choice":"Multiple choice"
+  "multiple_choice":"Multiple choice",
+  "validator_error_text_title": "Validation error message",
+  "validator_error_hint": "Error message"
 }

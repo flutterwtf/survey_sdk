@@ -5,7 +5,7 @@ import 'package:survey_admin/presentation/pages/new_question_page/new_question_p
 import 'package:survey_admin/presentation/utils/app_fonts.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/utils/constants/app_assets.dart';
-import 'package:survey_admin/presentation/utils/constants/constants.dart';
+import 'package:survey_admin/presentation/utils/constants/app_dimensions.dart';
 import 'package:survey_admin/presentation/utils/theme_extension.dart';
 import 'package:survey_admin/presentation/widgets/builder_page/question_list_item.dart';
 import 'package:survey_core/survey_core.dart';
@@ -37,12 +37,23 @@ class _QuestionListState extends State<QuestionList> {
   }
 
   void addQuestion(QuestionData data) {
-    final index = _questionList.length;
+    final index = _questionList.length + 1;
     setState(() {
       _questionList.add(
         data.copyWith(index: index),
       );
     });
+  }
+
+  void _updateQuestion(int oldIndex, int newIndex) {
+    final itemOld = _questionList.removeAt(oldIndex);
+    _questionList.insert(
+      newIndex,
+      itemOld,
+    );
+    for (var i = 0; i < _questionList.length; i++) {
+      _questionList[i] = _questionList[i].copyWith(index: i + 1);
+    }
   }
 
   @override
@@ -117,16 +128,7 @@ class _QuestionListState extends State<QuestionList> {
                 if (newIndex > oldIndex) newIndex--;
                 setState(
                   () {
-                    if (_selectedIndex == oldIndex) {
-                      _selectedIndex = newIndex;
-                    } else if (_selectedIndex == newIndex) {
-                      _selectedIndex = oldIndex;
-                    }
-
-                    final oldItem = _questionList[oldIndex];
-                    final newItem = _questionList[newIndex];
-                    _questionList[newIndex] = oldItem.copyWith(index: newIndex);
-                    _questionList[oldIndex] = newItem.copyWith(index: oldIndex);
+                    _updateQuestion(oldIndex, newIndex);
                   },
                 );
               },
