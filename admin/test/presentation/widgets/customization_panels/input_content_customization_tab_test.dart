@@ -32,7 +32,10 @@ void main() {
           expect(find.text('Subtitle'), findsOneWidget);
           expect(find.text('Hint'), findsOneWidget);
           expect(find.text('Button'), findsOneWidget);
-          expect(find.byType(CreateTextCustomizationItem), findsNWidgets(4));
+          expect(
+            find.byType(CustomizationMultilineTextField),
+            findsNWidgets(4),
+          );
         },
       );
 

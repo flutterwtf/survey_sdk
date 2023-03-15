@@ -3,11 +3,11 @@ import 'package:survey_admin/presentation/app/localization/localizations.dart';
 import 'package:survey_admin/presentation/utils/theme_extension.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
 
-class CreateTextCustomizationItem extends StatelessWidget {
+class CustomizationMultilineTextField extends StatelessWidget {
   final double maxHeight;
   final void Function(String text) onChanged;
 
-  const CreateTextCustomizationItem({
+  const CustomizationMultilineTextField({
     required this.maxHeight,
     required this.onChanged,
     super.key,

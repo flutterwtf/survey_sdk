@@ -30,7 +30,7 @@ class SliderContentCustomizationTab extends CustomizationTab {
           title: context.localization.title,
           isTopDividerShown: true,
           children: [
-            CreateTextCustomizationItem(
+            CustomizationMultilineTextField(
               maxHeight: AppDimensions.sizeXL,
               onChanged: onTitleChanged,
             )
@@ -39,7 +39,7 @@ class SliderContentCustomizationTab extends CustomizationTab {
         CustomizationItemsContainer(
           title: context.localization.subtitle,
           children: [
-            CreateTextCustomizationItem(
+            CustomizationMultilineTextField(
               maxHeight: AppDimensions.sizeXL,
               onChanged: onSubtitleChanged,
             ),

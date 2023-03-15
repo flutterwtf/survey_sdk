@@ -29,7 +29,7 @@ class IntroContentCustomizationTab extends CustomizationTab {
           title: context.localization.title,
           isTopDividerShown: true,
           children: [
-            CreateTextCustomizationItem(
+            CustomizationMultilineTextField(
               maxHeight: AppDimensions.sizeL,
               onChanged: onTitleChanged,
             )
@@ -38,7 +38,7 @@ class IntroContentCustomizationTab extends CustomizationTab {
         CustomizationItemsContainer(
           title: context.localization.subtitle,
           children: [
-            CreateTextCustomizationItem(
+            CustomizationMultilineTextField(
               maxHeight: AppDimensions.sizeL,
               onChanged: onSubtitleChanged,
             ),
@@ -47,7 +47,7 @@ class IntroContentCustomizationTab extends CustomizationTab {
         CustomizationItemsContainer(
           title: context.localization.primary_button,
           children: [
-            CreateTextCustomizationItem(
+            CustomizationMultilineTextField(
               maxHeight: AppDimensions.sizeL,
               onChanged: onPrimaryButtonTextChanged,
             )

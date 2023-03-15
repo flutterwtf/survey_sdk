@@ -198,7 +198,7 @@ class InputCustomizationTab extends CustomizationTab {
         CustomizationItemsContainer(
           title: context.localization.validator_error_text_title,
           children: [
-            CreateTextCustomizationItem(
+            CustomizationMultilineTextField(
               maxHeight: AppDimensions.sizeXL,
               onChanged: onValidatorErrorTextChanged,
             ),
