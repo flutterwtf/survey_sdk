@@ -8,7 +8,7 @@ class LocalStorageDataRepositoryImpl implements LocalStorageDataRepository {
   LocalStorageDataRepositoryImpl(this._localStorageDataSource);
 
   @override
-  Future<SurveyData?> surveyData() async {
+  Future<SurveyData?> surveyData() {
     return _localStorageDataSource.surveyData();
   }
 }

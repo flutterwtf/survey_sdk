@@ -16,6 +16,7 @@ class BuilderCubit extends Cubit<BuilderState> {
         state.copyWith(selectedQuestion: data),
       );
 
+  // TODO(message): show message in case of error/empty data
   Future<void> importData() async {
     final surveyData = await _localStorageDataRepository.surveyData();
     if (surveyData != null) {
