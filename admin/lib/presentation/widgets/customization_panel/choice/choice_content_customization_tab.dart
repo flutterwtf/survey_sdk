@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:survey_admin/presentation/app/localization/localizations.dart';
 import 'package:survey_admin/presentation/utils/constants/app_dimensions.dart';
-import 'package:survey_admin/presentation/widgets/customization_items/create_text_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
+import 'package:survey_admin/presentation/widgets/customization_items/customization_multiline_text_field.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/option_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/customization_tab.dart';
 
@@ -27,7 +27,7 @@ class ChoiceContentCustomizationTab extends CustomizationTab {
           title: context.localization.title,
           isTopDividerShown: true,
           children: [
-            CreateTextCustomizationItem(
+            CustomizationMultilineTextField(
               maxHeight: AppDimensions.sizeXL,
               onChanged: onTitleChanged,
             )
@@ -36,7 +36,7 @@ class ChoiceContentCustomizationTab extends CustomizationTab {
         CustomizationItemsContainer(
           title: context.localization.subtitle,
           children: [
-            CreateTextCustomizationItem(
+            CustomizationMultilineTextField(
               maxHeight: AppDimensions.sizeXL,
               onChanged: onSubTitleChanged,
             ),

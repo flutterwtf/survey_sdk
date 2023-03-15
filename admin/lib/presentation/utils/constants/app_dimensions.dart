@@ -24,7 +24,9 @@ abstract class AppDimensions {
   static const double circularRadiusL = 24;
   static const double circularRadiusXL = 36;
 
-  static const double appBarSize = 50;
+  static const double appbarHeight = 50;
+
+  static const double defaultBorderWidth = 1;
 
   static const double surveyContentBarWidth = 210;
 

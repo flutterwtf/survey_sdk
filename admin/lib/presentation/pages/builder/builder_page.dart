@@ -27,7 +27,7 @@ class _BuilderPageState extends State<BuilderPage> {
     return BlocBuilder<BuilderCubit, BuilderState>(
       builder: (context, state) => Scaffold(
         appBar: AppBar(
-          toolbarHeight: AppDimensions.appBarSize,
+          toolbarHeight: AppDimensions.appbarHeight,
           backgroundColor: AppColors.white,
           shadowColor: AppColors.transparentW,
           centerTitle: true,
