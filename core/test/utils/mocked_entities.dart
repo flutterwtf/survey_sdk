@@ -28,6 +28,16 @@ abstract class MockedQuestions {
     content: 'content',
   );
 
+  static const choice3 = ChoiceQuestionData(
+    title: 'title',
+    content: 'content',
+    options: ['option', 'option', 'option'],
+    isMultipleChoice: false,
+    isSkip: false,
+    index: 0,
+    subtitle: '',
+  );
+
   static const input1 = InputQuestionData(
     validator: DefaultValidator(),
     index: 0,
