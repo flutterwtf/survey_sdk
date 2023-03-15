@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:survey_admin/presentation/app/localization/localizations.dart';
+import 'package:survey_admin/presentation/utils/app_fonts.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/utils/constants/app_dimensions.dart';
 import 'package:survey_admin/presentation/utils/theme_extension.dart';
@@ -83,7 +84,7 @@ class InputCustomizationTab extends CustomizationTab {
                   child: SizedBox(
                     width: AppDimensions.margin4XL,
                     child: CustomizationTextField(
-                      initialValue: '1',
+                      initialValue: AppDimensions.defaultBorderWidth.toString(),
                       inputFormatters: [
                         FilteringTextInputFormatter.digitsOnly,
                         LengthLimitingTextInputFormatter(3),
@@ -113,8 +114,8 @@ class InputCustomizationTab extends CustomizationTab {
           title: context.localization.padding,
           children: [
             PaddingCustomizationItem(
-              initialHorizontalPadding: 14,
-              initialVerticalPadding: 14,
+              initialHorizontalPadding: AppDimensions.marginS,
+              initialVerticalPadding: AppDimensions.marginS,
               onHorizontalPaddingChange: onHorizontalPaddingChanged,
               onVerticalPaddingChange: onVerticalPaddingChanged,
             ),
@@ -133,7 +134,7 @@ class InputCustomizationTab extends CustomizationTab {
                 ),
                 Flexible(
                   child: CustomizationTextField(
-                    initialValue: '16',
+                    initialValue: AppFonts.sizeL.toString(),
                     inputFormatters: [
                       FilteringTextInputFormatter.digitsOnly,
                       LengthLimitingTextInputFormatter(3),
@@ -165,7 +166,7 @@ class InputCustomizationTab extends CustomizationTab {
                 ),
                 Flexible(
                   child: CustomizationTextField(
-                    initialValue: '16',
+                    initialValue: AppFonts.sizeL.toString(),
                     inputFormatters: [
                       FilteringTextInputFormatter.digitsOnly,
                       LengthLimitingTextInputFormatter(3),
