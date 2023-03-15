@@ -9,13 +9,13 @@ import 'package:survey_admin/presentation/widgets/customization_items/padding_cu
 import 'package:survey_admin/presentation/widgets/customization_panel/input/input_customization_tab.dart';
 import 'package:survey_core/survey_core.dart';
 
-import '../app_test.dart';
+import '../app_tester.dart';
 
 void main() {
   group(
     'Input customization tab tests',
     () {
-      final page = AppTest(
+      final page = AppTester(
         child: InputCustomizationTab(
           onBorderColorChanged: (Color value) {},
           onBorderSizeChanged: (int? value) {},
@@ -117,8 +117,7 @@ void main() {
           await widgetTester.pumpWidget(page);
           await widgetTester.pumpAndSettle();
 
-          expect(find.byType(CustomizationItemsContainer), findsNWidgets(7));
-
+          expect(find.byType(CustomizationItemsContainer), findsNWidgets(8));
           expect(find.byType(MultilineSwitch), findsOneWidget);
           expect(
             find.byType(DropdownCustomizationButton<InputType>),

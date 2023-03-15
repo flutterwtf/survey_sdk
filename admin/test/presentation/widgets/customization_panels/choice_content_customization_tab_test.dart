@@ -5,7 +5,7 @@ import 'package:survey_admin/presentation/widgets/customization_panel/choice/cho
 import 'package:survey_admin/presentation/widgets/customization_panel/choice/choice_customization_panel.dart';
 import 'package:survey_core/survey_core.dart';
 
-import '../app_test.dart';
+import '../app_tester.dart';
 
 void main() {
   group(
@@ -14,7 +14,7 @@ void main() {
       var options = <String>[];
       var title = '';
       var subtitle = '';
-      final page = AppTest(
+      final page = AppTester(
         child: ChoiceContentCustomizationTab(
           title: 'Content',
           onOptionsChanged: (newOptions) => options = newOptions,

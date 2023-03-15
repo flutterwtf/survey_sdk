@@ -3,7 +3,7 @@ import 'package:survey_admin/presentation/widgets/customization_items/customizat
 import 'package:survey_admin/presentation/widgets/customization_items/customization_multiline_text_field.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/input/input_content_customization_tab.dart';
 
-import '../app_test.dart';
+import '../app_tester.dart';
 
 void main() {
   group(
@@ -14,7 +14,7 @@ void main() {
       var textSubtitle = '';
       var textHint = '';
       var textButton = '';
-      final page = AppTest(
+      final page = AppTester(
         child: InputContentCustomizationTab(
           title: 'title',
           onTitleChanged: (value) => textTitle = value,

@@ -2,12 +2,15 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:collection/collection.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 const filePath = 'lib/presentation/app/localization/l10n/app_en.arb';
 
+Future<void> asyncThrows(String exError) async => throw Exception(exError);
+
 void main() async {
   if (filePath.isEmpty) {
-    throw const FileSystemException('Expected filepath to arb file.', filePath);
+    asyncThrows('Expected filepath to arb file: $filePath');
   }
 
   final file = File(filePath);
@@ -15,11 +18,13 @@ void main() async {
   final arbContents = await file.readAsString();
 
   final arbIsSorted = _isSorted(arbContents);
-  if (!arbIsSorted) throw Exception('Test Failed. Arb File is not sorted.');
+  if (!arbIsSorted) {
+    asyncThrows('Test Failed. Arb File is not sorted.');
+  }
 
   final notInCamelCaseList = _notInCamelCase(arbContents);
   if (notInCamelCaseList.isNotEmpty) {
-    throw Exception(
+    asyncThrows(
       'Test Failed. Arb File contains not camelCase keys:\n$notInCamelCaseList',
     );
   }
