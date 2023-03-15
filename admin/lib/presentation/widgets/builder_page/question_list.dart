@@ -8,6 +8,7 @@ import 'package:survey_admin/presentation/utils/constants/app_assets.dart';
 import 'package:survey_admin/presentation/utils/constants/app_dimensions.dart';
 import 'package:survey_admin/presentation/utils/theme_extension.dart';
 import 'package:survey_admin/presentation/widgets/builder_page/question_list_item.dart';
+import 'package:survey_admin/presentation/widgets/customization_items/item_divider.dart';
 import 'package:survey_core/survey_core.dart';
 
 class QuestionList extends StatefulWidget {
@@ -63,11 +64,7 @@ class _QuestionListState extends State<QuestionList> {
       color: AppColors.white,
       child: Column(
         children: [
-          const Divider(
-            color: AppColors.greyBackground,
-            thickness: 0.6,
-            height: 1,
-          ),
+          const ItemDivider(),
           Padding(
             padding: const EdgeInsets.symmetric(
               vertical: AppDimensions.margin2XS,
