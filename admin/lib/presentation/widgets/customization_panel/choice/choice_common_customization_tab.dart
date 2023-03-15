@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:survey_admin/presentation/app/localization/localizations.dart';
+import 'package:survey_admin/presentation/utils/app_fonts.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
+import 'package:survey_admin/presentation/utils/constants/app_dimensions.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/color_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/radius_customization_item.dart';
@@ -52,8 +54,7 @@ class ChoiceCommonCustomizationTab extends CustomizationTab {
             TextStyleCustomizationItem(
               initialColor: AppColors.black,
               onColorPicked: onTitleColorPicked,
-              // TODO(dev): what are the magic Strings here and in items below?
-              initialFontSize: '16',
+              initialFontSize: AppFonts.sizeL.toString(),
               onFontSizeChanged: (value) {
                 final size = int.tryParse(value);
                 if (size != null) {
@@ -69,7 +70,7 @@ class ChoiceCommonCustomizationTab extends CustomizationTab {
             TextStyleCustomizationItem(
               initialColor: Colors.black,
               onColorPicked: onSubtitleColorPicked,
-              initialFontSize: '12',
+              initialFontSize: AppFonts.sizeS.toString(),
               onFontSizeChanged: (value) {
                 final size = int.tryParse(value);
                 if (size != null) {
@@ -89,7 +90,7 @@ class ChoiceCommonCustomizationTab extends CustomizationTab {
             TextStyleCustomizationItem(
               initialColor: AppColors.white,
               onColorPicked: onButtonTextColorPicked,
-              initialFontSize: '12',
+              initialFontSize: AppFonts.sizeS.toString(),
               onFontSizeChanged: (value) {
                 final size = int.tryParse(value);
                 if (size != null) {
@@ -98,7 +99,7 @@ class ChoiceCommonCustomizationTab extends CustomizationTab {
               },
             ),
             RadiusCustomizationItem(
-              initialValue: 10,
+              initialValue: AppDimensions.circularRadiusS,
               onRadiusChanged: onButtonRadiusChanged,
             ),
           ],

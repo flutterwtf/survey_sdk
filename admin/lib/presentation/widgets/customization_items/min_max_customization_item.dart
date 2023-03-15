@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:survey_admin/presentation/app/localization/localizations.dart';
-import 'package:survey_admin/presentation/utils/constants/constants.dart';
+import 'package:survey_admin/presentation/utils/constants/app_dimensions.dart';
 import 'package:survey_admin/presentation/utils/theme_extension.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
 
@@ -45,8 +45,6 @@ class _MinMaxCustomizationItemState extends State<MinMaxCustomizationItem> {
         Expanded(
           flex: 2,
           child: _MinMaxInputField(
-            // TODO(dev): looks like a constant. Need to check all other parts.
-            name: 'min_input_field',
             prefix: context.localization.min,
             initialValue: widget.initialMin,
             minValue: null,
@@ -62,7 +60,6 @@ class _MinMaxCustomizationItemState extends State<MinMaxCustomizationItem> {
         Expanded(
           flex: 3,
           child: _MinMaxInputField(
-            name: 'max_input_field',
             prefix: context.localization.max,
             initialValue: widget.initialMax,
             minValue: _min,
@@ -81,7 +78,6 @@ class _MinMaxCustomizationItemState extends State<MinMaxCustomizationItem> {
 }
 
 class _MinMaxInputField extends StatelessWidget {
-  final String name;
   final String prefix;
   final int initialValue;
   final int? minValue;
@@ -89,7 +85,6 @@ class _MinMaxInputField extends StatelessWidget {
   final void Function(int value) onChanged;
 
   const _MinMaxInputField({
-    required this.name,
     required this.prefix,
     required this.initialValue,
     required this.minValue,

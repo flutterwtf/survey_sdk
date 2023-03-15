@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:survey_admin/presentation/app/localization/localizations.dart';
+import 'package:survey_admin/presentation/utils/app_fonts.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/color_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
@@ -49,7 +50,7 @@ class InputCommonCustomizationTab extends CustomizationTab {
             TextStyleCustomizationItem(
               initialColor: AppColors.black,
               onColorPicked: onTitleColorPicked,
-              initialFontSize: '16',
+              initialFontSize: AppFonts.sizeL.toString(),
               onFontSizeChanged: (value) {
                 final size = int.tryParse(value);
                 if (size != null) {
@@ -65,7 +66,7 @@ class InputCommonCustomizationTab extends CustomizationTab {
             TextStyleCustomizationItem(
               initialColor: AppColors.black,
               onColorPicked: onSubtitleColorPicked,
-              initialFontSize: '12',
+              initialFontSize: AppFonts.sizeS.toString(),
               onFontSizeChanged: (value) {
                 final size = int.tryParse(value);
                 if (size != null) {
@@ -85,7 +86,7 @@ class InputCommonCustomizationTab extends CustomizationTab {
             TextStyleCustomizationItem(
               initialColor: AppColors.white,
               onColorPicked: onButtonSecondColorPicked,
-              initialFontSize: '12',
+              initialFontSize: AppFonts.sizeS.toString(),
               onFontSizeChanged: (value) {
                 final size = int.tryParse(value);
                 if (size != null) {
