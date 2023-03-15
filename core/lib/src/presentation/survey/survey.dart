@@ -48,36 +48,7 @@ class _SurveyState extends State<Survey> {
                 ),
               )
             : Theme(
-                data: surveyData.commonTheme.toThemeData().copyWith(
-                      textTheme: const TextTheme(
-                        titleMedium: TextStyle(
-                          color: AppColors.black,
-                          fontWeight: AppFonts.weightBold,
-                          fontFamily: AppFonts.karla,
-                        ),
-                        titleSmall: TextStyle(
-                          color: AppColors.black,
-                          fontWeight: AppFonts.weightRegular,
-                          fontFamily: AppFonts.karla,
-                          fontSize: AppFonts.sizeS,
-                        ),
-                        labelLarge: TextStyle(
-                          color: AppColors.white,
-                          fontFamily: AppFonts.karla,
-                          fontWeight: AppFonts.weightBold,
-                        ),
-                        bodyMedium: TextStyle(
-                          color: AppColors.black,
-                          fontFamily: AppFonts.karla,
-                          fontWeight: AppFonts.weightRegular,
-                        ),
-                        bodySmall: TextStyle(
-                          color: AppColors.black,
-                          fontWeight: AppFonts.weightRegular,
-                          fontFamily: AppFonts.karla,
-                        ),
-                      ),
-                    ),
+                data: surveyData.commonTheme.toThemeData(),
                 child: WillPopScope(
                   onWillPop: () async {
                     _surveyController.onBack();
