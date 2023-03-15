@@ -22,7 +22,11 @@ Future<void> _initDataSources() async {
 void _initCubits() {
   i
     ..registerFactory<AppCubit>(AppCubit.new)
-    ..registerFactory<BuilderCubit>(BuilderCubit.new)
+    ..registerFactory<BuilderCubit>(
+      () => BuilderCubit(
+        i.get<SurveyDataRepository>(),
+      ),
+    )
     ..registerFactory<NewQuestionCubit>(NewQuestionCubit.new);
 }
 

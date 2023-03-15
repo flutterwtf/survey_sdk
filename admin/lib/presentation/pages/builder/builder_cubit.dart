@@ -7,8 +7,8 @@ import 'package:survey_core/survey_core.dart';
 class BuilderCubit extends Cubit<BuilderState> {
   final SurveyDataRepository _surveyDataRepository;
 
-  BuilderCubit()
-      : _surveyDataRepository = GetIt.instance.get<SurveyDataRepository>(),
+  BuilderCubit(this._surveyDataRepository)
+      :
         super(
           BuilderState(
             selectedQuestion: null,
