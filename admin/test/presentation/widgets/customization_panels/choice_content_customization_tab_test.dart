@@ -22,7 +22,7 @@ void main() {
           onTitleChanged: (newTitle) => title = newTitle,
           onRuleChanged: (value) {},
           ruleType: RuleType.none,
-          limitedRule: 0,
+          ruleValue: 0,
           listOptions: const [],
           onRuleLimitedChanged: (value) {},
           editableQuestion: const IntroQuestionData.common(),

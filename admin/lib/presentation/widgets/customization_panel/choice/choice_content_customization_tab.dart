@@ -18,7 +18,7 @@ class ChoiceContentCustomizationTab extends CustomizationTab {
   final ValueChanged<int> onRuleLimitedChanged;
   final QuestionData editableQuestion;
   final RuleType ruleType;
-  final int limitedRule;
+  final int ruleValue;
   final List<String> listOptions;
 
   const ChoiceContentCustomizationTab({
@@ -31,20 +31,22 @@ class ChoiceContentCustomizationTab extends CustomizationTab {
     required this.ruleType,
     required this.listOptions,
     required this.onRuleLimitedChanged,
-    required this.limitedRule,
+    required this.ruleValue,
     super.key,
   });
 
-  List<int> initialLimitedList(List<String> listOptions) {
-    final listLimited = <int>[];
+  List<int> _initialLimitedList(List<String> listOptions) {
+    // TODO(dev): we should rethink this
+    final limitedList = <int>[];
     if (listOptions.isEmpty) {
-      listLimited.add(0);
+      limitedList.add(0);
     } else {
+      // TODO(dev): do-while loop maybe?
       for (var i = 0; i <= listOptions.length; i++) {
-        listLimited.add(i);
+        limitedList.add(i);
       }
     }
-    return listLimited;
+    return limitedList;
   }
 
   @override
@@ -105,30 +107,49 @@ class ChoiceContentCustomizationTab extends CustomizationTab {
                   ),
                   Expanded(
                     child: ruleType != RuleType.none
-                        ? DropdownCustomizationButton<int>(
-                            items: initialLimitedList(listOptions)
-                                .map(
-                                  (e) => DropdownCustomizationItem<int>(
-                                    value: e,
-                                    onChange: onRuleLimitedChanged,
-                                    child: Text(
-                                      e.toString(),
-                                      style: context.theme.textTheme.bodyLarge,
-                                    ),
-                                  ),
-                                )
-                                .toList(),
-                            value: limitedRule,
+                        ? _RuleDropdown(
+                            onChanged: onRuleLimitedChanged,
+                            values: _initialLimitedList(listOptions),
+                            value: ruleValue,
                           )
                         : const SizedBox(),
                   ),
                 ],
               ),
             ],
-          )
-        else
-          Container(),
+          ),
       ],
+    );
+  }
+}
+
+class _RuleDropdown extends StatelessWidget {
+  final ValueChanged<int>? onChanged;
+  final List<int> values;
+  final int value;
+
+  const _RuleDropdown({
+    required this.onChanged,
+    required this.values,
+    required this.value,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return DropdownCustomizationButton<int>(
+      items: values
+          .map(
+            (e) => DropdownCustomizationItem<int>(
+              value: e,
+              onChange: onChanged,
+              child: Text(
+                e.toString(),
+                style: context.theme.textTheme.bodyLarge,
+              ),
+            ),
+          )
+          .toList(),
+      value: value,
     );
   }
 }

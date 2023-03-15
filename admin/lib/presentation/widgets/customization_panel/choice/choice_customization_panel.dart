@@ -37,9 +37,9 @@ class ChoiceCustomizationPanel extends StatefulWidget {
 }
 
 class _ChoiceCustomizationPanelState extends State<ChoiceCustomizationPanel> {
-  RuleType ruleType = RuleType.none;
-  List<String> listOptions = [];
-  int limitedRule = 0;
+  RuleType _ruleType = RuleType.none;
+  List<String> _listOptions = [];
+  int _ruleValue = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -71,23 +71,21 @@ class _ChoiceCustomizationPanelState extends State<ChoiceCustomizationPanel> {
           onTitleChanged: (title) {},
           onSubTitleChanged: (subtitle) {},
           onOptionsChanged: (options) {
-            setState(() {
-              listOptions = options;
-            });
+            setState(() => _listOptions = options);
           },
           onRuleChanged: (value) {
             setState(() {
-              ruleType = value;
+              _ruleType = value;
             });
           },
           onRuleLimitedChanged: (value) {
             setState(() {
-              limitedRule = value;
+              _ruleValue = value;
             });
           },
-          ruleType: ruleType,
-          limitedRule: limitedRule,
-          listOptions: listOptions,
+          ruleType: _ruleType,
+          ruleValue: _ruleValue,
+          listOptions: _listOptions,
           editableQuestion: widget.editableQuestion,
         ),
       ],
