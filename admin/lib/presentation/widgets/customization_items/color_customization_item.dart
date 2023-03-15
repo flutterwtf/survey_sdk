@@ -7,10 +7,14 @@ import 'package:survey_admin/presentation/widgets/customization_items/customizat
 class ColorCustomizationItem extends StatefulWidget {
   final Color initialColor;
   final ValueChanged<Color> onColorPicked;
+  final String? initialSize;
+  final ValueChanged<int>? onSizeChanged;
 
   const ColorCustomizationItem({
     required this.initialColor,
     required this.onColorPicked,
+    this.initialSize,
+    this.onSizeChanged,
     super.key,
   });
 
@@ -34,7 +38,7 @@ class _ColorCustomizationItemState extends State<ColorCustomizationItem> {
   @override
   void dispose() {
     _controller.dispose();
-    
+
     super.dispose();
   }
 
@@ -113,7 +117,7 @@ class _ColorCustomizationItemState extends State<ColorCustomizationItem> {
   void _updateTextField() {
     widget.onColorPicked(_pickedColor);
     setState(
-          () => _controller.text = _colorToString(_pickedColor),
+      () => _controller.text = _colorToString(_pickedColor),
     );
   }
 }

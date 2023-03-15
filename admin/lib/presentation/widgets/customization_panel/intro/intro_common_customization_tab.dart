@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:survey_admin/presentation/app/localization/localizations.dart';
 import 'package:survey_admin/presentation/utils/app_fonts.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
@@ -7,7 +6,6 @@ import 'package:survey_admin/presentation/utils/constants/app_dimensions.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/color_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/radius_customization_item.dart';
-import 'package:survey_admin/presentation/widgets/customization_items/text_style_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/customization_tab.dart';
 
 class IntroCommonCustomizationTab extends CustomizationTab {
@@ -52,42 +50,22 @@ class IntroCommonCustomizationTab extends CustomizationTab {
         CustomizationItemsContainer(
           title: context.localization.title,
           children: [
-            TextStyleCustomizationItem(
+            ColorCustomizationItem(
+              initialColor: AppColors.black,
               onColorPicked: onTitleColorPicked,
-              initialText: AppFonts.sizeL.toString(),
-              inputFormatters: [
-                FilteringTextInputFormatter.digitsOnly,
-                LengthLimitingTextInputFormatter(3),
-              ],
-              onTextChanged: (value) {
-                if (value == null) return;
-
-                final size = int.tryParse(value);
-                if (size != null) {
-                  onTitleFontSizeChanged(size);
-                }
-              },
+              initialSize: AppFonts.sizeL.toString(),
+              onSizeChanged: onTitleFontSizeChanged,
             ),
           ],
         ),
         CustomizationItemsContainer(
           title: context.localization.subtitle,
           children: [
-            TextStyleCustomizationItem(
+            ColorCustomizationItem(
+              initialColor: AppColors.black,
               onColorPicked: onSubtitleColorPicked,
-              initialText: AppFonts.sizeS.toString(),
-              inputFormatters: [
-                FilteringTextInputFormatter.digitsOnly,
-                LengthLimitingTextInputFormatter(3),
-              ],
-              onTextChanged: (value) {
-                if (value == null) return;
-
-                final size = int.tryParse(value);
-                if (size != null) {
-                  onSubtitleFontSizeChanged(size);
-                }
-              },
+              initialSize: AppFonts.sizeS.toString(),
+              onSizeChanged: onSubtitleFontSizeChanged,
             ),
           ],
         ),
@@ -98,22 +76,11 @@ class IntroCommonCustomizationTab extends CustomizationTab {
               initialColor: AppColors.black,
               onColorPicked: onButtonColorPicked,
             ),
-            TextStyleCustomizationItem(
+            ColorCustomizationItem(
               initialColor: AppColors.white,
               onColorPicked: onButtonTextColorPicked,
-              initialText: AppFonts.sizeS.toString(),
-              inputFormatters: [
-                FilteringTextInputFormatter.digitsOnly,
-                LengthLimitingTextInputFormatter(3),
-              ],
-              onTextChanged: (value) {
-                if (value == null) return;
-
-                final size = int.tryParse(value);
-                if (size != null) {
-                  onButtonFontSizeChanged(size);
-                }
-              },
+              initialSize: AppFonts.sizeS.toString(),
+              onSizeChanged: onButtonFontSizeChanged,
             ),
             RadiusCustomizationItem(
               initialValue: AppDimensions.circularRadiusS,
