@@ -51,11 +51,9 @@ class _QuestionSettingsTabBarState extends State<QuestionSettingsTabBar>
           labelStyle: context.theme.textTheme.bodyMedium?.copyWith(
             fontWeight: AppFonts.weightMedium,
           ),
-          tabs: widget.tabs
-              .map(
-                (tab) => Tab(text: tab.title),
-              )
-              .toList(),
+          tabs: [
+            for (final tab in widget.tabs) Tab(text: tab.title),
+          ],
         ),
         Expanded(
           child: TabBarView(

@@ -9,18 +9,18 @@ import 'package:survey_admin/presentation/widgets/customization_items/customizat
 import 'package:survey_admin/presentation/widgets/customization_items/switch_customization_item.dart';
 
 class MultilineSwitch extends StatefulWidget {
-  /// if [isMultiline] equals `false` then `lineAmount` is always equals 1.
-  /// In case of any input error `lineAmount` is always equals 1.
-  final void Function(bool isMultiline, int lineAmount) onChanged;
-  final bool isMultiline;
-  final int defaultLineAmount;
-
   const MultilineSwitch({
     required this.onChanged,
     this.isMultiline = false,
     this.defaultLineAmount = 3,
     super.key,
   });
+
+  /// if [isMultiline] equals `false` then `lineAmount` is always equals 1.
+  /// In case of any input error `lineAmount` is always equals 1.
+  final void Function(bool isMultiline, int lineAmount) onChanged;
+  final bool isMultiline;
+  final int defaultLineAmount;
 
   @override
   State<MultilineSwitch> createState() => _MultilineSwitchState();
@@ -71,7 +71,7 @@ class _MultilineSwitchState extends State<MultilineSwitch> {
 }
 
 class _LineAmountInputField extends StatelessWidget {
-  final void Function(int amount) onChanged;
+  final ValueChanged<int> onChanged;
   final int defaultLineAmount;
 
   const _LineAmountInputField({

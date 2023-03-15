@@ -86,10 +86,10 @@ class _InputTypeCustomizationItemState extends State<InputTypeCustomizationItem>
             child: SvgPicture.asset(AppAssets.arrowIcon),
           ),
           onTap: () {
-            setState(() => _isExpanded = !_isExpanded);
             _isExpanded
                 ? _iconAnimationController.forward()
                 : _iconAnimationController.reverse();
+            setState(() => _isExpanded = !_isExpanded);
           },
         ),
         AnimatedSize(
