@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/utils/constants/app_dimensions.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/choice/choice_customization_panel.dart';
+import 'package:survey_admin/presentation/widgets/customization_panel/common_theme/common_theme_customization_panel.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/input/input_customization_panel.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/intro/intro_customization_panel.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/slider/slider_customization_panel.dart';
@@ -37,7 +38,7 @@ class EditorBar extends StatelessWidget {
             case QuestionTypes.slider:
               return const SliderCustomizationPanel();
             default:
-              return const SizedBox.shrink();
+              return const CommonThemeCustomizationPanel();
           }
         },
       ),

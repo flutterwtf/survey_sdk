@@ -12,9 +12,11 @@ import 'package:survey_core/survey_core.dart';
 
 class QuestionList extends StatefulWidget {
   final void Function(QuestionData) onSelect;
+  final void Function() onEditCommonTheme;
 
   const QuestionList({
     required this.onSelect,
+    required this.onEditCommonTheme,
     super.key,
   });
 
@@ -25,6 +27,7 @@ class QuestionList extends StatefulWidget {
 class _QuestionListState extends State<QuestionList> {
   late List<QuestionData> _questionList;
   int _selectedIndex = 0;
+  final _commonThemeIndex = -1;
 
   @override
   void initState() {
@@ -71,7 +74,24 @@ class _QuestionListState extends State<QuestionList> {
                   ),
                 ),
                 const SizedBox(
-                  width: AppDimensions.margin4XL + AppDimensions.margin3XL,
+                  width: AppDimensions.margin4XL,
+                ),
+                GestureDetector(
+                  onTap: () async {
+                    setState(() {
+                      _selectedIndex = _commonThemeIndex;
+                    });
+                    widget.onEditCommonTheme();
+                  },
+                  child: Container(
+                    alignment: Alignment.center,
+                    height: AppDimensions.sizeL,
+                    width: AppDimensions.sizeL,
+                    color: _selectedIndex == _commonThemeIndex
+                        ? AppColors.greyBackground
+                        : AppColors.white,
+                    child: const Icon(Icons.invert_colors),
+                  ),
                 ),
                 GestureDetector(
                   onTap: () async {

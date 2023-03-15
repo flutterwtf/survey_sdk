@@ -4,11 +4,10 @@ import 'package:survey_core/survey_core.dart';
 
 class BuilderCubit extends Cubit<BuilderState> {
   BuilderCubit()
-      : super(
-          const BuilderState(selectedQuestion: null),
-        );
+      : super(const EditQuestionBuilderState(selectedQuestion: null));
 
-  void select(QuestionData data) => emit(
-        state.copyWith(selectedQuestion: data),
-      );
+  void select(QuestionData data) =>
+      emit(EditQuestionBuilderState(selectedQuestion: data));
+
+  void editCommonTheme() => emit(const EditCommonThemeBuilderState());
 }

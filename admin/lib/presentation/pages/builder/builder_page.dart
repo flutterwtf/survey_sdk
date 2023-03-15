@@ -41,14 +41,19 @@ class _BuilderPageState extends State<BuilderPage> {
         ),
         body: Row(
           children: [
-            QuestionList(onSelect: _cubit.select),
+            QuestionList(
+              onSelect: _cubit.select,
+              onEditCommonTheme: _cubit.editCommonTheme,
+            ),
             Expanded(
               child: PhoneView(
                 child: Container(),
               ),
             ),
             EditorBar(
-              editableQuestion: state.selectedQuestion,
+              editableQuestion: (state is EditQuestionBuilderState)
+                  ? state.selectedQuestion
+                  : null,
             ),
           ],
         ),
