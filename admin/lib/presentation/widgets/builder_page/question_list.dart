@@ -44,6 +44,17 @@ class _QuestionListState extends State<QuestionList> {
     });
   }
 
+  void _updateQuestion(int oldIndex, int newIndex) {
+    final itemOld = widget.questions.removeAt(oldIndex);
+    widget.questions.insert(
+      newIndex,
+      itemOld,
+    );
+    for (var i = 0; i < widget.questions.length; i++) {
+      widget.questions[i] = widget.questions[i].copyWith(index: i + 1);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -93,36 +104,36 @@ class _QuestionListState extends State<QuestionList> {
             ),
           ),
           if (widget.questions.isNotEmpty)
-          Expanded(
-            child: ReorderableListView(
-              buildDefaultDragHandles: false,
-              children: [
-                for (int index = 0; index < _questionList.length; index++)
-                  ReorderableDragStartListener(
-                    index: index,
-                    key: ValueKey(index),
-                    child: QuestionListItem(
-                      isSelected: index == _selectedIndex,
-                      questionData: _questionList[index],
-                      onTap: (data) {
-                        widget.onSelect(data);
-                        setState(() {
-                          _selectedIndex = index;
-                        });
-                      },
-                    ),
-                  )
-              ],
-              onReorder: (oldIndex, newIndex) {
-                if (newIndex > oldIndex) newIndex--;
-                setState(
-                  () {
-                    _updateQuestion(oldIndex, newIndex);
-                  },
-                );
-              },
+            Expanded(
+              child: ReorderableListView(
+                buildDefaultDragHandles: false,
+                children: [
+                  for (int index = 0; index < widget.questions.length; index++)
+                    ReorderableDragStartListener(
+                      index: index,
+                      key: ValueKey(index),
+                      child: QuestionListItem(
+                        isSelected: index == _selectedIndex,
+                        questionData: widget.questions[index],
+                        onTap: (data) {
+                          widget.onSelect(data);
+                          setState(() {
+                            _selectedIndex = index;
+                          });
+                        },
+                      ),
+                    )
+                ],
+                onReorder: (oldIndex, newIndex) {
+                  if (newIndex > oldIndex) newIndex--;
+                  setState(
+                    () {
+                      _updateQuestion(oldIndex, newIndex);
+                    },
+                  );
+                },
+              ),
             ),
-          ),
         ],
       ),
     );
