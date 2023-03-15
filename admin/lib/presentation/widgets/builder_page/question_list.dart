@@ -5,7 +5,7 @@ import 'package:survey_admin/presentation/pages/new_question_page/new_question_p
 import 'package:survey_admin/presentation/utils/app_fonts.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/utils/constants/app_assets.dart';
-import 'package:survey_admin/presentation/utils/constants/constants.dart';
+import 'package:survey_admin/presentation/utils/constants/app_dimensions.dart';
 import 'package:survey_admin/presentation/utils/theme_extension.dart';
 import 'package:survey_admin/presentation/widgets/builder_page/question_list_item.dart';
 import 'package:survey_core/survey_core.dart';
@@ -93,47 +93,36 @@ class _QuestionListState extends State<QuestionList> {
             ),
           ),
           if (widget.questions.isNotEmpty)
-            Expanded(
-              child: ReorderableListView(
-                buildDefaultDragHandles: false,
-                children: [
-                  for (int index = 0; index < widget.questions.length; index++)
-                    ReorderableDragStartListener(
-                      index: index,
-                      key: ValueKey(index),
-                      child: QuestionListItem(
-                        isSelected: index == _selectedIndex,
-                        questionData: widget.questions[index],
-                        onTap: (data) {
-                          widget.onSelect(data);
-                          setState(() {
-                            _selectedIndex = index;
-                          });
-                        },
-                      ),
-                    )
-                ],
-                onReorder: (oldIndex, newIndex) {
-                  if (newIndex > oldIndex) newIndex--;
-                  setState(
-                    () {
-                      if (_selectedIndex == oldIndex) {
-                        _selectedIndex = newIndex;
-                      } else if (_selectedIndex == newIndex) {
-                        _selectedIndex = oldIndex;
-                      }
-
-                      final oldItem = widget.questions[oldIndex];
-                      final newItem = widget.questions[newIndex];
-                      widget.questions[newIndex] =
-                          oldItem.copyWith(index: newIndex);
-                      widget.questions[oldIndex] =
-                          newItem.copyWith(index: oldIndex);
-                    },
-                  );
-                },
-              ),
+          Expanded(
+            child: ReorderableListView(
+              buildDefaultDragHandles: false,
+              children: [
+                for (int index = 0; index < _questionList.length; index++)
+                  ReorderableDragStartListener(
+                    index: index,
+                    key: ValueKey(index),
+                    child: QuestionListItem(
+                      isSelected: index == _selectedIndex,
+                      questionData: _questionList[index],
+                      onTap: (data) {
+                        widget.onSelect(data);
+                        setState(() {
+                          _selectedIndex = index;
+                        });
+                      },
+                    ),
+                  )
+              ],
+              onReorder: (oldIndex, newIndex) {
+                if (newIndex > oldIndex) newIndex--;
+                setState(
+                  () {
+                    _updateQuestion(oldIndex, newIndex);
+                  },
+                );
+              },
             ),
+          ),
         ],
       ),
     );

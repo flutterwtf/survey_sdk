@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:survey_admin/presentation/widgets/customization_items/create_text_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
+import 'package:survey_admin/presentation/widgets/customization_items/customization_multiline_text_field.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/input/input_content_customization_tab.dart';
 
 import '../app_test.dart';
@@ -32,7 +32,10 @@ void main() {
           expect(find.text('Subtitle'), findsOneWidget);
           expect(find.text('Hint'), findsOneWidget);
           expect(find.text('Button'), findsOneWidget);
-          expect(find.byType(CreateTextCustomizationItem), findsNWidgets(4));
+          expect(
+            find.byType(CustomizationMultilineTextField),
+            findsNWidgets(4),
+          );
         },
       );
 

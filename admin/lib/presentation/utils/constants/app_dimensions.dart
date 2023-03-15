@@ -1,4 +1,3 @@
-// TODO(dev): rename file
 abstract class AppDimensions {
   static const double margin2XS = 6;
   static const double marginXS = 12;
@@ -25,7 +24,9 @@ abstract class AppDimensions {
   static const double circularRadiusL = 24;
   static const double circularRadiusXL = 36;
 
-  static const double appbarSize = 50;
+  static const double appbarHeight = 50;
+
+  static const double defaultBorderWidth = 1;
 
   static const double surveyContentBarWidth = 210;
 
