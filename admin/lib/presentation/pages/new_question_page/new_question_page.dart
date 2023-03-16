@@ -218,8 +218,8 @@ class _AddButton extends StatelessWidget {
     return GestureDetector(
       onTap: onPressed,
       child: Container(
-        width: 150,
-        height: 34,
+        width: AppDimensions.addButtonWidth,
+        height: AppDimensions.addButtonHeight,
         decoration: BoxDecoration(
           color: AppColors.black,
           borderRadius: BorderRadius.circular(AppDimensions.circularRadiusXS),

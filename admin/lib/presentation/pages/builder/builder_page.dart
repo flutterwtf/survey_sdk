@@ -44,6 +44,7 @@ class _BuilderPageState extends State<BuilderPage> {
           body: Row(
             children: [
               QuestionList(
+                onAdd: _cubit.addQuestionData,
                 onSelect: _cubit.select,
                 questions: state.questions,
               ),
@@ -110,7 +111,7 @@ class _CreateTab extends StatelessWidget {
         right: AppDimensions.margin2XL,
       ),
       child: OutlinedButton(
-        onPressed: BlocProvider.of<BuilderCubit>(context).importData,
+        onPressed: () {},
         style: OutlinedButton.styleFrom(
           side: const BorderSide(),
         ),

@@ -3,12 +3,12 @@ import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
 
-import '../app_test.dart';
+import '../app_tester.dart';
 
 void main() {
   testWidgets('initialValue property', (tester) async {
     await tester.pumpWidget(
-      const AppTest(
+      const AppTester(
         child: CustomizationTextField(
           initialValue: 'initialValue',
         ),
@@ -21,7 +21,7 @@ void main() {
   testWidgets('onChanged property', (tester) async {
     String? text;
     await tester.pumpWidget(
-      AppTest(
+      AppTester(
         child: CustomizationTextField(
           onChanged: (newText) {
             text = newText;
@@ -39,7 +39,7 @@ void main() {
 
   testWidgets('fontSize property', (tester) async {
     await tester.pumpWidget(
-      const AppTest(
+      const AppTester(
         child: CustomizationTextField(
           fontSize: 14,
         ),
@@ -54,7 +54,7 @@ void main() {
 
   testWidgets('inputFormatters property', (tester) async {
     await tester.pumpWidget(
-      AppTest(
+      AppTester(
         child: CustomizationTextField(
           inputFormatters: [
             FilteringTextInputFormatter.digitsOnly,
@@ -71,7 +71,7 @@ void main() {
   testWidgets('focusNode property', (tester) async {
     final focusNode = FocusNode();
     await tester.pumpWidget(
-      AppTest(
+      AppTester(
         child: Scaffold(
           body: CustomizationTextField(
             focusNode: focusNode,
@@ -89,7 +89,7 @@ void main() {
   testWidgets('onEditingComplete property', (tester) async {
     var amountOfChanges = 0;
     await tester.pumpWidget(
-      AppTest(
+      AppTester(
         child: CustomizationTextField(
           onEditingComplete: () {
             amountOfChanges++;
@@ -114,7 +114,7 @@ void main() {
   testWidgets('controller property', (tester) async {
     final controller = TextEditingController();
     await tester.pumpWidget(
-      AppTest(
+      AppTester(
         child: CustomizationTextField(
           controller: controller,
         ),
@@ -135,7 +135,7 @@ void main() {
       fillColor: Colors.black,
     );
     await tester.pumpWidget(
-      const AppTest(
+      const AppTester(
         child: CustomizationTextField(
           decoration: decoration,
         ),

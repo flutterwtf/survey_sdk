@@ -8,14 +8,17 @@ import 'package:survey_admin/presentation/utils/constants/app_assets.dart';
 import 'package:survey_admin/presentation/utils/constants/app_dimensions.dart';
 import 'package:survey_admin/presentation/utils/theme_extension.dart';
 import 'package:survey_admin/presentation/widgets/builder_page/question_list_item.dart';
+import 'package:survey_admin/presentation/widgets/customization_items/item_divider.dart';
 import 'package:survey_core/survey_core.dart';
 
 class QuestionList extends StatefulWidget {
   final void Function(QuestionData) onSelect;
+  final ValueChanged<QuestionData> onAdd;
   final List<QuestionData> questions;
 
   const QuestionList({
     required this.onSelect,
+    required this.onAdd,
     required this.questions,
     super.key,
   });
@@ -25,33 +28,36 @@ class QuestionList extends StatefulWidget {
 }
 
 class _QuestionListState extends State<QuestionList> {
+  late List<QuestionData> _questionList;
   int _selectedIndex = 0;
 
   @override
   void initState() {
     super.initState();
-    if (widget.questions.isNotEmpty) {
-      widget.onSelect(widget.questions.first);
+    _questionList = widget.questions;
+    if (_questionList.isNotEmpty) {
+      widget.onSelect(_questionList.first);
     }
   }
 
   void addQuestion(QuestionData data) {
-    final index = widget.questions.length;
+    final index = _questionList.length + 1;
     setState(() {
-      widget.questions.add(
+      _questionList.add(
         data.copyWith(index: index),
       );
     });
+    widget.onAdd(data.copyWith(index: index));
   }
 
   void _updateQuestion(int oldIndex, int newIndex) {
-    final itemOld = widget.questions.removeAt(oldIndex);
-    widget.questions.insert(
+    final itemOld = _questionList.removeAt(oldIndex);
+    _questionList.insert(
       newIndex,
       itemOld,
     );
-    for (var i = 0; i < widget.questions.length; i++) {
-      widget.questions[i] = widget.questions[i].copyWith(index: i + 1);
+    for (var i = 0; i < _questionList.length; i++) {
+      _questionList[i] = _questionList[i].copyWith(index: i + 1);
     }
   }
 
@@ -62,11 +68,7 @@ class _QuestionListState extends State<QuestionList> {
       color: AppColors.white,
       child: Column(
         children: [
-          const Divider(
-            color: AppColors.greyBackground,
-            thickness: 0.6,
-            height: 1,
-          ),
+          const ItemDivider(),
           Padding(
             padding: const EdgeInsets.symmetric(
               vertical: AppDimensions.margin2XS,
@@ -103,18 +105,18 @@ class _QuestionListState extends State<QuestionList> {
               ],
             ),
           ),
-          if (widget.questions.isNotEmpty)
+          if (_questionList.isNotEmpty)
             Expanded(
               child: ReorderableListView(
                 buildDefaultDragHandles: false,
                 children: [
-                  for (int index = 0; index < widget.questions.length; index++)
+                  for (int index = 0; index < _questionList.length; index++)
                     ReorderableDragStartListener(
                       index: index,
                       key: ValueKey(index),
                       child: QuestionListItem(
                         isSelected: index == _selectedIndex,
-                        questionData: widget.questions[index],
+                        questionData: _questionList[index],
                         onTap: (data) {
                           widget.onSelect(data);
                           setState(() {

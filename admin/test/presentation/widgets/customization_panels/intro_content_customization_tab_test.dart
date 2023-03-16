@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/intro/intro_content_customization_tab.dart';
 
-import '../app_test.dart';
+import '../app_tester.dart';
 
 void main() {
   group('Tests for IntroContentCustomizationTab', () {
@@ -12,7 +12,7 @@ void main() {
     var textTitle = '';
     var textSubtitle = '';
     var textPrimaryButton = '';
-    final page = AppTest(
+    final page = AppTester(
       child: IntroContentCustomizationTab(
         title: 'Content',
         onTitleChanged: (newTitle) {
