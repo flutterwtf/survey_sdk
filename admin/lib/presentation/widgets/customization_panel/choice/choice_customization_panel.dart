@@ -4,14 +4,42 @@ import 'package:survey_admin/presentation/widgets/customization_panel/choice/cho
 import 'package:survey_admin/presentation/widgets/customization_panel/choice/choice_common_customization_tab.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/choice/choice_content_customization_tab.dart';
 import 'package:survey_admin/presentation/widgets/question_settings_tab_bar.dart';
+import 'package:survey_core/survey_core.dart';
 
-class ChoiceCustomizationPanel extends StatelessWidget {
+enum RuleType {
+  none('None'),
+  more('>'),
+  less('<'),
+  moreOrEqual('>='),
+  lessOrEqual('<='),
+  equal('=');
+
+  const RuleType(
+    this.name,
+  );
+
+  final String name;
+}
+
+class ChoiceCustomizationPanel extends StatefulWidget {
+  final QuestionData editableQuestion;
   final bool isMultipleChoice;
 
   const ChoiceCustomizationPanel({
+    required this.editableQuestion,
     required this.isMultipleChoice,
     super.key,
   });
+
+  @override
+  State<ChoiceCustomizationPanel> createState() =>
+      _ChoiceCustomizationPanelState();
+}
+
+class _ChoiceCustomizationPanelState extends State<ChoiceCustomizationPanel> {
+  RuleType _ruleType = RuleType.none;
+  List<String> _listOptions = [];
+  int _ruleValue = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +57,7 @@ class ChoiceCustomizationPanel extends StatelessWidget {
           onButtonRadiusChanged: (buttonRadius) {},
         ),
         ChoiceButtonsCustomizationTab(
-          title: isMultipleChoice
+          title: widget.isMultipleChoice
               ? context.localization.check_box
               : context.localization.radio_button,
           onMultipleChoiceUpdate: (isMultipleChoice) {},
@@ -37,10 +65,23 @@ class ChoiceCustomizationPanel extends StatelessWidget {
           onInactiveColorPicked: (inactiveColor) {},
         ),
         ChoiceContentCustomizationTab(
+          key: UniqueKey(),
           title: context.localization.content,
           onTitleChanged: (title) {},
           onSubTitleChanged: (subtitle) {},
-          onOptionsChanged: (options) {},
+          onOptionsChanged: (options) {
+            setState(() => _listOptions = options);
+          },
+          onRuleChanged: (value) {
+            setState(() => _ruleType = value);
+          },
+          onRuleLimitedChanged: (value) {
+            setState(() => _ruleValue = value);
+          },
+          ruleType: _ruleType,
+          ruleValue: _ruleValue,
+          listOptions: _listOptions,
+          editableQuestion: widget.editableQuestion,
         ),
       ],
     );

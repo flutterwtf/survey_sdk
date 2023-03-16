@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:survey_admin/presentation/app/localization/localizations.dart';
 import 'package:survey_admin/presentation/utils/app_fonts.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
@@ -6,16 +7,17 @@ import 'package:survey_admin/presentation/utils/constants/app_dimensions.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/color_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/radius_customization_item.dart';
+import 'package:survey_admin/presentation/widgets/customization_items/text_style_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/customization_tab.dart';
 
 class ChoiceCommonCustomizationTab extends CustomizationTab {
   final ValueChanged<Color> onFillColorPicked;
   final ValueChanged<Color> onTitleColorPicked;
-  final ValueChanged<int> onTitleFontSizeChanged;
+  final ValueChanged<double> onTitleFontSizeChanged;
   final ValueChanged<Color> onSubtitleColorPicked;
-  final ValueChanged<int> onSubtitleFontSizeChanged;
+  final ValueChanged<double> onSubtitleFontSizeChanged;
   final ValueChanged<Color> onButtonColorPicked;
-  final ValueChanged<int> onButtonFontSizeChanged;
+  final ValueChanged<double> onButtonFontSizeChanged;
   final ValueChanged<int> onButtonRadiusChanged;
 
   const ChoiceCommonCustomizationTab({

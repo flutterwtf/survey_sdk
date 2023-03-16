@@ -8,13 +8,18 @@ import 'package:survey_admin/presentation/utils/constants/app_assets.dart';
 import 'package:survey_admin/presentation/utils/constants/app_dimensions.dart';
 import 'package:survey_admin/presentation/utils/theme_extension.dart';
 import 'package:survey_admin/presentation/widgets/builder_page/question_list_item.dart';
+import 'package:survey_admin/presentation/widgets/customization_items/item_divider.dart';
 import 'package:survey_core/survey_core.dart';
 
 class QuestionList extends StatefulWidget {
-  final void Function(QuestionData) onSelect;
+  final ValueChanged<QuestionData> onSelect;
+  final ValueChanged<QuestionData> onAdd;
+  final List<QuestionData> questionList;
 
   const QuestionList({
     required this.onSelect,
+    required this.onAdd,
+    required this.questionList,
     super.key,
   });
 
@@ -29,10 +34,7 @@ class _QuestionListState extends State<QuestionList> {
   @override
   void initState() {
     super.initState();
-    _questionList = [
-      const IntroQuestionData.common(index: 1),
-      InputQuestionData.common(index: 2),
-    ];
+    _questionList = widget.questionList;
     widget.onSelect(_questionList.first);
   }
 
@@ -43,6 +45,7 @@ class _QuestionListState extends State<QuestionList> {
         data.copyWith(index: index),
       );
     });
+    widget.onAdd(data.copyWith(index: index));
   }
 
   void _updateQuestion(int oldIndex, int newIndex) {
@@ -63,11 +66,7 @@ class _QuestionListState extends State<QuestionList> {
       color: AppColors.white,
       child: Column(
         children: [
-          const Divider(
-            color: AppColors.greyBackground,
-            thickness: 0.6,
-            height: 1,
-          ),
+          const ItemDivider(),
           Padding(
             padding: const EdgeInsets.symmetric(
               vertical: AppDimensions.margin2XS,

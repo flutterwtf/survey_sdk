@@ -11,12 +11,12 @@ import 'package:survey_admin/presentation/widgets/customization_panel/customizat
 class IntroCommonCustomizationTab extends CustomizationTab {
   final ValueChanged<Color> onFillColorPicked;
   final ValueChanged<Color> onTitleColorPicked;
-  final ValueChanged<int> onTitleFontSizeChanged;
+  final ValueChanged<double> onTitleFontSizeChanged;
   final ValueChanged<Color> onSubtitleColorPicked;
-  final ValueChanged<int> onSubtitleFontSizeChanged;
+  final ValueChanged<double> onSubtitleFontSizeChanged;
   final ValueChanged<Color> onButtonColorPicked;
   final ValueChanged<Color> onButtonTextColorPicked;
-  final ValueChanged<int> onButtonFontSizeChanged;
+  final ValueChanged<double> onButtonFontSizeChanged;
   final ValueChanged<int> onButtonRadiusChanged;
 
   const IntroCommonCustomizationTab({

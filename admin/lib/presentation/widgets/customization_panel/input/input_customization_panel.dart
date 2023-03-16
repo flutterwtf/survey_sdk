@@ -4,10 +4,18 @@ import 'package:survey_admin/presentation/widgets/customization_panel/input/inpu
 import 'package:survey_admin/presentation/widgets/customization_panel/input/input_content_customization_tab.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/input/input_customization_tab.dart';
 import 'package:survey_admin/presentation/widgets/question_settings_tab_bar.dart';
+import 'package:survey_core/survey_core.dart';
 
-// TODO(dev): why do we have pages in this folder?
-class InputCustomizationPanel extends StatelessWidget {
+class InputCustomizationPanel extends StatefulWidget {
   const InputCustomizationPanel({super.key});
+
+  @override
+  State<InputCustomizationPanel> createState() =>
+      _InputCustomizationPanelState();
+}
+
+class _InputCustomizationPanelState extends State<InputCustomizationPanel> {
+  InputType inputType = InputType.text;
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +33,7 @@ class InputCustomizationPanel extends StatelessWidget {
           onButtonFontSizeChanged: (size) {},
         ),
         InputCustomizationTab(
+          key: UniqueKey(),
           title: context.localization.input,
           onMultilineChanged: (isMultiline, lineAmount) {},
           onFillColorChanged: (color) {},
@@ -37,7 +46,12 @@ class InputCustomizationPanel extends StatelessWidget {
           onHintFontSizeChanged: (size) {},
           onTextColorChanged: (color) {},
           onTextFontSizeChanged: (size) {},
-          onInputTypeChanged: (inputType) {},
+          onInputTypeChanged: (newInputType) {
+            setState(() {
+              inputType = newInputType;
+            });
+          },
+          inputType: inputType,
           onValidatorErrorTextChanged: (errorText) {},
         ),
         InputContentCustomizationTab(
