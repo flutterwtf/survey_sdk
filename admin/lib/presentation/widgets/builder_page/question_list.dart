@@ -86,9 +86,7 @@ class _QuestionListState extends State<QuestionList> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    setState(() {
-                      _selectedIndex = _commonThemeIndex;
-                    });
+                    setState(() => _selectedIndex = _commonThemeIndex);
                     widget.onEditCommonTheme();
                   },
                   child: Container(
