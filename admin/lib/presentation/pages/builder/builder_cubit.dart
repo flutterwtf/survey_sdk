@@ -8,13 +8,13 @@ class BuilderCubit extends Cubit<BuilderState> {
   final LocalStorageDataRepository _localStorageDataRepository;
   final SurveyDataRepository _surveyDataRepository;
 
-  BuilderCubit(this._localStorageDataRepository,this._surveyDataRepository,)
-      :
-        super(
+  BuilderCubit(
+    this._localStorageDataRepository,
+    this._surveyDataRepository,
+  ) : super(
           BuilderState(
             selectedQuestion: null,
             surveyData: SurveyData.common(),
-              questions: [],
           ),
         ) {
     _init();
@@ -42,9 +42,8 @@ class BuilderCubit extends Cubit<BuilderState> {
   Future<void> importData() async {
     final surveyData = await _localStorageDataRepository.surveyData();
     if (surveyData != null) {
-      final questions = surveyData.questions;
       emit(
-        state.copyWith(questions: questions),
+        state.copyWith(surveyData: surveyData),
       );
     }
   }

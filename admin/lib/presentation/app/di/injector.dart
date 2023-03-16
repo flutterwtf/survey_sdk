@@ -1,11 +1,12 @@
 import 'package:flutter/foundation.dart';
 import 'package:get_it/get_it.dart';
+import 'package:survey_admin/data/data_sources/filesystem_data_source.dart';
 import 'package:survey_admin/data/data_sources/local_storage_data_source.dart';
 import 'package:survey_admin/data/data_sources/session_storage_data_source.dart';
 import 'package:survey_admin/data/interfaces/local_storage_data_source.dart';
+import 'package:survey_admin/data/interfaces/session_storage_data_source.dart';
 import 'package:survey_admin/data/repositories/local_storage_data_repository.dart';
 import 'package:survey_admin/domain/repository_interfaces/local_storage_data_repository.dart';
-import 'package:survey_admin/data/interfaces/session_storage_data_source.dart';
 import 'package:survey_admin/domain/repository_interfaces/survey_data_repository.dart';
 import 'package:survey_admin/presentation/app/app_cubit.dart';
 import 'package:survey_admin/presentation/pages/builder/builder_cubit.dart';
@@ -36,12 +37,13 @@ void _initCubits() {
 }
 
 void _initRepositories() {
-  i.registerFactory<LocalStorageDataRepository>(
-    () => LocalStorageDataRepositoryImpl(i.get()),
-  );
-  i.registerFactory<SurveyDataRepository>(
-    () => SurveyDataRepositoryImpl(
-      i.get<SessionStorageDataSource>(),
-    ),
-  );
+  i
+    ..registerFactory<LocalStorageDataRepository>(
+      () => LocalStorageDataRepositoryImpl(i.get()),
+    )
+    ..registerFactory<SurveyDataRepository>(
+      () => SurveyDataRepositoryImpl(
+        i.get<SessionStorageDataSource>(),
+      ),
+    );
 }
