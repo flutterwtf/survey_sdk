@@ -83,7 +83,7 @@ class ChoiceContentCustomizationTab extends CustomizationTab {
         ),
         if (!(editableQuestion as ChoiceQuestionData).isMultipleChoice)
           CustomizationItemsContainer(
-            title: 'context.localization.rule',
+            title: context.localization.rule,
             children: [
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
