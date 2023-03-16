@@ -14,9 +14,9 @@ void main() {
     Color buttonUpColor = Colors.red;
     Color titleColor = Colors.red;
     Color subtitleColor = Colors.red;
-    var titleSize = 0;
-    var subtitleSize = 0;
-    var buttonDownSize = 0;
+    var titleSize = 0.0;
+    var subtitleSize = 0.0;
+    var buttonDownSize = 0.0;
     var buttonBorder = 0;
     final page = AppTester(
       child: SliderCommonCustomizationTab(
