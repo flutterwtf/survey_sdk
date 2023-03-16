@@ -39,7 +39,7 @@ class _SurveyState extends State<Survey> {
     return BlocBuilder<SurveyCubit, SurveyState>(
       bloc: _cubit,
       builder: (BuildContext context, state) {
-        if (state is SurveyInitialState) {
+        if (state is SurveyLoadedState) {
           final surveyData = state.surveyData;
           return surveyData == null
               ? const Center(

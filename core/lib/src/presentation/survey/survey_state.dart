@@ -4,16 +4,16 @@ abstract class SurveyState {
   const SurveyState();
 }
 
-class SurveyInitialState extends SurveyState {
+class SurveyLoadedState extends SurveyState {
   final SurveyData? surveyData;
 
-  const SurveyInitialState({this.surveyData});
+  const SurveyLoadedState({this.surveyData});
 
-  SurveyInitialState copyWith({SurveyData? surveyData}) {
-    return SurveyInitialState(surveyData: surveyData ?? this.surveyData);
+  SurveyLoadedState copyWith({SurveyData? surveyData}) {
+    return SurveyLoadedState(surveyData: surveyData ?? this.surveyData);
   }
 }
 
-class SurveyLoadingState extends SurveyState {
-  const SurveyLoadingState();
+class SurveyEmptyState extends SurveyState {
+  const SurveyEmptyState();
 }

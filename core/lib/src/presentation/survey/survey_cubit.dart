@@ -5,14 +5,15 @@ import 'package:survey_core/src/presentation/survey/survey_state.dart';
 class SurveyCubit extends Cubit<SurveyState> {
   final SurveyDataRepository _surveyDataRepository;
 
-  SurveyCubit(this._surveyDataRepository) : super(SurveyInitialState());
+  SurveyCubit(this._surveyDataRepository) : super(const SurveyLoadedState());
 
-  void initData(String surveyDataAsset) {
+  Future<void> initData(String surveyDataAsset) async {
     final currentState = state;
-    if (currentState is SurveyInitialState) {
-      _surveyDataRepository.getSurveyData(surveyDataAsset).then(
-            (data) => emit(currentState.copyWith(surveyData: data)),
-          );
+    if (currentState is SurveyLoadedState) {
+      final surveyData = await _surveyDataRepository.getSurveyData(
+        surveyDataAsset,
+      );
+      emit(currentState.copyWith(surveyData: surveyData));
     }
   }
 }
