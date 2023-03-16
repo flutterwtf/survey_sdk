@@ -67,6 +67,111 @@ void main() {
           expect(find.byType(Slider), findsOneWidget);
         },
       );
+      testWidgets(
+        'Move slider to 1.5',
+        (widgetTester) async {
+          const dragValue = 0.5;
+          final sliderQuestionPage = AppTest(
+            child: SliderQuestionPage(
+              data: const SliderQuestionData(
+                minValue: minValue,
+                maxValue: maxValue,
+                index: id,
+                title: title,
+                subtitle: subTitle,
+                isSkip: isSkip,
+                initialValue: initialValue,
+              ),
+              onSend: ({data, String? key}) {
+                expect(
+                  (data as double).toStringAsFixed(1),
+                  (dragValue + minValue).toStringAsFixed(1),
+                );
+                completerOnSendButtonTap.complete();
+              },
+            ),
+          );
+          await widgetTester.pumpWidget(sliderQuestionPage);
+          final slider = find.byType(Slider);
+          final totalWidth = widgetTester.getSize(slider).width;
+          final zeroPoint = widgetTester.getTopLeft(slider);
+          final calculatedOffset =
+              dragValue * (totalWidth / (maxValue - minValue));
+          await widgetTester.dragFrom(zeroPoint, Offset(calculatedOffset, 0));
+          await widgetTester.pumpAndSettle();
+          await widgetTester.tap(find.text('NEXT'));
+        },
+      );
+      testWidgets(
+        'Move slider to more then maxValue',
+        (widgetTester) async {
+          const dragValue = 2.0;
+          final sliderQuestionPage = AppTest(
+            child: SliderQuestionPage(
+              data: const SliderQuestionData(
+                minValue: minValue,
+                maxValue: maxValue,
+                index: id,
+                title: title,
+                subtitle: subTitle,
+                isSkip: isSkip,
+                initialValue: initialValue,
+              ),
+              onSend: ({data, String? key}) {
+                expect(
+                  (data as double).toStringAsFixed(1),
+                  maxValue.toStringAsFixed(1),
+                );
+                completerOnSendButtonTap.complete();
+              },
+            ),
+          );
+          await widgetTester.pumpWidget(sliderQuestionPage);
+          final slider = find.byType(Slider);
+          final totalWidth = widgetTester.getSize(slider).width;
+          final zeroPoint = widgetTester.getTopLeft(slider);
+          final calculatedOffset =
+              dragValue * (totalWidth / (maxValue - minValue));
+          await widgetTester.dragFrom(zeroPoint, Offset(calculatedOffset, 0));
+          await widgetTester.pumpAndSettle();
+          await widgetTester.tap(find.text('NEXT'));
+        },
+      );
+      testWidgets(
+        'Move slider to less then minValue',
+        (widgetTester) async {
+          const dragValue = 1.0;
+          final sliderQuestionPage = AppTest(
+            child: SliderQuestionPage(
+              data: const SliderQuestionData(
+                minValue: minValue,
+                maxValue: maxValue,
+                index: id,
+                title: title,
+                subtitle: subTitle,
+                isSkip: isSkip,
+                initialValue: initialValue,
+              ),
+              onSend: ({data, String? key}) {
+                expect(
+                  (data as double).toStringAsFixed(1),
+                  minValue.toStringAsFixed(1),
+                );
+                completerOnSendButtonTap.complete();
+              },
+            ),
+          );
+          await widgetTester.pumpWidget(sliderQuestionPage);
+          final slider = find.byType(Slider);
+          final totalWidth = widgetTester.getSize(slider).width;
+          final zeroPoint = widgetTester.getTopLeft(slider);
+          final calculatedOffset =
+              dragValue * (totalWidth / (maxValue - minValue));
+          await widgetTester.dragFrom(zeroPoint, Offset(-calculatedOffset, 0));
+          await widgetTester.pumpAndSettle();
+          await widgetTester.tap(find.text('NEXT'));
+        },
+      );
     },
   );
 }

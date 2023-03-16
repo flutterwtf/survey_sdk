@@ -3,7 +3,7 @@ import 'package:survey_admin/presentation/widgets/customization_items/customizat
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/slider/slider_content_customization_tab.dart';
 
-import '../app_test.dart';
+import '../app_tester.dart';
 
 void main() {
   group('Tests for SliderContentCustomizationTab', () {
@@ -12,7 +12,7 @@ void main() {
     var title = '';
     var subtitle = '';
     late int divisions;
-    final page = AppTest(
+    final page = AppTester(
       child: SliderContentCustomizationTab(
         title: 'Content',
         onDivisionsChanged: (newValue) {

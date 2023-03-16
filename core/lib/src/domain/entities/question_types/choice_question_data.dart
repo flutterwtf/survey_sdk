@@ -94,8 +94,10 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
       isSkip: json['isSkip'],
       content: json['content'],
       isMultipleChoice: payload['isMultipleChoice'],
-      options: payload['options'],
-      selectedOptions: payload['selectedOptions'],
+      options: (payload['options'] as List<dynamic>).cast<String>(),
+      selectedOptions: payload['selectedOptions'] != null
+          ? (payload['selectedOptions'] as List<dynamic>).cast<String>()
+          : null,
     );
   }
 
