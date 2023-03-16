@@ -25,9 +25,9 @@ void main() {
       var subtitleTextColor = AppColors.black;
       var buttonColor = AppColors.black;
       var buttonTextColor = AppColors.black;
-      int? titleTextSize = 10;
-      int? subtitleTextSize = 10;
-      int? buttonTextSize = 10;
+      double? titleTextSize = 10;
+      double? subtitleTextSize = 10;
+      double? buttonTextSize = 10;
       int? radius = 10;
 
       final introCommonCustomPanel = AppTester(

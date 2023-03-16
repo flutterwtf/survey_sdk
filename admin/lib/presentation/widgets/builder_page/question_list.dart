@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:survey_admin/presentation/app/localization/localizations.dart';
 import 'package:survey_admin/presentation/pages/new_question_page/new_question_page.dart';
@@ -38,6 +39,22 @@ class _QuestionListState extends State<QuestionList> {
     if (_questionList.isNotEmpty) {
       widget.onSelect(_questionList.first);
     }
+    RawKeyboard.instance.addListener(_handleKeyDown);
+  }
+
+  void _handleKeyDown(RawKeyEvent value) {
+    if (value is RawKeyDownEvent) {
+      final key = value.logicalKey;
+      if (key == LogicalKeyboardKey.delete) {
+        setState(() => _questionList.removeAt(_selectedIndex));
+      }
+    }
+  }
+
+  @override
+  void dispose() {
+    RawKeyboard.instance.removeListener(_handleKeyDown);
+    super.dispose();
   }
 
   void _addQuestion(QuestionData data) {
@@ -67,76 +84,147 @@ class _QuestionListState extends State<QuestionList> {
       width: AppDimensions.surveyContentBarWidth,
       color: AppColors.white,
       child: Column(
-        children: [
+          children: [
           const ItemDivider(),
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              vertical: AppDimensions.margin2XS,
-              horizontal: AppDimensions.marginXL,
+      _ListHeader(
+        onAddButtonTap: () async {
+          final questionData = await Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => const NewQuestionPage(),
             ),
-            child: Row(
-              children: [
-                Text(
-                  context.localization.survey,
-                  style: context.theme.textTheme.titleMedium?.copyWith(
-                    fontWeight: AppFonts.weightBold,
-                  ),
+          );
+          if (questionData != null) {
+            _addQuestion(questionData);
+          }
+        },
+        questionList: _questionList,
+      ),
+      Expanded(
+        child: ContextMenuOverlay(
+          cardBuilder: (_, children) {
+            return DecoratedBox(
+              decoration: BoxDecoration(
+                color: AppColors.white,
+                borderRadius: BorderRadius.circular(
+                  AppDimensions.circularRadiusXS,
                 ),
-                const SizedBox(
-                  width: AppDimensions.margin4XL + AppDimensions.margin3XL,
+                border: Border.all(
+                  width: 0.5,
                 ),
-                GestureDetector(
-                  onTap: () async {
-                    final questionData = await Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => const NewQuestionPage(),
-                      ),
-                    );
-                    if (questionData != null) {
-                      _addQuestion(questionData);
-                    }
+              ),
+              child: Column(children: children),
+            );
+          },
+          child: ReorderableListView(
+            buildDefaultDragHandles: false,
+            children: [
+              for (int index = 0; index < _questionList.length; index++)
+                _Question(
+                  key: ValueKey(index),
+                  index: index,
+                  isSelected: index == _selectedIndex,
+                  onDeleteButtonPressed: () =>
+                      setState(() => _questionList.removeAt(index)),
+                  question: _questionList[index],
+                  onQuestionTap: (data) {
+                    widget.onSelect(data);
+                    setState(() {
+                      _selectedIndex = index;
+                    });
                   },
-                  child: SizedBox(
-                    height: AppDimensions.sizeL,
-                    width: AppDimensions.sizeL,
-                    child: SvgPicture.asset(AppAssets.addCircleIcon),
-                  ),
                 ),
-              ],
+            ],
+            onReorder: (oldIndex, newIndex) {
+              if (newIndex > oldIndex) newIndex--;
+              setState(
+                    () {
+                  _updateQuestion(oldIndex, newIndex);
+                },
+              );
+            },
+          ),
+        ),),
+        ],
+      ),
+    );
+  }
+}
+
+class _ListHeader extends StatelessWidget {
+  final VoidCallback onAddButtonTap;
+  final List<QuestionData> questionList;
+
+  const _ListHeader({
+    required this.onAddButtonTap,
+    required this.questionList,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        vertical: AppDimensions.margin2XS,
+        horizontal: AppDimensions.marginXL,
+      ),
+      child: Row(
+        children: [
+          Text(
+            context.localization.survey,
+            style: context.theme.textTheme.titleMedium?.copyWith(
+              fontWeight: AppFonts.weightBold,
             ),
           ),
-          if (_questionList.isNotEmpty)
-            Expanded(
-              child: ReorderableListView(
-                buildDefaultDragHandles: false,
-                children: [
-                  for (int index = 0; index < _questionList.length; index++)
-                    ReorderableDragStartListener(
-                      index: index,
-                      key: ValueKey(index),
-                      child: QuestionListItem(
-                        isSelected: index == _selectedIndex,
-                        questionData: _questionList[index],
-                        onTap: (data) {
-                          widget.onSelect(data);
-                          setState(() {
-                            _selectedIndex = index;
-                          });
-                        },
-                      ),
-                    )
-                ],
-                onReorder: (oldIndex, newIndex) {
-                  if (newIndex > oldIndex) newIndex--;
-                  setState(
-                    () {
-                      _updateQuestion(oldIndex, newIndex);
-                    },
-                  );
-                },
-              ),
+          const SizedBox(
+            width: AppDimensions.margin4XL + AppDimensions.margin3XL,
+          ),
+          GestureDetector(
+            onTap: onAddButtonTap,
+            child: SizedBox(
+              height: AppDimensions.sizeL,
+              width: AppDimensions.sizeL,
+              child: SvgPicture.asset(AppAssets.addCircleIcon),
             ),
+          ),
         ],
+      ),
+    );
+  }
+}
+
+class _Question extends StatelessWidget {
+  final int index;
+  final bool isSelected;
+  final VoidCallback onDeleteButtonPressed;
+  final ValueChanged<QuestionData> onQuestionTap;
+  final QuestionData question;
+
+  const _Question({
+    required this.index,
+    required this.isSelected,
+    required this.onDeleteButtonPressed,
+    required this.question,
+    required this.onQuestionTap,
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ReorderableDragStartListener(
+      index: index,
+      child: ContextMenuRegion(
+        contextMenu: GenericContextMenu(
+          buttonConfigs: [
+            ContextMenuButtonConfig(
+              context.localization.delete_question,
+              onPressed: onDeleteButtonPressed,
+            ),
+          ],
+        ),
+        child: QuestionListItem(
+          isSelected: isSelected,
+          questionData: question,
+          onTap: onQuestionTap,
+        ),
       ),
     );
   }
