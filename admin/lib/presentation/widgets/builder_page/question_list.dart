@@ -85,41 +85,18 @@ class _QuestionListState extends State<QuestionList> {
       child: Column(
         children: [
           const ItemDivider(),
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              vertical: AppDimensions.margin2XS,
-              horizontal: AppDimensions.marginXL,
-            ),
-            child: Row(
-              children: [
-                Text(
-                  context.localization.survey,
-                  style: context.theme.textTheme.titleMedium?.copyWith(
-                    fontWeight: AppFonts.weightBold,
-                  ),
+          _ListHeader(
+            onAddButtonTap: () async {
+              final questionData = await Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => const NewQuestionPage(),
                 ),
-                const SizedBox(
-                  width: AppDimensions.margin4XL + AppDimensions.margin3XL,
-                ),
-                GestureDetector(
-                  onTap: () async {
-                    final questionData = await Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => const NewQuestionPage(),
-                      ),
-                    );
-                    if (questionData != null) {
-                      _addQuestion(questionData);
-                    }
-                  },
-                  child: SizedBox(
-                    height: AppDimensions.sizeL,
-                    width: AppDimensions.sizeL,
-                    child: SvgPicture.asset(AppAssets.addCircleIcon),
-                  ),
-                ),
-              ],
-            ),
+              );
+              if (questionData != null) {
+                _addQuestion(questionData);
+              }
+            },
+            questionList: _questionList,
           ),
           Expanded(
             child: ContextMenuOverlay(
@@ -165,6 +142,47 @@ class _QuestionListState extends State<QuestionList> {
                   );
                 },
               ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _ListHeader extends StatelessWidget {
+  final VoidCallback onAddButtonTap;
+  final List<QuestionData> questionList;
+
+  const _ListHeader({
+    required this.onAddButtonTap,
+    required this.questionList,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        vertical: AppDimensions.margin2XS,
+        horizontal: AppDimensions.marginXL,
+      ),
+      child: Row(
+        children: [
+          Text(
+            context.localization.survey,
+            style: context.theme.textTheme.titleMedium?.copyWith(
+              fontWeight: AppFonts.weightBold,
+            ),
+          ),
+          const SizedBox(
+            width: AppDimensions.margin4XL + AppDimensions.margin3XL,
+          ),
+          GestureDetector(
+            onTap: onAddButtonTap,
+            child: SizedBox(
+              height: AppDimensions.sizeL,
+              width: AppDimensions.sizeL,
+              child: SvgPicture.asset(AppAssets.addCircleIcon),
             ),
           ),
         ],
