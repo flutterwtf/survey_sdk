@@ -29,10 +29,11 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
   final _textFieldKey = GlobalKey<FormFieldState>();
   DateTime _dateTime = DateTime.now();
   String _input = '';
-  final format = DateFormat('dd.MM.yyyy');
+  final _format = DateFormat('dd.MM.yyyy');
 
-  bool get _canBeSkipped => widget.data.isSkip && _dateTime.toString().isEmpty;
-  // bool get _canBeSkipped => widget.data.isSkip && _input.isEmpty;
+  bool get _canBeSkippedDate =>
+      widget.data.isSkip && _dateTime.toString().isEmpty;
+  bool get _canBeSkippedNumber => widget.data.isSkip && _input.isEmpty;
 
   @override
   Widget build(BuildContext context) {
@@ -69,76 +70,79 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
               content: widget.data.subtitle,
             ),
           ),
+          //TODO: maybe create generic widget for some inputs(date,number,string and etc)
           Padding(
             padding: const EdgeInsets.only(top: AppDimensions.marginM),
-            child: DateTimeField(
-              key: _textFieldKey,
-              style: TextStyle(
-                color: theme.textColor,
-                fontSize: theme.textSize,
-              ),
-              decoration: InputDecoration(
-                fillColor: theme.backgroundColor,
-                hintText: widget.data.hintText ?? '',
-                hintStyle: TextStyle(
-                  color: theme.hintColor,
-                  fontSize: theme.hintSize,
-                ),
-                enabledBorder: border,
-                focusedBorder: border,
-                border: border,
-              ),
-              format: format,
-              autovalidateMode: AutovalidateMode.onUserInteraction,
-              validator: (dateTime) => _canBeSkipped
-                  ? null
-                  : widget.data.validator.validate(dateTime.toString()),
-              onChanged: (value) {
-                if (value != null) {
-                  setState(() {
-                    _dateTime = value;
-                  });
-                }
-              },
-              onShowPicker: (context, currentValue) async {
-                final date = await showDatePicker(
-                  context: context,
-                  firstDate: DateTime(1000),
-                  initialDate: _dateTime,
-                  lastDate: DateTime(9000),
-                );
-                if (date != null) {
-                  return date;
-                }
-                return currentValue;
-              },
-            ),
-            //     Form(
-            //   key: _textFieldKey,
-            //   child: TextFormField(
-            //     minLines: theme.minLines,
-            //     maxLines: theme.maxLines,
-            //     style: TextStyle(
-            //       color: theme.textColor,
-            //       fontSize: theme.textSize,
-            //     ),
-            //     autovalidateMode: AutovalidateMode.onUserInteraction,
-            //     validator: (text) =>
-            //         _canBeSkipped ? null : widget.data.validator.validate(text),
-            //     onChanged: (input) => setState(() => _input = input),
-            //     decoration: InputDecoration(
-            //       fillColor: theme.backgroundColor,
-            //       hintText: widget.data.hintText ?? '',
-            //       hintStyle: TextStyle(
-            //         color: theme.hintColor,
-            //         fontSize: theme.hintSize,
-            //       ),
-            //       enabledBorder: border,
-            //       focusedBorder: border,
-            //       border: border,
-            //     ),
-            //   ),
-            // ),
+            child: widget.data.validator.type == InputType.date
+                ? DateTimeField(
+                    key: _textFieldKey,
+                    style: TextStyle(
+                      color: theme.textColor,
+                      fontSize: theme.textSize,
+                    ),
+                    decoration: InputDecoration(
+                      fillColor: theme.backgroundColor,
+                      hintText: widget.data.hintText ?? '',
+                      hintStyle: TextStyle(
+                        color: theme.hintColor,
+                        fontSize: theme.hintSize,
+                      ),
+                      enabledBorder: border,
+                      focusedBorder: border,
+                      border: border,
+                    ),
+                    format: _format,
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    validator: (dateTime) => _canBeSkippedDate
+                        ? null
+                        : widget.data.validator.validate(dateTime.toString()),
+                    onChanged: (value) {
+                      if (value != null) {
+                        setState(() {
+                          _dateTime = value;
+                        });
+                      }
+                    },
+                    onShowPicker: (context, currentValue) async {
+                      final date = await showDatePicker(
+                        context: context,
+                        firstDate: DateTime(1000),
+                        initialDate: _dateTime,
+                        lastDate: DateTime(9000),
+                      );
+                      if (date != null) {
+                        return date;
+                      }
+                      return currentValue;
+                    },
+                  )
+                : Form(
+                    key: _textFieldKey,
+                    child: TextFormField(
+                      minLines: theme.minLines,
+                      maxLines: theme.maxLines,
+                      style: TextStyle(
+                        color: theme.textColor,
+                        fontSize: theme.textSize,
+                      ),
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      validator: (text) => _canBeSkippedNumber
+                          ? null
+                          : widget.data.validator.validate(text),
+                      onChanged: (input) => setState(() => _input = input),
+                      decoration: InputDecoration(
+                        fillColor: theme.backgroundColor,
+                        hintText: widget.data.hintText ?? '',
+                        hintStyle: TextStyle(
+                          color: theme.hintColor,
+                          fontSize: theme.hintSize,
+                        ),
+                        enabledBorder: border,
+                        focusedBorder: border,
+                        border: border,
+                      ),
+                    ),
+                  ),
           ),
           const Spacer(),
           QuestionBottomButton(
@@ -146,12 +150,16 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
             onPressed: () {
               if ((_textFieldKey.currentState?.validate() ?? false) ||
                   widget.data.isSkip) {
-                widget.onSend(key: widget.data.type, data: _dateTime);
-                // widget.onSend(key: widget.data.type, data: _input);
+                widget.data.validator.type == InputType.date
+                    ? widget.onSend(key: widget.data.type, data: _dateTime)
+                    : widget.onSend(key: widget.data.type, data: _input);
               }
             },
-            isEnabled:
-                _canBeSkipped || (_textFieldKey.currentState?.isValid ?? false),
+            isEnabled: widget.data.validator.type == InputType.date
+                ? _canBeSkippedDate ||
+                    (_textFieldKey.currentState?.isValid ?? false)
+                : _canBeSkippedNumber ||
+                    (_textFieldKey.currentState?.isValid ?? false),
           ),
         ],
       ),

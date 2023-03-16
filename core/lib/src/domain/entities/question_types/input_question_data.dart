@@ -30,7 +30,7 @@ class InputQuestionData extends QuestionData<InputQuestionTheme> {
       : this(
           // TODO(dev): to localization somehow
           // validator: InputValidator.number(),
-          validator: InputValidator.date(),
+          validator: InputValidator.number(),
           index: index,
           title: 'Why is asking the right type of questions important?',
           subtitle: '',
@@ -76,7 +76,7 @@ class InputQuestionData extends QuestionData<InputQuestionTheme> {
         'payload': {
           ...validator.toJson(),
           'hintText': hintText,
-        }
+        },
       };
 
   factory InputQuestionData.fromJson(Map<String, dynamic> json) {
