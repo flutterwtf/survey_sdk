@@ -7,7 +7,7 @@ import 'package:survey_admin/presentation/widgets/customization_items/radius_cus
 import 'package:survey_admin/presentation/widgets/customization_items/text_style_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/intro/intro_common_customization_tab.dart';
 
-import '../app_test.dart';
+import '../app_tester.dart';
 
 void main() {
   group(
@@ -30,7 +30,7 @@ void main() {
       int? buttonTextSize = 10;
       int? radius = 10;
 
-      final introCommonCustomPanel = AppTest(
+      final introCommonCustomPanel = AppTester(
         child: IntroCommonCustomizationTab(
           title: 'title',
           onFillColorPicked: (value) => fillTextColor = value,

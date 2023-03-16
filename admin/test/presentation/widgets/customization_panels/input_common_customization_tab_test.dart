@@ -6,7 +6,7 @@ import 'package:survey_admin/presentation/widgets/customization_items/customizat
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/input/input_common_customization_tab.dart';
 
-import '../app_test.dart';
+import '../app_tester.dart';
 
 void main() {
   group(
@@ -28,7 +28,7 @@ void main() {
       int? subtitleTextSize = 10;
       int? buttonTextSize = 10;
 
-      final page = AppTest(
+      final page = AppTester(
         child: InputCommonCustomizationTab(
           title: 'title',
           onFillColorPicked: (value) => fillTextColor = value,

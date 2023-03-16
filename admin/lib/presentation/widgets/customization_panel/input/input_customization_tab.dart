@@ -7,11 +7,11 @@ import 'package:survey_admin/presentation/utils/constants/app_dimensions.dart';
 import 'package:survey_admin/presentation/utils/theme_extension.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/color_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
+import 'package:survey_admin/presentation/widgets/customization_items/customization_multiline_text_field.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
-import 'package:survey_admin/presentation/widgets/customization_items/input_type_customization_item.dart';
+import 'package:survey_admin/presentation/widgets/customization_items/dropdown_customization_button.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/multiline_switch.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/padding_customization_item.dart';
-import 'package:survey_admin/presentation/widgets/customization_items/validator_error_text_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/customization_tab.dart';
 import 'package:survey_core/survey_core.dart';
 
@@ -28,6 +28,7 @@ class InputCustomizationTab extends CustomizationTab {
   final ValueChanged<Color> onTextColorChanged;
   final ValueChanged<int> onTextFontSizeChanged;
   final ValueChanged<InputType> onInputTypeChanged;
+  final InputType inputType;
   final ValueChanged<String> onValidatorErrorTextChanged;
 
   const InputCustomizationTab({
@@ -44,6 +45,7 @@ class InputCustomizationTab extends CustomizationTab {
     required this.onTextColorChanged,
     required this.onTextFontSizeChanged,
     required this.onInputTypeChanged,
+    required this.inputType,
     required this.onValidatorErrorTextChanged,
     super.key,
   });
@@ -191,19 +193,29 @@ class InputCustomizationTab extends CustomizationTab {
             bottom: AppDimensions.marginM,
           ),
           children: [
-            InputTypeCustomizationItem(
-              onChanged: onInputTypeChanged,
+            DropdownCustomizationButton<InputType>(
+              items: InputType.values
+                  .map(
+                    (e) => DropdownCustomizationItem<InputType>(
+                      value: e,
+                      onChange: onInputTypeChanged,
+                      child: Text(
+                        e.name,
+                        style: context.theme.textTheme.bodyLarge,
+                      ),
+                    ),
+                  )
+                  .toList(),
+              value: inputType,
             ),
           ],
         ),
         CustomizationItemsContainer(
           title: context.localization.validator_error_text_title,
-          itemsPadding: const EdgeInsets.only(
-            bottom: AppDimensions.marginM,
-          ),
           children: [
-            ValidatorErrorTextCustomizationItem(
-              onErrorTextChanged: onValidatorErrorTextChanged,
+            CustomizationMultilineTextField(
+              maxHeight: AppDimensions.sizeXL,
+              onChanged: onValidatorErrorTextChanged,
             ),
           ],
         ),

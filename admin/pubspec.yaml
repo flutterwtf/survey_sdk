@@ -14,7 +14,6 @@ dependencies:
   flutter_localizations:
     sdk: flutter
 
-  collection: ^1.17.0
   equatable: ^2.0.3
   flutter_bloc: ^8.0.1
   flutter_colorpicker: ^1.0.3
@@ -26,6 +25,7 @@ dependencies:
 
   path_provider: ^2.0.13
 dev_dependencies:
+  collection: ^1.17.0
   flutter_lints: ^2.0.0
   flutter_test:
     sdk: flutter
