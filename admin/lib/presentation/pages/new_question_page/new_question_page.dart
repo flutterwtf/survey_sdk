@@ -1,42 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:survey_admin/presentation/app/localization/localizations.dart';
+import 'package:survey_admin/presentation/pages/new_question_page/new_question_tabs.dart';
 import 'package:survey_admin/presentation/utils/app_fonts.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/utils/constants/app_assets.dart';
-import 'package:survey_admin/presentation/utils/constants/constants.dart';
+import 'package:survey_admin/presentation/utils/constants/app_dimensions.dart';
 import 'package:survey_admin/presentation/utils/theme_extension.dart';
 import 'package:survey_admin/presentation/widgets/vector_image.dart';
-import 'package:survey_core/survey_core.dart';
-
-// TODO(dev): check localization
-const _title = 'New screen';
-const _tabs = [
-  'Intro',
-  'Choice',
-  'Slider',
-  'Custom input',
-];
-final Map<String, QuestionData> _dataMap = {
-  'Intro': const IntroQuestionData.common(index: 0),
-  'Choice': const ChoiceQuestionData.common(index: 0),
-  'Slider': const SliderQuestionData.common(index: 0),
-  'Custom input': const InputQuestionData.common(index: 0),
-};
-const _optionsInTabs = {
-  'Intro': ['Title', 'Image intro'],
-  'Choice': ['Radio button', 'Check box'],
-  'Slider': ['Slider'],
-  'Custom input': ['Single-line input', 'Multi-line input'],
-};
-
-const Map<String, String> _optionsAssets = {
-  'Title': AppAssets.introImage,
-  'Image intro': AppAssets.imageIntroImage,
-  'Radio button': AppAssets.radioButtonImage,
-  'Slider': AppAssets.sliderImage,
-  'Check box': AppAssets.checkBoxImage,
-  'Single-line input': AppAssets.singleLineInputImage,
-  'Multi-line input': AppAssets.multiLineInputImage,
-};
 
 class NewQuestionPage extends StatefulWidget {
   const NewQuestionPage({super.key});
@@ -46,18 +16,18 @@ class NewQuestionPage extends StatefulWidget {
 }
 
 class _NewQuestionPageState extends State<NewQuestionPage> {
-  String _selectedTab = _tabs[0];
+  NewQuestionTabs _selectedTab = NewQuestionTabs.intro;
   String? _selectedOption;
 
-  Widget _questionTab(String tabTitle) {
+  Widget _questionTab(NewQuestionTabs tab) {
     return _TabButton(
-      title: tabTitle,
+      title: tab.name(context),
       onTap: () {
         setState(
-          () => _selectedTab = tabTitle,
+          () => _selectedTab = tab,
         );
       },
-      isSelected: _selectedTab == tabTitle,
+      isSelected: _selectedTab == tab,
     );
   }
 
@@ -70,9 +40,9 @@ class _NewQuestionPageState extends State<NewQuestionPage> {
       child: Scaffold(
         backgroundColor: AppColors.white,
         appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(AppDimensions.appbarSize),
+          preferredSize: const Size.fromHeight(AppDimensions.appbarHeight),
           child: AppBar(
-            toolbarHeight: AppDimensions.appbarSize,
+            toolbarHeight: AppDimensions.appbarHeight,
             backgroundColor: AppColors.white,
             shadowColor: AppColors.transparentW,
             automaticallyImplyLeading: false,
@@ -92,10 +62,10 @@ class _NewQuestionPageState extends State<NewQuestionPage> {
             children: [
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: _tabs.map(_questionTab).toList(),
+                children: NewQuestionTabs.values.map(_questionTab).toList(),
               ),
               _QuestionOptionsListView(
-                options: _optionsInTabs[_selectedTab] ?? [],
+                options: _selectedTab.options,
                 selectedOption: _selectedOption ?? '',
               ),
             ],
@@ -104,7 +74,7 @@ class _NewQuestionPageState extends State<NewQuestionPage> {
         persistentFooterButtons: [
           _AddButton(
             onPressed: () {
-              Navigator.pop(context, _dataMap[_selectedTab]);
+              Navigator.pop(context, _selectedTab.data);
             },
           ),
         ],
@@ -139,7 +109,7 @@ class _AppBarTitle extends StatelessWidget {
     return Align(
       alignment: Alignment.centerLeft,
       child: Text(
-        _title,
+        context.localization.new_screen,
         style: context.theme.textTheme.labelLarge?.copyWith(
           fontWeight: AppFonts.weightRegular,
         ),
@@ -182,7 +152,7 @@ class _TabButton extends StatelessWidget {
 }
 
 class _QuestionOptionsListView extends StatelessWidget {
-  final List<String> options;
+  final List<NewQuestionOptions> options;
   final String selectedOption;
 
   const _QuestionOptionsListView({
@@ -198,8 +168,8 @@ class _QuestionOptionsListView extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
           return _AssetTextOption(
-            assetName: _optionsAssets[options[index]] ?? '',
-            titleText: options[index],
+            assetName: options[index].asset,
+            titleText: options[index].name(context),
           );
         },
       ),
@@ -248,8 +218,8 @@ class _AddButton extends StatelessWidget {
     return GestureDetector(
       onTap: onPressed,
       child: Container(
-        width: 150,
-        height: 34,
+        width: AppDimensions.addButtonWidth,
+        height: AppDimensions.addButtonHeight,
         decoration: BoxDecoration(
           color: AppColors.black,
           borderRadius: BorderRadius.circular(AppDimensions.circularRadiusXS),

@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/padding_customization_item.dart';
 
-import '../app_test.dart';
+import '../app_tester.dart';
 
 void main() {
   const initialHorizontalPadding = 12.0;
@@ -9,7 +9,7 @@ void main() {
   double? horizontalPadding;
   double? verticalPadding;
 
-  final page = AppTest(
+  final page = AppTester(
     child: PaddingCustomizationItem(
       initialHorizontalPadding: initialHorizontalPadding,
       initialVerticalPadding: initialVerticalPadding,

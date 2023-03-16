@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/utils/constants/app_assets.dart';
-import 'package:survey_admin/presentation/utils/constants/constants.dart';
+import 'package:survey_admin/presentation/utils/constants/app_dimensions.dart';
 import 'package:survey_admin/presentation/utils/theme_extension.dart';
 import 'package:survey_admin/presentation/widgets/vector_image.dart';
 import 'package:survey_core/survey_core.dart';
@@ -50,10 +50,13 @@ class QuestionListItem extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.only(top: AppDimensions.marginXS),
-                child: Text(
-                  questionData.index.toString(),
-                  style: context.theme.textTheme.bodySmall?.copyWith(
-                    color: AppColors.textGrey,
+                child: SizedBox(
+                  width: AppDimensions.marginXS,
+                  child: Text(
+                    questionData.index.toString(),
+                    style: context.theme.textTheme.bodySmall?.copyWith(
+                      color: AppColors.textGrey,
+                    ),
                   ),
                 ),
               ),
@@ -61,14 +64,15 @@ class QuestionListItem extends StatelessWidget {
               Container(
                 decoration: BoxDecoration(
                   color: AppColors.white,
-                  borderRadius: const BorderRadius.all(Radius.circular(10)),
+                  borderRadius: const BorderRadius.all(
+                    Radius.circular(AppDimensions.circularRadiusS),
+                  ),
                   border: Border.all(
-                    width: 0.5,
+                    width: AppDimensions.thinBorderWidth,
                   ),
                 ),
-                // TODO(dev): to const maybe???
-                height: 40,
-                width: 40,
+                height: AppDimensions.imageSizeS,
+                width: AppDimensions.imageSizeS,
                 child: Center(
                   child: _questionImage(questionData),
                 ),

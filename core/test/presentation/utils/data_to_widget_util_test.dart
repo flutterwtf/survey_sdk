@@ -1,17 +1,17 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:survey_core/src/domain/entities/input_validator.dart';
 import 'package:survey_core/src/domain/entities/question_types/choice_question_data.dart';
 import 'package:survey_core/src/domain/entities/question_types/input_question_data.dart';
 import 'package:survey_core/src/domain/entities/question_types/intro_question_data.dart';
 import 'package:survey_core/src/domain/entities/question_types/question_data.dart';
 import 'package:survey_core/src/domain/entities/question_types/slider_question_data.dart';
-import 'package:survey_core/src/domain/entities/validator/input_validator.dart';
 import 'package:survey_core/src/presentation/choice_question/choice_question_page.dart';
 import 'package:survey_core/src/presentation/input_question/input_question_page.dart';
 import 'package:survey_core/src/presentation/intro_question/intro_question_page.dart';
 import 'package:survey_core/src/presentation/slider_question/slider_question_page.dart';
 import 'package:survey_core/src/presentation/utils/data_to_widget_util.dart';
 
-void _mockOnSend(dynamic data) {}
+void _mockOnSend({required String key, required dynamic data}) {}
 
 void main() {
   const mockSliderData = SliderQuestionData(
@@ -31,8 +31,8 @@ void main() {
     subtitle: 'subtitle',
     isSkip: false,
   );
-  const mockInputData = InputQuestionData(
-    validator: DefaultValidator(),
+  final mockInputData = InputQuestionData(
+    validator: InputValidator.text(),
     index: 0,
     title: 'title',
     subtitle: 'subtitle',

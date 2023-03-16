@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:survey_admin/presentation/app/localization/localizations.dart';
+import 'package:survey_admin/presentation/utils/app_fonts.dart';
+import 'package:survey_admin/presentation/utils/colors.dart';
+import 'package:survey_admin/presentation/utils/constants/app_dimensions.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/color_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/radius_customization_item.dart';
@@ -9,7 +12,7 @@ import 'package:survey_admin/presentation/widgets/customization_panel/customizat
 import 'package:survey_core/survey_core.dart';
 
 class IntroCommonCustomizationTab extends CustomizationTab {
-  final IntroQuestionTheme initialTheme; 
+  final IntroQuestionTheme initialTheme;
   final ValueChanged<Color> onFillColorPicked;
   final ValueChanged<Color> onTitleColorPicked;
   final ValueChanged<int> onTitleFontSizeChanged;
@@ -58,7 +61,7 @@ class IntroCommonCustomizationTab extends CustomizationTab {
               initialColor: initialTheme.titleTextColor,
               inputFormatters: [
                 FilteringTextInputFormatter.digitsOnly,
-                LengthLimitingTextInputFormatter(3),
+                LengthLimitingTextInputFormatter(2),
               ],
               onTextChanged: (value) {
                 if (value == null) return;
@@ -80,7 +83,7 @@ class IntroCommonCustomizationTab extends CustomizationTab {
               initialColor: initialTheme.subTitleTextColor,
               inputFormatters: [
                 FilteringTextInputFormatter.digitsOnly,
-                LengthLimitingTextInputFormatter(3),
+                LengthLimitingTextInputFormatter(2),
               ],
               onTextChanged: (value) {
                 if (value == null) return;
@@ -106,7 +109,7 @@ class IntroCommonCustomizationTab extends CustomizationTab {
               initialText: initialTheme.mainButtonTextSize.toString(),
               inputFormatters: [
                 FilteringTextInputFormatter.digitsOnly,
-                LengthLimitingTextInputFormatter(3),
+                LengthLimitingTextInputFormatter(2),
               ],
               onTextChanged: (value) {
                 if (value == null) return;

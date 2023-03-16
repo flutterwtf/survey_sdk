@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/switch_customization_item.dart';
 
-import '../app_test.dart';
+import '../app_tester.dart';
 
 void main() {
   group('SwitchCustomizationItem', () {
     testWidgets('Load widget', (tester) async {
       await tester.pumpWidget(
-        const AppTest(
+        const AppTester(
           child: SwitchCustomizationItem(
             title: 'switch_item',
           ),
@@ -22,7 +22,7 @@ void main() {
     testWidgets('Toggle switch', (tester) async {
       var isToggled = false;
       await tester.pumpWidget(
-        AppTest(
+        AppTester(
           child: SwitchCustomizationItem(
             title: 'switch_item',
             onChanged: (newIsToggled) {
@@ -44,7 +44,7 @@ void main() {
     testWidgets('Toggle initially active switch', (tester) async {
       var isToggled = true;
       await tester.pumpWidget(
-        AppTest(
+        AppTester(
           child: SwitchCustomizationItem(
             title: 'switch_item',
             initialValue: true,

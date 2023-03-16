@@ -8,9 +8,11 @@ import 'package:survey_admin/presentation/pages/new_question_page/new_question_p
 import 'package:survey_admin/presentation/utils/app_fonts.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/utils/constants/app_assets.dart';
-import 'package:survey_admin/presentation/utils/constants/constants.dart';
+import 'package:survey_admin/presentation/utils/constants/app_dimensions.dart';
 import 'package:survey_admin/presentation/utils/theme_extension.dart';
 import 'package:survey_admin/presentation/widgets/builder_page/question_list_item.dart';
+import 'package:survey_admin/presentation/widgets/customization_items/item_divider.dart';
+import 'package:survey_core/survey_core.dart';
 
 class QuestionList extends StatefulWidget {
   final BuilderCubit cubit;
@@ -34,12 +36,7 @@ class _QuestionListState extends State<QuestionList> {
           width: AppDimensions.surveyContentBarWidth,
           color: AppColors.white,
           child: Column(
-            children: [
-              const Divider(
-                color: AppColors.greyBackground,
-                thickness: 0.6,
-                height: 1,
-              ),
+            children: [const ItemDivider(),
               Padding(
                 padding: const EdgeInsets.symmetric(
                   vertical: AppDimensions.margin2XS,
@@ -64,7 +61,7 @@ class _QuestionListState extends State<QuestionList> {
                           ),
                         );
                         if (questionData != null) {
-                          widget.cubit.add(questionData);
+                          addQuestion(questionData);
                         }
                       },
                       child: SizedBox(

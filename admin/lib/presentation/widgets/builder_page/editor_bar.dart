@@ -3,6 +3,7 @@ import 'package:survey_admin/presentation/pages/builder/builder_cubit.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/utils/constants/constants.dart';
 import 'package:survey_admin/presentation/utils/question_data_transformers.dart';
+import 'package:survey_admin/presentation/utils/constants/app_dimensions.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/choice/choice_customization_panel.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/input/input_customization_panel.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/intro/intro_customization_panel.dart';
@@ -25,37 +26,37 @@ class EditorBar extends StatelessWidget {
       width: AppDimensions.surveyEditorBarWidth,
       child: Builder(
         builder: (context) {
-          switch (cubit.state.selectedQuestion.type) {
-            case QuestionTypes.choice:
-              return ChoiceCustomizationPanel(
-                transformers: ChoiceQuestionTransformers(
+          final questionData = editableQuestion;
+          if (questionData != null) {
+            switch (questionData.type) {
+              case QuestionTypes.choice:
+                return ChoiceCustomizationPanel(
+                  transformers: ChoiceQuestionTransformers(
+                    question: cubit.state.selectedQuestion,
+                    onTransformed: cubit.updateSelectedQuestion,
+                  ),
+                  editableQuestion: questionData,
+                  isMultipleChoice:
+                      (questionData as ChoiceQuestionData).isMultipleChoice,
+                );
+              case QuestionTypes.input:
+                return const InputCustomizationPanel(transformers: InputQuestionTransformers(
                   question: cubit.state.selectedQuestion,
                   onTransformed: cubit.updateSelectedQuestion,
-                ),
-              );
-            case QuestionTypes.input:
-              return InputCustomizationPanel(
-                transformers: InputQuestionTransformers(
+                ),);
+              case QuestionTypes.intro:
+                return const IntroCustomizationPanel(transformers: IntroQuestionTransformers(
                   question: cubit.state.selectedQuestion,
                   onTransformed: cubit.updateSelectedQuestion,
-                ),
-              );
-            case QuestionTypes.intro:
-              return IntroCustomizationPanel(
-                transformers: IntroQuestionTransformers(
+                ),);
+              case QuestionTypes.slider:
+                return const SliderCustomizationPanel(transformers: SliderQuestionTransformers(
                   question: cubit.state.selectedQuestion,
                   onTransformed: cubit.updateSelectedQuestion,
-                ),
-              );
-            case QuestionTypes.slider:
-              return SliderCustomizationPanel(
-                transformers: SliderQuestionTransformers(
-                  question: cubit.state.selectedQuestion,
-                  onTransformed: cubit.updateSelectedQuestion,
-                ),
-              );
-            default:
-              return const SizedBox.shrink();
+                ),);
+            }
+          } else {
+            return const SizedBox.shrink();
           }
         },
       ),

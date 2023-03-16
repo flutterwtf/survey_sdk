@@ -5,7 +5,7 @@ import 'package:survey_admin/presentation/widgets/customization_items/customizat
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/slider/slider_common_customization_tab.dart';
 
-import '../app_test.dart';
+import '../app_tester.dart';
 
 void main() {
   group('Tests for SliderCommonCustomizationTab', () {
@@ -18,7 +18,7 @@ void main() {
     var subtitleSize = 0;
     var buttonDownSize = 0;
     var buttonBorder = 0;
-    final page = AppTest(
+    final page = AppTester(
       child: SliderCommonCustomizationTab(
         title: 'Common',
         onButtonTextColorChanged: (newButtonDownColor) {
