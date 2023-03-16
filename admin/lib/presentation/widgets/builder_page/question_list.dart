@@ -12,7 +12,6 @@ import 'package:survey_admin/presentation/utils/constants/app_dimensions.dart';
 import 'package:survey_admin/presentation/utils/theme_extension.dart';
 import 'package:survey_admin/presentation/widgets/builder_page/question_list_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/item_divider.dart';
-import 'package:survey_core/survey_core.dart';
 
 class QuestionList extends StatefulWidget {
   final BuilderCubit cubit;
@@ -61,7 +60,7 @@ class _QuestionListState extends State<QuestionList> {
                           ),
                         );
                         if (questionData != null) {
-                          addQuestion(questionData);
+                          widget.cubit.add(questionData);
                         }
                       },
                       child: SizedBox(

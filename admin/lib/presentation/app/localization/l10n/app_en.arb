@@ -34,6 +34,7 @@
   "date": "Date",
   "email": "Email",
   "phone": "Phone",
+  "rule": "Rule",
   "password": "Password",
   "hint": "Hint",
   "border": "Border",

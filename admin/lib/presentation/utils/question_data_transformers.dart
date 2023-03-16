@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:survey_admin/presentation/widgets/customization_items/input_type_customization_item.dart';
 import 'package:survey_core/survey_core.dart';
 
 // TODO(dev): may be we can find a better name?

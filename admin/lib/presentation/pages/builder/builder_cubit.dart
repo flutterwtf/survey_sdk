@@ -8,8 +8,8 @@ class BuilderCubit extends Cubit<BuilderState> {
           const BuilderState(
             selectedQuestionId: 0,
             questions: [
-              IntroQuestionData.common(index: 0),
               IntroQuestionData.common(index: 1),
+              IntroQuestionData.common(index: 2),
             ],
           ),
         );
@@ -29,7 +29,9 @@ class BuilderCubit extends Cubit<BuilderState> {
     );
   }
 
-  void swapQuestions(int firstIndex, int secondIndex) {
+  void swapQuestions(int a, int b) {
+    final firstIndex = a;
+    var secondIndex = b;
     if (secondIndex > firstIndex) secondIndex--;
 
     final firstItem = state.questions[firstIndex];
@@ -47,12 +49,14 @@ class BuilderCubit extends Cubit<BuilderState> {
   }
 
   void updateSelectedQuestion(QuestionData question) {
-    final questions = [...state.questions];
-    questions[state.selectedQuestionId] = question;
-    emit(
-      state.copyWith(
-        questions: questions,
-      ),
-    );
+    if (state.selectedQuestionId != null) {
+      final questions = [...state.questions];
+      questions[state.selectedQuestionId!] = question;
+      emit(
+        state.copyWith(
+          questions: questions,
+        ),
+      );
+    }
   }
 }

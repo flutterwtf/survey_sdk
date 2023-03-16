@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:survey_admin/presentation/pages/builder/builder_cubit.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
-import 'package:survey_admin/presentation/utils/constants/constants.dart';
-import 'package:survey_admin/presentation/utils/question_data_transformers.dart';
 import 'package:survey_admin/presentation/utils/constants/app_dimensions.dart';
+import 'package:survey_admin/presentation/utils/question_data_transformers.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/choice/choice_customization_panel.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/input/input_customization_panel.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/intro/intro_customization_panel.dart';
@@ -26,13 +25,13 @@ class EditorBar extends StatelessWidget {
       width: AppDimensions.surveyEditorBarWidth,
       child: Builder(
         builder: (context) {
-          final questionData = editableQuestion;
+          final questionData = cubit.state.selectedQuestion;
           if (questionData != null) {
             switch (questionData.type) {
               case QuestionTypes.choice:
                 return ChoiceCustomizationPanel(
                   transformers: ChoiceQuestionTransformers(
-                    question: cubit.state.selectedQuestion,
+                    question: questionData,
                     onTransformed: cubit.updateSelectedQuestion,
                   ),
                   editableQuestion: questionData,
@@ -40,24 +39,29 @@ class EditorBar extends StatelessWidget {
                       (questionData as ChoiceQuestionData).isMultipleChoice,
                 );
               case QuestionTypes.input:
-                return const InputCustomizationPanel(transformers: InputQuestionTransformers(
-                  question: cubit.state.selectedQuestion,
-                  onTransformed: cubit.updateSelectedQuestion,
-                ),);
+                return InputCustomizationPanel(
+                  transformers: InputQuestionTransformers(
+                    question: questionData,
+                    onTransformed: cubit.updateSelectedQuestion,
+                  ),
+                );
               case QuestionTypes.intro:
-                return const IntroCustomizationPanel(transformers: IntroQuestionTransformers(
-                  question: cubit.state.selectedQuestion,
-                  onTransformed: cubit.updateSelectedQuestion,
-                ),);
+                return IntroCustomizationPanel(
+                  transformers: IntroQuestionTransformers(
+                    question: questionData,
+                    onTransformed: cubit.updateSelectedQuestion,
+                  ),
+                );
               case QuestionTypes.slider:
-                return const SliderCustomizationPanel(transformers: SliderQuestionTransformers(
-                  question: cubit.state.selectedQuestion,
-                  onTransformed: cubit.updateSelectedQuestion,
-                ),);
+                return SliderCustomizationPanel(
+                  transformers: SliderQuestionTransformers(
+                    question: questionData,
+                    onTransformed: cubit.updateSelectedQuestion,
+                  ),
+                );
             }
-          } else {
-            return const SizedBox.shrink();
           }
+          return const SizedBox.shrink();
         },
       ),
     );

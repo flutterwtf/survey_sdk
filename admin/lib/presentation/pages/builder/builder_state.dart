@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:survey_core/survey_core.dart';
 
 class BuilderState extends Equatable {
-  final int selectedQuestionId;
+  final int? selectedQuestionId;
   final List<QuestionData> questions;
 
   const BuilderState({
@@ -20,7 +20,8 @@ class BuilderState extends Equatable {
     );
   }
 
-  QuestionData get selectedQuestion => questions[selectedQuestionId];
+  QuestionData? get selectedQuestion =>
+      selectedQuestionId != null ? questions[selectedQuestionId!] : null;
 
   @override
   List<Object?> get props => [

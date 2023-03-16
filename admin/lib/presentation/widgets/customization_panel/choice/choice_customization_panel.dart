@@ -22,7 +22,7 @@ enum RuleType {
   final String name;
 }
 
-class ChoiceCustomizationPanel extends StatelessWidget {
+class ChoiceCustomizationPanel extends StatefulWidget {
   // TODO(dev): may be we can find a better name?
   final ChoiceQuestionTransformers transformers;
   final QuestionData editableQuestion;
@@ -51,31 +51,31 @@ class _ChoiceCustomizationPanelState extends State<ChoiceCustomizationPanel> {
       tabs: [
         ChoiceCommonCustomizationTab(
           title: context.localization.common,
-          onFillColorPicked: transformers.updateFillColor,
-          onTitleColorPicked: transformers.updateTitleColor,
-          onTitleFontSizeChanged: transformers.updateTitleFontSize,
-          onSubtitleColorPicked: transformers.updateSubtitleColor,
-          onSubtitleFontSizeChanged: transformers.updateSubtitleFontSize,
-          onButtonColorPicked: transformers.updateButtonColor,
-          onButtonTextColorPicked: transformers.updateButtonTextColor,
-          onButtonFontSizeChanged: transformers.updateButtonFontSize,
-          onButtonRadiusChanged: transformers.updateButtonRadius,
+          onFillColorPicked: widget.transformers.updateFillColor,
+          onTitleColorPicked: widget.transformers.updateTitleColor,
+          onTitleFontSizeChanged: widget.transformers.updateTitleFontSize,
+          onSubtitleColorPicked: widget.transformers.updateSubtitleColor,
+          onSubtitleFontSizeChanged: widget.transformers.updateSubtitleFontSize,
+          onButtonColorPicked: widget.transformers.updateButtonColor,
+          onButtonTextColorPicked: widget.transformers.updateButtonTextColor,
+          onButtonFontSizeChanged: widget.transformers.updateButtonFontSize,
+          onButtonRadiusChanged: widget.transformers.updateButtonRadius,
         ),
         ChoiceButtonsCustomizationTab(
           title: widget.isMultipleChoice
               ? context.localization.check_box
               : context.localization.radio_button,
           onMultipleChoiceUpdate: (isMultipleChoice) {},
-          onActiveColorPicked: transformers.updateActiveColor,
-          onInactiveColorPicked: transformers.updateInactiveColor,
+          onActiveColorPicked: widget.transformers.updateActiveColor,
+          onInactiveColorPicked: widget.transformers.updateInactiveColor,
         ),
         ChoiceContentCustomizationTab(
           key: UniqueKey(),
           title: context.localization.content,
-          onTitleChanged: transformers.updateTitle,
-          onSubTitleChanged: transformers.updateSubtitle,
+          onTitleChanged: widget.transformers.updateTitle,
+          onSubTitleChanged: widget.transformers.updateSubtitle,
           onOptionsChanged: (options) {
-            transformers.updateOptions(options);
+            widget.transformers.updateOptions(options);
             setState(() => _listOptions = options);
           },
           onRuleChanged: (value) {

@@ -27,31 +27,33 @@ class _InputCustomizationPanelState extends State<InputCustomizationPanel> {
       tabs: [
         InputCommonCustomizationTab(
           title: context.localization.common,
-          onFillColorPicked: transformers.updateFillColor,
-          onTitleColorPicked: transformers.updateTitleColor,
-          onTitleFontSizeChanged: transformers.updateTitleFontSize,
-          onSubtitleColorPicked: transformers.updateSubtitleColor,
-          onSubtitleFontSizeChanged: transformers.updateSubtitleFontSize,
-          onButtonFirstColorPicked: transformers.updateButtonFirstColor,
-          onButtonSecondColorPicked: transformers.updateButtonSecondColor,
-          onButtonFontSizeChanged: transformers.updateButtonFontSize,
+          onFillColorPicked: widget.transformers.updateFillColor,
+          onTitleColorPicked: widget.transformers.updateTitleColor,
+          onTitleFontSizeChanged: widget.transformers.updateTitleFontSize,
+          onSubtitleColorPicked: widget.transformers.updateSubtitleColor,
+          onSubtitleFontSizeChanged: widget.transformers.updateSubtitleFontSize,
+          onButtonFirstColorPicked: widget.transformers.updateButtonFirstColor,
+          onButtonSecondColorPicked:
+              widget.transformers.updateButtonSecondColor,
+          onButtonFontSizeChanged: widget.transformers.updateButtonFontSize,
         ),
         InputCustomizationTab(
           key: UniqueKey(),
           title: context.localization.input,
-          onMultilineChanged: transformers.updateMultiline,
-          onFillColorChanged: transformers.updateFillColor,
-          onBorderColorChanged: transformers.updateBorderColor,
-          onBorderSizeChanged: transformers.updateBorderSize,
-          onBorderWidthChanged: transformers.updateBorderWidth,
-          onHorizontalPaddingChanged: transformers.updateHorizontalPadding,
-          onVerticalPaddingChanged: transformers.updateVerticalPadding,
-          onHintColorChanged: transformers.updateHintColor,
-          onHintFontSizeChanged: transformers.updateHintFontSize,
-          onTextColorChanged: transformers.updateTextColor,
-          onTextFontSizeChanged: transformers.updateTextFontSize,
+          onMultilineChanged: widget.transformers.updateMultiline,
+          onFillColorChanged: widget.transformers.updateFillColor,
+          onBorderColorChanged: widget.transformers.updateBorderColor,
+          onBorderSizeChanged: widget.transformers.updateBorderSize,
+          onBorderWidthChanged: widget.transformers.updateBorderWidth,
+          onHorizontalPaddingChanged:
+              widget.transformers.updateHorizontalPadding,
+          onVerticalPaddingChanged: widget.transformers.updateVerticalPadding,
+          onHintColorChanged: widget.transformers.updateHintColor,
+          onHintFontSizeChanged: widget.transformers.updateHintFontSize,
+          onTextColorChanged: widget.transformers.updateTextColor,
+          onTextFontSizeChanged: widget.transformers.updateTextFontSize,
           onInputTypeChanged: (newInputType) {
-            transformers.updateInputType(newInputType);
+            widget.transformers.updateInputType(newInputType);
             setState(() {
               inputType = newInputType;
             });
@@ -61,10 +63,10 @@ class _InputCustomizationPanelState extends State<InputCustomizationPanel> {
         ),
         InputContentCustomizationTab(
           title: context.localization.content,
-          onTitleChanged: transformers.updateTitle,
-          onSubtitleChanged: transformers.updateSubtitle,
-          onHintTextChanged: transformers.updateHintText,
-          onButtonTextChanged: transformers.updateButtonText,
+          onTitleChanged: widget.transformers.updateTitle,
+          onSubtitleChanged: widget.transformers.updateSubtitle,
+          onHintTextChanged: widget.transformers.updateHintText,
+          onButtonTextChanged: widget.transformers.updateButtonText,
         ),
       ],
     );
