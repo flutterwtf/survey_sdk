@@ -4,7 +4,7 @@ import 'package:survey_admin/data/interfaces/session_storage_data_source.dart';
 import 'package:survey_core/survey_core.dart';
 import 'package:universal_html/html.dart';
 
-class SessionStorageDataSource implements ApiSessionStorageDataSource {
+class WebSessionStorageDataSource implements SessionStorageDataSource {
   static final _sessionStorage = window.sessionStorage;
   static const _surveyDataKey = 'SurveyData';
 
@@ -13,9 +13,8 @@ class SessionStorageDataSource implements ApiSessionStorageDataSource {
     final data = _sessionStorage[_surveyDataKey];
     if (data != null) {
       return SurveyData.fromJson(jsonDecode(data));
-    } else {
-      return null;
     }
+    return null;
   }
 
   @override

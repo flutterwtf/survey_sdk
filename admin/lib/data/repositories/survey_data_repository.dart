@@ -4,7 +4,7 @@ import 'package:survey_admin/domain/repository_interfaces/survey_data_repository
 import 'package:survey_core/survey_core.dart';
 
 class SurveyDataRepositoryImpl implements SurveyDataRepository {
-  final ApiSessionStorageDataSource _sessionStorageDataSource;
+  final SessionStorageDataSource _sessionStorageDataSource;
   final FileSystemDataSource _fileSystemDataSource;
 
   SurveyDataRepositoryImpl(

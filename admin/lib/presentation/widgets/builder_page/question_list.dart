@@ -11,8 +11,8 @@ import 'package:survey_admin/presentation/widgets/builder_page/question_list_ite
 import 'package:survey_core/survey_core.dart';
 
 class QuestionList extends StatefulWidget {
-  final void Function(QuestionData) onSelect;
-  final void Function(QuestionData) onAdd;
+  final ValueChanged<QuestionData> onSelect;
+  final ValueChanged<QuestionData> onAdd;
   final List<QuestionData> questionList;
 
   const QuestionList({

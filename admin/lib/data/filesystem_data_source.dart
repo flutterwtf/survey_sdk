@@ -3,7 +3,6 @@ import 'dart:convert';
 // TODO(dev): does it work in web app?
 import 'dart:io';
 
-import 'package:get_it/get_it.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:survey_admin/data/interfaces/session_storage_data_source.dart';
 import 'package:survey_admin/domain/repository_interfaces/survey_data_repository.dart';
@@ -11,11 +10,9 @@ import 'package:survey_core/survey_core.dart';
 
 // TODO(dev): rename
 class SurveyDataRepositoryImpl implements SurveyDataRepository {
-  final ApiSessionStorageDataSource _sessionStorageDataSource;
+  final SessionStorageDataSource _sessionStorageDataSource;
 
-  SurveyDataRepositoryImpl()
-      : _sessionStorageDataSource =
-            GetIt.instance.get<ApiSessionStorageDataSource>();
+  SurveyDataRepositoryImpl(this._sessionStorageDataSource);
 
   Future<String> get _localPath async {
     // TODO(dev): it's kinda strange to use

@@ -52,9 +52,7 @@ class SurveyData extends ApiObject {
   Map<String, dynamic> toJson() {
     return {
       'commonTheme': commonTheme.toJson(),
-      'questions': [
-        for (var question in questions) question.toJson(),
-      ],
+      'questions': questions.map((question) => question.toJson()).toList(),
     };
   }
 

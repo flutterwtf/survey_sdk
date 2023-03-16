@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:get_it/get_it.dart';
 import 'package:survey_admin/data/data_sources/session_storage_data_source.dart';
 import 'package:survey_admin/data/filesystem_data_source.dart';
@@ -16,7 +17,11 @@ Future<void> initInjector() async {
 }
 
 Future<void> _initDataSources() async {
-  i.registerFactory<ApiSessionStorageDataSource>(SessionStorageDataSource.new);
+  if (kIsWeb) {
+    i.registerFactory<SessionStorageDataSource>(
+      WebSessionStorageDataSource.new,
+    );
+  }
 }
 
 void _initCubits() {
@@ -31,5 +36,9 @@ void _initCubits() {
 }
 
 void _initRepositories() {
-  i.registerFactory<SurveyDataRepository>(SurveyDataRepositoryImpl.new);
+  i.registerFactory<SurveyDataRepository>(
+    () => SurveyDataRepositoryImpl(
+      i.get<SessionStorageDataSource>(),
+    ),
+  );
 }
