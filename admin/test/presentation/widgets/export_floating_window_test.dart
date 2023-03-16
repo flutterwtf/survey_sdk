@@ -28,34 +28,41 @@ void main() {
     ),
   );
 
-  group('Export floating window test', () {
-    testWidgets(
-      'open window, initialization',
-      (tester) async {
-        await tester.pumpWidget(exportFloatingWindow);
-        await tester.pumpAndSettle();
+  group(
+    'Export floating window test',
+    () {
+      testWidgets(
+        'open window, initialization',
+        (tester) async {
+          // Maybe it's a font that is not used for tests
+          // Standard font scale reduced to 0.9
+          tester.binding.platformDispatcher.textScaleFactorTestValue = 0.9;
 
-        expect(
-          find.byType(FilledButton),
-          findsNWidgets(2),
-        );
-      },
-    );
+          await tester.pumpWidget(exportFloatingWindow);
+          await tester.pumpAndSettle();
 
-    testWidgets(
-      'press `close`, `copy` and `download` buttons',
-      (tester) async {
-        await tester.pumpWidget(exportFloatingWindow);
-        await tester.pumpAndSettle();
+          expect(find.byType(OutlinedButton), findsOneWidget);
+          expect(find.byType(FilledButton), findsOneWidget);
+        },
+      );
 
-        await tester.tap(find.text('COPY'));
-        await tester.tap(find.text('DOWNLOAD'));
-        await tester.tap(find.byType(IconButton));
+      testWidgets(
+        'press `close`, `copy` and `download` buttons',
+        (tester) async {
+          await tester.pumpWidget(exportFloatingWindow);
+          await tester.pumpAndSettle();
 
-        expect(downloadCompleter.isCompleted, true);
-        expect(copyCompleter.isCompleted, true);
-        expect(closeCompleter.isCompleted, true);
-      },
-    );
-  });
+          await tester.tap(find.text('COPY'));
+          await tester.tap(find.text('DOWNLOAD'));
+          await tester.tap(find.byType(IconButton));
+
+          expect(downloadCompleter.isCompleted, true);
+          expect(copyCompleter.isCompleted, true);
+          expect(closeCompleter.isCompleted, true);
+
+          tester.binding.platformDispatcher.clearTextScaleFactorTestValue();
+        },
+      );
+    },
+  );
 }
