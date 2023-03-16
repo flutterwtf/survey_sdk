@@ -58,6 +58,7 @@ class _TextCustomizeItemState extends State<TextCustomizeItem> {
       padding: const EdgeInsets.all(AppDimensions.marginM),
       child: Column(
         children: [
+          // TODO(dev): we probably have to move this out of here
           CustomizationItemsContainer(
             isFontBold: true,
             children: [Text(widget.title)],

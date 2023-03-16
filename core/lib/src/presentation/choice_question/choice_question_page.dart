@@ -88,7 +88,7 @@ class _ChoiceQuestionPageState extends State<ChoiceQuestionPage>
                     onChanged: _onInputChanged,
                     activeColor: _theme.activeColor,
                     inactiveColor: _theme.inactiveColor,
-                    selectedOptions: _selectedItems,
+                    selectedOptions: List.from(_selectedItems),
                   )
                 : _QuestionRadioButtons(
                     selectedOption:
@@ -156,9 +156,9 @@ class _QuestionCheckboxes extends StatelessWidget {
               ),
               onChanged: (shouldAdd) {
                 if (shouldAdd != null) {
-                  var options = selectedOptions;
+                  final options = selectedOptions;
                   if (shouldAdd) {
-                    options = [...selectedOptions, option];
+                    options.add(option);
                   } else {
                     options.remove(option);
                   }

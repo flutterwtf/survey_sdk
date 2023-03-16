@@ -6,7 +6,7 @@ import 'package:survey_admin/presentation/widgets/hex_color_field.dart';
 import 'package:survey_admin/presentation/widgets/text_customize_item.dart';
 import 'package:survey_admin/presentation/widgets/text_width_field.dart';
 
-import '../app_test.dart';
+import '../app_tester.dart';
 
 void main() {
   group(
@@ -20,7 +20,7 @@ void main() {
       const newColorHex = 'FFC91515';
       const newWidth = '12';
 
-      final textCustomizationItem = AppTest(
+      final textCustomizationItem = AppTester(
         child: TextCustomizeItem(
           title: title,
           initialTextWidth: initialTextWidth,
