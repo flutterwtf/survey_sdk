@@ -7,11 +7,15 @@ import 'package:survey_admin/presentation/widgets/customization_items/customizat
 
 class OptionCustomizationItem extends StatefulWidget {
   final List<String> options;
+  final int ruleValue;
   final ValueChanged<List<String>> onChanged;
+  final ValueChanged<int> onRuleLimitedChanged;
 
   const OptionCustomizationItem({
     required this.options,
+    required this.ruleValue,
     required this.onChanged,
+    required this.onRuleLimitedChanged,
     super.key,
   });
 
@@ -47,6 +51,9 @@ class _OptionCustomizationItemState extends State<OptionCustomizationItem> {
   }
 
   void _delete(int index) {
+    if (widget.ruleValue == _options.length) {
+      widget.onRuleLimitedChanged(0);
+    }
     setState(() => _options.removeAt(index));
     widget.onChanged(_options);
   }

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:survey_admin/presentation/app/localization/localizations.dart';
 import 'package:survey_admin/presentation/utils/app_fonts.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/utils/constants/app_dimensions.dart';
+
 import 'package:survey_admin/presentation/widgets/customization_items/color_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/radius_customization_item.dart';
@@ -13,12 +13,12 @@ import 'package:survey_admin/presentation/widgets/customization_panel/customizat
 class IntroCommonCustomizationTab extends CustomizationTab {
   final ValueChanged<Color> onFillColorPicked;
   final ValueChanged<Color> onTitleColorPicked;
-  final ValueChanged<int> onTitleFontSizeChanged;
+  final ValueChanged<double> onTitleFontSizeChanged;
   final ValueChanged<Color> onSubtitleColorPicked;
-  final ValueChanged<int> onSubtitleFontSizeChanged;
+  final ValueChanged<double> onSubtitleFontSizeChanged;
   final ValueChanged<Color> onButtonColorPicked;
   final ValueChanged<Color> onButtonTextColorPicked;
-  final ValueChanged<int> onButtonFontSizeChanged;
+  final ValueChanged<double> onButtonFontSizeChanged;
   final ValueChanged<int> onButtonRadiusChanged;
 
   const IntroCommonCustomizationTab({
@@ -53,20 +53,10 @@ class IntroCommonCustomizationTab extends CustomizationTab {
           title: context.localization.title,
           children: [
             TextStyleCustomizationItem(
+              initialColor: AppColors.black,
               onColorPicked: onTitleColorPicked,
-              initialText: AppFonts.sizeL.toString(),
-              inputFormatters: [
-                FilteringTextInputFormatter.digitsOnly,
-                LengthLimitingTextInputFormatter(3),
-              ],
-              onTextChanged: (value) {
-                if (value == null) return;
-
-                final size = int.tryParse(value);
-                if (size != null) {
-                  onTitleFontSizeChanged(size);
-                }
-              },
+              initialFontSize: AppFonts.sizeL,
+              onFontSizeChanged: onTitleFontSizeChanged,
             ),
           ],
         ),
@@ -74,20 +64,10 @@ class IntroCommonCustomizationTab extends CustomizationTab {
           title: context.localization.subtitle,
           children: [
             TextStyleCustomizationItem(
+              initialColor: AppColors.black,
               onColorPicked: onSubtitleColorPicked,
-              initialText: AppFonts.sizeS.toString(),
-              inputFormatters: [
-                FilteringTextInputFormatter.digitsOnly,
-                LengthLimitingTextInputFormatter(3),
-              ],
-              onTextChanged: (value) {
-                if (value == null) return;
-
-                final size = int.tryParse(value);
-                if (size != null) {
-                  onSubtitleFontSizeChanged(size);
-                }
-              },
+              initialFontSize: AppFonts.sizeS,
+              onFontSizeChanged: onSubtitleFontSizeChanged,
             ),
           ],
         ),
@@ -101,19 +81,8 @@ class IntroCommonCustomizationTab extends CustomizationTab {
             TextStyleCustomizationItem(
               initialColor: AppColors.white,
               onColorPicked: onButtonTextColorPicked,
-              initialText: AppFonts.sizeS.toString(),
-              inputFormatters: [
-                FilteringTextInputFormatter.digitsOnly,
-                LengthLimitingTextInputFormatter(3),
-              ],
-              onTextChanged: (value) {
-                if (value == null) return;
-
-                final size = int.tryParse(value);
-                if (size != null) {
-                  onButtonFontSizeChanged(size);
-                }
-              },
+              initialFontSize: AppFonts.sizeS,
+              onFontSizeChanged: onButtonFontSizeChanged,
             ),
             RadiusCustomizationItem(
               initialValue: AppDimensions.circularRadiusS,
