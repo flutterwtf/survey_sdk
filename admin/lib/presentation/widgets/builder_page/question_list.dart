@@ -1,3 +1,4 @@
+import 'package:context_menus/context_menus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
@@ -51,12 +52,6 @@ class _QuestionListState extends State<QuestionList> {
     }
   }
 
-  @override
-  void dispose() {
-    RawKeyboard.instance.removeListener(_handleKeyDown);
-    super.dispose();
-  }
-
   void _addQuestion(QuestionData data) {
     final index = _questionList.length + 1;
     setState(() {
@@ -79,71 +74,76 @@ class _QuestionListState extends State<QuestionList> {
   }
 
   @override
+  void dispose() {
+    RawKeyboard.instance.removeListener(_handleKeyDown);
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
-      width: AppDimensions.surveyContentBarWidth,
       color: AppColors.white,
+      width: AppDimensions.surveyContentBarWidth,
       child: Column(
-          children: [
+        children: [
           const ItemDivider(),
-      _ListHeader(
-        onAddButtonTap: () async {
-          final questionData = await Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) => const NewQuestionPage(),
-            ),
-          );
-          if (questionData != null) {
-            _addQuestion(questionData);
-          }
-        },
-        questionList: _questionList,
-      ),
-      Expanded(
-        child: ContextMenuOverlay(
-          cardBuilder: (_, children) {
-            return DecoratedBox(
-              decoration: BoxDecoration(
-                color: AppColors.white,
-                borderRadius: BorderRadius.circular(
-                  AppDimensions.circularRadiusXS,
+          _ListHeader(
+            onAddButtonTap: () async {
+              final questionData = await Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => const NewQuestionPage(),
                 ),
-                border: Border.all(
-                  width: 0.5,
-                ),
-              ),
-              child: Column(children: children),
-            );
-          },
-          child: ReorderableListView(
-            buildDefaultDragHandles: false,
-            children: [
-              for (int index = 0; index < _questionList.length; index++)
-                _Question(
-                  key: ValueKey(index),
-                  index: index,
-                  isSelected: index == _selectedIndex,
-                  onDeleteButtonPressed: () =>
-                      setState(() => _questionList.removeAt(index)),
-                  question: _questionList[index],
-                  onQuestionTap: (data) {
-                    widget.onSelect(data);
-                    setState(() {
-                      _selectedIndex = index;
-                    });
-                  },
-                ),
-            ],
-            onReorder: (oldIndex, newIndex) {
-              if (newIndex > oldIndex) newIndex--;
-              setState(
-                    () {
-                  _updateQuestion(oldIndex, newIndex);
-                },
               );
+              if (questionData != null) {
+                _addQuestion(questionData);
+              }
             },
+            questionList: _questionList,
           ),
-        ),),
+          Expanded(
+            child: ContextMenuOverlay(
+              child: ReorderableListView(
+                onReorder: (oldIndex, newIndex) {
+                  if (newIndex > oldIndex) newIndex--;
+                  setState(() {
+                    _updateQuestion(oldIndex, newIndex);
+                  });
+                },
+                buildDefaultDragHandles: false,
+                children: [
+                  for (int index = 0; index < _questionList.length; index++)
+                    _Question(
+                      key: ValueKey(index),
+                      index: index,
+                      isSelected: index == _selectedIndex,
+                      onDeleteButtonPressed: () =>
+                          setState(() => _questionList.removeAt(index)),
+                      question: _questionList[index],
+                      onQuestionTap: (data) {
+                        widget.onSelect(data);
+                        setState(
+                          () {
+                            _selectedIndex = index;
+                          },
+                        );
+                      },
+                    ),
+                ],
+              ),
+              cardBuilder: (_, children) {
+                return DecoratedBox(
+                  decoration: const BoxDecoration(
+                    color: AppColors.white,
+                    border: Border.fromBorderSide(BorderSide(width: 0.5)),
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(AppDimensions.circularRadiusXS),
+                    ),
+                  ),
+                  child: Column(children: children),
+                );
+              },
+            ),
+          ),
         ],
       ),
     );

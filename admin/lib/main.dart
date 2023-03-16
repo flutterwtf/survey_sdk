@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:survey_admin/presentation/app/app.dart';
 import 'package:survey_admin/presentation/app/di/injector.dart';
 
-void main() async {
+void main() {
   if (kIsWeb) {
     window.document.onContextMenu.listen((evt) => evt.preventDefault());
   }
   WidgetsFlutterBinding.ensureInitialized();
-  await initInjector();
+  initInjector();
   runApp(const App());
 }

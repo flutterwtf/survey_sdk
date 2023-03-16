@@ -1,30 +1,30 @@
 import 'package:flutter/foundation.dart';
 import 'package:get_it/get_it.dart';
-import 'package:survey_admin/data/data_sources/filesystem_data_source.dart';
-import 'package:survey_admin/data/data_sources/local_storage_data_source.dart';
-import 'package:survey_admin/data/data_sources/session_storage_data_source.dart';
-import 'package:survey_admin/data/interfaces/local_storage_data_source.dart';
+import 'package:survey_admin/data/data_sources/filesystem_data_source_impl.dart';
+import 'package:survey_admin/data/data_sources/session_storage_data_source_impl.dart';
+import 'package:survey_admin/data/interfaces/filesystem_data_source.dart';
 import 'package:survey_admin/data/interfaces/session_storage_data_source.dart';
-import 'package:survey_admin/data/repositories/local_storage_data_repository.dart';
-import 'package:survey_admin/domain/repository_interfaces/local_storage_data_repository.dart';
-import 'package:survey_admin/domain/repository_interfaces/survey_data_repository.dart';
+import 'package:survey_admin/data/repositories/file_system_repository_impl.dart';
+import 'package:survey_admin/data/repositories/session_storage_repository_impl.dart';
+import 'package:survey_admin/domain/repository_interfaces/file_system_repository.dart.dart';
+import 'package:survey_admin/domain/repository_interfaces/session_storage_repository.dart';
 import 'package:survey_admin/presentation/app/app_cubit.dart';
 import 'package:survey_admin/presentation/pages/builder/builder_cubit.dart';
 import 'package:survey_admin/presentation/pages/new_question_page/new_question_cubit.dart';
 
 GetIt get i => GetIt.instance;
 
-Future<void> initInjector() async {
+void initInjector() {
   _initDataSources();
   _initRepositories();
   _initCubits();
 }
 
 void _initDataSources() {
-  i.registerFactory<LocalStorageDataSource>(LocalStorageDataSourceImpl.new);
+  i.registerFactory<FileSystemDataSource>(FileSystemDataSourceImpl.new);
   if (kIsWeb) {
     i.registerFactory<SessionStorageDataSource>(
-      WebSessionStorageDataSource.new,
+      SessionStorageDataSourceImpl.new,
     );
   }
 }
@@ -38,12 +38,14 @@ void _initCubits() {
 
 void _initRepositories() {
   i
-    ..registerFactory<LocalStorageDataRepository>(
-      () => LocalStorageDataRepositoryImpl(i.get()),
-    )
-    ..registerFactory<SurveyDataRepository>(
-      () => SurveyDataRepositoryImpl(
+    ..registerFactory<SessionStorageRepository>(
+      () => SessionStorageRepositoryImpl(
         i.get<SessionStorageDataSource>(),
+      ),
+    )
+    ..registerFactory<FileSystemRepository>(
+      () => FileSystemRepositoryImpl(
+        i.get<FileSystemDataSource>(),
       ),
     );
 }

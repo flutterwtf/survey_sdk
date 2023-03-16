@@ -4,7 +4,7 @@ import 'package:survey_admin/data/interfaces/session_storage_data_source.dart';
 import 'package:survey_core/survey_core.dart';
 import 'package:universal_html/html.dart';
 
-class WebSessionStorageDataSource implements SessionStorageDataSource {
+class SessionStorageDataSourceImpl implements SessionStorageDataSource {
   static final _sessionStorage = window.sessionStorage;
   static const _surveyDataKey = 'SurveyData';
 
