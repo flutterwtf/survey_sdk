@@ -1,11 +1,17 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'dart:io';
+
 import 'package:collection/collection.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 const filePath = 'lib/presentation/app/localization/l10n/app_en.arb';
+import 'package:flutter_test/flutter_test.dart';
 
+const filePath = 'lib/presentation/app/localization/l10n/app_en.arb';
+
+Future<void> asyncThrows(String exError) async => throw Exception(exError);
 Future<void> asyncThrows(String exError) async => throw Exception(exError);
 
 void main() async {
@@ -21,9 +27,15 @@ void main() async {
   if (!arbIsSorted) {
     asyncThrows('Test Failed. Arb File is not sorted.');
   }
+  if (!arbIsSorted) {
+    asyncThrows('Test Failed. Arb File is not sorted.');
+  }
 
   final notInCamelCaseList = _notInCamelCase(arbContents);
   if (notInCamelCaseList.isNotEmpty) {
+    asyncThrows(
+      'Test Failed. Arb File contains not camelCase keys:\n$notInCamelCaseList',
+    );
     asyncThrows(
       'Test Failed. Arb File contains not camelCase keys:\n$notInCamelCaseList',
     );
@@ -31,6 +43,7 @@ void main() async {
 }
 
 List<String> _notInCamelCase(String arbContents) {
+  final camelCaseExp = RegExp(r'[a-z]+((\d)|([A-Z0-9][a-z0-9]+))*([A-Z])?');
   final camelCaseExp = RegExp(r'[a-z]+((\d)|([A-Z0-9][a-z0-9]+))*([A-Z])?');
   final Map<String, dynamic> contents = json.decode(arbContents);
   final notInCamelCase = contents.keys
