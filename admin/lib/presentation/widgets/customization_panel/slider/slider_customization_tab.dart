@@ -14,7 +14,7 @@ class SliderCustomizationTab extends CustomizationTab {
   final ValueChanged<Color> onActiveColorChanged;
   final ValueChanged<Color> onInactiveColorChanged;
   final ValueChanged<Color> onThumbColorChanged;
-  final ValueChanged<int> onThumbSizeChanged;
+  final ValueChanged<double> onThumbSizeChanged;
 
   const SliderCustomizationTab({
     required super.title,
@@ -71,19 +71,14 @@ class SliderCustomizationTab extends CustomizationTab {
             TextStyleCustomizationItem(
               initialColor: AppColors.textHintGrey,
               onColorPicked: onThumbColorChanged,
-              initialFontSize: AppFonts.sizeL.toString(),
+              initialFontSize: AppFonts.sizeL,
               decoration: InputDecoration(
                 isCollapsed: true,
                 border: InputBorder.none,
                 suffixText: context.localization.px,
                 suffixStyle: context.theme.textTheme.bodyLarge,
               ),
-              onFontSizeChanged: (value) {
-                final size = int.tryParse(value);
-                if (size != null) {
-                  onThumbSizeChanged(size);
-                }
-              },
+              onFontSizeChanged: onThumbSizeChanged,
             ),
           ],
         ),

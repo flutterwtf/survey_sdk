@@ -7,7 +7,6 @@ import 'package:survey_admin/presentation/utils/theme_extension.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/color_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_multiline_text_field.dart';
-import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/dropdown_customization_button.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/multiline_switch.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/padding_customization_item.dart';
@@ -19,14 +18,14 @@ class InputCustomizationTab extends CustomizationTab {
   final void Function(bool isMultiline, int lineAmount) onMultilineChanged;
   final ValueChanged<Color> onFillColorChanged;
   final ValueChanged<Color> onBorderColorChanged;
-  final ValueChanged<int> onBorderSizeChanged;
-  final ValueChanged<int> onBorderWidthChanged;
+  final ValueChanged<double> onBorderSizeChanged;
+  final ValueChanged<double> onBorderWidthChanged;
   final void Function(double size) onHorizontalPaddingChanged;
   final void Function(double size) onVerticalPaddingChanged;
   final ValueChanged<Color> onHintColorChanged;
-  final ValueChanged<int> onHintFontSizeChanged;
+  final ValueChanged<double> onHintFontSizeChanged;
   final ValueChanged<Color> onTextColorChanged;
-  final ValueChanged<int> onTextFontSizeChanged;
+  final ValueChanged<double> onTextFontSizeChanged;
   final ValueChanged<InputType> onInputTypeChanged;
   final InputType inputType;
   final ValueChanged<String> onValidatorErrorTextChanged;
@@ -77,13 +76,8 @@ class InputCustomizationTab extends CustomizationTab {
             TextStyleCustomizationItem(
               initialColor: AppColors.black,
               onColorPicked: onBorderColorChanged,
-              initialFontSize: AppDimensions.defaultBorderWidth.toString(),
-              onFontSizeChanged: (value) {
-                final size = int.tryParse(value);
-                if (size != null) {
-                  onBorderWidthChanged(size);
-                }
-              },
+              initialFontSize: AppDimensions.defaultBorderWidth,
+              onFontSizeChanged: onBorderWidthChanged,
               decoration: InputDecoration(
                 isCollapsed: true,
                 border: InputBorder.none,
@@ -110,13 +104,8 @@ class InputCustomizationTab extends CustomizationTab {
             TextStyleCustomizationItem(
               initialColor: AppColors.textLightGrey,
               onColorPicked: onHintColorChanged,
-              initialFontSize: AppFonts.sizeL.toString(),
-              onFontSizeChanged: (value) {
-                final size = int.tryParse(value);
-                if (size != null) {
-                  onHintFontSizeChanged(size);
-                }
-              },
+              initialFontSize: AppFonts.sizeL,
+              onFontSizeChanged: onHintFontSizeChanged,
             ),
           ],
         ),
@@ -126,13 +115,8 @@ class InputCustomizationTab extends CustomizationTab {
             TextStyleCustomizationItem(
               initialColor: AppColors.black,
               onColorPicked: onTextColorChanged,
-              initialFontSize: AppFonts.sizeL.toString(),
-              onFontSizeChanged: (value) {
-                final size = int.tryParse(value);
-                if (size != null) {
-                  onTextFontSizeChanged(size);
-                }
-              },
+              initialFontSize: AppFonts.sizeL,
+              onFontSizeChanged: onTextFontSizeChanged,
             ),
           ],
         ),

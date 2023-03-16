@@ -6,9 +6,9 @@ import 'package:survey_admin/presentation/widgets/customization_items/customizat
 
 class TextStyleCustomizationItem extends StatefulWidget {
   final Color initialColor;
-  final String initialFontSize;
+  final double initialFontSize;
   final ValueChanged<Color> onColorPicked;
-  final ValueChanged<String> onFontSizeChanged;
+  final ValueChanged<double> onFontSizeChanged;
   final InputDecoration? decoration;
 
   const TextStyleCustomizationItem({
@@ -28,7 +28,7 @@ class TextStyleCustomizationItem extends StatefulWidget {
 class _TextStyleCustomizationItemState
     extends State<TextStyleCustomizationItem> {
   late Color _pickedColor;
-  late String _pickedFontSize;
+  late double _pickedFontSize;
   final TextEditingController _colorController = TextEditingController();
   final TextEditingController _fontSizeController = TextEditingController();
   bool _isPickerOpened = false;
@@ -40,7 +40,7 @@ class _TextStyleCustomizationItemState
   @override
   void initState() {
     _colorController.text = _colorToString(widget.initialColor);
-    _fontSizeController.text = widget.initialFontSize;
+    _fontSizeController.text = widget.initialFontSize.toString();
     _pickedColor = widget.initialColor;
     _pickedFontSize = widget.initialFontSize;
     super.initState();
@@ -65,8 +65,8 @@ class _TextStyleCustomizationItemState
 
   void _onChangedFontSizeTextField(String? value) {
     if (value != null) {
-      _pickedFontSize = value;
-      widget.onFontSizeChanged(value);
+      _pickedFontSize = double.parse(value);
+      widget.onFontSizeChanged(_pickedFontSize);
     }
   }
 
@@ -90,7 +90,7 @@ class _TextStyleCustomizationItemState
 
   void _updateFontSizeTextField() {
     widget.onFontSizeChanged(_pickedFontSize);
-    setState(() => _fontSizeController.text = _pickedFontSize);
+    setState(() => _fontSizeController.text = _pickedFontSize.toString());
   }
 
   @override

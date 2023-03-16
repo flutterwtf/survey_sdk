@@ -10,12 +10,12 @@ import 'package:survey_admin/presentation/widgets/customization_panel/customizat
 class InputCommonCustomizationTab extends CustomizationTab {
   final ValueChanged<Color> onFillColorPicked;
   final ValueChanged<Color> onTitleColorPicked;
-  final ValueChanged<int> onTitleFontSizeChanged;
+  final ValueChanged<double> onTitleFontSizeChanged;
   final ValueChanged<Color> onSubtitleColorPicked;
-  final ValueChanged<int> onSubtitleFontSizeChanged;
+  final ValueChanged<double> onSubtitleFontSizeChanged;
   final ValueChanged<Color> onButtonFirstColorPicked;
   final ValueChanged<Color> onButtonSecondColorPicked;
-  final ValueChanged<int> onButtonFontSizeChanged;
+  final ValueChanged<double> onButtonFontSizeChanged;
 
   const InputCommonCustomizationTab({
     required super.title,
@@ -50,13 +50,8 @@ class InputCommonCustomizationTab extends CustomizationTab {
             TextStyleCustomizationItem(
               initialColor: AppColors.black,
               onColorPicked: onTitleColorPicked,
-              initialFontSize: AppFonts.sizeL.toString(),
-              onFontSizeChanged: (value) {
-                final size = int.tryParse(value);
-                if (size != null) {
-                  onTitleFontSizeChanged(size);
-                }
-              },
+              initialFontSize: AppFonts.sizeL,
+              onFontSizeChanged: onTitleFontSizeChanged,
             ),
           ],
         ),
@@ -66,13 +61,8 @@ class InputCommonCustomizationTab extends CustomizationTab {
             TextStyleCustomizationItem(
               initialColor: AppColors.black,
               onColorPicked: onSubtitleColorPicked,
-              initialFontSize: AppFonts.sizeS.toString(),
-              onFontSizeChanged: (value) {
-                final size = int.tryParse(value);
-                if (size != null) {
-                  onSubtitleFontSizeChanged(size);
-                }
-              },
+              initialFontSize: AppFonts.sizeS,
+              onFontSizeChanged: onSubtitleFontSizeChanged,
             ),
           ],
         ),
@@ -86,13 +76,8 @@ class InputCommonCustomizationTab extends CustomizationTab {
             TextStyleCustomizationItem(
               initialColor: AppColors.white,
               onColorPicked: onButtonSecondColorPicked,
-              initialFontSize: AppFonts.sizeS.toString(),
-              onFontSizeChanged: (value) {
-                final size = int.tryParse(value);
-                if (size != null) {
-                  onButtonFontSizeChanged(size);
-                }
-              },
+              initialFontSize: AppFonts.sizeS,
+              onFontSizeChanged: onButtonFontSizeChanged,
             ),
           ],
         ),

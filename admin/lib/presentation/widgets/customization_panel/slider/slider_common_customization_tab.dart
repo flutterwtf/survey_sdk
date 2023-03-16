@@ -18,9 +18,9 @@ class SliderCommonCustomizationTab extends CustomizationTab {
   final ValueChanged<Color> onSubtitleColorChanged;
   final ValueChanged<Color> onButtonUpColorChanged;
   final ValueChanged<Color> onButtonDownColorChanged;
-  final ValueChanged<int> onTitleFontSizeChanged;
-  final ValueChanged<int> onSubtitleFontSizeChanged;
-  final ValueChanged<int> onButtonFontSizeChanged;
+  final ValueChanged<double> onTitleFontSizeChanged;
+  final ValueChanged<double> onSubtitleFontSizeChanged;
+  final ValueChanged<double> onButtonFontSizeChanged;
   final ValueChanged<int> onButtonRadiusChanged;
 
   const SliderCommonCustomizationTab({
@@ -57,13 +57,8 @@ class SliderCommonCustomizationTab extends CustomizationTab {
             TextStyleCustomizationItem(
               initialColor: AppColors.black,
               onColorPicked: onTitleColorChanged,
-              initialFontSize: AppFonts.sizeL.toString(),
-              onFontSizeChanged: (value) {
-                final size = int.tryParse(value);
-                if (size != null) {
-                  onTitleFontSizeChanged(size);
-                }
-              },
+              initialFontSize: AppFonts.sizeL,
+              onFontSizeChanged: onTitleFontSizeChanged,
             ),
           ],
         ),
@@ -73,13 +68,8 @@ class SliderCommonCustomizationTab extends CustomizationTab {
             TextStyleCustomizationItem(
               initialColor: AppColors.black,
               onColorPicked: onSubtitleColorChanged,
-              initialFontSize: AppFonts.sizeL.toString(),
-              onFontSizeChanged: (value) {
-                final size = int.tryParse(value);
-                if (size != null) {
-                  onSubtitleFontSizeChanged(size);
-                }
-              },
+              initialFontSize: AppFonts.sizeL,
+              onFontSizeChanged: onSubtitleFontSizeChanged,
             ),
           ],
         ),
@@ -93,13 +83,8 @@ class SliderCommonCustomizationTab extends CustomizationTab {
             TextStyleCustomizationItem(
               initialColor: AppColors.white,
               onColorPicked: onButtonDownColorChanged,
-              initialFontSize: AppFonts.sizeL.toString(),
-              onFontSizeChanged: (value) {
-                final size = int.tryParse(value);
-                if (size != null) {
-                  onButtonFontSizeChanged(size);
-                }
-              },
+              initialFontSize: AppFonts.sizeL,
+              onFontSizeChanged: onButtonFontSizeChanged,
             ),
             Row(
               children: [
