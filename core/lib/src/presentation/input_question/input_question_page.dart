@@ -29,7 +29,7 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
   final _textFieldKey = GlobalKey<FormFieldState>();
   DateTime _dateTime = DateTime.now();
   String _input = '';
-  final _format = DateFormat('dd.MM.yyyy');
+  final _dateFormat = DateFormat('dd.MM.yyyy');
 
   bool get _canBeSkippedDate =>
       widget.data.isSkip && _dateTime.toString().isEmpty;
@@ -91,7 +91,7 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
                       focusedBorder: border,
                       border: border,
                     ),
-                    format: _format,
+                    format: _dateFormat,
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                     validator: (dateTime) => _canBeSkippedDate
                         ? null
