@@ -1,7 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:get_it/get_it.dart';
-import 'package:survey_admin/data/data_sources/web_filesystem_data_source.dart';
+import 'package:survey_admin/data/data_sources/web/web_filesystem_data_source.dart';
+import 'package:survey_admin/data/data_sources/web/web_session_storage_data_source.dart';
 import 'package:survey_admin/data/interfaces/filesystem_data_source.dart';
+import 'package:survey_admin/data/interfaces/session_storage_data_source.dart';
 import 'package:survey_admin/data/repositories/survey_data_repository_impl.dart';
 import 'package:survey_admin/domain/repository_interfaces/survey_data_repository.dart';
 import 'package:survey_admin/presentation/app/app_cubit.dart';
@@ -17,7 +19,13 @@ Future<void> initInjector() async {
 }
 
 Future<void> _initWebDataSources() async {
-  i.registerFactory<FileSystemDataSource>(WebFileSystemDataSourceImpl.new);
+  i
+    ..registerFactory<FileSystemDataSource>(
+      WebFileSystemDataSourceImpl.new,
+    )
+    ..registerFactory<SessionStorageDataSource>(
+      WebSessionStorageDataSource.new,
+    );
 }
 
 Future<void> _initMobileDataSources() async {
@@ -26,7 +34,10 @@ Future<void> _initMobileDataSources() async {
 
 void _initRepositories() {
   i.registerSingleton<SurveyDataRepository>(
-    SurveyDataRepositoryImpl(i.get()),
+    SurveyDataRepositoryImpl(
+      i.get(),
+      i.get(),
+    ),
   );
 }
 

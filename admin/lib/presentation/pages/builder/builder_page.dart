@@ -11,6 +11,7 @@ import 'package:survey_admin/presentation/widgets/builder_page/editor_bar.dart';
 import 'package:survey_admin/presentation/widgets/builder_page/phone_view.dart';
 import 'package:survey_admin/presentation/widgets/builder_page/question_list.dart';
 import 'package:survey_admin/presentation/widgets/export_floating_window.dart';
+import 'package:survey_core/survey_core.dart';
 
 class BuilderPage extends StatefulWidget {
   const BuilderPage({super.key});
@@ -40,8 +41,11 @@ class _BuilderPageState extends State<BuilderPage> {
         body: Row(
           children: [
             QuestionList(
-              questionsList: state.questionsList,
+              onAdd: cubit.addQuestionData,
               onSelect: cubit.select,
+              questionList: List<QuestionData>.from(
+                cubit.state.surveyData.questions,
+              ),
             ),
             Expanded(
               child: PhoneView(

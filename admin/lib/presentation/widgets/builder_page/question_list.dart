@@ -8,15 +8,18 @@ import 'package:survey_admin/presentation/utils/constants/app_assets.dart';
 import 'package:survey_admin/presentation/utils/constants/app_dimensions.dart';
 import 'package:survey_admin/presentation/utils/theme_extension.dart';
 import 'package:survey_admin/presentation/widgets/builder_page/question_list_item.dart';
+import 'package:survey_admin/presentation/widgets/customization_items/item_divider.dart';
 import 'package:survey_core/survey_core.dart';
 
 class QuestionList extends StatefulWidget {
-  final List<QuestionData> questionsList;
-  final void Function(QuestionData) onSelect;
+  final ValueChanged<QuestionData> onSelect;
+  final ValueChanged<QuestionData> onAdd;
+  final List<QuestionData> questionList;
 
   const QuestionList({
-    required this.questionsList,
     required this.onSelect,
+    required this.onAdd,
+    required this.questionList,
     super.key,
   });
 
@@ -25,21 +28,24 @@ class QuestionList extends StatefulWidget {
 }
 
 class _QuestionListState extends State<QuestionList> {
+  late List<QuestionData> _questionList;
   int _selectedIndex = 0;
 
   @override
   void initState() {
     super.initState();
-    widget.onSelect(widget.questionsList.first);
+    _questionList = widget.questionList;
+    widget.onSelect(_questionList.first);
   }
 
   void addQuestion(QuestionData data) {
     final index = _questionList.length + 1;
     setState(() {
-      widget.questionsList.add(
+      _questionList.add(
         data.copyWith(index: index),
       );
     });
+    widget.onAdd(data.copyWith(index: index));
   }
 
   void _updateQuestion(int oldIndex, int newIndex) {
@@ -60,11 +66,7 @@ class _QuestionListState extends State<QuestionList> {
       color: AppColors.white,
       child: Column(
         children: [
-          const Divider(
-            color: AppColors.greyBackground,
-            thickness: 0.6,
-            height: 1,
-          ),
+          const ItemDivider(),
           Padding(
             padding: const EdgeInsets.symmetric(
               vertical: AppDimensions.margin2XS,
@@ -105,15 +107,13 @@ class _QuestionListState extends State<QuestionList> {
             child: ReorderableListView(
               buildDefaultDragHandles: false,
               children: [
-                for (int index = 0;
-                    index < widget.questionsList.length;
-                    index++)
+                for (int index = 0; index < _questionList.length; index++)
                   ReorderableDragStartListener(
                     index: index,
                     key: ValueKey(index),
                     child: QuestionListItem(
                       isSelected: index == _selectedIndex,
-                      questionData: widget.questionsList[index],
+                      questionData: _questionList[index],
                       onTap: (data) {
                         widget.onSelect(data);
                         setState(() {

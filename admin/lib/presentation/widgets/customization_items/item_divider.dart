@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
+import 'package:survey_admin/presentation/utils/constants/app_dimensions.dart';
 
 class ItemDivider extends StatelessWidget {
   const ItemDivider({super.key});
@@ -8,8 +9,8 @@ class ItemDivider extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Divider(
       color: AppColors.greyBackground,
-      thickness: 0.6,
-      height: 1,
+      thickness: AppDimensions.thinBorderWidth,
+      height: AppDimensions.dividerHeight,
     );
   }
 }

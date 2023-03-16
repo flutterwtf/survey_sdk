@@ -4,14 +4,14 @@ import 'package:mockito/mockito.dart';
 import 'package:survey_admin/presentation/pages/new_question_page/new_question_page.dart';
 import 'package:survey_admin/presentation/widgets/vector_image.dart';
 
-import '../../widgets/app_test.dart';
+import '../../widgets/app_tester.dart';
 
 class MockNavigatorObserver extends Mock implements NavigatorObserver {}
 
 void main() {
   group('Tests for NewQuestionPage', () {
     final mockObserver = MockNavigatorObserver();
-    final page = AppTest(
+    final page = AppTester(
       navigatorObservers: [mockObserver],
       child: const NewQuestionPage(),
     );

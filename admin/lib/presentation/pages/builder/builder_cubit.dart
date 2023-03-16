@@ -10,17 +10,22 @@ class BuilderCubit extends Cubit<BuilderState> {
       : super(
           BuilderState(
             selectedQuestion: null,
-            questionsList: [
-              const IntroQuestionData.common(index: 1),
-              InputQuestionData.common(index: 2),
-            ],
+            surveyData: SurveyData.common(),
           ),
-        );
+        ) {
+    _init();
+  }
+
+  void _init() {
+    final surveyData =
+        _surveyDataRepository.getSurveyData() ?? SurveyData.common();
+    emit(state.copyWith(surveyData: surveyData));
+  }
 
   void downloadExportedQuestions() {
-    if (state.questionsList.isNotEmpty) {
+    if (state.surveyData.questions.isNotEmpty) {
       final rawMap = <String, dynamic>{};
-      for (final element in state.questionsList) {
+      for (final element in state.surveyData.questions) {
         rawMap[element.index.toString()] = element.toJson();
       }
       _surveyDataRepository.downloadSurveyData(rawMap);
@@ -28,6 +33,14 @@ class BuilderCubit extends Cubit<BuilderState> {
   }
 
   void select(QuestionData data) {
-    return emit(state.copyWith(selectedQuestion: data));
+    emit(state.copyWith(selectedQuestion: data));
+  }
+
+  void addQuestionData(QuestionData data) {
+    final questionList = List<QuestionData>.from(state.surveyData.questions)
+      ..add(data);
+    final surveyData = state.surveyData.copyWith(questions: questionList);
+    _surveyDataRepository.saveSurveyData(surveyData);
+    emit(state.copyWith(surveyData: surveyData));
   }
 }
