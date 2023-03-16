@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/multiline_switch.dart';
 
-import '../app_test.dart';
+import '../app_tester.dart';
 
 void main() {
   group('Tests for MultilineSwitch', () {
@@ -11,7 +11,7 @@ void main() {
     const inputNum = '12';
     const inputText = 'qwe';
     const inputTitle = 'Lines';
-    final page = AppTest(
+    final page = AppTester(
       child: MultilineSwitch(
         onChanged: (bool isMultiline, int lineAmount) {},
       ),
@@ -57,7 +57,7 @@ void main() {
     testWidgets('Check widget with parameters isMultiline = true',
         (tester) async {
       await tester.pumpWidget(
-        AppTest(
+        AppTester(
           child: MultilineSwitch(
             isMultiline: true,
             onChanged: (bool isMultiline, int lineAmount) {},
