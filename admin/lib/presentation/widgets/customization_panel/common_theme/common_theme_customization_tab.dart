@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:survey_admin/presentation/app/localization/localizations.dart';
 import 'package:survey_admin/presentation/utils/app_fonts.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
+import 'package:survey_admin/presentation/utils/size_changed.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/color_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/text_style_customization_item.dart';
@@ -49,14 +50,10 @@ class CommonThemeCustomizationTab extends CustomizationTab {
                 FilteringTextInputFormatter.digitsOnly,
                 LengthLimitingTextInputFormatter(3),
               ],
-              onTextChanged: (value) {
-                if (value == null) return;
-
-                final size = int.tryParse(value);
-                if (size != null) {
-                  onTitleFontSizeChanged(size);
-                }
-              },
+              onTextChanged: (value) => onSizeChanged(
+                value,
+                onTitleFontSizeChanged,
+              ),
             ),
           ],
         ),
@@ -70,14 +67,10 @@ class CommonThemeCustomizationTab extends CustomizationTab {
                 FilteringTextInputFormatter.digitsOnly,
                 LengthLimitingTextInputFormatter(3),
               ],
-              onTextChanged: (value) {
-                if (value == null) return;
-
-                final size = int.tryParse(value);
-                if (size != null) {
-                  onSubtitleFontSizeChanged(size);
-                }
-              },
+              onTextChanged: (value) => onSizeChanged(
+                value,
+                onSubtitleFontSizeChanged,
+              ),
             ),
           ],
         ),
