@@ -21,11 +21,11 @@ class DivisionsCustomizationItem extends StatelessWidget {
         LengthLimitingTextInputFormatter(3),
       ],
       onChanged: (value) {
-        if (value == null) return;
-
-        final divisions = int.tryParse(value);
-        if (divisions != null) {
-          onChanged(divisions);
+        if (value != null) {
+          final divisions = int.tryParse(value);
+          if (divisions != null) {
+            onChanged(divisions);
+          }
         }
       },
     );

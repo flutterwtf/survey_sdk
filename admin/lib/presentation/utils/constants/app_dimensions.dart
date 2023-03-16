@@ -30,7 +30,6 @@ abstract class AppDimensions {
 
   static const double thinBorderWidth = 0.5;
   static const double defaultBorderWidth = 1;
-  static const double dividerHeight = 1;
 
   static const double surveyContentBarWidth = 210;
 

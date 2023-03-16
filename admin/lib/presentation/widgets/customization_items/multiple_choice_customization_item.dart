@@ -24,6 +24,7 @@ class _MultipleChoiceCustomizationItemState
   @override
   void initState() {
     super.initState();
+
     _isMultipleChoice = widget.isMultipleChoice;
   }
 

@@ -39,16 +39,18 @@ class _TextStyleCustomizationItemState
 
   @override
   void initState() {
+    super.initState();
+
     _colorController.text = _colorToString(widget.initialColor);
     _fontSizeController.text = widget.initialFontSize.toString();
     _pickedColor = widget.initialColor;
     _pickedFontSize = widget.initialFontSize;
-    super.initState();
   }
 
   @override
   void dispose() {
     _colorController.dispose();
+
     super.dispose();
   }
 
@@ -56,9 +58,7 @@ class _TextStyleCustomizationItemState
     if (value != null) {
       final color = int.tryParse(value.padRight(8, '0'), radix: 16);
       if (color != null) {
-        setState(() {
-          _pickedColor = Color(color);
-        });
+        setState(() => _pickedColor = Color(color));
       }
     }
   }

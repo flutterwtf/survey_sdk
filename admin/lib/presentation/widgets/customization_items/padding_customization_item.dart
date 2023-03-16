@@ -122,9 +122,7 @@ class _PaddingItem extends StatelessWidget {
                 LengthLimitingTextInputFormatter(3),
               ],
               onChanged: (value) {
-                if (value != null) {
-                  onChanged(value);
-                }
+                if (value != null) onChanged(value);
               },
             ),
           ),

@@ -63,6 +63,7 @@ class _OptionCustomizationItemState extends State<OptionCustomizationItem> {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        // TODO(dev): We definitely need a ListView here?
         ListView.builder(
           shrinkWrap: true,
           itemCount: _options.length,
