@@ -78,6 +78,8 @@ class ChoiceContentCustomizationTab extends CustomizationTab {
             OptionCustomizationItem(
               options: listOptions,
               onChanged: onOptionsChanged,
+              onRuleLimitedChanged: onRuleLimitedChanged,
+              ruleValue: ruleValue,
             )
           ],
         ),
