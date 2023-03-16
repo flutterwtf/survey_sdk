@@ -5,8 +5,7 @@ import 'package:survey_core/src/domain/entities/question_types/input_question_da
 const String _validatorKey = 'validator';
 const String _regexKey = 'regex';
 const String _isObscuredKey = 'is_obscured';
-// TODO(dev): show error text
-const String _validatorErrorText = 'error';
+const String _validatorErrorText = 'Validation error';
 
 class InputValidator implements ApiObject {
   late final String? _regex;

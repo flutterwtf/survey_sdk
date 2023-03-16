@@ -25,6 +25,7 @@ dependencies:
 
   path_provider: ^2.0.13
 dev_dependencies:
+  collection: ^1.17.0
   flutter_lints: ^2.0.0
   flutter_test:
     sdk: flutter

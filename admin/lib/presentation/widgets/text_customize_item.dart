@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
-import 'package:survey_admin/presentation/utils/constants/constants.dart';
+import 'package:survey_admin/presentation/utils/constants/app_dimensions.dart';
 import 'package:survey_admin/presentation/widgets/color_picker_dialog.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
 import 'package:survey_admin/presentation/widgets/hex_color_field.dart';
@@ -58,6 +58,7 @@ class _TextCustomizeItemState extends State<TextCustomizeItem> {
       padding: const EdgeInsets.all(AppDimensions.marginM),
       child: Column(
         children: [
+          // TODO(dev): we probably have to move this out of here
           CustomizationItemsContainer(
             isFontBold: true,
             children: [Text(widget.title)],

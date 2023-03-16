@@ -7,7 +7,7 @@ import 'package:survey_core/src/presentation/localization/localizations.dart';
 import 'package:survey_core/src/presentation/utils/constants.dart';
 import 'package:survey_core/src/presentation/utils/data_to_widget_util.dart';
 import 'package:survey_core/src/presentation/widgets/question_bottom_button.dart';
-import 'package:survey_core/src/presentation/widgets/question_subtitle.dart';
+import 'package:survey_core/src/presentation/widgets/question_content.dart';
 import 'package:survey_core/src/presentation/widgets/question_title.dart';
 
 //TODO: create child<T> widget for date,password,text,number etc
@@ -65,7 +65,7 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
             padding: const EdgeInsets.only(
               top: AppDimensions.margin2XL,
             ),
-            child: QuestionSubtitle(
+            child: QuestionContent(
               content: widget.data.subtitle,
             ),
           ),

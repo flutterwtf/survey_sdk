@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:survey_admin/presentation/app/localization/localizations.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
-import 'package:survey_admin/presentation/utils/constants/constants.dart';
+import 'package:survey_admin/presentation/utils/constants/app_dimensions.dart';
 import 'package:survey_admin/presentation/utils/theme_extension.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
 
@@ -30,7 +30,13 @@ class _OptionCustomizationItemState extends State<OptionCustomizationItem> {
     _options = widget.options;
   }
 
-  void onEditingComplete() {
+  @override
+  void dispose() {
+    super.dispose();
+    _controller.dispose();
+  }
+
+  void _onEditingComplete() {
     if (_controller.text.isNotEmpty) {
       setState(() {
         _options = [..._options, _controller.text];
@@ -40,7 +46,7 @@ class _OptionCustomizationItemState extends State<OptionCustomizationItem> {
     widget.onChanged(_options);
   }
 
-  void delete(int index) {
+  void _delete(int index) {
     setState(() => _options.removeAt(index));
     widget.onChanged(_options);
   }
@@ -54,7 +60,7 @@ class _OptionCustomizationItemState extends State<OptionCustomizationItem> {
           itemCount: _options.length,
           itemBuilder: (context, index) => _Option(
             option: _options[index],
-            delete: () => delete(index),
+            delete: () => _delete(index),
           ),
         ),
         const SizedBox(
@@ -73,7 +79,7 @@ class _OptionCustomizationItemState extends State<OptionCustomizationItem> {
             Expanded(
               child: CustomizationTextField(
                 controller: _controller,
-                onEditingComplete: onEditingComplete,
+                onEditingComplete: _onEditingComplete,
                 decoration: InputDecoration.collapsed(
                   hintText: context.localization.type_new_option_here,
                   hintStyle: const TextStyle(

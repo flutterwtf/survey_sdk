@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:survey_admin/presentation/app/localization/localizations.dart';
 import 'package:survey_admin/presentation/pages/new_question_page/new_question_tabs.dart';
 import 'package:survey_admin/presentation/utils/app_fonts.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/utils/constants/app_assets.dart';
-import 'package:survey_admin/presentation/utils/constants/constants.dart';
+import 'package:survey_admin/presentation/utils/constants/app_dimensions.dart';
 import 'package:survey_admin/presentation/utils/theme_extension.dart';
 import 'package:survey_admin/presentation/widgets/vector_image.dart';
-
-// TODO(dev): check localization
-const _title = 'New screen';
 
 class NewQuestionPage extends StatefulWidget {
   const NewQuestionPage({super.key});
@@ -42,9 +40,9 @@ class _NewQuestionPageState extends State<NewQuestionPage> {
       child: Scaffold(
         backgroundColor: AppColors.white,
         appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(AppDimensions.appbarSize),
+          preferredSize: const Size.fromHeight(AppDimensions.appbarHeight),
           child: AppBar(
-            toolbarHeight: AppDimensions.appbarSize,
+            toolbarHeight: AppDimensions.appbarHeight,
             backgroundColor: AppColors.white,
             shadowColor: AppColors.transparentW,
             automaticallyImplyLeading: false,
@@ -111,7 +109,7 @@ class _AppBarTitle extends StatelessWidget {
     return Align(
       alignment: Alignment.centerLeft,
       child: Text(
-        _title,
+        context.localization.new_screen,
         style: context.theme.textTheme.labelLarge?.copyWith(
           fontWeight: AppFonts.weightRegular,
         ),
@@ -220,8 +218,8 @@ class _AddButton extends StatelessWidget {
     return GestureDetector(
       onTap: onPressed,
       child: Container(
-        width: 150,
-        height: 34,
+        width: AppDimensions.addButtonWidth,
+        height: AppDimensions.addButtonHeight,
         decoration: BoxDecoration(
           color: AppColors.black,
           borderRadius: BorderRadius.circular(AppDimensions.circularRadiusXS),
