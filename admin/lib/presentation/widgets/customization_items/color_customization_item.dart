@@ -8,13 +8,15 @@ class ColorCustomizationItem extends StatefulWidget {
   final Color initialColor;
   final ValueChanged<Color> onColorPicked;
   final String? initialSize;
-  final ValueChanged<int>? onSizeChanged;
+  final ValueChanged<double>? onSizeChanged;
+  final InputDecoration? decoration;
 
   const ColorCustomizationItem({
     required this.initialColor,
     required this.onColorPicked,
     this.initialSize,
     this.onSizeChanged,
+    this.decoration,
     super.key,
   });
 
@@ -71,6 +73,11 @@ class _ColorCustomizationItemState extends State<ColorCustomizationItem> {
                     ),
                     LengthLimitingTextInputFormatter(8),
                   ],
+                  decoration: widget.decoration ??
+                      const InputDecoration(
+                        isCollapsed: true,
+                        border: InputBorder.none,
+                      ),
                   onChanged: _onChangedTextField,
                 ),
               ),
