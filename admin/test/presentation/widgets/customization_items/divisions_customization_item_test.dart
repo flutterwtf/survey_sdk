@@ -3,13 +3,13 @@ import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/divisions_customization_item.dart';
 
-import '../app_test.dart';
+import '../app_tester.dart';
 
 void main() {
   group('Division customization item widget', () {
     testWidgets('load widget', (tester) async {
       await tester.pumpWidget(
-        AppTest(
+        AppTester(
           child: DivisionsCustomizationItem(
             onChanged: (int? divisions) {},
           ),
@@ -21,7 +21,7 @@ void main() {
 
     testWidgets('erase first then second initial characters', (tester) async {
       await tester.pumpWidget(
-        AppTest(
+        AppTester(
           child: DivisionsCustomizationItem(
             initialValue: 11,
             onChanged: (int? divisions) => divisions,
@@ -43,7 +43,7 @@ void main() {
 
     testWidgets('erase and enter new value (1 character)', (tester) async {
       await tester.pumpWidget(
-        AppTest(
+        AppTester(
           child: DivisionsCustomizationItem(
             initialValue: 2,
             onChanged: (int? divisions) => divisions,
@@ -59,7 +59,7 @@ void main() {
 
     testWidgets('erase and enter new characters (total > 3)', (tester) async {
       await tester.pumpWidget(
-        AppTest(
+        AppTester(
           child: DivisionsCustomizationItem(
             initialValue: 2,
             onChanged: (int? divisions) => divisions,
@@ -77,7 +77,7 @@ void main() {
 
     testWidgets('5 initial characters and erase 1', (tester) async {
       await tester.pumpWidget(
-        AppTest(
+        AppTester(
           child: DivisionsCustomizationItem(
             initialValue: 22222,
             onChanged: (int? divisions) => divisions,

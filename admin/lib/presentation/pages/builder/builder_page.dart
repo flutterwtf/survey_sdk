@@ -6,7 +6,7 @@ import 'package:survey_admin/presentation/pages/builder/builder_cubit.dart';
 import 'package:survey_admin/presentation/pages/builder/builder_state.dart';
 import 'package:survey_admin/presentation/utils/app_fonts.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
-import 'package:survey_admin/presentation/utils/constants/constants.dart';
+import 'package:survey_admin/presentation/utils/constants/app_dimensions.dart';
 import 'package:survey_admin/presentation/utils/theme_extension.dart';
 import 'package:survey_admin/presentation/widgets/builder_page/editor_bar.dart';
 import 'package:survey_admin/presentation/widgets/builder_page/phone_view.dart';
@@ -30,7 +30,7 @@ class _BuilderPageState extends State<BuilderPage> {
       bloc: _cubit,
       builder: (context, state) => Scaffold(
         appBar: AppBar(
-          toolbarHeight: AppDimensions.appbarSize,
+          toolbarHeight: AppDimensions.appbarHeight,
           backgroundColor: AppColors.white,
           shadowColor: AppColors.transparentW,
           centerTitle: true,
@@ -42,7 +42,13 @@ class _BuilderPageState extends State<BuilderPage> {
         ),
         body: Row(
           children: [
-            QuestionList(onSelect: _cubit.select),
+            QuestionList(
+              onAdd: _cubit.addQuestionData,
+              onSelect: _cubit.select,
+              questionList: List<QuestionData>.from(
+                _cubit.state.surveyData.questions,
+              ),
+            ),
             Expanded(
               child: PhoneView(
                 child: Survey(

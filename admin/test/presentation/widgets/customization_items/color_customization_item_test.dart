@@ -3,7 +3,7 @@ import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/color_customization_item.dart';
 
-import '../app_test.dart';
+import '../app_tester.dart';
 
 void main() {
   group('Color customization item widget', () {
@@ -11,7 +11,7 @@ void main() {
     const redColor = Colors.red;
     testWidgets('load widget', (tester) async {
       await tester.pumpWidget(
-        AppTest(
+        AppTester(
           child: ColorCustomizationItem(
             initialColor: redColor,
             onColorPicked: (Color value) {},
@@ -23,7 +23,7 @@ void main() {
 
     testWidgets('open color picker', (tester) async {
       await tester.pumpWidget(
-        AppTest(
+        AppTester(
           child: ColorCustomizationItem(
             initialColor: redColor,
             onColorPicked: (Color value) {},
@@ -37,7 +37,7 @@ void main() {
 
     testWidgets('pick color', (tester) async {
       await tester.pumpWidget(
-        AppTest(
+        AppTester(
           child: ColorCustomizationItem(
             initialColor: redColor,
             onColorPicked: (Color value) {},
