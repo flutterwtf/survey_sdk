@@ -12,7 +12,7 @@ import 'package:survey_admin/presentation/widgets/customization_items/item_divid
 import 'package:survey_core/survey_core.dart';
 
 class QuestionList extends StatefulWidget {
-  final void Function(QuestionData) onSelect;
+  final ValueChanged<QuestionData> onSelect;
   final ValueChanged<QuestionData> onAdd;
   final List<QuestionData> questions;
 
@@ -40,7 +40,7 @@ class _QuestionListState extends State<QuestionList> {
     }
   }
 
-  void addQuestion(QuestionData data) {
+  void _addQuestion(QuestionData data) {
     final index = _questionList.length + 1;
     setState(() {
       _questionList.add(
@@ -93,7 +93,7 @@ class _QuestionListState extends State<QuestionList> {
                       ),
                     );
                     if (questionData != null) {
-                      addQuestion(questionData);
+                      _addQuestion(questionData);
                     }
                   },
                   child: SizedBox(
