@@ -10,7 +10,7 @@ import '../app_tester.dart';
 void main() {
   group('Tests for SliderCustomizationTab', () {
     var thickness = 0;
-    var numThumb = 0;
+    var numThumb = 0.0;
     Color active = Colors.red;
     Color inactive = Colors.red;
     Color colorThumb = Colors.red;
