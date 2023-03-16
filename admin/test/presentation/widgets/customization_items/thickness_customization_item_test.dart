@@ -2,7 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/thickness_customization_item.dart';
 
-import '../app_test.dart';
+import '../app_tester.dart';
 
 void main() {
   group(
@@ -13,7 +13,7 @@ void main() {
       const inputNum = '10';
       const inputText = 'qwe';
       const inputValidation = '100';
-      final page = AppTest(
+      final page = AppTester(
         child: ThicknessCustomizationItem(
           initialSize: initialSize,
           onThicknessChanged: (value) {},

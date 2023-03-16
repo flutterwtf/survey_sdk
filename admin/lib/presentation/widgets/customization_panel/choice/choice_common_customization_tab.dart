@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:survey_admin/presentation/app/localization/localizations.dart';
 import 'package:survey_admin/presentation/utils/app_fonts.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
@@ -13,12 +12,12 @@ import 'package:survey_admin/presentation/widgets/customization_panel/customizat
 class ChoiceCommonCustomizationTab extends CustomizationTab {
   final ValueChanged<Color> onFillColorPicked;
   final ValueChanged<Color> onTitleColorPicked;
-  final ValueChanged<int> onTitleFontSizeChanged;
+  final ValueChanged<double> onTitleFontSizeChanged;
   final ValueChanged<Color> onSubtitleColorPicked;
-  final ValueChanged<int> onSubtitleFontSizeChanged;
+  final ValueChanged<double> onSubtitleFontSizeChanged;
   final ValueChanged<Color> onButtonColorPicked;
   final ValueChanged<Color> onButtonTextColorPicked;
-  final ValueChanged<int> onButtonFontSizeChanged;
+  final ValueChanged<double> onButtonFontSizeChanged;
   final ValueChanged<int> onButtonRadiusChanged;
 
   const ChoiceCommonCustomizationTab({
@@ -53,16 +52,10 @@ class ChoiceCommonCustomizationTab extends CustomizationTab {
           title: context.localization.title,
           children: [
             TextStyleCustomizationItem(
+              initialColor: AppColors.black,
               onColorPicked: onTitleColorPicked,
-              initialText: AppFonts.sizeL.toString(),
-              inputFormatters: [
-                FilteringTextInputFormatter.digitsOnly,
-                LengthLimitingTextInputFormatter(2),
-              ],
-              onTextChanged: (value) => _fontSizeChange(
-                value,
-                onTitleFontSizeChanged,
-              ),
+              initialFontSize: AppFonts.sizeL,
+              onFontSizeChanged: onTitleFontSizeChanged,
             ),
           ],
         ),
@@ -70,16 +63,10 @@ class ChoiceCommonCustomizationTab extends CustomizationTab {
           title: context.localization.subtitle,
           children: [
             TextStyleCustomizationItem(
+              initialColor: Colors.black,
               onColorPicked: onSubtitleColorPicked,
-              initialText: AppFonts.sizeS.toString(),
-              inputFormatters: [
-                FilteringTextInputFormatter.digitsOnly,
-                LengthLimitingTextInputFormatter(2),
-              ],
-              onTextChanged: (value) => _fontSizeChange(
-                value,
-                onSubtitleFontSizeChanged,
-              ),
+              initialFontSize: AppFonts.sizeS,
+              onFontSizeChanged: onSubtitleFontSizeChanged,
             ),
           ],
         ),
@@ -93,15 +80,8 @@ class ChoiceCommonCustomizationTab extends CustomizationTab {
             TextStyleCustomizationItem(
               initialColor: AppColors.white,
               onColorPicked: onButtonTextColorPicked,
-              initialText: AppFonts.sizeS.toString(),
-              inputFormatters: [
-                FilteringTextInputFormatter.digitsOnly,
-                LengthLimitingTextInputFormatter(2),
-              ],
-              onTextChanged: (value) => _fontSizeChange(
-                value,
-                onButtonFontSizeChanged,
-              ),
+              initialFontSize: AppFonts.sizeS,
+              onFontSizeChanged: onButtonFontSizeChanged,
             ),
             RadiusCustomizationItem(
               initialValue: AppDimensions.circularRadiusS,
@@ -111,14 +91,5 @@ class ChoiceCommonCustomizationTab extends CustomizationTab {
         ),
       ],
     );
-  }
-
-  void _fontSizeChange(String? value, void Function(int) action) {
-    if (value != null) {
-      final size = int.tryParse(value);
-      if (size != null) {
-        action(size);
-      }
-    }
   }
 }

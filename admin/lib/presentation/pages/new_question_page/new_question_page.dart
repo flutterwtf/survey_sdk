@@ -58,6 +58,7 @@ class _NewQuestionPageState extends State<NewQuestionPage> {
             horizontal: AppDimensions.marginM,
           ),
           child: Row(
+            mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Column(
@@ -131,20 +132,22 @@ class _TabButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
       onTap: onTap,
-      child: Container(
-        alignment: Alignment.centerLeft,
-        padding: const EdgeInsets.only(top: AppDimensions.sizeM),
-        child: Text(
-          title,
-          style: isSelected
-              ? context.theme.textTheme.titleMedium?.copyWith(
-                  fontWeight: AppFonts.weightSemiBold,
-                )
-              : context.theme.textTheme.titleMedium?.copyWith(
-                  fontWeight: AppFonts.weightRegular,
-                ),
+      borderRadius: BorderRadius.circular(5),
+      child: SizedBox(
+        width: AppDimensions.surveyContentBarWidth,
+        child: ListTile(
+          title: Text(
+            title,
+            style: isSelected
+                ? context.theme.textTheme.titleMedium?.copyWith(
+                    fontWeight: AppFonts.weightSemiBold,
+                  )
+                : context.theme.textTheme.titleMedium?.copyWith(
+                    fontWeight: AppFonts.weightRegular,
+                  ),
+          ),
         ),
       ),
     );
@@ -218,8 +221,8 @@ class _AddButton extends StatelessWidget {
     return GestureDetector(
       onTap: onPressed,
       child: Container(
-        width: 150,
-        height: 34,
+        width: AppDimensions.addButtonWidth,
+        height: AppDimensions.addButtonHeight,
         decoration: BoxDecoration(
           color: AppColors.black,
           borderRadius: BorderRadius.circular(AppDimensions.circularRadiusXS),
