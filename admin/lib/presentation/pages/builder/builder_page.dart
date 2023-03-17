@@ -12,6 +12,7 @@ import 'package:survey_admin/presentation/widgets/builder_page/editor_bar.dart';
 import 'package:survey_admin/presentation/widgets/builder_page/phone_view.dart';
 import 'package:survey_admin/presentation/widgets/builder_page/question_list.dart';
 import 'package:survey_admin/presentation/widgets/export_floating_window.dart';
+import 'package:survey_core/survey_core.dart';
 
 class BuilderPage extends StatefulWidget {
   const BuilderPage({super.key});
@@ -28,7 +29,7 @@ class _BuilderPageState extends State<BuilderPage> {
   Widget build(BuildContext context) {
     return BlocProvider<BuilderCubit>(
       create: (context) => _cubit,
-      child: BlocBuilder<BuilderCubit, BuilderState>(
+      child: BlocConsumer<BuilderCubit, BuilderState>(
         bloc: _cubit,
         builder: (context, state) => Scaffold(
           appBar: AppBar(
@@ -63,15 +64,14 @@ class _BuilderPageState extends State<BuilderPage> {
             ],
           ),
         ),
+        listener: (oldState, newState) {
+          final selected = newState.selectedQuestion;
+          if (selected != null) {
+            // TODO(dev): animate to edited
+            //_surveyController.animateTo(selected.index - 1);
+          }
+        },
       ),
-      listener: (oldState, newState) {
-        final selected = newState.selectedQuestion;
-        if (selected != null) {
-          // TODO(dev): animate to edited
-          //_surveyController.animateTo(selected.index - 1);
-        }
-      },
-      bloc: _cubit,
     );
   }
 }
