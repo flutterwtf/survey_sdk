@@ -33,7 +33,6 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
   final _textFieldKey = GlobalKey<FormFieldState>();
   DateTime _dateTime = DateTime.now();
   String _input = '';
-  final _cubit = Injector().surveyCubit;
 
   bool get _canBeSkippedDate =>
       widget.data.isSkip && _dateTime.toString().isEmpty;
@@ -114,11 +113,11 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
                   widget.data.isSkip) {
                 isDateType
                     ? widget.onSend.call(
-                        key: widget.data.index,
+                        index: widget.data.index,
                         data: _dateTime,
                       )
                     : widget.onSend.call(
-                        key: widget.data.index,
+                        index: widget.data.index,
                         data: _input,
                       );
               }

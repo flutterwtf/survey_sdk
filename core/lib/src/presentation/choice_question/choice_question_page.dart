@@ -32,7 +32,6 @@ class _ChoiceQuestionPageState extends State<ChoiceQuestionPage>
     with SingleTickerProviderStateMixin {
   bool _canBeSend = false;
   List<String> _selectedItems = List.empty();
-  final _cubit = Injector().surveyCubit;
 
   ChoiceQuestionTheme get _theme =>
       widget.data.theme ?? const ChoiceQuestionTheme.common();
@@ -112,7 +111,7 @@ class _ChoiceQuestionPageState extends State<ChoiceQuestionPage>
             text: context.localization.next,
             onPressed: () {
               widget.onSend.call(
-                key: widget.data.index,
+                index: widget.data.index,
                 data: _selectedItems,
               );
             },

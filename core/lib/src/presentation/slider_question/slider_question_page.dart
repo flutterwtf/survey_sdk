@@ -29,13 +29,12 @@ class SliderQuestionPage extends StatefulWidget {
 
 class _SliderQuestionPageState extends State<SliderQuestionPage> {
   late final SliderThemeData _theme;
-  late double _answer;
-  final _cubit = Injector().surveyCubit;
+  late int _answer;
 
   @override
   void initState() {
     super.initState();
-    _answer = widget.data.initialValue.toDouble();
+    _answer = widget.data.initialValue.toInt();
   }
 
   @override
@@ -86,7 +85,7 @@ class _SliderQuestionPageState extends State<SliderQuestionPage> {
             text: context.localization.next,
             onPressed: () {
               widget.onSend.call(
-                key: widget.data.index,
+                index: widget.data.index,
                 data: _answer,
               );
             },
@@ -101,7 +100,7 @@ class _QuestionSlider extends StatefulWidget {
   final num minValue;
   final num maxValue;
   final num initialValue;
-  final ValueChanged<double> onChanged;
+  final ValueChanged<int> onChanged;
   final SliderThemeData theme;
 
   const _QuestionSlider({
@@ -138,7 +137,7 @@ class _QuestionSliderState extends State<_QuestionSlider> {
             value: _value,
             onChanged: (newValue) => setState(() {
               _value = _onlyInt ? newValue.roundToDouble() : newValue;
-              widget.onChanged(newValue);
+              widget.onChanged(newValue.toInt());
             }),
             min: widget.minValue.toDouble(),
             max: widget.maxValue.toDouble(),

@@ -1,9 +1,12 @@
-class QuestionAnswer<T> {
+import 'package:survey_core/src/domain/entities/api_object.dart';
+
+class QuestionAnswer extends ApiObject {
   final int index;
-  final T? answer;
+  final dynamic answer;
 
-  const QuestionAnswer(this.index, this.answer);
+  QuestionAnswer(this.index, this.answer);
 
+  @override
   Map<String, dynamic> toJson() => {
         'index': index,
         'answer': answer,
