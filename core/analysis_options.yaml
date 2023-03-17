@@ -27,6 +27,36 @@ analyzer:
     - "**/*.freezed.dart"
     - "**/*.config.dart"
 
+dart_code_metrics:
+  extends:
+    - package:dart_code_metrics_presets/all.yaml
+  rules:
+    - arguments-ordering: false
+    - avoid-banned-imports: false
+    - avoid-missing-enum-constant-in-map: false
+    - avoid-non-null-assertion: false
+    - avoid-top-level-members-in-tests: false
+    - no-empty-block: false
+    - check-for-equals-in-render-object-setters: false
+    - prefer-extracting-callbacks: false
+    - consistent-update-render-object: false
+    - prefer-correct-identifier-length:
+        max-length: 25
+    - avoid-late-keyword: false
+    - newline-before-return: false
+    - avoid-ignoring-return-values: false
+    - prefer-commenting-analyzer-ignores: false
+    - no-equal-arguments: false
+    - avoid-dynamic: false
+    - prefer-single-widget-per-file: false
+    - avoid-nested-conditional-expressions:
+        acceptable-level: 2
+  metrcis:
+    - cyclomatic-complexity: 10
+    - maximum-nesting-level: 5
+    - source-lines-of-code: 50
+
+
 linter:
   rules:
     library_private_types_in_public_api: false

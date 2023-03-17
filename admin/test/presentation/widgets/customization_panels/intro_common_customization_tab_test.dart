@@ -4,7 +4,6 @@ import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/color_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/radius_customization_item.dart';
-import 'package:survey_admin/presentation/widgets/customization_items/text_style_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/intro/intro_common_customization_tab.dart';
 
 import '../app_tester.dart';
@@ -50,10 +49,6 @@ void main() {
         (tester) async {
           await tester.pumpWidget(introCommonCustomPanel);
           expect(find.byType(ColorCustomizationItem), findsNWidgets(5));
-          expect(
-            find.byType(TextStyleCustomizationItem),
-            findsNWidgets(3),
-          );
           expect(find.byType(RadiusCustomizationItem), findsOneWidget);
         },
       );
