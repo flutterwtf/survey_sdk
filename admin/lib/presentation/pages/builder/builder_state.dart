@@ -4,7 +4,6 @@ import 'package:survey_core/survey_core.dart';
 class BuilderState extends Equatable {
   final SurveyData surveyData;
   final QuestionData? selectedQuestion;
-  final SurveyData surveyData;
 
   const BuilderState({
     required this.selectedQuestion,

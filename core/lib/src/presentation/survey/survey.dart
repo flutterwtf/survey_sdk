@@ -10,13 +10,13 @@ import 'package:survey_core/src/presentation/utils/data_to_widget_util.dart';
 
 class Survey extends StatefulWidget {
   final String? filePath;
-  final SurveyController? surveyController;
+  final SurveyController? controller;
   final SurveyData? surveyData;
 
   const Survey({
     this.filePath,
     this.surveyData,
-    this.surveyController,
+    this.controller,
     super.key,
   }) : assert(
           (filePath != null || surveyData != null) &&
@@ -37,7 +37,7 @@ class _SurveyState extends State<Survey> {
     super.initState();
     Injector().init();
     _cubit = Injector().surveyCubit;
-    _surveyController = widget.surveyController ?? SurveyController();
+    _surveyController = widget.controller ?? SurveyController();
     _cubit.initData(widget.filePath, widget.surveyData);
   }
 
@@ -61,6 +61,7 @@ class _SurveyState extends State<Survey> {
                     return false;
                   },
                   child: PageView(
+                    controller: _surveyController.pageController,
                     physics: const NeverScrollableScrollPhysics(),
                     children: surveyData.questions
                         .map<Widget>(
