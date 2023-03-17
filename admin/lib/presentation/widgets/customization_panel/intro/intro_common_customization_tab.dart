@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:survey_admin/presentation/app/localization/localizations.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/color_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/radius_customization_item.dart';
-import 'package:survey_admin/presentation/widgets/customization_items/text_style_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/customization_tab.dart';
 import 'package:survey_core/survey_core.dart';
 
@@ -12,12 +10,12 @@ class IntroCommonCustomizationTab extends CustomizationTab {
   final IntroQuestionTheme initialTheme;
   final ValueChanged<Color> onFillColorPicked;
   final ValueChanged<Color> onTitleColorPicked;
-  final ValueChanged<int> onTitleFontSizeChanged;
+  final ValueChanged<double> onTitleFontSizeChanged;
   final ValueChanged<Color> onSubtitleColorPicked;
-  final ValueChanged<int> onSubtitleFontSizeChanged;
+  final ValueChanged<double> onSubtitleFontSizeChanged;
   final ValueChanged<Color> onButtonColorPicked;
   final ValueChanged<Color> onButtonTextColorPicked;
-  final ValueChanged<int> onButtonFontSizeChanged;
+  final ValueChanged<double> onButtonFontSizeChanged;
   final ValueChanged<int> onButtonRadiusChanged;
 
   const IntroCommonCustomizationTab({
@@ -52,7 +50,8 @@ class IntroCommonCustomizationTab extends CustomizationTab {
         CustomizationItemsContainer(
           title: context.localization.title,
           children: [
-            TextStyleCustomizationItem(
+            ColorCustomizationItem(
+              initialColor: AppColors.black,
               onColorPicked: onTitleColorPicked,
               initialText: initialTheme.titleTextSize.toString(),
               initialColor: initialTheme.titleTextColor,
@@ -74,7 +73,8 @@ class IntroCommonCustomizationTab extends CustomizationTab {
         CustomizationItemsContainer(
           title: context.localization.subtitle,
           children: [
-            TextStyleCustomizationItem(
+            ColorCustomizationItem(
+              initialColor: AppColors.black,
               onColorPicked: onSubtitleColorPicked,
               initialText: initialTheme.subTitleTextSize.toString(),
               initialColor: initialTheme.subTitleTextColor,

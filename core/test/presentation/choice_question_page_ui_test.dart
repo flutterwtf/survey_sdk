@@ -1,29 +1,20 @@
 import 'dart:async';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:survey_core/src/domain/entities/question_types/choice_question_data.dart';
 import 'package:survey_core/src/presentation/choice_question/choice_question_page.dart';
 
+import '../utils/mocked_entities.dart';
 import 'widget/app_test.dart';
 
 void _mockOnSend({required String key, required dynamic data}) {}
 
 void main() {
-  const usualMockChoiceData = ChoiceQuestionData(
-    title: 'title',
-    content: 'content',
-    options: ['option', 'option', 'option'],
-    isMultipleChoice: false,
-    isSkip: false,
-    index: 0,
-    subtitle: '',
-  );
   group('components of Choice Question widget', () {
     testWidgets('Load widget', (tester) async {
       await tester.pumpWidget(
         const AppTest(
           child: ChoiceQuestionPage(
-            data: usualMockChoiceData,
+            data: MockedQuestions.choice3,
             onSend: _mockOnSend,
           ),
         ),
@@ -32,7 +23,7 @@ void main() {
       expect(find.text('content'), findsOneWidget);
       expect(
         find.text('option'),
-        findsNWidgets(usualMockChoiceData.options.length),
+        findsNWidgets(MockedQuestions.choice3.options.length),
       );
     });
 
@@ -41,8 +32,9 @@ void main() {
       await tester.pumpWidget(
         AppTest(
           child: ChoiceQuestionPage(
-            data: usualMockChoiceData,
+            data: MockedQuestions.choice3,
             onSend: ({data, String? key}) {
+              expect((data as List).isEmpty, true);
               completer.complete();
             },
           ),
@@ -57,8 +49,11 @@ void main() {
       await tester.pumpWidget(
         AppTest(
           child: ChoiceQuestionPage(
-            data: usualMockChoiceData.copyWith(isSkip: true),
-            onSend: ({data, String? key}) => completer.complete(),
+            data: MockedQuestions.choice3.copyWith(isSkip: true),
+            onSend: ({data, String? key}) {
+              expect((data as List).isEmpty, true);
+              completer.complete();
+            },
           ),
         ),
       );
@@ -70,10 +65,12 @@ void main() {
   testWidgets('Single choice without answer', (tester) async {
     final completer = Completer<void>();
     await tester.pumpWidget(
-      const AppTest(
+      AppTest(
         child: ChoiceQuestionPage(
-          data: usualMockChoiceData,
-          onSend: _mockOnSend,
+          data: MockedQuestions.choice3,
+          onSend: ({data, String? key}) {
+            expect((data as List).isEmpty, true);
+          },
         ),
       ),
     );
@@ -86,8 +83,11 @@ void main() {
     await tester.pumpWidget(
       AppTest(
         child: ChoiceQuestionPage(
-          data: usualMockChoiceData,
-          onSend: ({data, String? key}) => completer.complete(),
+          data: MockedQuestions.choice3,
+          onSend: ({data, String? key}) {
+            expect((data as List).length, 1);
+            completer.complete();
+          },
         ),
       ),
     );
@@ -102,8 +102,11 @@ void main() {
     await tester.pumpWidget(
       AppTest(
         child: ChoiceQuestionPage(
-          data: usualMockChoiceData,
-          onSend: ({data, String? key}) => completer.complete(),
+          data: MockedQuestions.choice3,
+          onSend: ({data, String? key}) {
+            expect((data as List).length, 1);
+            completer.complete();
+          },
         ),
       ),
     );
@@ -120,8 +123,11 @@ void main() {
     await tester.pumpWidget(
       AppTest(
         child: ChoiceQuestionPage(
-          data: usualMockChoiceData.copyWith(isMultipleChoice: true),
-          onSend: ({data, String? key}) => completer.complete(),
+          data: MockedQuestions.choice3.copyWith(isMultipleChoice: true),
+          onSend: ({data, String? key}) {
+            expect((data as List).isEmpty, true);
+            completer.complete();
+          },
         ),
       ),
     );
@@ -134,8 +140,11 @@ void main() {
     await tester.pumpWidget(
       AppTest(
         child: ChoiceQuestionPage(
-          data: usualMockChoiceData.copyWith(isMultipleChoice: true),
-          onSend: ({data, String? key}) => completer.complete(),
+          data: MockedQuestions.choice3.copyWith(isMultipleChoice: true),
+          onSend: ({data, String? key}) {
+            expect((data as List).length, 1);
+            completer.complete();
+          },
         ),
       ),
     );
@@ -150,8 +159,11 @@ void main() {
     await tester.pumpWidget(
       AppTest(
         child: ChoiceQuestionPage(
-          data: usualMockChoiceData.copyWith(isMultipleChoice: true),
-          onSend: ({data, String? key}) => completer.complete(),
+          data: MockedQuestions.choice3.copyWith(isMultipleChoice: true),
+          onSend: ({data, String? key}) {
+            expect((data as List).isEmpty, true);
+            completer.complete();
+          },
         ),
       ),
     );
@@ -168,8 +180,11 @@ void main() {
     await tester.pumpWidget(
       AppTest(
         child: ChoiceQuestionPage(
-          data: usualMockChoiceData.copyWith(isMultipleChoice: true),
-          onSend: ({data, String? key}) => completer.complete(),
+          data: MockedQuestions.choice3.copyWith(isMultipleChoice: true),
+          onSend: ({data, String? key}) {
+            expect((data as List).length, 2);
+            completer.complete();
+          },
         ),
       ),
     );

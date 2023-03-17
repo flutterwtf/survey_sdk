@@ -48,7 +48,6 @@
   "download": "DOWNLOAD",
   "export_floating_window_title": "Save generated json-file with all settings to use in your app",
   "slider": "Slider",
-  "options": "Options",
   "rule": "Rule",
   "intro": "Intro",
   "choice":"Choice",
@@ -59,6 +58,7 @@
   "check_box":"Check box",
   "single_line_input":"Single-line input",
   "multi_line_input":"Multi-line input",
+  "delete_question": "Delete question",
   "multiple_choice":"Multiple choice",
   "validator_error_text_title": "Validation error message",
   "validator_error_hint": "Error message"

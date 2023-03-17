@@ -12,6 +12,7 @@ import 'package:survey_admin/presentation/widgets/builder_page/editor_bar.dart';
 import 'package:survey_admin/presentation/widgets/builder_page/phone_view.dart';
 import 'package:survey_admin/presentation/widgets/builder_page/question_list.dart';
 import 'package:survey_admin/presentation/widgets/export_floating_window.dart';
+import 'package:survey_core/survey_core.dart';
 
 class BuilderPage extends StatefulWidget {
   const BuilderPage({super.key});
@@ -22,31 +23,34 @@ class BuilderPage extends StatefulWidget {
 
 class _BuilderPageState extends State<BuilderPage> {
   final _cubit = i.get<BuilderCubit>();
+  final _surveyController = SurveyController();
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<BuilderCubit, BuilderState>(
-      bloc: _cubit,
+    return BlocConsumer<BuilderCubit, BuilderState>(
       builder: (context, state) => Scaffold(
         appBar: AppBar(
-          toolbarHeight: AppDimensions.appbarHeight,
-          backgroundColor: AppColors.white,
-          shadowColor: AppColors.transparentW,
-          centerTitle: true,
           title: const _BuilderPageTabBar(),
-          actions: const [
-            _CreateTab(),
-            _PreviewTab(),
-          ],
+          actions: const [_CreateTab(), _PreviewTab()],
+          shadowColor: AppColors.transparentW,
+          backgroundColor: AppColors.white,
+          centerTitle: true,
+          toolbarHeight: AppDimensions.appbarHeight,
         ),
         body: Row(
           children: [
             QuestionList(
-              cubit: _cubit,
+              onSelect: _cubit.select,
+              onAdd: _cubit.addQuestionData,
+              questionList:
+                  List<QuestionData>.of(_cubit.state.surveyData.questions),
             ),
             Expanded(
               child: PhoneView(
-                child: Container(),
+                child: Survey(
+                  surveyData: state.surveyData,
+                  controller: _surveyController,
+                ),
               ),
             ),
             EditorBar(
@@ -55,6 +59,14 @@ class _BuilderPageState extends State<BuilderPage> {
           ],
         ),
       ),
+      listener: (oldState, newState) {
+        final selected = newState.selectedQuestion;
+        if (selected != null) {
+          // TODO(dev): animate to edited
+          //_surveyController.animateTo(selected.index - 1);
+        }
+      },
+      bloc: _cubit,
     );
   }
 }

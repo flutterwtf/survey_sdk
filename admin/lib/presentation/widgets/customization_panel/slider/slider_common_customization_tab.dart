@@ -17,9 +17,9 @@ class SliderCommonCustomizationTab extends CustomizationTab {
   final ValueChanged<Color> onSubtitleColorChanged;
   final ValueChanged<Color> onButtonColorChanged;
   final ValueChanged<Color> onButtonTextColorChanged;
-  final ValueChanged<int> onTitleFontSizeChanged;
-  final ValueChanged<int> onSubtitleFontSizeChanged;
-  final ValueChanged<int> onButtonFontSizeChanged;
+  final ValueChanged<double> onTitleFontSizeChanged;
+  final ValueChanged<double> onSubtitleFontSizeChanged;
+  final ValueChanged<double> onButtonFontSizeChanged;
   final ValueChanged<int> onButtonRadiusChanged;
 
   const SliderCommonCustomizationTab({
@@ -53,64 +53,22 @@ class SliderCommonCustomizationTab extends CustomizationTab {
         CustomizationItemsContainer(
           title: context.localization.title,
           children: [
-            Row(
-              children: [
-                Expanded(
-                  child: ColorCustomizationItem(
-                    initialColor: AppColors.black,
-                    onColorPicked: onTitleColorChanged,
-                  ),
-                ),
-                Expanded(
-                  child: CustomizationTextField(
-                    initialValue: AppFonts.sizeL.toString(),
-                    onChanged: (value) {
-                      if (value == null) return;
-
-                      final size = int.tryParse(value);
-                      if (size != null) {
-                        onTitleFontSizeChanged(size);
-                      }
-                    },
-                    inputFormatters: [
-                      FilteringTextInputFormatter.digitsOnly,
-                      LengthLimitingTextInputFormatter(2),
-                    ],
-                  ),
-                ),
-              ],
+            ColorCustomizationItem(
+              initialColor: AppColors.black,
+              onColorPicked: onTitleColorChanged,
+              initialSize: AppFonts.sizeL.toString(),
+              onSizeChanged: onTitleFontSizeChanged,
             ),
           ],
         ),
         CustomizationItemsContainer(
           title: context.localization.subtitle,
           children: [
-            Row(
-              children: [
-                Expanded(
-                  child: ColorCustomizationItem(
-                    initialColor: AppColors.black,
-                    onColorPicked: onSubtitleColorChanged,
-                  ),
-                ),
-                Expanded(
-                  child: CustomizationTextField(
-                    initialValue: AppFonts.sizeL.toString(),
-                    onChanged: (value) {
-                      if (value == null) return;
-
-                      final size = int.tryParse(value);
-                      if (size != null) {
-                        onSubtitleFontSizeChanged(size);
-                      }
-                    },
-                    inputFormatters: [
-                      FilteringTextInputFormatter.digitsOnly,
-                      LengthLimitingTextInputFormatter(2),
-                    ],
-                  ),
-                ),
-              ],
+            ColorCustomizationItem(
+              initialColor: AppColors.black,
+              onColorPicked: onSubtitleColorChanged,
+              initialSize: AppFonts.sizeL.toString(),
+              onSizeChanged: onSubtitleFontSizeChanged,
             ),
           ],
         ),
@@ -121,32 +79,11 @@ class SliderCommonCustomizationTab extends CustomizationTab {
               initialColor: AppColors.black,
               onColorPicked: onButtonColorChanged,
             ),
-            Row(
-              children: [
-                Expanded(
-                  child: ColorCustomizationItem(
-                    initialColor: AppColors.white,
-                    onColorPicked: onButtonTextColorChanged,
-                  ),
-                ),
-                Expanded(
-                  child: CustomizationTextField(
-                    initialValue: AppFonts.sizeL.toString(),
-                    onChanged: (value) {
-                      if (value == null) return;
-
-                      final size = int.tryParse(value);
-                      if (size != null) {
-                        onButtonFontSizeChanged(size);
-                      }
-                    },
-                    inputFormatters: [
-                      FilteringTextInputFormatter.digitsOnly,
-                      LengthLimitingTextInputFormatter(2),
-                    ],
-                  ),
-                ),
-              ],
+            ColorCustomizationItem(
+              initialColor: AppColors.white,
+              onColorPicked: onButtonDownColorChanged,
+              initialSize: AppFonts.sizeL.toString(),
+              onSizeChanged: onButtonFontSizeChanged,
             ),
             Row(
               children: [
