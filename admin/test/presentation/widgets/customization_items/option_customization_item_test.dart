@@ -17,7 +17,6 @@ void main() {
             onChanged: (newOptions) {
               options = newOptions;
             },
-            onRuleLimitedChanged: ,
           ),
         ),
       );
