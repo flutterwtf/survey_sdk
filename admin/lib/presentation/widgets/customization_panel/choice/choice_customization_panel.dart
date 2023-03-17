@@ -53,7 +53,6 @@ class _ChoiceCustomizationPanelState extends State<ChoiceCustomizationPanel> {
           onSubtitleColorPicked: (subtitleColor) {},
           onSubtitleFontSizeChanged: (subtitleFontSize) {},
           onButtonColorPicked: (buttonColor) {},
-          onButtonTextColorPicked: (buttonTextColor) {},
           onButtonFontSizeChanged: (buttonFontSize) {},
           onButtonRadiusChanged: (buttonRadius) {},
         ),
@@ -74,14 +73,10 @@ class _ChoiceCustomizationPanelState extends State<ChoiceCustomizationPanel> {
             setState(() => _listOptions = options);
           },
           onRuleChanged: (value) {
-            setState(() {
-              _ruleType = value;
-            });
+            setState(() => _ruleType = value);
           },
           onRuleLimitedChanged: (value) {
-            setState(() {
-              _ruleValue = value;
-            });
+            setState(() => _ruleValue = value);
           },
           ruleType: _ruleType,
           ruleValue: _ruleValue,
