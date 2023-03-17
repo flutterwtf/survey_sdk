@@ -31,6 +31,7 @@ dart_code_metrics:
   extends:
     - package:dart_code_metrics_presets/all.yaml
   rules:
+    - arguments-ordering: false
     - avoid-banned-imports: false
     - avoid-missing-enum-constant-in-map: false
     - avoid-non-null-assertion: false
@@ -45,14 +46,7 @@ dart_code_metrics:
     - newline-before-return: false
     - avoid-ignoring-return-values: false
     - prefer-commenting-analyzer-ignores: false
-    - no-equal-arguments:
-        ignore-parameters:
-          - top
-          - left
-          - right
-          - bottom
-          - height
-          - width
+    - no-equal-arguments: false
     - avoid-dynamic: false
     - prefer-single-widget-per-file: false
     - avoid-nested-conditional-expressions:
