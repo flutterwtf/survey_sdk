@@ -4,10 +4,9 @@ import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/color_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/radius_customization_item.dart';
-import 'package:survey_admin/presentation/widgets/customization_items/text_style_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/intro/intro_common_customization_tab.dart';
 
-import '../app_test.dart';
+import '../app_tester.dart';
 
 void main() {
   group(
@@ -25,12 +24,12 @@ void main() {
       var subtitleTextColor = AppColors.black;
       var buttonColor = AppColors.black;
       var buttonTextColor = AppColors.black;
-      int? titleTextSize = 10;
-      int? subtitleTextSize = 10;
-      int? buttonTextSize = 10;
+      double? titleTextSize = 10;
+      double? subtitleTextSize = 10;
+      double? buttonTextSize = 10;
       int? radius = 10;
 
-      final introCommonCustomPanel = AppTest(
+      final introCommonCustomPanel = AppTester(
         child: IntroCommonCustomizationTab(
           title: 'title',
           onFillColorPicked: (value) => fillTextColor = value,
@@ -50,10 +49,6 @@ void main() {
         (tester) async {
           await tester.pumpWidget(introCommonCustomPanel);
           expect(find.byType(ColorCustomizationItem), findsNWidgets(5));
-          expect(
-            find.byType(TextStyleCustomizationItem),
-            findsNWidgets(3),
-          );
           expect(find.byType(RadiusCustomizationItem), findsOneWidget);
         },
       );

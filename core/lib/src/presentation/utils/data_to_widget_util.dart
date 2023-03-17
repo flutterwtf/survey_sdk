@@ -10,7 +10,7 @@ import 'package:survey_core/src/presentation/intro_question/intro_question_page.
 import 'package:survey_core/src/presentation/slider_question/slider_question_page.dart';
 
 typedef OnSendCallback = void Function({
-  required String key,
+  required int index,
   required dynamic data,
 });
 

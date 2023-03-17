@@ -74,7 +74,7 @@ class InputQuestionData extends QuestionData<InputQuestionTheme> {
         'payload': {
           ...validator.toJson(),
           'hintText': hintText,
-        }
+        },
       };
 
   factory InputQuestionData.fromJson(Map<String, dynamic> json) {
