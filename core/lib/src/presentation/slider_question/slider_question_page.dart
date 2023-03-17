@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:survey_core/src/domain/entities/question_answer.dart';
 import 'package:survey_core/src/domain/entities/question_types/slider_question_data.dart';
 import 'package:survey_core/src/presentation/di/injector.dart';
 import 'package:survey_core/src/presentation/localization/localizations.dart';
@@ -8,6 +7,7 @@ import 'package:survey_core/src/presentation/survey/survey_cubit.dart';
 import 'package:survey_core/src/presentation/survey/survey_state.dart';
 import 'package:survey_core/src/presentation/utils/app_fonts.dart';
 import 'package:survey_core/src/presentation/utils/constants.dart';
+import 'package:survey_core/src/presentation/utils/data_to_widget_util.dart';
 import 'package:survey_core/src/presentation/utils/theme_extension.dart';
 import 'package:survey_core/src/presentation/widgets/question_bottom_button.dart';
 import 'package:survey_core/src/presentation/widgets/question_content.dart';
@@ -15,7 +15,7 @@ import 'package:survey_core/src/presentation/widgets/question_title.dart';
 
 class SliderQuestionPage extends StatefulWidget {
   final SliderQuestionData data;
-  final QuestionAnswer onSend;
+  final OnSendCallback onSend;
 
   const SliderQuestionPage({
     required this.data,
@@ -50,51 +50,49 @@ class _SliderQuestionPageState extends State<SliderQuestionPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SurveyCubit, SurveyState>(
-      bloc: _cubit,
-      builder: (context, state) {
-        return Padding(
-          padding: const EdgeInsets.only(
-            left: AppDimensions.margin2XL,
-            right: AppDimensions.margin2XL,
-            top: AppDimensions.margin3XL,
-            bottom: AppDimensions.marginXL,
+    return Padding(
+      padding: const EdgeInsets.only(
+        left: AppDimensions.margin2XL,
+        right: AppDimensions.margin2XL,
+        top: AppDimensions.margin3XL,
+        bottom: AppDimensions.marginXL,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          QuestionTitle(
+            title: widget.data.title,
           ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              QuestionTitle(
-                title: widget.data.title,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(
-                  top: AppDimensions.margin2XL,
-                ),
-                child: QuestionContent(
-                  content: widget.data.subtitle,
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: AppDimensions.marginM),
-                child: _QuestionSlider(
-                  minValue: widget.data.minValue,
-                  maxValue: widget.data.maxValue,
-                  initialValue: widget.data.initialValue,
-                  onChanged: (value) => setState(() => _answer = value),
-                  theme: _theme,
-                ),
-              ),
-              const Spacer(),
-              QuestionBottomButton(
-                text: context.localization.next,
-                onPressed: () {
-                  _cubit.saveAnswer(widget.data);
-                },
-              ),
-            ],
+          Padding(
+            padding: const EdgeInsets.only(
+              top: AppDimensions.margin2XL,
+            ),
+            child: QuestionContent(
+              content: widget.data.subtitle,
+            ),
           ),
-        );
-      },
+          Padding(
+            padding: const EdgeInsets.only(top: AppDimensions.marginM),
+            child: _QuestionSlider(
+              minValue: widget.data.minValue,
+              maxValue: widget.data.maxValue,
+              initialValue: widget.data.initialValue,
+              onChanged: (value) => setState(() => _answer = value),
+              theme: _theme,
+            ),
+          ),
+          const Spacer(),
+          QuestionBottomButton(
+            text: context.localization.next,
+            onPressed: () {
+              widget.onSend.call(
+                key: widget.data.index,
+                data: _answer,
+              );
+            },
+          ),
+        ],
+      ),
     );
   }
 }

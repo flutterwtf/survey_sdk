@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:survey_core/src/domain/entities/question_answer.dart';
 import 'package:survey_core/src/domain/entities/question_types/choice_question_data.dart';
 import 'package:survey_core/src/domain/entities/themes/choice_question_theme.dart';
 import 'package:survey_core/src/presentation/di/injector.dart';
@@ -9,6 +8,7 @@ import 'package:survey_core/src/presentation/survey/survey_cubit.dart';
 import 'package:survey_core/src/presentation/survey/survey_state.dart';
 import 'package:survey_core/src/presentation/utils/colors.dart';
 import 'package:survey_core/src/presentation/utils/constants.dart';
+import 'package:survey_core/src/presentation/utils/data_to_widget_util.dart';
 import 'package:survey_core/src/presentation/utils/theme_extension.dart';
 import 'package:survey_core/src/presentation/widgets/question_bottom_button.dart';
 import 'package:survey_core/src/presentation/widgets/question_content.dart';
@@ -16,7 +16,7 @@ import 'package:survey_core/src/presentation/widgets/question_title.dart';
 
 class ChoiceQuestionPage extends StatefulWidget {
   final ChoiceQuestionData data;
-  final QuestionAnswer onSend;
+  final OnSendCallback onSend;
 
   const ChoiceQuestionPage({
     required this.data,
@@ -61,67 +61,65 @@ class _ChoiceQuestionPageState extends State<ChoiceQuestionPage>
   @override
   Widget build(BuildContext context) {
     final content = widget.data.content;
-    return BlocBuilder<SurveyCubit, SurveyState>(
-      bloc: _cubit,
-      builder: (context, state) {
-        return Padding(
-          padding: const EdgeInsets.only(
-            left: AppDimensions.margin2XL,
-            right: AppDimensions.margin2XL,
-            top: AppDimensions.margin3XL,
-            bottom: AppDimensions.marginXL,
+
+    return Padding(
+      padding: const EdgeInsets.only(
+        left: AppDimensions.margin2XL,
+        right: AppDimensions.margin2XL,
+        top: AppDimensions.margin3XL,
+        bottom: AppDimensions.marginXL,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          QuestionTitle(
+            title: widget.data.title,
           ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              QuestionTitle(
-                title: widget.data.title,
+          if (content != null)
+            Padding(
+              padding: const EdgeInsets.only(
+                top: AppDimensions.marginXL,
               ),
-              if (content != null)
-                Padding(
-                  padding: const EdgeInsets.only(
-                    top: AppDimensions.marginXL,
+              child: QuestionContent(
+                content: content,
+              ),
+            ),
+          Padding(
+            padding: const EdgeInsets.only(
+              top: AppDimensions.margin2XL,
+            ),
+            child: widget.data.isMultipleChoice
+                ? _QuestionCheckboxes(
+                    options: widget.data.options,
+                    onChanged: _onInputChanged,
+                    activeColor: _theme.activeColor,
+                    inactiveColor: _theme.inactiveColor,
+                    selectedOptions: List.from(_selectedItems),
+                  )
+                : _QuestionRadioButtons(
+                    selectedOption:
+                        _selectedItems.isEmpty ? null : _selectedItems.first,
+                    options: widget.data.options,
+                    onChanged: (selectedItem) => _onInputChanged(
+                      selectedItem == null ? null : [selectedItem],
+                    ),
+                    activeColor: _theme.activeColor,
+                    inactiveColor: _theme.inactiveColor,
                   ),
-                  child: QuestionContent(
-                    content: content,
-                  ),
-                ),
-              Padding(
-                padding: const EdgeInsets.only(
-                  top: AppDimensions.margin2XL,
-                ),
-                child: widget.data.isMultipleChoice
-                    ? _QuestionCheckboxes(
-                        options: widget.data.options,
-                        onChanged: _onInputChanged,
-                        activeColor: _theme.activeColor,
-                        inactiveColor: _theme.inactiveColor,
-                        selectedOptions: List.from(_selectedItems),
-                      )
-                    : _QuestionRadioButtons(
-                        selectedOption: _selectedItems.isEmpty
-                            ? null
-                            : _selectedItems.first,
-                        options: widget.data.options,
-                        onChanged: (selectedItem) => _onInputChanged(
-                          selectedItem == null ? null : [selectedItem],
-                        ),
-                        activeColor: _theme.activeColor,
-                        inactiveColor: _theme.inactiveColor,
-                      ),
-              ),
-              const Spacer(),
-              QuestionBottomButton(
-                text: context.localization.next,
-                onPressed: () {
-                  _cubit.saveAnswer(widget.data);
-                },
-                isEnabled: widget.data.isSkip || _canBeSend,
-              ),
-            ],
           ),
-        );
-      },
+          const Spacer(),
+          QuestionBottomButton(
+            text: context.localization.next,
+            onPressed: () {
+              widget.onSend.call(
+                key: widget.data.index,
+                data: _selectedItems,
+              );
+            },
+            isEnabled: widget.data.isSkip || _canBeSend,
+          ),
+        ],
+      ),
     );
   }
 }

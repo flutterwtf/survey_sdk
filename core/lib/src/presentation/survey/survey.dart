@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:survey_core/src/domain/entities/survey_data.dart';
 import 'package:survey_core/src/presentation/di/injector.dart';
 import 'package:survey_core/src/presentation/survey/controller/survey_controller.dart';
 import 'package:survey_core/src/presentation/survey/survey_cubit.dart';
@@ -8,15 +9,17 @@ import 'package:survey_core/src/presentation/utils/colors.dart';
 import 'package:survey_core/src/presentation/utils/data_to_widget_util.dart';
 
 class Survey extends StatefulWidget {
-  final String surveyDataAsset;
+  final String? surveyDataAsset;
+  final SurveyData? surveyData;
   final SurveyController? surveyController;
 
   Survey({
-    required this.surveyDataAsset,
+    this.surveyDataAsset,
+    this.surveyData,
     this.surveyController,
     super.key,
   }) {
-    Injector().init();
+    // Injector().init();
   }
 
   @override
@@ -24,14 +27,23 @@ class Survey extends StatefulWidget {
 }
 
 class _SurveyState extends State<Survey> {
-  final _cubit = Injector().surveyCubit;
+  late final SurveyCubit _cubit;
+  // final _cubit = Injector().surveyCubit;
   late final SurveyController _surveyController;
 
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   _surveyController = widget.surveyController ?? SurveyController();
+  //   _cubit.initData(widget.surveyDataAsset);
+  // }
   @override
   void initState() {
     super.initState();
+    Injector().init();
+    _cubit = Injector().surveyCubit;
     _surveyController = widget.surveyController ?? SurveyController();
-    _cubit.initData(widget.surveyDataAsset);
+    _cubit.initData(widget.surveyDataAsset, widget.surveyData);
   }
 
   @override
@@ -59,7 +71,8 @@ class _SurveyState extends State<Survey> {
                         .map<Widget>(
                           (question) => DataToWidgetUtil.createWidget(
                             question,
-                            _cubit.saveAnswer(question),
+                            // _surveyController.onNext,
+                            _cubit.saveAnswer,
                           ),
                         )
                         .toList(),

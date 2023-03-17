@@ -9,13 +9,26 @@ class SurveyCubit extends Cubit<SurveyState> {
 
   SurveyCubit(this._surveyDataRepository) : super(SurveyState());
 
-  void initData(String surveyDataAsset) {
-    _surveyDataRepository.getSurveyData(surveyDataAsset).then(
-          (data) => emit(state.copyWith(surveyData: data)),
-        );
+  // void initData(String surveyDataAsset) {
+  //   _surveyDataRepository.getSurveyData(surveyDataAsset).then(
+  //         (data) => emit(state.copyWith(surveyData: data)),
+  //       );
+  // }
+  void initData(String? filePath, SurveyData? surveyData) {
+    if (filePath != null) {
+      _surveyDataRepository.getSurveyData(filePath).then(
+            (data) => emit(state.copyWith(surveyData: data)),
+          );
+    } else {
+      emit(state.copyWith(surveyData: surveyData));
+    }
   }
 
-  saveAnswer(QuestionData data) {
-      QuestionAnswer.toJson();
-    }
+  void saveAnswer({required int key, required dynamic data}) {
+    final answer = QuestionAnswer(key, data).toJson();
+    emit(state.copyWith(answer: answer));
+  }
+  // saveAnswer(QuestionData data) {
+  //   QuestionAnswer(data.index, 'rew').toJson();
+  // }
 }
