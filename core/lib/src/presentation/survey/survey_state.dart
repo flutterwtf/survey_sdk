@@ -1,22 +1,23 @@
 import 'package:equatable/equatable.dart';
+import 'package:survey_core/src/domain/entities/question_answer.dart';
 import 'package:survey_core/src/domain/entities/survey_data.dart';
 
 class SurveyState extends Equatable {
   final SurveyData? surveyData;
-  final Map<String, dynamic>? answer;
+  final Map<int, QuestionAnswer> answers;
 
-  const SurveyState({this.surveyData, this.answer});
+  const SurveyState({this.surveyData, this.answers = const {}});
 
   SurveyState copyWith({
     SurveyData? surveyData,
-    Map<String, dynamic>? answer,
+    Map<int, QuestionAnswer>? answers,
   }) {
     return SurveyState(
       surveyData: surveyData ?? this.surveyData,
-      answer: answer ?? this.answer,
+      answers: answers ?? this.answers,
     );
   }
 
   @override
-  List<Object?> get props => [surveyData, answer];
+  List<Object?> get props => [surveyData, answers];
 }

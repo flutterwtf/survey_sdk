@@ -21,7 +21,9 @@ class SurveyCubit extends Cubit<SurveyState> {
   }
 
   void saveAnswer({required int index, required dynamic data}) {
-    final answer = QuestionAnswer(index, data).toJson();
-    emit(state.copyWith(answer: answer));
+    final answer = QuestionAnswer(data);
+    final newAnswers = Map<int, QuestionAnswer>.of(state.answers);
+    newAnswers[index] = answer;
+    emit(state.copyWith(answers: newAnswers));
   }
 }

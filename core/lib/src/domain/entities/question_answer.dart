@@ -1,14 +1,11 @@
-import 'package:survey_core/src/domain/entities/api_object.dart';
+import 'package:equatable/equatable.dart';
 
-class QuestionAnswer extends ApiObject {
-  final int index;
+class QuestionAnswer extends Equatable {
   final dynamic answer;
 
-  QuestionAnswer(this.index, this.answer);
+  const QuestionAnswer(this.answer);
 
   @override
-  Map<String, dynamic> toJson() => {
-        'index': index,
-        'answer': answer,
-      };
+  // TODO: implement props
+  List<Object?> get props => [answer];
 }
