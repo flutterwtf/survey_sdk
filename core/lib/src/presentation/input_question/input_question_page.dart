@@ -14,7 +14,7 @@ import 'package:survey_core/src/presentation/widgets/question_bottom_button.dart
 import 'package:survey_core/src/presentation/widgets/question_content.dart';
 import 'package:survey_core/src/presentation/widgets/question_title.dart';
 
-//TODO: create child<T> widget for date,password,text,number etc
+// TODO(dev): create child<T> widget for date,password,text,number etc
 class InputQuestionPage extends StatefulWidget {
   final InputQuestionData data;
   final OnSendCallback onSend;
@@ -75,7 +75,7 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
               content: widget.data.subtitle,
             ),
           ),
-          //TODO: maybe create generic widget for some inputs(date,number,string and etc)
+          // TODO(dev): maybe create generic widget for some inputs(date,number,string and etc)
           Padding(
             padding: const EdgeInsets.only(top: AppDimensions.marginM),
             child: isDateType
