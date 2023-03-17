@@ -5,8 +5,7 @@ import 'package:survey_core/src/domain/entities/question_types/input_question_da
 const String _validatorKey = 'validator';
 const String _regexKey = 'regex';
 const String _isObscuredKey = 'is_obscured';
-// TODO(dev): show error text
-const String _validatorErrorText = 'error';
+const String _validatorErrorText = 'Validation error';
 
 class InputValidator implements ApiObject {
   late final String? _regex;
@@ -19,7 +18,7 @@ class InputValidator implements ApiObject {
   }) {
     type = InputType.number;
     _regex = regex ?? ValidatorDefaultRegexStrings.number;
-    isObscured = isObscured ?? false;
+    this.isObscured = isObscured ?? false;
   }
 
   InputValidator.date({
@@ -28,7 +27,7 @@ class InputValidator implements ApiObject {
   }) {
     type = InputType.date;
     _regex = regex ?? ValidatorDefaultRegexStrings.text;
-    isObscured = isObscured ?? false;
+    this.isObscured = isObscured ?? false;
   }
 
   InputValidator.email() {
@@ -43,7 +42,7 @@ class InputValidator implements ApiObject {
   }) {
     type = InputType.password;
     _regex = regex ?? ValidatorDefaultRegexStrings.password;
-    isObscured = isObscured ?? true;
+    this.isObscured = isObscured ?? true;
   }
 
   InputValidator.phone({
@@ -52,7 +51,7 @@ class InputValidator implements ApiObject {
   }) {
     type = InputType.phone;
     _regex = regex ?? ValidatorDefaultRegexStrings.phone;
-    isObscured = isObscured ?? false;
+    this.isObscured = isObscured ?? false;
   }
 
   InputValidator.text({
@@ -61,7 +60,7 @@ class InputValidator implements ApiObject {
   }) {
     type = InputType.text;
     _regex = regex ?? ValidatorDefaultRegexStrings.text;
-    isObscured = isObscured ?? false;
+    this.isObscured = isObscured ?? false;
   }
 
   factory InputValidator.fromType({

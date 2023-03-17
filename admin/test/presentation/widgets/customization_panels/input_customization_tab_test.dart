@@ -3,33 +3,35 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/color_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
-import 'package:survey_admin/presentation/widgets/customization_items/input_type_customization_item.dart';
+import 'package:survey_admin/presentation/widgets/customization_items/dropdown_customization_button.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/multiline_switch.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/padding_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/input/input_customization_tab.dart';
 import 'package:survey_core/survey_core.dart';
 
-import '../app_test.dart';
+import '../app_tester.dart';
 
 void main() {
   group(
     'Input customization tab tests',
     () {
-      final page = AppTest(
+      final page = AppTester(
         child: InputCustomizationTab(
           onBorderColorChanged: (Color value) {},
-          onBorderSizeChanged: (int? value) {},
-          onBorderWidthChanged: (int? value) {},
+          onBorderSizeChanged: (double? value) {},
+          onBorderWidthChanged: (double? value) {},
           onFillColorChanged: (Color value) {},
           onHintColorChanged: (Color value) {},
-          onHintFontSizeChanged: (int? value) {},
+          onHintFontSizeChanged: (double? value) {},
           onHorizontalPaddingChanged: (double size) {},
           onInputTypeChanged: (InputType value) {},
           onMultilineChanged: (bool isMultiline, int lineAmount) {},
           onTextColorChanged: (Color value) {},
-          onTextFontSizeChanged: (int? value) {},
+          onTextFontSizeChanged: (double? value) {},
           onVerticalPaddingChanged: (double size) {},
+          onValidatorErrorTextChanged: (String errorText) {},
           title: 'test',
+          inputType: InputType.text,
         ),
       );
 
@@ -103,7 +105,7 @@ void main() {
             findsNWidgets(2),
           );
           expect(
-            find.widgetWithText(InputTypeCustomizationItem, 'Text'),
+            find.widgetWithText(DropdownCustomizationButton<InputType>, 'Text'),
             findsOneWidget,
           );
         },
@@ -115,10 +117,12 @@ void main() {
           await widgetTester.pumpWidget(page);
           await widgetTester.pumpAndSettle();
 
-          expect(find.byType(CustomizationItemsContainer), findsNWidgets(7));
-
+          expect(find.byType(CustomizationItemsContainer), findsNWidgets(8));
           expect(find.byType(MultilineSwitch), findsOneWidget);
-          expect(find.byType(InputTypeCustomizationItem), findsOneWidget);
+          expect(
+            find.byType(DropdownCustomizationButton<InputType>),
+            findsOneWidget,
+          );
           expect(find.byType(ColorCustomizationItem), findsNWidgets(4));
           expect(find.byType(PaddingCustomizationItem), findsNWidgets(1));
           expect(find.byType(CustomizationTextField), findsNWidgets(9));

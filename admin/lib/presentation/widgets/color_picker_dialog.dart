@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:survey_admin/presentation/app/localization/localizations.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
-import 'package:survey_admin/presentation/utils/constants/constants.dart';
+import 'package:survey_admin/presentation/utils/constants/app_dimensions.dart';
 
 class ColorPickerDialog extends StatelessWidget {
   final ValueChanged<Color> onColorPicked;
@@ -41,9 +41,9 @@ class ColorPickerDialog extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(context.localization.hex),
-                  const SizedBox(width: 10),
+                  const SizedBox(width: AppDimensions.marginXS),
                   SizedBox(
-                    width: 75,
+                    width: AppDimensions.textFieldWidth,
                     child: TextField(
                       controller: colorTextController,
                       inputFormatters: [

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
-import 'package:survey_admin/presentation/utils/constants/constants.dart';
+import 'package:survey_admin/presentation/utils/constants/app_dimensions.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/choice/choice_customization_panel.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/input/input_customization_panel.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/intro/intro_customization_panel.dart';
@@ -23,21 +23,26 @@ class EditorBar extends StatelessWidget {
       width: AppDimensions.surveyEditorBarWidth,
       child: Builder(
         builder: (context) {
-          switch (editableQuestion?.type ?? '') {
-            case QuestionTypes.choice:
-              return ChoiceCustomizationPanel(
-                isMultipleChoice: (editableQuestion as ChoiceQuestionData?)
-                        ?.isMultipleChoice ??
-                    false,
-              );
-            case QuestionTypes.input:
-              return const InputCustomizationPanel();
-            case QuestionTypes.intro:
-              return const IntroCustomizationPanel();
-            case QuestionTypes.slider:
-              return const SliderCustomizationPanel();
-            default:
-              return const SizedBox.shrink();
+          final questionData = editableQuestion;
+          if (questionData != null) {
+            switch (questionData.type) {
+              case QuestionTypes.choice:
+                return ChoiceCustomizationPanel(
+                  editableQuestion: questionData,
+                  isMultipleChoice:
+                      (questionData as ChoiceQuestionData).isMultipleChoice,
+                );
+              case QuestionTypes.input:
+                return const InputCustomizationPanel();
+              case QuestionTypes.intro:
+                return const IntroCustomizationPanel();
+              case QuestionTypes.slider:
+                return const SliderCustomizationPanel();
+              default:
+                return const SizedBox.shrink();
+            }
+          } else {
+            return const SizedBox.shrink();
           }
         },
       ),
