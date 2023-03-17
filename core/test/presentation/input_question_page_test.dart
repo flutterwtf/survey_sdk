@@ -12,6 +12,8 @@ void main() {
   const testInvalidNumberString = 'test string2';
   const testValidNumberString = '12';
 
+  const validationErrorMessage = 'Validation error';
+
   final mockInputData = InputQuestionData(
     validator: InputValidator.text(),
     index: 0,
@@ -70,6 +72,8 @@ void main() {
       testWidgets(
         'NumberValidator should tell when number is not valid',
         (WidgetTester tester) async {
+          final validator = mockInputDataWithNumberValidator.validator;
+
           String? sendData;
           await tester.pumpWidget(
             AppTest(
@@ -80,14 +84,15 @@ void main() {
             ),
           );
 
+          final validationResult = validator.validate(testInvalidNumberString);
+
           final inputField = find.byType(TextFormField);
           await tester.enterText(inputField, testInvalidNumberString);
           await tester.tap(find.byType(QuestionBottomButton));
           await tester.pumpAndSettle();
 
           expect(sendData, equals(testInvalidNumberString));
-          // TODO(username): Widget missing
-          expect(find.text('Please enter a valid number'), findsOneWidget);
+          expect(validationResult, equals(validationErrorMessage));
         },
       );
 
