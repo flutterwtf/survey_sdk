@@ -16,12 +16,12 @@ import 'package:survey_core/survey_core.dart';
 class QuestionList extends StatefulWidget {
   final ValueChanged<QuestionData> onSelect;
   final ValueChanged<QuestionData> onAdd;
-  final List<QuestionData> questionList;
+  final List<QuestionData> questions;
 
   const QuestionList({
     required this.onSelect,
     required this.onAdd,
-    required this.questionList,
+    required this.questions,
     super.key,
   });
 
@@ -36,8 +36,10 @@ class _QuestionListState extends State<QuestionList> {
   @override
   void initState() {
     super.initState();
-    _questionList = widget.questionList;
-    widget.onSelect(_questionList.first);
+    _questionList = widget.questions;
+    if (_questionList.isNotEmpty) {
+      widget.onSelect(_questionList.first);
+    }
     RawKeyboard.instance.addListener(_handleKeyDown);
   }
 
@@ -48,12 +50,6 @@ class _QuestionListState extends State<QuestionList> {
         setState(() => _questionList.removeAt(_selectedIndex));
       }
     }
-  }
-
-  @override
-  void dispose() {
-    RawKeyboard.instance.removeListener(_handleKeyDown);
-    super.dispose();
   }
 
   void _addQuestion(QuestionData data) {
@@ -78,10 +74,16 @@ class _QuestionListState extends State<QuestionList> {
   }
 
   @override
+  void dispose() {
+    RawKeyboard.instance.removeListener(_handleKeyDown);
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
-      width: AppDimensions.surveyContentBarWidth,
       color: AppColors.white,
+      width: AppDimensions.surveyContentBarWidth,
       child: Column(
         children: [
           const ItemDivider(),
@@ -100,21 +102,13 @@ class _QuestionListState extends State<QuestionList> {
           ),
           Expanded(
             child: ContextMenuOverlay(
-              cardBuilder: (_, children) {
-                return DecoratedBox(
-                  decoration: BoxDecoration(
-                    color: AppColors.white,
-                    borderRadius: BorderRadius.circular(
-                      AppDimensions.circularRadiusXS,
-                    ),
-                    border: Border.all(
-                      width: 0.5,
-                    ),
-                  ),
-                  child: Column(children: children),
-                );
-              },
               child: ReorderableListView(
+                onReorder: (oldIndex, newIndex) {
+                  if (newIndex > oldIndex) newIndex--;
+                  setState(() {
+                    _updateQuestion(oldIndex, newIndex);
+                  });
+                },
                 buildDefaultDragHandles: false,
                 children: [
                   for (int index = 0; index < _questionList.length; index++)
@@ -127,21 +121,27 @@ class _QuestionListState extends State<QuestionList> {
                       question: _questionList[index],
                       onQuestionTap: (data) {
                         widget.onSelect(data);
-                        setState(() {
-                          _selectedIndex = index;
-                        });
+                        setState(
+                          () {
+                            _selectedIndex = index;
+                          },
+                        );
                       },
                     ),
                 ],
-                onReorder: (oldIndex, newIndex) {
-                  if (newIndex > oldIndex) newIndex--;
-                  setState(
-                    () {
-                      _updateQuestion(oldIndex, newIndex);
-                    },
-                  );
-                },
               ),
+              cardBuilder: (_, children) {
+                return DecoratedBox(
+                  decoration: const BoxDecoration(
+                    color: AppColors.white,
+                    border: Border.fromBorderSide(BorderSide(width: 0.5)),
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(AppDimensions.circularRadiusXS),
+                    ),
+                  ),
+                  child: Column(children: children),
+                );
+              },
             ),
           ),
         ],

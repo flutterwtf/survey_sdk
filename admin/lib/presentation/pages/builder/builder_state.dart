@@ -6,8 +6,8 @@ class BuilderState extends Equatable {
   final QuestionData? selectedQuestion;
 
   const BuilderState({
-    required this.selectedQuestion,
     required this.surveyData,
+    required this.selectedQuestion,
   });
 
   BuilderState copyWith({
@@ -15,8 +15,8 @@ class BuilderState extends Equatable {
     SurveyData? surveyData,
   }) {
     return BuilderState(
-      selectedQuestion: selectedQuestion ?? this.selectedQuestion,
       surveyData: surveyData ?? this.surveyData,
+      selectedQuestion: selectedQuestion ?? this.selectedQuestion,
     );
   }
 

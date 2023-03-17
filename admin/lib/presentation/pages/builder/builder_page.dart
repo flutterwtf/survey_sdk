@@ -27,46 +27,51 @@ class _BuilderPageState extends State<BuilderPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<BuilderCubit, BuilderState>(
-      builder: (context, state) => Scaffold(
-        appBar: AppBar(
-          title: const _BuilderPageTabBar(),
-          actions: const [_CreateTab(), _PreviewTab()],
-          shadowColor: AppColors.transparentW,
-          backgroundColor: AppColors.white,
-          centerTitle: true,
-          toolbarHeight: AppDimensions.appbarHeight,
-        ),
-        body: Row(
-          children: [
-            QuestionList(
-              onSelect: _cubit.select,
-              onAdd: _cubit.addQuestionData,
-              questionList:
-                  List<QuestionData>.of(_cubit.state.surveyData.questions),
-            ),
-            Expanded(
-              child: PhoneView(
-                child: Survey(
-                  surveyData: state.surveyData,
-                  controller: _surveyController,
+    return BlocProvider<BuilderCubit>(
+      create: (context) => _cubit,
+      child: BlocConsumer<BuilderCubit, BuilderState>(
+        bloc: _cubit,
+        builder: (context, state) => Scaffold(
+          appBar: AppBar(
+            toolbarHeight: AppDimensions.appbarHeight,
+            backgroundColor: AppColors.white,
+            shadowColor: AppColors.transparentW,
+            centerTitle: true,
+            title: const _BuilderPageTabBar(),
+            actions: const [
+              _CreateTab(),
+              _PreviewTab(),
+            ],
+          ),
+          body: Row(
+            children: [
+              QuestionList(
+                onAdd: _cubit.addQuestionData,
+                onSelect: _cubit.select,
+                questions: List<QuestionData>.of(_cubit.state.surveyData.questions),
+              ),
+              Expanded(
+                child: PhoneView(
+                  child: Survey(
+                    surveyData: state.surveyData,
+                    controller: _surveyController,
+                  ),
                 ),
               ),
-            ),
-            EditorBar(
-              editableQuestion: state.selectedQuestion,
-            ),
-          ],
+              EditorBar(
+                editableQuestion: state.selectedQuestion,
+              ),
+            ],
+          ),
         ),
+        listener: (oldState, newState) {
+          final selected = newState.selectedQuestion;
+          if (selected != null) {
+            // TODO(dev): animate to edited
+            //_surveyController.animateTo(selected.index - 1);
+          }
+        },
       ),
-      listener: (oldState, newState) {
-        final selected = newState.selectedQuestion;
-        if (selected != null) {
-          // TODO(dev): animate to edited
-          //_surveyController.animateTo(selected.index - 1);
-        }
-      },
-      bloc: _cubit,
     );
   }
 }

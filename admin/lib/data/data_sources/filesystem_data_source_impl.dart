@@ -3,17 +3,12 @@ import 'dart:convert';
 // TODO(dev): does it work in web app?
 import 'dart:io';
 
+import 'package:file_picker/file_picker.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:survey_admin/data/interfaces/session_storage_data_source.dart';
-import 'package:survey_admin/domain/repository_interfaces/survey_data_repository.dart';
+import 'package:survey_admin/data/interfaces/filesystem_data_source.dart';
 import 'package:survey_core/survey_core.dart';
 
-// TODO(dev): rename
-class SurveyDataRepositoryImpl implements SurveyDataRepository {
-  final SessionStorageDataSource _sessionStorageDataSource;
-
-  SurveyDataRepositoryImpl(this._sessionStorageDataSource);
-
+class FileSystemDataSourceImpl implements FileSystemDataSource {
   Future<String> get _localPath async {
     // TODO(dev): it's kinda strange to use
     //  getters instead of methods for futures.
@@ -35,9 +30,16 @@ class SurveyDataRepositoryImpl implements SurveyDataRepository {
   }
 
   @override
-  SurveyData? getSurveyData() => _sessionStorageDataSource.getSurveyData();
-
-  @override
-  void saveSurveyData(SurveyData surveyData) =>
-      _sessionStorageDataSource.saveSurveyData(surveyData);
+  Future<SurveyData?> importSurveyData() async {
+    final result = await FilePicker.platform.pickFiles();
+    if (result != null) {
+      final bytes = result.files.single.bytes;
+      if (bytes != null) {
+        final string = const Utf8Decoder().convert(bytes);
+        final map = json.decode(string);
+        return SurveyData.fromJson(map);
+      }
+    }
+    return null;
+  }
 }
