@@ -53,7 +53,6 @@ class _ChoiceCustomizationPanelState extends State<ChoiceCustomizationPanel> {
           onSubtitleColorPicked: (subtitleColor) {},
           onSubtitleFontSizeChanged: (subtitleFontSize) {},
           onButtonColorPicked: (buttonColor) {},
-          onButtonTextColorPicked: (buttonTextColor) {},
           onButtonFontSizeChanged: (buttonFontSize) {},
           onButtonRadiusChanged: (buttonRadius) {},
         ),
