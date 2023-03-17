@@ -29,6 +29,7 @@ dart_code_metrics:
   extends:
     - package:dart_code_metrics_presets/all.yaml
   rules:
+    - arguments-ordering: false
     - avoid-banned-imports: false
     - avoid-missing-enum-constant-in-map: false
     - avoid-non-null-assertion: false

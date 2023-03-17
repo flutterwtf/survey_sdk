@@ -30,6 +30,14 @@ class _BuilderPageState extends State<BuilderPage> {
     return BlocProvider<BuilderCubit>(
       create: (context) => _cubit,
       child: BlocConsumer<BuilderCubit, BuilderState>(
+        bloc: _cubit,
+        listener: (oldState, newState) {
+          final selected = newState.selectedQuestion;
+          if (selected != null) {
+            // TODO(dev): animate to edited
+            //_surveyController.animateTo(selected.index - 1);
+          }
+        },
         builder: (context, state) => Scaffold(
           appBar: AppBar(
             title: const _BuilderPageTabBar(),
@@ -62,11 +70,6 @@ class _BuilderPageState extends State<BuilderPage> {
             ],
           ),
         ),
-        listener: (oldState, newState) {
-          final selected = newState.selectedQuestion;
-          if (selected != null) {}
-        },
-        bloc: _cubit,
       ),
     );
   }
