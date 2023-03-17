@@ -23,13 +23,7 @@ class _AppState extends State<App> {
       child: BlocBuilder<AppCubit, AppState>(
         builder: (context, state) {
           return MaterialApp(
-            supportedLocales: AppLocalizations.supportedLocales,
-            localizationsDelegates: const [
-              AppLocalizations.delegate,
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-            ],
+            home: const BuilderPage(),
             theme: ThemeData(
               fontFamily: AppFonts.inter,
               textTheme: const TextTheme(
@@ -38,16 +32,22 @@ class _AppState extends State<App> {
                   color: AppColors.black,
                   fontWeight: AppFonts.weightSemiBold,
                 ),
-                labelLarge: TextStyle(
-                  fontWeight: AppFonts.weightBold,
-                  color: AppColors.black,
-                ),
                 bodyLarge: TextStyle(color: AppColors.black),
                 bodyMedium: TextStyle(color: AppColors.black),
                 bodySmall: TextStyle(color: AppColors.black),
+                labelLarge: TextStyle(
+                  color: AppColors.black,
+                  fontWeight: AppFonts.weightBold,
+                ),
               ),
             ),
-            home: const BuilderPage(),
+            localizationsDelegates: const [
+              AppLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            supportedLocales: AppLocalizations.supportedLocales,
           );
         },
       ),

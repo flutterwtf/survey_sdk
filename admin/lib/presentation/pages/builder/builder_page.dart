@@ -30,25 +30,23 @@ class _BuilderPageState extends State<BuilderPage> {
     return BlocProvider<BuilderCubit>(
       create: (context) => _cubit,
       child: BlocConsumer<BuilderCubit, BuilderState>(
-        bloc: _cubit,
         builder: (context, state) => Scaffold(
           appBar: AppBar(
-            toolbarHeight: AppDimensions.appbarHeight,
-            backgroundColor: AppColors.white,
-            shadowColor: AppColors.transparentW,
-            centerTitle: true,
             title: const _BuilderPageTabBar(),
-            actions: const [
-              _CreateTab(),
-              _PreviewTab(),
-            ],
+            actions: const [_CreateTab(), _PreviewTab()],
+            shadowColor: AppColors.transparentW,
+            backgroundColor: AppColors.white,
+            centerTitle: true,
+            toolbarHeight: AppDimensions.appbarHeight,
           ),
           body: Row(
             children: [
               QuestionList(
-                onAdd: _cubit.addQuestionData,
                 onSelect: _cubit.select,
-                questions: List<QuestionData>.of(_cubit.state.surveyData.questions),
+                onAdd: _cubit.addQuestionData,
+                questions: List<QuestionData>.of(
+                  _cubit.state.surveyData.questions,
+                ),
               ),
               Expanded(
                 child: PhoneView(
@@ -66,11 +64,9 @@ class _BuilderPageState extends State<BuilderPage> {
         ),
         listener: (oldState, newState) {
           final selected = newState.selectedQuestion;
-          if (selected != null) {
-            // TODO(dev): animate to edited
-            //_surveyController.animateTo(selected.index - 1);
-          }
+          if (selected != null) {}
         },
+        bloc: _cubit,
       ),
     );
   }
@@ -86,25 +82,22 @@ class _BuilderPageTabBar extends StatelessWidget {
       child: SizedBox(
         width: AppDimensions.tabBarWidth,
         child: TabBar(
-          padding: const EdgeInsets.only(
-            right: AppDimensions.tabBarPadding,
-          ),
+          tabs: [
+            Tab(text: context.localization.create),
+            Tab(text: context.localization.preview),
+          ],
+          padding: const EdgeInsets.only(right: AppDimensions.tabBarPadding),
+          indicatorColor: AppColors.black,
           indicator: const UnderlineTabIndicator(
             borderSide: BorderSide(),
             insets: EdgeInsets.symmetric(
               horizontal: AppDimensions.margin4XL + AppDimensions.sizeM,
             ),
           ),
-          unselectedLabelColor: AppColors.textGrey,
-          indicatorColor: AppColors.black,
           labelColor: AppColors.text,
-          labelStyle: context.theme.textTheme.titleMedium?.copyWith(
-            fontWeight: AppFonts.weightBold,
-          ),
-          tabs: [
-            Tab(text: context.localization.create),
-            Tab(text: context.localization.preview),
-          ],
+          labelStyle: context.theme.textTheme.titleMedium
+              ?.copyWith(fontWeight: AppFonts.weightBold),
+          unselectedLabelColor: AppColors.textGrey,
         ),
       ),
     );
@@ -118,9 +111,9 @@ class _CreateTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(
-        bottom: AppDimensions.margin2XS,
         top: AppDimensions.margin2XS,
         right: AppDimensions.margin2XL,
+        bottom: AppDimensions.margin2XS,
       ),
       child: OutlinedButton(
         onPressed: () {},
@@ -151,9 +144,9 @@ class _PreviewTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(
-        bottom: AppDimensions.margin2XS,
         top: AppDimensions.margin2XS,
         right: AppDimensions.margin3XL,
+        bottom: AppDimensions.margin2XS,
       ),
       child: TextButton(
         onPressed: () {
