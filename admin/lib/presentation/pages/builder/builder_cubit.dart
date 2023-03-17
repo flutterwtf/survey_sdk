@@ -1,34 +1,34 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:survey_admin/domain/repository_interfaces/survey_data_repository.dart';
+import 'package:survey_admin/domain/repository_interfaces/file_system_repository.dart.dart';
+import 'package:survey_admin/domain/repository_interfaces/session_storage_repository.dart';
 import 'package:survey_admin/presentation/pages/builder/builder_state.dart';
 import 'package:survey_core/survey_core.dart';
 
 class BuilderCubit extends Cubit<BuilderState> {
-  final SurveyDataRepository _surveyDataRepository;
+  final FileSystemRepository _fileSystemRepository;
+  final SessionStorageRepository _sessionStorageRepository;
 
-  BuilderCubit(this._surveyDataRepository)
-      : super(
+  BuilderCubit(
+    this._fileSystemRepository,
+    this._sessionStorageRepository,
+  ) : super(
           BuilderState(
-            selectedQuestion: null,
             surveyData: SurveyData.common(),
+            selectedQuestion: null,
           ),
         ) {
     _init();
   }
 
-  void _init() {
-    final surveyData =
-        _surveyDataRepository.getSurveyData() ?? SurveyData.common();
-    emit(state.copyWith(surveyData: surveyData));
-  }
-
   void downloadExportedQuestions() {
-    if (state.surveyData.questions.isNotEmpty) {
+    final questions = state.surveyData.questions;
+    if (questions.isNotEmpty) {
       final rawMap = <String, dynamic>{};
-      for (final element in state.surveyData.questions) {
+      for (final element in questions) {
         rawMap[element.index.toString()] = element.toJson();
       }
-      _surveyDataRepository.downloadSurveyData(rawMap);
+      _fileSystemRepository.downloadSurveyData(rawMap);
     }
   }
 
@@ -37,10 +37,26 @@ class BuilderCubit extends Cubit<BuilderState> {
   }
 
   void addQuestionData(QuestionData data) {
-    final questionList = List<QuestionData>.from(state.surveyData.questions)
+    final questionList = List<QuestionData>.of(state.surveyData.questions)
       ..add(data);
     final surveyData = state.surveyData.copyWith(questions: questionList);
-    _surveyDataRepository.saveSurveyData(surveyData);
+    _sessionStorageRepository.saveSurveyData(surveyData);
+    emit(state.copyWith(surveyData: surveyData));
+  }
+
+  // TODO(message): show message in case of error/empty data.
+  Future<void> importData() async {
+    final surveyData = await _fileSystemRepository.importSurveyData();
+    if (surveyData != null) {
+      emit(
+        state.copyWith(surveyData: surveyData),
+      );
+    }
+  }
+
+  void _init() {
+    final surveyData =
+        _sessionStorageRepository.getSurveyData() ?? SurveyData.common();
     emit(state.copyWith(surveyData: surveyData));
   }
 }

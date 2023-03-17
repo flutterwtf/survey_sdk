@@ -40,13 +40,13 @@ class _AppState extends State<App> {
                   color: AppColors.black,
                   fontWeight: AppFonts.weightSemiBold,
                 ),
-                labelLarge: TextStyle(
-                  fontWeight: AppFonts.weightBold,
-                  color: AppColors.black,
-                ),
                 bodyLarge: TextStyle(color: AppColors.black),
                 bodyMedium: TextStyle(color: AppColors.black),
                 bodySmall: TextStyle(color: AppColors.black),
+                labelLarge: TextStyle(
+                  color: AppColors.black,
+                  fontWeight: AppFonts.weightBold,
+                ),
               ),
             ),
             home: BlocProvider(
