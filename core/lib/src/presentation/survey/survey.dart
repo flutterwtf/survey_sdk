@@ -9,18 +9,20 @@ import 'package:survey_core/src/presentation/utils/colors.dart';
 import 'package:survey_core/src/presentation/utils/data_to_widget_util.dart';
 
 class Survey extends StatefulWidget {
-  final String? surveyDataAsset;
+  final String? filePath;
+  final SurveyController? controller;
   final SurveyData? surveyData;
-  final SurveyController? surveyController;
 
-  Survey({
-    this.surveyDataAsset,
+  const Survey({
+    this.filePath,
     this.surveyData,
-    this.surveyController,
+    this.controller,
     super.key,
-  }) {
-    // Injector().init();
-  }
+  }) : assert(
+          (filePath != null || surveyData != null) &&
+              (filePath == null || surveyData == null),
+          'Only one of the parameters must be not-null',
+        );
 
   @override
   State<Survey> createState() => _SurveyState();
@@ -28,22 +30,15 @@ class Survey extends StatefulWidget {
 
 class _SurveyState extends State<Survey> {
   late final SurveyCubit _cubit;
-  // final _cubit = Injector().surveyCubit;
   late final SurveyController _surveyController;
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   _surveyController = widget.surveyController ?? SurveyController();
-  //   _cubit.initData(widget.surveyDataAsset);
-  // }
   @override
   void initState() {
     super.initState();
     Injector().init();
     _cubit = Injector().surveyCubit;
-    _surveyController = widget.surveyController ?? SurveyController();
-    _cubit.initData(widget.surveyDataAsset, widget.surveyData);
+    _surveyController = widget.controller ?? SurveyController();
+    _cubit.initData(widget.filePath, widget.surveyData);
   }
 
   @override
@@ -66,6 +61,7 @@ class _SurveyState extends State<Survey> {
                     return false;
                   },
                   child: PageView(
+                    controller: _surveyController.pageController,
                     physics: const NeverScrollableScrollPhysics(),
                     children: surveyData.questions
                         .map<Widget>(

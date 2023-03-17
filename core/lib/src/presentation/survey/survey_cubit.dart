@@ -7,18 +7,13 @@ import 'package:survey_core/survey_core.dart';
 class SurveyCubit extends Cubit<SurveyState> {
   final SurveyDataRepository _surveyDataRepository;
 
-  SurveyCubit(this._surveyDataRepository) : super(SurveyState());
+  SurveyCubit(this._surveyDataRepository) : super(const SurveyState());
 
-  // void initData(String surveyDataAsset) {
-  //   _surveyDataRepository.getSurveyData(surveyDataAsset).then(
-  //         (data) => emit(state.copyWith(surveyData: data)),
-  //       );
-  // }
-  void initData(String? filePath, SurveyData? surveyData) {
+  // // TODO(dev): split into two methods.
+  Future<void> initData(String? filePath, SurveyData? surveyData) async {
     if (filePath != null) {
-      _surveyDataRepository.getSurveyData(filePath).then(
-            (data) => emit(state.copyWith(surveyData: data)),
-          );
+      final data = await _surveyDataRepository.getSurveyData(filePath);
+      emit(state.copyWith(surveyData: data));
     } else {
       emit(state.copyWith(surveyData: surveyData));
     }
@@ -28,7 +23,4 @@ class SurveyCubit extends Cubit<SurveyState> {
     final answer = QuestionAnswer(key, data).toJson();
     emit(state.copyWith(answer: answer));
   }
-  // saveAnswer(QuestionData data) {
-  //   QuestionAnswer(data.index, 'rew').toJson();
-  // }
 }
