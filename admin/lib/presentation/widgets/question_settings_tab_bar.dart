@@ -47,7 +47,6 @@ class _QuestionSettingsTabBarState extends State<QuestionSettingsTabBar>
           unselectedLabelColor: AppColors.customizationTabBarInactiveText,
           indicatorColor: AppColors.black,
           indicatorSize: TabBarIndicatorSize.label,
-          // TODO(dev): do we need this field?
           labelStyle: context.theme.textTheme.bodyMedium?.copyWith(
             fontWeight: AppFonts.weightMedium,
           ),

@@ -8,6 +8,6 @@ class SurveyDataRepositoryImpl implements SurveyDataRepository {
   SurveyDataRepositoryImpl(this._fileSystemDataSource);
 
   @override
-  Future<SurveyData> getSurveyData(String asset) =>
-      _fileSystemDataSource.getSurveyData(asset);
+  Future<SurveyData> getSurveyData(String filePath) =>
+      _fileSystemDataSource.getSurveyData(filePath);
 }

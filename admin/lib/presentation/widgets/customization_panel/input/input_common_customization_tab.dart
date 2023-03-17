@@ -4,7 +4,6 @@ import 'package:survey_admin/presentation/utils/app_fonts.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/color_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
-import 'package:survey_admin/presentation/widgets/customization_items/text_style_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/customization_tab.dart';
 
 class InputCommonCustomizationTab extends CustomizationTab {
@@ -47,22 +46,22 @@ class InputCommonCustomizationTab extends CustomizationTab {
         CustomizationItemsContainer(
           title: context.localization.title,
           children: [
-            TextStyleCustomizationItem(
+            ColorCustomizationItem(
               initialColor: AppColors.black,
               onColorPicked: onTitleColorPicked,
-              initialFontSize: AppFonts.sizeL,
-              onFontSizeChanged: onTitleFontSizeChanged,
+              initialSize: AppFonts.sizeL.toString(),
+              onSizeChanged: onTitleFontSizeChanged,
             ),
           ],
         ),
         CustomizationItemsContainer(
           title: context.localization.subtitle,
           children: [
-            TextStyleCustomizationItem(
+            ColorCustomizationItem(
               initialColor: AppColors.black,
               onColorPicked: onSubtitleColorPicked,
-              initialFontSize: AppFonts.sizeS,
-              onFontSizeChanged: onSubtitleFontSizeChanged,
+              initialSize: AppFonts.sizeS.toString(),
+              onSizeChanged: onSubtitleFontSizeChanged,
             ),
           ],
         ),
@@ -73,11 +72,11 @@ class InputCommonCustomizationTab extends CustomizationTab {
               initialColor: AppColors.black,
               onColorPicked: onButtonFirstColorPicked,
             ),
-            TextStyleCustomizationItem(
+            ColorCustomizationItem(
               initialColor: AppColors.white,
               onColorPicked: onButtonSecondColorPicked,
-              initialFontSize: AppFonts.sizeS,
-              onFontSizeChanged: onButtonFontSizeChanged,
+              initialSize: AppFonts.sizeS.toString(),
+              onSizeChanged: onButtonFontSizeChanged,
             ),
           ],
         ),

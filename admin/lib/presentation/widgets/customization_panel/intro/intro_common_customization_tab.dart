@@ -3,11 +3,9 @@ import 'package:survey_admin/presentation/app/localization/localizations.dart';
 import 'package:survey_admin/presentation/utils/app_fonts.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/utils/constants/app_dimensions.dart';
-
 import 'package:survey_admin/presentation/widgets/customization_items/color_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/radius_customization_item.dart';
-import 'package:survey_admin/presentation/widgets/customization_items/text_style_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/customization_tab.dart';
 
 class IntroCommonCustomizationTab extends CustomizationTab {
@@ -52,22 +50,22 @@ class IntroCommonCustomizationTab extends CustomizationTab {
         CustomizationItemsContainer(
           title: context.localization.title,
           children: [
-            TextStyleCustomizationItem(
+            ColorCustomizationItem(
               initialColor: AppColors.black,
               onColorPicked: onTitleColorPicked,
-              initialFontSize: AppFonts.sizeL,
-              onFontSizeChanged: onTitleFontSizeChanged,
+              initialSize: AppFonts.sizeL.toString(),
+              onSizeChanged: onTitleFontSizeChanged,
             ),
           ],
         ),
         CustomizationItemsContainer(
           title: context.localization.subtitle,
           children: [
-            TextStyleCustomizationItem(
+            ColorCustomizationItem(
               initialColor: AppColors.black,
               onColorPicked: onSubtitleColorPicked,
-              initialFontSize: AppFonts.sizeS,
-              onFontSizeChanged: onSubtitleFontSizeChanged,
+              initialSize: AppFonts.sizeS.toString(),
+              onSizeChanged: onSubtitleFontSizeChanged,
             ),
           ],
         ),
@@ -78,11 +76,11 @@ class IntroCommonCustomizationTab extends CustomizationTab {
               initialColor: AppColors.black,
               onColorPicked: onButtonColorPicked,
             ),
-            TextStyleCustomizationItem(
+            ColorCustomizationItem(
               initialColor: AppColors.white,
               onColorPicked: onButtonTextColorPicked,
-              initialFontSize: AppFonts.sizeS,
-              onFontSizeChanged: onButtonFontSizeChanged,
+              initialSize: AppFonts.sizeS.toString(),
+              onSizeChanged: onButtonFontSizeChanged,
             ),
             RadiusCustomizationItem(
               initialValue: AppDimensions.circularRadiusS,

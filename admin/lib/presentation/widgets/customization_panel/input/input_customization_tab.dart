@@ -10,7 +10,6 @@ import 'package:survey_admin/presentation/widgets/customization_items/customizat
 import 'package:survey_admin/presentation/widgets/customization_items/dropdown_customization_button.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/multiline_switch.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/padding_customization_item.dart';
-import 'package:survey_admin/presentation/widgets/customization_items/text_style_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/customization_tab.dart';
 import 'package:survey_core/survey_core.dart';
 
@@ -73,11 +72,11 @@ class InputCustomizationTab extends CustomizationTab {
         CustomizationItemsContainer(
           title: context.localization.border,
           children: [
-            TextStyleCustomizationItem(
+            ColorCustomizationItem(
               initialColor: AppColors.black,
               onColorPicked: onBorderColorChanged,
-              initialFontSize: AppDimensions.defaultBorderWidth,
-              onFontSizeChanged: onBorderWidthChanged,
+              initialSize: AppDimensions.defaultBorderWidth.toString(),
+              onSizeChanged: onBorderWidthChanged,
               decoration: InputDecoration(
                 isCollapsed: true,
                 border: InputBorder.none,
@@ -101,22 +100,22 @@ class InputCustomizationTab extends CustomizationTab {
         CustomizationItemsContainer(
           title: context.localization.hint,
           children: [
-            TextStyleCustomizationItem(
+            ColorCustomizationItem(
               initialColor: AppColors.textLightGrey,
               onColorPicked: onHintColorChanged,
-              initialFontSize: AppFonts.sizeL,
-              onFontSizeChanged: onHintFontSizeChanged,
+              initialSize: AppFonts.sizeL.toString(),
+              onSizeChanged: onHintFontSizeChanged,
             ),
           ],
         ),
         CustomizationItemsContainer(
           title: context.localization.text,
           children: [
-            TextStyleCustomizationItem(
+            ColorCustomizationItem(
               initialColor: AppColors.black,
               onColorPicked: onTextColorChanged,
-              initialFontSize: AppFonts.sizeL,
-              onFontSizeChanged: onTextFontSizeChanged,
+              initialSize: AppFonts.sizeL.toString(),
+              onSizeChanged: onTextFontSizeChanged,
             ),
           ],
         ),
