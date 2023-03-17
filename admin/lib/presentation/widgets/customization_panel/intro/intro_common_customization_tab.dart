@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:survey_admin/presentation/app/localization/localizations.dart';
+import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/color_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/radius_customization_item.dart';
@@ -53,20 +55,6 @@ class IntroCommonCustomizationTab extends CustomizationTab {
             ColorCustomizationItem(
               initialColor: AppColors.black,
               onColorPicked: onTitleColorPicked,
-              initialText: initialTheme.titleTextSize.toString(),
-              initialColor: initialTheme.titleTextColor,
-              inputFormatters: [
-                FilteringTextInputFormatter.digitsOnly,
-                LengthLimitingTextInputFormatter(2),
-              ],
-              onTextChanged: (value) {
-                if (value == null) return;
-
-                final size = int.tryParse(value);
-                if (size != null) {
-                  onTitleFontSizeChanged(size);
-                }
-              },
             ),
           ],
         ),
@@ -76,20 +64,6 @@ class IntroCommonCustomizationTab extends CustomizationTab {
             ColorCustomizationItem(
               initialColor: AppColors.black,
               onColorPicked: onSubtitleColorPicked,
-              initialText: initialTheme.subTitleTextSize.toString(),
-              initialColor: initialTheme.subTitleTextColor,
-              inputFormatters: [
-                FilteringTextInputFormatter.digitsOnly,
-                LengthLimitingTextInputFormatter(2),
-              ],
-              onTextChanged: (value) {
-                if (value == null) return;
-
-                final size = int.tryParse(value);
-                if (size != null) {
-                  onSubtitleFontSizeChanged(size);
-                }
-              },
             ),
           ],
         ),
@@ -100,23 +74,23 @@ class IntroCommonCustomizationTab extends CustomizationTab {
               initialColor: initialTheme.mainButtonColor,
               onColorPicked: onButtonColorPicked,
             ),
-            TextStyleCustomizationItem(
-              initialColor: initialTheme.mainButtonTextColor,
-              onColorPicked: onButtonTextColorPicked,
-              initialText: initialTheme.mainButtonTextSize.toString(),
-              inputFormatters: [
-                FilteringTextInputFormatter.digitsOnly,
-                LengthLimitingTextInputFormatter(2),
-              ],
-              onTextChanged: (value) {
-                if (value == null) return;
-
-                final size = int.tryParse(value);
-                if (size != null) {
-                  onButtonFontSizeChanged(size);
-                }
-              },
-            ),
+            // TextStyleCustomizationItem(
+            //   initialColor: initialTheme.mainButtonTextColor,
+            //   onColorPicked: onButtonTextColorPicked,
+            //   initialText: initialTheme.mainButtonTextSize.toString(),
+            //   inputFormatters: [
+            //     FilteringTextInputFormatter.digitsOnly,
+            //     LengthLimitingTextInputFormatter(2),
+            //   ],
+            //   onTextChanged: (value) {
+            //     if (value == null) return;
+            //
+            //     final size = double.tryParse(value);
+            //     if (size != null) {
+            //       onButtonFontSizeChanged(size);
+            //     }
+            //   },
+            // ),
             RadiusCustomizationItem(
               initialValue: initialTheme.mainButtonRadius,
               onRadiusChanged: onButtonRadiusChanged,

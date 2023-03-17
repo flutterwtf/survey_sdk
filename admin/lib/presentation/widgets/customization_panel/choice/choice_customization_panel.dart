@@ -7,21 +7,6 @@ import 'package:survey_admin/presentation/widgets/customization_panel/choice/cho
 import 'package:survey_admin/presentation/widgets/question_settings_tab_bar.dart';
 import 'package:survey_core/survey_core.dart';
 
-enum RuleType {
-  none('None'),
-  more('>'),
-  less('<'),
-  moreOrEqual('>='),
-  lessOrEqual('<='),
-  equal('=');
-
-  const RuleType(
-    this.name,
-  );
-
-  final String name;
-}
-
 class ChoiceCustomizationPanel extends StatefulWidget {
   // TODO(dev): may be we can find a better name?
   final ChoiceQuestionTransformers transformers;
@@ -57,7 +42,6 @@ class _ChoiceCustomizationPanelState extends State<ChoiceCustomizationPanel> {
           onSubtitleColorPicked: widget.transformers.updateSubtitleColor,
           onSubtitleFontSizeChanged: widget.transformers.updateSubtitleFontSize,
           onButtonColorPicked: widget.transformers.updateButtonColor,
-          onButtonTextColorPicked: widget.transformers.updateButtonTextColor,
           onButtonFontSizeChanged: widget.transformers.updateButtonFontSize,
           onButtonRadiusChanged: widget.transformers.updateButtonRadius,
         ),
@@ -92,4 +76,19 @@ class _ChoiceCustomizationPanelState extends State<ChoiceCustomizationPanel> {
       ],
     );
   }
+}
+
+enum RuleType {
+  none('None'),
+  more('>'),
+  less('<'),
+  moreOrEqual('>='),
+  lessOrEqual('<='),
+  equal('=');
+
+  const RuleType(
+      this.name,
+      );
+
+  final String name;
 }

@@ -20,9 +20,6 @@ class BuilderState extends Equatable {
     );
   }
 
-  QuestionData? get selectedQuestion =>
-      selectedQuestionId != null ? questions[selectedQuestionId!] : null;
-
   @override
   List<Object?> get props => [selectedQuestion, surveyData];
 }

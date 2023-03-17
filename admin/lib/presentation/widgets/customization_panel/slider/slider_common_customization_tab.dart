@@ -20,7 +20,7 @@ class SliderCommonCustomizationTab extends CustomizationTab {
   final ValueChanged<double> onTitleFontSizeChanged;
   final ValueChanged<double> onSubtitleFontSizeChanged;
   final ValueChanged<double> onButtonFontSizeChanged;
-  final ValueChanged<int> onButtonRadiusChanged;
+  final ValueChanged<double> onButtonRadiusChanged;
 
   const SliderCommonCustomizationTab({
     required super.title,
@@ -81,7 +81,7 @@ class SliderCommonCustomizationTab extends CustomizationTab {
             ),
             ColorCustomizationItem(
               initialColor: AppColors.white,
-              onColorPicked: onButtonDownColorChanged,
+              onColorPicked: onButtonTextColorChanged,
               initialSize: AppFonts.sizeL.toString(),
               onSizeChanged: onButtonFontSizeChanged,
             ),
@@ -95,7 +95,7 @@ class SliderCommonCustomizationTab extends CustomizationTab {
                     onChanged: (value) {
                       if (value == null) return;
 
-                      final radius = int.tryParse(value);
+                      final radius = double.tryParse(value);
                       if (radius != null) {
                         onButtonRadiusChanged(radius);
                       }

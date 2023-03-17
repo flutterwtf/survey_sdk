@@ -32,7 +32,6 @@ class EditorBar extends StatelessWidget {
                 return ChoiceCustomizationPanel(
                   transformers: ChoiceQuestionTransformers(
                     question: questionData,
-                    onTransformed: cubit.updateSelectedQuestion,
                   ),
                   editableQuestion: questionData,
                   isMultipleChoice:
@@ -42,21 +41,18 @@ class EditorBar extends StatelessWidget {
                 return InputCustomizationPanel(
                   transformers: InputQuestionTransformers(
                     question: questionData,
-                    onTransformed: cubit.updateSelectedQuestion,
                   ),
                 );
               case QuestionTypes.intro:
                 return IntroCustomizationPanel(
                   transformers: IntroQuestionTransformers(
                     question: questionData,
-                    onTransformed: cubit.updateSelectedQuestion,
                   ),
                 );
               case QuestionTypes.slider:
                 return SliderCustomizationPanel(
                   transformers: SliderQuestionTransformers(
                     question: questionData,
-                    onTransformed: cubit.updateSelectedQuestion,
                   ),
                 );
             }

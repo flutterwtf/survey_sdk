@@ -41,7 +41,7 @@ class _BuilderPageState extends State<BuilderPage> {
           children: [
             QuestionList(
               onSelect: _cubit.select,
-              onAdd: _cubit.addQuestionData,
+              onAdd: _cubit.add,
               questionList:
                   List<QuestionData>.of(_cubit.state.surveyData.questions),
             ),
