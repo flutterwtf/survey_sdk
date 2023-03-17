@@ -22,6 +22,7 @@ class BuilderPage extends StatefulWidget {
 
 class _BuilderPageState extends State<BuilderPage> {
   final _cubit = i.get<BuilderCubit>();
+  final _surveyController = SurveyController();
 
   @override
   Widget build(BuildContext context) {
@@ -46,11 +47,14 @@ class _BuilderPageState extends State<BuilderPage> {
               QuestionList(
                 onAdd: _cubit.addQuestionData,
                 onSelect: _cubit.select,
-                questions: state.surveyData.questions,
+                questions: List<QuestionData>.of(_cubit.state.surveyData.questions),
               ),
               Expanded(
                 child: PhoneView(
-                  child: Container(),
+                  child: Survey(
+                    surveyData: state.surveyData,
+                    controller: _surveyController,
+                  ),
                 ),
               ),
               EditorBar(
@@ -60,6 +64,14 @@ class _BuilderPageState extends State<BuilderPage> {
           ),
         ),
       ),
+      listener: (oldState, newState) {
+        final selected = newState.selectedQuestion;
+        if (selected != null) {
+          // TODO(dev): animate to edited
+          //_surveyController.animateTo(selected.index - 1);
+        }
+      },
+      bloc: _cubit,
     );
   }
 }
