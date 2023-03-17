@@ -25,7 +25,7 @@ void main() {
           );
           when(mockedSurveyRepo.getSurveyData(''))
               .thenAnswer((_) => Future.value(surveyData));
-          surveyCubit.initData('');
+          surveyCubit.initData('', null);
           expect(surveyCubit.state.surveyData, surveyData);
         },
       );
