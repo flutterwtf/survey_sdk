@@ -6,10 +6,12 @@ abstract class SurveyState {
 }
 
 class SurveyLoadedState extends SurveyState {
-  final SurveyData? surveyData;
+  final SurveyData surveyData;
   final Map<int, QuestionAnswer> answers;
 
-  const SurveyLoadedState({this.surveyData, this.answers = const {}});
+  List<Object?> get props => [surveyData, answers];
+
+  const SurveyLoadedState({required this.surveyData, this.answers = const {}});
 
   SurveyLoadedState copyWith({
     SurveyData? surveyData,
@@ -20,9 +22,6 @@ class SurveyLoadedState extends SurveyState {
       answers: answers ?? this.answers,
     );
   }
-
-  @override
-  List<Object?> get props => [surveyData, answers];
 }
 
 class SurveyEmptyState extends SurveyState {

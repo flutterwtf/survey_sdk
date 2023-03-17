@@ -46,37 +46,34 @@ class _SurveyState extends State<Survey> {
     return BlocBuilder<SurveyCubit, SurveyState>(
       bloc: _cubit,
       builder: (BuildContext context, state) {
-      if (state is SurveyLoadingState) {
-        final surveyData = state.surveyData;
-        return surveyData == null
-            ? const Center(
-                child: CircularProgressIndicator(
-                  color: AppColors.black,
-                ),
-              )
-            : Theme(
-                data: surveyData.commonTheme.toThemeData(),
-                child: WillPopScope(
-                  onWillPop: () async {
-                    _surveyController.onBack();
-                    return false;
-                  },
-                  child: PageView(
-                    controller: _surveyController.pageController,
-                    physics: const NeverScrollableScrollPhysics(),
-                    children: surveyData.questions
-                        .map<Widget>(
-                          (question) => DataToWidgetUtil.createWidget(
-                            question,
-                            _cubit.saveAnswer,
-                          ),
-                        )
-                        .toList(),
-                  ),
-                ),
-              );
-      }
-      return const SizedBox.shrink();
+        if (state is SurveyLoadedState) {
+          return Theme(
+            data: state.surveyData.commonTheme.toThemeData(),
+            child: WillPopScope(
+              onWillPop: () async {
+                _surveyController.onBack();
+                return false;
+              },
+              child: PageView(
+                controller: _surveyController.pageController,
+                physics: const NeverScrollableScrollPhysics(),
+                children: state.surveyData.questions
+                    .map<Widget>(
+                      (question) => DataToWidgetUtil.createWidget(
+                        question,
+                        _cubit.saveAnswer,
+                      ),
+                    )
+                    .toList(),
+              ),
+            ),
+          );
+        }
+        return const Center(
+          child: CircularProgressIndicator(
+            color: AppColors.black,
+          ),
+        );
       },
     );
   }
