@@ -32,7 +32,9 @@ class _BuilderPageState extends State<BuilderPage> {
       child: BlocConsumer<BuilderCubit, BuilderState>(
         bloc: _cubit,
         listener: (oldState, newState) {
-          final selected = newState.selectedQuestion;
+          final selected = (newState is EditQuestionBuilderState)
+              ? newState.selectedQuestion
+              : null;
           if (selected != null) {
             // TODO(dev): animate to edited
             //_surveyController.animateTo(selected.index - 1);
@@ -52,6 +54,7 @@ class _BuilderPageState extends State<BuilderPage> {
               QuestionList(
                 onSelect: _cubit.select,
                 onAdd: _cubit.addQuestionData,
+                onEditCommonTheme: _cubit.editCommonTheme,
                 questions: List<QuestionData>.of(
                   _cubit.state.surveyData.questions,
                 ),
@@ -65,7 +68,9 @@ class _BuilderPageState extends State<BuilderPage> {
                 ),
               ),
               EditorBar(
-                editableQuestion: state.selectedQuestion,
+                editableQuestion: (state is EditQuestionBuilderState)
+                    ? state.selectedQuestion
+                    : null,
               ),
             ],
           ),
