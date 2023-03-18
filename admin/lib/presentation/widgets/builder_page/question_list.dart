@@ -14,7 +14,7 @@ import 'package:survey_admin/presentation/widgets/customization_items/item_divid
 import 'package:survey_core/survey_core.dart';
 
 class QuestionList extends StatefulWidget {
-  final void Function(QuestionData) onSelect;
+  final ValueChanged<QuestionData> onSelect;
   final VoidCallback onEditCommonTheme;
   final ValueChanged<QuestionData> onAdd;
   final List<QuestionData> questions;
