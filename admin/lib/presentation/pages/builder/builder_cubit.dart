@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:survey_admin/domain/repository_interfaces/file_system_repository.dart.dart';
 import 'package:survey_admin/domain/repository_interfaces/session_storage_repository.dart';
@@ -13,7 +12,7 @@ class BuilderCubit extends Cubit<BuilderState> {
     this._fileSystemRepository,
     this._sessionStorageRepository,
   ) : super(
-          BuilderState(
+          EditQuestionBuilderState(
             surveyData: SurveyData.common(),
             selectedQuestion: null,
           ),
@@ -22,8 +21,14 @@ class BuilderCubit extends Cubit<BuilderState> {
   }
 
   void select(QuestionData data) => emit(
-        state.copyWith(selectedQuestion: data),
+        EditQuestionBuilderState(
+          selectedQuestion: data,
+          surveyData: state.surveyData,
+        ),
       );
+
+  void editCommonTheme() =>
+      emit(EditCommonThemeBuilderState(surveyData: state.surveyData));
 
   void addQuestionData(QuestionData data) {
     final questionList = List<QuestionData>.of(state.surveyData.questions)
