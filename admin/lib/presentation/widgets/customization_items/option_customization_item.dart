@@ -35,13 +35,6 @@ class _OptionCustomizationItemState extends State<OptionCustomizationItem> {
     _options = widget.options;
   }
 
-  @override
-  void dispose() {
-    _controller.dispose();
-
-    super.dispose();
-  }
-
   void _onEditingComplete() {
     if (_controller.text.isNotEmpty) {
       setState(() => _options = [..._options, _controller.text]);
@@ -57,6 +50,13 @@ class _OptionCustomizationItemState extends State<OptionCustomizationItem> {
     }
     setState(() => _options.removeAt(index));
     widget.onChanged(_options);
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+
+    super.dispose();
   }
 
   @override

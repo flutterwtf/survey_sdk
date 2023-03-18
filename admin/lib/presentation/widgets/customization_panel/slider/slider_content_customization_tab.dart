@@ -33,7 +33,7 @@ class SliderContentCustomizationTab extends CustomizationTab {
             CustomizationMultilineTextField(
               maxHeight: AppDimensions.sizeXL,
               onChanged: onTitleChanged,
-            )
+            ),
           ],
         ),
         CustomizationItemsContainer(

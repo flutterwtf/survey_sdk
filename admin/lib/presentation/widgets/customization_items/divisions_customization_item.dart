@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:survey_admin/presentation/utils/value_changed.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
 
 class DivisionsCustomizationItem extends StatelessWidget {
@@ -20,14 +21,7 @@ class DivisionsCustomizationItem extends StatelessWidget {
         FilteringTextInputFormatter.digitsOnly,
         LengthLimitingTextInputFormatter(3),
       ],
-      onChanged: (value) {
-        if (value != null) {
-          final divisions = int.tryParse(value);
-          if (divisions != null) {
-            onChanged(divisions);
-          }
-        }
-      },
+      onChanged: (value) => onValueChanged(value, onChanged),
     );
   }
 }

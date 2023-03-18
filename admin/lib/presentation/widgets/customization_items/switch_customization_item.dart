@@ -71,7 +71,9 @@ class _CustomSwitchState extends State<_CustomSwitch> {
           color: _isToggled
               ? AppColors.switchBackgroundActive
               : AppColors.switchBackgroundInactive,
-          borderRadius: BorderRadius.circular(AppDimensions.circularRadiusS),
+          borderRadius: const BorderRadius.all(
+            Radius.circular(AppDimensions.circularRadiusS),
+          ),
         ),
         duration: AppDurations.customizationItemAnimation,
         child: AnimatedAlign(
@@ -81,10 +83,10 @@ class _CustomSwitchState extends State<_CustomSwitch> {
             padding: const EdgeInsets.all(AppDimensions.margin3XS),
             child: Container(
               width: AppDimensions.switchIndicatorWidth,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: AppColors.black,
-                borderRadius: BorderRadius.circular(
-                  AppDimensions.circularRadiusXS,
+                borderRadius: BorderRadius.all(
+                  Radius.circular(AppDimensions.circularRadiusXS),
                 ),
               ),
             ),

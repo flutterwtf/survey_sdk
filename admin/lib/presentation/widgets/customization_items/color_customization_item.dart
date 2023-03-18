@@ -37,6 +37,31 @@ class _ColorCustomizationItemState extends State<ColorCustomizationItem> {
     _pickedColor = widget.initialColor;
   }
 
+  void _onChangedTextField(String? value) {
+    if (value != null) {
+      final color = int.tryParse(value.padRight(8, '0'), radix: 16);
+      if (color != null) {
+        setState(() => _pickedColor = Color(color));
+      }
+    }
+  }
+
+  void _onColorChanged(Color color) {
+    widget.onColorPicked(color);
+    setState(() {
+      _pickedColor = color;
+      _controller.text = _colorToString(color);
+    });
+  }
+
+  String _colorToString(Color color) =>
+      color.value.toRadixString(16).toUpperCase();
+
+  void _updateTextField() {
+    widget.onColorPicked(_pickedColor);
+    setState(() => _controller.text = _colorToString(_pickedColor));
+  }
+
   @override
   void dispose() {
     _controller.dispose();
@@ -94,37 +119,8 @@ class _ColorCustomizationItemState extends State<ColorCustomizationItem> {
             portraitOnly: true,
             pickerAreaHeightPercent: 0.4,
           ),
-        ]
+        ],
       ],
-    );
-  }
-
-  void _onChangedTextField(String? value) {
-    if (value != null) {
-      final color = int.tryParse(value.padRight(8, '0'), radix: 16);
-      if (color != null) {
-        setState(() {
-          _pickedColor = Color(color);
-        });
-      }
-    }
-  }
-
-  void _onColorChanged(Color color) {
-    widget.onColorPicked(color);
-    setState(() {
-      _pickedColor = color;
-      _controller.text = _colorToString(color);
-    });
-  }
-
-  String _colorToString(Color color) =>
-      color.value.toRadixString(16).toUpperCase();
-
-  void _updateTextField() {
-    widget.onColorPicked(_pickedColor);
-    setState(
-      () => _controller.text = _colorToString(_pickedColor),
     );
   }
 }

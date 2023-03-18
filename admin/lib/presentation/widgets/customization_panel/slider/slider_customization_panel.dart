@@ -6,9 +6,7 @@ import 'package:survey_admin/presentation/widgets/customization_panel/slider/sli
 import 'package:survey_admin/presentation/widgets/question_settings_tab_bar.dart';
 
 class SliderCustomizationPanel extends StatelessWidget {
-  const SliderCustomizationPanel({
-    super.key,
-  });
+  const SliderCustomizationPanel({super.key});
 
   @override
   Widget build(BuildContext context) {
