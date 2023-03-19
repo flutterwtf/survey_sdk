@@ -30,7 +30,7 @@ class HexColorField extends StatelessWidget {
             FilteringTextInputFormatter.allow(RegExp(kValidHexPattern)),
           ],
           onChanged: (str) => onColorPicked(colorFromHex(str)!),
-        ), //
+        ),
       ),
     );
   }
