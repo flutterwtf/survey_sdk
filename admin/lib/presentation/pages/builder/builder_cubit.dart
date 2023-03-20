@@ -13,7 +13,7 @@ class BuilderCubit extends Cubit<BuilderState> {
     this._fileSystemRepository,
     this._sessionStorageRepository,
   ) : super(
-          BuilderState(
+          EditQuestionBuilderState(
             surveyData: SurveyData(
               questions: [],
               commonTheme: CommonData.commonTheme,
@@ -25,8 +25,14 @@ class BuilderCubit extends Cubit<BuilderState> {
   }
 
   void select(QuestionData data) => emit(
-        state.copyWith(selectedQuestion: data),
+        EditQuestionBuilderState(
+          selectedQuestion: data,
+          surveyData: state.surveyData,
+        ),
       );
+
+  void editCommonTheme() =>
+      emit(EditCommonThemeBuilderState(surveyData: state.surveyData));
 
   void addQuestionData(QuestionData data) {
     final questionList = List<QuestionData>.of(state.surveyData.questions)

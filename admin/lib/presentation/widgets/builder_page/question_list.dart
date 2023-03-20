@@ -15,11 +15,13 @@ import 'package:survey_core/survey_core.dart';
 
 class QuestionList extends StatefulWidget {
   final ValueChanged<QuestionData> onSelect;
+  final VoidCallback onEditCommonTheme;
   final ValueChanged<QuestionData> onAdd;
   final List<QuestionData> questions;
 
   const QuestionList({
     required this.onSelect,
+    required this.onEditCommonTheme,
     required this.onAdd,
     required this.questions,
     super.key,
@@ -32,6 +34,7 @@ class QuestionList extends StatefulWidget {
 class _QuestionListState extends State<QuestionList> {
   late List<QuestionData> _questionList;
   int _selectedIndex = 0;
+  final _commonThemeIndex = -1;
 
   @override
   void initState() {
@@ -98,7 +101,12 @@ class _QuestionListState extends State<QuestionList> {
                 _addQuestion(questionData);
               }
             },
-            questionList: widget.questions,
+            onEditCommonTheme: () {
+              setState(() => _selectedIndex = _commonThemeIndex);
+              widget.onEditCommonTheme();
+            },
+            isEditingCommonTheme: _selectedIndex == _commonThemeIndex,
+            questionList: _questionList,
           ),
           Expanded(
             child: ContextMenuOverlay(
@@ -153,10 +161,14 @@ class _QuestionListState extends State<QuestionList> {
 class _ListHeader extends StatelessWidget {
   final VoidCallback onAddButtonTap;
   final List<QuestionData> questionList;
+  final VoidCallback onEditCommonTheme;
+  final bool isEditingCommonTheme;
 
   const _ListHeader({
     required this.onAddButtonTap,
     required this.questionList,
+    required this.onEditCommonTheme,
+    required this.isEditingCommonTheme,
   });
 
   @override
@@ -175,7 +187,19 @@ class _ListHeader extends StatelessWidget {
             ),
           ),
           const SizedBox(
-            width: AppDimensions.margin4XL + AppDimensions.margin3XL,
+            width: AppDimensions.margin4XL,
+          ),
+          GestureDetector(
+            onTap: onEditCommonTheme,
+            child: Container(
+              alignment: Alignment.center,
+              height: AppDimensions.sizeL,
+              width: AppDimensions.sizeL,
+              color: isEditingCommonTheme
+                  ? AppColors.greyBackground
+                  : AppColors.white,
+              child: const Icon(Icons.invert_colors),
+            ),
           ),
           GestureDetector(
             onTap: onAddButtonTap,

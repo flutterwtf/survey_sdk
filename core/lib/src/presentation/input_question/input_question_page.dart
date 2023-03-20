@@ -1,20 +1,17 @@
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:survey_core/src/domain/entities/question_answer.dart';
 import 'package:survey_core/src/domain/entities/question_types/input_question_data.dart';
 import 'package:survey_core/src/domain/entities/themes/input_question_theme.dart';
-import 'package:survey_core/src/presentation/di/injector.dart';
 import 'package:survey_core/src/presentation/localization/localizations.dart';
-import 'package:survey_core/src/presentation/survey/survey_cubit.dart';
-import 'package:survey_core/src/presentation/survey/survey_state.dart';
 import 'package:survey_core/src/presentation/utils/constants.dart';
 import 'package:survey_core/src/presentation/utils/data_to_widget_util.dart';
 import 'package:survey_core/src/presentation/widgets/question_bottom_button.dart';
 import 'package:survey_core/src/presentation/widgets/question_content.dart';
 import 'package:survey_core/src/presentation/widgets/question_title.dart';
 
-//TODO: create child<T> widget for date,password,text,number etc
+// TODO(dev): create child<T> widget for date,password,text,number etc
 class InputQuestionPage extends StatefulWidget {
   final InputQuestionData data;
   final OnSendCallback onSend;
@@ -75,7 +72,7 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
               content: widget.data.subtitle,
             ),
           ),
-          //TODO: maybe create generic widget for some inputs(date,number,string and etc)
+          // TODO(dev): maybe create generic widget for some inputs(date,number,string and etc)
           Padding(
             padding: const EdgeInsets.only(top: AppDimensions.marginM),
             child: isDateType
@@ -114,11 +111,11 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
                 isDateType
                     ? widget.onSend.call(
                         index: widget.data.index,
-                        data: _dateTime,
+                        answer: QuestionAnswer<DateTime>(_dateTime),
                       )
                     : widget.onSend.call(
                         index: widget.data.index,
-                        data: _input,
+                        answer: QuestionAnswer<String>(_input),
                       );
               }
             },

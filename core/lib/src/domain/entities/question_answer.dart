@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 
-class QuestionAnswer extends Equatable {
-  final dynamic answer;
+class QuestionAnswer<T> extends Equatable {
+  final T answer;
 
   const QuestionAnswer(this.answer);
 

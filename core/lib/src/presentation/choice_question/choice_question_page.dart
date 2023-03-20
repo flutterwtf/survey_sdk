@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:survey_core/src/domain/entities/question_answer.dart';
 import 'package:survey_core/src/domain/entities/question_types/choice_question_data.dart';
 import 'package:survey_core/src/domain/entities/themes/choice_question_theme.dart';
-import 'package:survey_core/src/presentation/di/injector.dart';
 import 'package:survey_core/src/presentation/localization/localizations.dart';
-import 'package:survey_core/src/presentation/survey/survey_cubit.dart';
-import 'package:survey_core/src/presentation/survey/survey_state.dart';
 import 'package:survey_core/src/presentation/utils/colors.dart';
 import 'package:survey_core/src/presentation/utils/constants.dart';
 import 'package:survey_core/src/presentation/utils/data_to_widget_util.dart';
@@ -112,7 +109,7 @@ class _ChoiceQuestionPageState extends State<ChoiceQuestionPage>
             onPressed: () {
               widget.onSend.call(
                 index: widget.data.index,
-                data: _selectedItems,
+                answer: QuestionAnswer<List<String>>(_selectedItems),
               );
             },
             isEnabled: widget.data.isSkip || _canBeSend,
