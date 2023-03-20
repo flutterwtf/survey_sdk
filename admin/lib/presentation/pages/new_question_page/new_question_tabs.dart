@@ -25,16 +25,16 @@ extension NewQuestionTabsExt on NewQuestionTabs {
     }
   }
 
-  Future<QuestionData> get data {
+  QuestionData data(BuildContext context) {
     switch (this) {
       case NewQuestionTabs.intro:
-        return CommonData.introQuestionData();
+        return CommonData.intro(context: context);
       case NewQuestionTabs.choice:
-        return CommonData.choiceQuestionData();
+        return CommonData.choice(context: context);
       case NewQuestionTabs.slider:
-        return CommonData.sliderQuestionData();
+        return CommonData.slider(context: context);
       case NewQuestionTabs.customInput:
-        return CommonData.inputQuestionData();
+        return CommonData.input(context: context);
     }
   }
 

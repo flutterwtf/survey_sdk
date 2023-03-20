@@ -39,10 +39,14 @@ class _SurveyState extends State<Survey> {
     _cubit = Injector().surveyCubit;
     _surveyController = widget.controller ?? SurveyController();
   }
+  @override
+  void didChangeDependencies(){
+    super.didChangeDependencies();
+    _cubit.initData(widget.filePath, widget.surveyData);
+  }
 
   @override
   Widget build(BuildContext context) {
-    _cubit.initData(widget.filePath, widget.surveyData);
     return BlocBuilder<SurveyCubit, SurveyState>(
       bloc: _cubit,
       builder: (BuildContext context, state) {

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:survey_admin/domain/repository_interfaces/file_system_repository.dart.dart';
 import 'package:survey_admin/domain/repository_interfaces/session_storage_repository.dart';
@@ -20,9 +21,7 @@ class BuilderCubit extends Cubit<BuilderState> {
             ),
             selectedQuestion: null,
           ),
-        ) {
-    _init();
-  }
+        );
 
   void select(QuestionData data) => emit(
         EditQuestionBuilderState(
@@ -52,9 +51,9 @@ class BuilderCubit extends Cubit<BuilderState> {
     }
   }
 
-  Future<void> _init() async {
+  void initState(BuildContext context) {
     final surveyData = _sessionStorageRepository.getSurveyData() ??
-        await CommonData.surveyData;
+        CommonData.surveyData(context);
     emit(state.copyWith(surveyData: surveyData));
   }
 }

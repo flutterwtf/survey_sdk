@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:survey_admin/presentation/app/localization/localizations.dart';
 import 'package:survey_admin/presentation/utils/app_fonts.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/utils/constants/app_dimensions.dart';
@@ -11,16 +12,6 @@ abstract class CommonData {
   static const _initialValue = 5;
   static const _firstIndex = 1;
   static const _secondIndex = 2;
-
-  static Future<SurveyData> get surveyData async {
-    return SurveyData(
-      questions: [
-        await CommonData.introQuestionData(index: _firstIndex),
-        await CommonData.inputQuestionData(index: _secondIndex),
-      ],
-      commonTheme: commonTheme,
-    );
-  }
 
   static CommonTheme get commonTheme => CommonTheme(
         textFieldThemeData: const TextFieldThemeData(
@@ -45,62 +36,76 @@ abstract class CommonData {
         sliderThemeData: const SliderThemeData(),
       );
 
-  static Future<IntroQuestionData> introQuestionData({int index = 0}) async {
-    final localization =
-        await AppLocalizations.delegate.load(const Locale('en'));
-    return IntroQuestionData(
-      mainButtonTitle: localization.next,
-      title: localization.intro,
-      index: index,
-      subtitle: localization.empty_subtitle,
-      isSkip: false,
-      content: localization.question_content,
+  static SurveyData surveyData(BuildContext context) {
+    return SurveyData(
+      questions: [
+        CommonData.intro(context: context, index: _firstIndex),
+        CommonData.input(context: context, index: _secondIndex),
+      ],
+      commonTheme: commonTheme,
     );
   }
 
-  static Future<InputQuestionData> inputQuestionData({int index = 0}) async {
-    final localization =
-        await AppLocalizations.delegate.load(const Locale('en'));
+  static IntroQuestionData intro({
+    required BuildContext context,
+    int index = 0,
+  }) {
+    return IntroQuestionData(
+      mainButtonTitle: context.localization.next,
+      title: context.localization.intro,
+      index: index,
+      subtitle: context.localization.empty_subtitle,
+      isSkip: false,
+      content: context.localization.question_content,
+    );
+  }
+
+  static InputQuestionData input({
+    required BuildContext context,
+    int index = 0,
+  }) {
     return InputQuestionData(
       validator: InputValidator.number(),
       index: index,
-      title: localization.input,
-      subtitle: localization.empty_subtitle,
+      title: context.localization.input,
+      subtitle: context.localization.empty_subtitle,
       isSkip: false,
-      content: localization.question_content,
+      content: context.localization.question_content,
     );
   }
 
-  static Future<ChoiceQuestionData> choiceQuestionData({int index = 0}) async {
-    final localization =
-        await AppLocalizations.delegate.load(const Locale('en'));
+  static ChoiceQuestionData choice({
+    required BuildContext context,
+    int index = 0,
+  }) {
     return ChoiceQuestionData(
       isMultipleChoice: false,
       options: [
-        localization.first_option,
-        localization.second_option,
-        localization.third_option,
+        context.localization.first_option,
+        context.localization.second_option,
+        context.localization.third_option,
       ],
-      title: localization.choice,
-      subtitle: localization.empty_subtitle,
+      title: context.localization.choice,
+      subtitle: context.localization.empty_subtitle,
       isSkip: false,
-      content: localization.question_content,
+      content: context.localization.question_content,
       index: index,
     );
   }
 
-  static Future<SliderQuestionData> sliderQuestionData({int index = 0}) async {
-    final localization =
-        await AppLocalizations.delegate.load(const Locale('en'));
+  static SliderQuestionData slider({
+    required BuildContext context,
+    int index = 0,
+  }) {
     return SliderQuestionData(
       minValue: _minValue,
       maxValue: _maxValue,
       initialValue: _initialValue,
-      title: localization.slider,
+      title: context.localization.slider,
       index: index,
-      subtitle: localization.empty_subtitle,
+      subtitle: context.localization.empty_subtitle,
       isSkip: false,
-      content: localization.question_content,
+      content: context.localization.question_content,
     );
   }
 }

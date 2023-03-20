@@ -76,6 +76,12 @@ class _QuestionListState extends State<QuestionList> {
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _questionList = widget.questions;
+  }
+
+  @override
   void dispose() {
     RawKeyboard.instance.removeListener(_handleKeyDown);
     super.dispose();
@@ -83,7 +89,6 @@ class _QuestionListState extends State<QuestionList> {
 
   @override
   Widget build(BuildContext context) {
-    _questionList = widget.questions;
     return Container(
       color: AppColors.white,
       width: AppDimensions.surveyContentBarWidth,

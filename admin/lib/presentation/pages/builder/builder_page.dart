@@ -26,6 +26,12 @@ class _BuilderPageState extends State<BuilderPage> {
   final _surveyController = SurveyController();
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _cubit.initState(context);
+  }
+
+  @override
   Widget build(BuildContext context) {
     return BlocProvider<BuilderCubit>(
       create: (context) => _cubit,
