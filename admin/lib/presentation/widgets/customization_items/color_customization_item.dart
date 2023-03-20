@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
+import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/utils/constants/app_dimensions.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
 
@@ -71,7 +72,7 @@ class _ColorCustomizationItemState extends State<ColorCustomizationItem> {
                     FilteringTextInputFormatter.allow(
                       RegExp('[0-9a-fA-F]'),
                     ),
-                    LengthLimitingTextInputFormatter(8),
+                    LengthLimitingTextInputFormatter(6),
                   ],
                   decoration: widget.decoration ??
                       const InputDecoration(
@@ -101,7 +102,8 @@ class _ColorCustomizationItemState extends State<ColorCustomizationItem> {
 
   void _onChangedTextField(String? value) {
     if (value != null) {
-      final color = int.tryParse(value.padRight(8, '0'), radix: 16);
+      final newValue = AppColors.colorOpasity + value;
+      final color = int.tryParse(newValue.padRight(8, '0'), radix: 16);
       if (color != null) {
         setState(() {
           _pickedColor = Color(color);
@@ -119,7 +121,7 @@ class _ColorCustomizationItemState extends State<ColorCustomizationItem> {
   }
 
   String _colorToString(Color color) =>
-      color.value.toRadixString(16).toUpperCase();
+      color.value.toRadixString(16).toUpperCase().substring(2);
 
   void _updateTextField() {
     widget.onColorPicked(_pickedColor);
