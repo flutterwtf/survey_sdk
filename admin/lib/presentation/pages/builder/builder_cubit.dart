@@ -17,7 +17,7 @@ class BuilderCubit extends Cubit<BuilderState> {
           EditQuestionBuilderState(
             surveyData: SurveyData(
               questions: [],
-              commonTheme: CommonData.commonTheme,
+              commonTheme: CommonData.commonTheme(),
             ),
             selectedQuestion: null,
           ),

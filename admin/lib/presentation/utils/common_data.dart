@@ -13,28 +13,33 @@ abstract class CommonData {
   static const _firstIndex = 1;
   static const _secondIndex = 2;
 
-  static CommonTheme get commonTheme => CommonTheme(
-        textFieldThemeData: const TextFieldThemeData(
-          fillCommonColor: AppColors.black,
-          fillInputColor: AppColors.white,
-          borderColor: AppColors.black,
-          borderWidth: AppDimensions.defaultBorderWidth,
-          verticalPadding: AppDimensions.margin2XS,
-          horizontalPadding: AppDimensions.margin2XS,
-          hintColor: AppColors.textGrey,
-          hintSize: AppFonts.sizeS,
-          textColor: AppColors.black,
-          textSize: AppFonts.sizeS,
-          titleColor: AppColors.black,
-          titleSize: AppFonts.sizeM,
-          subtitleColor: AppColors.black,
-          subtitleSize: AppFonts.sizeS,
-          buttonTextSize: AppFonts.sizeS,
-          buttonColor: AppColors.white,
-          buttonTextColor: AppColors.black,
-        ),
-        sliderThemeData: const SliderThemeData(),
-      );
+  static CommonTheme commonTheme({BuildContext? context}) {
+    final sliderTheme = context != null
+        ? Theme.of(context).sliderTheme
+        : const SliderThemeData();
+    return CommonTheme(
+      textFieldThemeData: const TextFieldThemeData(
+        fillCommonColor: AppColors.white,
+        fillInputColor: AppColors.white,
+        borderColor: AppColors.black,
+        borderWidth: AppDimensions.circularRadiusXS,
+        verticalPadding: AppDimensions.marginM,
+        horizontalPadding: AppDimensions.marginM,
+        hintColor: AppColors.textGrey,
+        hintSize: AppDimensions.marginM,
+        textColor: AppColors.black,
+        textSize: AppDimensions.marginM,
+        titleColor: AppColors.black,
+        titleSize: AppDimensions.marginM,
+        subtitleColor: AppColors.black,
+        subtitleSize: AppDimensions.marginS,
+        buttonTextSize: AppDimensions.marginS,
+        buttonColor: AppColors.black,
+        buttonTextColor: AppColors.white,
+      ),
+      sliderThemeData: sliderTheme,
+    );
+  }
 
   static SurveyData surveyData(BuildContext context) {
     return SurveyData(
@@ -42,7 +47,7 @@ abstract class CommonData {
         CommonData.intro(context: context, index: _firstIndex),
         CommonData.input(context: context, index: _secondIndex),
       ],
-      commonTheme: commonTheme,
+      commonTheme: commonTheme(context: context),
     );
   }
 
