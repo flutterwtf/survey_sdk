@@ -21,7 +21,7 @@ abstract class AppTheme {
     iconTheme: const IconThemeData(
       color: AppColors.black,
     ),
-    tabBarTheme: const TabBarTheme().copyWith(
+    tabBarTheme: const TabBarTheme(
       labelColor: AppColors.black,
       unselectedLabelColor: AppColors.customizationTabBarInactiveText,
       indicatorColor: AppColors.black,
