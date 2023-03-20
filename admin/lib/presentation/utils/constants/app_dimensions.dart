@@ -30,7 +30,6 @@ abstract class AppDimensions {
 
   static const double thinBorderWidth = 0.5;
   static const double defaultBorderWidth = 1;
-  static const double dividerHeight = 1;
 
   static const double surveyContentBarWidth = 210;
 
@@ -38,6 +37,7 @@ abstract class AppDimensions {
   static const double addButtonHeight = 34;
 
   static const double textFieldWidth = 75;
+  static const double maxTextFieldHeight = 100;
 
   static const double switchIndicatorWidth = 34;
   static const double switchWidth = 34;

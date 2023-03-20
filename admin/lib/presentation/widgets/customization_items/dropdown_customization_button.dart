@@ -29,6 +29,7 @@ class _DropdownCustomizationButtonState<T>
   @override
   void initState() {
     super.initState();
+
     _isExpanded = false;
     _iconAnimationController = AnimationController(
       vsync: this,
@@ -69,14 +70,10 @@ class _DropdownCustomizationButtonState<T>
             ],
           ),
           onTap: () {
-            setState(() {
-              _isExpanded = !_isExpanded;
-            });
-            if (_isExpanded) {
-              _iconAnimationController.forward();
-            } else {
-              _iconAnimationController.reverse();
-            }
+            _isExpanded
+                ? _iconAnimationController.reverse()
+                : _iconAnimationController.forward();
+            setState(() => _isExpanded = !_isExpanded);
           },
         ),
         AnimatedSize(

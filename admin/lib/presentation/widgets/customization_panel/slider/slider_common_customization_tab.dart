@@ -6,6 +6,7 @@ import 'package:survey_admin/presentation/utils/app_fonts.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/utils/constants/app_assets.dart';
 import 'package:survey_admin/presentation/utils/constants/app_dimensions.dart';
+import 'package:survey_admin/presentation/utils/size_handler.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/color_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
@@ -92,14 +93,10 @@ class SliderCommonCustomizationTab extends CustomizationTab {
                 Expanded(
                   child: CustomizationTextField(
                     initialValue: AppFonts.sizeL.toString(),
-                    onChanged: (value) {
-                      if (value == null) return;
-
-                      final radius = int.tryParse(value);
-                      if (radius != null) {
-                        onButtonRadiusChanged(radius);
-                      }
-                    },
+                    onChanged: (value) => SizeHandler.onSizeChanged(
+                      value,
+                      onButtonRadiusChanged,
+                    ),
                     inputFormatters: [
                       FilteringTextInputFormatter.digitsOnly,
                       LengthLimitingTextInputFormatter(2),

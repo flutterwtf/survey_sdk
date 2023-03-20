@@ -23,6 +23,7 @@ class _QuestionSettingsTabBarState extends State<QuestionSettingsTabBar>
   @override
   void initState() {
     super.initState();
+
     _tabController = TabController(
       length: widget.tabs.length,
       vsync: this,
@@ -32,6 +33,7 @@ class _QuestionSettingsTabBarState extends State<QuestionSettingsTabBar>
   @override
   void dispose() {
     _tabController.dispose();
+
     super.dispose();
   }
 
@@ -49,7 +51,7 @@ class _QuestionSettingsTabBarState extends State<QuestionSettingsTabBar>
             fontWeight: AppFonts.weightMedium,
           ),
           tabs: [
-            for (var tab in widget.tabs) Tab(text: tab.title),
+            for (final tab in widget.tabs) Tab(text: tab.title),
           ],
         ),
         Expanded(

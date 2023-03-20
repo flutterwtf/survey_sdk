@@ -31,21 +31,15 @@ class _OptionCustomizationItemState extends State<OptionCustomizationItem> {
   @override
   void initState() {
     super.initState();
-    _options = widget.options;
-  }
 
-  @override
-  void dispose() {
-    super.dispose();
-    _controller.dispose();
+    _options = widget.options;
   }
 
   void _onEditingComplete() {
     if (_controller.text.isNotEmpty) {
-      setState(() {
-        _options = [..._options, _controller.text];
-      });
+      setState(() => _options = [..._options, _controller.text]);
     }
+
     _controller.clear();
     widget.onChanged(_options);
   }
@@ -59,20 +53,26 @@ class _OptionCustomizationItemState extends State<OptionCustomizationItem> {
   }
 
   @override
+  void dispose() {
+    _controller.dispose();
+
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Column(
       children: [
+        // TODO(dev): We definitely need a ListView here?
         ListView.builder(
           shrinkWrap: true,
           itemCount: _options.length,
-          itemBuilder: (context, index) => _Option(
+          itemBuilder: (_, index) => _Option(
             option: _options[index],
             delete: () => _delete(index),
           ),
         ),
-        const SizedBox(
-          height: AppDimensions.sizeS,
-        ),
+        const SizedBox(height: AppDimensions.sizeS),
         Row(
           children: [
             const Icon(
@@ -80,9 +80,7 @@ class _OptionCustomizationItemState extends State<OptionCustomizationItem> {
               size: AppDimensions.sizeS,
               color: AppColors.textLightGrey,
             ),
-            const SizedBox(
-              width: AppDimensions.margin2XS,
-            ),
+            const SizedBox(width: AppDimensions.margin2XS),
             Expanded(
               child: CustomizationTextField(
                 controller: _controller,
@@ -119,9 +117,7 @@ class _Option extends StatelessWidget {
           Icons.fiber_manual_record,
           size: AppDimensions.sizeS,
         ),
-        const SizedBox(
-          width: AppDimensions.margin2XS,
-        ),
+        const SizedBox(width: AppDimensions.margin2XS),
         Expanded(
           child: Text(
             option,

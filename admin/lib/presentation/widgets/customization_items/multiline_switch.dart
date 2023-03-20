@@ -33,6 +33,7 @@ class _MultilineSwitchState extends State<MultilineSwitch> {
   @override
   void initState() {
     super.initState();
+
     _isMultiline = widget.isMultiline;
     _lineAmount = widget.defaultLineAmount;
   }
@@ -47,9 +48,7 @@ class _MultilineSwitchState extends State<MultilineSwitch> {
           child: SwitchCustomizationItem(
             title: context.localization.multiline,
             onChanged: (isToggled) {
-              setState(() {
-                _isMultiline = isToggled;
-              });
+              setState(() => _isMultiline = isToggled);
               widget.onChanged(_isMultiline, _isMultiline ? _lineAmount : 1);
             },
           ),
@@ -72,13 +71,13 @@ class _MultilineSwitchState extends State<MultilineSwitch> {
 }
 
 class _LineAmountInputField extends StatelessWidget {
+  final ValueChanged<int> onChanged;
+  final int defaultLineAmount;
+
   const _LineAmountInputField({
     required this.onChanged,
     required this.defaultLineAmount,
   });
-
-  final void Function(int amount) onChanged;
-  final int defaultLineAmount;
 
   @override
   Widget build(BuildContext context) {
@@ -101,13 +100,9 @@ class _LineAmountInputField extends StatelessWidget {
               ],
               initialValue: defaultLineAmount.toString(),
               fontSize: AppFonts.sizeM,
-              onChanged: (value) {
-                if (value == null) {
-                  onChanged(1);
-                } else {
-                  onChanged(int.tryParse(value) ?? 1);
-                }
-              },
+              onChanged: (value) => value == null
+                  ? onChanged(1)
+                  : onChanged(int.tryParse(value) ?? 1),
             ),
           ),
         ],

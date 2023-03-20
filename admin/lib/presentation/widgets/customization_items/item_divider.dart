@@ -10,7 +10,6 @@ class ItemDivider extends StatelessWidget {
     return const Divider(
       color: AppColors.greyBackground,
       thickness: AppDimensions.thinBorderWidth,
-      height: AppDimensions.dividerHeight,
     );
   }
 }

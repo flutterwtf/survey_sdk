@@ -23,13 +23,12 @@ class ColorPickerDialog extends StatelessWidget {
       title: Text(
         context.localization.pick_a_color,
       ),
+      // TODO(dev): Maybe ListView here?
       content: SingleChildScrollView(
         child: Column(
           children: [
             ColorPicker(
-              pickerColor: colorFromHex(
-                colorTextController.value.text,
-              )!,
+              pickerColor: colorFromHex(colorTextController.value.text)!,
               hexInputController: colorTextController,
               portraitOnly: true,
               onColorChanged: (_) {},
@@ -75,10 +74,10 @@ class ColorPickerDialog extends StatelessWidget {
               vertical: AppDimensions.sizeS,
               horizontal: AppDimensions.sizeM,
             ),
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: AppColors.black,
-              borderRadius: BorderRadius.circular(
-                AppDimensions.circularRadiusS,
+              borderRadius: BorderRadius.all(
+                Radius.circular(AppDimensions.circularRadiusS),
               ),
             ),
             child: Text(

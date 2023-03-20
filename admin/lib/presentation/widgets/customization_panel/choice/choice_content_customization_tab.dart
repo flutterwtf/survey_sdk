@@ -60,7 +60,7 @@ class ChoiceContentCustomizationTab extends CustomizationTab {
             CustomizationMultilineTextField(
               maxHeight: AppDimensions.sizeXL,
               onChanged: onTitleChanged,
-            )
+            ),
           ],
         ),
         CustomizationItemsContainer(
@@ -80,7 +80,7 @@ class ChoiceContentCustomizationTab extends CustomizationTab {
               onChanged: onOptionsChanged,
               onRuleLimitedChanged: onRuleLimitedChanged,
               ruleValue: ruleValue,
-            )
+            ),
           ],
         ),
         if (!(editableQuestion as ChoiceQuestionData).isMultipleChoice)
