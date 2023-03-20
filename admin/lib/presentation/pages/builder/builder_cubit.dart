@@ -20,6 +20,17 @@ class BuilderCubit extends Cubit<BuilderState> {
     _init();
   }
 
+  void downloadExportedQuestions() {
+    final questions = state.surveyData.questions;
+    if (questions.isNotEmpty) {
+      final rawMap = <String, dynamic>{};
+      for (final element in questions) {
+        rawMap[element.index.toString()] = element.toJson();
+      }
+      _fileSystemRepository.downloadSurveyData(rawMap);
+    }
+  }
+
   void select(QuestionData data) => emit(
         EditQuestionBuilderState(
           selectedQuestion: data,

@@ -1,9 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:get_it/get_it.dart';
-import 'package:survey_admin/data/data_sources/filesystem_data_source_impl.dart';
 import 'package:survey_admin/data/data_sources/interfaces/filesystem_data_source.dart';
-import 'package:survey_admin/data/data_sources/session_storage_data_source_impl.dart';
-import 'package:survey_admin/data/interfaces/session_storage_data_source.dart';
+import 'package:survey_admin/data/data_sources/web/web_filesystem_data_source_impl.dart';
+import 'package:survey_admin/data/data_sources/web/web_session_storage_data_source.dart';
+import 'package:survey_admin/data/data_sources/interfaces/session_storage_data_source.dart';
 import 'package:survey_admin/data/repositories/file_system_repository_impl.dart';
 import 'package:survey_admin/data/repositories/session_storage_repository_impl.dart';
 import 'package:survey_admin/domain/repository_interfaces/file_system_repository.dart.dart';
@@ -15,38 +15,37 @@ import 'package:survey_admin/presentation/pages/new_question_page/new_question_c
 GetIt get i => GetIt.instance;
 
 void initInjector() {
-  _initDataSources();
+  kIsWeb ? _initWebDataSources() : _initMobileDataSources();
   _initRepositories();
   _initCubits();
 }
 
-
-void _initDataSources() {
-  i.registerFactory<FilesystemDataSource>(FileSystemDataSourceImpl.new);
-  if (kIsWeb) {
-    i.registerFactory<SessionStorageDataSource>(
-      SessionStorageDataSourceImpl.new,
+void _initWebDataSources() {
+  i
+    ..registerFactory<FilesystemDataSource>(
+      WebFilesystemDataSourceImpl.new,
+    )
+    ..registerFactory<SessionStorageDataSource>(
+      WebSessionStorageDataSource.new,
     );
-  }
+}
+
+Future<void> _initMobileDataSources() async {
+  throw UnimplementedError();
+}
+
+void _initRepositories() {
+  i..registerSingleton<FileSystemRepository>(
+    FileSystemRepositoryImpl(i.get()),
+  )
+  ..registerSingleton<SessionStorageRepository>(
+    SessionStorageRepositoryImpl(i.get()),
+  );
 }
 
 void _initCubits() {
   i
     ..registerFactory<AppCubit>(AppCubit.new)
-    ..registerFactory<BuilderCubit>(() => BuilderCubit(i.get(), i.get()))
-    ..registerFactory<NewQuestionCubit>(NewQuestionCubit.new);
-}
-
-void _initRepositories() {
-  i
-    ..registerFactory<SessionStorageRepository>(
-      () => SessionStorageRepositoryImpl(
-        i.get<SessionStorageDataSource>(),
-      ),
-    )
-    ..registerFactory<FileSystemRepository>(
-      () => FileSystemRepositoryImpl(
-        i.get<FilesystemDataSource>(),
-      ),
-    );
+    ..registerFactory<NewQuestionCubit>(NewQuestionCubit.new)
+    ..registerFactory<BuilderCubit>(() => BuilderCubit(i.get(), i.get()));
 }

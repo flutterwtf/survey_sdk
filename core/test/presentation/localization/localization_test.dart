@@ -37,24 +37,24 @@ List<String> _notInCamelCase(String arbContents) {
       .toList()
       .where(
         (element) => !element.contains(camelCaseExp) || element.contains('_'),
-  )
+      )
       .toList();
   return notInCamelCase;
 }
 
 bool _isSorted(
-    String arbContents, {
-      bool caseInsensitive = false,
-      bool naturalOrdering = false,
-      bool descendingOrdering = false,
-    }) {
+  String arbContents, {
+  bool caseInsensitive = false,
+  bool naturalOrdering = false,
+  bool descendingOrdering = false,
+}) {
   int compareFunction(a, b) => _commonCompareFunction(
-    a,
-    b,
-    caseInsensitive,
-    naturalOrdering,
-    descendingOrdering,
-  );
+        a,
+        b,
+        caseInsensitive,
+        naturalOrdering,
+        descendingOrdering,
+      );
 
   final Map<String, dynamic> contents = json.decode(arbContents);
 
@@ -64,12 +64,12 @@ bool _isSorted(
 }
 
 int _commonCompareFunction(
-    String a,
-    String b,
-    bool isCaseInsensitive,
-    bool isNaturalOrdering,
-    bool isDescending,
-    ) {
+  String a,
+  String b,
+  bool isCaseInsensitive,
+  bool isNaturalOrdering,
+  bool isDescending,
+) {
   var firstStr = a;
   var secondStr = b;
 
