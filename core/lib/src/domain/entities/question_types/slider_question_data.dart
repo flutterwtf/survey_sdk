@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:survey_core/src/domain/entities/constants/question_types.dart';
 import 'package:survey_core/src/domain/entities/question_types/question_data.dart';
+import 'package:survey_core/src/domain/entities/themes/slider_question_theme.dart';
 
 class SliderQuestionData extends QuestionData<SliderThemeData> {
   final num minValue;
   final num maxValue;
   final num initialValue;
+  final int divisions;
+  final SliderQuestionTheme? theme;
 
   const SliderQuestionData({
     required this.minValue,
     required this.maxValue,
+    required this.divisions,
     required this.initialValue,
+    required this.theme,
     required super.index,
     required super.title,
     required super.subtitle,
@@ -23,11 +28,13 @@ class SliderQuestionData extends QuestionData<SliderThemeData> {
           // TODO(dev): to localization somehow
           minValue: 0,
           maxValue: 10,
+          divisions: 10,
           initialValue: 5,
           title: 'Intro',
           index: index,
           subtitle: '',
           isSkip: false,
+          theme: null,
           content:
               'You may simply need a single, brief answer without discussion. '
               'Other times, you may want to talk through a scenario, evaluate '
@@ -41,11 +48,13 @@ class SliderQuestionData extends QuestionData<SliderThemeData> {
     num? minValue,
     num? maxValue,
     num? initialValue,
+    int? divisions,
     int? index,
     String? title,
     String? subtitle,
     String? content,
     bool? isSkip,
+    SliderQuestionTheme? theme,
   }) {
     return SliderQuestionData(
       minValue: minValue ?? this.minValue,
@@ -54,14 +63,11 @@ class SliderQuestionData extends QuestionData<SliderThemeData> {
       index: index ?? this.index,
       title: title ?? this.title,
       subtitle: subtitle ?? this.subtitle,
+      divisions: divisions ?? this.divisions,
       isSkip: isSkip ?? this.isSkip,
+      theme: theme ?? this.theme,
     );
   }
-
-  // TODO(dev): do like this in every question widget
-  // TODO(dev): implement theme
-  @override
-  SliderThemeData? get theme => null;
 
   @override
   String get type => QuestionTypes.slider;
@@ -69,8 +75,10 @@ class SliderQuestionData extends QuestionData<SliderThemeData> {
   @override
   Map<String, dynamic> toJson() => {
         'index': index,
+        'theme': theme?.toJson(),
         'minValue': minValue,
         'maxValue': maxValue,
+        'divisions': divisions,
         'initialValue': initialValue,
         'title': title,
         'subtitle': subtitle,
@@ -80,15 +88,18 @@ class SliderQuestionData extends QuestionData<SliderThemeData> {
       };
 
   factory SliderQuestionData.fromJson(Map<String, dynamic> json) {
+    final theme = json['theme'];
     return SliderQuestionData(
       index: json['index'],
       minValue: json['minValue'],
       maxValue: json['maxValue'],
+      divisions: json['divisions'],
       initialValue: json['initialValue'],
       title: json['title'],
       subtitle: json['subtitle'],
       isSkip: json['isSkip'],
       content: json['content'],
+      theme: theme != null ? SliderQuestionTheme.fromJson(theme) : null,
     );
   }
 
@@ -97,6 +108,7 @@ class SliderQuestionData extends QuestionData<SliderThemeData> {
         minValue,
         maxValue,
         initialValue,
+        divisions,
         index,
         title,
         subtitle,

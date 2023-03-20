@@ -23,7 +23,7 @@ class ChoiceQuestionTheme extends ThemeExtension<ChoiceQuestionTheme>
         inactiveColor = Color(json['inactiveColor']);
 
   @override
-  ThemeExtension<ChoiceQuestionTheme> copyWith({
+  ChoiceQuestionTheme copyWith({
     Color? activeColor,
     Color? inactiveColor,
   }) {
@@ -34,8 +34,8 @@ class ChoiceQuestionTheme extends ThemeExtension<ChoiceQuestionTheme>
   }
 
   @override
-  ThemeExtension<ChoiceQuestionTheme> lerp(
-    covariant ThemeExtension<ChoiceQuestionTheme>? other,
+  ChoiceQuestionTheme lerp(
+    covariant ChoiceQuestionTheme? other,
     double t,
   ) {
     if (other is! ChoiceQuestionTheme) {

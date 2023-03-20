@@ -39,7 +39,7 @@ void main() {
     isSkip: false,
   );
   const mockIntroData = IntroQuestionData(
-    mainButtonTitle: 'button title',
+    buttonText: 'button title',
     index: 0,
     title: 'title',
     subtitle: 'subtitle',

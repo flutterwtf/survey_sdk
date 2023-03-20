@@ -72,7 +72,7 @@ class IntroQuestionPage extends StatelessWidget {
                 ),
               Flexible(
                 child: QuestionBottomButton(
-                  text: data.mainButtonTitle,
+                  text: data.buttonText,
                   color: _theme.mainButtonColor,
                   textColor: _theme.mainButtonTextColor,
                   textSize: _theme.mainButtonTextSize,

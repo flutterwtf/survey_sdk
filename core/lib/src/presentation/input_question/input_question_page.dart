@@ -211,8 +211,7 @@ class _InputNumber extends StatelessWidget {
     return Form(
       key: textFieldKey,
       child: TextFormField(
-        minLines: theme.minLines,
-        maxLines: theme.maxLines,
+        maxLines: theme.lines,
         style: TextStyle(
           color: theme.textColor,
           fontSize: theme.textSize,

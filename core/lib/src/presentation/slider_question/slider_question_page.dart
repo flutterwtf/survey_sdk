@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:survey_core/src/domain/entities/question_answer.dart';
 import 'package:survey_core/src/domain/entities/question_types/slider_question_data.dart';
+import 'package:survey_core/src/domain/entities/themes/slider_question_theme.dart';
 import 'package:survey_core/src/presentation/localization/localizations.dart';
 import 'package:survey_core/src/presentation/utils/app_fonts.dart';
 import 'package:survey_core/src/presentation/utils/constants.dart';
@@ -25,7 +26,6 @@ class SliderQuestionPage extends StatefulWidget {
 }
 
 class _SliderQuestionPageState extends State<SliderQuestionPage> {
-  late final SliderThemeData _theme;
   late int _answer;
 
   @override
@@ -34,15 +34,8 @@ class _SliderQuestionPageState extends State<SliderQuestionPage> {
     _answer = widget.data.initialValue.toInt();
   }
 
-  @override
-  void didChangeDependencies() {
-    if (widget.data.theme == null) {
-      _theme = Theme.of(context).sliderTheme;
-    } else {
-      _theme = widget.data.theme!;
-    }
-    super.didChangeDependencies();
-  }
+  SliderQuestionTheme get _theme =>
+      widget.data.theme ?? const SliderQuestionTheme.common();
 
   @override
   Widget build(BuildContext context) {
@@ -98,7 +91,7 @@ class _QuestionSlider extends StatefulWidget {
   final num maxValue;
   final num initialValue;
   final ValueChanged<int> onChanged;
-  final SliderThemeData theme;
+  final SliderQuestionTheme theme;
 
   const _QuestionSlider({
     required this.minValue,
@@ -127,7 +120,15 @@ class _QuestionSliderState extends State<_QuestionSlider> {
   @override
   Widget build(BuildContext context) {
     return SliderTheme(
-      data: widget.theme,
+      data: SliderThemeData(
+        activeTrackColor: widget.theme.activeColor,
+        inactiveTrackColor: widget.theme.inactiveColor,
+        thumbColor: widget.theme.thumbColor,
+        trackHeight: widget.theme.thickness,
+        thumbShape: RoundSliderThumbShape(
+          enabledThumbRadius: widget.theme.thumbRadius,
+        ),
+      ),
       child: Column(
         children: [
           Slider(

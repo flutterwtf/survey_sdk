@@ -4,18 +4,19 @@ import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/utils/constants/app_dimensions.dart';
 import 'package:survey_admin/presentation/utils/theme_extension.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
+import 'package:survey_core/survey_core.dart';
 
 class OptionCustomizationItem extends StatefulWidget {
   final List<String> options;
-  final int ruleValue;
   final ValueChanged<List<String>> onChanged;
-  final ValueChanged<int> onRuleLimitedChanged;
+  final ValueChanged<int> onRuleValueChanged;
+  final int ruleValue;
 
   const OptionCustomizationItem({
     required this.options,
-    required this.ruleValue,
     required this.onChanged,
-    required this.onRuleLimitedChanged,
+    required this.onRuleValueChanged,
+    required this.ruleValue,
     super.key,
   });
 
@@ -52,7 +53,7 @@ class _OptionCustomizationItemState extends State<OptionCustomizationItem> {
 
   void _delete(int index) {
     if (widget.ruleValue == _options.length) {
-      widget.onRuleLimitedChanged(0);
+      widget.onRuleValueChanged(0);
     }
     setState(() => _options.removeAt(index));
     widget.onChanged(_options);

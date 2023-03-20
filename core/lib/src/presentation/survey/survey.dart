@@ -48,7 +48,11 @@ class _SurveyState extends State<Survey> {
       builder: (BuildContext context, state) {
         if (state is SurveyLoadedState) {
           return Theme(
-            data: state.surveyData.commonTheme.toThemeData(),
+            data: ThemeData(
+              extensions: [
+                state.surveyData.commonTheme,
+              ],
+            ),
             child: WillPopScope(
               onWillPop: () async {
                 _surveyController.onBack();

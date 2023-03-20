@@ -56,7 +56,7 @@ abstract class MockedQuestions {
   );
 
   static const intro1 = IntroQuestionData(
-    mainButtonTitle: 'Next',
+    buttonText: 'Next',
     index: 0,
     title: 'title',
     subtitle: 'subtitle',
@@ -64,7 +64,7 @@ abstract class MockedQuestions {
   );
 
   static const intro2 = IntroQuestionData(
-    mainButtonTitle: 'Next',
+    buttonText: 'Next',
     index: 1,
     title: 'Another title',
     subtitle: 'Another subtitle',

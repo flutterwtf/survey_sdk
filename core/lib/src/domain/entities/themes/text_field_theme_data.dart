@@ -3,14 +3,15 @@ import 'dart:ui';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:survey_core/src/domain/entities/api_object.dart';
+import 'package:survey_core/src/domain/entities/question_types/input_question_data.dart';
+import 'package:survey_core/src/domain/entities/themes/input_question_theme.dart';
 import 'package:survey_core/src/presentation/utils/colors.dart';
 import 'package:survey_core/src/presentation/utils/constants.dart';
 
 @immutable
 class TextFieldThemeData extends ThemeExtension<TextFieldThemeData>
     with ApiObject, EquatableMixin {
-  final Color fillCommonColor;
-  final Color fillInputColor;
+  final Color fill;
   final Color borderColor;
   final double borderWidth;
   final double verticalPadding;
@@ -19,17 +20,10 @@ class TextFieldThemeData extends ThemeExtension<TextFieldThemeData>
   final double hintSize;
   final Color textColor;
   final double textSize;
-  final Color titleColor;
-  final double titleSize;
-  final Color subtitleColor;
-  final double subtitleSize;
-  final double buttonTextSize;
-  final Color buttonColor;
-  final Color buttonTextColor;
+  final InputType inputType;
 
   const TextFieldThemeData({
-    required this.fillCommonColor,
-    required this.fillInputColor,
+    required this.fill,
     required this.borderColor,
     required this.borderWidth,
     required this.verticalPadding,
@@ -38,19 +32,13 @@ class TextFieldThemeData extends ThemeExtension<TextFieldThemeData>
     required this.hintSize,
     required this.textColor,
     required this.textSize,
-    required this.titleColor,
-    required this.titleSize,
-    required this.subtitleColor,
-    required this.subtitleSize,
-    required this.buttonTextSize,
-    required this.buttonColor,
-    required this.buttonTextColor,
+    required this.inputType,
   });
 
+  // TODO(dev): move commons to admin.
   const TextFieldThemeData.common()
       : this(
-          fillCommonColor: AppColors.white,
-          fillInputColor: AppColors.white,
+          fill: AppColors.white,
           borderColor: AppColors.black,
           borderWidth: AppDimensions.circularRadiusXS,
           verticalPadding: AppDimensions.marginM,
@@ -59,18 +47,11 @@ class TextFieldThemeData extends ThemeExtension<TextFieldThemeData>
           hintSize: AppDimensions.marginM,
           textColor: AppColors.black,
           textSize: AppDimensions.marginM,
-          titleColor: AppColors.black,
-          titleSize: AppDimensions.marginM,
-          subtitleColor: AppColors.black,
-          subtitleSize: AppDimensions.marginS,
-          buttonTextSize: AppDimensions.marginS,
-          buttonColor: AppColors.black,
-          buttonTextColor: AppColors.white,
+          inputType: InputType.text,
         );
 
   TextFieldThemeData.fromJson(Map<String, dynamic> json)
-      : fillCommonColor = Color(json['fillCommonColor']),
-        fillInputColor = Color(json['fillInputColor']),
+      : fill = Color(json['fill']),
         borderColor = Color(json['borderColor']),
         borderWidth = json['borderWidth'],
         verticalPadding = json['verticalPadding'],
@@ -78,19 +59,12 @@ class TextFieldThemeData extends ThemeExtension<TextFieldThemeData>
         hintColor = Color(json['hintColor']),
         hintSize = json['hintSize'],
         textColor = Color(json['textColor']),
-        textSize = json['textSize'],
-        titleColor = Color(json['titleColor']),
-        titleSize = json['titleSize'],
-        subtitleColor = Color(json['subtitleColor']),
-        subtitleSize = json['subtitleSize'],
-        buttonTextSize = json['buttonTextSize'],
-        buttonColor = Color(json['buttonColor']),
-        buttonTextColor = Color(json['buttonTextColor']);
+        inputType = InputType.values[json['inputType']],
+        textSize = json['textSize'];
 
   @override
   Map<String, dynamic> toJson() => {
-        'fillCommonColor': fillCommonColor.value,
-        'fillInputColor': fillInputColor.value,
+        'fill': fill.value,
         'borderColor': borderColor.value,
         'borderWidth': borderWidth,
         'verticalPadding': verticalPadding,
@@ -99,19 +73,12 @@ class TextFieldThemeData extends ThemeExtension<TextFieldThemeData>
         'hintSize': hintSize,
         'textColor': textColor.value,
         'textSize': textSize,
-        'titleColor': titleColor.value,
-        'titleSize': titleSize,
-        'subtitleColor': subtitleColor.value,
-        'subtitleSize': subtitleSize,
-        'buttonTextSize': buttonTextSize,
-        'buttonColor': buttonColor.value,
-        'buttonTextColor': buttonTextColor.value,
+        'inputType': inputType.index,
       };
 
   @override
   ThemeExtension<TextFieldThemeData> copyWith({
-    Color? fillCommonColor,
-    Color? fillInputColor,
+    Color? fill,
     Color? borderColor,
     double? borderWidth,
     double? verticalPadding,
@@ -120,17 +87,10 @@ class TextFieldThemeData extends ThemeExtension<TextFieldThemeData>
     double? hintSize,
     Color? textColor,
     double? textSize,
-    Color? titleColor,
-    double? titleSize,
-    Color? subtitleColor,
-    double? subtitleSize,
-    double? buttonTextSize,
-    Color? buttonColor,
-    Color? buttonTextColor,
+    InputType? inputType,
   }) {
     return TextFieldThemeData(
-      fillCommonColor: fillCommonColor ?? this.fillCommonColor,
-      fillInputColor: fillInputColor ?? this.fillInputColor,
+      fill: fill ?? this.fill,
       borderColor: borderColor ?? this.borderColor,
       borderWidth: borderWidth ?? this.borderWidth,
       verticalPadding: verticalPadding ?? this.verticalPadding,
@@ -139,27 +99,20 @@ class TextFieldThemeData extends ThemeExtension<TextFieldThemeData>
       hintSize: hintSize ?? this.hintSize,
       textColor: textColor ?? this.textColor,
       textSize: textSize ?? this.textSize,
-      titleColor: titleColor ?? this.titleColor,
-      titleSize: titleSize ?? this.titleSize,
-      subtitleColor: subtitleColor ?? this.subtitleColor,
-      subtitleSize: subtitleSize ?? this.subtitleSize,
-      buttonTextSize: buttonTextSize ?? this.buttonTextSize,
-      buttonColor: buttonColor ?? this.buttonColor,
-      buttonTextColor: buttonTextColor ?? this.buttonTextColor,
+      inputType: inputType ?? this.inputType,
     );
   }
 
   @override
-  ThemeExtension<TextFieldThemeData> lerp(
-    covariant ThemeExtension<TextFieldThemeData>? other,
+  TextFieldThemeData lerp(
+    covariant TextFieldThemeData? other,
     double t,
   ) {
     if (other is! TextFieldThemeData) {
       return this;
     }
     return TextFieldThemeData(
-      fillCommonColor: Color.lerp(fillCommonColor, other.fillCommonColor, t)!,
-      fillInputColor: Color.lerp(fillInputColor, other.fillInputColor, t)!,
+      fill: Color.lerp(fill, other.fill, t)!,
       borderColor: Color.lerp(borderColor, other.borderColor, t)!,
       borderWidth: lerpDouble(borderWidth, other.borderWidth, t)!,
       verticalPadding: lerpDouble(verticalPadding, other.verticalPadding, t)!,
@@ -169,20 +122,13 @@ class TextFieldThemeData extends ThemeExtension<TextFieldThemeData>
       hintSize: lerpDouble(hintSize, other.hintSize, t)!,
       textColor: Color.lerp(textColor, other.textColor, t)!,
       textSize: lerpDouble(textSize, other.textSize, t)!,
-      titleColor: Color.lerp(titleColor, other.titleColor, t)!,
-      titleSize: lerpDouble(titleSize, other.titleSize, t)!,
-      subtitleColor: Color.lerp(subtitleColor, other.subtitleColor, t)!,
-      subtitleSize: lerpDouble(subtitleSize, other.subtitleSize, t)!,
-      buttonTextSize: lerpDouble(buttonTextSize, other.buttonTextSize, t)!,
-      buttonColor: Color.lerp(buttonColor, other.buttonColor, t)!,
-      buttonTextColor: Color.lerp(buttonTextColor, other.buttonTextColor, t)!,
+      inputType: inputType,
     );
   }
 
   @override
   List<Object?> get props => [
-        fillCommonColor,
-        fillInputColor,
+        fill,
         borderColor,
         borderWidth,
         verticalPadding,
@@ -191,12 +137,6 @@ class TextFieldThemeData extends ThemeExtension<TextFieldThemeData>
         hintSize,
         textColor,
         textSize,
-        titleColor,
-        titleSize,
-        subtitleColor,
-        subtitleSize,
-        buttonTextSize,
-        buttonColor,
-        buttonTextColor,
+    inputType,
       ];
 }

@@ -3,10 +3,10 @@ import 'package:survey_core/src/domain/entities/question_types/question_data.dar
 import 'package:survey_core/src/domain/entities/themes/intro_question_theme.dart';
 
 class IntroQuestionData extends QuestionData {
-  final String mainButtonTitle;
+  final String buttonText;
 
   const IntroQuestionData({
-    required this.mainButtonTitle,
+    required this.buttonText,
     required super.index,
     required super.title,
     required super.subtitle,
@@ -17,7 +17,7 @@ class IntroQuestionData extends QuestionData {
   const IntroQuestionData.common({int index = 0})
       : this(
           // TODO(dev): to localization somehow
-          mainButtonTitle: 'NEXT',
+          buttonText: 'NEXT',
           title: 'Intro',
           index: index,
           subtitle: '',
@@ -32,7 +32,7 @@ class IntroQuestionData extends QuestionData {
 
   @override
   IntroQuestionData copyWith({
-    String? mainButtonTitle,
+    String? buttonText,
     int? index,
     String? title,
     String? subtitle,
@@ -40,7 +40,7 @@ class IntroQuestionData extends QuestionData {
     bool? isSkip,
   }) {
     return IntroQuestionData(
-      mainButtonTitle: mainButtonTitle ?? this.mainButtonTitle,
+      buttonText: buttonText ?? this.buttonText,
       index: index ?? this.index,
       title: title ?? this.title,
       subtitle: subtitle ?? this.subtitle,
@@ -63,7 +63,7 @@ class IntroQuestionData extends QuestionData {
         'isSkip': isSkip,
         'content': content,
         'payload': {
-          'mainButtonTitle': mainButtonTitle,
+          'buttonText': buttonText,
         },
       };
 
@@ -75,13 +75,13 @@ class IntroQuestionData extends QuestionData {
       subtitle: json['subtitle'],
       isSkip: json['isSkip'],
       content: json['content'],
-      mainButtonTitle: payload['mainButtonTitle'],
+      buttonText: payload['buttonText'],
     );
   }
 
   @override
   List<Object?> get props => [
-        mainButtonTitle,
+        buttonText,
         index,
         title,
         subtitle,

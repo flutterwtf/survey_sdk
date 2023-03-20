@@ -1,33 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:survey_admin/presentation/app/localization/localizations.dart';
+import 'package:survey_admin/presentation/pages/builder/builder_cubit.dart';
+import 'package:survey_admin/presentation/pages/builder/builder_state.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/choice/choice_buttons_customization_tab.dart';
-import 'package:survey_admin/presentation/widgets/customization_panel/choice/choice_common_customization_tab.dart';
+import 'package:survey_admin/presentation/widgets/customization_panel/common_customization_tab.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/choice/choice_content_customization_tab.dart';
 import 'package:survey_admin/presentation/widgets/question_settings_tab_bar.dart';
 import 'package:survey_core/survey_core.dart';
 
-enum RuleType {
-  none('None'),
-  more('>'),
-  less('<'),
-  moreOrEqual('>='),
-  lessOrEqual('<='),
-  equal('=');
-
-  const RuleType(
-    this.name,
-  );
-
-  final String name;
-}
-
 class ChoiceCustomizationPanel extends StatefulWidget {
-  final QuestionData editableQuestion;
-  final bool isMultipleChoice;
-
   const ChoiceCustomizationPanel({
-    required this.editableQuestion,
-    required this.isMultipleChoice,
     super.key,
   });
 
@@ -37,51 +20,31 @@ class ChoiceCustomizationPanel extends StatefulWidget {
 }
 
 class _ChoiceCustomizationPanelState extends State<ChoiceCustomizationPanel> {
-  RuleType _ruleType = RuleType.none;
-  List<String> _listOptions = [];
-  int _ruleValue = 0;
+  late final ChoiceQuestionData _data;
+
+  @override
+  void initState() {
+    // TODO(dev): Rechek.
+    final state = BlocProvider.of<BuilderCubit>(context).state
+        as EditQuestionBuilderState;
+    _data = state.selectedQuestion! as ChoiceQuestionData;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return QuestionSettingsTabBar(
       tabs: [
-        ChoiceCommonCustomizationTab(
-          title: context.localization.common,
-          onFillColorPicked: (fillColor) {},
-          onTitleColorPicked: (titleColor) {},
-          onTitleFontSizeChanged: (titleFontSize) {},
-          onSubtitleColorPicked: (subtitleColor) {},
-          onSubtitleFontSizeChanged: (subtitleFontSize) {},
-          onButtonColorPicked: (buttonColor) {},
-          onButtonFontSizeChanged: (buttonFontSize) {},
-          onButtonRadiusChanged: (buttonRadius) {},
-        ),
+        CommonCustomizationTab(title: context.localization.common),
         ChoiceButtonsCustomizationTab(
-          title: widget.isMultipleChoice
+          title: _data.isMultipleChoice
               ? context.localization.check_box
               : context.localization.radio_button,
-          onMultipleChoiceUpdate: (isMultipleChoice) {},
-          onActiveColorPicked: (activeColor) {},
-          onInactiveColorPicked: (inactiveColor) {},
         ),
         ChoiceContentCustomizationTab(
+          // TODO(dev): do we need this?
           key: UniqueKey(),
           title: context.localization.content,
-          onTitleChanged: (title) {},
-          onSubTitleChanged: (subtitle) {},
-          onOptionsChanged: (options) {
-            setState(() => _listOptions = options);
-          },
-          onRuleChanged: (value) {
-            setState(() => _ruleType = value);
-          },
-          onRuleLimitedChanged: (value) {
-            setState(() => _ruleValue = value);
-          },
-          ruleType: _ruleType,
-          ruleValue: _ruleValue,
-          listOptions: _listOptions,
-          editableQuestion: widget.editableQuestion,
         ),
       ],
     );

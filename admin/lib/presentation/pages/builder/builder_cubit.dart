@@ -27,6 +27,7 @@ class BuilderCubit extends Cubit<BuilderState> {
         ),
       );
 
+  // TODO(dev): Remove.
   void editCommonTheme() =>
       emit(EditCommonThemeBuilderState(surveyData: state.surveyData));
 
@@ -46,6 +47,25 @@ class BuilderCubit extends Cubit<BuilderState> {
         state.copyWith(surveyData: surveyData),
       );
     }
+  }
+
+  void updateQuestionData(QuestionData data) {
+    final questions = List.of(state.surveyData.questions);
+    // TODO(dev): Rewrite index system maybe?
+    questions[data.index - 1] = data;
+    emit(
+      state.copyWith(
+        surveyData: state.surveyData.copyWith(questions: questions),
+      ),
+    );
+  }
+
+  void updateTheme(CommonTheme theme) {
+    emit(
+      state.copyWith(
+        surveyData: state.surveyData.copyWith(commonTheme: theme),
+      ),
+    );
   }
 
   void _init() {

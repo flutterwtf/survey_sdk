@@ -8,7 +8,6 @@ import 'package:survey_admin/presentation/widgets/customization_panel/intro/intr
 import 'package:survey_admin/presentation/widgets/customization_panel/slider/slider_customization_panel.dart';
 import 'package:survey_core/survey_core.dart';
 
-// TODO(dev): will we use this?
 class EditorBar extends StatelessWidget {
   final QuestionData? editableQuestion;
 
@@ -28,23 +27,16 @@ class EditorBar extends StatelessWidget {
           if (questionData != null) {
             switch (questionData.type) {
               case QuestionTypes.choice:
-                return ChoiceCustomizationPanel(
-                  editableQuestion: questionData,
-                  isMultipleChoice:
-                      (questionData as ChoiceQuestionData).isMultipleChoice,
-                );
+                return const ChoiceCustomizationPanel();
               case QuestionTypes.input:
                 return const InputCustomizationPanel();
               case QuestionTypes.intro:
                 return const IntroCustomizationPanel();
               case QuestionTypes.slider:
                 return const SliderCustomizationPanel();
-              default:
-                return const SizedBox.shrink();
             }
-          } else {
-            return const CommonThemeCustomizationPanel();
           }
+          return const SizedBox.shrink();
         },
       ),
     );

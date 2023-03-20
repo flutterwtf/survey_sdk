@@ -13,6 +13,8 @@ abstract class QuestionData<T> extends Equatable with ApiObject {
   final String? content;
   final bool isSkip;
 
+  String get type;
+
   const QuestionData({
     required this.index,
     required this.title,
@@ -29,10 +31,6 @@ abstract class QuestionData<T> extends Equatable with ApiObject {
     bool? isSkip,
   });
 
-  T? get theme;
-
-  String get type;
-
   static QuestionData fromType(Map<String, dynamic> json) {
     switch (json['type']) {
       case QuestionTypes.slider:
@@ -44,7 +42,7 @@ abstract class QuestionData<T> extends Equatable with ApiObject {
       case QuestionTypes.choice:
         return ChoiceQuestionData.fromJson(json);
       default:
-        throw Exception('Unimplemented error');
+        throw UnimplementedError();
     }
   }
 }

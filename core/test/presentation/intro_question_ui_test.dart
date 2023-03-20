@@ -21,7 +21,7 @@ void main() {
       final introQuestionPage = AppTest(
         child: IntroQuestionPage(
           data: const IntroQuestionData(
-            mainButtonTitle: mainButtonTitle,
+            buttonText: mainButtonTitle,
             index: 1,
             title: title,
             content: content,

@@ -6,10 +6,16 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
   final bool isMultipleChoice;
   final List<String> options;
   final List<String>? selectedOptions;
+  final RuleType ruleType;
+  final int ruleValue;
+  final ChoiceQuestionTheme? theme;
 
   const ChoiceQuestionData({
     required this.isMultipleChoice,
     required this.options,
+    required this.ruleType,
+    required this.ruleValue,
+    required this.theme,
     required super.index,
     required super.title,
     required super.subtitle,
@@ -27,9 +33,12 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
 
   const ChoiceQuestionData.common({int index = 0})
       : this(
-          // TODO(dev): to localization somehow
+          // TODO(dev): To localization somehow.
           isMultipleChoice: false,
+          theme: null,
           options: const ['First option', 'Second option', 'Third option'],
+          ruleType: RuleType.none,
+          ruleValue: 0,
           title: 'Title',
           subtitle: '',
           isSkip: false,
@@ -52,10 +61,16 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
     String? content,
     bool? isSkip,
     List<String>? selectedOptions,
+    RuleType? ruleType,
+    int? ruleValue,
+    ChoiceQuestionTheme? theme,
   }) {
     return ChoiceQuestionData(
       isMultipleChoice: isMultipleChoice ?? this.isMultipleChoice,
       options: options ?? this.options,
+      theme: theme ?? this.theme,
+      ruleType: ruleType ?? this.ruleType,
+      ruleValue: ruleValue ?? this.ruleValue,
       index: index ?? this.index,
       title: title ?? this.title,
       subtitle: subtitle ?? this.subtitle,
@@ -63,9 +78,6 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
       selectedOptions: selectedOptions ?? this.selectedOptions,
     );
   }
-
-  @override
-  ChoiceQuestionTheme? get theme => const ChoiceQuestionTheme.common();
 
   @override
   String get type => QuestionTypes.choice;
@@ -78,15 +90,21 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
         'type': type,
         'isSkip': isSkip,
         'content': content,
+        'theme': theme?.toJson(),
+        // TODO(dev): Do we need payload?
+        // TODO(dev): Should we move keys to const?
         'payload': {
           'isMultipleChoice': isMultipleChoice,
           'options': options,
           'selectedOptions': selectedOptions,
-        }
+          'ruleType': ruleType.index,
+          'ruleValue': ruleValue,
+        },
       };
 
   factory ChoiceQuestionData.fromJson(Map<String, dynamic> json) {
     final payload = json['payload'] as Map<String, dynamic>;
+    final theme = json['theme'];
     return ChoiceQuestionData(
       index: json['index'],
       title: json['title'],
@@ -98,6 +116,9 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
       selectedOptions: payload['selectedOptions'] != null
           ? (payload['selectedOptions'] as List<dynamic>).cast<String>()
           : null,
+      ruleType: RuleType.values[payload['ruleType']],
+      ruleValue: payload['ruleValue'],
+      theme: theme != null ? ChoiceQuestionTheme.fromJson(theme) : null,
     );
   }
 
@@ -112,4 +133,19 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
         content,
         selectedOptions,
       ];
+}
+
+enum RuleType {
+  none('None'),
+  more('>'),
+  less('<'),
+  moreOrEqual('>='),
+  lessOrEqual('<='),
+  equal('=');
+
+  const RuleType(
+    this.name,
+  );
+
+  final String name;
 }

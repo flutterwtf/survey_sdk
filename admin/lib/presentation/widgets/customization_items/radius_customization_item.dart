@@ -7,7 +7,7 @@ import 'package:survey_admin/presentation/widgets/customization_items/customizat
 
 class RadiusCustomizationItem extends StatelessWidget {
   final double initialValue;
-  final ValueChanged<int> onRadiusChanged;
+  final ValueChanged<double> onRadiusChanged;
 
   const RadiusCustomizationItem({
     required this.initialValue,
@@ -31,7 +31,7 @@ class RadiusCustomizationItem extends StatelessWidget {
             onChanged: (value) {
               if (value == null) return;
 
-              final radius = int.tryParse(value);
+              final radius = double.tryParse(value);
               if (radius != null) {
                 onRadiusChanged(radius);
               }

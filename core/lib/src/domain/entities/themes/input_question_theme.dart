@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:survey_core/src/domain/entities/api_object.dart';
+import 'package:survey_core/src/domain/entities/question_types/input_question_data.dart';
 import 'package:survey_core/src/presentation/utils/app_fonts.dart';
 import 'package:survey_core/src/presentation/utils/colors.dart';
 
@@ -15,11 +16,14 @@ class InputQuestionTheme extends ThemeExtension<InputQuestionTheme>
   final double hintSize;
   final Color textColor;
   final double textSize;
-  final int? minLines;
-  final int? maxLines;
+  final int? lines;
   final double? verticalPadding;
   final double? horizontalPadding;
+  final bool isMultiline;
+  final String errorText;
+  final InputType inputType;
 
+  // TODO(dev): Add hint text.
   const InputQuestionTheme({
     required this.backgroundColor,
     required this.borderColor,
@@ -28,40 +32,45 @@ class InputQuestionTheme extends ThemeExtension<InputQuestionTheme>
     required this.hintSize,
     required this.textColor,
     required this.textSize,
-    this.minLines,
-    this.maxLines,
+    required this.isMultiline,
+    required this.errorText,
+    required this.inputType,
+    this.lines,
     this.verticalPadding,
     this.horizontalPadding,
   });
 
   InputQuestionTheme.fromJson(Map<String, dynamic> json)
-      : backgroundColor = Color(int.parse(json['backgroundColor'].toString())),
-        borderColor = Color(int.parse(json['borderColor'].toString())),
-        borderWidth = double.parse(json['borderWidth'].toString()),
-        hintColor = Color(int.parse(json['hintColor'].toString())),
-        hintSize = double.parse(json['hintSize'].toString()),
-        textColor = Color(int.parse(json['textColor'].toString())),
-        textSize = double.parse(json['textSize'].toString()),
-        minLines = int.parse(json['minLines'].toString()),
-        maxLines = int.parse(json['maxLines'].toString()),
-        verticalPadding = double.parse(json['verticalPadding'].toString()),
-        horizontalPadding = double.parse(json['horizontalPadding'].toString());
+      : backgroundColor = Color(json['backgroundColor']),
+        borderColor = Color(json['borderColor']),
+        borderWidth = json['borderWidth'],
+        hintColor = Color(json['hintColor']),
+        hintSize = json['hintSize'],
+        textColor = Color(json['textColor']),
+        textSize = json['textSize'],
+        lines = json['lines'],
+        verticalPadding = json['verticalPadding'],
+        isMultiline = json['isMultiLine'],
+        errorText = json['errorText'],
+        inputType = json['inputType'],
+        horizontalPadding = json['horizontalPadding'];
 
   @override
   Map<String, dynamic> toJson() => {
-    'backgroundColor': backgroundColor.value,
-    'borderColor': borderColor.value,
-    'borderWidth': borderWidth,
-    'hintColor': hintColor.value,
-    'hintSize': hintSize,
-    'textColor': textColor.value,
-    'textSize': textSize,
-    'minLines': minLines,
-    'maxLines': maxLines,
-    'verticalPadding': verticalPadding,
-    'horizontalPadding': horizontalPadding,
-  };
-
+        'backgroundColor': backgroundColor.value,
+        'borderColor': borderColor.value,
+        'borderWidth': borderWidth,
+        'hintColor': hintColor.value,
+        'hintSize': hintSize,
+        'textColor': textColor.value,
+        'textSize': textSize,
+        'lines': lines,
+        'isMultiline': isMultiline,
+        'errorText': errorText,
+        'inputType': inputType,
+        'verticalPadding': verticalPadding,
+        'horizontalPadding': horizontalPadding,
+      };
 
   const InputQuestionTheme.common()
       : this(
@@ -72,10 +81,14 @@ class InputQuestionTheme extends ThemeExtension<InputQuestionTheme>
           hintSize: AppFonts.sizeL,
           textColor: AppColors.black,
           textSize: AppFonts.sizeL,
+          inputType: InputType.text,
+          // TODO(dev): Replace with the text.
+          errorText: 'Error',
+          isMultiline: false,
         );
 
   @override
-  ThemeExtension<InputQuestionTheme> copyWith({
+  InputQuestionTheme copyWith({
     Color? backgroundColor,
     Color? borderColor,
     double? borderWidth,
@@ -84,10 +97,13 @@ class InputQuestionTheme extends ThemeExtension<InputQuestionTheme>
     Color? textColor,
     double? textSize,
     int? minLines,
-    int? maxLines,
+    int? lines,
     double? verticalPadding,
     double? horizontalPadding,
     String? hintText,
+    String? errorText,
+    InputType? inputType,
+    bool? isMultiline,
   }) {
     return InputQuestionTheme(
       backgroundColor: backgroundColor ?? this.backgroundColor,
@@ -97,16 +113,18 @@ class InputQuestionTheme extends ThemeExtension<InputQuestionTheme>
       hintSize: hintSize ?? this.hintSize,
       textColor: textColor ?? this.textColor,
       textSize: textSize ?? this.textSize,
-      minLines: minLines ?? this.minLines,
-      maxLines: maxLines ?? this.maxLines,
+      lines: lines ?? this.lines,
       verticalPadding: verticalPadding ?? this.verticalPadding,
       horizontalPadding: horizontalPadding ?? this.horizontalPadding,
+      inputType: inputType ?? this.inputType,
+      isMultiline: isMultiline ?? this.isMultiline,
+      errorText: errorText ?? this.errorText,
     );
   }
 
   @override
-  ThemeExtension<InputQuestionTheme> lerp(
-    covariant ThemeExtension<InputQuestionTheme>? other,
+  InputQuestionTheme lerp(
+    covariant InputQuestionTheme? other,
     double t,
   ) {
     if (other is! InputQuestionTheme) {
@@ -120,11 +138,13 @@ class InputQuestionTheme extends ThemeExtension<InputQuestionTheme>
       hintSize: lerpDouble(hintSize, other.hintSize, t)!,
       textColor: Color.lerp(textColor, other.textColor, t)!,
       textSize: lerpDouble(textSize, other.textSize, t)!,
-      minLines: lerpDouble(minLines, other.minLines, t)?.toInt(),
-      maxLines: lerpDouble(maxLines, other.maxLines, t)?.toInt(),
+      lines: lerpDouble(lines, other.lines, t)?.toInt(),
       verticalPadding: lerpDouble(verticalPadding, other.verticalPadding, t),
       horizontalPadding:
           lerpDouble(horizontalPadding, other.horizontalPadding, t),
+      isMultiline: isMultiline,
+      inputType: inputType,
+      errorText: errorText,
     );
   }
 
@@ -133,13 +153,24 @@ class InputQuestionTheme extends ThemeExtension<InputQuestionTheme>
         backgroundColor,
         borderColor,
         borderWidth,
+        inputType,
         hintColor,
         hintSize,
         textColor,
         textSize,
-        minLines,
-        maxLines,
+        errorText,
+        lines,
         verticalPadding,
         horizontalPadding,
+        isMultiline,
       ];
+}
+
+enum InputType {
+  text,
+  number,
+  date,
+  email,
+  password,
+  phone;
 }
