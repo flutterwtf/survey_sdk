@@ -25,23 +25,6 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
           'case of multiple choice higher than zero',
         );
 
-  const ChoiceQuestionData.common({int index = 0})
-      : this(
-          // TODO(dev): to localization somehow
-          isMultipleChoice: false,
-          options: const ['First option', 'Second option', 'Third option'],
-          title: 'Title',
-          subtitle: '',
-          isSkip: false,
-          content:
-              'You may simply need a single, brief answer without discussion. '
-              'Other times, you may want to talk through a scenario, evaluate '
-              'how well a group is learning new material or solicit feedback. '
-              'The types of questions you ask directly impact the type of '
-              'answer you receive.',
-          index: index,
-        );
-
   @override
   ChoiceQuestionData copyWith({
     bool? isMultipleChoice,

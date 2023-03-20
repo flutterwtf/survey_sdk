@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get_it/get_it.dart';
 import 'package:survey_admin/data/data_sources/filesystem_data_source_impl.dart';
@@ -11,6 +12,7 @@ import 'package:survey_admin/domain/repository_interfaces/session_storage_reposi
 import 'package:survey_admin/presentation/app/app_cubit.dart';
 import 'package:survey_admin/presentation/pages/builder/builder_cubit.dart';
 import 'package:survey_admin/presentation/pages/new_question_page/new_question_cubit.dart';
+import 'package:survey_admin/presentation/utils/common_data.dart';
 
 GetIt get i => GetIt.instance;
 
@@ -48,4 +50,8 @@ void _initRepositories() {
         i.get<FileSystemDataSource>(),
       ),
     );
+}
+
+void initCommonData(BuildContext context) {
+  i.registerFactory<CommonData>(() => CommonData(context));
 }

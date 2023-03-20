@@ -39,9 +39,8 @@ class _QuestionListState extends State<QuestionList> {
   @override
   void initState() {
     super.initState();
-    _questionList = widget.questions;
-    if (_questionList.isNotEmpty) {
-      widget.onSelect(_questionList.first);
+    if (widget.questions.isNotEmpty) {
+      widget.onSelect(widget.questions.first);
     }
     RawKeyboard.instance.addListener(_handleKeyDown);
   }
@@ -74,6 +73,12 @@ class _QuestionListState extends State<QuestionList> {
     for (var i = 0; i < _questionList.length; i++) {
       _questionList[i] = _questionList[i].copyWith(index: i + 1);
     }
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _questionList = widget.questions;
   }
 
   @override

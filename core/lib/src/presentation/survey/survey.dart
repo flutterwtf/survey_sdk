@@ -38,6 +38,10 @@ class _SurveyState extends State<Survey> {
     Injector().init();
     _cubit = Injector().surveyCubit;
     _surveyController = widget.controller ?? SurveyController();
+  }
+  @override
+  void didChangeDependencies(){
+    super.didChangeDependencies();
     _cubit.initData(widget.filePath, widget.surveyData);
   }
 
