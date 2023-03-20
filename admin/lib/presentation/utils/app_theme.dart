@@ -15,6 +15,7 @@ abstract class AppTheme {
       selectedTileColor: AppColors.greyBackground,
     ),
     dividerTheme: const DividerThemeData(
+      space: AppDimensions.thinBorderWidth,
       color: AppColors.greyBackground,
       thickness: AppDimensions.thinBorderWidth,
     ),

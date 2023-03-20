@@ -41,6 +41,7 @@ class _QuestionSettingsTabBarState extends State<QuestionSettingsTabBar>
   Widget build(BuildContext context) {
     return Column(
       children: [
+        const Divider(),
         TabBar(
           controller: _tabController,
           indicatorColor: AppColors.black,
