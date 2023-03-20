@@ -32,7 +32,7 @@ class IntroContentCustomizationTab extends CustomizationTab {
             CustomizationMultilineTextField(
               maxHeight: AppDimensions.sizeL,
               onChanged: onTitleChanged,
-            )
+            ),
           ],
         ),
         CustomizationItemsContainer(
@@ -50,7 +50,7 @@ class IntroContentCustomizationTab extends CustomizationTab {
             CustomizationMultilineTextField(
               maxHeight: AppDimensions.sizeL,
               onChanged: onPrimaryButtonTextChanged,
-            )
+            ),
           ],
         ),
         CustomizationItemsContainer(

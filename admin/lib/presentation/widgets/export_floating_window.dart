@@ -94,17 +94,17 @@ class ExportFloatingWindow extends StatelessWidget {
                   children: [
                     OutlinedButton(
                       onPressed: onCopyPressed,
-                      style: ButtonStyle(
-                        backgroundColor: const MaterialStatePropertyAll(
+                      style: const ButtonStyle(
+                        backgroundColor: MaterialStatePropertyAll(
                           AppColors.white,
                         ),
-                        side: const MaterialStatePropertyAll(
+                        side: MaterialStatePropertyAll(
                           BorderSide(),
                         ),
                         shape: MaterialStatePropertyAll(
                           RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(
-                              AppDimensions.circularRadiusXS,
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(AppDimensions.circularRadiusXS),
                             ),
                           ),
                         ),
@@ -123,14 +123,14 @@ class ExportFloatingWindow extends StatelessWidget {
                     ),
                     FilledButton(
                       onPressed: onDownloadPressed,
-                      style: ButtonStyle(
-                        backgroundColor: const MaterialStatePropertyAll(
+                      style: const ButtonStyle(
+                        backgroundColor: MaterialStatePropertyAll(
                           AppColors.black,
                         ),
                         shape: MaterialStatePropertyAll(
                           RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(
-                              AppDimensions.circularRadiusXS,
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(AppDimensions.circularRadiusXS),
                             ),
                           ),
                         ),

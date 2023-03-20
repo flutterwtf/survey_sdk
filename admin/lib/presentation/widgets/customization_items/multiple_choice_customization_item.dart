@@ -24,6 +24,7 @@ class _MultipleChoiceCustomizationItemState
   @override
   void initState() {
     super.initState();
+
     _isMultipleChoice = widget.isMultipleChoice;
   }
 
@@ -35,9 +36,7 @@ class _MultipleChoiceCustomizationItemState
         SwitchCustomizationItem(
           title: context.localization.multiple_choice,
           onChanged: (isToggled) {
-            setState(() {
-              _isMultipleChoice = isToggled;
-            });
+            setState(() => _isMultipleChoice = isToggled);
             widget.onChanged(_isMultipleChoice);
           },
         ),

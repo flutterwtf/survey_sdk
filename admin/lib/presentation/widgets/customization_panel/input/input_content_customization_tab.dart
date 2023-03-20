@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:survey_admin/presentation/app/localization/localizations.dart';
+import 'package:survey_admin/presentation/utils/constants/app_dimensions.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_multiline_text_field.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/customization_tab.dart';
@@ -19,8 +20,6 @@ class InputContentCustomizationTab extends CustomizationTab {
     super.key,
   });
 
-  static const double _maxInputTextHeight = 100;
-
   @override
   Widget build(BuildContext context) {
     return ListView(
@@ -30,7 +29,7 @@ class InputContentCustomizationTab extends CustomizationTab {
           isTopDividerShown: true,
           children: [
             CustomizationMultilineTextField(
-              maxHeight: _maxInputTextHeight,
+              maxHeight: AppDimensions.maxTextFieldHeight,
               onChanged: onTitleChanged,
             ),
           ],
@@ -39,7 +38,7 @@ class InputContentCustomizationTab extends CustomizationTab {
           title: context.localization.subtitle,
           children: [
             CustomizationMultilineTextField(
-              maxHeight: _maxInputTextHeight,
+              maxHeight: AppDimensions.maxTextFieldHeight,
               onChanged: onSubtitleChanged,
             ),
           ],
@@ -48,7 +47,7 @@ class InputContentCustomizationTab extends CustomizationTab {
           title: context.localization.hint,
           children: [
             CustomizationMultilineTextField(
-              maxHeight: _maxInputTextHeight,
+              maxHeight: AppDimensions.maxTextFieldHeight,
               onChanged: onHintTextChanged,
             ),
           ],
@@ -57,7 +56,7 @@ class InputContentCustomizationTab extends CustomizationTab {
           title: context.localization.button,
           children: [
             CustomizationMultilineTextField(
-              maxHeight: _maxInputTextHeight,
+              maxHeight: AppDimensions.maxTextFieldHeight,
               onChanged: onButtonTextChanged,
             ),
           ],
