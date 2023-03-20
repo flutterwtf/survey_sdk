@@ -18,36 +18,6 @@ class SurveyData extends ApiObject {
     required this.commonTheme,
   });
 
-  SurveyData.common()
-      : this(
-          questions: [
-            const IntroQuestionData.common(index: 1),
-            InputQuestionData.common(index: 2),
-          ],
-          commonTheme: CommonTheme(
-            textFieldThemeData: const TextFieldThemeData(
-              fillCommonColor: AppColors.black,
-              fillInputColor: AppColors.white,
-              borderColor: AppColors.black,
-              borderWidth: AppDimensions.borderWidth,
-              verticalPadding: AppDimensions.margin2XS,
-              horizontalPadding: AppDimensions.margin2XS,
-              hintColor: AppColors.textGrey,
-              hintSize: AppFonts.sizeS,
-              textColor: AppColors.black,
-              textSize: AppFonts.sizeS,
-              titleColor: AppColors.black,
-              titleSize: AppFonts.sizeM,
-              subtitleColor: AppColors.black,
-              subtitleSize: AppFonts.sizeS,
-              buttonTextSize: AppFonts.sizeS,
-              buttonColor: AppColors.white,
-              buttonTextColor: AppColors.black,
-            ),
-            sliderThemeData: const SliderThemeData(),
-          ),
-        );
-
   @override
   Map<String, dynamic> toJson() {
     return {

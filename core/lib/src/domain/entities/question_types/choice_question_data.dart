@@ -1,4 +1,3 @@
-import 'package:survey_core/src/domain/entities/constants/question_data_common.dart';
 import 'package:survey_core/src/domain/entities/constants/question_types.dart';
 import 'package:survey_core/src/domain/entities/question_types/question_data.dart';
 import 'package:survey_core/src/domain/entities/themes/choice_question_theme.dart';
@@ -24,17 +23,6 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
           'Selected options should be null, or in case of single '
           'choice buttons have the length of 1, and in '
           'case of multiple choice higher than zero',
-        );
-
-  const ChoiceQuestionData.common({int index = 0})
-      : this(
-          isMultipleChoice: false,
-          options: QuestionDataCommon.choiceQuestionOptions,
-          title: QuestionDataCommon.choiceQuestionTitle,
-          subtitle: QuestionDataCommon.choiceQuestionSubtitle,
-          isSkip: false,
-          content: QuestionDataCommon.questionContent,
-          index: index,
         );
 
   @override

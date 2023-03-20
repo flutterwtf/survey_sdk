@@ -1,4 +1,3 @@
-import 'package:survey_core/src/domain/entities/constants/question_data_common.dart';
 import 'package:survey_core/src/domain/entities/constants/question_types.dart';
 import 'package:survey_core/src/domain/entities/question_types/question_data.dart';
 import 'package:survey_core/src/domain/entities/themes/intro_question_theme.dart';
@@ -14,16 +13,6 @@ class IntroQuestionData extends QuestionData {
     required super.isSkip,
     super.content,
   });
-
-  const IntroQuestionData.common({int index = 0})
-      : this(
-          mainButtonTitle: QuestionDataCommon.introQuestionMainButtonTitle,
-          title: QuestionDataCommon.introQuestionTitle,
-          index: index,
-          subtitle: QuestionDataCommon.choiceQuestionSubtitle,
-          isSkip: false,
-          content: QuestionDataCommon.questionContent,
-        );
 
   @override
   IntroQuestionData copyWith({

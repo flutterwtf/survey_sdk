@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:survey_admin/presentation/app/localization/localizations.dart';
+import 'package:survey_admin/presentation/utils/common_data.dart';
 import 'package:survey_admin/presentation/utils/constants/app_assets.dart';
 import 'package:survey_core/survey_core.dart';
 
@@ -24,16 +25,16 @@ extension NewQuestionTabsExt on NewQuestionTabs {
     }
   }
 
-  QuestionData get data {
+  Future<QuestionData> get data {
     switch (this) {
       case NewQuestionTabs.intro:
-        return const IntroQuestionData.common();
+        return CommonData.introQuestionData();
       case NewQuestionTabs.choice:
-        return const ChoiceQuestionData.common();
+        return CommonData.choiceQuestionData();
       case NewQuestionTabs.slider:
-        return const SliderQuestionData.common();
+        return CommonData.sliderQuestionData();
       case NewQuestionTabs.customInput:
-        return InputQuestionData.common();
+        return CommonData.inputQuestionData();
     }
   }
 

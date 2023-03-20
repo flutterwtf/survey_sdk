@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:survey_admin/domain/repository_interfaces/file_system_repository.dart.dart';
 import 'package:survey_admin/domain/repository_interfaces/session_storage_repository.dart';
 import 'package:survey_admin/presentation/pages/builder/builder_state.dart';
+import 'package:survey_admin/presentation/utils/common_data.dart';
 import 'package:survey_core/survey_core.dart';
 
 class BuilderCubit extends Cubit<BuilderState> {
@@ -14,7 +14,10 @@ class BuilderCubit extends Cubit<BuilderState> {
     this._sessionStorageRepository,
   ) : super(
           BuilderState(
-            surveyData: SurveyData.common(),
+            surveyData: SurveyData(
+              questions: [],
+              commonTheme: CommonData.commonTheme,
+            ),
             selectedQuestion: null,
           ),
         ) {
@@ -43,9 +46,9 @@ class BuilderCubit extends Cubit<BuilderState> {
     }
   }
 
-  void _init() {
-    final surveyData =
-        _sessionStorageRepository.getSurveyData() ?? SurveyData.common();
+  Future<void> _init() async {
+    final surveyData = _sessionStorageRepository.getSurveyData() ??
+        await CommonData.surveyData;
     emit(state.copyWith(surveyData: surveyData));
   }
 }

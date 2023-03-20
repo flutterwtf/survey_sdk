@@ -36,9 +36,8 @@ class _QuestionListState extends State<QuestionList> {
   @override
   void initState() {
     super.initState();
-    _questionList = widget.questions;
-    if (_questionList.isNotEmpty) {
-      widget.onSelect(_questionList.first);
+    if (widget.questions.isNotEmpty) {
+      widget.onSelect(widget.questions.first);
     }
     RawKeyboard.instance.addListener(_handleKeyDown);
   }
@@ -81,6 +80,7 @@ class _QuestionListState extends State<QuestionList> {
 
   @override
   Widget build(BuildContext context) {
+    _questionList = widget.questions;
     return Container(
       color: AppColors.white,
       width: AppDimensions.surveyContentBarWidth,
@@ -98,7 +98,7 @@ class _QuestionListState extends State<QuestionList> {
                 _addQuestion(questionData);
               }
             },
-            questionList: _questionList,
+            questionList: widget.questions,
           ),
           Expanded(
             child: ContextMenuOverlay(

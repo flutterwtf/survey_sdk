@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:survey_core/src/domain/entities/constants/question_data_common.dart';
 import 'package:survey_core/src/domain/entities/constants/question_types.dart';
 import 'package:survey_core/src/domain/entities/question_types/question_data.dart';
 
@@ -18,18 +17,6 @@ class SliderQuestionData extends QuestionData<SliderThemeData> {
     required super.isSkip,
     super.content,
   });
-
-  const SliderQuestionData.common({int index = 0})
-      : this(
-          minValue: 0,
-          maxValue: 10,
-          initialValue: 5,
-          title: QuestionDataCommon.sliderQuestionTitle,
-          index: index,
-          subtitle: QuestionDataCommon.sliderQuestionSubtitle,
-          isSkip: false,
-          content: QuestionDataCommon.questionContent,
-        );
 
   @override
   SliderQuestionData copyWith({

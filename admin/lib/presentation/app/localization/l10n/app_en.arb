@@ -60,5 +60,10 @@
   "delete_question": "Delete question",
   "multiple_choice":"Multiple choice",
   "validator_error_text_title": "Validation error message",
-  "validator_error_hint": "Error message"
+  "validator_error_hint": "Error message",
+  "empty_subtitle":"",
+  "question_content":"You may simply need a single, brief answer without discussion. Other times, you may want to talk through a scenario, evaluate how well a group is learning new material or solicit feedback. The types of questions you ask directly impact the type of answer you receive.",
+  "first_option":"First option",
+  "second_option":"Second option",
+  "third_option":"ThirdOption"
 }

@@ -1,4 +1,3 @@
-import 'package:survey_core/src/domain/entities/constants/question_data_common.dart';
 import 'package:survey_core/src/domain/entities/constants/question_types.dart';
 import 'package:survey_core/src/domain/entities/input_validator.dart';
 import 'package:survey_core/src/domain/entities/question_types/question_data.dart';
@@ -26,16 +25,6 @@ class InputQuestionData extends QuestionData<InputQuestionTheme> {
     super.content,
     this.hintText,
   });
-
-  InputQuestionData.common({int index = 0})
-      : this(
-          validator: InputValidator.number(),
-          index: index,
-          title: QuestionDataCommon.inputQuestionTitle,
-          subtitle: QuestionDataCommon.choiceQuestionSubtitle,
-          isSkip: false,
-          content: QuestionDataCommon.inputQuestionContent,
-        );
 
   @override
   InputQuestionData copyWith({
