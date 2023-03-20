@@ -8,22 +8,34 @@ import 'package:survey_core/survey_core.dart';
 class SurveyCubit extends Cubit<SurveyState> {
   final SurveyDataRepository _surveyDataRepository;
 
-  SurveyCubit(this._surveyDataRepository) : super(const SurveyState());
+  SurveyCubit(this._surveyDataRepository) : super(const SurveyEmptyState());
 
-  // // TODO(dev): split into two methods.
+  // TODO(dev): split into two methods.
   Future<void> initData(String? filePath, SurveyData? surveyData) async {
     if (filePath != null) {
       final data = await _surveyDataRepository.getSurveyData(filePath);
-      emit(state.copyWith(surveyData: data));
+      _setSurveyData(data);
     } else {
-      emit(state.copyWith(surveyData: surveyData));
+      if (surveyData != null) {
+        _setSurveyData(surveyData);
+      }
     }
   }
 
-  void saveAnswer({required int index, required dynamic data}) {
-    final answer = QuestionAnswer(data);
-    final newAnswers = Map<int, QuestionAnswer>.of(state.answers);
-    newAnswers[index] = answer;
-    emit(state.copyWith(answers: newAnswers));
+  void saveAnswer({required int index, required QuestionAnswer answer}) {
+    final currentState = state;
+    if (currentState is SurveyLoadedState) {
+      final newAnswers = Map<int, QuestionAnswer>.of(currentState.answers);
+      newAnswers[index] = answer;
+      emit(currentState.copyWith(answers: newAnswers));
+    }
+  }
+
+  void _setSurveyData(SurveyData surveyData) {
+    emit(SurveyLoadedState(surveyData: surveyData));
+    // final currentState = state;
+    // if (currentState is SurveyLoadedState) {
+    //   emit(currentState.copyWith(surveyData: surveyData));
+    // }
   }
 }

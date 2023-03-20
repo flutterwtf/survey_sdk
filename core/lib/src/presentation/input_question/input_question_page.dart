@@ -1,13 +1,10 @@
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:survey_core/src/domain/entities/question_answer.dart';
 import 'package:survey_core/src/domain/entities/question_types/input_question_data.dart';
 import 'package:survey_core/src/domain/entities/themes/input_question_theme.dart';
-import 'package:survey_core/src/presentation/di/injector.dart';
 import 'package:survey_core/src/presentation/localization/localizations.dart';
-import 'package:survey_core/src/presentation/survey/survey_cubit.dart';
-import 'package:survey_core/src/presentation/survey/survey_state.dart';
 import 'package:survey_core/src/presentation/utils/constants.dart';
 import 'package:survey_core/src/presentation/utils/data_to_widget_util.dart';
 import 'package:survey_core/src/presentation/widgets/question_bottom_button.dart';
@@ -114,11 +111,11 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
                 isDateType
                     ? widget.onSend.call(
                         index: widget.data.index,
-                        data: _dateTime,
+                        answer: QuestionAnswer<DateTime>(_dateTime),
                       )
                     : widget.onSend.call(
                         index: widget.data.index,
-                        data: _input,
+                        answer: QuestionAnswer<String>(_input),
                       );
               }
             },
