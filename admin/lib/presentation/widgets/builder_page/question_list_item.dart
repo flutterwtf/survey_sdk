@@ -41,8 +41,6 @@ class QuestionListItem extends StatelessWidget {
       child: ListTile(
         onTap: () => onTap(questionData),
         selected: isSelected,
-        selectedColor: AppColors.black,
-        selectedTileColor: AppColors.greyBackground,
         tileColor: isSelected ? AppColors.greyBackground : AppColors.white,
         title: Padding(
           padding: const EdgeInsets.all(AppDimensions.margin2XS),

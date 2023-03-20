@@ -43,10 +43,7 @@ class _QuestionSettingsTabBarState extends State<QuestionSettingsTabBar>
       children: [
         TabBar(
           controller: _tabController,
-          labelColor: AppColors.black,
-          unselectedLabelColor: AppColors.customizationTabBarInactiveText,
           indicatorColor: AppColors.black,
-          indicatorSize: TabBarIndicatorSize.label,
           labelStyle: context.theme.textTheme.bodyMedium?.copyWith(
             fontWeight: AppFonts.weightMedium,
           ),
