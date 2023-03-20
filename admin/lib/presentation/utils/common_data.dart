@@ -1,22 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:survey_admin/presentation/app/localization/localizations.dart';
-import 'package:survey_admin/presentation/utils/app_fonts.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/utils/constants/app_dimensions.dart';
 import 'package:survey_core/survey_core.dart';
 
-abstract class CommonData {
+class CommonData {
+  final BuildContext context;
   static const _minValue = 0;
   static const _maxValue = 10;
   static const _initialValue = 5;
   static const _firstIndex = 1;
   static const _secondIndex = 2;
 
-  static CommonTheme commonTheme({BuildContext? context}) {
-    final sliderTheme = context != null
-        ? Theme.of(context).sliderTheme
-        : const SliderThemeData();
+  CommonTheme get commonTheme {
     return CommonTheme(
       textFieldThemeData: const TextFieldThemeData(
         fillCommonColor: AppColors.white,
@@ -37,24 +33,23 @@ abstract class CommonData {
         buttonColor: AppColors.black,
         buttonTextColor: AppColors.white,
       ),
-      sliderThemeData: sliderTheme,
+      sliderThemeData: Theme.of(context).sliderTheme,
     );
   }
 
-  static SurveyData surveyData(BuildContext context) {
+  SurveyData get surveyData {
     return SurveyData(
       questions: [
-        CommonData.intro(context: context, index: _firstIndex),
-        CommonData.input(context: context, index: _secondIndex),
+        intro(index: _firstIndex),
+        input(index: _secondIndex),
       ],
-      commonTheme: commonTheme(context: context),
+      commonTheme: commonTheme,
     );
   }
 
-  static IntroQuestionData intro({
-    required BuildContext context,
-    int index = 0,
-  }) {
+  const CommonData(this.context);
+
+  IntroQuestionData intro({int index = 0}) {
     return IntroQuestionData(
       mainButtonTitle: context.localization.next,
       title: context.localization.intro,
@@ -65,10 +60,7 @@ abstract class CommonData {
     );
   }
 
-  static InputQuestionData input({
-    required BuildContext context,
-    int index = 0,
-  }) {
+  InputQuestionData input({int index = 0}) {
     return InputQuestionData(
       validator: InputValidator.number(),
       index: index,
@@ -79,10 +71,7 @@ abstract class CommonData {
     );
   }
 
-  static ChoiceQuestionData choice({
-    required BuildContext context,
-    int index = 0,
-  }) {
+  ChoiceQuestionData choice({int index = 0}) {
     return ChoiceQuestionData(
       isMultipleChoice: false,
       options: [
@@ -98,10 +87,7 @@ abstract class CommonData {
     );
   }
 
-  static SliderQuestionData slider({
-    required BuildContext context,
-    int index = 0,
-  }) {
+  SliderQuestionData slider({int index = 0}) {
     return SliderQuestionData(
       minValue: _minValue,
       maxValue: _maxValue,

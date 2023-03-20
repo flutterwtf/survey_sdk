@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:survey_admin/presentation/app/di/injector.dart';
 import 'package:survey_admin/presentation/app/localization/localizations.dart';
 import 'package:survey_admin/presentation/utils/common_data.dart';
 import 'package:survey_admin/presentation/utils/constants/app_assets.dart';
@@ -28,13 +29,13 @@ extension NewQuestionTabsExt on NewQuestionTabs {
   QuestionData data(BuildContext context) {
     switch (this) {
       case NewQuestionTabs.intro:
-        return CommonData.intro(context: context);
+        return i.get<CommonData>().intro();
       case NewQuestionTabs.choice:
-        return CommonData.choice(context: context);
+        return i.get<CommonData>().choice();
       case NewQuestionTabs.slider:
-        return CommonData.slider(context: context);
+        return i.get<CommonData>().slider();
       case NewQuestionTabs.customInput:
-        return CommonData.input(context: context);
+        return i.get<CommonData>().input();
     }
   }
 

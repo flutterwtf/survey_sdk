@@ -22,13 +22,14 @@ class BuilderPage extends StatefulWidget {
 }
 
 class _BuilderPageState extends State<BuilderPage> {
-  final _cubit = i.get<BuilderCubit>();
+  late final BuilderCubit _cubit;
   final _surveyController = SurveyController();
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    _cubit.initState(context);
+    initCommonData(context);
+    _cubit = i.get<BuilderCubit>();
   }
 
   @override
