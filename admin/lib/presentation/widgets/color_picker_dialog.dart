@@ -41,9 +41,9 @@ class ColorPickerDialog extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(context.localization.hex),
-                  const SizedBox(width: 10),
+                  const SizedBox(width: AppDimensions.marginXS),
                   SizedBox(
-                    width: 75,
+                    width: AppDimensions.textFieldWidth,
                     child: TextField(
                       controller: colorTextController,
                       inputFormatters: [

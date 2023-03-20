@@ -7,10 +7,16 @@ import 'package:survey_admin/presentation/widgets/customization_items/customizat
 class ColorCustomizationItem extends StatefulWidget {
   final Color initialColor;
   final ValueChanged<Color> onColorPicked;
+  final String? initialSize;
+  final ValueChanged<double>? onSizeChanged;
+  final InputDecoration? decoration;
 
   const ColorCustomizationItem({
     required this.initialColor,
     required this.onColorPicked,
+    this.initialSize,
+    this.onSizeChanged,
+    this.decoration,
     super.key,
   });
 
@@ -25,45 +31,17 @@ class _ColorCustomizationItemState extends State<ColorCustomizationItem> {
 
   @override
   void initState() {
-    _controller.text = colorToString(widget.initialColor);
-    _pickedColor = widget.initialColor;
     super.initState();
+
+    _controller.text = _colorToString(widget.initialColor);
+    _pickedColor = widget.initialColor;
   }
 
   @override
   void dispose() {
     _controller.dispose();
+
     super.dispose();
-  }
-
-  // TODO(dev): Why is it "public"? Need to check all other places.
-  void onChangedTextField(String? value) {
-    if (value != null) {
-      final color = int.tryParse(value.padRight(8, '0'), radix: 16);
-      if (color != null) {
-        setState(() {
-          _pickedColor = Color(color);
-        });
-      }
-    }
-  }
-
-  void onColorChanged(Color color) {
-    widget.onColorPicked(color);
-    setState(() {
-      _pickedColor = color;
-      _controller.text = colorToString(color);
-    });
-  }
-
-  String colorToString(Color color) =>
-      color.value.toRadixString(16).toUpperCase();
-
-  void updateTextField() {
-    widget.onColorPicked(_pickedColor);
-    setState(
-      () => _controller.text = colorToString(_pickedColor),
-    );
   }
 
   @override
@@ -88,14 +66,19 @@ class _ColorCustomizationItemState extends State<ColorCustomizationItem> {
                 margin: const EdgeInsets.all(AppDimensions.margin2XS),
                 child: CustomizationTextField(
                   controller: _controller,
-                  onEditingComplete: updateTextField,
+                  onEditingComplete: _updateTextField,
                   inputFormatters: [
                     FilteringTextInputFormatter.allow(
                       RegExp('[0-9a-fA-F]'),
                     ),
                     LengthLimitingTextInputFormatter(8),
                   ],
-                  onChanged: onChangedTextField,
+                  decoration: widget.decoration ??
+                      const InputDecoration(
+                        isCollapsed: true,
+                        border: InputBorder.none,
+                      ),
+                  onChanged: _onChangedTextField,
                 ),
               ),
             ),
@@ -107,12 +90,41 @@ class _ColorCustomizationItemState extends State<ColorCustomizationItem> {
           ),
           ColorPicker(
             pickerColor: _pickedColor,
-            onColorChanged: onColorChanged,
+            onColorChanged: _onColorChanged,
             portraitOnly: true,
             pickerAreaHeightPercent: 0.4,
           ),
         ]
       ],
+    );
+  }
+
+  void _onChangedTextField(String? value) {
+    if (value != null) {
+      final color = int.tryParse(value.padRight(8, '0'), radix: 16);
+      if (color != null) {
+        setState(() {
+          _pickedColor = Color(color);
+        });
+      }
+    }
+  }
+
+  void _onColorChanged(Color color) {
+    widget.onColorPicked(color);
+    setState(() {
+      _pickedColor = color;
+      _controller.text = _colorToString(color);
+    });
+  }
+
+  String _colorToString(Color color) =>
+      color.value.toRadixString(16).toUpperCase();
+
+  void _updateTextField() {
+    widget.onColorPicked(_pickedColor);
+    setState(
+      () => _controller.text = _colorToString(_pickedColor),
     );
   }
 }

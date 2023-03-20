@@ -1,13 +1,13 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
-import 'package:survey_admin/data/repositories/survey_data_repository.dart';
+import 'package:survey_admin/data/repositories/file_system_repository_impl.dart';
 
 import '../../utils/shared_mocks.mocks.dart';
 
 void main() {
   final mockFilesystemDataSource = MockFilesystemDataSource();
   final surveyDataRepository =
-      SurveyDataRepositoryImpl(mockFilesystemDataSource);
+      FileSystemRepositoryImpl(mockFilesystemDataSource);
   var surveyData = <String, dynamic>{};
 
   group('test SurveyDataRepository', () {

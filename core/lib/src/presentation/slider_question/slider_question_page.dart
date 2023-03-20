@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:survey_core/src/domain/entities/question_answer.dart';
 import 'package:survey_core/src/domain/entities/question_types/slider_question_data.dart';
 import 'package:survey_core/src/presentation/localization/localizations.dart';
 import 'package:survey_core/src/presentation/utils/app_fonts.dart';
@@ -6,7 +7,7 @@ import 'package:survey_core/src/presentation/utils/constants.dart';
 import 'package:survey_core/src/presentation/utils/data_to_widget_util.dart';
 import 'package:survey_core/src/presentation/utils/theme_extension.dart';
 import 'package:survey_core/src/presentation/widgets/question_bottom_button.dart';
-import 'package:survey_core/src/presentation/widgets/question_subtitle.dart';
+import 'package:survey_core/src/presentation/widgets/question_content.dart';
 import 'package:survey_core/src/presentation/widgets/question_title.dart';
 
 class SliderQuestionPage extends StatefulWidget {
@@ -25,12 +26,12 @@ class SliderQuestionPage extends StatefulWidget {
 
 class _SliderQuestionPageState extends State<SliderQuestionPage> {
   late final SliderThemeData _theme;
-  late double _answer;
+  late int _answer;
 
   @override
   void initState() {
     super.initState();
-    _answer = widget.data.initialValue.toDouble();
+    _answer = widget.data.initialValue.toInt();
   }
 
   @override
@@ -62,7 +63,7 @@ class _SliderQuestionPageState extends State<SliderQuestionPage> {
             padding: const EdgeInsets.only(
               top: AppDimensions.margin2XL,
             ),
-            child: QuestionSubtitle(
+            child: QuestionContent(
               content: widget.data.subtitle,
             ),
           ),
@@ -80,7 +81,10 @@ class _SliderQuestionPageState extends State<SliderQuestionPage> {
           QuestionBottomButton(
             text: context.localization.next,
             onPressed: () {
-              widget.onSend.call(key: widget.data.type, data: _answer);
+              widget.onSend.call(
+                index: widget.data.index,
+                answer: QuestionAnswer<int>(_answer),
+              );
             },
           ),
         ],
@@ -93,7 +97,7 @@ class _QuestionSlider extends StatefulWidget {
   final num minValue;
   final num maxValue;
   final num initialValue;
-  final ValueChanged<double> onChanged;
+  final ValueChanged<int> onChanged;
   final SliderThemeData theme;
 
   const _QuestionSlider({
@@ -130,7 +134,7 @@ class _QuestionSliderState extends State<_QuestionSlider> {
             value: _value,
             onChanged: (newValue) => setState(() {
               _value = _onlyInt ? newValue.roundToDouble() : newValue;
-              widget.onChanged(newValue);
+              widget.onChanged(newValue.toInt());
             }),
             min: widget.minValue.toDouble(),
             max: widget.maxValue.toDouble(),

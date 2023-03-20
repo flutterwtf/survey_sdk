@@ -1,4 +1,5 @@
 abstract class AppDimensions {
+  static const double margin3XS = 2;
   static const double margin2XS = 6;
   static const double marginXS = 12;
   static const double marginS = 14;
@@ -16,6 +17,7 @@ abstract class AppDimensions {
   static const double sizeXL = 48;
   static const double size3XL = 96;
 
+  static const double imageSizeS = 40;
   static const double imageSizeM = 150;
 
   static const double circularRadiusXS = 6;
@@ -24,9 +26,22 @@ abstract class AppDimensions {
   static const double circularRadiusL = 24;
   static const double circularRadiusXL = 36;
 
-  static const double appbarSize = 50;
+  static const double appbarHeight = 50;
+
+  static const double thinBorderWidth = 0.5;
+  static const double defaultBorderWidth = 1;
+  static const double dividerHeight = 1;
 
   static const double surveyContentBarWidth = 210;
+
+  static const double addButtonWidth = 150;
+  static const double addButtonHeight = 34;
+
+  static const double textFieldWidth = 75;
+
+  static const double switchIndicatorWidth = 34;
+  static const double switchWidth = 34;
+  static const double switchHeight = 18;
 
   static const double surveyEditorBarWidth = 300;
   static const double surveyEditorTabBarHeight = 37;

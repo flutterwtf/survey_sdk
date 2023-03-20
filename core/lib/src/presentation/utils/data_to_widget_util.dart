@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:survey_core/src/domain/entities/question_answer.dart';
 import 'package:survey_core/src/domain/entities/question_types/choice_question_data.dart';
 import 'package:survey_core/src/domain/entities/question_types/input_question_data.dart';
 import 'package:survey_core/src/domain/entities/question_types/intro_question_data.dart';
@@ -10,8 +11,8 @@ import 'package:survey_core/src/presentation/intro_question/intro_question_page.
 import 'package:survey_core/src/presentation/slider_question/slider_question_page.dart';
 
 typedef OnSendCallback = void Function({
-  required String key,
-  required dynamic data,
+  required int index,
+  required QuestionAnswer answer,
 });
 
 abstract class DataToWidgetUtil {

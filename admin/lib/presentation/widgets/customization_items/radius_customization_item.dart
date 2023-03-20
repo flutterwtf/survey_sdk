@@ -6,7 +6,7 @@ import 'package:survey_admin/presentation/utils/constants/app_dimensions.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
 
 class RadiusCustomizationItem extends StatelessWidget {
-  final int initialValue;
+  final double initialValue;
   final ValueChanged<int> onRadiusChanged;
 
   const RadiusCustomizationItem({
