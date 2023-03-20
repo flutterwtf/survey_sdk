@@ -157,6 +157,7 @@ class _PreviewTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cubit = BlocProvider.of<BuilderCubit>(context);
     return Padding(
       padding: const EdgeInsets.only(
         top: AppDimensions.margin2XS,
@@ -167,7 +168,7 @@ class _PreviewTab extends StatelessWidget {
         onPressed: () {
           showExportFloatingWindow(
             context,
-            onDownloadPressed: () {},
+            onDownloadPressed: cubit.downloadExportedQuestions,
             onCopyPressed: () {},
           );
         },
