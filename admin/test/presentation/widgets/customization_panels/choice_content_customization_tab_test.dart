@@ -7,7 +7,7 @@ import 'package:survey_core/survey_core.dart';
 
 import '../app_tester.dart';
 
-//add test for choice rule
+//TODO: add test for choice rule
 void main() {
   group(
     'Choice content customization tab tests',
