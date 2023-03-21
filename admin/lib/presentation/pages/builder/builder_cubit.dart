@@ -18,7 +18,9 @@ class BuilderCubit extends Cubit<BuilderState> {
             surveyData: i.get<CommonData>().surveyData,
             selectedQuestion: null,
           ),
-        );
+        ) {
+    _init();
+  }
 
   void downloadExportedQuestions() {
     final questions = state.surveyData.questions;
@@ -57,5 +59,11 @@ class BuilderCubit extends Cubit<BuilderState> {
         state.copyWith(surveyData: surveyData),
       );
     }
+  }
+
+  void _init() {
+    final surveyData = _sessionStorageRepository.getSurveyData() ??
+        i.get<CommonData>().surveyData;
+    emit(state.copyWith(surveyData: surveyData));
   }
 }
