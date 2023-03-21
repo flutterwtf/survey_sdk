@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:survey_admin/presentation/app/localization/localizations.dart';
+import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/utils/constants/app_dimensions.dart';
 import 'package:survey_admin/presentation/utils/theme_extension.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
@@ -91,20 +92,31 @@ class ChoiceContentCustomizationTab extends CustomizationTab {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Expanded(
-                    child: DropdownCustomizationButton<RuleType>(
-                      items: RuleType.values
-                          .map(
-                            (e) => DropdownCustomizationItem<RuleType>(
-                              value: e,
-                              onChange: onRuleChanged,
-                              child: Text(
-                                e.name,
-                                style: context.theme.textTheme.bodyLarge,
+                    child: DecoratedBox(
+                      decoration: const BoxDecoration(
+                        border: Border(
+                          right: BorderSide(
+                            color: Colors.grey,
+                            // For demonstration.
+                            width: 1.0,
+                          ),
+                        ),
+                      ),
+                      child: DropdownCustomizationButton<RuleType>(
+                        items: RuleType.values
+                            .map(
+                              (e) => DropdownCustomizationItem<RuleType>(
+                                value: e,
+                                onChange: onRuleChanged,
+                                child: Text(
+                                  e.name,
+                                  style: context.theme.textTheme.bodyLarge,
+                                ),
                               ),
-                            ),
-                          )
-                          .toList(),
-                      value: ruleType,
+                            )
+                            .toList(),
+                        value: ruleType,
+                      ),
                     ),
                   ),
                   Expanded(
