@@ -17,7 +17,7 @@ class InputValidator implements ApiObject {
     bool? isObscured,
   }) {
     type = InputType.number;
-    _regex = regex ?? ValidatorDefaultRegexStrings.number;
+    _regex = regex ?? ValidatorRegexes.number;
     this.isObscured = isObscured ?? false;
   }
 
@@ -26,7 +26,7 @@ class InputValidator implements ApiObject {
     bool? isObscured,
   }) {
     type = InputType.date;
-    _regex = regex ?? ValidatorDefaultRegexStrings.text;
+    _regex = regex ?? ValidatorRegexes.text;
     this.isObscured = isObscured ?? false;
   }
 
@@ -41,7 +41,7 @@ class InputValidator implements ApiObject {
     bool? isObscured,
   }) {
     type = InputType.password;
-    _regex = regex ?? ValidatorDefaultRegexStrings.password;
+    _regex = regex ?? ValidatorRegexes.password;
     this.isObscured = isObscured ?? true;
   }
 
@@ -50,7 +50,7 @@ class InputValidator implements ApiObject {
     bool? isObscured,
   }) {
     type = InputType.phone;
-    _regex = regex ?? ValidatorDefaultRegexStrings.phone;
+    _regex = regex ?? ValidatorRegexes.phone;
     this.isObscured = isObscured ?? false;
   }
 
@@ -59,7 +59,7 @@ class InputValidator implements ApiObject {
     bool? isObscured,
   }) {
     type = InputType.text;
-    _regex = regex ?? ValidatorDefaultRegexStrings.text;
+    _regex = regex ?? ValidatorRegexes.text;
     this.isObscured = isObscured ?? false;
   }
 
@@ -101,7 +101,7 @@ class InputValidator implements ApiObject {
     );
   }
 
-  RegExp get _reg => RegExp(_regex ?? ValidatorDefaultRegexStrings.text);
+  RegExp get _reg => RegExp(_regex ?? ValidatorRegexes.text);
 
   String? validate(String? input) {
     return input == null || _reg.hasMatch(input) ? null : _validatorErrorText;
