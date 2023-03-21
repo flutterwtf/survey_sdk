@@ -19,6 +19,19 @@ class IntroQuestionTheme extends ThemeExtension<IntroQuestionTheme>
   final double mainButtonTextSize;
   final double mainButtonRadius;
 
+  @override
+  List<Object?> get props => [
+        fillColor,
+        titleTextColor,
+        titleTextSize,
+        subTitleTextColor,
+        subTitleTextSize,
+        mainButtonColor,
+        mainButtonTextColor,
+        mainButtonTextSize,
+        mainButtonRadius,
+      ];
+
   const IntroQuestionTheme({
     required this.fillColor,
     required this.titleTextColor,
@@ -121,17 +134,4 @@ class IntroQuestionTheme extends ThemeExtension<IntroQuestionTheme>
         'mainButtonTextSize': mainButtonTextSize,
         'mainButtonRadius': mainButtonRadius,
       };
-
-  @override
-  List<Object?> get props => [
-        fillColor,
-        titleTextColor,
-        titleTextSize,
-        subTitleTextColor,
-        subTitleTextSize,
-        mainButtonColor,
-        mainButtonTextColor,
-        mainButtonTextSize,
-        mainButtonRadius,
-      ];
 }
