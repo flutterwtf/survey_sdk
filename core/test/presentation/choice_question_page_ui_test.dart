@@ -1,12 +1,13 @@
 import 'dart:async';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:survey_core/src/domain/entities/question_answer.dart';
 import 'package:survey_core/src/presentation/choice_question/choice_question_page.dart';
 
 import '../utils/mocked_entities.dart';
 import 'widget/app_test.dart';
 
-void _mockOnSend({required String key, required dynamic data}) {}
+void _mockOnSend({required int index, required QuestionAnswer answer}) {}
 
 void main() {
   group('components of Choice Question widget', () {
@@ -33,8 +34,11 @@ void main() {
         AppTest(
           child: ChoiceQuestionPage(
             data: MockedQuestions.choice3,
-            onSend: ({data, String? key}) {
-              expect((data as List).isEmpty, true);
+            onSend: ({required int index, required QuestionAnswer answer}) {
+              expect(
+                (answer as QuestionAnswer<List<String>>).answer.isEmpty,
+                true,
+              );
               completer.complete();
             },
           ),
@@ -50,8 +54,11 @@ void main() {
         AppTest(
           child: ChoiceQuestionPage(
             data: MockedQuestions.choice3.copyWith(isSkip: true),
-            onSend: ({data, String? key}) {
-              expect((data as List).isEmpty, true);
+            onSend: ({required int index, required QuestionAnswer answer}) {
+              expect(
+                (answer as QuestionAnswer<List<String>>).answer.isEmpty,
+                true,
+              );
               completer.complete();
             },
           ),
@@ -68,8 +75,11 @@ void main() {
       AppTest(
         child: ChoiceQuestionPage(
           data: MockedQuestions.choice3,
-          onSend: ({data, String? key}) {
-            expect((data as List).isEmpty, true);
+          onSend: ({required int index, required QuestionAnswer answer}) {
+            expect(
+              (answer as QuestionAnswer<List<String>>).answer.isEmpty,
+              true,
+            );
           },
         ),
       ),
@@ -84,8 +94,8 @@ void main() {
       AppTest(
         child: ChoiceQuestionPage(
           data: MockedQuestions.choice3,
-          onSend: ({data, String? key}) {
-            expect((data as List).length, 1);
+          onSend: ({required int index, required QuestionAnswer answer}) {
+            expect((answer as QuestionAnswer<List<String>>).answer.length, 1);
             completer.complete();
           },
         ),
@@ -103,8 +113,8 @@ void main() {
       AppTest(
         child: ChoiceQuestionPage(
           data: MockedQuestions.choice3,
-          onSend: ({data, String? key}) {
-            expect((data as List).length, 1);
+          onSend: ({required int index, required QuestionAnswer answer}) {
+            expect((answer as QuestionAnswer<List<String>>).answer.length, 1);
             completer.complete();
           },
         ),
@@ -124,8 +134,11 @@ void main() {
       AppTest(
         child: ChoiceQuestionPage(
           data: MockedQuestions.choice3.copyWith(isMultipleChoice: true),
-          onSend: ({data, String? key}) {
-            expect((data as List).isEmpty, true);
+          onSend: ({required int index, required QuestionAnswer answer}) {
+            expect(
+              (answer as QuestionAnswer<List<String>>).answer.isEmpty,
+              true,
+            );
             completer.complete();
           },
         ),
@@ -141,8 +154,8 @@ void main() {
       AppTest(
         child: ChoiceQuestionPage(
           data: MockedQuestions.choice3.copyWith(isMultipleChoice: true),
-          onSend: ({data, String? key}) {
-            expect((data as List).length, 1);
+          onSend: ({required int index, required QuestionAnswer answer}) {
+            expect((answer as QuestionAnswer<List<String>>).answer.length, 1);
             completer.complete();
           },
         ),
@@ -160,8 +173,11 @@ void main() {
       AppTest(
         child: ChoiceQuestionPage(
           data: MockedQuestions.choice3.copyWith(isMultipleChoice: true),
-          onSend: ({data, String? key}) {
-            expect((data as List).isEmpty, true);
+          onSend: ({required int index, required QuestionAnswer answer}) {
+            expect(
+              (answer as QuestionAnswer<List<String>>).answer.isEmpty,
+              true,
+            );
             completer.complete();
           },
         ),
@@ -181,8 +197,8 @@ void main() {
       AppTest(
         child: ChoiceQuestionPage(
           data: MockedQuestions.choice3.copyWith(isMultipleChoice: true),
-          onSend: ({data, String? key}) {
-            expect((data as List).length, 2);
+          onSend: ({required int index, required QuestionAnswer answer}) {
+            expect((answer as QuestionAnswer<List<String>>).answer.length, 2);
             completer.complete();
           },
         ),
