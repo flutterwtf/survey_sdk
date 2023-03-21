@@ -44,7 +44,6 @@ class _QuestionSettingsTabBarState extends State<QuestionSettingsTabBar>
         const Divider(),
         TabBar(
           controller: _tabController,
-          indicatorColor: AppColors.black,
           labelStyle: context.theme.textTheme.bodyMedium?.copyWith(
             fontWeight: AppFonts.weightMedium,
           ),

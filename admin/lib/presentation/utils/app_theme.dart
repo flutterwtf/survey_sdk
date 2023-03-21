@@ -25,7 +25,9 @@ abstract class AppTheme {
     tabBarTheme: const TabBarTheme(
       labelColor: AppColors.black,
       unselectedLabelColor: AppColors.customizationTabBarInactiveText,
-      indicatorColor: AppColors.black,
+      indicator: UnderlineTabIndicator(
+        borderSide: BorderSide(color: AppColors.black),
+      ),
       indicatorSize: TabBarIndicatorSize.label,
     ),
     textButtonTheme: TextButtonThemeData(
