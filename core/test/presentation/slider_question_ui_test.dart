@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:survey_core/src/domain/entities/question_answer.dart';
 import 'package:survey_core/src/domain/entities/question_types/slider_question_data.dart';
 import 'package:survey_core/src/presentation/slider_question/slider_question_page.dart';
 import 'package:survey_core/src/presentation/widgets/question_bottom_button.dart';
@@ -32,7 +33,7 @@ void main() {
             isSkip: isSkip,
             initialValue: initialValue,
           ),
-          onSend: ({data, String? key}) {
+          onSend: ({required int index, required QuestionAnswer answer}) {
             completerOnSendButtonTap.complete();
           },
         ),
@@ -70,6 +71,7 @@ void main() {
       testWidgets(
         'Move slider to 1.5',
         (widgetTester) async {
+          final completer = Completer<void>();
           const dragValue = 0.5;
           final sliderQuestionPage = AppTest(
             child: SliderQuestionPage(
@@ -82,12 +84,12 @@ void main() {
                 isSkip: isSkip,
                 initialValue: initialValue,
               ),
-              onSend: ({data, String? key}) {
+              onSend: ({required int index, required QuestionAnswer answer}) {
                 expect(
-                  (data as double).toStringAsFixed(1),
+                  (answer as QuestionAnswer<double>).answer.toStringAsFixed(1),
                   (dragValue + minValue).toStringAsFixed(1),
                 );
-                completerOnSendButtonTap.complete();
+                completer.complete();
               },
             ),
           );
@@ -105,6 +107,7 @@ void main() {
       testWidgets(
         'Move slider to more then maxValue',
         (widgetTester) async {
+          final completer = Completer<void>();
           const dragValue = 2.0;
           final sliderQuestionPage = AppTest(
             child: SliderQuestionPage(
@@ -117,12 +120,12 @@ void main() {
                 isSkip: isSkip,
                 initialValue: initialValue,
               ),
-              onSend: ({data, String? key}) {
+              onSend: ({required int index, required QuestionAnswer answer}) {
                 expect(
-                  (data as double).toStringAsFixed(1),
+                  (answer as QuestionAnswer<double>).answer.toStringAsFixed(1),
                   maxValue.toStringAsFixed(1),
                 );
-                completerOnSendButtonTap.complete();
+                completer.complete();
               },
             ),
           );
@@ -140,6 +143,7 @@ void main() {
       testWidgets(
         'Move slider to less then minValue',
         (widgetTester) async {
+          final completer = Completer<void>();
           const dragValue = 1.0;
           final sliderQuestionPage = AppTest(
             child: SliderQuestionPage(
@@ -152,12 +156,12 @@ void main() {
                 isSkip: isSkip,
                 initialValue: initialValue,
               ),
-              onSend: ({data, String? key}) {
+              onSend: ({required int index, required QuestionAnswer answer}) {
                 expect(
-                  (data as double).toStringAsFixed(1),
+                  (answer as QuestionAnswer<double>).answer.toStringAsFixed(1),
                   minValue.toStringAsFixed(1),
                 );
-                completerOnSendButtonTap.complete();
+                completer.complete();
               },
             ),
           );

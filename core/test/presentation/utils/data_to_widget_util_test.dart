@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:survey_core/src/domain/entities/input_validator.dart';
+import 'package:survey_core/src/domain/entities/question_answer.dart';
 import 'package:survey_core/src/domain/entities/question_types/choice_question_data.dart';
 import 'package:survey_core/src/domain/entities/question_types/input_question_data.dart';
 import 'package:survey_core/src/domain/entities/question_types/intro_question_data.dart';
@@ -11,7 +12,7 @@ import 'package:survey_core/src/presentation/intro_question/intro_question_page.
 import 'package:survey_core/src/presentation/slider_question/slider_question_page.dart';
 import 'package:survey_core/src/presentation/utils/data_to_widget_util.dart';
 
-void _mockOnSend({required String key, required dynamic data}) {}
+void _mockOnSend({required int index, required QuestionAnswer answer}) {}
 
 void main() {
   const mockSliderData = SliderQuestionData(
