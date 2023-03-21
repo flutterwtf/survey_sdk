@@ -42,9 +42,6 @@ class _NewQuestionPageState extends State<NewQuestionPage> {
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(AppDimensions.appbarHeight),
           child: AppBar(
-            toolbarHeight: AppDimensions.appbarHeight,
-            backgroundColor: AppColors.white,
-            shadowColor: AppColors.transparentW,
             automaticallyImplyLeading: false,
             title: const _AppBarTitle(),
             actions: const [

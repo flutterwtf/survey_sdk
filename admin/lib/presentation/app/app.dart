@@ -7,8 +7,7 @@ import 'package:survey_admin/presentation/app/app_state.dart';
 import 'package:survey_admin/presentation/app/di/injector.dart';
 import 'package:survey_admin/presentation/pages/builder/builder_cubit.dart';
 import 'package:survey_admin/presentation/pages/builder/builder_page.dart';
-import 'package:survey_admin/presentation/utils/app_fonts.dart';
-import 'package:survey_admin/presentation/utils/colors.dart';
+import 'package:survey_admin/presentation/utils/app_theme.dart';
 
 class App extends StatefulWidget {
   const App({super.key});
@@ -32,23 +31,7 @@ class _AppState extends State<App> {
               GlobalWidgetsLocalizations.delegate,
               GlobalCupertinoLocalizations.delegate,
             ],
-            theme: ThemeData(
-              fontFamily: AppFonts.inter,
-              textTheme: const TextTheme(
-                titleMedium: TextStyle(color: AppColors.black),
-                titleSmall: TextStyle(
-                  color: AppColors.black,
-                  fontWeight: AppFonts.weightSemiBold,
-                ),
-                bodyLarge: TextStyle(color: AppColors.black),
-                bodyMedium: TextStyle(color: AppColors.black),
-                bodySmall: TextStyle(color: AppColors.black),
-                labelLarge: TextStyle(
-                  color: AppColors.black,
-                  fontWeight: AppFonts.weightBold,
-                ),
-              ),
-            ),
+            theme: AppTheme.theme,
             home: BlocProvider(
               create: (context) => i.get<BuilderCubit>(),
               child: const BuilderPage(),
