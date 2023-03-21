@@ -18,24 +18,6 @@ class SliderQuestionData extends QuestionData<SliderThemeData> {
     super.content,
   });
 
-  const SliderQuestionData.common({int index = 0})
-      : this(
-          // TODO(dev): to localization somehow
-          minValue: 0,
-          maxValue: 10,
-          initialValue: 5,
-          title: 'Intro',
-          index: index,
-          subtitle: '',
-          isSkip: false,
-          content:
-              'You may simply need a single, brief answer without discussion. '
-              'Other times, you may want to talk through a scenario, evaluate '
-              'how well a group is learning new material or solicit feedback. '
-              'The types of questions you ask directly impact the type of '
-              'answer you receive.',
-        );
-
   @override
   SliderQuestionData copyWith({
     num? minValue,

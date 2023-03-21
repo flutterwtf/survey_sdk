@@ -22,8 +22,15 @@ class BuilderPage extends StatefulWidget {
 }
 
 class _BuilderPageState extends State<BuilderPage> {
-  final _cubit = i.get<BuilderCubit>();
+  late final BuilderCubit _cubit;
   final _surveyController = SurveyController();
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    initCommonData(context);
+    _cubit = i.get<BuilderCubit>();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -144,6 +151,7 @@ class _PreviewTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cubit = BlocProvider.of<BuilderCubit>(context);
     return Padding(
       padding: const EdgeInsets.only(
         top: AppDimensions.margin2XS,
@@ -154,7 +162,7 @@ class _PreviewTab extends StatelessWidget {
         onPressed: () {
           showExportFloatingWindow(
             context,
-            onDownloadPressed: () {},
+            onDownloadPressed: cubit.downloadExportedQuestions,
             onCopyPressed: () {},
           );
         },

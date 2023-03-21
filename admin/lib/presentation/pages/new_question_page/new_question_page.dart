@@ -72,7 +72,7 @@ class _NewQuestionPageState extends State<NewQuestionPage> {
         persistentFooterButtons: [
           _AddButton(
             onPressed: () {
-              Navigator.pop(context, _selectedTab.data);
+              Navigator.pop(context, _selectedTab.data(context));
             },
           ),
         ],

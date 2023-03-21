@@ -26,18 +26,6 @@ class InputQuestionData extends QuestionData<InputQuestionTheme> {
     this.hintText,
   });
 
-  InputQuestionData.common({int index = 0})
-      : this(
-          // TODO(dev): to localization somehow
-          validator: InputValidator.number(),
-          index: index,
-          title: 'Why is asking the right type of questions important?',
-          subtitle: '',
-          isSkip: false,
-          content: 'Doing so can help you gather the information most '
-              'relevant and useful to you',
-        );
-
   @override
   InputQuestionData copyWith({
     InputValidator? validator,
