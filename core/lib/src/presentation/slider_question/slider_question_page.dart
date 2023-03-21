@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:survey_core/src/domain/entities/question_answer.dart';
 import 'package:survey_core/src/domain/entities/question_types/slider_question_data.dart';
-import 'package:survey_core/src/presentation/localization/localizations.dart';
+import 'package:survey_core/src/presentation/localization/app_localizations_ext.dart';
 import 'package:survey_core/src/presentation/utils/app_fonts.dart';
-import 'package:survey_core/src/presentation/utils/constants.dart';
+import 'package:survey_core/src/presentation/utils/app_dimensions.dart';
 import 'package:survey_core/src/presentation/utils/data_to_widget_util.dart';
 import 'package:survey_core/src/presentation/utils/theme_extension.dart';
 import 'package:survey_core/src/presentation/widgets/question_bottom_button.dart';
@@ -36,11 +36,8 @@ class _SliderQuestionPageState extends State<SliderQuestionPage> {
 
   @override
   void didChangeDependencies() {
-    if (widget.data.theme == null) {
-      _theme = Theme.of(context).sliderTheme;
-    } else {
-      _theme = widget.data.theme!;
-    }
+    final theme = widget.data.theme;
+    _theme = theme ?? Theme.of(context).sliderTheme;
     super.didChangeDependencies();
   }
 
@@ -126,6 +123,9 @@ class _QuestionSliderState extends State<_QuestionSlider> {
 
   @override
   Widget build(BuildContext context) {
+    final textStyle = context.theme.textTheme.bodyMedium?.copyWith(
+      fontFamily: AppFonts.inter,
+    );
     return SliderTheme(
       data: widget.theme,
       child: Column(
@@ -144,16 +144,12 @@ class _QuestionSliderState extends State<_QuestionSlider> {
             children: [
               Text(
                 widget.minValue.toString(),
-                style: context.theme.textTheme.bodyMedium?.copyWith(
-                  fontFamily: AppFonts.inter,
-                ),
+                style: textStyle,
               ),
               const Spacer(),
               Text(
                 widget.maxValue.toString(),
-                style: context.theme.textTheme.bodyMedium?.copyWith(
-                  fontFamily: AppFonts.inter,
-                ),
+                style: textStyle,
               ),
             ],
           ),

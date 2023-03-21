@@ -1,5 +1,5 @@
 class AppDurations {
-  /// animation duration
+  /// Animation duration.
   static const Duration questionBottomButtonAnimation =
       Duration(milliseconds: 200);
 }
