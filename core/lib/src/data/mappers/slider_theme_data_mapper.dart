@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:survey_core/src/presentation/utils/colors.dart';
+import 'package:survey_core/src/presentation/utils/constants.dart';
 
 extension SliderThemeDataMapper on SliderThemeData {
   Map<String, dynamic> toJson() => {
-        'thumbColor': thumbColor?.value ?? 0xFF000000,
+        'thumbColor': thumbColor?.value ?? AppColors.black,
         'thumbRadius':
-            (thumbShape as RoundSliderThumbShape?)?.enabledThumbRadius ?? 10,
+            (thumbShape as RoundSliderThumbShape?)?.enabledThumbRadius ??
+                AppDimensions.circularRadiusS,
         'trackHeight': trackHeight,
-        'activeTrackColor': activeTrackColor?.value ?? 0xFF000000,
-        'inactiveTrackColor': inactiveTrackColor?.value ?? 0xFF00000,
+        'activeTrackColor': activeTrackColor?.value ?? AppColors.black,
+        'inactiveTrackColor': inactiveTrackColor?.value ?? AppColors.black,
       };
 
   static SliderThemeData fromJson(Map<String, dynamic> json) => SliderThemeData(
