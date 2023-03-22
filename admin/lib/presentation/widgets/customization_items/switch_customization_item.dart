@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:survey_admin/presentation/utils/colors.dart';
+import 'package:survey_admin/presentation/utils/app_colors.dart';
 import 'package:survey_admin/presentation/utils/constants/app_dimensions.dart';
 import 'package:survey_admin/presentation/utils/constants/app_durations.dart';
 import 'package:survey_admin/presentation/utils/theme_extension.dart';
@@ -75,10 +75,10 @@ class _CustomSwitchState extends State<_CustomSwitch> {
             Radius.circular(AppDimensions.circularRadiusS),
           ),
         ),
-        duration: AppDurations.customizationItemAnimation,
+        duration: AppDurations.customizationItem,
         child: AnimatedAlign(
           alignment: _isToggled ? Alignment.centerRight : Alignment.centerLeft,
-          duration: AppDurations.customizationItemAnimation,
+          duration: AppDurations.customizationItem,
           child: Padding(
             padding: const EdgeInsets.all(AppDimensions.margin3XS),
             child: Container(

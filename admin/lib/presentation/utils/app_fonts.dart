@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:survey_admin/presentation/utils/colors.dart';
+import 'package:survey_admin/presentation/utils/app_colors.dart';
 
 // TODO(dev): it looks like core class.
 // TODO(dev): folder structure is weird. We need better constants
