@@ -39,6 +39,6 @@ The Survey SDK offers a range of customizable widgets and components that can be
 
 If you would like to contribute to the Survey SDK project, please see the [CONTRIBUTING.md](CONTRIBUTING.md) file for more information.
 
-## License
+## License📋
 
 The Survey SDK is released under the [MIT License](LICENSE).
