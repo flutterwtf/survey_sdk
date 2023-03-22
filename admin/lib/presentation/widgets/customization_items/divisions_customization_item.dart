@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:survey_admin/presentation/utils/constants/initial_values.dart';
 import 'package:survey_admin/presentation/utils/size_handler.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
 
 class DivisionsCustomizationItem extends StatelessWidget {
+  static const _initialValue = 10;
   final int initialValue;
   final void Function(int divisions) onChanged;
 
   const DivisionsCustomizationItem({
     required this.onChanged,
-    this.initialValue = InitialValues.divisionsInitialValue,
+    this.initialValue = _initialValue,
     super.key,
   });
 

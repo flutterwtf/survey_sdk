@@ -2,20 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:survey_admin/presentation/app/localization/localizations.dart';
 import 'package:survey_admin/presentation/utils/constants/app_dimensions.dart';
-import 'package:survey_admin/presentation/utils/constants/initial_values.dart';
 import 'package:survey_admin/presentation/utils/size_handler.dart';
 import 'package:survey_admin/presentation/utils/theme_extension.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
 
 class MinMaxCustomizationItem extends StatefulWidget {
+  static const _minValue = 0;
+  static const _maxValue = 10;
   final int initialMin;
   final int initialMax;
   final void Function(int min, int max) onChanged;
 
   const MinMaxCustomizationItem({
     required this.onChanged,
-    this.initialMin = InitialValues.min,
-    this.initialMax = InitialValues.max,
+    this.initialMin = _minValue,
+    this.initialMax = _maxValue,
     super.key,
   }) : assert(
           initialMax > initialMin,
