@@ -37,6 +37,8 @@ class QuestionListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = context.theme.textTheme;
+    const maxLines = 2;
     return Material(
       child: ListTile(
         onTap: () => onTap(questionData),
@@ -53,7 +55,7 @@ class QuestionListItem extends StatelessWidget {
                   width: AppDimensions.marginXS,
                   child: Text(
                     questionData.index.toString(),
-                    style: context.theme.textTheme.bodySmall?.copyWith(
+                    style: textTheme.bodySmall?.copyWith(
                       color: AppColors.textGrey,
                     ),
                   ),
@@ -61,18 +63,21 @@ class QuestionListItem extends StatelessWidget {
               ),
               const SizedBox(width: AppDimensions.marginXS),
               Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: AppColors.white,
-                  borderRadius: const BorderRadius.all(
+                  borderRadius: BorderRadius.all(
                     Radius.circular(AppDimensions.circularRadiusS),
                   ),
-                  border: Border.all(
-                    width: AppDimensions.thinBorderWidth,
+                  border: Border.fromBorderSide(
+                    BorderSide(
+                      width: AppDimensions.thinBorderWidth,
+                    ),
                   ),
                 ),
                 height: AppDimensions.imageSizeS,
                 width: AppDimensions.imageSizeS,
                 child: Center(
+                  //ignore: avoid-returning-widgets
                   child: _questionImage(questionData),
                 ),
               ),
@@ -80,10 +85,10 @@ class QuestionListItem extends StatelessWidget {
               Expanded(
                 child: Text(
                   questionData.title,
-                  maxLines: 2,
+                  maxLines: maxLines,
                   overflow: TextOverflow.ellipsis,
                   softWrap: false,
-                  style: context.theme.textTheme.bodyMedium,
+                  style: textTheme.bodyMedium,
                 ),
               ),
             ],

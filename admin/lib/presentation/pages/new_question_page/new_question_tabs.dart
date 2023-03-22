@@ -26,7 +26,7 @@ extension NewQuestionTabsExt on NewQuestionTabs {
     }
   }
 
-  QuestionData data(BuildContext context) {
+  QuestionData get data {
     switch (this) {
       case NewQuestionTabs.intro:
         return i.get<CommonData>().intro();
