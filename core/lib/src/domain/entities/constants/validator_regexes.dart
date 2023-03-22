@@ -1,4 +1,4 @@
-abstract class ValidatorDefaultRegexStrings {
+abstract class ValidatorRegexes {
   static const String phone =
       r'^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$';
 

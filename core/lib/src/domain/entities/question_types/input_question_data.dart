@@ -3,18 +3,26 @@ import 'package:survey_core/src/domain/entities/input_validator.dart';
 import 'package:survey_core/src/domain/entities/question_types/question_data.dart';
 import 'package:survey_core/src/domain/entities/themes/input_question_theme.dart';
 
-enum InputType {
-  text,
-  number,
-  date,
-  email,
-  password,
-  phone;
-}
-
 class InputQuestionData extends QuestionData<InputQuestionTheme> {
   final InputValidator validator;
   final String? hintText;
+
+  @override
+  List<Object?> get props => [
+        validator,
+        index,
+        title,
+        subtitle,
+        isSkip,
+        content,
+        hintText,
+      ];
+
+  @override
+  InputQuestionTheme? get theme => const InputQuestionTheme.common();
+
+  @override
+  String get type => QuestionTypes.input;
 
   const InputQuestionData({
     required this.validator,
@@ -25,6 +33,19 @@ class InputQuestionData extends QuestionData<InputQuestionTheme> {
     super.content,
     this.hintText,
   });
+
+  factory InputQuestionData.fromJson(Map<String, dynamic> json) {
+    final payload = json['payload'] as Map<String, dynamic>;
+    return InputQuestionData(
+      index: json['index'],
+      title: json['title'],
+      subtitle: json['subtitle'],
+      isSkip: json['isSkip'],
+      content: json['content'],
+      validator: InputValidator.fromJson(payload),
+      hintText: payload['hintText'],
+    );
+  }
 
   @override
   InputQuestionData copyWith({
@@ -47,12 +68,6 @@ class InputQuestionData extends QuestionData<InputQuestionTheme> {
   }
 
   @override
-  InputQuestionTheme? get theme => const InputQuestionTheme.common();
-
-  @override
-  String get type => QuestionTypes.input;
-
-  @override
   Map<String, dynamic> toJson() => {
         'index': index,
         'title': title,
@@ -65,28 +80,13 @@ class InputQuestionData extends QuestionData<InputQuestionTheme> {
           'hintText': hintText,
         },
       };
+}
 
-  factory InputQuestionData.fromJson(Map<String, dynamic> json) {
-    final payload = json['payload'] as Map<String, dynamic>;
-    return InputQuestionData(
-      index: json['index'],
-      title: json['title'],
-      subtitle: json['subtitle'],
-      isSkip: json['isSkip'],
-      content: json['content'],
-      validator: InputValidator.fromJson(payload),
-      hintText: payload['hintText'],
-    );
-  }
-
-  @override
-  List<Object?> get props => [
-        validator,
-        index,
-        title,
-        subtitle,
-        isSkip,
-        content,
-        hintText,
-      ];
+enum InputType {
+  text,
+  number,
+  date,
+  email,
+  password,
+  phone;
 }

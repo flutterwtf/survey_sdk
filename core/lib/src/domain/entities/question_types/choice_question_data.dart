@@ -7,6 +7,24 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
   final List<String> options;
   final List<String>? selectedOptions;
 
+  @override
+  List<Object?> get props => [
+        isMultipleChoice,
+        ...options,
+        index,
+        title,
+        subtitle,
+        isSkip,
+        content,
+        selectedOptions,
+      ];
+
+  @override
+  ChoiceQuestionTheme? get theme => const ChoiceQuestionTheme.common();
+
+  @override
+  String get type => QuestionTypes.choice;
+
   const ChoiceQuestionData({
     required this.isMultipleChoice,
     required this.options,
@@ -24,6 +42,22 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
           'choice buttons have the length of 1, and in '
           'case of multiple choice higher than zero',
         );
+
+  factory ChoiceQuestionData.fromJson(Map<String, dynamic> json) {
+    final payload = json['payload'] as Map<String, dynamic>;
+    return ChoiceQuestionData(
+      index: json['index'],
+      title: json['title'],
+      subtitle: json['subtitle'],
+      isSkip: json['isSkip'],
+      content: json['content'],
+      isMultipleChoice: payload['isMultipleChoice'],
+      options: (payload['options'] as List<dynamic>).cast<String>(),
+      selectedOptions: payload['selectedOptions'] != null
+          ? (payload['selectedOptions'] as List<dynamic>).cast<String>()
+          : null,
+    );
+  }
 
   @override
   ChoiceQuestionData copyWith({
@@ -48,12 +82,6 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
   }
 
   @override
-  ChoiceQuestionTheme? get theme => const ChoiceQuestionTheme.common();
-
-  @override
-  String get type => QuestionTypes.choice;
-
-  @override
   Map<String, dynamic> toJson() => {
         'index': index,
         'title': title,
@@ -65,34 +93,6 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
           'isMultipleChoice': isMultipleChoice,
           'options': options,
           'selectedOptions': selectedOptions,
-        }
+        },
       };
-
-  factory ChoiceQuestionData.fromJson(Map<String, dynamic> json) {
-    final payload = json['payload'] as Map<String, dynamic>;
-    return ChoiceQuestionData(
-      index: json['index'],
-      title: json['title'],
-      subtitle: json['subtitle'],
-      isSkip: json['isSkip'],
-      content: json['content'],
-      isMultipleChoice: payload['isMultipleChoice'],
-      options: (payload['options'] as List<dynamic>).cast<String>(),
-      selectedOptions: payload['selectedOptions'] != null
-          ? (payload['selectedOptions'] as List<dynamic>).cast<String>()
-          : null,
-    );
-  }
-
-  @override
-  List<Object?> get props => [
-        isMultipleChoice,
-        ...options,
-        index,
-        title,
-        subtitle,
-        isSkip,
-        content,
-        selectedOptions,
-      ];
 }

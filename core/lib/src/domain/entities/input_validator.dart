@@ -2,22 +2,26 @@ import 'package:survey_core/src/domain/entities/api_object.dart';
 import 'package:survey_core/src/domain/entities/constants/validator_regexes.dart';
 import 'package:survey_core/src/domain/entities/question_types/input_question_data.dart';
 
-const String _validatorKey = 'validator';
-const String _regexKey = 'regex';
-const String _isObscuredKey = 'is_obscured';
-const String _validatorErrorText = 'Validation error';
+abstract class _ValidatorKeys {
+  static const validator = 'validator';
+  static const String regex = 'regex';
+  static const isObscured = 'is_obscured';
+  static const validatorError = 'Validation error';
+}
 
 class InputValidator implements ApiObject {
-  late final String? _regex;
   late final InputType type;
   late final bool? isObscured;
+  late final String? _regex;
+
+  RegExp get _reg => RegExp(_regex ?? ValidatorRegexes.text);
 
   InputValidator.number({
     String? regex,
     bool? isObscured,
   }) {
     type = InputType.number;
-    _regex = regex ?? ValidatorDefaultRegexStrings.number;
+    _regex = regex ?? ValidatorRegexes.number;
     this.isObscured = isObscured ?? false;
   }
 
@@ -26,7 +30,7 @@ class InputValidator implements ApiObject {
     bool? isObscured,
   }) {
     type = InputType.date;
-    _regex = regex ?? ValidatorDefaultRegexStrings.text;
+    _regex = regex ?? ValidatorRegexes.text;
     this.isObscured = isObscured ?? false;
   }
 
@@ -41,7 +45,7 @@ class InputValidator implements ApiObject {
     bool? isObscured,
   }) {
     type = InputType.password;
-    _regex = regex ?? ValidatorDefaultRegexStrings.password;
+    _regex = regex ?? ValidatorRegexes.password;
     this.isObscured = isObscured ?? true;
   }
 
@@ -50,7 +54,7 @@ class InputValidator implements ApiObject {
     bool? isObscured,
   }) {
     type = InputType.phone;
-    _regex = regex ?? ValidatorDefaultRegexStrings.phone;
+    _regex = regex ?? ValidatorRegexes.phone;
     this.isObscured = isObscured ?? false;
   }
 
@@ -59,7 +63,7 @@ class InputValidator implements ApiObject {
     bool? isObscured,
   }) {
     type = InputType.text;
-    _regex = regex ?? ValidatorDefaultRegexStrings.text;
+    _regex = regex ?? ValidatorRegexes.text;
     this.isObscured = isObscured ?? false;
   }
 
@@ -91,9 +95,9 @@ class InputValidator implements ApiObject {
   }
 
   factory InputValidator.fromJson(Map<String, dynamic> json) {
-    final type = InputType.values[json[_validatorKey]];
-    final String? regex = json[_regexKey];
-    final bool? isObscured = json[_isObscuredKey];
+    final type = InputType.values[json[_ValidatorKeys.validator]];
+    final String? regex = json[_ValidatorKeys.regex];
+    final bool? isObscured = json[_ValidatorKeys.isObscured];
     return InputValidator.fromType(
       type: type,
       regex: regex,
@@ -101,16 +105,16 @@ class InputValidator implements ApiObject {
     );
   }
 
-  RegExp get _reg => RegExp(_regex ?? ValidatorDefaultRegexStrings.text);
-
   String? validate(String? input) {
-    return input == null || _reg.hasMatch(input) ? null : _validatorErrorText;
+    return input == null || _reg.hasMatch(input)
+        ? null
+        : _ValidatorKeys.validatorError;
   }
 
   @override
   Map<String, dynamic> toJson() => {
-        _validatorKey: type.index,
-        _regexKey: _regex,
-        _isObscuredKey: isObscured,
+        _ValidatorKeys.validator: type.index,
+        _ValidatorKeys.regex: _regex,
+        _ValidatorKeys.isObscured: isObscured,
       };
 }
