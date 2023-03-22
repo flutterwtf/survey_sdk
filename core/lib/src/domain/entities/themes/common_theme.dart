@@ -8,10 +8,27 @@ class CommonTheme extends ApiObject with EquatableMixin {
   final SliderThemeData sliderThemeData;
   final TextFieldThemeData textFieldThemeData;
 
+  @override
+  List<Object?> get props => [
+        sliderThemeData,
+        textFieldThemeData,
+      ];
+
   CommonTheme({
     required this.textFieldThemeData,
     required this.sliderThemeData,
   });
+
+  factory CommonTheme.fromJson(Map<String, dynamic> json) {
+    return CommonTheme(
+      textFieldThemeData: TextFieldThemeData.fromJson(
+        json['textFieldThemeData'],
+      ),
+      sliderThemeData: SliderThemeDataMapper.fromJson(
+        json['sliderThemeData'],
+      ),
+    );
+  }
 
   ThemeData toThemeData() {
     return ThemeData(
@@ -25,21 +42,4 @@ class CommonTheme extends ApiObject with EquatableMixin {
         'sliderThemeData': sliderThemeData.toJson(),
         'textFieldThemeData': textFieldThemeData.toJson(),
       };
-
-  factory CommonTheme.fromJson(Map<String, dynamic> json) {
-    return CommonTheme(
-      textFieldThemeData: TextFieldThemeData.fromJson(
-        json['textFieldThemeData'],
-      ),
-      sliderThemeData: SliderThemeDataMapper.fromJson(
-        json['sliderThemeData'],
-      ),
-    );
-  }
-
-  @override
-  List<Object?> get props => [
-        sliderThemeData,
-        textFieldThemeData,
-      ];
 }

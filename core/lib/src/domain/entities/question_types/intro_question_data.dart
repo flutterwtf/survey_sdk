@@ -5,6 +5,22 @@ import 'package:survey_core/src/domain/entities/themes/intro_question_theme.dart
 class IntroQuestionData extends QuestionData {
   final String mainButtonTitle;
 
+  @override
+  List<Object?> get props => [
+        mainButtonTitle,
+        index,
+        title,
+        subtitle,
+        isSkip,
+        content,
+      ];
+
+  @override
+  IntroQuestionTheme? get theme => const IntroQuestionTheme.common();
+
+  @override
+  String get type => QuestionTypes.intro;
+
   const IntroQuestionData({
     required this.mainButtonTitle,
     required super.index,
@@ -13,6 +29,18 @@ class IntroQuestionData extends QuestionData {
     required super.isSkip,
     super.content,
   });
+
+  factory IntroQuestionData.fromJson(Map<String, dynamic> json) {
+    final payload = json['payload'] as Map<String, dynamic>;
+    return IntroQuestionData(
+      index: json['index'],
+      title: json['title'],
+      subtitle: json['subtitle'],
+      isSkip: json['isSkip'],
+      content: json['content'],
+      mainButtonTitle: payload['mainButtonTitle'],
+    );
+  }
 
   @override
   IntroQuestionData copyWith({
@@ -33,12 +61,6 @@ class IntroQuestionData extends QuestionData {
   }
 
   @override
-  IntroQuestionTheme? get theme => const IntroQuestionTheme.common();
-
-  @override
-  String get type => QuestionTypes.intro;
-
-  @override
   Map<String, dynamic> toJson() => {
         'index': index,
         'title': title,
@@ -50,26 +72,4 @@ class IntroQuestionData extends QuestionData {
           'mainButtonTitle': mainButtonTitle,
         },
       };
-
-  factory IntroQuestionData.fromJson(Map<String, dynamic> json) {
-    final payload = json['payload'] as Map<String, dynamic>;
-    return IntroQuestionData(
-      index: json['index'],
-      title: json['title'],
-      subtitle: json['subtitle'],
-      isSkip: json['isSkip'],
-      content: json['content'],
-      mainButtonTitle: payload['mainButtonTitle'],
-    );
-  }
-
-  @override
-  List<Object?> get props => [
-        mainButtonTitle,
-        index,
-        title,
-        subtitle,
-        isSkip,
-        content,
-      ];
 }

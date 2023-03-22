@@ -36,7 +36,7 @@ class ChoiceContentCustomizationTab extends CustomizationTab {
   });
 
   List<int> _initialLimitedList(List<String> listOptions) {
-    // TODO(dev): we should rethink this
+    // TODO(dev): we should rethink this.
     final limitedList = <int>[];
     if (listOptions.isEmpty) {
       limitedList.add(0);

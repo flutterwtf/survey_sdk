@@ -39,6 +39,8 @@ class SliderCommonCustomizationTab extends CustomizationTab {
 
   @override
   Widget build(BuildContext context) {
+    const lengthInputFormatter = 2;
+    final fontSize = AppFonts.sizeL.toString();
     return ListView(
       children: [
         CustomizationItemsContainer(
@@ -57,7 +59,7 @@ class SliderCommonCustomizationTab extends CustomizationTab {
             ColorCustomizationItem(
               initialColor: AppColors.black,
               onColorPicked: onTitleColorChanged,
-              initialSize: AppFonts.sizeL.toString(),
+              initialSize: fontSize,
               onSizeChanged: onTitleFontSizeChanged,
             ),
           ],
@@ -68,7 +70,7 @@ class SliderCommonCustomizationTab extends CustomizationTab {
             ColorCustomizationItem(
               initialColor: AppColors.black,
               onColorPicked: onSubtitleColorChanged,
-              initialSize: AppFonts.sizeL.toString(),
+              initialSize: fontSize,
               onSizeChanged: onSubtitleFontSizeChanged,
             ),
           ],
@@ -83,7 +85,7 @@ class SliderCommonCustomizationTab extends CustomizationTab {
             ColorCustomizationItem(
               initialColor: AppColors.white,
               onColorPicked: onButtonDownColorChanged,
-              initialSize: AppFonts.sizeL.toString(),
+              initialSize: fontSize,
               onSizeChanged: onButtonFontSizeChanged,
             ),
             Row(
@@ -92,14 +94,14 @@ class SliderCommonCustomizationTab extends CustomizationTab {
                 const SizedBox(width: AppDimensions.margin2XS),
                 Expanded(
                   child: CustomizationTextField(
-                    initialValue: AppFonts.sizeL.toString(),
+                    initialValue: fontSize,
                     onChanged: (value) => SizeHandler.onSizeChanged(
                       value,
                       onButtonRadiusChanged,
                     ),
                     inputFormatters: [
                       FilteringTextInputFormatter.digitsOnly,
-                      LengthLimitingTextInputFormatter(2),
+                      LengthLimitingTextInputFormatter(lengthInputFormatter),
                     ],
                   ),
                 ),
