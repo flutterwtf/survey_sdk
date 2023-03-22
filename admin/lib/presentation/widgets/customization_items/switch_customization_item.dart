@@ -79,15 +79,13 @@ class _CustomSwitchState extends State<_CustomSwitch> {
         child: AnimatedAlign(
           alignment: _isToggled ? Alignment.centerRight : Alignment.centerLeft,
           duration: AppDurations.customizationItemAnimation,
-          child: Padding(
-            padding: const EdgeInsets.all(AppDimensions.margin3XS),
-            child: Container(
-              width: AppDimensions.switchIndicatorWidth,
-              decoration: const BoxDecoration(
-                color: AppColors.black,
-                borderRadius: BorderRadius.all(
-                  Radius.circular(AppDimensions.circularRadiusXS),
-                ),
+          child: Container(
+            margin: const EdgeInsets.all(AppDimensions.margin3XS),
+            width: AppDimensions.switchIndicatorWidth,
+            decoration: const BoxDecoration(
+              color: AppColors.black,
+              borderRadius: BorderRadius.all(
+                Radius.circular(AppDimensions.circularRadiusM),
               ),
             ),
           ),
