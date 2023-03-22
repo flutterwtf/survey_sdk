@@ -1,13 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:survey_core/src/domain/entities/api_object.dart';
-import 'package:survey_core/src/domain/entities/question_types/input_question_data.dart';
-import 'package:survey_core/src/domain/entities/question_types/intro_question_data.dart';
 import 'package:survey_core/src/domain/entities/question_types/question_data.dart';
 import 'package:survey_core/src/domain/entities/themes/common_theme.dart';
-import 'package:survey_core/src/domain/entities/themes/text_field_theme_data.dart';
-import 'package:survey_core/src/presentation/utils/app_fonts.dart';
-import 'package:survey_core/src/presentation/utils/app_colors.dart';
-import 'package:survey_core/src/presentation/utils/app_dimensions.dart';
 
 class SurveyData extends ApiObject {
   final List<QuestionData> questions;
