@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:survey_admin/presentation/app/localization/localizations.dart';
 import 'package:survey_admin/presentation/utils/constants/app_dimensions.dart';
-import 'package:survey_admin/presentation/utils/theme_extension.dart';
+import 'package:survey_admin/presentation/utils/constants/initial_values.dart';
 import 'package:survey_admin/presentation/utils/size_handler.dart';
+import 'package:survey_admin/presentation/utils/theme_extension.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
 
 class MinMaxCustomizationItem extends StatefulWidget {
@@ -13,8 +14,8 @@ class MinMaxCustomizationItem extends StatefulWidget {
 
   const MinMaxCustomizationItem({
     required this.onChanged,
-    this.initialMin = 0,
-    this.initialMax = 10,
+    this.initialMin = InitialValues.min,
+    this.initialMax = InitialValues.max,
     super.key,
   }) : assert(
           initialMax > initialMin,
@@ -41,10 +42,12 @@ class _MinMaxCustomizationItemState extends State<MinMaxCustomizationItem> {
 
   @override
   Widget build(BuildContext context) {
+    const minFlex = 2;
+    const maxFlex = 3;
     return Row(
       children: [
         Expanded(
-          flex: 2,
+          flex: minFlex,
           child: _MinMaxInputField(
             prefix: context.localization.min,
             initialValue: widget.initialMin,
@@ -59,7 +62,7 @@ class _MinMaxCustomizationItemState extends State<MinMaxCustomizationItem> {
           ),
         ),
         Expanded(
-          flex: 3,
+          flex: maxFlex,
           child: _MinMaxInputField(
             prefix: context.localization.max,
             initialValue: widget.initialMax,
@@ -104,12 +107,12 @@ class _MinMaxInputField extends StatelessWidget {
         return inputNumber > maxValue! ? '$prefix < $maxValue' : null;
       }
     }
-
     return null;
   }
 
   @override
   Widget build(BuildContext context) {
+    const lengthInputFormatter = 6;
     return Row(
       children: [
         Padding(
@@ -126,7 +129,7 @@ class _MinMaxInputField extends StatelessWidget {
             initialValue: initialValue.toString(),
             inputFormatters: [
               FilteringTextInputFormatter.digitsOnly,
-              LengthLimitingTextInputFormatter(6),
+              LengthLimitingTextInputFormatter(lengthInputFormatter),
             ],
             autovalidateMode: AutovalidateMode.onUserInteraction,
             validator: _validator,

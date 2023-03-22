@@ -4,6 +4,7 @@ import 'package:survey_admin/presentation/app/localization/localizations.dart';
 import 'package:survey_admin/presentation/utils/app_fonts.dart';
 import 'package:survey_admin/presentation/utils/constants/app_dimensions.dart';
 import 'package:survey_admin/presentation/utils/constants/app_durations.dart';
+import 'package:survey_admin/presentation/utils/constants/initial_values.dart';
 import 'package:survey_admin/presentation/utils/theme_extension.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/switch_customization_item.dart';
@@ -12,11 +13,11 @@ class MultilineSwitch extends StatefulWidget {
   const MultilineSwitch({
     required this.onChanged,
     this.isMultiline = false,
-    this.defaultLineAmount = 3,
+    this.defaultLineAmount = InitialValues.defaultLineAmount,
     super.key,
   });
 
-  /// if [isMultiline] equals `false` then `lineAmount` is always equals 1.
+  /// If [isMultiline] equals `false` then `lineAmount` is always equals 1.
   /// In case of any input error `lineAmount` is always equals 1.
   final void Function(bool isMultiline, int lineAmount) onChanged;
   final bool isMultiline;
@@ -81,6 +82,7 @@ class _LineAmountInputField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const lengthInputFormatter = 3;
     return Padding(
       padding: const EdgeInsets.only(
         top: AppDimensions.marginM,
@@ -96,7 +98,7 @@ class _LineAmountInputField extends StatelessWidget {
             child: CustomizationTextField(
               inputFormatters: [
                 FilteringTextInputFormatter.digitsOnly,
-                LengthLimitingTextInputFormatter(3),
+                LengthLimitingTextInputFormatter(lengthInputFormatter),
               ],
               initialValue: defaultLineAmount.toString(),
               fontSize: AppFonts.sizeM,

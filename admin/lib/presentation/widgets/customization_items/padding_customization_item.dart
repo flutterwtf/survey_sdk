@@ -94,6 +94,7 @@ class _PaddingItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const lengthInputFormatter = 3;
     return Expanded(
       child: Row(
         children: [
@@ -119,7 +120,7 @@ class _PaddingItem extends StatelessWidget {
               initialValue: initialValue,
               inputFormatters: [
                 FilteringTextInputFormatter.digitsOnly,
-                LengthLimitingTextInputFormatter(3),
+                LengthLimitingTextInputFormatter(lengthInputFormatter),
               ],
               onChanged: (value) {
                 if (value != null) onChanged(value);

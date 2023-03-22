@@ -40,6 +40,7 @@ dart_code_metrics:
     - consistent-update-render-object: false
     - prefer-correct-identifier-length:
         max-length: 25
+        exceptions: [ 'i' ]
     - avoid-late-keyword: false
     - newline-before-return: false
     - avoid-ignoring-return-values: false

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:survey_admin/presentation/utils/constants/initial_values.dart';
 import 'package:survey_admin/presentation/utils/size_handler.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
 
@@ -9,17 +10,18 @@ class DivisionsCustomizationItem extends StatelessWidget {
 
   const DivisionsCustomizationItem({
     required this.onChanged,
-    this.initialValue = 10,
+    this.initialValue = InitialValues.divisionsInitialValue,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
+    const lengthInputFormatter = 3;
     return CustomizationTextField(
       initialValue: initialValue.toString(),
       inputFormatters: [
         FilteringTextInputFormatter.digitsOnly,
-        LengthLimitingTextInputFormatter(3),
+        LengthLimitingTextInputFormatter(lengthInputFormatter),
       ],
       onChanged: (value) => SizeHandler.onSizeChanged(value, onChanged),
     );

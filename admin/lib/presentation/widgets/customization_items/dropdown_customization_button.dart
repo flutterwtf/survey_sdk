@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:survey_admin/presentation/utils/constants/app_assets.dart';
 import 'package:survey_admin/presentation/utils/constants/app_dimensions.dart';
 import 'package:survey_admin/presentation/utils/constants/app_durations.dart';
+import 'package:survey_admin/presentation/utils/constants/initial_values.dart';
 
 class DropdownCustomizationButton<T> extends StatefulWidget {
   final T value;
@@ -36,7 +37,9 @@ class _DropdownCustomizationButtonState<T>
       duration: AppDurations.customizationItemAnimation,
     );
     // ignore: prefer_int_literals
-    _animation = Tween(begin: 0.0, end: .5).animate(
+    _animation =
+        Tween(begin: InitialValues.tweenBegin, end: InitialValues.tweenEnd)
+            .animate(
       CurvedAnimation(
         parent: _iconAnimationController,
         curve: Curves.easeOut,
