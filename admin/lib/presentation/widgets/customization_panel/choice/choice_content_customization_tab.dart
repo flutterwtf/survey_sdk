@@ -92,33 +92,24 @@ class ChoiceContentCustomizationTab extends CustomizationTab {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Expanded(
-                    child: DecoratedBox(
-                      decoration: const BoxDecoration(
-                        border: Border(
-                          right: BorderSide(
-                            color: Colors.grey,
-                            // For demonstration.
-                            width: 1.0,
-                          ),
-                        ),
-                      ),
-                      child: DropdownCustomizationButton<RuleType>(
-                        items: RuleType.values
-                            .map(
-                              (e) => DropdownCustomizationItem<RuleType>(
-                                value: e,
-                                onChange: onRuleChanged,
-                                child: Text(
-                                  e.name,
-                                  style: context.theme.textTheme.bodyLarge,
-                                ),
+                    child: DropdownCustomizationButton<RuleType>(
+                      items: RuleType.values
+                          .map(
+                            (e) => DropdownCustomizationItem<RuleType>(
+                              value: e,
+                              onChange: onRuleChanged,
+                              child: Text(
+                                e.name,
+                                style: context.theme.textTheme.bodyLarge,
                               ),
-                            )
-                            .toList(),
-                        value: ruleType,
-                      ),
+                            ),
+                          )
+                          .toList(),
+                      value: ruleType,
+                      withColor: true,
                     ),
                   ),
+                  const SizedBox(width: AppDimensions.marginXS),
                   Expanded(
                     child: ruleType != RuleType.none
                         ? _RuleDropdown(
@@ -164,6 +155,7 @@ class _RuleDropdown extends StatelessWidget {
           )
           .toList(),
       value: value,
+      withColor: true,
     );
   }
 }

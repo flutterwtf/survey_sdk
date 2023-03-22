@@ -139,6 +139,7 @@ class InputCustomizationTab extends CustomizationTab {
                   )
                   .toList(),
               value: inputType,
+              withColor: false,
             ),
           ],
         ),
