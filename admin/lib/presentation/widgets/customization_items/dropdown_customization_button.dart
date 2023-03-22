@@ -58,7 +58,7 @@ class _DropdownCustomizationButtonState<T>
     return DecoratedBox(
       decoration: widget.withColor
           ? BoxDecoration(
-              color: _isExpanded ? AppColors.greyBackground : AppColors.white,
+              color: _isExpanded ? AppColors.dropdownMenuBackground : AppColors.white,
               borderRadius: const BorderRadius.all(
                 Radius.circular(AppDimensions.circularRadiusS),
               ),
