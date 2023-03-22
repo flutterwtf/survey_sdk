@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:survey_core/src/presentation/utils/colors.dart';
-import 'package:survey_core/src/presentation/utils/constants.dart';
+import 'package:survey_core/src/presentation/utils/app_colors.dart';
+import 'package:survey_core/src/presentation/utils/app_dimensions.dart';
 
 extension SliderThemeDataMapper on SliderThemeData {
   Map<String, dynamic> toJson() => {
