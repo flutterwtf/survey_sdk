@@ -10,13 +10,12 @@ To get started with using the Survey SDK, simply follow these steps:
 
 2. Install the required dependencies by running the following command:
 
-bash flutter pub get
+        -- flutter pub get
 
 3. Import the Survey SDK into your Flutter application by including it in your pubspec.yaml file:
 
-yaml
-dependencies:
-  survey_sdk: ^0.0.1
+        dependencies:
+          survey_sdk: ^0.0.1
 
 4. Start using the Survey SDK in your Flutter application.
 
