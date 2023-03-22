@@ -9,7 +9,8 @@ import 'package:survey_core/survey_core.dart';
 class WebFilesystemDataSourceImpl implements FilesystemDataSource {
   @override
   Future<void> downloadSurveyData(Map<String, dynamic> exportJson) async {
-    final mapObject = jsonEncode(exportJson);
+    const encoder = JsonEncoder.withIndent('  ');
+    final mapObject = encoder.convert(exportJson);
 
     final bytes = utf8.encode(mapObject);
     final blob = html.Blob([bytes]);
