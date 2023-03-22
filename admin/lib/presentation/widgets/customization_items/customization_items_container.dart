@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:survey_admin/presentation/utils/constants/app_dimensions.dart';
-import 'package:survey_admin/presentation/utils/theme_extension.dart';
+import 'package:survey_admin/presentation/utils/utils.dart';
 
 class CustomizationItemsContainer extends StatefulWidget {
   final String? title;

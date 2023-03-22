@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:survey_admin/presentation/utils/app_fonts.dart';
-import 'package:survey_admin/presentation/utils/colors.dart';
-import 'package:survey_admin/presentation/utils/constants/app_dimensions.dart';
+import 'package:survey_admin/presentation/utils/utils.dart';
 
 abstract class AppTheme {
   static final theme = ThemeData(
