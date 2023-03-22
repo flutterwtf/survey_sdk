@@ -7,6 +7,12 @@ class ChoiceQuestionTheme extends ThemeExtension<ChoiceQuestionTheme>
   final Color activeColor;
   final Color inactiveColor;
 
+  @override
+  List<Object?> get props => [
+        activeColor,
+        inactiveColor,
+      ];
+
   const ChoiceQuestionTheme({
     required this.activeColor,
     required this.inactiveColor,
@@ -52,10 +58,4 @@ class ChoiceQuestionTheme extends ThemeExtension<ChoiceQuestionTheme>
         'activeColor': activeColor.value,
         'inactiveColor': inactiveColor.value,
       };
-
-  @override
-  List<Object?> get props => [
-        activeColor,
-        inactiveColor,
-      ];
 }

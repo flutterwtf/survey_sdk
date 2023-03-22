@@ -50,6 +50,7 @@ class InputCustomizationTab extends CustomizationTab {
 
   @override
   Widget build(BuildContext context) {
+    final fontSize = AppFonts.sizeL.toString();
     return ListView(
       children: [
         CustomizationItemsContainer(
@@ -103,7 +104,7 @@ class InputCustomizationTab extends CustomizationTab {
             ColorCustomizationItem(
               initialColor: AppColors.textLightGrey,
               onColorPicked: onHintColorChanged,
-              initialSize: AppFonts.sizeL.toString(),
+              initialSize: fontSize,
               onSizeChanged: onHintFontSizeChanged,
             ),
           ],
@@ -114,7 +115,7 @@ class InputCustomizationTab extends CustomizationTab {
             ColorCustomizationItem(
               initialColor: AppColors.black,
               onColorPicked: onTextColorChanged,
-              initialSize: AppFonts.sizeL.toString(),
+              initialSize: fontSize,
               onSizeChanged: onTextFontSizeChanged,
             ),
           ],

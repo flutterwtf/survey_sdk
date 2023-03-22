@@ -80,12 +80,12 @@ class _CustomSwitchState extends State<_CustomSwitch> {
           alignment: _isToggled ? Alignment.centerRight : Alignment.centerLeft,
           duration: AppDurations.customizationItemAnimation,
           child: Container(
-            padding: const EdgeInsets.all(AppDimensions.margin3XS),
+            margin: const EdgeInsets.all(AppDimensions.margin3XS),
             width: AppDimensions.switchIndicatorWidth,
             decoration: const BoxDecoration(
               color: AppColors.black,
               borderRadius: BorderRadius.all(
-                Radius.circular(AppDimensions.circularRadiusXS),
+                Radius.circular(AppDimensions.circularRadiusM),
               ),
             ),
           ),

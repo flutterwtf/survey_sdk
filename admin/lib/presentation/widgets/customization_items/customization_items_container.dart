@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:survey_admin/presentation/utils/constants/app_dimensions.dart';
 import 'package:survey_admin/presentation/utils/theme_extension.dart';
-import 'package:survey_admin/presentation/widgets/customization_items/item_divider.dart';
 
 class CustomizationItemsContainer extends StatefulWidget {
   final String? title;
@@ -59,7 +58,7 @@ class _CustomizationItemsContainerState
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if (widget.isTopDividerShown) const ItemDivider(),
+        if (widget.isTopDividerShown) const Divider(),
         if (widget.title != null)
           Padding(
             padding: widget.titlePadding ??
@@ -86,7 +85,7 @@ class _CustomizationItemsContainerState
             children: _items,
           ),
         ),
-        if (widget.isBottomDividerShown) const ItemDivider(),
+        if (widget.isBottomDividerShown) const Divider(),
       ],
     );
   }

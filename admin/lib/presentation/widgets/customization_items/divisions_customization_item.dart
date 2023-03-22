@@ -3,8 +3,9 @@ import 'package:flutter/services.dart';
 import 'package:survey_admin/presentation/utils/size_handler.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
 
+const _initialValue = 10;
+
 class DivisionsCustomizationItem extends StatelessWidget {
-  static const _initialValue = 10;
   final int initialValue;
   final void Function(int divisions) onChanged;
 

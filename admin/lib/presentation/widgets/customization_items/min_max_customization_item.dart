@@ -6,9 +6,10 @@ import 'package:survey_admin/presentation/utils/size_handler.dart';
 import 'package:survey_admin/presentation/utils/theme_extension.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
 
+const _minValue = 0;
+const _maxValue = 10;
+
 class MinMaxCustomizationItem extends StatefulWidget {
-  static const _minValue = 0;
-  static const _maxValue = 10;
   final int initialMin;
   final int initialMax;
   final void Function(int min, int max) onChanged;

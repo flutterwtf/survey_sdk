@@ -8,9 +8,9 @@ import 'package:survey_admin/presentation/utils/theme_extension.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/switch_customization_item.dart';
 
-class MultilineSwitch extends StatefulWidget {
-  static const _lineAmount = 3;
+const _lineAmount = 3;
 
+class MultilineSwitch extends StatefulWidget {
   const MultilineSwitch({
     required this.onChanged,
     this.isMultiline = false,

@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:survey_core/src/domain/entities/input_validator.dart';
+import 'package:survey_core/src/domain/entities/question_answer.dart';
 import 'package:survey_core/src/domain/entities/question_types/input_question_data.dart';
 import 'package:survey_core/src/presentation/input_question/input_question_page.dart';
 import 'package:survey_core/src/presentation/widgets/question_bottom_button.dart';
 
 import 'widget/app_test.dart';
 
+//TODO: Make a test for input date
 void main() {
   const testValidTextString = 'test string1';
   const testInvalidNumberString = 'test string2';
@@ -55,7 +57,11 @@ void main() {
             AppTest(
               child: InputQuestionPage(
                 data: mockInputData,
-                onSend: ({data, String? key}) => sendData = data,
+                onSend: ({
+                  required int index,
+                  required QuestionAnswer answer,
+                }) =>
+                    sendData = (answer as QuestionAnswer<String>).answer,
               ),
             ),
           );
@@ -79,7 +85,11 @@ void main() {
             AppTest(
               child: InputQuestionPage(
                 data: mockInputDataWithNumberValidator,
-                onSend: ({data, String? key}) => sendData = data,
+                onSend: ({
+                  required int index,
+                  required QuestionAnswer answer,
+                }) =>
+                    sendData = (answer as QuestionAnswer<String>).answer,
               ),
             ),
           );
@@ -104,7 +114,11 @@ void main() {
             AppTest(
               child: InputQuestionPage(
                 data: mockInputData,
-                onSend: ({data, String? key}) => isPressed = true,
+                onSend: ({
+                  required int index,
+                  required QuestionAnswer answer,
+                }) =>
+                    isPressed = true,
               ),
             ),
           );
@@ -123,7 +137,11 @@ void main() {
             AppTest(
               child: InputQuestionPage(
                 data: mockInputData,
-                onSend: ({data, String? key}) => sentData = data,
+                onSend: ({
+                  required int index,
+                  required QuestionAnswer answer,
+                }) =>
+                    sentData = (answer as QuestionAnswer<String>).answer,
               ),
             ),
           );

@@ -41,12 +41,9 @@ class _QuestionSettingsTabBarState extends State<QuestionSettingsTabBar>
   Widget build(BuildContext context) {
     return Column(
       children: [
+        const Divider(),
         TabBar(
           controller: _tabController,
-          labelColor: AppColors.black,
-          unselectedLabelColor: AppColors.customizationTabBarInactiveText,
-          indicatorColor: AppColors.black,
-          indicatorSize: TabBarIndicatorSize.label,
           labelStyle: context.theme.textTheme.bodyMedium?.copyWith(
             fontWeight: AppFonts.weightMedium,
           ),

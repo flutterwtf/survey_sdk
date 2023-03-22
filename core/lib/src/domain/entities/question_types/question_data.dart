@@ -13,6 +13,10 @@ abstract class QuestionData<T> extends Equatable with ApiObject {
   final String? content;
   final bool isSkip;
 
+  T? get theme;
+
+  String get type;
+
   const QuestionData({
     required this.index,
     required this.title,
@@ -28,10 +32,6 @@ abstract class QuestionData<T> extends Equatable with ApiObject {
     String? content,
     bool? isSkip,
   });
-
-  T? get theme;
-
-  String get type;
 
   static QuestionData fromType(Map<String, dynamic> json) {
     switch (json['type']) {

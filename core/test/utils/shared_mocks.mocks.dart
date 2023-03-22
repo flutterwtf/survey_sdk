@@ -8,7 +8,7 @@ import 'dart:async' as _i4;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:survey_core/src/data/data_sources/interfaces/filesystem_data_source.dart'
     as _i3;
-import 'package:survey_core/src/data/repositories/survey_data_repository.dart'
+import 'package:survey_core/src/data/repositories/survey_data_repository_impl.dart'
     as _i5;
 import 'package:survey_core/src/domain/entities/survey_data.dart' as _i2;
 

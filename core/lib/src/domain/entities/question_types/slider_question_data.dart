@@ -7,6 +7,26 @@ class SliderQuestionData extends QuestionData<SliderThemeData> {
   final num maxValue;
   final num initialValue;
 
+  @override
+  List<Object?> get props => [
+        minValue,
+        maxValue,
+        initialValue,
+        index,
+        title,
+        subtitle,
+        isSkip,
+        content,
+      ];
+
+  // TODO(dev): do like this in every question widget.
+  // TODO(dev): implement theme.
+  @override
+  SliderThemeData? get theme => null;
+
+  @override
+  String get type => QuestionTypes.slider;
+
   const SliderQuestionData({
     required this.minValue,
     required this.maxValue,
@@ -17,6 +37,19 @@ class SliderQuestionData extends QuestionData<SliderThemeData> {
     required super.isSkip,
     super.content,
   });
+
+  factory SliderQuestionData.fromJson(Map<String, dynamic> json) {
+    return SliderQuestionData(
+      index: json['index'],
+      minValue: json['minValue'],
+      maxValue: json['maxValue'],
+      initialValue: json['initialValue'],
+      title: json['title'],
+      subtitle: json['subtitle'],
+      isSkip: json['isSkip'],
+      content: json['content'],
+    );
+  }
 
   @override
   SliderQuestionData copyWith({
@@ -40,14 +73,6 @@ class SliderQuestionData extends QuestionData<SliderThemeData> {
     );
   }
 
-  // TODO(dev): do like this in every question widget
-  // TODO(dev): implement theme
-  @override
-  SliderThemeData? get theme => null;
-
-  @override
-  String get type => QuestionTypes.slider;
-
   @override
   Map<String, dynamic> toJson() => {
         'index': index,
@@ -60,29 +85,4 @@ class SliderQuestionData extends QuestionData<SliderThemeData> {
         'isSkip': isSkip,
         'content': content,
       };
-
-  factory SliderQuestionData.fromJson(Map<String, dynamic> json) {
-    return SliderQuestionData(
-      index: json['index'],
-      minValue: json['minValue'],
-      maxValue: json['maxValue'],
-      initialValue: json['initialValue'],
-      title: json['title'],
-      subtitle: json['subtitle'],
-      isSkip: json['isSkip'],
-      content: json['content'],
-    );
-  }
-
-  @override
-  List<Object?> get props => [
-        minValue,
-        maxValue,
-        initialValue,
-        index,
-        title,
-        subtitle,
-        isSkip,
-        content,
-      ];
 }

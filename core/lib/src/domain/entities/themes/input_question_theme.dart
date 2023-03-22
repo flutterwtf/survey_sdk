@@ -4,7 +4,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:survey_core/src/domain/entities/api_object.dart';
 import 'package:survey_core/src/presentation/utils/app_fonts.dart';
-import 'package:survey_core/src/presentation/utils/colors.dart';
+import 'package:survey_core/src/presentation/utils/app_colors.dart';
 
 class InputQuestionTheme extends ThemeExtension<InputQuestionTheme>
     with ApiObject, EquatableMixin {
@@ -19,6 +19,21 @@ class InputQuestionTheme extends ThemeExtension<InputQuestionTheme>
   final int? maxLines;
   final double? verticalPadding;
   final double? horizontalPadding;
+
+  @override
+  List<Object?> get props => [
+        backgroundColor,
+        borderColor,
+        borderWidth,
+        hintColor,
+        hintSize,
+        textColor,
+        textSize,
+        minLines,
+        maxLines,
+        verticalPadding,
+        horizontalPadding,
+      ];
 
   const InputQuestionTheme({
     required this.backgroundColor,
@@ -47,22 +62,6 @@ class InputQuestionTheme extends ThemeExtension<InputQuestionTheme>
         verticalPadding = double.parse(json['verticalPadding'].toString()),
         horizontalPadding = double.parse(json['horizontalPadding'].toString());
 
-  @override
-  Map<String, dynamic> toJson() => {
-    'backgroundColor': backgroundColor.value,
-    'borderColor': borderColor.value,
-    'borderWidth': borderWidth,
-    'hintColor': hintColor.value,
-    'hintSize': hintSize,
-    'textColor': textColor.value,
-    'textSize': textSize,
-    'minLines': minLines,
-    'maxLines': maxLines,
-    'verticalPadding': verticalPadding,
-    'horizontalPadding': horizontalPadding,
-  };
-
-
   const InputQuestionTheme.common()
       : this(
           backgroundColor: Colors.white,
@@ -73,6 +72,21 @@ class InputQuestionTheme extends ThemeExtension<InputQuestionTheme>
           textColor: AppColors.black,
           textSize: AppFonts.sizeL,
         );
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'backgroundColor': backgroundColor.value,
+        'borderColor': borderColor.value,
+        'borderWidth': borderWidth,
+        'hintColor': hintColor.value,
+        'hintSize': hintSize,
+        'textColor': textColor.value,
+        'textSize': textSize,
+        'minLines': minLines,
+        'maxLines': maxLines,
+        'verticalPadding': verticalPadding,
+        'horizontalPadding': horizontalPadding,
+      };
 
   @override
   ThemeExtension<InputQuestionTheme> copyWith({
@@ -127,19 +141,4 @@ class InputQuestionTheme extends ThemeExtension<InputQuestionTheme>
           lerpDouble(horizontalPadding, other.horizontalPadding, t),
     );
   }
-
-  @override
-  List<Object?> get props => [
-        backgroundColor,
-        borderColor,
-        borderWidth,
-        hintColor,
-        hintSize,
-        textColor,
-        textSize,
-        minLines,
-        maxLines,
-        verticalPadding,
-        horizontalPadding,
-      ];
 }

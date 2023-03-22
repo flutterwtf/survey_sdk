@@ -3,8 +3,8 @@ import 'dart:ui';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:survey_core/src/domain/entities/api_object.dart';
-import 'package:survey_core/src/presentation/utils/colors.dart';
-import 'package:survey_core/src/presentation/utils/constants.dart';
+import 'package:survey_core/src/presentation/utils/app_colors.dart';
+import 'package:survey_core/src/presentation/utils/app_dimensions.dart';
 
 @immutable
 class TextFieldThemeData extends ThemeExtension<TextFieldThemeData>
@@ -26,6 +26,27 @@ class TextFieldThemeData extends ThemeExtension<TextFieldThemeData>
   final double buttonTextSize;
   final Color buttonColor;
   final Color buttonTextColor;
+
+  @override
+  List<Object?> get props => [
+        fillCommonColor,
+        fillInputColor,
+        borderColor,
+        borderWidth,
+        verticalPadding,
+        horizontalPadding,
+        hintColor,
+        hintSize,
+        textColor,
+        textSize,
+        titleColor,
+        titleSize,
+        subtitleColor,
+        subtitleSize,
+        buttonTextSize,
+        buttonColor,
+        buttonTextColor,
+      ];
 
   const TextFieldThemeData({
     required this.fillCommonColor,
@@ -178,25 +199,4 @@ class TextFieldThemeData extends ThemeExtension<TextFieldThemeData>
       buttonTextColor: Color.lerp(buttonTextColor, other.buttonTextColor, t)!,
     );
   }
-
-  @override
-  List<Object?> get props => [
-        fillCommonColor,
-        fillInputColor,
-        borderColor,
-        borderWidth,
-        verticalPadding,
-        horizontalPadding,
-        hintColor,
-        hintSize,
-        textColor,
-        textSize,
-        titleColor,
-        titleSize,
-        subtitleColor,
-        subtitleSize,
-        buttonTextSize,
-        buttonColor,
-        buttonTextColor,
-      ];
 }

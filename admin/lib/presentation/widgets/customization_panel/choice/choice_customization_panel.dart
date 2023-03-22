@@ -6,21 +6,6 @@ import 'package:survey_admin/presentation/widgets/customization_panel/choice/cho
 import 'package:survey_admin/presentation/widgets/question_settings_tab_bar.dart';
 import 'package:survey_core/survey_core.dart';
 
-enum RuleType {
-  none('None'),
-  more('>'),
-  less('<'),
-  moreOrEqual('>='),
-  lessOrEqual('<='),
-  equal('=');
-
-  const RuleType(
-    this.name,
-  );
-
-  final String name;
-}
-
 class ChoiceCustomizationPanel extends StatefulWidget {
   final QuestionData editableQuestion;
   final bool isMultipleChoice;
@@ -86,4 +71,19 @@ class _ChoiceCustomizationPanelState extends State<ChoiceCustomizationPanel> {
       ],
     );
   }
+}
+
+enum RuleType {
+  none('None'),
+  more('>'),
+  less('<'),
+  moreOrEqual('>='),
+  lessOrEqual('<='),
+  equal('=');
+
+  const RuleType(
+    this.name,
+  );
+
+  final String name;
 }
