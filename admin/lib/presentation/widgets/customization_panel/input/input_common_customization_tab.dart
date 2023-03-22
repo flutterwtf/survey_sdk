@@ -31,6 +31,7 @@ class InputCommonCustomizationTab extends CustomizationTab {
 
   @override
   Widget build(BuildContext context) {
+    final fontSize = AppFonts.sizeS.toString();
     return ListView(
       children: [
         CustomizationItemsContainer(
@@ -60,7 +61,7 @@ class InputCommonCustomizationTab extends CustomizationTab {
             ColorCustomizationItem(
               initialColor: AppColors.black,
               onColorPicked: onSubtitleColorPicked,
-              initialSize: AppFonts.sizeS.toString(),
+              initialSize: fontSize,
               onSizeChanged: onSubtitleFontSizeChanged,
             ),
           ],
@@ -75,7 +76,7 @@ class InputCommonCustomizationTab extends CustomizationTab {
             ColorCustomizationItem(
               initialColor: AppColors.white,
               onColorPicked: onButtonSecondColorPicked,
-              initialSize: AppFonts.sizeS.toString(),
+              initialSize: fontSize,
               onSizeChanged: onButtonFontSizeChanged,
             ),
           ],
