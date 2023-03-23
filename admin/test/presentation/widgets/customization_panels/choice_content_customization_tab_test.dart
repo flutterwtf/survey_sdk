@@ -7,6 +7,7 @@ import 'package:survey_core/survey_core.dart';
 
 import '../app_tester.dart';
 
+//TODO: add test for choice rule
 void main() {
   group(
     'Choice content customization tab tests',
@@ -25,7 +26,15 @@ void main() {
           ruleValue: 0,
           listOptions: const [],
           onRuleLimitedChanged: (value) {},
-          editableQuestion: const IntroQuestionData.common(),
+          editableQuestion: const ChoiceQuestionData(
+            isMultipleChoice: true,
+            options: [],
+            title: 'title',
+            subtitle: 'subtitle',
+            isSkip: false,
+            content: 'content',
+            index: 1,
+          ),
         ),
       );
 
@@ -79,7 +88,7 @@ void main() {
           await tester.pumpWidget(page);
           await tester.pumpAndSettle();
 
-          final optionsInputField = find.byType(TextFormField);
+          final optionsInputField = find.byType(TextFormField).at(2);
 
           // Enter first option
           await tester.enterText(optionsInputField, 'first');

@@ -23,6 +23,7 @@ class _QuestionSettingsTabBarState extends State<QuestionSettingsTabBar>
   @override
   void initState() {
     super.initState();
+
     _tabController = TabController(
       length: widget.tabs.length,
       vsync: this,
@@ -32,6 +33,7 @@ class _QuestionSettingsTabBarState extends State<QuestionSettingsTabBar>
   @override
   void dispose() {
     _tabController.dispose();
+
     super.dispose();
   }
 
@@ -39,17 +41,14 @@ class _QuestionSettingsTabBarState extends State<QuestionSettingsTabBar>
   Widget build(BuildContext context) {
     return Column(
       children: [
+        const Divider(),
         TabBar(
           controller: _tabController,
-          labelColor: AppColors.black,
-          unselectedLabelColor: AppColors.customizationTabBarInactiveText,
-          indicatorColor: AppColors.black,
-          indicatorSize: TabBarIndicatorSize.label,
           labelStyle: context.theme.textTheme.bodyMedium?.copyWith(
             fontWeight: AppFonts.weightMedium,
           ),
           tabs: [
-            for (var tab in widget.tabs) Tab(text: tab.title),
+            for (final tab in widget.tabs) Tab(text: tab.title),
           ],
         ),
         Expanded(

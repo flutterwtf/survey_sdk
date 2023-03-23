@@ -53,6 +53,7 @@ class _CustomSwitchState extends State<_CustomSwitch> {
   @override
   void initState() {
     super.initState();
+
     _isToggled = widget.initialValue;
   }
 
@@ -60,9 +61,7 @@ class _CustomSwitchState extends State<_CustomSwitch> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        setState(() {
-          _isToggled = !_isToggled;
-        });
+        setState(() => _isToggled = !_isToggled);
         widget.onChanged?.call(_isToggled);
       },
       child: AnimatedContainer(
@@ -72,21 +71,21 @@ class _CustomSwitchState extends State<_CustomSwitch> {
           color: _isToggled
               ? AppColors.switchBackgroundActive
               : AppColors.switchBackgroundInactive,
-          borderRadius: BorderRadius.circular(AppDimensions.circularRadiusS),
+          borderRadius: const BorderRadius.all(
+            Radius.circular(AppDimensions.circularRadiusS),
+          ),
         ),
         duration: AppDurations.customizationItemAnimation,
         child: AnimatedAlign(
           alignment: _isToggled ? Alignment.centerRight : Alignment.centerLeft,
           duration: AppDurations.customizationItemAnimation,
-          child: Padding(
-            padding: const EdgeInsets.all(AppDimensions.margin3XS),
-            child: Container(
-              width: AppDimensions.switchIndicatorWidth,
-              decoration: BoxDecoration(
-                color: AppColors.black,
-                borderRadius: BorderRadius.circular(
-                  AppDimensions.circularRadiusXS,
-                ),
+          child: Container(
+            margin: const EdgeInsets.all(AppDimensions.margin3XS),
+            width: AppDimensions.switchIndicatorWidth,
+            decoration: const BoxDecoration(
+              color: AppColors.black,
+              borderRadius: BorderRadius.all(
+                Radius.circular(AppDimensions.circularRadiusM),
               ),
             ),
           ),

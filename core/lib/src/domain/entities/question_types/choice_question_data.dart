@@ -10,6 +10,24 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
   final int ruleValue;
   final ChoiceQuestionTheme? theme;
 
+  @override
+  List<Object?> get props => [
+        isMultipleChoice,
+        ...options,
+        index,
+        title,
+        subtitle,
+        isSkip,
+        content,
+        selectedOptions,
+      ];
+
+  @override
+  ChoiceQuestionTheme? get theme => const ChoiceQuestionTheme.common();
+
+  @override
+  String get type => QuestionTypes.choice;
+
   const ChoiceQuestionData({
     required this.isMultipleChoice,
     required this.options,

@@ -30,6 +30,7 @@ class InputCustomizationTabState
     extends CustomizationTabState<InputCustomizationTab> {
   @override
   Widget build(BuildContext context) {
+    final fontSize = AppFonts.sizeL.toString();
     return BlocBuilder<BuilderCubit, BuilderState>(
       builder: (context, state) {
         final data = (state as EditQuestionBuilderState).selectedQuestion!
@@ -134,7 +135,7 @@ class InputCustomizationTabState
                       ),
                     ),
                   ),
-                  initialSize: AppFonts.sizeL.toString(),
+                  initialSize: fontSize,
                   onSizeChanged: (size) => cubit.updateQuestionData(
                     data.copyWith(
                       theme: theme.copyWith(
@@ -157,7 +158,7 @@ class InputCustomizationTabState
                       ),
                     ),
                   ),
-                  initialSize: AppFonts.sizeL.toString(),
+                  initialSize: fontSize,
                   onSizeChanged: (size) => cubit.updateQuestionData(
                     data.copyWith(
                       theme: theme.copyWith(

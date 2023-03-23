@@ -29,6 +29,7 @@ class _DropdownCustomizationButtonState<T>
   @override
   void initState() {
     super.initState();
+
     _isExpanded = false;
     _iconAnimationController = AnimationController(
       vsync: this,
@@ -54,30 +55,32 @@ class _DropdownCustomizationButtonState<T>
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        InkWell(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              widget.items
-                  .where((element) => element.value == widget.value)
-                  .first
-                  .child,
-              RotationTransition(
-                turns: _animation,
-                child: SvgPicture.asset(AppAssets.arrowIcon),
-              ),
-            ],
+        Padding(
+          padding: const EdgeInsets.symmetric(
+            vertical: AppDimensions.margin2XS,
+            horizontal: AppDimensions.marginM,
           ),
-          onTap: () {
-            setState(() {
-              _isExpanded = !_isExpanded;
-            });
-            if (_isExpanded) {
-              _iconAnimationController.forward();
-            } else {
-              _iconAnimationController.reverse();
-            }
-          },
+          child: InkWell(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                widget.items
+                    .where((element) => element.value == widget.value)
+                    .first
+                    .child,
+                RotationTransition(
+                  turns: _animation,
+                  child: SvgPicture.asset(AppAssets.arrowIcon),
+                ),
+              ],
+            ),
+            onTap: () {
+              _isExpanded
+                  ? _iconAnimationController.reverse()
+                  : _iconAnimationController.forward();
+              setState(() => _isExpanded = !_isExpanded);
+            },
+          ),
         ),
         AnimatedSize(
           duration: AppDurations.customizationItemAnimation,

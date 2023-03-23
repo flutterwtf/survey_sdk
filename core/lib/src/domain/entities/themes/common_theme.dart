@@ -16,6 +16,12 @@ class CommonTheme extends ThemeExtension<CommonTheme>
   final double buttonTextSize;
   final double buttonRadius;
 
+  @override
+  List<Object?> get props => [
+        sliderThemeData,
+        textFieldThemeData,
+      ];
+
   CommonTheme({
     required this.fill,
     required this.titleColor,

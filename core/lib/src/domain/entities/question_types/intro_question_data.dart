@@ -5,6 +5,22 @@ import 'package:survey_core/src/domain/entities/themes/intro_question_theme.dart
 class IntroQuestionData extends QuestionData {
   final String buttonText;
 
+  @override
+  List<Object?> get props => [
+        mainButtonTitle,
+        index,
+        title,
+        subtitle,
+        isSkip,
+        content,
+      ];
+
+  @override
+  IntroQuestionTheme? get theme => const IntroQuestionTheme.common();
+
+  @override
+  String get type => QuestionTypes.intro;
+
   const IntroQuestionData({
     required this.buttonText,
     required super.index,
@@ -47,12 +63,6 @@ class IntroQuestionData extends QuestionData {
       isSkip: isSkip ?? this.isSkip,
     );
   }
-
-  @override
-  IntroQuestionTheme? get theme => const IntroQuestionTheme.common();
-
-  @override
-  String get type => QuestionTypes.intro;
 
   @override
   Map<String, dynamic> toJson() => {

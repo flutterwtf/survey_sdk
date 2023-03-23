@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:survey_admin/presentation/app/localization/localizations.dart';
 import 'package:survey_admin/presentation/pages/builder/builder_cubit.dart';
 import 'package:survey_admin/presentation/pages/builder/builder_state.dart';
+import 'package:survey_admin/presentation/utils/constants/app_dimensions.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_multiline_text_field.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/customization_tab.dart';
@@ -35,7 +36,7 @@ class InputContentCustomizationTabState
               isTopDividerShown: true,
               children: [
                 CustomizationMultilineTextField(
-                  maxHeight: _maxInputTextHeight,
+                  maxHeight: AppDimensions.maxTextFieldHeight,
                   onChanged: (title) => cubit.updateQuestionData(
                     data.copyWith(title: title),
                   ),
@@ -46,7 +47,7 @@ class InputContentCustomizationTabState
               title: context.localization.subtitle,
               children: [
                 CustomizationMultilineTextField(
-                  maxHeight: _maxInputTextHeight,
+                  maxHeight: AppDimensions.maxTextFieldHeight,
                   onChanged: (subtitle) => cubit.updateQuestionData(
                     data.copyWith(subtitle: subtitle),
                   ),
@@ -57,7 +58,7 @@ class InputContentCustomizationTabState
               title: context.localization.hint,
               children: [
                 CustomizationMultilineTextField(
-                  maxHeight: _maxInputTextHeight,
+                  maxHeight: AppDimensions.maxTextFieldHeight,
                   onChanged: (hint) => cubit.updateQuestionData(
                     data.copyWith(hintText: hint),
                   ),
@@ -69,7 +70,7 @@ class InputContentCustomizationTabState
               title: context.localization.button,
               children: [
                 CustomizationMultilineTextField(
-                  maxHeight: _maxInputTextHeight,
+                  maxHeight: AppDimensions.maxTextFieldHeight,
                   onChanged: (text) => cubit.updateQuestionData(
                     data.copyWith(buttonText: text),
                   ),

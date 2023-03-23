@@ -1,9 +1,9 @@
-import 'package:survey_admin/data/interfaces/filesystem_data_source.dart';
+import 'package:survey_admin/data/data_sources/interfaces/filesystem_data_source.dart';
 import 'package:survey_admin/domain/repository_interfaces/file_system_repository.dart.dart';
 import 'package:survey_core/survey_core.dart';
 
 class FileSystemRepositoryImpl extends FileSystemRepository {
-  final FileSystemDataSource _fileSystemDataSource;
+  final FilesystemDataSource _fileSystemDataSource;
 
   FileSystemRepositoryImpl(this._fileSystemDataSource);
 

@@ -29,12 +29,8 @@ class HexColorField extends StatelessWidget {
             UpperCaseTextFormatter(),
             FilteringTextInputFormatter.allow(RegExp(kValidHexPattern)),
           ],
-          onChanged: (str) => onColorPicked(
-            colorFromHex(
-              str,
-            )!,
-          ),
-        ), //
+          onChanged: (str) => onColorPicked(colorFromHex(str)!),
+        ),
       ),
     );
   }

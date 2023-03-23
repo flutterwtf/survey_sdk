@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:survey_core/src/domain/entities/api_object.dart';
 import 'package:survey_core/src/domain/entities/question_types/input_question_data.dart';
 import 'package:survey_core/src/presentation/utils/app_fonts.dart';
-import 'package:survey_core/src/presentation/utils/colors.dart';
+import 'package:survey_core/src/presentation/utils/app_colors.dart';
 
 class InputQuestionTheme extends ThemeExtension<InputQuestionTheme>
     with ApiObject, EquatableMixin {
@@ -54,6 +54,17 @@ class InputQuestionTheme extends ThemeExtension<InputQuestionTheme>
         errorText = json['errorText'],
         inputType = json['inputType'],
         horizontalPadding = json['horizontalPadding'];
+
+  const InputQuestionTheme.common()
+      : this(
+          backgroundColor: Colors.white,
+          borderColor: Colors.black,
+          borderWidth: 1,
+          hintColor: AppColors.textLightGrey,
+          hintSize: AppFonts.sizeL,
+          textColor: AppColors.black,
+          textSize: AppFonts.sizeL,
+        );
 
   @override
   Map<String, dynamic> toJson() => {

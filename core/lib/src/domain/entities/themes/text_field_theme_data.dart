@@ -7,6 +7,8 @@ import 'package:survey_core/src/domain/entities/question_types/input_question_da
 import 'package:survey_core/src/domain/entities/themes/input_question_theme.dart';
 import 'package:survey_core/src/presentation/utils/colors.dart';
 import 'package:survey_core/src/presentation/utils/constants.dart';
+import 'package:survey_core/src/presentation/utils/app_colors.dart';
+import 'package:survey_core/src/presentation/utils/app_dimensions.dart';
 
 @immutable
 class TextFieldThemeData extends ThemeExtension<TextFieldThemeData>
@@ -21,6 +23,27 @@ class TextFieldThemeData extends ThemeExtension<TextFieldThemeData>
   final Color textColor;
   final double textSize;
   final InputType inputType;
+
+  @override
+  List<Object?> get props => [
+        fillCommonColor,
+        fillInputColor,
+        borderColor,
+        borderWidth,
+        verticalPadding,
+        horizontalPadding,
+        hintColor,
+        hintSize,
+        textColor,
+        textSize,
+        titleColor,
+        titleSize,
+        subtitleColor,
+        subtitleSize,
+        buttonTextSize,
+        buttonColor,
+        buttonTextColor,
+      ];
 
   const TextFieldThemeData({
     required this.fill,

@@ -9,6 +9,23 @@ class InputQuestionData extends QuestionData<InputQuestionTheme> {
   final String? buttonText;
   final InputQuestionTheme? theme;
 
+  @override
+  List<Object?> get props => [
+        validator,
+        index,
+        title,
+        subtitle,
+        isSkip,
+        content,
+        hintText,
+      ];
+
+  @override
+  InputQuestionTheme? get theme => const InputQuestionTheme.common();
+
+  @override
+  String get type => QuestionTypes.input;
+
   const InputQuestionData({
     required this.validator,
     required this.theme,

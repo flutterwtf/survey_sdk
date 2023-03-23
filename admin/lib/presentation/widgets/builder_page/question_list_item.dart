@@ -41,8 +41,6 @@ class QuestionListItem extends StatelessWidget {
       child: ListTile(
         onTap: () => onTap(questionData),
         selected: isSelected,
-        selectedColor: AppColors.black,
-        selectedTileColor: AppColors.greyBackground,
         tileColor: isSelected ? AppColors.greyBackground : AppColors.white,
         title: Padding(
           padding: const EdgeInsets.all(AppDimensions.margin2XS),
@@ -79,9 +77,14 @@ class QuestionListItem extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: AppDimensions.marginXS),
-              Text(
-                questionData.type,
-                style: context.theme.textTheme.bodyMedium,
+              Expanded(
+                child: Text(
+                  questionData.title,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  softWrap: false,
+                  style: context.theme.textTheme.bodyMedium,
+                ),
               ),
             ],
           ),

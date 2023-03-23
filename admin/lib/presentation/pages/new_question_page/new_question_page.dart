@@ -33,53 +33,45 @@ class _NewQuestionPageState extends State<NewQuestionPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Theme(
-      data: ThemeData().copyWith(
-        dividerColor: Colors.transparent,
-      ),
-      child: Scaffold(
-        backgroundColor: AppColors.white,
-        appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(AppDimensions.appbarHeight),
-          child: AppBar(
-            toolbarHeight: AppDimensions.appbarHeight,
-            backgroundColor: AppColors.white,
-            shadowColor: AppColors.transparentW,
-            automaticallyImplyLeading: false,
-            title: const _AppBarTitle(),
-            actions: const [
-              _BackButton(),
-            ],
-          ),
+    return Scaffold(
+      backgroundColor: AppColors.white,
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(AppDimensions.appbarHeight),
+        child: AppBar(
+          automaticallyImplyLeading: false,
+          title: const _AppBarTitle(),
+          actions: const [
+            _BackButton(),
+          ],
         ),
-        body: Padding(
-          padding: const EdgeInsets.symmetric(
-            vertical: AppDimensions.margin2XS,
-            horizontal: AppDimensions.marginM,
-          ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: NewQuestionTabs.values.map(_questionTab).toList(),
-              ),
-              _QuestionOptionsListView(
-                options: _selectedTab.options,
-                selectedOption: _selectedOption ?? '',
-              ),
-            ],
-          ),
-        ),
-        persistentFooterButtons: [
-          _AddButton(
-            onPressed: () {
-              Navigator.pop(context, _selectedTab.data);
-            },
-          ),
-        ],
       ),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(
+          vertical: AppDimensions.margin2XS,
+          horizontal: AppDimensions.marginM,
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: NewQuestionTabs.values.map(_questionTab).toList(),
+            ),
+            _QuestionOptionsListView(
+              options: _selectedTab.options,
+              selectedOption: _selectedOption ?? '',
+            ),
+          ],
+        ),
+      ),
+      persistentFooterButtons: [
+        _AddButton(
+          onPressed: () {
+            Navigator.pop(context, _selectedTab.data(context));
+          },
+        ),
+      ],
     );
   }
 }

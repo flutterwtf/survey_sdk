@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:survey_core/src/domain/entities/question_types/intro_question_data.dart';
 import 'package:survey_core/src/domain/entities/themes/intro_question_theme.dart';
-import 'package:survey_core/src/presentation/localization/localizations.dart';
-import 'package:survey_core/src/presentation/utils/constants.dart';
+import 'package:survey_core/src/presentation/localization/app_localizations_ext.dart';
+import 'package:survey_core/src/presentation/utils/app_dimensions.dart';
 import 'package:survey_core/src/presentation/utils/data_to_widget_util.dart';
 import 'package:survey_core/src/presentation/widgets/question_bottom_button.dart';
 import 'package:survey_core/src/presentation/widgets/question_content.dart';
@@ -13,7 +13,7 @@ class IntroQuestionPage extends StatelessWidget {
   final OnSendCallback onSend;
   final VoidCallback? onMainButtonTap;
 
-  // TODO(dev): onSkip
+  // TODO(dev): onSkip.
   final VoidCallback? onSecondaryButtonTap;
 
   const IntroQuestionPage({

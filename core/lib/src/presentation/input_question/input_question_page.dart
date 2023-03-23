@@ -4,14 +4,14 @@ import 'package:intl/intl.dart';
 import 'package:survey_core/src/domain/entities/question_answer.dart';
 import 'package:survey_core/src/domain/entities/question_types/input_question_data.dart';
 import 'package:survey_core/src/domain/entities/themes/input_question_theme.dart';
-import 'package:survey_core/src/presentation/localization/localizations.dart';
-import 'package:survey_core/src/presentation/utils/constants.dart';
+import 'package:survey_core/src/presentation/localization/app_localizations_ext.dart';
+import 'package:survey_core/src/presentation/utils/app_dimensions.dart';
 import 'package:survey_core/src/presentation/utils/data_to_widget_util.dart';
 import 'package:survey_core/src/presentation/widgets/question_bottom_button.dart';
 import 'package:survey_core/src/presentation/widgets/question_content.dart';
 import 'package:survey_core/src/presentation/widgets/question_title.dart';
 
-// TODO(dev): create child<T> widget for date,password,text,number etc
+// TODO(dev): create child<T> widget for date,password,text,number etc.
 class InputQuestionPage extends StatefulWidget {
   final InputQuestionData data;
   final OnSendCallback onSend;
@@ -33,7 +33,9 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
 
   bool get _canBeSkippedDate =>
       widget.data.isSkip && _dateTime.toString().isEmpty;
+
   bool get _canBeSkippedNumber => widget.data.isSkip && _input.isEmpty;
+
   bool get isDateType => widget.data.validator.type == InputType.date;
 
   @override
@@ -50,7 +52,8 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
         ),
       ),
     );
-
+    final hintText = widget.data.hintText;
+    final isValid = _textFieldKey.currentState?.isValid;
     return Padding(
       padding: const EdgeInsets.only(
         left: AppDimensions.margin2XL,
@@ -72,14 +75,15 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
               content: widget.data.subtitle,
             ),
           ),
-          // TODO(dev): maybe create generic widget for some inputs(date,number,string and etc)
+          // TODO(dev): maybe create generic widget for some inputs
+          //  (date,number,string and etc).
           Padding(
             padding: const EdgeInsets.only(top: AppDimensions.marginM),
             child: isDateType
                 ? _InputDate(
                     border: border,
                     dateTime: _dateTime,
-                    hintText: widget.data.hintText ?? '',
+                    hintText: hintText ?? '',
                     onChanged: (value) {
                       if (value != null) {
                         setState(() => _dateTime = value);
@@ -93,7 +97,7 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
                   )
                 : _InputNumber(
                     border: border,
-                    hintText: widget.data.hintText ?? '',
+                    hintText: hintText ?? '',
                     onChanged: (input) => setState(() => _input = input),
                     theme: theme,
                     textFieldKey: _textFieldKey,
@@ -120,10 +124,8 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
               }
             },
             isEnabled: isDateType
-                ? _canBeSkippedDate ||
-                    (_textFieldKey.currentState?.isValid ?? false)
-                : _canBeSkippedNumber ||
-                    (_textFieldKey.currentState?.isValid ?? false),
+                ? _canBeSkippedDate || (isValid ?? false)
+                : _canBeSkippedNumber || (isValid ?? false),
           ),
         ],
       ),

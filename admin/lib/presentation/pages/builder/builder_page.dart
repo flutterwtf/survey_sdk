@@ -22,8 +22,15 @@ class BuilderPage extends StatefulWidget {
 }
 
 class _BuilderPageState extends State<BuilderPage> {
-  final _cubit = i.get<BuilderCubit>();
+  late final BuilderCubit _cubit;
   final _surveyController = SurveyController();
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    initCommonData(context);
+    _cubit = i.get<BuilderCubit>();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,10 +51,7 @@ class _BuilderPageState extends State<BuilderPage> {
           appBar: AppBar(
             title: const _BuilderPageTabBar(),
             actions: const [_CreateTab(), _PreviewTab()],
-            shadowColor: AppColors.transparentW,
-            backgroundColor: AppColors.white,
             centerTitle: true,
-            toolbarHeight: AppDimensions.appbarHeight,
           ),
           body: Row(
             children: [
@@ -95,17 +99,14 @@ class _BuilderPageTabBar extends StatelessWidget {
             Tab(text: context.localization.preview),
           ],
           padding: const EdgeInsets.only(right: AppDimensions.tabBarPadding),
-          indicatorColor: AppColors.black,
           indicator: const UnderlineTabIndicator(
             borderSide: BorderSide(),
             insets: EdgeInsets.symmetric(
               horizontal: AppDimensions.margin4XL + AppDimensions.sizeM,
             ),
           ),
-          labelColor: AppColors.text,
           labelStyle: context.theme.textTheme.titleMedium
               ?.copyWith(fontWeight: AppFonts.weightBold),
-          unselectedLabelColor: AppColors.textGrey,
         ),
       ),
     );
@@ -150,6 +151,7 @@ class _PreviewTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cubit = BlocProvider.of<BuilderCubit>(context);
     return Padding(
       padding: const EdgeInsets.only(
         top: AppDimensions.margin2XS,
@@ -160,13 +162,10 @@ class _PreviewTab extends StatelessWidget {
         onPressed: () {
           showExportFloatingWindow(
             context,
-            onDownloadPressed: () {},
+            onDownloadPressed: cubit.downloadExportedQuestions,
             onCopyPressed: () {},
           );
         },
-        style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all(AppColors.black),
-        ),
         child: Padding(
           padding: const EdgeInsets.symmetric(
             horizontal: AppDimensions.margin3XL,

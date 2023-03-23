@@ -10,7 +10,6 @@ import 'package:survey_admin/presentation/utils/constants/app_assets.dart';
 import 'package:survey_admin/presentation/utils/constants/app_dimensions.dart';
 import 'package:survey_admin/presentation/utils/theme_extension.dart';
 import 'package:survey_admin/presentation/widgets/builder_page/question_list_item.dart';
-import 'package:survey_admin/presentation/widgets/customization_items/item_divider.dart';
 import 'package:survey_core/survey_core.dart';
 
 class QuestionList extends StatefulWidget {
@@ -39,9 +38,8 @@ class _QuestionListState extends State<QuestionList> {
   @override
   void initState() {
     super.initState();
-    _questionList = widget.questions;
-    if (_questionList.isNotEmpty) {
-      widget.onSelect(_questionList.first);
+    if (widget.questions.isNotEmpty) {
+      widget.onSelect(widget.questions.first);
     }
     RawKeyboard.instance.addListener(_handleKeyDown);
   }
@@ -77,6 +75,12 @@ class _QuestionListState extends State<QuestionList> {
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _questionList = widget.questions;
+  }
+
+  @override
   void dispose() {
     RawKeyboard.instance.removeListener(_handleKeyDown);
     super.dispose();
@@ -89,7 +93,7 @@ class _QuestionListState extends State<QuestionList> {
       width: AppDimensions.surveyContentBarWidth,
       child: Column(
         children: [
-          const ItemDivider(),
+          const Divider(),
           _ListHeader(
             onAddButtonTap: () async {
               final questionData = await Navigator.of(context).push(

@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:survey_admin/presentation/app/localization/localizations.dart';
 import 'package:survey_admin/presentation/utils/constants/app_dimensions.dart';
 import 'package:survey_admin/presentation/utils/theme_extension.dart';
+import 'package:survey_admin/presentation/utils/size_handler.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
 
 class MinMaxCustomizationItem extends StatefulWidget {
@@ -93,28 +94,18 @@ class _MinMaxInputField extends StatelessWidget {
   });
 
   String? _validator(String? value) {
-    if (value == null) return null;
+    final inputNumber = int.tryParse(value ?? '');
 
-    final inputNumber = int.tryParse(value);
-    if (inputNumber == null) return null;
-
-    if (minValue != null) {
-      return inputNumber < minValue! ? '$prefix > $minValue' : null;
-    }
-    if (maxValue != null) {
-      return inputNumber > maxValue! ? '$prefix < $maxValue' : null;
+    if (inputNumber != null) {
+      if (minValue != null) {
+        return inputNumber < minValue! ? '$prefix > $minValue' : null;
+      }
+      if (maxValue != null) {
+        return inputNumber > maxValue! ? '$prefix < $maxValue' : null;
+      }
     }
 
     return null;
-  }
-
-  void _onChanged(String? value) {
-    if (value == null) return;
-
-    final size = int.tryParse(value);
-    if (size != null) {
-      onChanged(size);
-    }
   }
 
   @override
@@ -139,7 +130,7 @@ class _MinMaxInputField extends StatelessWidget {
             ],
             autovalidateMode: AutovalidateMode.onUserInteraction,
             validator: _validator,
-            onChanged: _onChanged,
+            onChanged: (value) => SizeHandler.onSizeChanged(value, onChanged),
           ),
         ),
       ],
