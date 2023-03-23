@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:survey_admin/presentation/app/di/injector.dart';
 import 'package:survey_admin/presentation/app/localization/localizations.dart';
+import 'package:survey_admin/presentation/pages/builder/builder_cubit.dart';
+import 'package:survey_admin/presentation/pages/builder/builder_state.dart';
 import 'package:survey_admin/presentation/pages/new_question_page/new_question_tabs.dart';
 import 'package:survey_admin/presentation/utils/app_fonts.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/utils/constants/app_assets.dart';
 import 'package:survey_admin/presentation/utils/constants/app_dimensions.dart';
 import 'package:survey_admin/presentation/utils/theme_extension.dart';
+import 'package:survey_admin/presentation/widgets/builder_page/editor_bar.dart';
 import 'package:survey_admin/presentation/widgets/vector_image.dart';
+import 'package:survey_core/survey_core.dart';
 
 class NewQuestionPage extends StatefulWidget {
   const NewQuestionPage({super.key});
@@ -18,6 +24,8 @@ class NewQuestionPage extends StatefulWidget {
 class _NewQuestionPageState extends State<NewQuestionPage> {
   NewQuestionTabs _selectedTab = NewQuestionTabs.intro;
   String? _selectedOption;
+
+  final _cubit = i.get<BuilderCubit>();
 
   Widget _questionTab(NewQuestionTabs tab) {
     return _TabButton(
@@ -31,47 +39,71 @@ class _NewQuestionPageState extends State<NewQuestionPage> {
     );
   }
 
+  QuestionData _selectCommon(BuilderState state, NewQuestionTabs tab) {
+    switch (tab) {
+      case NewQuestionTabs.intro:
+        return state.commonIntro;
+      case NewQuestionTabs.choice:
+        return state.commonChoice;
+      case NewQuestionTabs.slider:
+        return state.commonSlider;
+      case NewQuestionTabs.customInput:
+        return state.commonInput;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.white,
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(AppDimensions.appbarHeight),
-        child: AppBar(
-          automaticallyImplyLeading: false,
-          title: const _AppBarTitle(),
-          actions: const [
-            _BackButton(),
-          ],
-        ),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(
-          vertical: AppDimensions.margin2XS,
-          horizontal: AppDimensions.marginM,
-        ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Column(
+    return BlocBuilder<BuilderCubit, BuilderState>(
+      bloc: _cubit,
+      builder: (context, state) {
+        return Scaffold(
+          backgroundColor: AppColors.white,
+          appBar: PreferredSize(
+            preferredSize: const Size.fromHeight(AppDimensions.appbarHeight),
+            child: AppBar(
+              automaticallyImplyLeading: false,
+              title: const _AppBarTitle(),
+              actions: const [
+                _BackButton(),
+              ],
+            ),
+          ),
+          body: Padding(
+            padding: const EdgeInsets.symmetric(
+              vertical: AppDimensions.margin2XS,
+              horizontal: AppDimensions.marginM,
+            ),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: NewQuestionTabs.values.map(_questionTab).toList(),
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: NewQuestionTabs.values.map(_questionTab).toList(),
+                ),
+                Expanded(
+                  child: _QuestionOptionsListView(
+                    options: _selectedTab.options,
+                    selectedOption: _selectedOption ?? '',
+                  ),
+                ),
+                EditorBar(
+                  onChange: _cubit.updateCommon,
+                  editableQuestion: _selectCommon(state, _selectedTab),
+                ),
+              ],
             ),
-            _QuestionOptionsListView(
-              options: _selectedTab.options,
-              selectedOption: _selectedOption ?? '',
+          ),
+          persistentFooterButtons: [
+            _AddButton(
+              onPressed: () {
+                Navigator.pop(context, _selectedTab.data(context));
+              },
             ),
           ],
-        ),
-      ),
-      persistentFooterButtons: [
-        _AddButton(
-          onPressed: () {
-            Navigator.pop(context, _selectedTab.data(context));
-          },
-        ),
-      ],
+        );
+      },
     );
   }
 }

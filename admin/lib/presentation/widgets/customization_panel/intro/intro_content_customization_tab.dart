@@ -11,7 +11,10 @@ import 'package:survey_admin/presentation/widgets/customization_panel/customizat
 import 'package:survey_core/survey_core.dart';
 
 class IntroContentCustomizationTab extends CustomizationTab {
+  final void Function(QuestionData data) onChange;
+
   const IntroContentCustomizationTab({
+    required this.onChange,
     required super.title,
     super.key,
   });
@@ -36,7 +39,7 @@ class IntroContentCustomizationTabState
               children: [
                 CustomizationMultilineTextField(
                   maxHeight: AppDimensions.sizeL,
-                  onChanged: (title) => cubit.updateQuestionData(
+                  onChanged: (title) => widget.onChange(
                     data.copyWith(title: title),
                   ),
                 ),
@@ -47,7 +50,7 @@ class IntroContentCustomizationTabState
               children: [
                 CustomizationMultilineTextField(
                   maxHeight: AppDimensions.sizeL,
-                  onChanged: (subtitle) => cubit.updateQuestionData(
+                  onChanged: (subtitle) => widget.onChange(
                     data.copyWith(title: subtitle),
                   ),
                 ),
@@ -58,7 +61,7 @@ class IntroContentCustomizationTabState
               children: [
                 CustomizationMultilineTextField(
                   maxHeight: AppDimensions.sizeL,
-                  onChanged: (text) => cubit.updateQuestionData(
+                  onChanged: (text) => widget.onChange(
                     data.copyWith(buttonText: text),
                   ),
                 ),
@@ -71,7 +74,7 @@ class IntroContentCustomizationTabState
               children: [
                 SecondaryButtonCustomizationItem(
                   // TODO(dev): Do we plan to change title?
-                  onChanged: (canSkip, title) => cubit.updateQuestionData(
+                  onChanged: (canSkip, title) => widget.onChange(
                     data.copyWith(isSkip: canSkip),
                   ),
                 ),

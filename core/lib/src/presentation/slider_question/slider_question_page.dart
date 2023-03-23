@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:survey_core/src/domain/entities/question_answer.dart';
 import 'package:survey_core/src/domain/entities/question_types/slider_question_data.dart';
 import 'package:survey_core/src/domain/entities/themes/slider_question_theme.dart';
-import 'package:survey_core/src/presentation/localization/localizations.dart';
 import 'package:survey_core/src/presentation/localization/app_localizations_ext.dart';
-import 'package:survey_core/src/presentation/utils/app_fonts.dart';
 import 'package:survey_core/src/presentation/utils/app_dimensions.dart';
+import 'package:survey_core/src/presentation/utils/app_fonts.dart';
 import 'package:survey_core/src/presentation/utils/data_to_widget_util.dart';
 import 'package:survey_core/src/presentation/utils/theme_extension.dart';
 import 'package:survey_core/src/presentation/widgets/question_bottom_button.dart';
@@ -27,7 +26,7 @@ class SliderQuestionPage extends StatefulWidget {
 }
 
 class _SliderQuestionPageState extends State<SliderQuestionPage> {
-  late final SliderThemeData _theme;
+  late final SliderQuestionTheme _theme;
   late double _answer;
 
   @override
@@ -38,8 +37,9 @@ class _SliderQuestionPageState extends State<SliderQuestionPage> {
 
   @override
   void didChangeDependencies() {
-    final theme = widget.data.theme;
-    _theme = theme ?? Theme.of(context).sliderTheme;
+    final theme = Theme.of(context).extension<SliderQuestionTheme>() ??
+        const SliderQuestionTheme.common();
+    _theme = (widget.data.theme ?? theme) as SliderQuestionTheme;
     super.didChangeDependencies();
   }
 
@@ -142,10 +142,11 @@ class _QuestionSliderState extends State<_QuestionSlider> {
         children: [
           Slider(
             value: _value,
-            onChanged: (newValue) => setState(() {
-              _value = _onlyInt ? newValue.roundToDouble() : newValue;
-              widget.onChanged(newValue);
-            }),
+            onChanged: (newValue) =>
+                setState(() {
+                  _value = _onlyInt ? newValue.roundToDouble() : newValue;
+                  widget.onChanged(newValue);
+                }),
             min: widget.minValue.toDouble(),
             max: widget.maxValue.toDouble(),
           ),

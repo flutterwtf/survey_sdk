@@ -22,6 +22,15 @@ class InputQuestionTheme extends ThemeExtension<InputQuestionTheme>
   final bool isMultiline;
   final String errorText;
   final InputType inputType;
+  final Color fill;
+  final Color titleColor;
+  final double titleSize;
+  final Color subtitleColor;
+  final double subtitleSize;
+  final Color buttonFill;
+  final Color buttonTextColor;
+  final double buttonTextSize;
+  final double buttonRadius;
 
   // TODO(dev): Add hint text.
   const InputQuestionTheme({
@@ -35,6 +44,15 @@ class InputQuestionTheme extends ThemeExtension<InputQuestionTheme>
     required this.isMultiline,
     required this.errorText,
     required this.inputType,
+    required this.fill,
+    required this.titleColor,
+    required this.titleSize,
+    required this.subtitleColor,
+    required this.subtitleSize,
+    required this.buttonFill,
+    required this.buttonTextColor,
+    required this.buttonTextSize,
+    required this.buttonRadius,
     this.lines,
     this.verticalPadding,
     this.horizontalPadding,
@@ -53,18 +71,16 @@ class InputQuestionTheme extends ThemeExtension<InputQuestionTheme>
         isMultiline = json['isMultiLine'],
         errorText = json['errorText'],
         inputType = json['inputType'],
-        horizontalPadding = json['horizontalPadding'];
-
-  const InputQuestionTheme.common()
-      : this(
-          backgroundColor: Colors.white,
-          borderColor: Colors.black,
-          borderWidth: 1,
-          hintColor: AppColors.textLightGrey,
-          hintSize: AppFonts.sizeL,
-          textColor: AppColors.black,
-          textSize: AppFonts.sizeL,
-        );
+        horizontalPadding = json['horizontalPadding'],
+        fill = json['fill'],
+        titleColor = json['titleColor'],
+        titleSize = json['titleSize'],
+        subtitleColor = json['subtitleColor'],
+        subtitleSize = json['subtitleSize'],
+        buttonFill = json['buttonFill'],
+        buttonTextColor = json['buttonTextColor'],
+        buttonTextSize = json['buttonTextSize'],
+        buttonRadius = json['buttonRadius'];
 
   @override
   Map<String, dynamic> toJson() => {
@@ -81,6 +97,15 @@ class InputQuestionTheme extends ThemeExtension<InputQuestionTheme>
         'inputType': inputType,
         'verticalPadding': verticalPadding,
         'horizontalPadding': horizontalPadding,
+        'fill': fill.value,
+        'titleColor': titleColor.value,
+        'titleSize': titleSize,
+        'subtitleColor': subtitleColor.value,
+        'subtitleSize': subtitleSize,
+        'buttonFill': buttonFill.value,
+        'buttonTextColor': buttonTextColor.value,
+        'buttonTextSize': buttonTextSize,
+        'buttonRadius': buttonRadius,
       };
 
   const InputQuestionTheme.common()
@@ -96,6 +121,15 @@ class InputQuestionTheme extends ThemeExtension<InputQuestionTheme>
           // TODO(dev): Replace with the text.
           errorText: 'Error',
           isMultiline: false,
+          fill: Colors.white,
+          titleColor: Colors.black,
+          titleSize: 16,
+          subtitleColor: Colors.black,
+          subtitleSize: 12,
+          buttonFill: Colors.black,
+          buttonTextColor: Colors.white,
+          buttonTextSize: 12,
+          buttonRadius: 10,
         );
 
   @override
@@ -115,6 +149,15 @@ class InputQuestionTheme extends ThemeExtension<InputQuestionTheme>
     String? errorText,
     InputType? inputType,
     bool? isMultiline,
+    Color? fill,
+    Color? titleColor,
+    double? titleSize,
+    Color? subtitleColor,
+    double? subtitleSize,
+    Color? buttonFill,
+    Color? buttonTextColor,
+    double? buttonTextSize,
+    double? buttonRadius,
   }) {
     return InputQuestionTheme(
       backgroundColor: backgroundColor ?? this.backgroundColor,
@@ -130,6 +173,15 @@ class InputQuestionTheme extends ThemeExtension<InputQuestionTheme>
       inputType: inputType ?? this.inputType,
       isMultiline: isMultiline ?? this.isMultiline,
       errorText: errorText ?? this.errorText,
+      fill: fill ?? this.fill,
+      titleColor: titleColor ?? this.titleColor,
+      titleSize: titleSize ?? this.titleSize,
+      subtitleColor: subtitleColor ?? this.subtitleColor,
+      subtitleSize: subtitleSize ?? this.subtitleSize,
+      buttonFill: buttonFill ?? this.buttonFill,
+      buttonTextColor: buttonTextColor ?? this.buttonTextColor,
+      buttonTextSize: buttonTextSize ?? this.buttonTextSize,
+      buttonRadius: buttonRadius ?? this.buttonRadius,
     );
   }
 
@@ -156,6 +208,15 @@ class InputQuestionTheme extends ThemeExtension<InputQuestionTheme>
       isMultiline: isMultiline,
       inputType: inputType,
       errorText: errorText,
+      fill: Color.lerp(fill, other.fill, t)!,
+      titleColor: Color.lerp(titleColor, other.titleColor, t)!,
+      titleSize: lerpDouble(titleSize, other.titleSize, t)!,
+      subtitleColor: Color.lerp(subtitleColor, other.subtitleColor, t)!,
+      subtitleSize: lerpDouble(subtitleSize, other.subtitleSize, t)!,
+      buttonFill: Color.lerp(buttonFill, other.buttonFill, t)!,
+      buttonTextColor: Color.lerp(buttonTextColor, other.buttonTextColor, t)!,
+      buttonTextSize: lerpDouble(buttonTextSize, other.buttonTextSize, t)!,
+      buttonRadius: lerpDouble(buttonRadius, other.buttonRadius, t)!,
     );
   }
 
@@ -174,6 +235,15 @@ class InputQuestionTheme extends ThemeExtension<InputQuestionTheme>
         verticalPadding,
         horizontalPadding,
         isMultiline,
+        fill,
+        titleColor,
+        titleSize,
+        subtitleColor,
+        subtitleSize,
+        buttonFill,
+        buttonTextColor,
+        buttonTextSize,
+        buttonRadius,
       ];
 }
 

@@ -12,7 +12,10 @@ import 'package:survey_admin/presentation/widgets/customization_panel/customizat
 import 'package:survey_core/survey_core.dart';
 
 class SliderContentCustomizationTab extends CustomizationTab {
+  final void Function(QuestionData data) onChange;
+
   const SliderContentCustomizationTab({
+    required this.onChange,
     required super.title,
     super.key,
   });
@@ -37,7 +40,7 @@ class SliderContentCustomizationTabState
               children: [
                 CustomizationMultilineTextField(
                   maxHeight: AppDimensions.sizeXL,
-                  onChanged: (title) => cubit.updateQuestionData(
+                  onChanged: (title) => widget.onChange(
                     data.copyWith(title: title),
                   ),
                 ),
@@ -48,7 +51,7 @@ class SliderContentCustomizationTabState
               children: [
                 CustomizationMultilineTextField(
                   maxHeight: AppDimensions.sizeXL,
-                  onChanged: (subtitle) => cubit.updateQuestionData(
+                  onChanged: (subtitle) => widget.onChange(
                     data.copyWith(title: subtitle),
                   ),
                 ),
@@ -58,7 +61,7 @@ class SliderContentCustomizationTabState
               title: context.localization.value,
               children: [
                 MinMaxCustomizationItem(
-                  onChanged: (min, max) => cubit.updateQuestionData(
+                  onChanged: (min, max) => widget.onChange(
                     data.copyWith(minValue: min, maxValue: max),
                   ),
                 ),
@@ -68,7 +71,7 @@ class SliderContentCustomizationTabState
               title: context.localization.divisions,
               children: [
                 DivisionsCustomizationItem(
-                  onChanged: (divisions) => cubit.updateQuestionData(
+                  onChanged: (divisions) => widget.onChange(
                     data.copyWith(divisions: divisions),
                   ),
                 ),

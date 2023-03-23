@@ -17,7 +17,10 @@ import 'package:survey_admin/presentation/widgets/customization_panel/customizat
 import 'package:survey_core/survey_core.dart';
 
 class InputCustomizationTab extends CustomizationTab {
+  final void Function(QuestionData data) onChange;
+
   const InputCustomizationTab({
+    required this.onChange,
     required super.title,
     super.key,
   });
@@ -42,7 +45,7 @@ class InputCustomizationTabState
               isTopDividerShown: true,
               children: [
                 MultilineSwitch(
-                  onChanged: (isMultiline, lines) => cubit.updateQuestionData(
+                  onChanged: (isMultiline, lines) => widget.onChange(
                     data.copyWith(
                       theme: theme.copyWith(
                         isMultiline: isMultiline,
@@ -58,7 +61,7 @@ class InputCustomizationTabState
               children: [
                 ColorCustomizationItem(
                   initialColor: AppColors.white,
-                  onColorPicked: (color) => cubit.updateQuestionData(
+                  onColorPicked: (color) => widget.onChange(
                     data.copyWith(
                       theme: theme.copyWith(
                         backgroundColor: color,
@@ -73,7 +76,7 @@ class InputCustomizationTabState
               children: [
                 ColorCustomizationItem(
                   initialColor: AppColors.black,
-                  onColorPicked: (color) => cubit.updateQuestionData(
+                  onColorPicked: (color) => widget.onChange(
                     data.copyWith(
                       theme: theme.copyWith(
                         borderColor: color,
@@ -81,7 +84,7 @@ class InputCustomizationTabState
                     ),
                   ),
                   initialSize: AppDimensions.defaultBorderWidth.toString(),
-                  onSizeChanged: (width) => cubit.updateQuestionData(
+                  onSizeChanged: (width) => widget.onChange(
                     data.copyWith(
                       theme: theme.copyWith(
                         borderWidth: width,
@@ -105,7 +108,7 @@ class InputCustomizationTabState
                   initialVerticalPadding: AppDimensions.marginS,
                   // TODO(dev): Move theme change to a method.
                   onHorizontalPaddingChange: (padding) =>
-                      cubit.updateQuestionData(
+                      widget.onChange(
                     data.copyWith(
                       theme: theme.copyWith(
                         horizontalPadding: padding,
@@ -113,7 +116,7 @@ class InputCustomizationTabState
                     ),
                   ),
                   onVerticalPaddingChange: (padding) =>
-                      cubit.updateQuestionData(
+                      widget.onChange(
                     data.copyWith(
                       theme: theme.copyWith(
                         verticalPadding: padding,
@@ -128,7 +131,7 @@ class InputCustomizationTabState
               children: [
                 ColorCustomizationItem(
                   initialColor: AppColors.textLightGrey,
-                  onColorPicked: (color) => cubit.updateQuestionData(
+                  onColorPicked: (color) => widget.onChange(
                     data.copyWith(
                       theme: theme.copyWith(
                         hintColor: color,
@@ -136,7 +139,7 @@ class InputCustomizationTabState
                     ),
                   ),
                   initialSize: fontSize,
-                  onSizeChanged: (size) => cubit.updateQuestionData(
+                  onSizeChanged: (size) => widget.onChange(
                     data.copyWith(
                       theme: theme.copyWith(
                         hintSize: size,
@@ -151,7 +154,7 @@ class InputCustomizationTabState
               children: [
                 ColorCustomizationItem(
                   initialColor: AppColors.black,
-                  onColorPicked: (color) => cubit.updateQuestionData(
+                  onColorPicked: (color) => widget.onChange(
                     data.copyWith(
                       theme: theme.copyWith(
                         textColor: color,
@@ -159,7 +162,7 @@ class InputCustomizationTabState
                     ),
                   ),
                   initialSize: fontSize,
-                  onSizeChanged: (size) => cubit.updateQuestionData(
+                  onSizeChanged: (size) => widget.onChange(
                     data.copyWith(
                       theme: theme.copyWith(
                         textSize: size,
@@ -180,7 +183,7 @@ class InputCustomizationTabState
                       .map(
                         (e) => DropdownCustomizationItem<InputType>(
                           value: e,
-                          onChange: (type) => cubit.updateQuestionData(
+                          onChange: (type) => widget.onChange(
                             data.copyWith(
                               theme: theme.copyWith(
                                 inputType: type,
@@ -203,7 +206,7 @@ class InputCustomizationTabState
               children: [
                 CustomizationMultilineTextField(
                   maxHeight: AppDimensions.sizeXL,
-                  onChanged: (text) => cubit.updateQuestionData(
+                  onChanged: (text) => widget.onChange(
                     data.copyWith(
                       theme: theme.copyWith(
                         errorText: text,

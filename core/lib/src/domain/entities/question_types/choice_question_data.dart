@@ -11,21 +11,6 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
   final ChoiceQuestionTheme? theme;
 
   @override
-  List<Object?> get props => [
-        isMultipleChoice,
-        ...options,
-        index,
-        title,
-        subtitle,
-        isSkip,
-        content,
-        selectedOptions,
-      ];
-
-  @override
-  ChoiceQuestionTheme? get theme => const ChoiceQuestionTheme.common();
-
-  @override
   String get type => QuestionTypes.choice;
 
   const ChoiceQuestionData({
@@ -96,9 +81,6 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
       selectedOptions: selectedOptions ?? this.selectedOptions,
     );
   }
-
-  @override
-  String get type => QuestionTypes.choice;
 
   @override
   Map<String, dynamic> toJson() => {

@@ -13,7 +13,10 @@ import 'package:survey_admin/presentation/widgets/customization_panel/customizat
 import 'package:survey_core/survey_core.dart';
 
 class ChoiceContentCustomizationTab extends CustomizationTab {
+  final void Function(QuestionData data) onChange;
+
   const ChoiceContentCustomizationTab({
+    required this.onChange,
     required super.title,
     super.key,
   });
@@ -52,7 +55,7 @@ class ChoiceContentCustomizationTabState
               children: [
                 CustomizationMultilineTextField(
                   maxHeight: AppDimensions.sizeXL,
-                  onChanged: (title) => cubit.updateQuestionData(
+                  onChanged: (title) => widget.onChange(
                     data.copyWith(title: title),
                   ),
                 )
@@ -63,7 +66,7 @@ class ChoiceContentCustomizationTabState
               children: [
                 CustomizationMultilineTextField(
                   maxHeight: AppDimensions.sizeXL,
-                  onChanged: (subtitle) => cubit.updateQuestionData(
+                  onChanged: (subtitle) => widget.onChange(
                     data.copyWith(subtitle: subtitle),
                   ),
                 ),
@@ -76,11 +79,11 @@ class ChoiceContentCustomizationTabState
                 OptionCustomizationItem(
                   options: data.options,
                   ruleValue: data.ruleValue,
-                  onChanged: (options) => cubit.updateQuestionData(
+                  onChanged: (options) => widget.onChange(
                     data.copyWith(options: options),
                   ),
                   // TODO(dev): Move repeated method somewhere.
-                  onRuleValueChanged: (ruleValue) => cubit.updateQuestionData(
+                  onRuleValueChanged: (ruleValue) => widget.onChange(
                     data.copyWith(ruleValue: ruleValue),
                   ),
                 ),
@@ -99,7 +102,7 @@ class ChoiceContentCustomizationTabState
                               .map(
                                 (e) => DropdownCustomizationItem<RuleType>(
                                   value: e,
-                                  onChange: (rule) => cubit.updateQuestionData(
+                                  onChange: (rule) => widget.onChange(
                                     data.copyWith(ruleType: rule),
                                   ),
                                   child: Text(
@@ -116,7 +119,7 @@ class ChoiceContentCustomizationTabState
                         child: data.ruleType != RuleType.none
                             ? _RuleDropdown(
                                 onChanged: (ruleValue) =>
-                                    cubit.updateQuestionData(
+                                    widget.onChange(
                                   data.copyWith(ruleValue: ruleValue),
                                 ),
                                 values: _initialLimitedList(data.options),

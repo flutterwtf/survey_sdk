@@ -14,26 +14,6 @@ class CommonData {
 
   CommonTheme get commonTheme {
     return CommonTheme(
-      textFieldThemeData: const TextFieldThemeData(
-        fillCommonColor: AppColors.white,
-        fillInputColor: AppColors.white,
-        borderColor: AppColors.black,
-        borderWidth: AppDimensions.circularRadiusXS,
-        verticalPadding: AppDimensions.marginM,
-        horizontalPadding: AppDimensions.marginM,
-        hintColor: AppColors.textGrey,
-        hintSize: AppDimensions.marginM,
-        textColor: AppColors.black,
-        textSize: AppDimensions.marginM,
-        titleColor: AppColors.black,
-        titleSize: AppDimensions.marginM,
-        subtitleColor: AppColors.black,
-        subtitleSize: AppDimensions.marginS,
-        buttonTextSize: AppDimensions.marginS,
-        buttonColor: AppColors.black,
-        buttonTextColor: AppColors.white,
-      ),
-      sliderThemeData: Theme.of(context).sliderTheme,
     );
   }
 

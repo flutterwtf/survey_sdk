@@ -58,7 +58,6 @@ class _BuilderPageState extends State<BuilderPage> {
               QuestionList(
                 onSelect: _cubit.select,
                 onAdd: _cubit.addQuestionData,
-                onEditCommonTheme: _cubit.editCommonTheme,
                 questions: List<QuestionData>.of(
                   _cubit.state.surveyData.questions,
                 ),
@@ -72,6 +71,7 @@ class _BuilderPageState extends State<BuilderPage> {
                 ),
               ),
               EditorBar(
+                onChange: _cubit.updateQuestionData,
                 editableQuestion: (state is EditQuestionBuilderState)
                     ? state.selectedQuestion
                     : null,

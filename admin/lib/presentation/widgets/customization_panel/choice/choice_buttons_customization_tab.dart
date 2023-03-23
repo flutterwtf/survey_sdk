@@ -12,7 +12,10 @@ import 'package:survey_admin/presentation/widgets/customization_panel/customizat
 import 'package:survey_core/survey_core.dart';
 
 class ChoiceButtonsCustomizationTab extends CustomizationTab {
+  final void Function(QuestionData data) onChange;
+
   const ChoiceButtonsCustomizationTab({
+    required this.onChange,
     required super.title,
     super.key,
   });
@@ -42,7 +45,7 @@ class ChoiceButtonsCustomizationTabState
               children: [
                 // TODO(dev): Move to the other tab.
                 MultipleChoiceCustomizationItem(
-                  onChanged: (isMultipleChoice) => cubit.updateQuestionData(
+                  onChanged: (isMultipleChoice) => widget.onChange(
                     data.copyWith(isMultipleChoice: isMultipleChoice),
                   ),
                 ),
@@ -54,7 +57,7 @@ class ChoiceButtonsCustomizationTabState
               children: [
                 ColorCustomizationItem(
                   initialColor: AppColors.black,
-                  onColorPicked: (color) => cubit.updateQuestionData(
+                  onColorPicked: (color) => widget.onChange(
                     data.copyWith(
                       theme: theme.copyWith(activeColor: color),
                     ),
@@ -67,7 +70,7 @@ class ChoiceButtonsCustomizationTabState
               children: [
                 ColorCustomizationItem(
                   initialColor: AppColors.inactiveElementGrey,
-                  onColorPicked: (color) => cubit.updateQuestionData(
+                  onColorPicked: (color) => widget.onChange(
                     data.copyWith(
                       theme: theme.copyWith(inactiveColor: color),
                     ),

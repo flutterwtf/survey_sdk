@@ -14,13 +14,7 @@ class CommonTheme extends ThemeExtension<CommonTheme>
   final Color buttonFill;
   final Color buttonTextColor;
   final double buttonTextSize;
-  final double buttonRadius;
-
-  @override
-  List<Object?> get props => [
-        sliderThemeData,
-        textFieldThemeData,
-      ];
+  final int buttonRadius;
 
   CommonTheme({
     required this.fill,
@@ -71,7 +65,7 @@ class CommonTheme extends ThemeExtension<CommonTheme>
     Color? buttonFill,
     Color? buttonTextColor,
     double? buttonTextSize,
-    double? buttonRadius,
+    int? buttonRadius,
   }) {
     return CommonTheme(
       fill: fill ?? this.fill,
@@ -110,7 +104,8 @@ class CommonTheme extends ThemeExtension<CommonTheme>
       buttonFill: Color.lerp(buttonFill, other?.buttonFill, t)!,
       buttonTextColor: Color.lerp(buttonTextColor, other?.buttonTextColor, t)!,
       buttonTextSize: lerpDouble(buttonTextSize, other?.buttonTextSize, t)!,
-      buttonRadius: lerpDouble(buttonRadius, other?.buttonRadius, t)!,
+      // TODO(dev): to double
+      buttonRadius: buttonRadius,
     );
   }
 }

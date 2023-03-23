@@ -10,7 +10,10 @@ import 'package:survey_admin/presentation/widgets/customization_panel/customizat
 import 'package:survey_core/survey_core.dart';
 
 class InputContentCustomizationTab extends CustomizationTab {
+  final void Function(QuestionData data) onChange;
+
   const InputContentCustomizationTab({
+    required this.onChange,
     required super.title,
     super.key,
   });
@@ -37,7 +40,7 @@ class InputContentCustomizationTabState
               children: [
                 CustomizationMultilineTextField(
                   maxHeight: AppDimensions.maxTextFieldHeight,
-                  onChanged: (title) => cubit.updateQuestionData(
+                  onChanged: (title) => widget.onChange(
                     data.copyWith(title: title),
                   ),
                 ),
@@ -48,7 +51,7 @@ class InputContentCustomizationTabState
               children: [
                 CustomizationMultilineTextField(
                   maxHeight: AppDimensions.maxTextFieldHeight,
-                  onChanged: (subtitle) => cubit.updateQuestionData(
+                  onChanged: (subtitle) => widget.onChange(
                     data.copyWith(subtitle: subtitle),
                   ),
                 ),
@@ -59,7 +62,7 @@ class InputContentCustomizationTabState
               children: [
                 CustomizationMultilineTextField(
                   maxHeight: AppDimensions.maxTextFieldHeight,
-                  onChanged: (hint) => cubit.updateQuestionData(
+                  onChanged: (hint) => widget.onChange(
                     data.copyWith(hintText: hint),
                   ),
                 ),
@@ -71,7 +74,7 @@ class InputContentCustomizationTabState
               children: [
                 CustomizationMultilineTextField(
                   maxHeight: AppDimensions.maxTextFieldHeight,
-                  onChanged: (text) => cubit.updateQuestionData(
+                  onChanged: (text) => widget.onChange(
                     data.copyWith(buttonText: text),
                   ),
                 ),

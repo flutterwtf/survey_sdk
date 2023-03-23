@@ -3,9 +3,6 @@ import 'dart:ui';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:survey_core/src/domain/entities/api_object.dart';
-import 'package:survey_core/src/domain/entities/question_types/input_question_data.dart';
-import 'package:survey_core/src/presentation/utils/app_fonts.dart';
-import 'package:survey_core/src/presentation/utils/colors.dart';
 
 // TODO(dev): Can we move equatable mixin to ApiObject?
 class SliderQuestionTheme extends ThemeExtension<SliderQuestionTheme>
@@ -15,6 +12,15 @@ class SliderQuestionTheme extends ThemeExtension<SliderQuestionTheme>
   final Color thumbColor;
   final double thumbRadius;
   final double thickness;
+  final Color fill;
+  final Color titleColor;
+  final double titleSize;
+  final Color subtitleColor;
+  final double subtitleSize;
+  final Color buttonFill;
+  final Color buttonTextColor;
+  final double buttonTextSize;
+  final double buttonRadius;
 
   // TODO(dev): Add hint text.
   const SliderQuestionTheme({
@@ -23,6 +29,15 @@ class SliderQuestionTheme extends ThemeExtension<SliderQuestionTheme>
     required this.thumbColor,
     required this.thumbRadius,
     required this.thickness,
+    required this.fill,
+    required this.titleColor,
+    required this.titleSize,
+    required this.subtitleColor,
+    required this.subtitleSize,
+    required this.buttonFill,
+    required this.buttonTextColor,
+    required this.buttonTextSize,
+    required this.buttonRadius,
   });
 
   SliderQuestionTheme.fromJson(Map<String, dynamic> json)
@@ -30,7 +45,16 @@ class SliderQuestionTheme extends ThemeExtension<SliderQuestionTheme>
         inactiveColor = Color(json['inactiveColor']),
         thumbColor = Color(json['thumbColor']),
         thumbRadius = json['thumbRadius'],
-        thickness = json['thickness'];
+        thickness = json['thickness'],
+        fill = json['fill'],
+        titleColor = json['titleColor'],
+        titleSize = json['titleSize'],
+        subtitleColor = json['subtitleColor'],
+        subtitleSize = json['subtitleSize'],
+        buttonFill = json['buttonFill'],
+        buttonTextColor = json['buttonTextColor'],
+        buttonTextSize = json['buttonTextSize'],
+        buttonRadius = json['buttonRadius'];
 
   @override
   Map<String, dynamic> toJson() => {
@@ -39,6 +63,15 @@ class SliderQuestionTheme extends ThemeExtension<SliderQuestionTheme>
         'thumbColor': thumbColor.value,
         'thumbRadius': thumbRadius,
         'thickness': thickness,
+        'fill': fill.value,
+        'titleColor': titleColor.value,
+        'titleSize': titleSize,
+        'subtitleColor': subtitleColor.value,
+        'subtitleSize': subtitleSize,
+        'buttonFill': buttonFill.value,
+        'buttonTextColor': buttonTextColor.value,
+        'buttonTextSize': buttonTextSize,
+        'buttonRadius': buttonRadius,
       };
 
   const SliderQuestionTheme.common()
@@ -48,6 +81,15 @@ class SliderQuestionTheme extends ThemeExtension<SliderQuestionTheme>
           thumbColor: const Color(0xFF000000),
           thumbRadius: 16.0,
           thickness: 8.0,
+          fill: Colors.white,
+          titleColor: Colors.black,
+          titleSize: 16,
+          subtitleColor: Colors.black,
+          subtitleSize: 12,
+          buttonFill: Colors.black,
+          buttonTextColor: Colors.white,
+          buttonTextSize: 12,
+          buttonRadius: 10,
         );
 
   @override
@@ -57,6 +99,15 @@ class SliderQuestionTheme extends ThemeExtension<SliderQuestionTheme>
     Color? thumbColor,
     double? thumbRadius,
     double? thickness,
+    Color? fill,
+    Color? titleColor,
+    double? titleSize,
+    Color? subtitleColor,
+    double? subtitleSize,
+    Color? buttonFill,
+    Color? buttonTextColor,
+    double? buttonTextSize,
+    double? buttonRadius,
   }) {
     return SliderQuestionTheme(
       activeColor: activeColor ?? this.activeColor,
@@ -64,6 +115,15 @@ class SliderQuestionTheme extends ThemeExtension<SliderQuestionTheme>
       thumbColor: thumbColor ?? this.thumbColor,
       thumbRadius: thumbRadius ?? this.thumbRadius,
       thickness: thickness ?? this.thickness,
+      fill: fill ?? this.fill,
+      titleColor: titleColor ?? this.titleColor,
+      titleSize: titleSize ?? this.titleSize,
+      subtitleColor: subtitleColor ?? this.subtitleColor,
+      subtitleSize: subtitleSize ?? this.subtitleSize,
+      buttonFill: buttonFill ?? this.buttonFill,
+      buttonTextColor: buttonTextColor ?? this.buttonTextColor,
+      buttonTextSize: buttonTextSize ?? this.buttonTextSize,
+      buttonRadius: buttonRadius ?? this.buttonRadius,
     );
   }
 
@@ -81,6 +141,15 @@ class SliderQuestionTheme extends ThemeExtension<SliderQuestionTheme>
       thumbColor: Color.lerp(thumbColor, other.thumbColor, t)!,
       thumbRadius: lerpDouble(thumbRadius, other.thumbRadius, t)!,
       thickness: lerpDouble(thickness, other.thickness, t)!,
+      fill: Color.lerp(fill, other.fill, t)!,
+      titleColor: Color.lerp(titleColor, other.titleColor, t)!,
+      titleSize: lerpDouble(titleSize, other.titleSize, t)!,
+      subtitleColor: Color.lerp(subtitleColor, other.subtitleColor, t)!,
+      subtitleSize: lerpDouble(subtitleSize, other.subtitleSize, t)!,
+      buttonFill: Color.lerp(buttonFill, other.buttonFill, t)!,
+      buttonTextColor: Color.lerp(buttonTextColor, other.buttonTextColor, t)!,
+      buttonTextSize: lerpDouble(buttonTextSize, other.buttonTextSize, t)!,
+      buttonRadius: lerpDouble(buttonRadius, other.buttonRadius, t)!,
     );
   }
 
@@ -91,5 +160,14 @@ class SliderQuestionTheme extends ThemeExtension<SliderQuestionTheme>
         thumbColor,
         thumbRadius,
         thickness,
+        fill,
+        titleColor,
+        titleSize,
+        subtitleColor,
+        subtitleSize,
+        buttonFill,
+        buttonTextColor,
+        buttonTextSize,
+        buttonRadius,
       ];
 }

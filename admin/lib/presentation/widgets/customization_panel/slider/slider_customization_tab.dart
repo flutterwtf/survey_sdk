@@ -4,7 +4,6 @@ import 'package:survey_admin/presentation/app/localization/localizations.dart';
 import 'package:survey_admin/presentation/pages/builder/builder_state.dart';
 import 'package:survey_admin/presentation/utils/app_fonts.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
-import 'package:survey_admin/presentation/utils/size_handler.dart';
 import 'package:survey_admin/presentation/utils/theme_extension.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/color_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
@@ -13,7 +12,10 @@ import 'package:survey_admin/presentation/widgets/customization_panel/customizat
 import 'package:survey_core/survey_core.dart';
 
 class SliderCustomizationTab extends CustomizationTab {
+  final void Function(QuestionData data) onChange;
+
   const SliderCustomizationTab({
+    required this.onChange,
     required super.title,
     super.key,
   });
@@ -43,7 +45,7 @@ class SliderCustomizationTabState
 
                     final thickness = double.tryParse(value);
                     if (thickness != null) {
-                      cubit.updateQuestionData(
+                      widget.onChange(
                         data.copyWith(
                           theme: theme.copyWith(thickness: thickness),
                         ),
@@ -59,7 +61,7 @@ class SliderCustomizationTabState
               children: [
                 ColorCustomizationItem(
                   initialColor: AppColors.switchBackgroundActive,
-                  onColorPicked: (color) => cubit.updateQuestionData(
+                  onColorPicked: (color) => widget.onChange(
                     data.copyWith(
                       theme: theme.copyWith(activeColor: color),
                     ),
@@ -72,7 +74,7 @@ class SliderCustomizationTabState
               children: [
                 ColorCustomizationItem(
                   initialColor: AppColors.switchBackgroundInactive,
-                  onColorPicked: (color) => cubit.updateQuestionData(
+                  onColorPicked: (color) => widget.onChange(
                     data.copyWith(
                       theme: theme.copyWith(inactiveColor: color),
                     ),
@@ -85,7 +87,7 @@ class SliderCustomizationTabState
               children: [
                 ColorCustomizationItem(
                   initialColor: AppColors.textHintGrey,
-                  onColorPicked: (color) => cubit.updateQuestionData(
+                  onColorPicked: (color) => widget.onChange(
                     data.copyWith(
                       theme: theme.copyWith(thumbColor: color),
                     ),
@@ -97,7 +99,7 @@ class SliderCustomizationTabState
                     suffixText: context.localization.px,
                     suffixStyle: context.theme.textTheme.bodyLarge,
                   ),
-                  onSizeChanged: (radius) => cubit.updateQuestionData(
+                  onSizeChanged: (radius) => widget.onChange(
                     data.copyWith(
                       theme: theme.copyWith(thumbRadius: radius),
                     ),

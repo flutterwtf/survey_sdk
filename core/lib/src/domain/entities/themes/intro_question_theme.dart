@@ -3,135 +3,136 @@ import 'dart:ui';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:survey_core/src/domain/entities/api_object.dart';
-import 'package:survey_core/src/presentation/utils/app_fonts.dart';
 import 'package:survey_core/src/presentation/utils/app_colors.dart';
 import 'package:survey_core/src/presentation/utils/app_dimensions.dart';
+import 'package:survey_core/src/presentation/utils/app_fonts.dart';
 
 class IntroQuestionTheme extends ThemeExtension<IntroQuestionTheme>
     with ApiObject, EquatableMixin {
-  final Color fillColor;
-  final Color titleTextColor;
-  final double titleTextSize;
-  final Color subTitleTextColor;
-  final double subTitleTextSize;
-  final Color mainButtonColor;
-  final Color mainButtonTextColor;
-  final double mainButtonTextSize;
-  final double mainButtonRadius;
+  final Color fill;
+  final Color titleColor;
+  final double titleSize;
+  final Color subtitleColor;
+  final double subtitleSize;
+  final Color buttonFill;
+  final Color buttonTextColor;
+  final double buttonTextSize;
+  final double buttonRadius;
 
   @override
   List<Object?> get props => [
-        fillColor,
-        titleTextColor,
-        titleTextSize,
-        subTitleTextColor,
-        subTitleTextSize,
-        mainButtonColor,
-        mainButtonTextColor,
-        mainButtonTextSize,
-        mainButtonRadius,
+        fill,
+        titleColor,
+        titleSize,
+        subtitleColor,
+        subtitleSize,
+        buttonFill,
+        buttonTextColor,
+        buttonTextSize,
+        buttonRadius,
       ];
 
   const IntroQuestionTheme({
-    required this.fillColor,
-    required this.titleTextColor,
-    required this.titleTextSize,
-    required this.subTitleTextColor,
-    required this.subTitleTextSize,
-    required this.mainButtonColor,
-    required this.mainButtonTextColor,
-    required this.mainButtonTextSize,
-    required this.mainButtonRadius,
+    required this.fill,
+    required this.titleColor,
+    required this.titleSize,
+    required this.subtitleColor,
+    required this.subtitleSize,
+    required this.buttonFill,
+    required this.buttonTextColor,
+    required this.buttonTextSize,
+    required this.buttonRadius,
   });
 
   const IntroQuestionTheme.common()
       : this(
-          fillColor: AppColors.white,
-          titleTextColor: AppColors.black,
-          titleTextSize: AppFonts.sizeL,
-          subTitleTextColor: AppColors.black,
-          subTitleTextSize: AppFonts.sizeS,
-          mainButtonColor: AppColors.black,
-          mainButtonTextColor: AppColors.white,
-          mainButtonTextSize: AppFonts.sizeS,
-          mainButtonRadius: AppDimensions.circularRadiusS,
+          fill: AppColors.white,
+          titleColor: AppColors.black,
+          titleSize: AppFonts.sizeL,
+          subtitleColor: AppColors.black,
+          subtitleSize: AppFonts.sizeS,
+          buttonFill: AppColors.black,
+          buttonTextColor: AppColors.white,
+          buttonTextSize: AppFonts.sizeS,
+          buttonRadius: AppDimensions.circularRadiusS,
         );
 
+  // TODO(dev): rewrite.
   IntroQuestionTheme.fromJson(Map<String, dynamic> json)
-      : fillColor = Color(int.parse(json['fillColor'].toString())),
-        titleTextColor = Color(int.parse(json['titleTextColor'].toString())),
-        titleTextSize = double.parse(json['titleTextSize'].toString()),
-        subTitleTextColor =
-            Color(int.parse(json['subTitleTextColor'].toString())),
-        subTitleTextSize = double.parse(json['subTitleTextSize'].toString()),
-        mainButtonColor = Color(int.parse(json['mainButtonColor'].toString())),
-        mainButtonTextColor =
-            Color(int.parse(json['mainButtonTextColor'].toString())),
-        mainButtonTextSize =
-            double.parse(json['mainButtonTextSize'].toString()),
-        mainButtonRadius = double.parse(json['mainButtonRadius'].toString());
+      : fill = Color(int.parse(json['fill'].toString())),
+        titleColor = Color(int.parse(json['titleColor'].toString())),
+        titleSize = double.parse(json['titleSize'].toString()),
+        subtitleColor =
+            Color(int.parse(json['subtitleColor'].toString())),
+        subtitleSize = double.parse(json['subtitleSize'].toString()),
+        buttonFill = Color(int.parse(json['buttonFill'].toString())),
+        buttonTextColor =
+            Color(int.parse(json['buttonTextColor'].toString())),
+        buttonTextSize =
+            double.parse(json['buttonTextSize'].toString()),
+        buttonRadius = double.parse(json['buttonRadius'].toString());
 
   @override
-  ThemeExtension<IntroQuestionTheme> copyWith({
-    Color? fillColor,
-    Color? titleTextColor,
-    double? titleTextSize,
-    Color? subTitleTextColor,
-    double? subTitleTextSize,
-    Color? mainButtonColor,
-    Color? mainButtonTextColor,
-    double? mainButtonTextSize,
-    double? mainButtonRadius,
+  IntroQuestionTheme copyWith({
+    Color? fill,
+    Color? titleColor,
+    double? titleSize,
+    Color? subtitleColor,
+    double? subtitleSize,
+    Color? buttonFill,
+    Color? buttonTextColor,
+    double? buttonTextSize,
+    double? buttonRadius,
   }) {
     return IntroQuestionTheme(
-      fillColor: fillColor ?? this.fillColor,
-      titleTextColor: titleTextColor ?? this.titleTextColor,
-      titleTextSize: titleTextSize ?? this.titleTextSize,
-      subTitleTextColor: subTitleTextColor ?? this.subTitleTextColor,
-      subTitleTextSize: subTitleTextSize ?? this.subTitleTextSize,
-      mainButtonColor: mainButtonColor ?? this.mainButtonColor,
-      mainButtonTextColor: mainButtonTextColor ?? this.mainButtonTextColor,
-      mainButtonTextSize: mainButtonTextSize ?? this.mainButtonTextSize,
-      mainButtonRadius: mainButtonRadius ?? this.mainButtonRadius,
+      fill: fill ?? this.fill,
+      titleColor: titleColor ?? this.titleColor,
+      titleSize: titleSize ?? this.titleSize,
+      subtitleColor: subtitleColor ?? this.subtitleColor,
+      subtitleSize: subtitleSize ?? this.subtitleSize,
+      buttonFill: buttonFill ?? this.buttonFill,
+      buttonTextColor: buttonTextColor ?? this.buttonTextColor,
+      buttonTextSize: buttonTextSize ?? this.buttonTextSize,
+      buttonRadius: buttonRadius ?? this.buttonRadius,
     );
   }
 
   @override
-  ThemeExtension<IntroQuestionTheme> lerp(
-    covariant ThemeExtension<IntroQuestionTheme>? other,
+  IntroQuestionTheme lerp(
+    covariant IntroQuestionTheme? other,
     double t,
   ) {
     if (other is! IntroQuestionTheme) {
       return this;
     }
     return IntroQuestionTheme(
-      fillColor: Color.lerp(fillColor, other.fillColor, t)!,
-      titleTextColor: Color.lerp(titleTextColor, other.titleTextColor, t)!,
-      titleTextSize: lerpDouble(titleTextSize, other.titleTextSize, t)!,
-      subTitleTextColor:
-          Color.lerp(subTitleTextColor, other.subTitleTextColor, t)!,
-      subTitleTextSize:
-          lerpDouble(subTitleTextSize, other.subTitleTextSize, t)!,
-      mainButtonColor: Color.lerp(mainButtonColor, other.mainButtonColor, t)!,
-      mainButtonTextColor:
-          Color.lerp(mainButtonTextColor, other.mainButtonTextColor, t)!,
-      mainButtonTextSize:
-          lerpDouble(mainButtonTextSize, other.mainButtonTextSize, t)!,
-      mainButtonRadius:
-          lerpDouble(mainButtonRadius, other.mainButtonRadius, t)!,
+      fill: Color.lerp(fill, other.fill, t)!,
+      titleColor: Color.lerp(titleColor, other.titleColor, t)!,
+      titleSize: lerpDouble(titleSize, other.titleSize, t)!,
+      subtitleColor:
+          Color.lerp(subtitleColor, other.subtitleColor, t)!,
+      subtitleSize:
+          lerpDouble(subtitleSize, other.subtitleSize, t)!,
+      buttonFill: Color.lerp(buttonFill, other.buttonFill, t)!,
+      buttonTextColor:
+          Color.lerp(buttonTextColor, other.buttonTextColor, t)!,
+      buttonTextSize:
+          lerpDouble(buttonTextSize, other.buttonTextSize, t)!,
+      buttonRadius:
+          lerpDouble(buttonRadius, other.buttonRadius, t)!,
     );
   }
 
   @override
   Map<String, dynamic> toJson() => {
-        'fillColor': fillColor.value,
-        'titleTextColor': titleTextColor.value,
-        'titleTextSize': titleTextSize,
-        'subTitleTextColor': subTitleTextColor.value,
-        'subTitleTextSize': subTitleTextSize,
-        'mainButtonColor': mainButtonColor.value,
-        'mainButtonTextColor': mainButtonTextColor.value,
-        'mainButtonTextSize': mainButtonTextSize,
-        'mainButtonRadius': mainButtonRadius,
+        'fill': fill.value,
+        'titleColor': titleColor.value,
+        'titleSize': titleSize,
+        'subtitleColor': subtitleColor.value,
+        'subtitleSize': subtitleSize,
+        'buttonFill': buttonFill.value,
+        'buttonTextColor': buttonTextColor.value,
+        'buttonTextSize': buttonTextSize,
+        'buttonRadius': buttonRadius,
       };
 }

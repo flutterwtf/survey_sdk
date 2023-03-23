@@ -43,8 +43,8 @@ class IntroQuestionPage extends StatelessWidget {
         children: [
           QuestionTitle(
             title: data.title,
-            textColor: _theme.titleTextColor,
-            textSize: _theme.titleTextSize,
+            textColor: _theme.titleColor,
+            textSize: _theme.titleSize,
           ),
           if (content != null)
             Padding(
@@ -53,8 +53,8 @@ class IntroQuestionPage extends StatelessWidget {
               ),
               child: QuestionContent(
                 content: content,
-                textColor: _theme.subTitleTextColor,
-                textSize: _theme.subTitleTextSize,
+                textColor: _theme.subtitleColor,
+                textSize: _theme.subtitleSize,
               ),
             ),
           const Spacer(),
@@ -73,10 +73,10 @@ class IntroQuestionPage extends StatelessWidget {
               Flexible(
                 child: QuestionBottomButton(
                   text: data.buttonText,
-                  color: _theme.mainButtonColor,
-                  textColor: _theme.mainButtonTextColor,
-                  textSize: _theme.mainButtonTextSize,
-                  radius: _theme.mainButtonRadius,
+                  color: _theme.buttonFill,
+                  textColor: _theme.buttonTextColor,
+                  textSize: _theme.buttonTextSize,
+                  radius: _theme.buttonRadius,
                   onPressed: onMainButtonTap ?? () {},
                 ),
               ),

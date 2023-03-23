@@ -11,23 +11,6 @@ class SliderQuestionData extends QuestionData<SliderThemeData> {
   final SliderQuestionTheme? theme;
 
   @override
-  List<Object?> get props => [
-        minValue,
-        maxValue,
-        initialValue,
-        index,
-        title,
-        subtitle,
-        isSkip,
-        content,
-      ];
-
-  // TODO(dev): do like this in every question widget.
-  // TODO(dev): implement theme.
-  @override
-  SliderThemeData? get theme => null;
-
-  @override
   String get type => QuestionTypes.slider;
 
   const SliderQuestionData({
@@ -88,9 +71,6 @@ class SliderQuestionData extends QuestionData<SliderThemeData> {
       theme: theme ?? this.theme,
     );
   }
-
-  @override
-  String get type => QuestionTypes.slider;
 
   @override
   Map<String, dynamic> toJson() => {
