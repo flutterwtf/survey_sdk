@@ -24,8 +24,8 @@ class PaddingCustomizationItem extends StatefulWidget {
 }
 
 class _PaddingCustomizationItemState extends State<PaddingCustomizationItem> {
-  final horizontalPaddingFocusNode = FocusNode();
-  final verticalPaddingFocusNode = FocusNode();
+  final horizontalPaddingFocus = FocusNode();
+  final verticalPaddingFocus = FocusNode();
   late double horizontalPadding;
   late double verticalPadding;
 
@@ -35,13 +35,13 @@ class _PaddingCustomizationItemState extends State<PaddingCustomizationItem> {
 
     horizontalPadding = widget.initialHorizontalPadding;
     verticalPadding = widget.initialVerticalPadding;
-    horizontalPaddingFocusNode.addListener(() {
-      if (!horizontalPaddingFocusNode.hasFocus) {
+    horizontalPaddingFocus.addListener(() {
+      if (!horizontalPaddingFocus.hasFocus) {
         widget.onHorizontalPaddingChange(horizontalPadding);
       }
     });
-    verticalPaddingFocusNode.addListener(() {
-      if (!verticalPaddingFocusNode.hasFocus) {
+    verticalPaddingFocus.addListener(() {
+      if (!verticalPaddingFocus.hasFocus) {
         widget.onVerticalPaddingChange(verticalPadding);
       }
     });
@@ -49,8 +49,8 @@ class _PaddingCustomizationItemState extends State<PaddingCustomizationItem> {
 
   @override
   void dispose() {
-    horizontalPaddingFocusNode.dispose();
-    verticalPaddingFocusNode.dispose();
+    horizontalPaddingFocus.dispose();
+    verticalPaddingFocus.dispose();
 
     super.dispose();
   }
@@ -62,14 +62,14 @@ class _PaddingCustomizationItemState extends State<PaddingCustomizationItem> {
       children: [
         _PaddingItem(
           isHorizontal: true,
-          focusNode: horizontalPaddingFocusNode,
+          focusNode: horizontalPaddingFocus,
           initialValue: horizontalPadding.toString(),
           onChanged: (value) =>
               setState(() => horizontalPadding = double.parse(value)),
         ),
         _PaddingItem(
           isHorizontal: false,
-          focusNode: verticalPaddingFocusNode,
+          focusNode: verticalPaddingFocus,
           initialValue: verticalPadding.toString(),
           onChanged: (value) =>
               setState(() => verticalPadding = double.parse(value)),
@@ -94,6 +94,7 @@ class _PaddingItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const lengthInputFormatter = 3;
     return Expanded(
       child: Row(
         children: [
@@ -119,7 +120,7 @@ class _PaddingItem extends StatelessWidget {
               initialValue: initialValue,
               inputFormatters: [
                 FilteringTextInputFormatter.digitsOnly,
-                LengthLimitingTextInputFormatter(3),
+                LengthLimitingTextInputFormatter(lengthInputFormatter),
               ],
               onChanged: (value) {
                 if (value != null) onChanged(value);

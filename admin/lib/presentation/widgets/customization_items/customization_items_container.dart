@@ -37,11 +37,12 @@ class _CustomizationItemsContainerState
   void initState() {
     super.initState();
     _items.add(widget.children.first);
+    final length = widget.children.length;
 
-    if (widget.children.length > 1) {
+    if (length > 1) {
       _items.add(_itemSeparator());
 
-      for (var i = 1; i < widget.children.length - 1; i++) {
+      for (var i = 1; i < length - 1; i++) {
         _items
           ..add(widget.children[i])
           ..add(_itemSeparator());

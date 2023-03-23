@@ -29,6 +29,8 @@ class _DropdownCustomizationButtonState<T>
   @override
   void initState() {
     super.initState();
+    const tweenBegin = 0.0;
+    const tweenEnd = 0.5;
 
     _isExpanded = false;
     _iconAnimationController = AnimationController(
@@ -36,7 +38,7 @@ class _DropdownCustomizationButtonState<T>
       duration: AppDurations.customizationItemAnimation,
     );
     // ignore: prefer_int_literals
-    _animation = Tween(begin: 0.0, end: .5).animate(
+    _animation = Tween(begin: tweenBegin, end: tweenEnd).animate(
       CurvedAnimation(
         parent: _iconAnimationController,
         curve: Curves.easeOut,
