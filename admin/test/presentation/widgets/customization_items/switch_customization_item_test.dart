@@ -20,13 +20,13 @@ void main() {
     });
 
     testWidgets('Toggle switch', (tester) async {
-      var isToggled = false;
+      var toggled = false;
       await tester.pumpWidget(
         AppTester(
           child: SwitchCustomizationItem(
             title: 'switch_item',
-            onChanged: (newIsToggled) {
-              isToggled = newIsToggled;
+            onChanged: ({required bool isToggled}) {
+              toggled = isToggled;
             },
           ),
         ),
@@ -34,22 +34,22 @@ void main() {
 
       await tester.tap(find.byType(InkWell));
       await tester.pump();
-      expect(isToggled, true);
+      expect(toggled, true);
 
       await tester.tap(find.byType(InkWell));
       await tester.pump();
-      expect(isToggled, false);
+      expect(toggled, false);
     });
 
     testWidgets('Toggle initially active switch', (tester) async {
-      var isToggled = true;
+      var toggled = true;
       await tester.pumpWidget(
         AppTester(
           child: SwitchCustomizationItem(
             title: 'switch_item',
             initialValue: true,
-            onChanged: (newIsToggled) {
-              isToggled = newIsToggled;
+            onChanged: ({required bool isToggled}) {
+              toggled = isToggled;
             },
           ),
         ),
@@ -57,11 +57,11 @@ void main() {
 
       await tester.tap(find.byType(InkWell));
       await tester.pump();
-      expect(isToggled, false);
+      expect(toggled, false);
 
       await tester.tap(find.byType(InkWell));
       await tester.pump();
-      expect(isToggled, true);
+      expect(toggled, true);
     });
   });
 }

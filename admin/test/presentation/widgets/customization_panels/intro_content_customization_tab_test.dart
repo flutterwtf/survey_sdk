@@ -18,10 +18,13 @@ void main() {
         onTitleChanged: (newTitle) {
           textTitle = newTitle;
         },
-        onPrimaryButtonTextChanged: (newTextPrimaryButton) {
+        onPrimaryButtonTextUpdate: (newTextPrimaryButton) {
           textPrimaryButton = newTextPrimaryButton;
         },
-        onSecondaryButtonChanged: (isShown, text) {
+        onSecondaryButtonChanged: ({
+          required bool isShown,
+          required String text,
+        }) {
           isVisible = isShown;
           textSecondaryButton = text;
         },

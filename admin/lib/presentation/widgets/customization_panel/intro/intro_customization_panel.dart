@@ -27,8 +27,11 @@ class IntroCustomizationPanel extends StatelessWidget {
           title: context.localization.content,
           onTitleChanged: (title) {},
           onSubtitleChanged: (subtitle) {},
-          onPrimaryButtonTextChanged: (text) {},
-          onSecondaryButtonChanged: (isShown, text) {},
+          onPrimaryButtonTextUpdate: (text) {},
+          onSecondaryButtonChanged: ({
+            required bool isShown,
+            required String text,
+          }) {},
         ),
       ],
     );

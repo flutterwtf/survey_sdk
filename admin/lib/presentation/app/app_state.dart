@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 
 class AppState extends Equatable {
   @override
@@ -7,7 +6,7 @@ class AppState extends Equatable {
 
   const AppState();
 
-  AppState copyWith({ThemeData? themeData}) {
+  AppState copyWith() {
     return const AppState();
   }
 }
