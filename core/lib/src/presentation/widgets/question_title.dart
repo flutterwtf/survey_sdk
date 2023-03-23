@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:survey_core/src/presentation/utils/app_colors.dart';
-import 'package:survey_core/src/presentation/utils/app_fonts.dart';
+import 'package:survey_core/src/presentation/utils/utils.dart';
 
 class QuestionTitle extends StatelessWidget {
   final String title;

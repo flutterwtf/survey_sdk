@@ -39,7 +39,7 @@ abstract class AppDimensions {
   static const double textFieldWidth = 75;
   static const double maxTextFieldHeight = 100;
 
-  static const double switchIndicatorWidth = 15;
+  static const double switchIndicatorWidth = 14;
   static const double switchWidth = 34;
   static const double switchHeight = 18;
 

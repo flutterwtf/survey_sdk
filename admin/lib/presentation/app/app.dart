@@ -7,7 +7,7 @@ import 'package:survey_admin/presentation/app/app_state.dart';
 import 'package:survey_admin/presentation/app/di/injector.dart';
 import 'package:survey_admin/presentation/pages/builder/builder_cubit.dart';
 import 'package:survey_admin/presentation/pages/builder/builder_page.dart';
-import 'package:survey_admin/presentation/utils/app_theme.dart';
+import 'package:survey_admin/presentation/utils/utils.dart';
 
 class App extends StatefulWidget {
   const App({super.key});

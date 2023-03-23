@@ -4,10 +4,7 @@ import 'package:survey_admin/presentation/app/di/injector.dart';
 import 'package:survey_admin/presentation/app/localization/app_localizations_ext.dart';
 import 'package:survey_admin/presentation/pages/builder/builder_cubit.dart';
 import 'package:survey_admin/presentation/pages/builder/builder_state.dart';
-import 'package:survey_admin/presentation/utils/app_fonts.dart';
-import 'package:survey_admin/presentation/utils/app_colors.dart';
-import 'package:survey_admin/presentation/utils/constants/app_dimensions.dart';
-import 'package:survey_admin/presentation/utils/theme_extension.dart';
+import 'package:survey_admin/presentation/utils/utils.dart';
 import 'package:survey_admin/presentation/widgets/builder_page/editor_bar.dart';
 import 'package:survey_admin/presentation/widgets/builder_page/phone_view.dart';
 import 'package:survey_admin/presentation/widgets/builder_page/question_list.dart';
@@ -44,7 +41,7 @@ class _BuilderPageState extends State<BuilderPage> {
               : null;
           if (selected != null) {
             // TODO(dev): animate to edited
-            //_surveyController.animateTo(selected.index - 1);
+            //  _surveyController.animateTo(selected.index - 1).
           }
         },
         builder: (context, state) => Scaffold(
@@ -89,8 +86,9 @@ class _BuilderPageTabBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const tabLength = 2;
     return DefaultTabController(
-      length: 2,
+      length: tabLength,
       child: SizedBox(
         width: AppDimensions.tabBarWidth,
         child: TabBar(

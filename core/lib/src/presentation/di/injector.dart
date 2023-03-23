@@ -1,6 +1,6 @@
-import 'package:survey_core/src/data/data_sources/filesystem_data_source.dart';
+import 'package:survey_core/src/data/data_sources/filesystem_data_source_impl.dart';
 import 'package:survey_core/src/data/data_sources/interfaces/filesystem_data_source.dart';
-import 'package:survey_core/src/data/repositories/survey_data_repository.dart';
+import 'package:survey_core/src/data/repositories/survey_data_repository_impl.dart';
 import 'package:survey_core/src/domain/repository_interfaces/survey_data_repository.dart';
 import 'package:survey_core/src/presentation/survey/survey_cubit.dart';
 

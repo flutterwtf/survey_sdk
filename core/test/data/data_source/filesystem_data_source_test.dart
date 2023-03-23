@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:survey_core/src/data/data_sources/filesystem_data_source.dart';
+import 'package:survey_core/src/data/data_sources/filesystem_data_source_impl.dart';
 import 'package:survey_core/src/data/data_sources/interfaces/filesystem_data_source.dart';
 
 void main() {
@@ -14,7 +14,7 @@ void main() {
       );
     });
 
-    test('Call with bad parameter', () async {
+    test('Call with bad parameter', () {
       expect(
         () => dataSource.getSurveyData('bad asset'),
         throwsFlutterError,

@@ -6,9 +6,10 @@ import 'package:survey_core/src/domain/entities/themes/common_theme.dart';
 import 'package:survey_core/src/domain/entities/themes/text_field_theme_data.dart';
 import 'package:survey_core/src/presentation/survey/survey_cubit.dart';
 import 'package:survey_core/src/presentation/survey/survey_state.dart';
+
 import '../../utils/shared_mocks.mocks.dart';
 
-//TODO: add test save answer
+// TODO(dev): add test save answer
 void main() {
   group(
     'Survey cubit tests',
@@ -18,7 +19,7 @@ void main() {
 
       test(
         'Get survey data',
-        () async {
+        () {
           final currentState = surveyCubit.state;
           final surveyData = SurveyData(
             questions: [],

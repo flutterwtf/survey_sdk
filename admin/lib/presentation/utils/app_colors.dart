@@ -17,6 +17,7 @@ abstract class AppColors {
   static const switchBackgroundActive = Color(0xFF727272);
   static const switchBackgroundInactive = Color(0xFFD9D9D9);
 
+  static const dropdownMenuBackground = Color(0xFFF5F5F5);
   static const greyBackground = Color(0xFFDEDEDE);
 
   static const tabBarInactiveText = Color(0xFF929292);

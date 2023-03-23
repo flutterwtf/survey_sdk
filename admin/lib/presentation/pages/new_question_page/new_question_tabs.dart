@@ -1,8 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:survey_admin/presentation/app/di/injector.dart';
 import 'package:survey_admin/presentation/app/localization/app_localizations_ext.dart';
-import 'package:survey_admin/presentation/utils/common_data.dart';
-import 'package:survey_admin/presentation/utils/constants/app_assets.dart';
+import 'package:survey_admin/presentation/utils/utils.dart';
 import 'package:survey_core/survey_core.dart';
 
 enum NewQuestionTabs {
@@ -26,7 +25,7 @@ extension NewQuestionTabsExt on NewQuestionTabs {
     }
   }
 
-  QuestionData data(BuildContext context) {
+  QuestionData get data {
     switch (this) {
       case NewQuestionTabs.intro:
         return i.get<CommonData>().intro();

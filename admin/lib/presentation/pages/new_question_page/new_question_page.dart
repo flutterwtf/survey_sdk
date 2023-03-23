@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:survey_admin/presentation/app/localization/app_localizations_ext.dart';
 import 'package:survey_admin/presentation/pages/new_question_page/new_question_tabs.dart';
-import 'package:survey_admin/presentation/utils/app_fonts.dart';
-import 'package:survey_admin/presentation/utils/app_colors.dart';
-import 'package:survey_admin/presentation/utils/constants/app_assets.dart';
-import 'package:survey_admin/presentation/utils/constants/app_dimensions.dart';
-import 'package:survey_admin/presentation/utils/theme_extension.dart';
+import 'package:survey_admin/presentation/utils/utils.dart';
 import 'package:survey_admin/presentation/widgets/vector_image.dart';
 
 class NewQuestionPage extends StatefulWidget {
@@ -33,50 +29,45 @@ class _NewQuestionPageState extends State<NewQuestionPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Theme(
-      data: ThemeData().copyWith(
-        dividerColor: Colors.transparent,
-      ),
-      child: Scaffold(
-        backgroundColor: AppColors.white,
-        appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(AppDimensions.appbarHeight),
-          child: AppBar(
-            automaticallyImplyLeading: false,
-            title: const _AppBarTitle(),
-            actions: const [
-              _BackButton(),
-            ],
-          ),
+    return Scaffold(
+      backgroundColor: AppColors.white,
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(AppDimensions.appbarHeight),
+        child: AppBar(
+          automaticallyImplyLeading: false,
+          title: const _AppBarTitle(),
+          actions: const [
+            _BackButton(),
+          ],
         ),
-        body: Padding(
-          padding: const EdgeInsets.symmetric(
-            vertical: AppDimensions.margin2XS,
-            horizontal: AppDimensions.marginM,
-          ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: NewQuestionTabs.values.map(_questionTab).toList(),
-              ),
-              _QuestionOptionsListView(
-                options: _selectedTab.options,
-                selectedOption: _selectedOption ?? '',
-              ),
-            ],
-          ),
-        ),
-        persistentFooterButtons: [
-          _AddButton(
-            onPressed: () {
-              Navigator.pop(context, _selectedTab.data(context));
-            },
-          ),
-        ],
       ),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(
+          vertical: AppDimensions.margin2XS,
+          horizontal: AppDimensions.marginM,
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: NewQuestionTabs.values.map(_questionTab).toList(),
+            ),
+            _QuestionOptionsListView(
+              options: _selectedTab.options,
+              selectedOption: _selectedOption ?? '',
+            ),
+          ],
+        ),
+      ),
+      persistentFooterButtons: [
+        _AddButton(
+          onPressed: () {
+            Navigator.pop(context, _selectedTab.data);
+          },
+        ),
+      ],
     );
   }
 }
@@ -129,19 +120,20 @@ class _TabButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final titleMedium = context.theme.textTheme.titleMedium;
     return InkWell(
       onTap: onTap,
-      borderRadius: BorderRadius.circular(5),
+      borderRadius: const BorderRadius.all(Radius.circular(5)),
       child: SizedBox(
         width: AppDimensions.surveyContentBarWidth,
         child: ListTile(
           title: Text(
             title,
             style: isSelected
-                ? context.theme.textTheme.titleMedium?.copyWith(
+                ? titleMedium?.copyWith(
                     fontWeight: AppFonts.weightSemiBold,
                   )
-                : context.theme.textTheme.titleMedium?.copyWith(
+                : titleMedium?.copyWith(
                     fontWeight: AppFonts.weightRegular,
                   ),
           ),
@@ -220,9 +212,11 @@ class _AddButton extends StatelessWidget {
       child: Container(
         width: AppDimensions.addButtonWidth,
         height: AppDimensions.addButtonHeight,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: AppColors.black,
-          borderRadius: BorderRadius.circular(AppDimensions.circularRadiusXS),
+          borderRadius: BorderRadius.all(
+            Radius.circular(AppDimensions.circularRadiusXS),
+          ),
         ),
         child: Center(
           child: Text(

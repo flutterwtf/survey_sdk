@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:survey_admin/presentation/utils/app_colors.dart';
-import 'package:survey_admin/presentation/utils/constants/app_assets.dart';
-import 'package:survey_admin/presentation/utils/constants/app_dimensions.dart';
+import 'package:survey_admin/presentation/utils/utils.dart';
 
 class PhoneView extends StatelessWidget {
   final Widget child;
@@ -29,8 +27,9 @@ class PhoneView extends StatelessWidget {
                     horizontal: AppDimensions.margin5XL,
                   ),
                   child: ClipRRect(
-                    borderRadius:
-                        BorderRadius.circular(AppDimensions.circularRadiusXL),
+                    borderRadius: const BorderRadius.all(
+                      Radius.circular(AppDimensions.circularRadiusXL),
+                    ),
                     child: child,
                   ),
                 ),
