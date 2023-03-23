@@ -7,6 +7,7 @@ import 'package:survey_core/src/presentation/choice_question/choice_question_pag
 import '../utils/mocked_entities.dart';
 import 'widget/app_test.dart';
 
+//ignore: avoid-unused-parameters
 void _mockOnSend({required int index, required QuestionAnswer answer}) {}
 
 void main() {
@@ -15,7 +16,7 @@ void main() {
       await tester.pumpWidget(
         const AppTest(
           child: ChoiceQuestionPage(
-            data: MockedQuestions.choice3,
+            data: MockedEntities.choice3,
             onSend: _mockOnSend,
           ),
         ),
@@ -24,7 +25,7 @@ void main() {
       expect(find.text('content'), findsOneWidget);
       expect(
         find.text('option'),
-        findsNWidgets(MockedQuestions.choice3.options.length),
+        findsNWidgets(MockedEntities.choice3.options.length),
       );
     });
 
@@ -33,7 +34,7 @@ void main() {
       await tester.pumpWidget(
         AppTest(
           child: ChoiceQuestionPage(
-            data: MockedQuestions.choice3,
+            data: MockedEntities.choice3,
             onSend: ({required int index, required QuestionAnswer answer}) {
               expect(
                 (answer as QuestionAnswer<List<String>>).answer.isEmpty,
@@ -53,7 +54,7 @@ void main() {
       await tester.pumpWidget(
         AppTest(
           child: ChoiceQuestionPage(
-            data: MockedQuestions.choice3.copyWith(isSkip: true),
+            data: MockedEntities.choice3.copyWith(isSkip: true),
             onSend: ({required int index, required QuestionAnswer answer}) {
               expect(
                 (answer as QuestionAnswer<List<String>>).answer.isEmpty,
@@ -74,7 +75,7 @@ void main() {
     await tester.pumpWidget(
       AppTest(
         child: ChoiceQuestionPage(
-          data: MockedQuestions.choice3,
+          data: MockedEntities.choice3,
           onSend: ({required int index, required QuestionAnswer answer}) {
             expect(
               (answer as QuestionAnswer<List<String>>).answer.isEmpty,
@@ -93,7 +94,7 @@ void main() {
     await tester.pumpWidget(
       AppTest(
         child: ChoiceQuestionPage(
-          data: MockedQuestions.choice3,
+          data: MockedEntities.choice3,
           onSend: ({required int index, required QuestionAnswer answer}) {
             expect((answer as QuestionAnswer<List<String>>).answer.length, 1);
             completer.complete();
@@ -112,7 +113,7 @@ void main() {
     await tester.pumpWidget(
       AppTest(
         child: ChoiceQuestionPage(
-          data: MockedQuestions.choice3,
+          data: MockedEntities.choice3,
           onSend: ({required int index, required QuestionAnswer answer}) {
             expect((answer as QuestionAnswer<List<String>>).answer.length, 1);
             completer.complete();
@@ -133,7 +134,7 @@ void main() {
     await tester.pumpWidget(
       AppTest(
         child: ChoiceQuestionPage(
-          data: MockedQuestions.choice3.copyWith(isMultipleChoice: true),
+          data: MockedEntities.choice3.copyWith(isMultipleChoice: true),
           onSend: ({required int index, required QuestionAnswer answer}) {
             expect(
               (answer as QuestionAnswer<List<String>>).answer.isEmpty,
@@ -153,7 +154,7 @@ void main() {
     await tester.pumpWidget(
       AppTest(
         child: ChoiceQuestionPage(
-          data: MockedQuestions.choice3.copyWith(isMultipleChoice: true),
+          data: MockedEntities.choice3.copyWith(isMultipleChoice: true),
           onSend: ({required int index, required QuestionAnswer answer}) {
             expect((answer as QuestionAnswer<List<String>>).answer.length, 1);
             completer.complete();
@@ -172,7 +173,7 @@ void main() {
     await tester.pumpWidget(
       AppTest(
         child: ChoiceQuestionPage(
-          data: MockedQuestions.choice3.copyWith(isMultipleChoice: true),
+          data: MockedEntities.choice3.copyWith(isMultipleChoice: true),
           onSend: ({required int index, required QuestionAnswer answer}) {
             expect(
               (answer as QuestionAnswer<List<String>>).answer.isEmpty,
@@ -196,7 +197,7 @@ void main() {
     await tester.pumpWidget(
       AppTest(
         child: ChoiceQuestionPage(
-          data: MockedQuestions.choice3.copyWith(isMultipleChoice: true),
+          data: MockedEntities.choice3.copyWith(isMultipleChoice: true),
           onSend: ({required int index, required QuestionAnswer answer}) {
             expect((answer as QuestionAnswer<List<String>>).answer.length, 2);
             completer.complete();
