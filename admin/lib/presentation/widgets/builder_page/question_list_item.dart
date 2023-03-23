@@ -50,7 +50,7 @@ class QuestionListItem extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(top: AppDimensions.marginXS),
                 child: SizedBox(
-                  width: AppDimensions.marginXS,
+                  width: AppDimensions.marginXS + AppDimensions.margin3XS,
                   child: Text(
                     questionData.index.toString(),
                     style: context.theme.textTheme.bodySmall?.copyWith(
