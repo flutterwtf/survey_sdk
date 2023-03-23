@@ -58,7 +58,9 @@ class _DropdownCustomizationButtonState<T>
     return DecoratedBox(
       decoration: widget.withColor
           ? BoxDecoration(
-              color: _isExpanded ? AppColors.dropdownMenuBackground : AppColors.white,
+              color: _isExpanded
+                  ? AppColors.dropdownMenuBackground
+                  : AppColors.white,
               borderRadius: const BorderRadius.all(
                 Radius.circular(AppDimensions.circularRadiusS),
               ),
@@ -125,15 +127,25 @@ class DropdownCustomizationItem<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () => onChange?.call(value),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(
-          vertical: AppDimensions.margin2XS,
-          horizontal: AppDimensions.marginM,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Divider(),
+        InkWell(
+          onTap: () => onChange?.call(value),
+          child: Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  vertical: AppDimensions.margin2XS,
+                  horizontal: AppDimensions.marginM,
+                ),
+                child: child,
+              ),
+            ],
+          ),
         ),
-        child: child,
-      ),
+      ],
     );
   }
 }
