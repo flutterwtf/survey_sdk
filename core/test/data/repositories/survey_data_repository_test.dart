@@ -15,14 +15,14 @@ void main() {
     when(mockFilesystemDataSource.getSurveyData('data')).thenAnswer(
       (_) => Future.delayed(
         const Duration(seconds: 1),
-        () => MockedSurveyData.data1,
+        () => MockedEntities.data1,
       ),
     );
 
     test('get survey data', () async {
       expect(
         await surveyDataRepository.getSurveyData('data'),
-        MockedSurveyData.data1,
+        MockedEntities.data1,
       );
     });
   });

@@ -45,7 +45,7 @@ class QuestionBottomButton extends StatelessWidget {
             ),
             border: Border.all(color: buttonColor),
           ),
-          duration: AppDurations.questionBottomButtonAnimation,
+          duration: AppDurations.questionBottomButton,
           child: Padding(
             padding: const EdgeInsets.all(AppDimensions.marginS),
             child: Center(

@@ -14,7 +14,7 @@ void main() {
       );
     });
 
-    test('Call with bad parameter', () async {
+    test('Call with bad parameter', () {
       expect(
         () => dataSource.getSurveyData('bad asset'),
         throwsFlutterError,
