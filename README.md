@@ -10,7 +10,7 @@ To get started with using the Survey SDK, simply follow these steps:
 
 2. Install the required dependencies by running the following command:
 
-        -- flutter pub get
+        flutter pub get
 
 3. Import the Survey SDK into your Flutter application by including it in your pubspec.yaml file:
 
@@ -18,11 +18,9 @@ To get started with using the Survey SDK, simply follow these steps:
           survey_sdk: ^0.0.1
 
 4. Start using the Survey SDK in your Flutter application.
-
 ## Usage💡
 
 The Survey SDK offers a range of customizable widgets and components that can be used to integrate surveys and feedback mechanisms into your Flutter application with ease. Some of the key features include:
-
 - ⚙️Customizable survey forms with a range of different question types.
 
 - 🖥️A variety of feedback mechanisms, including in-app feedback forms, email feedback forms, and more.
