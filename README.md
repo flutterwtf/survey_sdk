@@ -1,13 +1,8 @@
 # Survey SDK
-
 The Survey SDK is a toolkit that allows developers to integrate surveys and feedback mechanisms into their Flutter applications quickly and easily.
-
 ## Getting Started❗
-
 To get started with using the Survey SDK, simply follow these steps:
-
 1. Clone the GitHub repository into your local environment.
-
 2. Install the required dependencies by running the following command:
 
         flutter pub get
@@ -19,7 +14,6 @@ To get started with using the Survey SDK, simply follow these steps:
 
 4. Start using the Survey SDK in your Flutter application.
 ## Usage💡
-
 The Survey SDK offers a range of customizable widgets and components that can be used to integrate surveys and feedback mechanisms into your Flutter application with ease. Some of the key features include:
 - ⚙️Customizable survey forms with a range of different question types.
 
@@ -34,9 +28,6 @@ The Survey SDK offers a range of customizable widgets and components that can be
 - 🖌️Survey theme customization (background color, font styles, button colors, etc.).
 
 ## Contributing🤝
-
 If you would like to contribute to the Survey SDK project, please see the [CONTRIBUTING.md](CONTRIBUTING.md) file for more information.
-
 ## License📋
-
 The Survey SDK is released under the [MIT License](LICENSE).
