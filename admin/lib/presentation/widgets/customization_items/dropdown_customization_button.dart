@@ -35,7 +35,7 @@ class _DropdownCustomizationButtonState<T>
     _isExpanded = false;
     _iconAnimationController = AnimationController(
       vsync: this,
-      duration: AppDurations.customizationItemAnimation,
+      duration: AppDurations.customizationItem,
     );
     // ignore: prefer_int_literals
     _animation = Tween(begin: tweenBegin, end: tweenEnd).animate(
@@ -96,7 +96,7 @@ class _DropdownCustomizationButtonState<T>
             ),
           ),
           AnimatedSize(
-            duration: AppDurations.customizationItemAnimation,
+            duration: AppDurations.customizationItem,
             child: _isExpanded
                 ? Column(
                     crossAxisAlignment: CrossAxisAlignment.start,

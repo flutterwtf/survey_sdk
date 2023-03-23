@@ -22,9 +22,9 @@ abstract class AppTheme {
     ),
     tabBarTheme: const TabBarTheme(
       labelColor: AppColors.black,
-      unselectedLabelColor: AppColors.customizationTabBarInactiveText,
+      unselectedLabelColor: AppColors.tabBarInactiveText,
       indicator: UnderlineTabIndicator(
-        borderSide: BorderSide(color: AppColors.black),
+        borderSide: BorderSide(),
       ),
       indicatorSize: TabBarIndicatorSize.label,
     ),

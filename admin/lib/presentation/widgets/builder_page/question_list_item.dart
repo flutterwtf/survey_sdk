@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:survey_admin/presentation/utils/utils.dart';
-
 import 'package:survey_admin/presentation/widgets/vector_image.dart';
 import 'package:survey_core/survey_core.dart';
 
