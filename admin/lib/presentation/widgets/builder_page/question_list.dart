@@ -95,6 +95,7 @@ class _QuestionListState extends State<QuestionList> {
         children: [
           const Divider(),
           _ListHeader(
+            //ignore: avoid-passing-async-when-sync-expected
             onAddButtonTap: () async {
               final questionData = await Navigator.of(context).push(
                 MaterialPageRoute(

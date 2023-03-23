@@ -44,7 +44,7 @@ class _BuilderPageState extends State<BuilderPage> {
               : null;
           if (selected != null) {
             // TODO(dev): animate to edited
-            //_surveyController.animateTo(selected.index - 1);
+            //  _surveyController.animateTo(selected.index - 1).
           }
         },
         builder: (context, state) => Scaffold(
@@ -89,8 +89,9 @@ class _BuilderPageTabBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const tabLength = 2;
     return DefaultTabController(
-      length: 2,
+      length: tabLength,
       child: SizedBox(
         width: AppDimensions.tabBarWidth,
         child: TabBar(
