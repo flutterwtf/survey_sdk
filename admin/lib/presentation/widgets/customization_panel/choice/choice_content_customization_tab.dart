@@ -104,8 +104,10 @@ class ChoiceContentCustomizationTab extends CustomizationTab {
                           )
                           .toList(),
                       value: ruleType,
+                      withColor: true,
                     ),
                   ),
+                  const SizedBox(width: AppDimensions.marginXS),
                   Expanded(
                     child: ruleType != RuleType.none
                         ? _RuleDropdown(
@@ -151,6 +153,7 @@ class _RuleDropdown extends StatelessWidget {
           )
           .toList(),
       value: value,
+      withColor: true,
     );
   }
 }

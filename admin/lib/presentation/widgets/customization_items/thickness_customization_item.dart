@@ -16,6 +16,7 @@ class ThicknessCustomizationItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const lengthInputFormatter = 2;
     return Row(
       children: [
         SizedBox(
@@ -25,7 +26,7 @@ class ThicknessCustomizationItem extends StatelessWidget {
             initialValue: initialSize.toString(),
             inputFormatters: [
               FilteringTextInputFormatter.digitsOnly,
-              LengthLimitingTextInputFormatter(2),
+              LengthLimitingTextInputFormatter(lengthInputFormatter),
             ],
           ),
         ),

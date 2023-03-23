@@ -64,7 +64,7 @@ class _NewQuestionPageState extends State<NewQuestionPage> {
       persistentFooterButtons: [
         _AddButton(
           onPressed: () {
-            Navigator.pop(context, _selectedTab.data(context));
+            Navigator.pop(context, _selectedTab.data);
           },
         ),
       ],
@@ -120,19 +120,20 @@ class _TabButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final titleMedium = context.theme.textTheme.titleMedium;
     return InkWell(
       onTap: onTap,
-      borderRadius: BorderRadius.circular(5),
+      borderRadius: const BorderRadius.all(Radius.circular(5)),
       child: SizedBox(
         width: AppDimensions.surveyContentBarWidth,
         child: ListTile(
           title: Text(
             title,
             style: isSelected
-                ? context.theme.textTheme.titleMedium?.copyWith(
+                ? titleMedium?.copyWith(
                     fontWeight: AppFonts.weightSemiBold,
                   )
-                : context.theme.textTheme.titleMedium?.copyWith(
+                : titleMedium?.copyWith(
                     fontWeight: AppFonts.weightRegular,
                   ),
           ),
@@ -211,9 +212,11 @@ class _AddButton extends StatelessWidget {
       child: Container(
         width: AppDimensions.addButtonWidth,
         height: AppDimensions.addButtonHeight,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: AppColors.black,
-          borderRadius: BorderRadius.circular(AppDimensions.circularRadiusXS),
+          borderRadius: BorderRadius.all(
+            Radius.circular(AppDimensions.circularRadiusXS),
+          ),
         ),
         child: Center(
           child: Text(

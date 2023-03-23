@@ -54,18 +54,20 @@ void main() {
       expect(find.text(inputText), findsNothing);
     });
 
-    testWidgets('Check widget with parameters isMultiline = true',
-        (tester) async {
-      await tester.pumpWidget(
-        AppTester(
-          child: MultilineSwitch(
-            isMultiline: true,
-            onChanged: (bool isMultiline, int lineAmount) {},
+    testWidgets(
+      'Check widget with parameters isMultiline = true',
+      (tester) async {
+        await tester.pumpWidget(
+          AppTester(
+            child: MultilineSwitch(
+              isMultiline: true,
+              onChanged: (bool isMultiline, int lineAmount) {},
+            ),
           ),
-        ),
-      );
-      await tester.pumpAndSettle();
-      expect(find.text(inputTitle), findsOneWidget);
-    });
+        );
+        await tester.pumpAndSettle();
+        expect(find.text(inputTitle), findsOneWidget);
+      },
+    );
   });
 }

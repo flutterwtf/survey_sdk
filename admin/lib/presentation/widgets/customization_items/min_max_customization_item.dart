@@ -4,6 +4,9 @@ import 'package:survey_admin/presentation/app/localization/localizations.dart';
 import 'package:survey_admin/presentation/utils/utils.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
 
+const _minValue = 0;
+const _maxValue = 10;
+
 class MinMaxCustomizationItem extends StatefulWidget {
   final int initialMin;
   final int initialMax;
@@ -11,8 +14,8 @@ class MinMaxCustomizationItem extends StatefulWidget {
 
   const MinMaxCustomizationItem({
     required this.onChanged,
-    this.initialMin = 0,
-    this.initialMax = 10,
+    this.initialMin = _minValue,
+    this.initialMax = _maxValue,
     super.key,
   }) : assert(
           initialMax > initialMin,
@@ -39,10 +42,12 @@ class _MinMaxCustomizationItemState extends State<MinMaxCustomizationItem> {
 
   @override
   Widget build(BuildContext context) {
+    const minFlex = 2;
+    const maxFlex = 3;
     return Row(
       children: [
         Expanded(
-          flex: 2,
+          flex: minFlex,
           child: _MinMaxInputField(
             prefix: context.localization.min,
             initialValue: widget.initialMin,
@@ -57,7 +62,7 @@ class _MinMaxCustomizationItemState extends State<MinMaxCustomizationItem> {
           ),
         ),
         Expanded(
-          flex: 3,
+          flex: maxFlex,
           child: _MinMaxInputField(
             prefix: context.localization.max,
             initialValue: widget.initialMax,
@@ -102,12 +107,12 @@ class _MinMaxInputField extends StatelessWidget {
         return inputNumber > maxValue! ? '$prefix < $maxValue' : null;
       }
     }
-
     return null;
   }
 
   @override
   Widget build(BuildContext context) {
+    const lengthInputFormatter = 6;
     return Row(
       children: [
         Padding(
@@ -124,7 +129,7 @@ class _MinMaxInputField extends StatelessWidget {
             initialValue: initialValue.toString(),
             inputFormatters: [
               FilteringTextInputFormatter.digitsOnly,
-              LengthLimitingTextInputFormatter(6),
+              LengthLimitingTextInputFormatter(lengthInputFormatter),
             ],
             autovalidateMode: AutovalidateMode.onUserInteraction,
             validator: _validator,

@@ -16,7 +16,7 @@ void main() {
       (_) => surveyData = {'test': 'test'},
     );
 
-    test('get survey data', () async {
+    test('get survey data', () {
       surveyDataRepository.downloadSurveyData({'test': 'test'});
       expect(surveyData, {'test': 'test'});
     });

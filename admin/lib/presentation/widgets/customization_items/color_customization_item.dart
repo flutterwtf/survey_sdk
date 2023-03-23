@@ -28,6 +28,9 @@ class _ColorCustomizationItemState extends State<ColorCustomizationItem> {
   late Color _pickedColor;
   final TextEditingController _controller = TextEditingController();
   bool _isPickerOpened = false;
+  final _pickerAreaHeightPercent = 0.4;
+  final _lengthInputFormatters = 8;
+  final _radix = 16;
 
   @override
   void initState() {
@@ -55,7 +58,7 @@ class _ColorCustomizationItemState extends State<ColorCustomizationItem> {
   }
 
   String _colorToString(Color color) =>
-      color.value.toRadixString(16).toUpperCase();
+      color.value.toRadixString(_radix).toUpperCase();
 
   void _updateTextField() {
     widget.onColorPicked(_pickedColor);
@@ -79,7 +82,6 @@ class _ColorCustomizationItemState extends State<ColorCustomizationItem> {
               onTap: () => setState(() => _isPickerOpened = !_isPickerOpened),
               child: Container(
                 decoration: BoxDecoration(
-                  border: Border.all(),
                   color: _pickedColor,
                 ),
                 width: AppDimensions.sizeM,
@@ -96,7 +98,7 @@ class _ColorCustomizationItemState extends State<ColorCustomizationItem> {
                     FilteringTextInputFormatter.allow(
                       RegExp('[0-9a-fA-F]'),
                     ),
-                    LengthLimitingTextInputFormatter(8),
+                    LengthLimitingTextInputFormatter(_lengthInputFormatters),
                   ],
                   decoration: widget.decoration ??
                       const InputDecoration(
@@ -117,7 +119,7 @@ class _ColorCustomizationItemState extends State<ColorCustomizationItem> {
             pickerColor: _pickedColor,
             onColorChanged: _onColorChanged,
             portraitOnly: true,
-            pickerAreaHeightPercent: 0.4,
+            pickerAreaHeightPercent: _pickerAreaHeightPercent,
           ),
         ],
       ],

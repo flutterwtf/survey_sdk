@@ -16,6 +16,7 @@ class RadiusCustomizationItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const lengthInputFormatter = 2;
     return Row(
       children: [
         SvgPicture.asset(AppAssets.arcIcon),
@@ -25,7 +26,7 @@ class RadiusCustomizationItem extends StatelessWidget {
             initialValue: initialValue.toString(),
             inputFormatters: [
               FilteringTextInputFormatter.digitsOnly,
-              LengthLimitingTextInputFormatter(2),
+              LengthLimitingTextInputFormatter(lengthInputFormatter),
             ],
             onChanged: (value) => SizeHandler.onSizeChanged(
               value,

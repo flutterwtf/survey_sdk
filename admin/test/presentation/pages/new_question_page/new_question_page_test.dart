@@ -6,6 +6,7 @@ import 'package:survey_admin/presentation/widgets/vector_image.dart';
 
 import '../../widgets/app_tester.dart';
 
+//ignore: prefer-match-file-name
 class MockNavigatorObserver extends Mock implements NavigatorObserver {}
 
 void main() {

@@ -15,8 +15,8 @@ class CustomizationMultilineTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // LimitedBox, isCollapsed: true, maxLines: null - used to make
-    // this TextField expandable
+    /// LimitedBox, isCollapsed: true, maxLines: null - used to make
+    /// this TextField expandable.
     return LimitedBox(
       maxHeight: maxHeight,
       child: CustomizationTextField(

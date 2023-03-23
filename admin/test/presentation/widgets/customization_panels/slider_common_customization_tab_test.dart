@@ -253,13 +253,18 @@ void main() {
       expect(buttonDownSize, 4);
     });
 
-    testWidgets('Validate input size length > 2 for DownButton',
-        (tester) async {
-      await tester.pumpWidget(page);
-      await tester.enterText(find.byType(CustomizationTextField).at(7), '143');
-      expect(find.text('143'), findsNothing);
-      expect(buttonDownSize, 14);
-    });
+    testWidgets(
+      'Validate input size length > 2 for DownButton',
+      (tester) async {
+        await tester.pumpWidget(page);
+        await tester.enterText(
+          find.byType(CustomizationTextField).at(7),
+          '143',
+        );
+        expect(find.text('143'), findsNothing);
+        expect(buttonDownSize, 14);
+      },
+    );
 
     testWidgets('Input size(num) for BorderButton', (tester) async {
       await tester.pumpWidget(page);
@@ -275,12 +280,17 @@ void main() {
       expect(buttonBorder, 8);
     });
 
-    testWidgets('Validate input size length > 2 for BorderButton',
-        (tester) async {
-      await tester.pumpWidget(page);
-      await tester.enterText(find.byType(CustomizationTextField).at(8), '198');
-      expect(find.text('198'), findsNothing);
-      expect(buttonBorder, 19);
-    });
+    testWidgets(
+      'Validate input size length > 2 for BorderButton',
+      (tester) async {
+        await tester.pumpWidget(page);
+        await tester.enterText(
+          find.byType(CustomizationTextField).at(8),
+          '198',
+        );
+        expect(find.text('198'), findsNothing);
+        expect(buttonBorder, 19);
+      },
+    );
   });
 }

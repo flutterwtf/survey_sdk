@@ -42,11 +42,11 @@ class _OptionCustomizationItemState extends State<OptionCustomizationItem> {
     widget.onChanged(_options);
   }
 
-  void _delete(int index) {
+  void _delete(String option) {
     if (widget.ruleValue == _options.length) {
       widget.onRuleLimitedChanged(0);
     }
-    setState(() => _options.removeAt(index));
+    setState(() => _options.remove(option));
     widget.onChanged(_options);
   }
 
@@ -61,13 +61,10 @@ class _OptionCustomizationItemState extends State<OptionCustomizationItem> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        // TODO(dev): We definitely need a ListView here?
-        ListView.builder(
-          shrinkWrap: true,
-          itemCount: _options.length,
-          itemBuilder: (_, index) => _Option(
-            option: _options[index],
-            delete: () => _delete(index),
+        ..._options.map(
+          (option) => _Option(
+            option: option,
+            delete: () => _delete(option),
           ),
         ),
         const SizedBox(height: AppDimensions.sizeS),
