@@ -18,7 +18,7 @@ class SurveyData extends ApiObject {
 
   factory SurveyData.fromJson(Map<String, dynamic> json) {
     final questions = <QuestionData>[];
-    for (final questionJson in json.values) {
+    for (final questionJson in json['questions']) {
       questions.add(QuestionData.fromType(questionJson));
     }
     return SurveyData(
