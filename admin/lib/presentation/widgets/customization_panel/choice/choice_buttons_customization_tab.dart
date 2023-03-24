@@ -21,7 +21,7 @@ class ChoiceButtonsCustomizationTab extends CustomizationTab {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return ListView(
       children: [
         CustomizationItemsContainer(
           isTopDividerShown: true,
