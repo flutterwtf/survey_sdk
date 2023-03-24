@@ -11,20 +11,36 @@ import 'package:survey_core/src/presentation/survey/survey_cubit.dart';
 import 'package:survey_core/src/presentation/survey/survey_state.dart';
 import 'package:survey_core/src/presentation/utils/utils.dart';
 
-/// The survey is responsible for the survey form in the application.
+// TODO(dev): Maybe create two classes, where one is for filePath and the other
+// TODO(dev): is for surveyData? The build method will be the same for both.
+
+/// A widget that renders a survey form.
+///
+/// The survey form is defined by either a [filePath] parameter
+/// or a [surveyData] parameter. The [filePath] is the path to a JSON file
+/// containing the survey data, while the [surveyData] parameter is the survey
+/// data itself.
+///
+/// The widget manages the state of the survey and renders the appropriate
+/// widgets based on the survey state.
+///
+/// See also:
+///
+///  * [SurveyData] for survey data.
+///  * [SurveyController], where the logic behind a survey navigation is hosted.
 class Survey extends StatefulWidget {
-  /// The [filePath] parameter is the path to a JSON file containing the survey
-  /// data.
+  /// The path to a JSON file containing the survey data.
   final String? filePath;
 
-  /// This [controller] need to navigation on survey and save answer.
-  final SurveyController? controller;
-
-  /// The [surveyData] parameter is the survey data itself.
+  /// The survey data.
   final SurveyData? surveyData;
 
-  /// Only one of [filePath], [surveyData] can be not-null, and the code
-  /// asserts this to be true upon initialization. Сontroller can be empty.
+  /// The controller for navigating the survey and saving answers.
+  final SurveyController? controller;
+
+  /// Either [filePath] or [surveyData] must pe provided. The [controller]
+  /// parameter is optional and can be used to provide a custom survey
+  /// controller.
   const Survey({
     this.filePath,
     this.surveyData,
@@ -40,14 +56,16 @@ class Survey extends StatefulWidget {
   State<Survey> createState() => _SurveyState();
 }
 
+/// The private state class for the [Survey] widget.
 class _SurveyState extends State<Survey> {
   late final SurveyCubit _cubit;
   late final SurveyController _surveyController;
 
-  /// In the initState method, the code initializes an instance
-  /// of [SurveyCubit] and [SurveyController] using a dependency
-  /// injection pattern. It then calls the initData method of
-  /// [SurveyCubit] with the survey data provided.
+  /// Initializes an instance of [_SurveyState] and its dependencies.
+  ///
+  /// The method initializes an instance of [SurveyCubit] and [SurveyController]
+  /// using a dependency injection pattern. It then calls the initData method
+  /// of [SurveyCubit] with the survey data provided.
   @override
   void initState() {
     super.initState();
@@ -56,54 +74,60 @@ class _SurveyState extends State<Survey> {
     _surveyController = widget.controller ?? SurveyController();
   }
 
+
+  /// Called when a dependency of this [State] object changes.
+  ///
+  /// The method initializes the survey data for [SurveyCubit] using the
+  /// data provided to the widget.
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     _cubit.initData(widget.filePath, widget.surveyData);
   }
 
-  /// The build method renders the survey form using a PageView widget. The
-  /// questions are mapped to widgets using the [DataToWidgetUtil.createWidget]
-  /// method, which is passed to the BlocBuilder widget as a callback
-  /// function. The BlocBuilder is responsible for managing the state of the
-  /// survey and rendering the appropriate widgets based on the survey state.
+  /// Builds the survey form using a PageView widget.
+  ///
+  /// The questions are mapped to widgets using the
+  /// [DataToWidgetUtil.createWidget] method, which is passed to the
+  /// BlocBuilder widget as a callback function. The BlocBuilder is responsible
+  /// for managing the state of the survey and rendering the appropriate widgets
+  /// based on the survey state.
+  ///
+  /// If the survey is not yet loaded, a circular progress indicator is
+  /// displayed. If the user attempts to navigate back from the first page,
+  /// the onBack of the [SurveyController] is called.
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SurveyCubit, SurveyState>(
       bloc: _cubit,
       builder: (BuildContext context, state) {
-        if (state is SurveyLoadedState) {
-          return Theme(
-            data: state.surveyData.commonTheme.toThemeData(),
-            child: WillPopScope(
-              onWillPop: () async {
-                _surveyController.onBack();
-                return false;
-              },
-              child: PageView(
-                controller: _surveyController.pageController,
-                physics: const NeverScrollableScrollPhysics(),
-                children: state.surveyData.questions
-                    .map<Widget>(
-                      (question) => DataToWidgetUtil.createWidget(
-                        question,
-                        _cubit.saveAnswer,
-                      ),
-                    )
-                    .toList(),
-              ),
-            ),
-          );
-        }
-
-        /// If the survey is not yet loaded, a circular progress indicator
-        /// is displayed. If the user attempts to navigate back from the
-        /// first page, the onBack method of the [SurveyController] is called.
-        return const Center(
-          child: CircularProgressIndicator(
-            color: AppColors.black,
-          ),
-        );
+        return state is SurveyLoadedState
+            ? Theme(
+                data: state.surveyData.commonTheme.toThemeData(),
+                child: WillPopScope(
+                  onWillPop: () async {
+                    _surveyController.onBack();
+                    return false;
+                  },
+                  child: PageView(
+                    controller: _surveyController.pageController,
+                    physics: const NeverScrollableScrollPhysics(),
+                    children: state.surveyData.questions
+                        .map<Widget>(
+                          (question) => DataToWidgetUtil.createWidget(
+                            question,
+                            _cubit.saveAnswer,
+                          ),
+                        )
+                        .toList(),
+                  ),
+                ),
+              )
+            : const Center(
+                child: CircularProgressIndicator(
+                  color: AppColors.black,
+                ),
+              );
       },
     );
   }
