@@ -4,7 +4,7 @@ import 'package:survey_admin/presentation/utils/utils.dart';
 class SwitchCustomizationItem extends StatelessWidget {
   final String title;
   final bool? initialValue;
-  final void Function(bool isToggled)? onChanged;
+  final ValueChanged<bool>? onChanged;
 
   const SwitchCustomizationItem({
     required this.title,
@@ -33,7 +33,7 @@ class SwitchCustomizationItem extends StatelessWidget {
 
 class _CustomSwitch extends StatefulWidget {
   final bool initialValue;
-  final void Function(bool isToggled)? onChanged;
+  final ValueChanged<bool>? onChanged;
 
   const _CustomSwitch({
     required this.initialValue,

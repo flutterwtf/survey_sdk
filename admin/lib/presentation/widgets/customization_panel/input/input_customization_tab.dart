@@ -11,20 +11,23 @@ import 'package:survey_admin/presentation/widgets/customization_panel/customizat
 import 'package:survey_core/survey_core.dart';
 
 class InputCustomizationTab extends CustomizationTab {
-  final void Function(bool isMultiline, int lineAmount) onMultilineChanged;
+  final void Function({
+    required bool isMultiline,
+    required int lineAmount,
+  }) onMultilineChanged;
   final ValueChanged<Color> onFillColorChanged;
   final ValueChanged<Color> onBorderColorChanged;
   final ValueChanged<double> onBorderSizeChanged;
   final ValueChanged<double> onBorderWidthChanged;
-  final void Function(double size) onHorizontalPaddingChanged;
-  final void Function(double size) onVerticalPaddingChanged;
+  final void Function(double size) onHorizontalPaddingUpdate;
+  final void Function(double size) onVerticalPaddingUpdate;
   final ValueChanged<Color> onHintColorChanged;
   final ValueChanged<double> onHintFontSizeChanged;
   final ValueChanged<Color> onTextColorChanged;
   final ValueChanged<double> onTextFontSizeChanged;
   final ValueChanged<InputType> onInputTypeChanged;
   final InputType inputType;
-  final ValueChanged<String> onValidatorErrorTextChanged;
+  final ValueChanged<String> onValidatorErrorChanged;
 
   const InputCustomizationTab({
     required super.title,
@@ -33,15 +36,15 @@ class InputCustomizationTab extends CustomizationTab {
     required this.onBorderColorChanged,
     required this.onBorderSizeChanged,
     required this.onBorderWidthChanged,
-    required this.onHorizontalPaddingChanged,
-    required this.onVerticalPaddingChanged,
+    required this.onHorizontalPaddingUpdate,
+    required this.onVerticalPaddingUpdate,
     required this.onHintColorChanged,
     required this.onHintFontSizeChanged,
     required this.onTextColorChanged,
     required this.onTextFontSizeChanged,
     required this.onInputTypeChanged,
     required this.inputType,
-    required this.onValidatorErrorTextChanged,
+    required this.onValidatorErrorChanged,
     super.key,
   });
 
@@ -90,8 +93,8 @@ class InputCustomizationTab extends CustomizationTab {
             PaddingCustomizationItem(
               initialHorizontalPadding: AppDimensions.marginS,
               initialVerticalPadding: AppDimensions.marginS,
-              onHorizontalPaddingChange: onHorizontalPaddingChanged,
-              onVerticalPaddingChange: onVerticalPaddingChanged,
+              onHorizontalPaddingChange: onHorizontalPaddingUpdate,
+              onVerticalPaddingChange: onVerticalPaddingUpdate,
             ),
           ],
         ),
@@ -146,7 +149,7 @@ class InputCustomizationTab extends CustomizationTab {
           children: [
             CustomizationMultilineTextField(
               maxHeight: AppDimensions.sizeXL,
-              onChanged: onValidatorErrorTextChanged,
+              onChanged: onValidatorErrorChanged,
             ),
           ],
         ),

@@ -13,7 +13,7 @@ void main() {
     const inputTitle = 'Lines';
     final page = AppTester(
       child: MultilineSwitch(
-        onChanged: (bool isMultiline, int lineAmount) {},
+        onChanged: ({required bool isMultiline, required int lineAmount}) {},
       ),
     );
 
@@ -61,7 +61,10 @@ void main() {
           AppTester(
             child: MultilineSwitch(
               isMultiline: true,
-              onChanged: (bool isMultiline, int lineAmount) {},
+              onChanged: ({
+                required bool isMultiline,
+                required int lineAmount,
+              }) {},
             ),
           ),
         );

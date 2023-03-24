@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:survey_admin/presentation/app/app_state.dart';
 
@@ -8,7 +7,7 @@ class AppCubit extends Cubit<AppState> {
           const AppState(),
         );
 
-  void changeTheme(ThemeData themeData) {
-    emit(state.copyWith(themeData: themeData));
+  void changeTheme() {
+    emit(state.copyWith());
   }
 }
