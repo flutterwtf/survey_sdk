@@ -48,5 +48,11 @@ abstract class AppTheme {
         fontWeight: AppFonts.weightBold,
       ),
     ),
+    outlinedButtonTheme: OutlinedButtonThemeData(
+      style: OutlinedButton.styleFrom(foregroundColor: AppColors.black),
+    ),
+    textSelectionTheme: const TextSelectionThemeData(
+      cursorColor: AppColors.black,
+    ),
   );
 }
