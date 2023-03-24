@@ -4,13 +4,11 @@ import 'dart:io';
 import 'package:collection/collection.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-const filePath = 'lib/presentation/app/localization/l10n/app_en.arb';
-
-Future<void> asyncThrows(String exError) async => throw Exception(exError);
+const filePath = 'lib/src/presentation/localization/l10n/app_en.arb';
 
 void main() async {
   if (filePath.isEmpty) {
-    asyncThrows('Expected filepath to arb file: $filePath');
+    _asyncThrows('Expected filepath to arb file: $filePath');
   }
 
   final file = File(filePath);
@@ -19,12 +17,12 @@ void main() async {
 
   final arbIsSorted = _isSorted(arbContents);
   if (!arbIsSorted) {
-    asyncThrows('Test Failed. Arb File is not sorted.');
+    _asyncThrows('Test Failed. Arb File is not sorted.');
   }
 
   final notInCamelCaseList = _notInCamelCase(arbContents);
   if (notInCamelCaseList.isNotEmpty) {
-    asyncThrows(
+    _asyncThrows(
       'Test Failed. Arb File contains not camelCase keys:\n$notInCamelCaseList',
     );
   }
@@ -84,3 +82,5 @@ int _commonCompareFunction(
       ? ascending * compareNatural(firstStr, secondStr)
       : ascending * firstStr.compareTo(secondStr);
 }
+
+Future<void> _asyncThrows(String exError) async => throw Exception(exError);

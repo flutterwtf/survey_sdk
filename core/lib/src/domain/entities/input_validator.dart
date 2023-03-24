@@ -95,7 +95,7 @@ class InputValidator implements ApiObject {
   }
 
   factory InputValidator.fromJson(Map<String, dynamic> json) {
-    final type = InputType.values[json[_ValidatorKeys.validator]];
+    final type = InputType.values.byName(json[_ValidatorKeys.validator]);
     final String? regex = json[_ValidatorKeys.regex];
     final bool? isObscured = json[_ValidatorKeys.isObscured];
     return InputValidator.fromType(

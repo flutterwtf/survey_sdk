@@ -1,4 +1,19 @@
 {
+  "questions": [
+    {
+      "index": 0,
+      "title": "title",
+      "subtitle": "subtitle",
+      "type": "Input",
+      "isSkip": false,
+      "info": null,
+      "payload": {
+        "validator": "text",
+        "value": 0,
+        "hintText": null
+      }
+    }
+  ],
   "commonTheme": {
     "sliderThemeData": {
       "thumbColor": 4278190080,
@@ -8,28 +23,23 @@
       "inactiveTrackColor": 267386880
     },
     "textFieldThemeData": {
-      "thickness": 9.0,
-      "activeColor": 4294967295,
-      "inactiveColor": 4278190080,
-      "thumb": {
-        "color": 4294198070,
-        "radius": 12.0
-      }
+      "fillCommonColor": 0,
+      "fillInputColor": 0,
+      "borderColor": 0,
+      "borderWidth": 0.0,
+      "verticalPadding": 0.0,
+      "horizontalPadding": 0.0,
+      "hintColor": 0,
+      "hintSize": 0.0,
+      "textColor": 0,
+      "textSize": 0.0,
+      "titleColor": 0,
+      "titleSize": 0.0,
+      "subtitleColor": 0,
+      "subtitleSize": 0.0,
+      "buttonTextSize": 0.0,
+      "buttonColor": 0,
+      "buttonTextColor": 0
     }
-  },
-  "questions": [
-    {
-      "id": 0,
-      "title": "title",
-      "subtitle": "subtitle",
-      "typeQuestion": "Input",
-      "isSkip": false,
-      "info": null,
-      "payload": {
-        "validator": "default",
-        "value": 0,
-        "hintText": null
-      }
-    }
-  ]
+  }
 }

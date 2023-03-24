@@ -103,4 +103,14 @@ abstract class MockedEntities {
       sliderThemeData: const SliderThemeData(),
     ),
   );
+
+  static final data2 = SurveyData(
+    questions: [
+      input1,
+    ],
+    commonTheme: CommonTheme(
+      textFieldThemeData: const TextFieldThemeData.common(),
+      sliderThemeData: const SliderThemeData(),
+    ),
+  );
 }

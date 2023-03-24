@@ -5,7 +5,7 @@ import 'package:survey_core/src/domain/entities/question_answer.dart';
 import 'package:survey_core/src/presentation/choice_question/choice_question_page.dart';
 
 import '../utils/mocked_entities.dart';
-import 'widget/app_test.dart';
+import 'widget/app_tester.dart';
 
 //ignore: avoid-unused-parameters
 void _mockOnSend({required int index, required QuestionAnswer answer}) {}

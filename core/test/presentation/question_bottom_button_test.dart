@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:survey_core/src/presentation/widgets/question_bottom_button.dart';
 
-import 'widget/app_test.dart';
+import 'widget/app_tester.dart';
 
 void main() {
   final completerActive = Completer<void>();

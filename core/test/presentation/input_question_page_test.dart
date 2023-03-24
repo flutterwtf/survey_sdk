@@ -6,7 +6,7 @@ import 'package:survey_core/src/domain/entities/question_types/input_question_da
 import 'package:survey_core/src/presentation/input_question/input_question_page.dart';
 import 'package:survey_core/src/presentation/widgets/question_bottom_button.dart';
 
-import 'widget/app_test.dart';
+import 'widget/app_tester.dart';
 
 // TODO(dev): Make a test for input date
 void main() {

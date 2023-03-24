@@ -2,9 +2,12 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:survey_core/src/data/data_sources/filesystem_data_source_impl.dart';
 import 'package:survey_core/src/data/data_sources/interfaces/filesystem_data_source.dart';
 
+import '../../utils/mocked_entities.dart';
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   final FilesystemDataSource dataSource = FilesystemDataSourceImpl();
+  const surveyAssetsPath = 'test/assets/test_survey_data.json';
 
   group('getSurveyData method', () {
     test('Call with empty parameter', () {
@@ -22,12 +25,12 @@ void main() {
     });
 
     test('Call with good parameter', () async {
-      // This line should not throw exceptions
-      await dataSource.getSurveyData(
-        'test/assets/test_survey_data.json',
-      );
+      final surveyData = await dataSource.getSurveyData(surveyAssetsPath);
 
-      // TODO(dev): compare SurveyData from assets with mock SurveyData
+      expect(
+        surveyData.questions.first.index,
+        equals(MockedEntities.data2.questions.first.index),
+      );
     });
   });
 }
