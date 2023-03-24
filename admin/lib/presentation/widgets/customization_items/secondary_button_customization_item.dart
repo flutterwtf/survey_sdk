@@ -41,7 +41,7 @@ class _SecondaryButtonCustomizationItemState
       children: [
         SwitchCustomizationItem(
           title: context.localization.secondary_button,
-          onChanged: ({required bool isToggled}) {
+          onChanged: (isToggled) {
             setState(() => _isShown = isToggled);
             widget.onChanged(isShown: _isShown, text: _text);
           },

@@ -49,7 +49,7 @@ class _MultilineSwitchState extends State<MultilineSwitch> {
           padding: const EdgeInsets.only(top: AppDimensions.marginS),
           child: SwitchCustomizationItem(
             title: context.localization.multiline,
-            onChanged: ({required bool isToggled}) {
+            onChanged: (isToggled) {
               setState(() => _isMultiline = isToggled);
               widget.onChanged(
                 isMultiline: _isMultiline,

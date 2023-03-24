@@ -25,7 +25,7 @@ void main() {
         AppTester(
           child: SwitchCustomizationItem(
             title: 'switch_item',
-            onChanged: ({required bool isToggled}) {
+            onChanged: (isToggled) {
               toggled = isToggled;
             },
           ),
@@ -48,7 +48,7 @@ void main() {
           child: SwitchCustomizationItem(
             title: 'switch_item',
             initialValue: true,
-            onChanged: ({required bool isToggled}) {
+            onChanged: (isToggled) {
               toggled = isToggled;
             },
           ),
