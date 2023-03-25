@@ -46,12 +46,12 @@ class IntroQuestionTheme extends ThemeExtension<IntroQuestionTheme>
       : this(
           fillColor: AppColors.white,
           titleTextColor: AppColors.black,
-          titleTextSize: AppFonts.sizeL,
+          titleTextSize: AppFonts.size2XL,
           subTitleTextColor: AppColors.black,
-          subTitleTextSize: AppFonts.sizeS,
+          subTitleTextSize: AppFonts.sizeL,
           mainButtonColor: AppColors.black,
           mainButtonTextColor: AppColors.white,
-          mainButtonTextSize: AppFonts.sizeS,
+          mainButtonTextSize: AppFonts.sizeXL,
           mainButtonRadius: AppDimensions.circularRadiusS,
         );
 
