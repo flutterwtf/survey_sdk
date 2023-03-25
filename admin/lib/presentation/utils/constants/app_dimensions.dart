@@ -27,7 +27,6 @@ abstract class AppDimensions {
   static const double circularRadiusXL = 36;
 
   static const double appbarHeight = 50;
-  static const double defaultAppbarActionWidth = 50;
 
   static const double thinBorderWidth = 0.5;
   static const double defaultBorderWidth = 1;
