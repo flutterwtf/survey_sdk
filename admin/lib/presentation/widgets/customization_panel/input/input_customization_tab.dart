@@ -50,7 +50,6 @@ class InputCustomizationTab extends CustomizationTab {
 
   @override
   Widget build(BuildContext context) {
-    final fontSize = AppFonts.sizeL.toString();
     return ListView(
       children: [
         CustomizationItemsContainer(
@@ -76,14 +75,6 @@ class InputCustomizationTab extends CustomizationTab {
             ColorCustomizationItem(
               initialColor: AppColors.black,
               onColorPicked: onBorderColorChanged,
-              initialSize: AppDimensions.defaultBorderWidth.toString(),
-              onSizeChanged: onBorderWidthChanged,
-              decoration: InputDecoration(
-                isCollapsed: true,
-                border: InputBorder.none,
-                suffixText: context.localization.px,
-                suffixStyle: context.theme.textTheme.bodyLarge,
-              ),
             ),
           ],
         ),
@@ -104,8 +95,6 @@ class InputCustomizationTab extends CustomizationTab {
             ColorCustomizationItem(
               initialColor: AppColors.textLightGrey,
               onColorPicked: onHintColorChanged,
-              initialSize: fontSize,
-              onSizeChanged: onHintFontSizeChanged,
             ),
           ],
         ),
@@ -115,8 +104,6 @@ class InputCustomizationTab extends CustomizationTab {
             ColorCustomizationItem(
               initialColor: AppColors.black,
               onColorPicked: onTextColorChanged,
-              initialSize: fontSize,
-              onSizeChanged: onTextFontSizeChanged,
             ),
           ],
         ),
@@ -132,6 +119,7 @@ class InputCustomizationTab extends CustomizationTab {
                     (e) => DropdownCustomizationItem<InputType>(
                       value: e,
                       onChange: onInputTypeChanged,
+                      // TODO(dev): We have localization names for it.
                       child: Text(
                         e.name,
                         style: context.theme.textTheme.bodyLarge,
@@ -140,7 +128,7 @@ class InputCustomizationTab extends CustomizationTab {
                   )
                   .toList(),
               value: inputType,
-              withColor: true,
+              withColor: false,
             ),
           ],
         ),

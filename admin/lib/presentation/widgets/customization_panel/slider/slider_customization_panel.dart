@@ -29,7 +29,6 @@ class SliderCustomizationPanel extends StatelessWidget {
           onActiveColorChanged: (color) {},
           onInactiveColorChanged: (color) {},
           onThicknessChanged: (thickness) {},
-          onThumbSizeChanged: (size) {},
           onThumbColorChanged: (color) {},
         ),
         SliderContentCustomizationTab(

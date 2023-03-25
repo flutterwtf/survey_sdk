@@ -10,7 +10,6 @@ import '../app_tester.dart';
 void main() {
   group('Tests for SliderCustomizationTab', () {
     var thickness = 0;
-    var numThumb = 0.0;
     Color active = Colors.red;
     Color inactive = Colors.red;
     Color colorThumb = Colors.red;
@@ -25,9 +24,6 @@ void main() {
         },
         onThicknessChanged: (newThickness) {
           thickness = newThickness;
-        },
-        onThumbSizeChanged: (newNumThumb) {
-          numThumb = newNumThumb;
         },
         onThumbColorChanged: (newColorThumb) {
           colorThumb = newColorThumb;
@@ -170,7 +166,6 @@ void main() {
 
       await tester.enterText(find.byType(ThicknessCustomizationItem).last, '8');
       expect(find.text('8'), findsOneWidget);
-      expect(numThumb, 8);
     });
 
     testWidgets('Validate input string for Thumb', (tester) async {
@@ -180,7 +175,6 @@ void main() {
         'q3',
       );
       expect(find.text('3'), findsOneWidget);
-      expect(numThumb, 3);
     });
 
     testWidgets('Validate input length > 2 for Thumb', (tester) async {
@@ -190,7 +184,6 @@ void main() {
         '873',
       );
       expect(find.text('87'), findsOneWidget);
-      expect(numThumb, 87);
     });
   });
 }

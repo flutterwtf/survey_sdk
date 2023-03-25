@@ -68,24 +68,6 @@ void main() {
     expect(find.text('132'), findsOneWidget);
   });
 
-  testWidgets('focusNode property', (tester) async {
-    final focusNode = FocusNode();
-    await tester.pumpWidget(
-      AppTester(
-        child: Scaffold(
-          body: CustomizationTextField(
-            focusNode: focusNode,
-          ),
-        ),
-      ),
-    );
-
-    final textField = tester.widget<CustomizationTextField>(
-      find.byType(CustomizationTextField),
-    );
-    expect(textField.focusNode, focusNode);
-  });
-
   testWidgets('onEditingComplete property', (tester) async {
     var amountOfChanges = 0;
     await tester.pumpWidget(

@@ -28,7 +28,7 @@ class RadiusCustomizationItem extends StatelessWidget {
               FilteringTextInputFormatter.digitsOnly,
               LengthLimitingTextInputFormatter(lengthInputFormatter),
             ],
-            onChanged: (value) => SizeHandler.onSizeChanged(
+            onChanged: (value) => SizeHandler.onIntSizeChanged(
               value,
               onRadiusChanged,
             ),

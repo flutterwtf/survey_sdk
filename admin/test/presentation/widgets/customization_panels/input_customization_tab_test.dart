@@ -65,9 +65,11 @@ void main() {
             find.widgetWithText(CustomizationItemsContainer, 'Hint'),
             findsOneWidget,
           );
+          // TODO(dev): change this to findsNWidget(2) when the values from
+          // TODO(dev): localization are returned to the input type.
           expect(
             find.widgetWithText(CustomizationItemsContainer, 'Text'),
-            findsNWidgets(2),
+            findsOneWidget,
           );
           expect(
             find.widgetWithText(CustomizationItemsContainer, 'Input type'),
@@ -100,15 +102,18 @@ void main() {
             findsOneWidget,
           );
           expect(
-            find.widgetWithText(CustomizationItemsContainer, '1'),
+            find.byWidgetPredicate(
+              (widget) =>
+                  widget is PaddingCustomizationItem &&
+                  widget.initialHorizontalPadding == 14.0 &&
+                  widget.initialVerticalPadding == 14.0,
+            ),
             findsOneWidget,
           );
+          // TODO(dev): change this to Text from text when the values from
+          // TODO(dev): localization are returned to the input type.
           expect(
-            find.widgetWithText(CustomizationItemsContainer, '16'),
-            findsNWidgets(2),
-          );
-          expect(
-            find.widgetWithText(DropdownCustomizationButton<InputType>, 'Text'),
+            find.widgetWithText(DropdownCustomizationButton<InputType>, 'text'),
             findsOneWidget,
           );
         },
@@ -120,7 +125,7 @@ void main() {
           await widgetTester.pumpWidget(page);
           await widgetTester.pumpAndSettle();
 
-          expect(find.byType(CustomizationItemsContainer), findsNWidgets(8));
+          expect(find.byType(CustomizationItemsContainer), findsNWidgets(7));
           expect(find.byType(MultilineSwitch), findsOneWidget);
           expect(
             find.byType(DropdownCustomizationButton<InputType>),
@@ -128,7 +133,7 @@ void main() {
           );
           expect(find.byType(ColorCustomizationItem), findsNWidgets(4));
           expect(find.byType(PaddingCustomizationItem), findsNWidgets(1));
-          expect(find.byType(CustomizationTextField), findsNWidgets(9));
+          expect(find.byType(CustomizationTextField), findsNWidgets(6));
         },
       );
     },

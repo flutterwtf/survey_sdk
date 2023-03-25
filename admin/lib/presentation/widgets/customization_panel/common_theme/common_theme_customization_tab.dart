@@ -42,7 +42,6 @@ class CommonThemeCustomizationTab extends CustomizationTab {
             ColorCustomizationItem(
               initialColor: AppColors.black,
               onColorPicked: onTitleColorPicked,
-              onSizeChanged: onTitleFontSizeChanged,
             ),
           ],
         ),
@@ -52,8 +51,6 @@ class CommonThemeCustomizationTab extends CustomizationTab {
             ColorCustomizationItem(
               onColorPicked: onSubtitleColorPicked,
               initialColor: AppColors.black,
-              initialSize: AppFonts.sizeS.toString(),
-              onSizeChanged: onSubtitleFontSizeChanged,
             ),
           ],
         ),

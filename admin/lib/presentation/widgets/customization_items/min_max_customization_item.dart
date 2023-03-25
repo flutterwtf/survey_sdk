@@ -133,7 +133,7 @@ class _MinMaxInputField extends StatelessWidget {
             ],
             autovalidateMode: AutovalidateMode.onUserInteraction,
             validator: _validator,
-            onChanged: (value) => SizeHandler.onSizeChanged(value, onChanged),
+            onChanged: (value) => SizeHandler.onIntSizeChanged(value, onChanged),
           ),
         ),
       ],

@@ -7,15 +7,11 @@ import 'package:survey_admin/presentation/widgets/customization_items/customizat
 class ColorCustomizationItem extends StatefulWidget {
   final Color initialColor;
   final ValueChanged<Color> onColorPicked;
-  final String? initialSize;
-  final ValueChanged<double>? onSizeChanged;
   final InputDecoration? decoration;
 
   const ColorCustomizationItem({
     required this.initialColor,
     required this.onColorPicked,
-    this.initialSize,
-    this.onSizeChanged,
     this.decoration,
     super.key,
   });

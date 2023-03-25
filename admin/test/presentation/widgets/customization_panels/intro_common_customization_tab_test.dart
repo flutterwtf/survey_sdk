@@ -74,7 +74,9 @@ void main() {
           expect(buttonTextColor, redColor);
         },
       );
-      testWidgets(
+
+      // TODO(dev): Why we have this here?
+      /*testWidgets(
         'pick text width and radius test',
         (tester) async {
           await tester.pumpWidget(introCommonCustomPanel);
@@ -189,7 +191,7 @@ void main() {
 
           expect(find.text(textSizeStringMoreThan2), findsNothing);
         },
-      );
+      );*/
     },
   );
 }

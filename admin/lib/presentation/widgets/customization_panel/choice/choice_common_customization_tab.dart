@@ -31,7 +31,6 @@ class ChoiceCommonCustomizationTab extends CustomizationTab {
 
   @override
   Widget build(BuildContext context) {
-    final fontSize = AppFonts.sizeS.toString();
     return ListView(
       children: [
         CustomizationItemsContainer(
@@ -50,8 +49,6 @@ class ChoiceCommonCustomizationTab extends CustomizationTab {
             ColorCustomizationItem(
               initialColor: AppColors.black,
               onColorPicked: onTitleColorPicked,
-              initialSize: AppFonts.sizeL.toString(),
-              onSizeChanged: onTitleFontSizeChanged,
             ),
           ],
         ),
@@ -61,8 +58,6 @@ class ChoiceCommonCustomizationTab extends CustomizationTab {
             ColorCustomizationItem(
               initialColor: AppColors.black,
               onColorPicked: onSubtitleColorPicked,
-              initialSize: fontSize,
-              onSizeChanged: onSubtitleFontSizeChanged,
             ),
           ],
         ),
@@ -72,8 +67,6 @@ class ChoiceCommonCustomizationTab extends CustomizationTab {
             ColorCustomizationItem(
               initialColor: AppColors.black,
               onColorPicked: onButtonColorPicked,
-              initialSize: fontSize,
-              onSizeChanged: onButtonFontSizeChanged,
             ),
             RadiusCustomizationItem(
               initialValue: AppDimensions.circularRadiusS,

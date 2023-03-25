@@ -24,7 +24,7 @@ class DivisionsCustomizationItem extends StatelessWidget {
         FilteringTextInputFormatter.digitsOnly,
         LengthLimitingTextInputFormatter(lengthInputFormatter),
       ],
-      onChanged: (value) => SizeHandler.onSizeChanged(value, onChanged),
+      onChanged: (value) => SizeHandler.onIntSizeChanged(value, onChanged),
     );
   }
 }

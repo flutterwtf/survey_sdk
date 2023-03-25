@@ -18,11 +18,7 @@ class _NewQuestionPageState extends State<NewQuestionPage> {
   Widget _questionTab(NewQuestionTabs tab) {
     return _TabButton(
       title: tab.name(context),
-      onTap: () {
-        setState(
-          () => _selectedTab = tab,
-        );
-      },
+      onTap: () => setState(() => _selectedTab = tab),
       isSelected: _selectedTab == tab,
     );
   }
@@ -78,13 +74,11 @@ class _BackButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      behavior: HitTestBehavior.opaque,
       onTap: () => Navigator.pop(context),
       child: Container(
         margin: const EdgeInsets.only(right: AppDimensions.marginL),
-        child: const Align(
-          alignment: Alignment.centerRight,
-          child: VectorImage(assetName: AppAssets.closeIcon),
-        ),
+        child: const VectorImage(assetName: AppAssets.closeIcon),
       ),
     );
   }

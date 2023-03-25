@@ -55,8 +55,6 @@ class SliderCommonCustomizationTab extends CustomizationTab {
             ColorCustomizationItem(
               initialColor: AppColors.black,
               onColorPicked: onTitleColorChanged,
-              initialSize: fontSize,
-              onSizeChanged: onTitleFontSizeChanged,
             ),
           ],
         ),
@@ -66,8 +64,6 @@ class SliderCommonCustomizationTab extends CustomizationTab {
             ColorCustomizationItem(
               initialColor: AppColors.black,
               onColorPicked: onSubtitleColorChanged,
-              initialSize: fontSize,
-              onSizeChanged: onSubtitleFontSizeChanged,
             ),
           ],
         ),
@@ -81,8 +77,6 @@ class SliderCommonCustomizationTab extends CustomizationTab {
             ColorCustomizationItem(
               initialColor: AppColors.white,
               onColorPicked: onButtonDownColorChanged,
-              initialSize: fontSize,
-              onSizeChanged: onButtonFontSizeChanged,
             ),
             Row(
               children: [
@@ -91,7 +85,7 @@ class SliderCommonCustomizationTab extends CustomizationTab {
                 Expanded(
                   child: CustomizationTextField(
                     initialValue: fontSize,
-                    onChanged: (value) => SizeHandler.onSizeChanged(
+                    onChanged: (value) => SizeHandler.onIntSizeChanged(
                       value,
                       onButtonRadiusChanged,
                     ),

@@ -11,14 +11,12 @@ class SliderCustomizationTab extends CustomizationTab {
   final ValueChanged<Color> onActiveColorChanged;
   final ValueChanged<Color> onInactiveColorChanged;
   final ValueChanged<Color> onThumbColorChanged;
-  final ValueChanged<double> onThumbSizeChanged;
 
   const SliderCustomizationTab({
     required super.title,
     required this.onActiveColorChanged,
     required this.onInactiveColorChanged,
     required this.onThicknessChanged,
-    required this.onThumbSizeChanged,
     required this.onThumbColorChanged,
     super.key,
   });
@@ -32,7 +30,7 @@ class SliderCustomizationTab extends CustomizationTab {
           isTopDividerShown: true,
           children: [
             ThicknessCustomizationItem(
-              onThicknessChanged: (value) => SizeHandler.onSizeChanged(
+              onThicknessChanged: (value) => SizeHandler.onIntSizeChanged(
                 value,
                 onThicknessChanged,
               ),
@@ -64,14 +62,12 @@ class SliderCustomizationTab extends CustomizationTab {
             ColorCustomizationItem(
               initialColor: AppColors.textHintGrey,
               onColorPicked: onThumbColorChanged,
-              initialSize: AppFonts.sizeL.toString(),
               decoration: InputDecoration(
                 isCollapsed: true,
                 border: InputBorder.none,
                 suffixText: context.localization.px,
                 suffixStyle: context.theme.textTheme.bodyLarge,
               ),
-              onSizeChanged: onThumbSizeChanged,
             ),
           ],
         ),

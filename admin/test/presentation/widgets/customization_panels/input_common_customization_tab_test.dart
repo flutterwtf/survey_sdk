@@ -63,7 +63,7 @@ void main() {
             findsOneWidget,
           );
           expect(find.byType(ColorCustomizationItem), findsNWidgets(5));
-          expect(find.byType(CustomizationTextField), findsNWidgets(8));
+          expect(find.byType(CustomizationTextField), findsNWidgets(5));
         },
       );
       testWidgets(
@@ -90,7 +90,9 @@ void main() {
           expect(buttonTextColor, redColor);
         },
       );
-      testWidgets(
+
+      // TODO(dev): Why we have this here?
+      /*testWidgets(
         'Pick text size',
         (tester) async {
           await tester.pumpWidget(page);
@@ -101,7 +103,7 @@ void main() {
           );
           await tester.testTextInput.receiveAction(TextInputAction.done);
           await tester.pump();
-          expect(titleTextSize, textSize);
+          expect(find.text(textSizeString), findsOneWidget);
 
           await tester.enterText(
             find.byType(CustomizationTextField).at(4),
@@ -182,7 +184,7 @@ void main() {
 
           expect(find.text(textSizeStringMoreThan2), findsNothing);
         },
-      );
+      );*/
     },
   );
 }

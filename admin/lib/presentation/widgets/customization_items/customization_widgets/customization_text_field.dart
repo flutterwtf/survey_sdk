@@ -9,7 +9,6 @@ class CustomizationTextField extends StatelessWidget {
   final List<TextInputFormatter>? inputFormatters;
   final String? Function(String? value)? validator;
   final AutovalidateMode autovalidateMode;
-  final FocusNode? focusNode;
   final VoidCallback? onEditingComplete;
   final TextEditingController? controller;
   final InputDecoration decoration;
@@ -24,7 +23,6 @@ class CustomizationTextField extends StatelessWidget {
     this.inputFormatters,
     this.validator,
     this.autovalidateMode = AutovalidateMode.disabled,
-    this.focusNode,
     this.onEditingComplete,
     this.controller,
     this.fontSize = AppFonts.sizeL,
@@ -47,7 +45,6 @@ class CustomizationTextField extends StatelessWidget {
       maxLines: maxLines,
       onChanged: onChanged,
       onEditingComplete: onEditingComplete,
-      focusNode: focusNode,
       decoration: decoration.copyWith(hintText: hintText),
       style: style ??
           context.theme.textTheme.bodyMedium?.copyWith(fontSize: fontSize),

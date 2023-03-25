@@ -1,8 +1,14 @@
 abstract class SizeHandler {
-  static void onSizeChanged(String? value, void Function(int size) action) {
+  static void onIntSizeChanged(String? value, void Function(int size) action) {
     final size = int.tryParse(value ?? '');
-    if (size != null) {
-      action(size);
-    }
+    if (size != null) action(size);
+  }
+
+  static void onDoubleSizeChanged(
+    String? value,
+    void Function(double size) action,
+  ) {
+    final size = double.tryParse(value ?? '');
+    if (size != null) action(size);
   }
 }
