@@ -52,13 +52,14 @@ class BuilderCubit extends Cubit<BuilderState> {
   }
 
   // TODO(message): show message in case of error/empty data.
-  Future<void> importData() async {
+  Future<SurveyData?> importData() async {
     final surveyData = await _fileSystemRepository.importSurveyData();
     if (surveyData != null) {
       emit(
         state.copyWith(surveyData: surveyData),
       );
     }
+    return surveyData;
   }
 
   void _init() {
