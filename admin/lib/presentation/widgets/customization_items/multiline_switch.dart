@@ -17,10 +17,10 @@ class MultilineSwitch extends StatefulWidget {
 
   /// If [isMultiline] equals `false` then `lineAmount` is always equals 1.
   /// In case of any input error `lineAmount` is always equals 1.
-  final void Function({
-    required bool isMultiline,
-    required int lineAmount,
-  }) onChanged;
+  final void Function(
+    bool isMultiline,
+    int lineAmount,
+  ) onChanged;
   final bool isMultiline;
   final int defaultLineAmount;
 
@@ -52,8 +52,8 @@ class _MultilineSwitchState extends State<MultilineSwitch> {
             onChanged: (isToggled) {
               setState(() => _isMultiline = isToggled);
               widget.onChanged(
-                isMultiline: _isMultiline,
-                lineAmount: _isMultiline ? _lineAmount : 1,
+                _isMultiline,
+                _isMultiline ? _lineAmount : 1,
               );
             },
           ),
@@ -66,8 +66,8 @@ class _MultilineSwitchState extends State<MultilineSwitch> {
                   onChanged: (amount) {
                     _lineAmount = amount;
                     widget.onChanged(
-                      isMultiline: _isMultiline,
-                      lineAmount: _lineAmount,
+                      _isMultiline,
+                      _lineAmount,
                     );
                   },
                 )
