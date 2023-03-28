@@ -172,29 +172,6 @@ void main() {
         expect(find.text('0'), findsOneWidget);
         expect(subtitleColor, const Color(0x00000000));
       });
-
-      // TODO(dev): Why we have this here?
-      /*testWidgets('Input size(num) for Subtitle', (tester) async {
-      await tester.pumpWidget(page);
-      await tester.enterText(find.byType(CustomizationTextField).at(4), '8');
-      expect(find.text('8'), findsOneWidget);
-      expect(subtitleSize, 8);
-    });
-
-    testWidgets('Input size(string) for Subtitle', (tester) async {
-      await tester.pumpWidget(page);
-      await tester.enterText(find.byType(CustomizationTextField).at(4), 'q9');
-      expect(find.text('q9'), findsNothing);
-      expect(subtitleSize, 9);
-    });
-
-    testWidgets('Validate input size length > 2 for Subtitle', (tester) async {
-      await tester.pumpWidget(page);
-      await tester.enterText(find.byType(CustomizationTextField).at(4), '123');
-      expect(find.text('123'), findsNothing);
-      expect(subtitleSize, 12);
-    });*/
-
       testWidgets('Input color for UpButton', (tester) async {
         await tester.pumpWidget(page);
         await tester.enterText(
@@ -242,61 +219,6 @@ void main() {
         expect(find.text('0'), findsOneWidget);
         expect(buttonDownColor, const Color(0x00000000));
       });
-
-      // TODO(dev): Why we have this here?
-      /*testWidgets('Input size(num) for DownButton', (tester) async {
-      await tester.pumpWidget(page);
-      await tester.enterText(find.byType(CustomizationTextField).at(7), '14');
-      expect(find.text('14'), findsOneWidget);
-      expect(buttonDownSize, 14);
-    });
-
-    testWidgets('Input size(string) for DownButton', (tester) async {
-      await tester.pumpWidget(page);
-      await tester.enterText(find.byType(CustomizationTextField).at(7), 'q4');
-      expect(find.text('q4'), findsNothing);
-      expect(buttonDownSize, 4);
-    });
-
-    testWidgets(
-      'Validate input size length > 2 for DownButton',
-      (tester) async {
-        await tester.pumpWidget(page);
-        await tester.enterText(
-          find.byType(CustomizationTextField).at(7),
-          '143',
-        );
-        expect(find.text('143'), findsNothing);
-        expect(buttonDownSize, 14);
-      },
-    );*/
-
-      /*testWidgets('Input size(num) for BorderButton', (tester) async {
-      await tester.pumpWidget(page);
-      await tester.enterText(find.byType(CustomizationTextField).at(8), '18');
-      expect(find.text('18'), findsOneWidget);
-      expect(buttonBorder, 18);
-    });
-
-    testWidgets('Input size(string) for BorderButton', (tester) async {
-      await tester.pumpWidget(page);
-      await tester.enterText(find.byType(CustomizationTextField).at(8), 'q8');
-      expect(find.text('q8'), findsNothing);
-      expect(buttonBorder, 8);
-    });
-
-    testWidgets(
-      'Validate input size length > 2 for BorderButton',
-      (tester) async {
-        await tester.pumpWidget(page);
-        await tester.enterText(
-          find.byType(CustomizationTextField).at(8),
-          '198',
-        );
-        expect(find.text('198'), findsNothing);
-        expect(buttonBorder, 19);
-      },
-    );*/
     },
   );
 }
