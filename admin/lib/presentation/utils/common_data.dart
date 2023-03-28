@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:survey_admin/presentation/app/localization/localizations.dart';
-import 'package:survey_admin/presentation/utils/colors.dart';
-import 'package:survey_admin/presentation/utils/constants/app_dimensions.dart';
 import 'package:survey_core/survey_core.dart';
 
 class CommonData {
@@ -14,6 +12,10 @@ class CommonData {
 
   CommonTheme get commonTheme {
     return CommonTheme(
+      slider: const SliderQuestionData.common(),
+      intro: IntroQuestionData.common(),
+      input: InputQuestionData.common(),
+      choice: const ChoiceQuestionData.common(),
     );
   }
 
@@ -31,12 +33,13 @@ class CommonData {
 
   IntroQuestionData intro({int index = 0}) {
     return IntroQuestionData(
-      mainButtonTitle: context.localization.next,
+      buttonText: context.localization.next,
       title: context.localization.intro,
       index: index,
       subtitle: context.localization.empty_subtitle,
       isSkip: false,
       content: context.localization.question_content,
+      theme: const IntroQuestionTheme.common(),
     );
   }
 
@@ -48,6 +51,7 @@ class CommonData {
       subtitle: context.localization.empty_subtitle,
       isSkip: false,
       content: context.localization.question_content,
+      theme: const InputQuestionTheme.common(),
     );
   }
 
@@ -64,6 +68,9 @@ class CommonData {
       isSkip: false,
       content: context.localization.question_content,
       index: index,
+      ruleType: RuleType.none,
+      ruleValue: 0,
+      theme: const ChoiceQuestionTheme.common(),
     );
   }
 
@@ -77,6 +84,8 @@ class CommonData {
       subtitle: context.localization.empty_subtitle,
       isSkip: false,
       content: context.localization.question_content,
+      divisions: 10,
+      theme: const SliderQuestionTheme.common(),
     );
   }
 }

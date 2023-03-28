@@ -13,10 +13,12 @@ import 'package:survey_core/survey_core.dart';
 
 class SliderCustomizationTab extends CustomizationTab {
   final void Function(QuestionData data) onChange;
+  final SliderQuestionData editable;
 
   const SliderCustomizationTab({
     required this.onChange,
     required super.title,
+    required this.editable,
     super.key,
   });
 
@@ -30,8 +32,7 @@ class SliderCustomizationTabState
   Widget build(BuildContext context) {
     return BlocBuilder(
       builder: (context, state) {
-        final data = (state! as EditQuestionBuilderState).selectedQuestion!
-            as SliderQuestionData;
+        final data = widget.editable;
         final theme = data.theme ?? const SliderQuestionTheme.common();
         return ListView(
           children: [

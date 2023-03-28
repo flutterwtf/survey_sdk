@@ -1,111 +1,74 @@
-import 'dart:ui';
-
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:survey_core/src/domain/entities/api_object.dart';
+import 'package:survey_core/src/domain/entities/question_types/choice_question_data.dart';
+import 'package:survey_core/src/domain/entities/question_types/input_question_data.dart';
+import 'package:survey_core/src/domain/entities/question_types/intro_question_data.dart';
+import 'package:survey_core/src/domain/entities/question_types/slider_question_data.dart';
 
 class CommonTheme extends ThemeExtension<CommonTheme>
     with ApiObject, EquatableMixin {
-  final Color fill;
-  final Color titleColor;
-  final double titleSize;
-  final Color subtitleColor;
-  final double subtitleSize;
-  final Color buttonFill;
-  final Color buttonTextColor;
-  final double buttonTextSize;
-  final int buttonRadius;
-
-  CommonTheme({
-    required this.fill,
-    required this.titleColor,
-    required this.titleSize,
-    required this.subtitleColor,
-    required this.subtitleSize,
-    required this.buttonFill,
-    required this.buttonTextColor,
-    required this.buttonTextSize,
-    required this.buttonRadius,
-  });
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'fill': fill.value,
-        'titleColor': titleColor.value,
-        'titleSize': titleSize,
-        'subtitleColor': subtitleColor.value,
-        'subtitleSize': subtitleSize,
-        'buttonFill': buttonFill.value,
-        'buttonTextColor': buttonTextColor.value,
-        'buttonTextSize': buttonTextSize,
-        'buttonRadius': buttonRadius,
-      };
-
-  factory CommonTheme.fromJson(Map<String, dynamic> json) {
-    return CommonTheme(
-      fill: json['fill'],
-      titleColor: json['titleColor'],
-      titleSize: json['titleSize'],
-      subtitleColor: json['subtitleColor'],
-      subtitleSize: json['subtitleSize'],
-      buttonFill: json['buttonFill'],
-      buttonTextColor: json['buttonTextColor'],
-      buttonTextSize: json['buttonTextSize'],
-      buttonRadius: json['buttonRadius'],
-    );
-  }
-
-  @override
-  CommonTheme copyWith({
-    Color? fill,
-    Color? titleColor,
-    double? titleSize,
-    Color? subtitleColor,
-    double? subtitleSize,
-    Color? buttonFill,
-    Color? buttonTextColor,
-    double? buttonTextSize,
-    int? buttonRadius,
-  }) {
-    return CommonTheme(
-      fill: fill ?? this.fill,
-      titleColor: titleColor ?? this.titleColor,
-      titleSize: titleSize ?? this.titleSize,
-      subtitleColor: subtitleColor ?? this.subtitleColor,
-      subtitleSize: subtitleSize ?? this.subtitleSize,
-      buttonFill: buttonFill ?? this.buttonFill,
-      buttonTextColor: buttonTextColor ?? this.buttonTextColor,
-      buttonTextSize: buttonTextSize ?? this.buttonTextSize,
-      buttonRadius: buttonRadius ?? this.buttonRadius,
-    );
-  }
+  final SliderQuestionData slider;
+  final IntroQuestionData intro;
+  final InputQuestionData input;
+  final ChoiceQuestionData choice;
 
   @override
   List<Object?> get props => [
-        fill,
-        titleColor,
-        titleSize,
-        subtitleColor,
-        subtitleSize,
-        buttonFill,
-        buttonTextColor,
-        buttonTextSize,
-        buttonRadius,
+        slider,
+        intro,
+        input,
+        choice,
       ];
+
+  CommonTheme({
+    required this.choice,
+    required this.slider,
+    required this.intro,
+    required this.input,
+  });
+
+  @override
+  factory CommonTheme.fromJson(Map<String, dynamic> json) {
+    return CommonTheme(
+      slider: SliderQuestionData.fromJson(json['slider']),
+      intro: IntroQuestionData.fromJson(json['intro']),
+      input: InputQuestionData.fromJson(json['input']),
+      choice: ChoiceQuestionData.fromJson(json['choice']),
+    );
+  }
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'slider': slider.toJson(),
+        'intro': intro.toJson(),
+        'input': input.toJson(),
+        'choice': choice.toJson(),
+      };
+
+  @override
+  CommonTheme copyWith({
+    SliderQuestionData? slider,
+    IntroQuestionData? intro,
+    InputQuestionData? input,
+    ChoiceQuestionData? choice,
+  }) {
+    return CommonTheme(
+      slider: slider ?? this.slider,
+      intro: intro ?? this.intro,
+      input: input ?? this.input,
+      choice: choice ?? this.choice,
+    );
+  }
 
   @override
   CommonTheme lerp(covariant CommonTheme? other, double t) {
     return CommonTheme(
-      fill: Color.lerp(fill, other?.fill, t)!,
-      titleColor: Color.lerp(titleColor, other?.titleColor, t)!,
-      titleSize: lerpDouble(titleSize, other?.titleSize, t)!,
-      subtitleColor: Color.lerp(subtitleColor, other?.subtitleColor, t)!,
-      subtitleSize: lerpDouble(subtitleSize, other?.subtitleSize, t)!,
-      buttonFill: Color.lerp(buttonFill, other?.buttonFill, t)!,
-      buttonTextColor: Color.lerp(buttonTextColor, other?.buttonTextColor, t)!,
-      buttonTextSize: lerpDouble(buttonTextSize, other?.buttonTextSize, t)!,
-      // TODO(dev): to double
-      buttonRadius: buttonRadius,
+      // TODO(dev): should we lerp it?
+      slider: slider,
+      intro: intro,
+      input: input,
+      choice: choice,
     );
   }
 }

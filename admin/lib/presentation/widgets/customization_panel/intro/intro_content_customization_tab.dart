@@ -12,10 +12,12 @@ import 'package:survey_core/survey_core.dart';
 
 class IntroContentCustomizationTab extends CustomizationTab {
   final void Function(QuestionData data) onChange;
+  final IntroQuestionData editable;
 
   const IntroContentCustomizationTab({
     required this.onChange,
     required super.title,
+    required this.editable,
     super.key,
   });
 
@@ -29,8 +31,7 @@ class IntroContentCustomizationTabState
   Widget build(BuildContext context) {
     return BlocBuilder<BuilderCubit, BuilderState>(
       builder: (context, state) {
-        final data = (state as EditQuestionBuilderState).selectedQuestion!
-            as IntroQuestionData;
+        final data = widget.editable;
         return ListView(
           children: [
             CustomizationItemsContainer(

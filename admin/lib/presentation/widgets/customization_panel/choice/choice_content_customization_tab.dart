@@ -14,10 +14,12 @@ import 'package:survey_core/survey_core.dart';
 
 class ChoiceContentCustomizationTab extends CustomizationTab {
   final void Function(QuestionData data) onChange;
+  final ChoiceQuestionData editable;
 
   const ChoiceContentCustomizationTab({
     required this.onChange,
     required super.title,
+    required this.editable,
     super.key,
   });
 
@@ -45,8 +47,7 @@ class ChoiceContentCustomizationTabState
   Widget build(BuildContext context) {
     return BlocBuilder<BuilderCubit, BuilderState>(
       builder: (context, state) {
-        final data = (state as EditQuestionBuilderState).selectedQuestion!
-            as ChoiceQuestionData;
+        final data = widget.editable;
         return ListView(
           children: [
             CustomizationItemsContainer(
@@ -58,7 +59,7 @@ class ChoiceContentCustomizationTabState
                   onChanged: (title) => widget.onChange(
                     data.copyWith(title: title),
                   ),
-                )
+                ),
               ],
             ),
             CustomizationItemsContainer(
@@ -118,8 +119,7 @@ class ChoiceContentCustomizationTabState
                       Expanded(
                         child: data.ruleType != RuleType.none
                             ? _RuleDropdown(
-                                onChanged: (ruleValue) =>
-                                    widget.onChange(
+                                onChanged: (ruleValue) => widget.onChange(
                                   data.copyWith(ruleValue: ruleValue),
                                 ),
                                 values: _initialLimitedList(data.options),

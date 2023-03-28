@@ -14,10 +14,12 @@ import 'package:survey_core/survey_core.dart';
 
 class InputCommonCustomizationTab extends CustomizationTab {
   final void Function(QuestionData data) onChange;
+  final InputQuestionData editable;
 
   const InputCommonCustomizationTab({
     required this.onChange,
     required super.title,
+    required this.editable,
     super.key,
   });
 
@@ -31,9 +33,8 @@ class CommonCustomizationTabState
   Widget build(BuildContext context) {
     return BlocBuilder<BuilderCubit, BuilderState>(
       builder: (context, state) {
-        final data = (state as EditQuestionBuilderState).selectedQuestion!
-        as IntroQuestionData;
-        final theme = data.theme ?? const IntroQuestionTheme.common();
+        final data = widget.editable;
+        final theme = data.theme ?? const InputQuestionTheme.common();
         return ListView(
           children: [
             CustomizationItemsContainer(

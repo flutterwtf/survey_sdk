@@ -18,10 +18,12 @@ import 'package:survey_core/survey_core.dart';
 
 class InputCustomizationTab extends CustomizationTab {
   final void Function(QuestionData data) onChange;
+  final InputQuestionData editable;
 
   const InputCustomizationTab({
     required this.onChange,
     required super.title,
+    required this.editable,
     super.key,
   });
 
@@ -36,8 +38,7 @@ class InputCustomizationTabState
     final fontSize = AppFonts.sizeL.toString();
     return BlocBuilder<BuilderCubit, BuilderState>(
       builder: (context, state) {
-        final data = (state as EditQuestionBuilderState).selectedQuestion!
-            as InputQuestionData;
+        final data = widget.editable;
         final theme = data.theme ?? const InputQuestionTheme.common();
         return ListView(
           children: [
@@ -107,16 +108,14 @@ class InputCustomizationTabState
                   initialHorizontalPadding: AppDimensions.marginS,
                   initialVerticalPadding: AppDimensions.marginS,
                   // TODO(dev): Move theme change to a method.
-                  onHorizontalPaddingChange: (padding) =>
-                      widget.onChange(
+                  onHorizontalPaddingChange: (padding) => widget.onChange(
                     data.copyWith(
                       theme: theme.copyWith(
                         horizontalPadding: padding,
                       ),
                     ),
                   ),
-                  onVerticalPaddingChange: (padding) =>
-                      widget.onChange(
+                  onVerticalPaddingChange: (padding) => widget.onChange(
                     data.copyWith(
                       theme: theme.copyWith(
                         verticalPadding: padding,

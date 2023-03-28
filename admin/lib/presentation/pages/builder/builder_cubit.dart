@@ -17,10 +17,6 @@ class BuilderCubit extends Cubit<BuilderState> {
           EditQuestionBuilderState(
             surveyData: i.get<CommonData>().surveyData,
             selectedQuestion: null,
-            commonChoice: const ChoiceQuestionData.common(),
-            commonInput: InputQuestionData.common(),
-            commonIntro: IntroQuestionData.common(),
-            commonSlider: const SliderQuestionData.common(),
           ),
         ) {
     _init();
@@ -38,18 +34,44 @@ class BuilderCubit extends Cubit<BuilderState> {
   }
 
   void updateCommon(QuestionData data) {
+    final surveyData = state.surveyData;
+    final common = state.surveyData.commonTheme;
     switch (data.type) {
       case QuestionTypes.choice:
-        emit(state.copyWith(commonChoice: data as ChoiceQuestionData));
+        emit(
+          state.copyWith(
+            surveyData: surveyData.copyWith(
+              commonTheme: common.copyWith(choice: data as ChoiceQuestionData),
+            ),
+          ),
+        );
         break;
       case QuestionTypes.input:
-        emit(state.copyWith(commonInput: data as InputQuestionData));
+        emit(
+          state.copyWith(
+            surveyData: surveyData.copyWith(
+              commonTheme: common.copyWith(input: data as InputQuestionData),
+            ),
+          ),
+        );
         break;
       case QuestionTypes.intro:
-        emit(state.copyWith(commonIntro: data as IntroQuestionData));
+        emit(
+          state.copyWith(
+            surveyData: surveyData.copyWith(
+              commonTheme: common.copyWith(intro: data as IntroQuestionData),
+            ),
+          ),
+        );
         break;
       case QuestionTypes.slider:
-        emit(state.copyWith(commonSlider: data as SliderQuestionData));
+        emit(
+          state.copyWith(
+            surveyData: surveyData.copyWith(
+              commonTheme: common.copyWith(slider: data as SliderQuestionData),
+            ),
+          ),
+        );
         break;
     }
   }
@@ -58,10 +80,6 @@ class BuilderCubit extends Cubit<BuilderState> {
         EditQuestionBuilderState(
           selectedQuestion: data,
           surveyData: state.surveyData,
-          commonChoice: state.commonChoice,
-          commonInput: state.commonInput,
-          commonIntro: state.commonIntro,
-          commonSlider: state.commonSlider,
         ),
       );
 

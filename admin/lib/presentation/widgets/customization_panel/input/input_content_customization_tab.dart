@@ -11,10 +11,12 @@ import 'package:survey_core/survey_core.dart';
 
 class InputContentCustomizationTab extends CustomizationTab {
   final void Function(QuestionData data) onChange;
+  final InputQuestionData editable;
 
   const InputContentCustomizationTab({
     required this.onChange,
     required super.title,
+    required this.editable,
     super.key,
   });
 
@@ -24,14 +26,11 @@ class InputContentCustomizationTab extends CustomizationTab {
 
 class InputContentCustomizationTabState
     extends CustomizationTabState<InputContentCustomizationTab> {
-  static const double _maxInputTextHeight = 100;
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<BuilderCubit, BuilderState>(
       builder: (context, state) {
-        final data = (state as EditQuestionBuilderState).selectedQuestion!
-            as InputQuestionData;
+        final data = widget.editable;
         return ListView(
           children: [
             CustomizationItemsContainer(

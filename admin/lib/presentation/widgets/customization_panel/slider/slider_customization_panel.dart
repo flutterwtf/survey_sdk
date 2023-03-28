@@ -8,9 +8,11 @@ import 'package:survey_core/survey_core.dart';
 
 class SliderCustomizationPanel extends StatelessWidget {
   final void Function(QuestionData data) onChange;
+  final SliderQuestionData editable;
 
   const SliderCustomizationPanel({
     required this.onChange,
+    required this.editable,
     super.key,
   });
 
@@ -21,14 +23,17 @@ class SliderCustomizationPanel extends StatelessWidget {
         SliderCommonCustomizationTab(
           onChange: onChange,
           title: context.localization.common,
+          editable: editable,
         ),
         SliderCustomizationTab(
           onChange: onChange,
           title: context.localization.slider,
+          editable: editable,
         ),
         SliderContentCustomizationTab(
           onChange: onChange,
           title: context.localization.content,
+          editable: editable,
         ),
       ],
     );

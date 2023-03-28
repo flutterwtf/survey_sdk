@@ -13,10 +13,12 @@ import 'package:survey_core/survey_core.dart';
 
 class ChoiceButtonsCustomizationTab extends CustomizationTab {
   final void Function(QuestionData data) onChange;
+  final ChoiceQuestionData editable;
 
   const ChoiceButtonsCustomizationTab({
     required this.onChange,
     required super.title,
+    required this.editable,
     super.key,
   });
 
@@ -31,9 +33,7 @@ class ChoiceButtonsCustomizationTabState
     // TODO(dev): Maybe retrieve state here instead of builder again?
     return BlocBuilder<BuilderCubit, BuilderState>(
       builder: (context, state) {
-        // TODO(dev): Look at it again. Everywhere.
-        final data = (state as EditQuestionBuilderState).selectedQuestion!
-            as ChoiceQuestionData;
+        final data = widget.editable;
         final theme = data.theme ?? const ChoiceQuestionTheme.common();
         return Column(
           children: [

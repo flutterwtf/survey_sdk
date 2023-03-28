@@ -8,8 +8,13 @@ import 'package:survey_core/survey_core.dart';
 
 class InputCustomizationPanel extends StatefulWidget {
   final void Function(QuestionData data) onChange;
+  final InputQuestionData editable;
 
-  const InputCustomizationPanel({required this.onChange, super.key});
+  const InputCustomizationPanel({
+    required this.onChange,
+    required this.editable,
+    super.key,
+  });
 
   @override
   State<InputCustomizationPanel> createState() =>
@@ -24,16 +29,19 @@ class _InputCustomizationPanelState extends State<InputCustomizationPanel> {
         InputCommonCustomizationTab(
           onChange: widget.onChange,
           title: context.localization.common,
+          editable: widget.editable,
         ),
         InputCustomizationTab(
           onChange: widget.onChange,
           // TODO(dev): do we need this here?
           key: UniqueKey(),
           title: context.localization.input,
+          editable: widget.editable,
         ),
         InputContentCustomizationTab(
           onChange: widget.onChange,
           title: context.localization.content,
+          editable: widget.editable,
         ),
       ],
     );

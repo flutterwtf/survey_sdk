@@ -25,7 +25,7 @@ class _NewQuestionPageState extends State<NewQuestionPage> {
   NewQuestionTabs _selectedTab = NewQuestionTabs.intro;
   String? _selectedOption;
 
-  final _cubit = i.get<BuilderCubit>();
+  final BuilderCubit _cubit = i.get<BuilderCubit>();
 
   Widget _questionTab(NewQuestionTabs tab) {
     return _TabButton(
@@ -42,68 +42,70 @@ class _NewQuestionPageState extends State<NewQuestionPage> {
   QuestionData _selectCommon(BuilderState state, NewQuestionTabs tab) {
     switch (tab) {
       case NewQuestionTabs.intro:
-        return state.commonIntro;
+        return state.surveyData.commonTheme.intro;
       case NewQuestionTabs.choice:
-        return state.commonChoice;
+        return state.surveyData.commonTheme.choice;
       case NewQuestionTabs.slider:
-        return state.commonSlider;
+        return state.surveyData.commonTheme.slider;
       case NewQuestionTabs.customInput:
-        return state.commonInput;
+        return state.surveyData.commonTheme.input;
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<BuilderCubit, BuilderState>(
-      bloc: _cubit,
-      builder: (context, state) {
-        return Scaffold(
-          backgroundColor: AppColors.white,
-          appBar: PreferredSize(
-            preferredSize: const Size.fromHeight(AppDimensions.appbarHeight),
-            child: AppBar(
-              automaticallyImplyLeading: false,
-              title: const _AppBarTitle(),
-              actions: const [
-                _BackButton(),
-              ],
+    return BlocProvider<BuilderCubit>(
+      create: (context) => _cubit,
+      child: BlocBuilder<BuilderCubit, BuilderState>(
+        builder: (context, state) {
+          return Scaffold(
+            backgroundColor: AppColors.white,
+            appBar: PreferredSize(
+              preferredSize: const Size.fromHeight(AppDimensions.appbarHeight),
+              child: AppBar(
+                automaticallyImplyLeading: false,
+                title: const _AppBarTitle(),
+                actions: const [
+                  _BackButton(),
+                ],
+              ),
             ),
-          ),
-          body: Padding(
-            padding: const EdgeInsets.symmetric(
-              vertical: AppDimensions.margin2XS,
-              horizontal: AppDimensions.marginM,
-            ),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: NewQuestionTabs.values.map(_questionTab).toList(),
-                ),
-                Expanded(
-                  child: _QuestionOptionsListView(
-                    options: _selectedTab.options,
-                    selectedOption: _selectedOption ?? '',
+            body: Padding(
+              padding: const EdgeInsets.symmetric(
+                vertical: AppDimensions.margin2XS,
+                horizontal: AppDimensions.marginM,
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: NewQuestionTabs.values.map(_questionTab).toList(),
                   ),
-                ),
-                EditorBar(
-                  onChange: _cubit.updateCommon,
-                  editableQuestion: _selectCommon(state, _selectedTab),
-                ),
-              ],
+                  Expanded(
+                    child: _QuestionOptionsListView(
+                      options: _selectedTab.options,
+                      selectedOption: _selectedOption ?? '',
+                    ),
+                  ),
+                  EditorBar(
+                    onChange: _cubit.updateCommon,
+                    editableQuestion: _selectCommon(state, _selectedTab),
+                  ),
+                ],
+              ),
             ),
-          ),
-          persistentFooterButtons: [
-            _AddButton(
-              onPressed: () {
-                Navigator.pop(context, _selectedTab.data(context));
-              },
-            ),
-          ],
-        );
-      },
+            persistentFooterButtons: [
+              _AddButton(
+                onPressed: () {
+                  Navigator.pop(context, _selectedTab.data(context));
+                },
+              ),
+            ],
+          );
+        },
+      ),
     );
   }
 }

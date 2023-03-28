@@ -28,13 +28,25 @@ class EditorBar extends StatelessWidget {
           if (questionData != null) {
             switch (questionData.type) {
               case QuestionTypes.choice:
-                return ChoiceCustomizationPanel(onChange: onChange);
+                return ChoiceCustomizationPanel(
+                  onChange: onChange,
+                  editable: questionData as ChoiceQuestionData,
+                );
               case QuestionTypes.input:
-                return InputCustomizationPanel(onChange: onChange);
+                return InputCustomizationPanel(
+                  onChange: onChange,
+                  editable: questionData as InputQuestionData,
+                );
               case QuestionTypes.intro:
-                return IntroCustomizationPanel(onChange: onChange);
+                return IntroCustomizationPanel(
+                  onChange: onChange,
+                  editable: questionData as IntroQuestionData,
+                );
               case QuestionTypes.slider:
-                return SliderCustomizationPanel(onChange: onChange);
+                return SliderCustomizationPanel(
+                  onChange: onChange,
+                  editable: questionData as SliderQuestionData,
+                );
             }
           }
           return const SizedBox.shrink();

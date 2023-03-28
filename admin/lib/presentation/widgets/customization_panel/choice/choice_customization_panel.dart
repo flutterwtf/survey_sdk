@@ -12,9 +12,11 @@ import 'package:survey_core/survey_core.dart';
 class ChoiceCustomizationPanel extends StatefulWidget {
   // TODO(dev): to defines.
   final void Function(QuestionData data) onChange;
+  final ChoiceQuestionData editable;
 
   const ChoiceCustomizationPanel({
     required this.onChange,
+    required this.editable,
     super.key,
   });
 
@@ -24,14 +26,8 @@ class ChoiceCustomizationPanel extends StatefulWidget {
 }
 
 class _ChoiceCustomizationPanelState extends State<ChoiceCustomizationPanel> {
-  late final ChoiceQuestionData _data;
-
   @override
   void initState() {
-    // TODO(dev): Rechek.
-    final state = BlocProvider.of<BuilderCubit>(context).state
-        as EditQuestionBuilderState;
-    _data = state.selectedQuestion! as ChoiceQuestionData;
     super.initState();
   }
 
@@ -42,18 +38,21 @@ class _ChoiceCustomizationPanelState extends State<ChoiceCustomizationPanel> {
         ChoiceCommonCustomizationTab(
           onChange: widget.onChange,
           title: context.localization.common,
+          editable: widget.editable,
         ),
         ChoiceButtonsCustomizationTab(
           onChange: widget.onChange,
-          title: _data.isMultipleChoice
+          title: widget.editable.isMultipleChoice
               ? context.localization.check_box
               : context.localization.radio_button,
+          editable: widget.editable,
         ),
         ChoiceContentCustomizationTab(
           onChange: widget.onChange,
           // TODO(dev): do we need this?
           key: UniqueKey(),
           title: context.localization.content,
+          editable: widget.editable,
         ),
       ],
     );

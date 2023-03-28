@@ -7,8 +7,13 @@ import 'package:survey_core/survey_core.dart';
 
 class IntroCustomizationPanel extends StatelessWidget {
   final void Function(QuestionData data) onChange;
+  final IntroQuestionData editable;
 
-  const IntroCustomizationPanel({required this.onChange, super.key});
+  const IntroCustomizationPanel({
+    required this.onChange,
+    required this.editable,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -18,10 +23,12 @@ class IntroCustomizationPanel extends StatelessWidget {
           onChange: onChange,
           // TODO(dev): We can remove title property probably.
           title: context.localization.common,
+          editable: editable,
         ),
         IntroContentCustomizationTab(
           onChange: onChange,
           title: context.localization.content,
+          editable: editable,
         ),
       ],
     );
