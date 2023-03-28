@@ -12,7 +12,7 @@ void main() {
     'Intro question widget test',
     () {
       final completerOnMainButtonTap = Completer<void>();
-      final completerOnSecondaryButtonTap = Completer<void>();
+      final completerOnSecondButton = Completer<void>();
       const title = 'Intro widget';
       const mainButtonTitle = 'NEXT';
       const secondaryButtonTitle = 'SKIP';
@@ -30,7 +30,7 @@ void main() {
             isSkip: false,
           ),
           onMainButtonTap: completerOnMainButtonTap.complete,
-          onSecondaryButtonTap: completerOnSecondaryButtonTap.complete,
+          onSecondaryButtonTap: completerOnSecondButton.complete,
           onSend: ({required int index, required QuestionAnswer answer}) {},
         ),
       );
@@ -52,7 +52,7 @@ void main() {
           await widgetTester.tap(find.text(mainButtonTitle));
           expect(completerOnMainButtonTap.isCompleted, isTrue);
           await widgetTester.tap(find.text(secondaryButtonTitle));
-          expect(completerOnSecondaryButtonTap.isCompleted, isTrue);
+          expect(completerOnSecondButton.isCompleted, isTrue);
         },
       );
     },

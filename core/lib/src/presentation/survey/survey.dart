@@ -5,8 +5,7 @@ import 'package:survey_core/src/presentation/di/injector.dart';
 import 'package:survey_core/src/presentation/survey/controller/survey_controller.dart';
 import 'package:survey_core/src/presentation/survey/survey_cubit.dart';
 import 'package:survey_core/src/presentation/survey/survey_state.dart';
-import 'package:survey_core/src/presentation/utils/app_colors.dart';
-import 'package:survey_core/src/presentation/utils/data_to_widget_util.dart';
+import 'package:survey_core/src/presentation/utils/utils.dart';
 
 class Survey extends StatefulWidget {
   final String? filePath;
@@ -39,8 +38,9 @@ class _SurveyState extends State<Survey> {
     _cubit = Injector().surveyCubit;
     _surveyController = widget.controller ?? SurveyController();
   }
+
   @override
-  void didChangeDependencies(){
+  void didChangeDependencies() {
     super.didChangeDependencies();
     _cubit.initData(widget.filePath, widget.surveyData);
   }

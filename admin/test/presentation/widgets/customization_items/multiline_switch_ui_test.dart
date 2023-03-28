@@ -13,7 +13,7 @@ void main() {
     const inputTitle = 'Lines';
     final page = AppTester(
       child: MultilineSwitch(
-        onChanged: (bool isMultiline, int lineAmount) {},
+        onChanged: ({required bool isMultiline, required int lineAmount}) {},
       ),
     );
 
@@ -54,18 +54,23 @@ void main() {
       expect(find.text(inputText), findsNothing);
     });
 
-    testWidgets('Check widget with parameters isMultiline = true',
-        (tester) async {
-      await tester.pumpWidget(
-        AppTester(
-          child: MultilineSwitch(
-            isMultiline: true,
-            onChanged: (bool isMultiline, int lineAmount) {},
+    testWidgets(
+      'Check widget with parameters isMultiline = true',
+      (tester) async {
+        await tester.pumpWidget(
+          AppTester(
+            child: MultilineSwitch(
+              isMultiline: true,
+              onChanged: ({
+                required bool isMultiline,
+                required int lineAmount,
+              }) {},
+            ),
           ),
-        ),
-      );
-      await tester.pumpAndSettle();
-      expect(find.text(inputTitle), findsOneWidget);
-    });
+        );
+        await tester.pumpAndSettle();
+        expect(find.text(inputTitle), findsOneWidget);
+      },
+    );
   });
 }

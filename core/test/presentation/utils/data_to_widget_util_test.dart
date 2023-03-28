@@ -12,6 +12,7 @@ import 'package:survey_core/src/presentation/intro_question/intro_question_page.
 import 'package:survey_core/src/presentation/slider_question/slider_question_page.dart';
 import 'package:survey_core/src/presentation/utils/data_to_widget_util.dart';
 
+//ignore: avoid-unused-parameters
 void _mockOnSend({required int index, required QuestionAnswer answer}) {}
 
 void main() {
@@ -48,14 +49,14 @@ void main() {
   );
 
   group('createWidget method', () {
-    test('Call with SliderQuestionData}', () async {
+    test('Call with SliderQuestionData}', () {
       final widget = DataToWidgetUtil.createWidget(mockSliderData, _mockOnSend);
       expect(widget.runtimeType, SliderQuestionPage);
       expect((widget as SliderQuestionPage).data, mockSliderData);
       expect(widget.onSend, _mockOnSend);
     });
 
-    test('Call with ChoiceQuestionData', () async {
+    test('Call with ChoiceQuestionData', () {
       final widget = DataToWidgetUtil.createWidget(mockChoiceData, _mockOnSend);
 
       expect(widget.runtimeType, ChoiceQuestionPage);
@@ -63,7 +64,7 @@ void main() {
       expect(widget.onSend, _mockOnSend);
     });
 
-    test('Call with InputQuestionData', () async {
+    test('Call with InputQuestionData', () {
       final widget = DataToWidgetUtil.createWidget(mockInputData, _mockOnSend);
 
       expect(widget.runtimeType, InputQuestionPage);
@@ -71,7 +72,7 @@ void main() {
       expect(widget.onSend, _mockOnSend);
     });
 
-    test('Call with IntroQuestionData', () async {
+    test('Call with IntroQuestionData', () {
       final widget = DataToWidgetUtil.createWidget(mockIntroData, _mockOnSend);
 
       expect(widget.runtimeType, IntroQuestionPage);
@@ -79,7 +80,7 @@ void main() {
       expect(widget.onSend, _mockOnSend);
     });
 
-    test('Call with bad QuestionData', () async {
+    test('Call with bad QuestionData', () {
       expect(
         () => DataToWidgetUtil.createWidget(
           const _BadQuestionData(),
@@ -91,7 +92,17 @@ void main() {
   });
 }
 
+//ignore: prefer-match-file-name
 class _BadQuestionData extends QuestionData {
+  @override
+  Never get theme => throw UnimplementedError();
+
+  @override
+  String get type => throw UnimplementedError();
+
+  @override
+  List<Object?> get props => [];
+
   const _BadQuestionData()
       : super(
           index: 0,
@@ -101,16 +112,7 @@ class _BadQuestionData extends QuestionData {
         );
 
   @override
-  Never get theme => throw UnimplementedError();
-
-  @override
   Map<String, dynamic> toJson() => throw UnimplementedError();
-
-  @override
-  String get type => throw UnimplementedError();
-
-  @override
-  List<Object?> get props => [];
 
   @override
   QuestionData copyWith({

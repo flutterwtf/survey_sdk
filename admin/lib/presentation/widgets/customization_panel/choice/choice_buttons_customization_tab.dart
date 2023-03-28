@@ -5,6 +5,8 @@ import 'package:survey_admin/presentation/pages/builder/builder_cubit.dart';
 import 'package:survey_admin/presentation/pages/builder/builder_state.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/utils/constants/app_dimensions.dart';
+import 'package:survey_admin/presentation/app/localization/app_localizations_ext.dart';
+import 'package:survey_admin/presentation/utils/utils.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/color_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/multiple_choice_customization_item.dart';
@@ -35,7 +37,7 @@ class ChoiceButtonsCustomizationTabState
       builder: (context, state) {
         final data = widget.editable;
         final theme = data.theme ?? const ChoiceQuestionTheme.common();
-        return Column(
+        return ListView(
           children: [
             CustomizationItemsContainer(
               isTopDividerShown: true,

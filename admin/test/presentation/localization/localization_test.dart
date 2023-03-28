@@ -33,13 +33,12 @@ void main() async {
 List<String> _notInCamelCase(String arbContents) {
   final camelCaseExp = RegExp(r'[a-z]+((\d)|([A-Z0-9][a-z0-9]+))*([A-Z])?');
   final Map<String, dynamic> contents = json.decode(arbContents);
-  final notInCamelCase = contents.keys
+  return contents.keys
       .toList()
       .where(
         (element) => !element.contains(camelCaseExp) || element.contains('_'),
       )
       .toList();
-  return notInCamelCase;
 }
 
 bool _isSorted(
@@ -58,9 +57,7 @@ bool _isSorted(
 
   final Map<String, dynamic> contents = json.decode(arbContents);
 
-  final isSorted = contents.keys.toList().isSorted(compareFunction);
-
-  return isSorted;
+  return contents.keys.toList().isSorted(compareFunction);
 }
 
 int _commonCompareFunction(
@@ -83,9 +80,7 @@ int _commonCompareFunction(
     secondStr = secondStr.toLowerCase();
   }
 
-  if (isNaturalOrdering) {
-    return ascending * compareNatural(firstStr, secondStr);
-  } else {
-    return ascending * firstStr.compareTo(secondStr);
-  }
+  return isNaturalOrdering
+      ? ascending * compareNatural(firstStr, secondStr)
+      : ascending * firstStr.compareTo(secondStr);
 }

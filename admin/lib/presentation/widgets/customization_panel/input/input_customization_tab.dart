@@ -7,6 +7,8 @@ import 'package:survey_admin/presentation/utils/app_fonts.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/utils/constants/app_dimensions.dart';
 import 'package:survey_admin/presentation/utils/theme_extension.dart';
+import 'package:survey_admin/presentation/app/localization/app_localizations_ext.dart';
+import 'package:survey_admin/presentation/utils/utils.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/color_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_multiline_text_field.dart';
@@ -197,6 +199,7 @@ class InputCustomizationTabState
                       )
                       .toList(),
                   value: theme.inputType,
+                  withColor: true,
                 ),
               ],
             ),

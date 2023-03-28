@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:survey_admin/presentation/utils/app_fonts.dart';
-import 'package:survey_admin/presentation/utils/colors.dart';
-import 'package:survey_admin/presentation/utils/constants/app_dimensions.dart';
+import 'package:survey_admin/presentation/utils/utils.dart';
 
 abstract class AppTheme {
   static final theme = ThemeData(
@@ -24,9 +22,9 @@ abstract class AppTheme {
     ),
     tabBarTheme: const TabBarTheme(
       labelColor: AppColors.black,
-      unselectedLabelColor: AppColors.customizationTabBarInactiveText,
+      unselectedLabelColor: AppColors.tabBarInactiveText,
       indicator: UnderlineTabIndicator(
-        borderSide: BorderSide(color: AppColors.black),
+        borderSide: BorderSide(),
       ),
       indicatorSize: TabBarIndicatorSize.label,
     ),
@@ -49,6 +47,12 @@ abstract class AppTheme {
         color: AppColors.black,
         fontWeight: AppFonts.weightBold,
       ),
+    ),
+    outlinedButtonTheme: OutlinedButtonThemeData(
+      style: OutlinedButton.styleFrom(foregroundColor: AppColors.black),
+    ),
+    textSelectionTheme: const TextSelectionThemeData(
+      cursorColor: AppColors.black,
     ),
   );
 }

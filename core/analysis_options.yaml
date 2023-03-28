@@ -41,7 +41,8 @@ dart_code_metrics:
     - prefer-extracting-callbacks: false
     - consistent-update-render-object: false
     - prefer-correct-identifier-length:
-        max-length: 25
+        min-identifier-length: 1
+        max-identifier-length: 25
     - avoid-late-keyword: false
     - newline-before-return: false
     - avoid-ignoring-return-values: false
@@ -52,6 +53,10 @@ dart_code_metrics:
     - avoid-nested-conditional-expressions:
         acceptable-level: 2
     - format-comment: false
+    - prefer-static-class: false
+    - no-magic-number:
+        exclude:
+          - test/**
   metrcis:
     - cyclomatic-complexity: 10
     - maximum-nesting-level: 5

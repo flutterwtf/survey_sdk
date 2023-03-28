@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:survey_admin/presentation/app/localization/localizations.dart';
-import 'package:survey_admin/presentation/utils/constants/app_dimensions.dart';
-import 'package:survey_admin/presentation/utils/theme_extension.dart';
+import 'package:survey_admin/presentation/app/localization/app_localizations_ext.dart';
+import 'package:survey_admin/presentation/utils/utils.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
 
 class ThicknessCustomizationItem extends StatelessWidget {
@@ -17,6 +16,7 @@ class ThicknessCustomizationItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const lengthInputFormatter = 2;
     return Row(
       children: [
         SizedBox(
@@ -26,7 +26,7 @@ class ThicknessCustomizationItem extends StatelessWidget {
             initialValue: initialSize.toString(),
             inputFormatters: [
               FilteringTextInputFormatter.digitsOnly,
-              LengthLimitingTextInputFormatter(2),
+              LengthLimitingTextInputFormatter(lengthInputFormatter),
             ],
           ),
         ),

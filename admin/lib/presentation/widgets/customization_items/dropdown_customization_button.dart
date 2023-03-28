@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:survey_admin/presentation/utils/constants/app_assets.dart';
-import 'package:survey_admin/presentation/utils/constants/app_dimensions.dart';
-import 'package:survey_admin/presentation/utils/constants/app_durations.dart';
+import 'package:survey_admin/presentation/utils/utils.dart';
 
 class DropdownCustomizationButton<T> extends StatefulWidget {
   final T value;
   final List<DropdownCustomizationItem<T>> items;
+  final bool withColor;
 
   const DropdownCustomizationButton({
     required this.value,
     required this.items,
+    required this.withColor,
     super.key,
   });
 
@@ -29,14 +29,16 @@ class _DropdownCustomizationButtonState<T>
   @override
   void initState() {
     super.initState();
+    const tweenBegin = 0.0;
+    const tweenEnd = 0.5;
 
     _isExpanded = false;
     _iconAnimationController = AnimationController(
       vsync: this,
-      duration: AppDurations.customizationItemAnimation,
+      duration: AppDurations.customizationItem,
     );
     // ignore: prefer_int_literals
-    _animation = Tween(begin: 0.0, end: .5).animate(
+    _animation = Tween(begin: tweenBegin, end: tweenEnd).animate(
       CurvedAnimation(
         parent: _iconAnimationController,
         curve: Curves.easeOut,
@@ -52,48 +54,60 @@ class _DropdownCustomizationButtonState<T>
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(
-            vertical: AppDimensions.margin2XS,
-            horizontal: AppDimensions.marginM,
-          ),
-          child: InkWell(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                widget.items
-                    .where((element) => element.value == widget.value)
-                    .first
-                    .child,
-                RotationTransition(
-                  turns: _animation,
-                  child: SvgPicture.asset(AppAssets.arrowIcon),
-                ),
-              ],
+    return DecoratedBox(
+      decoration: widget.withColor
+          ? BoxDecoration(
+              color: _isExpanded
+                  ? AppColors.dropdownMenuBackground
+                  : AppColors.white,
+              borderRadius: const BorderRadius.all(
+                Radius.circular(AppDimensions.circularRadiusS),
+              ),
+            )
+          : const BoxDecoration(),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(
+              vertical: AppDimensions.margin2XS,
+              horizontal: AppDimensions.marginM,
             ),
-            onTap: () {
-              _isExpanded
-                  ? _iconAnimationController.reverse()
-                  : _iconAnimationController.forward();
-              setState(() => _isExpanded = !_isExpanded);
-            },
+            child: InkWell(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  widget.items
+                      .where((element) => element.value == widget.value)
+                      .first
+                      .child,
+                  RotationTransition(
+                    turns: _animation,
+                    child: SvgPicture.asset(AppAssets.arrowIcon),
+                  ),
+                ],
+              ),
+              onTap: () {
+                _isExpanded
+                    ? _iconAnimationController.reverse()
+                    : _iconAnimationController.forward();
+                setState(() => _isExpanded = !_isExpanded);
+              },
+            ),
           ),
-        ),
-        AnimatedSize(
-          duration: AppDurations.customizationItemAnimation,
-          child: _isExpanded
-              ? Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: widget.items
-                      .where((element) => element.value != widget.value)
-                      .toList(),
-                )
-              : const SizedBox.shrink(),
-        ),
-      ],
+          AnimatedSize(
+            duration: AppDurations.customizationItem,
+            child: _isExpanded
+                ? Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: widget.items
+                        .where((element) => element.value != widget.value)
+                        .toList(),
+                  )
+                : const SizedBox.shrink(),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -112,15 +126,25 @@ class DropdownCustomizationItem<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () => onChange?.call(value),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(
-          vertical: AppDimensions.margin2XS,
-          horizontal: AppDimensions.marginM,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Divider(),
+        InkWell(
+          onTap: () => onChange?.call(value),
+          child: Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  vertical: AppDimensions.margin2XS,
+                  horizontal: AppDimensions.marginM,
+                ),
+                child: child,
+              ),
+            ],
+          ),
         ),
-        child: child,
-      ),
+      ],
     );
   }
 }

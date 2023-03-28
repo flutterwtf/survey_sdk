@@ -8,7 +8,7 @@ import 'package:survey_core/src/domain/entities/survey_data.dart';
 import 'package:survey_core/src/domain/entities/themes/common_theme.dart';
 import 'package:survey_core/src/domain/entities/themes/text_field_theme_data.dart';
 
-abstract class MockedQuestions {
+abstract class MockedEntities {
   static const choice1 = ChoiceQuestionData(
     isMultipleChoice: true,
     options: ['option 1', 'option 2', 'option 3'],
@@ -91,14 +91,12 @@ abstract class MockedQuestions {
     subtitle: 'Another subtitle',
     isSkip: true,
   );
-}
 
-abstract class MockedSurveyData {
   static final data1 = SurveyData(
     questions: [
-      MockedQuestions.intro1,
-      MockedQuestions.choice1,
-      MockedQuestions.choice2,
+      intro1,
+      choice1,
+      choice2,
     ],
     commonTheme: CommonTheme(
       textFieldThemeData: const TextFieldThemeData.common(),

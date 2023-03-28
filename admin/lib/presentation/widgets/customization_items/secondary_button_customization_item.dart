@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:survey_admin/presentation/app/localization/localizations.dart';
-import 'package:survey_admin/presentation/utils/constants/app_dimensions.dart';
-import 'package:survey_admin/presentation/utils/constants/app_durations.dart';
+import 'package:survey_admin/presentation/app/localization/app_localizations_ext.dart';
+import 'package:survey_admin/presentation/utils/utils.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/switch_customization_item.dart';
 
 class SecondaryButtonCustomizationItem extends StatefulWidget {
-  final void Function(bool isShown, String text) onChanged;
+  final void Function({required bool isShown, required String text}) onChanged;
   final String initialText;
   final bool isShown;
 
@@ -44,11 +43,11 @@ class _SecondaryButtonCustomizationItemState
           title: context.localization.secondary_button,
           onChanged: (isToggled) {
             setState(() => _isShown = isToggled);
-            widget.onChanged(_isShown, _text);
+            widget.onChanged(isShown: _isShown, text: _text);
           },
         ),
         AnimatedSize(
-          duration: AppDurations.customizationItemAnimation,
+          duration: AppDurations.customizationItem,
           child: _isShown
               ? Padding(
                   padding: const EdgeInsets.only(
@@ -60,7 +59,7 @@ class _SecondaryButtonCustomizationItemState
                       if (text != null) {
                         setState(() => _text = text);
                       }
-                      widget.onChanged(_isShown, _text);
+                      widget.onChanged(isShown: _isShown, text: _text);
                     },
                     decoration: InputDecoration(
                       hintText: context.localization.enter_text,

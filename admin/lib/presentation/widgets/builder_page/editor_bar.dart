@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:survey_admin/presentation/utils/colors.dart';
-import 'package:survey_admin/presentation/utils/constants/app_dimensions.dart';
+import 'package:survey_admin/presentation/utils/utils.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/choice/choice_customization_panel.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/input/input_customization_panel.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/intro/intro_customization_panel.dart';

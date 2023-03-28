@@ -6,6 +6,7 @@ import 'package:survey_core/src/domain/entities/api_object.dart';
 import 'package:survey_core/src/domain/entities/question_types/input_question_data.dart';
 import 'package:survey_core/src/presentation/utils/app_fonts.dart';
 import 'package:survey_core/src/presentation/utils/app_colors.dart';
+import 'package:survey_core/src/presentation/utils/app_fonts.dart';
 
 class InputQuestionTheme extends ThemeExtension<InputQuestionTheme>
     with ApiObject, EquatableMixin {

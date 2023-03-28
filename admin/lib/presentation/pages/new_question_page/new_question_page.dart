@@ -4,7 +4,9 @@ import 'package:survey_admin/presentation/app/di/injector.dart';
 import 'package:survey_admin/presentation/app/localization/localizations.dart';
 import 'package:survey_admin/presentation/pages/builder/builder_cubit.dart';
 import 'package:survey_admin/presentation/pages/builder/builder_state.dart';
+import 'package:survey_admin/presentation/app/localization/app_localizations_ext.dart';
 import 'package:survey_admin/presentation/pages/new_question_page/new_question_tabs.dart';
+import 'package:survey_admin/presentation/utils/utils.dart';
 import 'package:survey_admin/presentation/utils/app_fonts.dart';
 import 'package:survey_admin/presentation/utils/colors.dart';
 import 'package:survey_admin/presentation/utils/constants/app_assets.dart';
@@ -158,19 +160,20 @@ class _TabButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final titleMedium = context.theme.textTheme.titleMedium;
     return InkWell(
       onTap: onTap,
-      borderRadius: BorderRadius.circular(5),
+      borderRadius: const BorderRadius.all(Radius.circular(5)),
       child: SizedBox(
         width: AppDimensions.surveyContentBarWidth,
         child: ListTile(
           title: Text(
             title,
             style: isSelected
-                ? context.theme.textTheme.titleMedium?.copyWith(
+                ? titleMedium?.copyWith(
                     fontWeight: AppFonts.weightSemiBold,
                   )
-                : context.theme.textTheme.titleMedium?.copyWith(
+                : titleMedium?.copyWith(
                     fontWeight: AppFonts.weightRegular,
                   ),
           ),
@@ -249,9 +252,11 @@ class _AddButton extends StatelessWidget {
       child: Container(
         width: AppDimensions.addButtonWidth,
         height: AppDimensions.addButtonHeight,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: AppColors.black,
-          borderRadius: BorderRadius.circular(AppDimensions.circularRadiusXS),
+          borderRadius: BorderRadius.all(
+            Radius.circular(AppDimensions.circularRadiusXS),
+          ),
         ),
         child: Center(
           child: Text(

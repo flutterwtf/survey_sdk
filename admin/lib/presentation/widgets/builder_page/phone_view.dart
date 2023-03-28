@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:survey_admin/presentation/utils/colors.dart';
-import 'package:survey_admin/presentation/utils/constants/app_assets.dart';
-import 'package:survey_admin/presentation/utils/constants/app_dimensions.dart';
+import 'package:survey_admin/presentation/utils/utils.dart';
 
 class PhoneView extends StatelessWidget {
   final Widget child;
@@ -17,25 +15,26 @@ class PhoneView extends StatelessWidget {
     return ColoredBox(
       color: AppColors.greyBackground,
       child: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(AppDimensions.sizeL),
-          child: Stack(
-            children: [
-              SvgPicture.asset(AppAssets.iphoneImage),
-              Positioned.fill(
-                child: Container(
-                  margin: const EdgeInsets.symmetric(
-                    vertical: AppDimensions.marginL,
-                    horizontal: AppDimensions.margin5XL,
-                  ),
-                  child: ClipRRect(
-                    borderRadius:
-                        BorderRadius.circular(AppDimensions.circularRadiusXL),
-                    child: child,
+        child: FittedBox(
+          fit: BoxFit.fitWidth,
+          child: Padding(
+            padding: const EdgeInsets.all(AppDimensions.sizeL),
+            child: Stack(
+              children: [
+                SvgPicture.asset(AppAssets.iphoneImage),
+                Positioned.fill(
+                  child: Container(
+                    margin: const EdgeInsets.all(AppDimensions.marginL),
+                    child: ClipRRect(
+                      borderRadius: const BorderRadius.all(
+                        Radius.circular(AppDimensions.circularRadiusXL),
+                      ),
+                      child: child,
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

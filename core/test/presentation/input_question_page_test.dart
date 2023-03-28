@@ -8,7 +8,7 @@ import 'package:survey_core/src/presentation/widgets/question_bottom_button.dart
 
 import 'widget/app_test.dart';
 
-//TODO: Make a test for input date
+// TODO(dev): Make a test for input date
 void main() {
   const testValidTextString = 'test string1';
   const testInvalidNumberString = 'test string2';
@@ -24,7 +24,7 @@ void main() {
     isSkip: true,
   );
 
-  final mockInputDataWithNumberValidator = InputQuestionData(
+  final mockInputWithNumber = InputQuestionData(
     validator: InputValidator.number(),
     index: 0,
     title: 'title',
@@ -78,13 +78,13 @@ void main() {
       testWidgets(
         'NumberValidator should tell when number is not valid',
         (WidgetTester tester) async {
-          final validator = mockInputDataWithNumberValidator.validator;
+          final validator = mockInputWithNumber.validator;
 
           String? sendData;
           await tester.pumpWidget(
             AppTest(
               child: InputQuestionPage(
-                data: mockInputDataWithNumberValidator,
+                data: mockInputWithNumber,
                 onSend: ({
                   required int index,
                   required QuestionAnswer answer,

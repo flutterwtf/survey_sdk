@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:survey_admin/presentation/utils/constants/app_assets.dart';
-import 'package:survey_admin/presentation/utils/constants/app_dimensions.dart';
-import 'package:survey_admin/presentation/utils/size_handler.dart';
+import 'package:survey_admin/presentation/utils/utils.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
 
 class RadiusCustomizationItem extends StatelessWidget {
@@ -18,6 +16,7 @@ class RadiusCustomizationItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const lengthInputFormatter = 2;
     return Row(
       children: [
         SvgPicture.asset(AppAssets.arcIcon),
@@ -27,7 +26,7 @@ class RadiusCustomizationItem extends StatelessWidget {
             initialValue: initialValue.toString(),
             inputFormatters: [
               FilteringTextInputFormatter.digitsOnly,
-              LengthLimitingTextInputFormatter(2),
+              LengthLimitingTextInputFormatter(lengthInputFormatter),
             ],
             onChanged: (value) => SizeHandler.onSizeChanged(
               value,

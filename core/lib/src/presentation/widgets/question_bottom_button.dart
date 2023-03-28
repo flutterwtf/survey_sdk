@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:survey_core/src/presentation/utils/app_colors.dart';
-import 'package:survey_core/src/presentation/utils/app_dimensions.dart';
-import 'package:survey_core/src/presentation/utils/app_durations.dart';
-import 'package:survey_core/src/presentation/utils/app_fonts.dart';
+import 'package:survey_core/src/presentation/utils/utils.dart';
 
 class QuestionBottomButton extends StatelessWidget {
   final String text;
@@ -45,7 +42,7 @@ class QuestionBottomButton extends StatelessWidget {
             ),
             border: Border.all(color: buttonColor),
           ),
-          duration: AppDurations.questionBottomButtonAnimation,
+          duration: AppDurations.questionBottomButton,
           child: Padding(
             padding: const EdgeInsets.all(AppDimensions.marginS),
             child: Center(
