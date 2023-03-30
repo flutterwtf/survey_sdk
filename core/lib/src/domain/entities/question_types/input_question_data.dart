@@ -3,8 +3,12 @@ import 'package:survey_core/src/domain/entities/input_validator.dart';
 import 'package:survey_core/src/domain/entities/question_types/question_data.dart';
 import 'package:survey_core/src/domain/entities/themes/input_question_theme.dart';
 
+/// The data class for an input question
 class InputQuestionData extends QuestionData<InputQuestionTheme> {
+  /// Input validation rules.
   final InputValidator validator;
+
+  /// Text to display as a hint in the input field
   final String? hintText;
 
   @override

@@ -6,25 +6,59 @@ import 'package:survey_core/src/domain/entities/api_object.dart';
 import 'package:survey_core/src/presentation/utils/app_colors.dart';
 import 'package:survey_core/src/presentation/utils/app_dimensions.dart';
 
+/// Defines the visual properties for text field
 @immutable
 class TextFieldThemeData extends ThemeExtension<TextFieldThemeData>
     with ApiObject, EquatableMixin {
+  /// Color for the background fill of the text field and input section
   final Color fillCommonColor;
+
+  /// Color for the background fill of the input field
   final Color fillInputColor;
+
+  /// Color for the border of the input field
   final Color borderColor;
+
+  /// Width of the border for the input field
   final double borderWidth;
+
+  /// Vertical padding for the input field
   final double verticalPadding;
+
+  /// Horizontal padding for the input field
   final double horizontalPadding;
+
+  /// Color for the hint text
   final Color hintColor;
+
+  /// Size of the hint text
   final double hintSize;
+
+  /// Color for the text of the input field
   final Color textColor;
+
+  /// Size of the text of the input field
   final double textSize;
+
+  /// Color for the title text of the input section
   final Color titleColor;
+
+  /// Size of the title text of the input section
   final double titleSize;
+
+  /// Color for the subtitle text of the input section
   final Color subtitleColor;
+
+  /// Size of the subtitle text of the input section
   final double subtitleSize;
+
+  /// Size of the text of the button
   final double buttonTextSize;
+
+  /// Color for the background of the button
   final Color buttonColor;
+
+  /// Color for the text of the button
   final Color buttonTextColor;
 
   @override

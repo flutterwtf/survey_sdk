@@ -7,12 +7,18 @@ import 'package:survey_core/src/presentation/widgets/question_bottom_button.dart
 import 'package:survey_core/src/presentation/widgets/question_content.dart';
 import 'package:survey_core/src/presentation/widgets/question_title.dart';
 
+/// The question page with a question, question description, and buttons
 class IntroQuestionPage extends StatelessWidget {
+  /// Contains the content for a page
   final IntroQuestionData data;
+
   final OnSendCallback onSend;
+
+  /// Optional callback that is called after pressing main button
   final VoidCallback? onMainButtonTap;
 
   // TODO(dev): onSkip.
+  /// Optional callback that is called after pressing main button
   final VoidCallback? onSecondaryButtonTap;
 
   const IntroQuestionPage({
