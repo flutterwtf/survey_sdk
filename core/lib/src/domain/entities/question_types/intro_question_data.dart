@@ -2,7 +2,9 @@ import 'package:survey_core/src/domain/entities/constants/question_types.dart';
 import 'package:survey_core/src/domain/entities/question_types/question_data.dart';
 import 'package:survey_core/src/domain/entities/themes/intro_question_theme.dart';
 
+/// Contains the content for the introduction question
 class IntroQuestionData extends QuestionData {
+  /// Text to display on the main button
   final String mainButtonTitle;
 
   @override

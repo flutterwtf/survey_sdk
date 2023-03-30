@@ -2,8 +2,14 @@ import 'package:survey_core/src/domain/entities/api_object.dart';
 import 'package:survey_core/src/domain/entities/question_types/question_data.dart';
 import 'package:survey_core/src/domain/entities/themes/common_theme.dart';
 
+/// Holds the core survey data used in the whole app, including the list of
+/// questions and the common theme
 class SurveyData extends ApiObject {
+  /// List of questions used to build question pages of different types
+  /// of questions
   final List<QuestionData> questions;
+
+  /// Defines the visual properties used throughout the app
   final CommonTheme commonTheme;
 
   List<Object?> get props => [
