@@ -21,4 +21,6 @@ abstract class AppColors {
   static const greyBackground = Color(0xFFDEDEDE);
 
   static const tabBarInactiveText = Color(0xFF929292);
+
+  static const selectionColor = Color(0xFFDADADA);
 }

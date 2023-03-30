@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:survey_core/src/data/mappers/slider_theme_data_mapper.dart';
+import 'package:survey_core/src/data/mappers/text_selection_theme_data_mapper.dart';
 import 'package:survey_core/src/domain/entities/api_object.dart';
 import 'package:survey_core/src/domain/entities/themes/text_field_theme_data.dart';
 
@@ -13,15 +14,20 @@ class CommonTheme extends ApiObject with EquatableMixin {
   /// Defines the theme for text fields throughout the app
   final TextFieldThemeData textFieldThemeData;
 
+  /// Defines the visual properties needed for text selection in TextField
+  final TextSelectionThemeData textSelectionThemeData;
+
   @override
   List<Object?> get props => [
         sliderThemeData,
         textFieldThemeData,
+        textSelectionThemeData,
       ];
 
   CommonTheme({
     required this.textFieldThemeData,
     required this.sliderThemeData,
+    required this.textSelectionThemeData,
   });
 
   factory CommonTheme.fromJson(Map<String, dynamic> json) {
@@ -32,6 +38,9 @@ class CommonTheme extends ApiObject with EquatableMixin {
       sliderThemeData: SliderThemeDataMapper.fromJson(
         json['sliderThemeData'],
       ),
+      textSelectionThemeData: TextSelectionThemeDataMapper.fromJson(
+        json['textSelectionThemeData'],
+      ),
     );
   }
 
@@ -39,6 +48,7 @@ class CommonTheme extends ApiObject with EquatableMixin {
     return ThemeData(
       sliderTheme: sliderThemeData,
       extensions: [textFieldThemeData],
+      textSelectionTheme: textSelectionThemeData,
     );
   }
 
@@ -46,5 +56,6 @@ class CommonTheme extends ApiObject with EquatableMixin {
   Map<String, dynamic> toJson() => {
         'sliderThemeData': sliderThemeData.toJson(),
         'textFieldThemeData': textFieldThemeData.toJson(),
+        'textSelectionThemeData': textSelectionThemeData.toJson(),
       };
 }

@@ -26,6 +26,7 @@ void main() {
             commonTheme: CommonTheme(
               textFieldThemeData: const TextFieldThemeData.common(),
               sliderThemeData: const SliderThemeData(),
+              textSelectionThemeData: const TextSelectionThemeData(),
             ),
           );
           when(mockedSurveyRepo.getSurveyData(''))

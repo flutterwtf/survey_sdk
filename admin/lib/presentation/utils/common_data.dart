@@ -33,6 +33,9 @@ class CommonData {
         buttonTextColor: AppColors.white,
       ),
       sliderThemeData: Theme.of(context).sliderTheme,
+      textSelectionThemeData: const TextSelectionThemeData(
+        selectionColor: AppColors.selectionColor,
+      ),
     );
   }
 

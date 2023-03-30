@@ -39,19 +39,26 @@ class CustomizationTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      controller: controller,
-      initialValue: initialValue,
-      validator: validator,
-      autovalidateMode: autovalidateMode,
-      maxLines: maxLines,
-      onChanged: onChanged,
-      onEditingComplete: onEditingComplete,
-      focusNode: focusNode,
-      decoration: decoration.copyWith(hintText: hintText),
-      style: style ??
-          context.theme.textTheme.bodyMedium?.copyWith(fontSize: fontSize),
-      inputFormatters: inputFormatters,
+    return Theme(
+      data: Theme.of(context).copyWith(
+        textSelectionTheme: const TextSelectionThemeData(
+          selectionColor: AppColors.selectionColor,
+        ),
+      ),
+      child: TextFormField(
+        controller: controller,
+        initialValue: initialValue,
+        validator: validator,
+        autovalidateMode: autovalidateMode,
+        maxLines: maxLines,
+        onChanged: onChanged,
+        onEditingComplete: onEditingComplete,
+        focusNode: focusNode,
+        decoration: decoration.copyWith(hintText: hintText),
+        style: style ??
+            context.theme.textTheme.bodyMedium?.copyWith(fontSize: fontSize),
+        inputFormatters: inputFormatters,
+      ),
     );
   }
 }
