@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:survey_admin/presentation/app/localization/localizations.dart';
+import 'package:survey_admin/presentation/app/localization/app_localizations_ext.dart';
 import 'package:survey_admin/presentation/utils/utils.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/switch_customization_item.dart';
@@ -17,7 +17,10 @@ class MultilineSwitch extends StatefulWidget {
 
   /// If [isMultiline] equals `false` then `lineAmount` is always equals 1.
   /// In case of any input error `lineAmount` is always equals 1.
-  final void Function(bool isMultiline, int lineAmount) onChanged;
+  final void Function({
+    required bool isMultiline,
+    required int lineAmount,
+  }) onChanged;
   final bool isMultiline;
   final int defaultLineAmount;
 
@@ -48,18 +51,24 @@ class _MultilineSwitchState extends State<MultilineSwitch> {
             title: context.localization.multiline,
             onChanged: (isToggled) {
               setState(() => _isMultiline = isToggled);
-              widget.onChanged(_isMultiline, _isMultiline ? _lineAmount : 1);
+              widget.onChanged(
+                isMultiline: _isMultiline,
+                lineAmount: _isMultiline ? _lineAmount : 1,
+              );
             },
           ),
         ),
         AnimatedSize(
-          duration: AppDurations.customizationItemAnimation,
+          duration: AppDurations.customizationItem,
           child: _isMultiline
               ? _LineAmountInputField(
                   defaultLineAmount: widget.defaultLineAmount,
                   onChanged: (amount) {
                     _lineAmount = amount;
-                    widget.onChanged(_isMultiline, _lineAmount);
+                    widget.onChanged(
+                      isMultiline: _isMultiline,
+                      lineAmount: _lineAmount,
+                    );
                   },
                 )
               : const SizedBox.shrink(),

@@ -2,9 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get_it/get_it.dart';
 import 'package:survey_admin/data/data_sources/interfaces/filesystem_data_source.dart';
+import 'package:survey_admin/data/data_sources/interfaces/session_storage_data_source.dart';
 import 'package:survey_admin/data/data_sources/web/web_filesystem_data_source_impl.dart';
 import 'package:survey_admin/data/data_sources/web/web_session_storage_data_source.dart';
-import 'package:survey_admin/data/data_sources/interfaces/session_storage_data_source.dart';
 import 'package:survey_admin/data/repositories/file_system_repository_impl.dart';
 import 'package:survey_admin/data/repositories/session_storage_repository_impl.dart';
 import 'package:survey_admin/domain/repository_interfaces/file_system_repository.dart.dart';
@@ -14,6 +14,7 @@ import 'package:survey_admin/presentation/pages/builder/builder_cubit.dart';
 import 'package:survey_admin/presentation/pages/new_question_page/new_question_cubit.dart';
 import 'package:survey_admin/presentation/utils/common_data.dart';
 
+//ignore_for_file: prefer-static-class
 GetIt get i => GetIt.instance;
 
 void initInjector() {

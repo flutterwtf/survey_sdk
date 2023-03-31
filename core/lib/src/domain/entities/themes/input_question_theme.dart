@@ -3,21 +3,47 @@ import 'dart:ui';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:survey_core/src/domain/entities/api_object.dart';
-import 'package:survey_core/src/presentation/utils/app_fonts.dart';
 import 'package:survey_core/src/presentation/utils/app_colors.dart';
+import 'package:survey_core/src/presentation/utils/app_fonts.dart';
 
+/// Defines the visual properties for an input question options
 class InputQuestionTheme extends ThemeExtension<InputQuestionTheme>
     with ApiObject, EquatableMixin {
+  /// Background color of the text field. Common value is [Colors.white]
   final Color backgroundColor;
+
+  /// Color of the border around the text field.
+  /// Common value is [Colors.black]
   final Color borderColor;
+
+  /// Width of the border around the text field. Common value is 1
   final double borderWidth;
+
+  /// Color of the hint text that is displayed when the text field is empty.
+  /// Common value is [AppColors.textLightGrey]
   final Color hintColor;
+
+  /// Font size of the hint text. Common value is 16
   final double hintSize;
+
+  /// Color of the text that is entered into the text field.
+  /// Common value is [Colors.black]
   final Color textColor;
+
+  /// Font size of the text that is entered into the text field.
+  /// Common value is 16
   final double textSize;
+
+  /// Minimum number of lines that the text field can display
   final int? minLines;
+
+  /// Maximum number of lines that the text field can display
   final int? maxLines;
+
+  /// Padding added to the top and bottom of the text field
   final double? verticalPadding;
+
+  /// Padding added to the left and right of the text field
   final double? horizontalPadding;
 
   @override
@@ -62,6 +88,7 @@ class InputQuestionTheme extends ThemeExtension<InputQuestionTheme>
         verticalPadding = double.parse(json['verticalPadding'].toString()),
         horizontalPadding = double.parse(json['horizontalPadding'].toString());
 
+  /// Default color and size values of input question page
   const InputQuestionTheme.common()
       : this(
           backgroundColor: Colors.white,

@@ -15,26 +15,26 @@ class PhoneView extends StatelessWidget {
     return ColoredBox(
       color: AppColors.greyBackground,
       child: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(AppDimensions.sizeL),
-          child: Stack(
-            children: [
-              SvgPicture.asset(AppAssets.iphoneImage),
-              Positioned.fill(
-                child: Container(
-                  margin: const EdgeInsets.symmetric(
-                    vertical: AppDimensions.marginL,
-                    horizontal: AppDimensions.margin5XL,
-                  ),
-                  child: ClipRRect(
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(AppDimensions.circularRadiusXL),
+        child: FittedBox(
+          fit: BoxFit.fitWidth,
+          child: Padding(
+            padding: const EdgeInsets.all(AppDimensions.sizeL),
+            child: Stack(
+              children: [
+                SvgPicture.asset(AppAssets.iphoneImage),
+                Positioned.fill(
+                  child: Container(
+                    margin: const EdgeInsets.all(AppDimensions.marginL),
+                    child: ClipRRect(
+                      borderRadius: const BorderRadius.all(
+                        Radius.circular(AppDimensions.circularRadiusXL),
+                      ),
+                      child: child,
                     ),
-                    child: child,
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

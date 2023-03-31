@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:survey_admin/presentation/app/localization/localizations.dart';
+import 'package:survey_admin/presentation/app/localization/app_localizations_ext.dart';
 import 'package:survey_admin/presentation/utils/utils.dart';
 
+//ignore_for_file: prefer-static-class
 void showExportFloatingWindow(
   BuildContext context, {
   required VoidCallback onDownloadPressed,
@@ -44,8 +45,10 @@ class ExportFloatingWindow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const opacity = 0.2;
+    final labelLarge = context.theme.textTheme.labelLarge;
     return Material(
-      color: AppColors.black.withOpacity(0.2),
+      color: AppColors.black.withOpacity(opacity),
       child: Center(
         child: Container(
           decoration: const BoxDecoration(
@@ -112,7 +115,7 @@ class ExportFloatingWindow extends StatelessWidget {
                         ),
                         child: Text(
                           context.localization.copy,
-                          style: context.theme.textTheme.labelLarge?.copyWith(
+                          style: labelLarge?.copyWith(
                             fontFamily: AppFonts.karla,
                           ),
                         ),
@@ -138,7 +141,7 @@ class ExportFloatingWindow extends StatelessWidget {
                         ),
                         child: Text(
                           context.localization.download,
-                          style: context.theme.textTheme.labelLarge?.copyWith(
+                          style: labelLarge?.copyWith(
                             fontFamily: AppFonts.karla,
                             color: AppColors.white,
                           ),

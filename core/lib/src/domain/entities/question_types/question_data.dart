@@ -6,15 +6,32 @@ import 'package:survey_core/src/domain/entities/question_types/input_question_da
 import 'package:survey_core/src/domain/entities/question_types/intro_question_data.dart';
 import 'package:survey_core/src/domain/entities/question_types/slider_question_data.dart';
 
+/// Class that serves as a base for creating specific types of [QuestionData]
+/// classes. [QuestionData] classes are used to represent data for various
+/// types of questions and are used to display and set question data in the app
 abstract class QuestionData<T> extends Equatable with ApiObject {
+  /// Index number of the question
   final int index;
+
+  /// Text that appears at the top of a question page and serves as the main
+  /// heading for the question
   final String title;
+
+  /// Text that appears below the question title and provides additional
+  /// context or information about the question
   final String subtitle;
+
+  /// Optional text that appears below the question title
   final String? content;
+
+  /// Indicates whether the user is allowed to skip the question without
+  /// providing an answer
   final bool isSkip;
 
+  /// Used to specify the visual style of the question page
   T? get theme;
 
+  /// Type of the question
   String get type;
 
   const QuestionData({
@@ -33,6 +50,8 @@ abstract class QuestionData<T> extends Equatable with ApiObject {
     bool? isSkip,
   });
 
+  /// Used to convert a Map from JSON to a [QuestionData] based on the
+  /// question's type
   static QuestionData fromType(Map<String, dynamic> json) {
     switch (json['type']) {
       case QuestionTypes.slider:

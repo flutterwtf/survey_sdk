@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:survey_admin/presentation/app/localization/localizations.dart';
+import 'package:survey_admin/presentation/app/localization/app_localizations_ext.dart';
 import 'package:survey_admin/presentation/utils/utils.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_multiline_text_field.dart';
@@ -9,14 +9,17 @@ import 'package:survey_admin/presentation/widgets/customization_panel/customizat
 class IntroContentCustomizationTab extends CustomizationTab {
   final ValueChanged<String> onTitleChanged;
   final ValueChanged<String> onSubtitleChanged;
-  final ValueChanged<String> onPrimaryButtonTextChanged;
-  final void Function(bool isShown, String text) onSecondaryButtonChanged;
+  final ValueChanged<String> onPrimaryButtonTextUpdate;
+  final void Function({
+    required bool isShown,
+    required String text,
+  }) onSecondaryButtonChanged;
 
   const IntroContentCustomizationTab({
     required super.title,
     required this.onTitleChanged,
     required this.onSubtitleChanged,
-    required this.onPrimaryButtonTextChanged,
+    required this.onPrimaryButtonTextUpdate,
     required this.onSecondaryButtonChanged,
     super.key,
   });
@@ -49,7 +52,7 @@ class IntroContentCustomizationTab extends CustomizationTab {
           children: [
             CustomizationMultilineTextField(
               maxHeight: AppDimensions.sizeL,
-              onChanged: onPrimaryButtonTextChanged,
+              onChanged: onPrimaryButtonTextUpdate,
             ),
           ],
         ),

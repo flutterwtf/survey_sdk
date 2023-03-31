@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:survey_admin/presentation/app/localization/localizations.dart';
+import 'package:survey_admin/presentation/app/localization/app_localizations_ext.dart';
 import 'package:survey_admin/presentation/utils/utils.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/color_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';

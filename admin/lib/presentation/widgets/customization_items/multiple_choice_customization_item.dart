@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:survey_admin/presentation/app/localization/localizations.dart';
+import 'package:survey_admin/presentation/app/localization/app_localizations_ext.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/switch_customization_item.dart';
 
 class MultipleChoiceCustomizationItem extends StatefulWidget {

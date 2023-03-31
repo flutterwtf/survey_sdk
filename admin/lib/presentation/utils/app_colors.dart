@@ -20,5 +20,5 @@ abstract class AppColors {
   static const dropdownMenuBackground = Color(0xFFF5F5F5);
   static const greyBackground = Color(0xFFDEDEDE);
 
-  static const customizationTabBarInactiveText = Color(0xFF929292);
+  static const tabBarInactiveText = Color(0xFF929292);
 }

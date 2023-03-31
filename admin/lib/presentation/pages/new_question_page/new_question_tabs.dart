@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:survey_admin/presentation/app/di/injector.dart';
-import 'package:survey_admin/presentation/app/localization/localizations.dart';
+import 'package:survey_admin/presentation/app/localization/app_localizations_ext.dart';
 import 'package:survey_admin/presentation/utils/utils.dart';
 import 'package:survey_core/survey_core.dart';
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
-import 'package:survey_admin/presentation/app/localization/localizations.dart';
+import 'package:survey_admin/presentation/app/localization/app_localizations_ext.dart';
 import 'package:survey_admin/presentation/utils/utils.dart';
 
 class ColorPickerDialog extends StatelessWidget {
@@ -22,41 +22,38 @@ class ColorPickerDialog extends StatelessWidget {
       title: Text(
         context.localization.pick_a_color,
       ),
-      // TODO(dev): Maybe ListView here?
-      content: SingleChildScrollView(
-        child: Column(
-          children: [
-            ColorPicker(
-              pickerColor: colorFromHex(colorTextController.value.text)!,
-              hexInputController: colorTextController,
-              portraitOnly: true,
-              onColorChanged: (_) {},
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: AppDimensions.margin2XS),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(context.localization.hex),
-                  const SizedBox(width: AppDimensions.marginXS),
-                  SizedBox(
-                    width: AppDimensions.textFieldWidth,
-                    child: TextField(
-                      controller: colorTextController,
-                      inputFormatters: [
-                        UpperCaseTextFormatter(),
-                        FilteringTextInputFormatter.allow(
-                          RegExp(kValidHexPattern),
-                        ),
-                      ],
-                    ),
+      content: ListView(
+        children: [
+          ColorPicker(
+            pickerColor: colorFromHex(colorTextController.value.text)!,
+            hexInputController: colorTextController,
+            portraitOnly: true,
+            onColorChanged: (_) {},
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: AppDimensions.margin2XS),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(context.localization.hex),
+                const SizedBox(width: AppDimensions.marginXS),
+                SizedBox(
+                  width: AppDimensions.textFieldWidth,
+                  child: TextField(
+                    controller: colorTextController,
+                    inputFormatters: [
+                      UpperCaseTextFormatter(),
+                      FilteringTextInputFormatter.allow(
+                        RegExp(kValidHexPattern),
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
       actions: <Widget>[
         GestureDetector(

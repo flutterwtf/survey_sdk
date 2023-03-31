@@ -22,9 +22,9 @@ abstract class AppTheme {
     ),
     tabBarTheme: const TabBarTheme(
       labelColor: AppColors.black,
-      unselectedLabelColor: AppColors.customizationTabBarInactiveText,
+      unselectedLabelColor: AppColors.tabBarInactiveText,
       indicator: UnderlineTabIndicator(
-        borderSide: BorderSide(color: AppColors.black),
+        borderSide: BorderSide(),
       ),
       indicatorSize: TabBarIndicatorSize.label,
     ),
@@ -47,6 +47,12 @@ abstract class AppTheme {
         color: AppColors.black,
         fontWeight: AppFonts.weightBold,
       ),
+    ),
+    outlinedButtonTheme: OutlinedButtonThemeData(
+      style: OutlinedButton.styleFrom(foregroundColor: AppColors.black),
+    ),
+    textSelectionTheme: const TextSelectionThemeData(
+      cursorColor: AppColors.black,
     ),
   );
 }

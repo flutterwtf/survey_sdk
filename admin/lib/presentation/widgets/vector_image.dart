@@ -9,7 +9,7 @@ class VectorImage extends StatelessWidget {
   final String assetName;
   final WidgetBuilder? placeholderBuilder;
   final bool matchTextDirection;
-  final bool allowDrawingOutsideViewBox;
+  final bool canDrawOutsideViewBox;
   final String? semanticsLabel;
   final bool excludeFromSemantics;
   final Clip clipBehavior;
@@ -26,7 +26,7 @@ class VectorImage extends StatelessWidget {
     this.fit = BoxFit.contain,
     this.alignment = Alignment.center,
     this.matchTextDirection = false,
-    this.allowDrawingOutsideViewBox = false,
+    this.canDrawOutsideViewBox = false,
     this.placeholderBuilder,
     this.semanticsLabel,
     this.excludeFromSemantics = false,
@@ -48,7 +48,7 @@ class VectorImage extends StatelessWidget {
       fit: fit,
       alignment: alignment,
       matchTextDirection: matchTextDirection,
-      allowDrawingOutsideViewBox: allowDrawingOutsideViewBox,
+      allowDrawingOutsideViewBox: canDrawOutsideViewBox,
       placeholderBuilder: placeholderBuilder,
       semanticsLabel: semanticsLabel,
       excludeFromSemantics: excludeFromSemantics,

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:survey_admin/presentation/app/localization/localizations.dart';
+import 'package:survey_admin/presentation/app/localization/app_localizations_ext.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/input/input_common_customization_tab.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/input/input_content_customization_tab.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/input/input_customization_tab.dart';
@@ -35,13 +35,16 @@ class _InputCustomizationPanelState extends State<InputCustomizationPanel> {
         InputCustomizationTab(
           key: UniqueKey(),
           title: context.localization.input,
-          onMultilineChanged: (isMultiline, lineAmount) {},
+          onMultilineChanged: ({
+            required bool isMultiline,
+            required int lineAmount,
+          }) {},
           onFillColorChanged: (color) {},
           onBorderColorChanged: (color) {},
           onBorderSizeChanged: (size) {},
           onBorderWidthChanged: (size) {},
-          onHorizontalPaddingChanged: (size) {},
-          onVerticalPaddingChanged: (size) {},
+          onHorizontalPaddingUpdate: (size) {},
+          onVerticalPaddingUpdate: (size) {},
           onHintColorChanged: (color) {},
           onHintFontSizeChanged: (size) {},
           onTextColorChanged: (color) {},
@@ -52,7 +55,7 @@ class _InputCustomizationPanelState extends State<InputCustomizationPanel> {
             });
           },
           inputType: inputType,
-          onValidatorErrorTextChanged: (errorText) {},
+          onValidatorErrorChanged: (errorText) {},
         ),
         InputContentCustomizationTab(
           title: context.localization.content,
