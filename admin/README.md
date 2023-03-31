@@ -2,13 +2,6 @@
 
 This is an administrative package for the Flutter Survey SDK. This package provides a web interface for configuring, managing, and viewing survey responses.
 
-## Installation
-
-Add the following dependency to your pubspec.yaml file:
-
-    dependencies:
-      survey_admin: ^1.0.0
-
 ## Building 
 
 flutter pub run build_runner build
