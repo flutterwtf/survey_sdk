@@ -95,9 +95,6 @@ void main() {
 //ignore: prefer-match-file-name
 class _BadQuestionData extends QuestionData {
   @override
-  Never get theme => throw UnimplementedError();
-
-  @override
   String get type => throw UnimplementedError();
 
   @override

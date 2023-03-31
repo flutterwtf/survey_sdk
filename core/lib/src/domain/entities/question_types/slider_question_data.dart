@@ -13,6 +13,19 @@ class SliderQuestionData extends QuestionData<SliderThemeData> {
   @override
   String get type => QuestionTypes.slider;
 
+  @override
+  List<Object?> get props => [
+    minValue,
+    maxValue,
+    initialValue,
+    divisions,
+    index,
+    title,
+    subtitle,
+    isSkip,
+    content,
+  ];
+
   const SliderQuestionData({
     required this.minValue,
     required this.maxValue,
@@ -45,6 +58,22 @@ class SliderQuestionData extends QuestionData<SliderThemeData> {
               'The types of questions you ask directly impact the type of '
               'answer you receive.',
         );
+
+  factory SliderQuestionData.fromJson(Map<String, dynamic> json) {
+    final theme = json['theme'];
+    return SliderQuestionData(
+      index: json['index'],
+      minValue: json['minValue'],
+      maxValue: json['maxValue'],
+      divisions: json['divisions'],
+      initialValue: json['initialValue'],
+      title: json['title'],
+      subtitle: json['subtitle'],
+      isSkip: json['isSkip'],
+      content: json['content'],
+      theme: theme != null ? SliderQuestionTheme.fromJson(theme) : null,
+    );
+  }
 
   @override
   SliderQuestionData copyWith({
@@ -86,33 +115,4 @@ class SliderQuestionData extends QuestionData<SliderThemeData> {
         'isSkip': isSkip,
         'content': content,
       };
-
-  factory SliderQuestionData.fromJson(Map<String, dynamic> json) {
-    final theme = json['theme'];
-    return SliderQuestionData(
-      index: json['index'],
-      minValue: json['minValue'],
-      maxValue: json['maxValue'],
-      divisions: json['divisions'],
-      initialValue: json['initialValue'],
-      title: json['title'],
-      subtitle: json['subtitle'],
-      isSkip: json['isSkip'],
-      content: json['content'],
-      theme: theme != null ? SliderQuestionTheme.fromJson(theme) : null,
-    );
-  }
-
-  @override
-  List<Object?> get props => [
-        minValue,
-        maxValue,
-        initialValue,
-        divisions,
-        index,
-        title,
-        subtitle,
-        isSkip,
-        content,
-      ];
 }

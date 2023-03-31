@@ -13,6 +13,18 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
   @override
   String get type => QuestionTypes.choice;
 
+  @override
+  List<Object?> get props => [
+    isMultipleChoice,
+    ...options,
+    index,
+    title,
+    subtitle,
+    isSkip,
+    content,
+    selectedOptions,
+  ];
+
   const ChoiceQuestionData({
     required this.isMultipleChoice,
     required this.options,
@@ -53,6 +65,26 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
               'answer you receive.',
           index: index,
         );
+
+  factory ChoiceQuestionData.fromJson(Map<String, dynamic> json) {
+    final payload = json['payload'] as Map<String, dynamic>;
+    final theme = json['theme'];
+    return ChoiceQuestionData(
+      index: json['index'],
+      title: json['title'],
+      subtitle: json['subtitle'],
+      isSkip: json['isSkip'],
+      content: json['content'],
+      isMultipleChoice: payload['isMultipleChoice'],
+      options: (payload['options'] as List<dynamic>).cast<String>(),
+      selectedOptions: payload['selectedOptions'] != null
+          ? (payload['selectedOptions'] as List<dynamic>).cast<String>()
+          : null,
+      ruleType: RuleType.values[payload['ruleType']],
+      ruleValue: payload['ruleValue'],
+      theme: theme != null ? ChoiceQuestionTheme.fromJson(theme) : null,
+    );
+  }
 
   @override
   ChoiceQuestionData copyWith({
@@ -101,38 +133,6 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
           'ruleValue': ruleValue,
         },
       };
-
-  factory ChoiceQuestionData.fromJson(Map<String, dynamic> json) {
-    final payload = json['payload'] as Map<String, dynamic>;
-    final theme = json['theme'];
-    return ChoiceQuestionData(
-      index: json['index'],
-      title: json['title'],
-      subtitle: json['subtitle'],
-      isSkip: json['isSkip'],
-      content: json['content'],
-      isMultipleChoice: payload['isMultipleChoice'],
-      options: (payload['options'] as List<dynamic>).cast<String>(),
-      selectedOptions: payload['selectedOptions'] != null
-          ? (payload['selectedOptions'] as List<dynamic>).cast<String>()
-          : null,
-      ruleType: RuleType.values[payload['ruleType']],
-      ruleValue: payload['ruleValue'],
-      theme: theme != null ? ChoiceQuestionTheme.fromJson(theme) : null,
-    );
-  }
-
-  @override
-  List<Object?> get props => [
-        isMultipleChoice,
-        ...options,
-        index,
-        title,
-        subtitle,
-        isSkip,
-        content,
-        selectedOptions,
-      ];
 }
 
 enum RuleType {

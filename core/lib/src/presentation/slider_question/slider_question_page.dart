@@ -3,10 +3,6 @@ import 'package:survey_core/src/domain/entities/question_answer.dart';
 import 'package:survey_core/src/domain/entities/question_types/slider_question_data.dart';
 import 'package:survey_core/src/domain/entities/themes/slider_question_theme.dart';
 import 'package:survey_core/src/presentation/localization/app_localizations_ext.dart';
-import 'package:survey_core/src/presentation/utils/app_dimensions.dart';
-import 'package:survey_core/src/presentation/utils/app_fonts.dart';
-import 'package:survey_core/src/presentation/utils/data_to_widget_util.dart';
-import 'package:survey_core/src/presentation/utils/theme_extension.dart';
 import 'package:survey_core/src/presentation/utils/utils.dart';
 import 'package:survey_core/src/presentation/widgets/question_bottom_button.dart';
 import 'package:survey_core/src/presentation/widgets/question_content.dart';
@@ -40,7 +36,7 @@ class _SliderQuestionPageState extends State<SliderQuestionPage> {
   void didChangeDependencies() {
     final theme = Theme.of(context).extension<SliderQuestionTheme>() ??
         const SliderQuestionTheme.common();
-    _theme = (widget.data.theme ?? theme) as SliderQuestionTheme;
+    _theme = widget.data.theme ?? theme;
     super.didChangeDependencies();
   }
 

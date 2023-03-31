@@ -12,6 +12,19 @@ class InputQuestionData extends QuestionData<InputQuestionTheme> {
   @override
   String get type => QuestionTypes.input;
 
+  @override
+  List<Object?> get props => [
+    validator,
+    index,
+    title,
+    subtitle,
+    isSkip,
+    content,
+    hintText,
+    buttonText,
+    theme,
+  ];
+
   const InputQuestionData({
     required this.validator,
     required this.theme,
@@ -36,6 +49,22 @@ class InputQuestionData extends QuestionData<InputQuestionTheme> {
           content: 'Doing so can help you gather the information most '
               'relevant and useful to you',
         );
+
+  factory InputQuestionData.fromJson(Map<String, dynamic> json) {
+    final Map<String, String> payload = json['payload'];
+    final theme = json['theme'];
+    return InputQuestionData(
+      theme: theme != null ? InputQuestionTheme.fromJson(theme) : null,
+      index: json['index'],
+      title: json['title'],
+      subtitle: json['subtitle'],
+      isSkip: json['isSkip'],
+      content: json['content'],
+      validator: InputValidator.fromJson(payload),
+      hintText: payload['hintText'],
+      buttonText: payload['buttonText'],
+    );
+  }
 
   @override
   InputQuestionData copyWith({
@@ -76,33 +105,4 @@ class InputQuestionData extends QuestionData<InputQuestionTheme> {
           'buttonText': buttonText,
         },
       };
-
-  factory InputQuestionData.fromJson(Map<String, dynamic> json) {
-    final payload = json['payload'];
-    final theme = json['theme'];
-    return InputQuestionData(
-      theme: theme != null ? InputQuestionTheme.fromJson(theme) : null,
-      index: json['index'],
-      title: json['title'],
-      subtitle: json['subtitle'],
-      isSkip: json['isSkip'],
-      content: json['content'],
-      validator: InputValidator.fromJson(payload),
-      hintText: payload['hintText'],
-      buttonText: payload['buttonText'],
-    );
-  }
-
-  @override
-  List<Object?> get props => [
-        validator,
-        index,
-        title,
-        subtitle,
-        isSkip,
-        content,
-        hintText,
-        buttonText,
-        theme,
-      ];
 }

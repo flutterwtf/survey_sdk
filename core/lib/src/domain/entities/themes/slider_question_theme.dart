@@ -22,6 +22,24 @@ class SliderQuestionTheme extends ThemeExtension<SliderQuestionTheme>
   final double buttonTextSize;
   final double buttonRadius;
 
+  @override
+  List<Object?> get props => [
+    activeColor,
+    inactiveColor,
+    thumbColor,
+    thumbRadius,
+    thickness,
+    fill,
+    titleColor,
+    titleSize,
+    subtitleColor,
+    subtitleSize,
+    buttonFill,
+    buttonTextColor,
+    buttonTextSize,
+    buttonRadius,
+  ];
+
   // TODO(dev): Add hint text.
   const SliderQuestionTheme({
     required this.activeColor,
@@ -39,6 +57,24 @@ class SliderQuestionTheme extends ThemeExtension<SliderQuestionTheme>
     required this.buttonTextSize,
     required this.buttonRadius,
   });
+
+  const SliderQuestionTheme.common()
+      : this(
+    activeColor: const Color(0xFF000000),
+    inactiveColor: const Color(0xFFCCCCCC),
+    thumbColor: const Color(0xFF000000),
+    thumbRadius: 16,
+    thickness: 8,
+    fill: Colors.white,
+    titleColor: Colors.black,
+    titleSize: 16,
+    subtitleColor: Colors.black,
+    subtitleSize: 12,
+    buttonFill: Colors.black,
+    buttonTextColor: Colors.white,
+    buttonTextSize: 12,
+    buttonRadius: 10,
+  );
 
   SliderQuestionTheme.fromJson(Map<String, dynamic> json)
       : activeColor = Color(json['activeColor']),
@@ -73,24 +109,6 @@ class SliderQuestionTheme extends ThemeExtension<SliderQuestionTheme>
         'buttonTextSize': buttonTextSize,
         'buttonRadius': buttonRadius,
       };
-
-  const SliderQuestionTheme.common()
-      : this(
-          activeColor: const Color(0xFF000000),
-          inactiveColor: const Color(0xFFCCCCCC),
-          thumbColor: const Color(0xFF000000),
-          thumbRadius: 16.0,
-          thickness: 8.0,
-          fill: Colors.white,
-          titleColor: Colors.black,
-          titleSize: 16,
-          subtitleColor: Colors.black,
-          subtitleSize: 12,
-          buttonFill: Colors.black,
-          buttonTextColor: Colors.white,
-          buttonTextSize: 12,
-          buttonRadius: 10,
-        );
 
   @override
   SliderQuestionTheme copyWith({
@@ -152,22 +170,4 @@ class SliderQuestionTheme extends ThemeExtension<SliderQuestionTheme>
       buttonRadius: lerpDouble(buttonRadius, other.buttonRadius, t)!,
     );
   }
-
-  @override
-  List<Object?> get props => [
-        activeColor,
-        inactiveColor,
-        thumbColor,
-        thumbRadius,
-        thickness,
-        fill,
-        titleColor,
-        titleSize,
-        subtitleColor,
-        subtitleSize,
-        buttonFill,
-        buttonTextColor,
-        buttonTextSize,
-        buttonRadius,
-      ];
 }

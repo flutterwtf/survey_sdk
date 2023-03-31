@@ -9,11 +9,12 @@ class CommonData {
   static const _initialValue = 5;
   static const _firstIndex = 1;
   static const _secondIndex = 2;
+  static const _dividers = 10;
 
   CommonTheme get commonTheme {
     return CommonTheme(
       slider: const SliderQuestionData.common(),
-      intro: IntroQuestionData.common(),
+      intro: const IntroQuestionData.common(),
       input: InputQuestionData.common(),
       choice: const ChoiceQuestionData.common(),
     );
@@ -84,7 +85,7 @@ class CommonData {
       subtitle: context.localization.empty_subtitle,
       isSkip: false,
       content: context.localization.question_content,
-      divisions: 10,
+      divisions: _dividers,
       theme: const SliderQuestionTheme.common(),
     );
   }

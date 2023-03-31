@@ -3,8 +3,6 @@ import 'dart:ui';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:survey_core/src/domain/entities/api_object.dart';
-import 'package:survey_core/src/domain/entities/question_types/input_question_data.dart';
-import 'package:survey_core/src/presentation/utils/app_fonts.dart';
 import 'package:survey_core/src/presentation/utils/app_colors.dart';
 import 'package:survey_core/src/presentation/utils/app_fonts.dart';
 
@@ -32,6 +30,32 @@ class InputQuestionTheme extends ThemeExtension<InputQuestionTheme>
   final Color buttonTextColor;
   final double buttonTextSize;
   final double buttonRadius;
+
+  @override
+  List<Object?> get props => [
+        backgroundColor,
+        borderColor,
+        borderWidth,
+        inputType,
+        hintColor,
+        hintSize,
+        textColor,
+        textSize,
+        errorText,
+        lines,
+        verticalPadding,
+        horizontalPadding,
+        isMultiline,
+        fill,
+        titleColor,
+        titleSize,
+        subtitleColor,
+        subtitleSize,
+        buttonFill,
+        buttonTextColor,
+        buttonTextSize,
+        buttonRadius,
+      ];
 
   // TODO(dev): Add hint text.
   const InputQuestionTheme({
@@ -83,6 +107,30 @@ class InputQuestionTheme extends ThemeExtension<InputQuestionTheme>
         buttonTextSize = json['buttonTextSize'],
         buttonRadius = json['buttonRadius'];
 
+  const InputQuestionTheme.common()
+      : this(
+          backgroundColor: Colors.white,
+          borderColor: Colors.black,
+          borderWidth: 1,
+          hintColor: AppColors.textLightGrey,
+          hintSize: AppFonts.sizeL,
+          textColor: AppColors.black,
+          textSize: AppFonts.sizeL,
+          inputType: InputType.text,
+          // TODO(dev): Replace with the text.
+          errorText: 'Error',
+          isMultiline: false,
+          fill: Colors.white,
+          titleColor: Colors.black,
+          titleSize: 16,
+          subtitleColor: Colors.black,
+          subtitleSize: 12,
+          buttonFill: Colors.black,
+          buttonTextColor: Colors.white,
+          buttonTextSize: 12,
+          buttonRadius: 10,
+        );
+
   @override
   Map<String, dynamic> toJson() => {
         'backgroundColor': backgroundColor.value,
@@ -108,30 +156,6 @@ class InputQuestionTheme extends ThemeExtension<InputQuestionTheme>
         'buttonTextSize': buttonTextSize,
         'buttonRadius': buttonRadius,
       };
-
-  const InputQuestionTheme.common()
-      : this(
-          backgroundColor: Colors.white,
-          borderColor: Colors.black,
-          borderWidth: 1,
-          hintColor: AppColors.textLightGrey,
-          hintSize: AppFonts.sizeL,
-          textColor: AppColors.black,
-          textSize: AppFonts.sizeL,
-          inputType: InputType.text,
-          // TODO(dev): Replace with the text.
-          errorText: 'Error',
-          isMultiline: false,
-          fill: Colors.white,
-          titleColor: Colors.black,
-          titleSize: 16,
-          subtitleColor: Colors.black,
-          subtitleSize: 12,
-          buttonFill: Colors.black,
-          buttonTextColor: Colors.white,
-          buttonTextSize: 12,
-          buttonRadius: 10,
-        );
 
   @override
   InputQuestionTheme copyWith({
@@ -220,32 +244,6 @@ class InputQuestionTheme extends ThemeExtension<InputQuestionTheme>
       buttonRadius: lerpDouble(buttonRadius, other.buttonRadius, t)!,
     );
   }
-
-  @override
-  List<Object?> get props => [
-        backgroundColor,
-        borderColor,
-        borderWidth,
-        inputType,
-        hintColor,
-        hintSize,
-        textColor,
-        textSize,
-        errorText,
-        lines,
-        verticalPadding,
-        horizontalPadding,
-        isMultiline,
-        fill,
-        titleColor,
-        titleSize,
-        subtitleColor,
-        subtitleSize,
-        buttonFill,
-        buttonTextColor,
-        buttonTextSize,
-        buttonRadius,
-      ];
 }
 
 enum InputType {
