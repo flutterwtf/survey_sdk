@@ -5,4 +5,4 @@ flutter analyze
 flutter test --coverage
 flutter test
 lcov --remove coverage/lcov.info '*.g.dart' '*.part.dart' '*/generated/*' -o coverage/lcov.info
-./coverage_check.sh
+../scripts/coverage_check.sh
