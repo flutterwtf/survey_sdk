@@ -4,9 +4,15 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:survey_core/src/domain/entities/api_object.dart';
 
+/// Defines the visual properties for a choice question options
 class ChoiceQuestionTheme extends ThemeExtension<ChoiceQuestionTheme>
     with ApiObject, EquatableMixin {
+  /// Color of the active radio or checkbox option.
+  /// By default is set to [Colors.black]
   final Color activeColor;
+
+  /// Color of the inactive radio or checkbox option.
+  /// By default is set to [Colors.grey]
   final Color inactiveColor;
   final Color fill;
   final Color titleColor;
@@ -47,6 +53,7 @@ class ChoiceQuestionTheme extends ThemeExtension<ChoiceQuestionTheme>
     required this.buttonRadius,
   });
 
+  /// Default color values of choice question options
   const ChoiceQuestionTheme.common()
       : this(
           activeColor: Colors.black,

@@ -2,9 +2,16 @@ import 'package:survey_core/src/domain/entities/constants/question_types.dart';
 import 'package:survey_core/src/domain/entities/question_types/question_data.dart';
 import 'package:survey_core/src/domain/entities/themes/choice_question_theme.dart';
 
+/// Contains the content for a multiple-choice or single-choice question
 class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
+  /// Indicates whether the question allows multiple answers or only a
+  /// single answer
   final bool isMultipleChoice;
+
+  /// Contains the text for each answer option
   final List<String> options;
+
+  /// Options that have been selected
   final List<String>? selectedOptions;
   final RuleType ruleType;
   final int ruleValue;

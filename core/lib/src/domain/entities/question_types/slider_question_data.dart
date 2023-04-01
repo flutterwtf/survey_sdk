@@ -3,9 +3,16 @@ import 'package:survey_core/src/domain/entities/constants/question_types.dart';
 import 'package:survey_core/src/domain/entities/question_types/question_data.dart';
 import 'package:survey_core/src/domain/entities/themes/slider_question_theme.dart';
 
+/// Contains the content for a page with slider to choose a value between
+/// minimum and maximum range
 class SliderQuestionData extends QuestionData<SliderThemeData> {
+  /// The minimum value of the slider
   final num minValue;
+
+  /// The maximum value of the slider
   final num maxValue;
+
+  /// The initial value of the slider
   final num initialValue;
   final int divisions;
   final SliderQuestionTheme? theme;

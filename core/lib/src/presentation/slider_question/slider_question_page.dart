@@ -8,8 +8,14 @@ import 'package:survey_core/src/presentation/widgets/question_bottom_button.dart
 import 'package:survey_core/src/presentation/widgets/question_content.dart';
 import 'package:survey_core/src/presentation/widgets/question_title.dart';
 
+/// The question page with a question, question description, button to submit
+/// the answer and slider to select a value from a range
 class SliderQuestionPage extends StatefulWidget {
+  /// Contains the content for a page as minimum and maximum values of the
+  /// slider, the initial value of the slider, and other properties
   final SliderQuestionData data;
+
+  /// Callback that is called after pressing bottom button
   final OnSendCallback onSend;
 
   const SliderQuestionPage({

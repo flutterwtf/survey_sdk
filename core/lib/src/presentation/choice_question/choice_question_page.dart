@@ -8,8 +8,20 @@ import 'package:survey_core/src/presentation/widgets/question_bottom_button.dart
 import 'package:survey_core/src/presentation/widgets/question_content.dart';
 import 'package:survey_core/src/presentation/widgets/question_title.dart';
 
+/// The page with options to choose from,
+/// along with a question, question description, and a button.
+///
+/// The appearance of the page varies based on the value of
+/// [ChoiceQuestionData.isMultipleChoice] - if it is true, checkboxes will be
+/// displayed to allow selecting multiple options. If
+/// [ChoiceQuestionData.isMultipleChoice] is false, radio buttons will be
+/// displayed to allow selecting a single option.
 class ChoiceQuestionPage extends StatefulWidget {
+  /// This field contains the content for a page, including options
   final ChoiceQuestionData data;
+
+  /// Callback that is called when [ChoiceQuestionData.isSkip] is true or at
+  /// least one option has been selected
   final OnSendCallback onSend;
 
   const ChoiceQuestionPage({

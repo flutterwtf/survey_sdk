@@ -10,9 +10,21 @@ import 'package:survey_core/src/presentation/widgets/question_bottom_button.dart
 import 'package:survey_core/src/presentation/widgets/question_content.dart';
 import 'package:survey_core/src/presentation/widgets/question_title.dart';
 
+/// The question page with an input field for the
+/// user to enter a response. It includes a question, question description,
+/// button to submit the response, and an input widget to enter the response.
+///
+/// The [InputQuestionData.validator.type] determines the type of input field
+/// displayed on the page. If [InputType.number], a [TextFormField] that only
+/// allows numbers is displayed. If [InputType.date], a [DateTimeField] is
+/// displayed to select a date.
 // TODO(dev): create child<T> widget for date,password,text,number etc.
 class InputQuestionPage extends StatefulWidget {
+  /// Contains the content for a page
   final InputQuestionData data;
+
+  /// Callback that is called after pressing bottom button if input data is
+  /// valid or when the question can be skipped
   final OnSendCallback onSend;
 
   const InputQuestionPage({

@@ -28,19 +28,6 @@ class ChoiceContentCustomizationTab extends CustomizationTab {
 
 class ChoiceContentCustomizationTabState
     extends CustomizationTabState<ChoiceContentCustomizationTab> {
-  List<int> _initialLimitedList(List<String> listOptions) {
-    // TODO(dev): we should rethink this.
-    final limitedList = <int>[];
-    if (listOptions.isEmpty) {
-      limitedList.add(0);
-    } else {
-      // TODO(dev): do-while loop maybe?
-      for (var i = 0; i <= listOptions.length; i++) {
-        limitedList.add(i);
-      }
-    }
-    return limitedList;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -123,7 +110,10 @@ class ChoiceContentCustomizationTabState
                                 onChanged: (ruleValue) => widget.onChange(
                                   data.copyWith(ruleValue: ruleValue),
                                 ),
-                                values: _initialLimitedList(data.options),
+                                values: List<int>.generate(
+                                  listOptions.length + 1,
+                                      (i) => i++,
+                                ),
                                 value: data.ruleValue,
                               )
                             : const SizedBox(),

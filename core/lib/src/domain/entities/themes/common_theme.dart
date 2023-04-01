@@ -6,6 +6,7 @@ import 'package:survey_core/src/domain/entities/question_types/input_question_da
 import 'package:survey_core/src/domain/entities/question_types/intro_question_data.dart';
 import 'package:survey_core/src/domain/entities/question_types/slider_question_data.dart';
 
+// TODO(dev): docs.
 class CommonTheme extends ThemeExtension<CommonTheme>
     with ApiObject, EquatableMixin {
   final SliderQuestionData slider;
