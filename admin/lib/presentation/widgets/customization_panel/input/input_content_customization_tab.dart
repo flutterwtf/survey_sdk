@@ -29,60 +29,59 @@ class InputContentCustomizationTabState
     extends CustomizationTabState<InputContentCustomizationTab> {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<BuilderCubit, BuilderState>(
-      builder: (context, state) {
-        final data = widget.editable;
-        return ListView(
+    return ListView(
+      children: [
+        CustomizationItemsContainer(
+          title: context.localization.title,
+          isTopDividerShown: true,
           children: [
-            CustomizationItemsContainer(
-              title: context.localization.title,
-              isTopDividerShown: true,
-              children: [
-                CustomizationMultilineTextField(
-                  maxHeight: AppDimensions.maxTextFieldHeight,
-                  onChanged: (title) => widget.onChange(
-                    data.copyWith(title: title),
-                  ),
-                ),
-              ],
-            ),
-            CustomizationItemsContainer(
-              title: context.localization.subtitle,
-              children: [
-                CustomizationMultilineTextField(
-                  maxHeight: AppDimensions.maxTextFieldHeight,
-                  onChanged: (subtitle) => widget.onChange(
-                    data.copyWith(subtitle: subtitle),
-                  ),
-                ),
-              ],
-            ),
-            CustomizationItemsContainer(
-              title: context.localization.hint,
-              children: [
-                CustomizationMultilineTextField(
-                  maxHeight: AppDimensions.maxTextFieldHeight,
-                  onChanged: (hint) => widget.onChange(
-                    data.copyWith(hintText: hint),
-                  ),
-                ),
-              ],
-            ),
-            // TODO(dev): Kind of strange to put this here.
-            CustomizationItemsContainer(
-              title: context.localization.button,
-              children: [
-                CustomizationMultilineTextField(
-                  maxHeight: AppDimensions.maxTextFieldHeight,
-                  onChanged: (text) => widget.onChange(
-                    data.copyWith(buttonText: text),
-                  ),
-                ),
-              ],
+            CustomizationMultilineTextField(
+              value: widget.editable.title,
+              maxHeight: AppDimensions.maxTextFieldHeight,
+              onChanged: (title) => widget.onChange(
+                widget.editable.copyWith(title: title),
+              ),
             ),
           ],
-        );
-      },
+        ),
+        CustomizationItemsContainer(
+          title: context.localization.subtitle,
+          children: [
+            CustomizationMultilineTextField(
+              value: widget.editable.subtitle,
+              maxHeight: AppDimensions.maxTextFieldHeight,
+              onChanged: (subtitle) => widget.onChange(
+                widget.editable.copyWith(subtitle: subtitle),
+              ),
+            ),
+          ],
+        ),
+        CustomizationItemsContainer(
+          title: context.localization.hint,
+          children: [
+            CustomizationMultilineTextField(
+              value: widget.editable.hintText ?? '',
+              maxHeight: AppDimensions.maxTextFieldHeight,
+              onChanged: (hint) => widget.onChange(
+                widget.editable.copyWith(hintText: hint),
+              ),
+            ),
+          ],
+        ),
+        // TODO(dev): Kind of strange to put this here.
+        CustomizationItemsContainer(
+          title: context.localization.button,
+          children: [
+            CustomizationMultilineTextField(
+              value: widget.editable.buttonText ?? '',
+              maxHeight: AppDimensions.maxTextFieldHeight,
+              onChanged: (text) => widget.onChange(
+                widget.editable.copyWith(buttonText: text),
+              ),
+            ),
+          ],
+        ),
+      ],
     );
   }
 }

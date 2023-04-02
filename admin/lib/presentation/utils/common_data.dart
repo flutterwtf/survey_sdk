@@ -13,10 +13,10 @@ class CommonData {
 
   CommonTheme get commonTheme {
     return CommonTheme(
-      slider: const SliderQuestionData.common(),
-      intro: const IntroQuestionData.common(),
-      input: InputQuestionData.common(),
-      choice: const ChoiceQuestionData.common(),
+      slider: slider(),
+      intro: intro(),
+      input: input(),
+      choice: choice(),
     );
   }
 
@@ -25,6 +25,8 @@ class CommonData {
       questions: [
         intro(index: _firstIndex),
         input(index: _secondIndex),
+        choice(index: 3),
+        slider(index: 4),
       ],
       commonTheme: commonTheme,
     );

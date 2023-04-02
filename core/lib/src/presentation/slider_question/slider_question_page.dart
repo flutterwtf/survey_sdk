@@ -29,7 +29,6 @@ class SliderQuestionPage extends StatefulWidget {
 }
 
 class _SliderQuestionPageState extends State<SliderQuestionPage> {
-  late final SliderQuestionTheme _theme;
   late double _answer;
 
   @override
@@ -39,15 +38,9 @@ class _SliderQuestionPageState extends State<SliderQuestionPage> {
   }
 
   @override
-  void didChangeDependencies() {
-    final theme = Theme.of(context).extension<SliderQuestionTheme>() ??
-        const SliderQuestionTheme.common();
-    _theme = widget.data.theme ?? theme;
-    super.didChangeDependencies();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final theme = widget.data.theme ??
+        Theme.of(context).extension<SliderQuestionTheme>()!;
     return Padding(
       padding: const EdgeInsets.only(
         left: AppDimensions.margin2XL,
@@ -76,7 +69,7 @@ class _SliderQuestionPageState extends State<SliderQuestionPage> {
               maxValue: widget.data.maxValue,
               initialValue: widget.data.initialValue,
               onChanged: (value) => setState(() => _answer = value),
-              theme: _theme,
+              theme: theme,
             ),
           ),
           const Spacer(),
@@ -145,11 +138,10 @@ class _QuestionSliderState extends State<_QuestionSlider> {
         children: [
           Slider(
             value: _value,
-            onChanged: (newValue) =>
-                setState(() {
-                  _value = _onlyInt ? newValue.roundToDouble() : newValue;
-                  widget.onChanged(newValue);
-                }),
+            onChanged: (newValue) => setState(() {
+              _value = _onlyInt ? newValue.roundToDouble() : newValue;
+              widget.onChanged(newValue);
+            }),
             min: widget.minValue.toDouble(),
             max: widget.maxValue.toDouble(),
           ),

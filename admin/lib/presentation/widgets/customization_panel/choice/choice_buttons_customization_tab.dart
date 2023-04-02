@@ -29,57 +29,51 @@ class ChoiceButtonsCustomizationTabState
     extends CustomizationTabState<ChoiceButtonsCustomizationTab> {
   @override
   Widget build(BuildContext context) {
-    // TODO(dev): Maybe retrieve state here instead of builder again?
-    return BlocBuilder<BuilderCubit, BuilderState>(
-      builder: (context, state) {
-        final data = widget.editable;
-        final theme = data.theme ?? const ChoiceQuestionTheme.common();
-        return ListView(
+    final theme = widget.editable.theme ?? const ChoiceQuestionTheme.common();
+    return ListView(
+      children: [
+        CustomizationItemsContainer(
+          isTopDividerShown: true,
+          itemsPadding: const EdgeInsets.all(
+            AppDimensions.marginM,
+          ),
           children: [
-            CustomizationItemsContainer(
-              isTopDividerShown: true,
-              itemsPadding: const EdgeInsets.all(
-                AppDimensions.marginM,
+            // TODO(dev): Move to the other tab.
+            MultipleChoiceCustomizationItem(
+              onChanged: (isMultipleChoice) => widget.onChange(
+                widget.editable.copyWith(isMultipleChoice: isMultipleChoice),
               ),
-              children: [
-                // TODO(dev): Move to the other tab.
-                MultipleChoiceCustomizationItem(
-                  onChanged: (isMultipleChoice) => widget.onChange(
-                    data.copyWith(isMultipleChoice: isMultipleChoice),
-                  ),
-                ),
-              ],
-            ),
-            CustomizationItemsContainer(
-              title: context.localization.active,
-              isTopDividerShown: true,
-              children: [
-                ColorCustomizationItem(
-                  initialColor: AppColors.black,
-                  onColorPicked: (color) => widget.onChange(
-                    data.copyWith(
-                      theme: theme.copyWith(activeColor: color),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            CustomizationItemsContainer(
-              title: context.localization.inactive,
-              children: [
-                ColorCustomizationItem(
-                  initialColor: AppColors.inactiveElementGrey,
-                  onColorPicked: (color) => widget.onChange(
-                    data.copyWith(
-                      theme: theme.copyWith(inactiveColor: color),
-                    ),
-                  ),
-                ),
-              ],
             ),
           ],
-        );
-      },
+        ),
+        CustomizationItemsContainer(
+          title: context.localization.active,
+          isTopDividerShown: true,
+          children: [
+            ColorCustomizationItem(
+              initialColor: AppColors.black,
+              onColorPicked: (color) => widget.onChange(
+                widget.editable.copyWith(
+                  theme: theme.copyWith(activeColor: color),
+                ),
+              ),
+            ),
+          ],
+        ),
+        CustomizationItemsContainer(
+          title: context.localization.inactive,
+          children: [
+            ColorCustomizationItem(
+              initialColor: AppColors.inactiveElementGrey,
+              onColorPicked: (color) => widget.onChange(
+                widget.editable.copyWith(
+                  theme: theme.copyWith(inactiveColor: color),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ],
     );
   }
 }

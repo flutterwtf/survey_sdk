@@ -28,103 +28,99 @@ class ChoiceContentCustomizationTab extends CustomizationTab {
 
 class ChoiceContentCustomizationTabState
     extends CustomizationTabState<ChoiceContentCustomizationTab> {
-
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<BuilderCubit, BuilderState>(
-      builder: (context, state) {
-        final data = widget.editable;
-        return ListView(
+    return ListView(
+      children: [
+        CustomizationItemsContainer(
+          title: context.localization.title,
+          isTopDividerShown: true,
           children: [
-            CustomizationItemsContainer(
-              title: context.localization.title,
-              isTopDividerShown: true,
-              children: [
-                CustomizationMultilineTextField(
-                  maxHeight: AppDimensions.sizeXL,
-                  onChanged: (title) => widget.onChange(
-                    data.copyWith(title: title),
-                  ),
-                ),
-              ],
+            CustomizationMultilineTextField(
+              value: widget.editable.title,
+              maxHeight: AppDimensions.sizeXL,
+              onChanged: (title) => widget.onChange(
+                widget.editable.copyWith(title: title),
+              ),
             ),
-            CustomizationItemsContainer(
-              title: context.localization.subtitle,
-              children: [
-                CustomizationMultilineTextField(
-                  maxHeight: AppDimensions.sizeXL,
-                  onChanged: (subtitle) => widget.onChange(
-                    data.copyWith(subtitle: subtitle),
-                  ),
-                ),
-              ],
+          ],
+        ),
+        CustomizationItemsContainer(
+          title: context.localization.subtitle,
+          children: [
+            CustomizationMultilineTextField(
+              value: widget.editable.subtitle,
+              maxHeight: AppDimensions.sizeXL,
+              onChanged: (subtitle) => widget.onChange(
+                widget.editable.copyWith(subtitle: subtitle),
+              ),
             ),
-            CustomizationItemsContainer(
-              title: context.localization.options,
-              children: [
-                // TODO(dev): Split to items.
-                OptionCustomizationItem(
-                  options: data.options,
-                  ruleValue: data.ruleValue,
-                  onChanged: (options) => widget.onChange(
-                    data.copyWith(options: options),
-                  ),
-                  // TODO(dev): Move repeated method somewhere.
-                  onRuleValueChanged: (ruleValue) => widget.onChange(
-                    data.copyWith(ruleValue: ruleValue),
-                  ),
-                ),
-              ],
+          ],
+        ),
+        CustomizationItemsContainer(
+          title: context.localization.options,
+          children: [
+            // TODO(dev): Split to items.
+            OptionCustomizationItem(
+              options: widget.editable.options,
+              ruleValue: widget.editable.ruleValue,
+              onChanged: (options) => widget.onChange(
+                widget.editable.copyWith(options: options),
+              ),
+              // TODO(dev): Move repeated method somewhere.
+              onRuleValueChanged: (ruleValue) => widget.onChange(
+                widget.editable.copyWith(ruleValue: ruleValue),
+              ),
             ),
-            if (data.isMultipleChoice)
-              CustomizationItemsContainer(
-                title: context.localization.rule,
+          ],
+        ),
+        if (widget.editable.isMultipleChoice)
+          CustomizationItemsContainer(
+            title: context.localization.rule,
+            children: [
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        child: DropdownCustomizationButton<RuleType>(
-                          items: RuleType.values
-                              .map(
-                                (e) => DropdownCustomizationItem<RuleType>(
-                                  value: e,
-                                  onChange: (rule) => widget.onChange(
-                                    data.copyWith(ruleType: rule),
-                                  ),
-                                  child: Text(
-                                    e.name,
-                                    style: context.theme.textTheme.bodyLarge,
-                                  ),
-                                ),
-                              )
-                              .toList(),
-                          value: data.ruleType,
-                          withColor: true,
-                        ),
-                      ),
-                      const SizedBox(width: AppDimensions.marginXS),
-                      Expanded(
-                        child: data.ruleType != RuleType.none
-                            ? _RuleDropdown(
-                                onChanged: (ruleValue) => widget.onChange(
-                                  data.copyWith(ruleValue: ruleValue),
-                                ),
-                                values: List<int>.generate(
-                                  listOptions.length + 1,
-                                      (i) => i++,
-                                ),
-                                value: data.ruleValue,
-                              )
-                            : const SizedBox(),
-                      ),
-                    ],
+                  Expanded(
+                    child: DropdownCustomizationButton<RuleType>(
+                      items: RuleType.values
+                          .map(
+                            (e) => DropdownCustomizationItem<RuleType>(
+                              value: e,
+                              onChange: (rule) => widget.onChange(
+                                widget.editable.copyWith(ruleType: rule),
+                              ),
+                              child: Text(
+                                e.name,
+                                style: context.theme.textTheme.bodyLarge,
+                              ),
+                            ),
+                          )
+                          .toList(),
+                      value: widget.editable.ruleType,
+                      withColor: true,
+                    ),
+                  ),
+                  const SizedBox(width: AppDimensions.marginXS),
+                  Expanded(
+                    child: widget.editable.ruleType != RuleType.none
+                        ? _RuleDropdown(
+                            onChanged: (ruleValue) => widget.onChange(
+                              widget.editable.copyWith(ruleValue: ruleValue),
+                            ),
+                            values: List<int>.generate(
+                              widget.editable.options.length + 1,
+                              (i) => i++,
+                            ),
+                            value: widget.editable.ruleValue,
+                          )
+                        : const SizedBox(),
                   ),
                 ],
               ),
-          ],
-        );
-      },
+            ],
+          ),
+      ],
     );
   }
 }

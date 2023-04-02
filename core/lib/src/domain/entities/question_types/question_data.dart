@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:survey_core/src/domain/entities/api_object.dart';
 import 'package:survey_core/src/domain/entities/constants/question_types.dart';
 import 'package:survey_core/src/domain/entities/question_types/choice_question_data.dart';
@@ -9,7 +10,7 @@ import 'package:survey_core/src/domain/entities/question_types/slider_question_d
 /// Class that serves as a base for creating specific types of [QuestionData]
 /// classes. [QuestionData] classes are used to represent data for various
 /// types of questions and are used to display and set question data in the app
-abstract class QuestionData<T> extends Equatable with ApiObject {
+abstract class QuestionData<T> extends Equatable {
   /// Index number of the question
   final int index;
 
@@ -63,4 +64,6 @@ abstract class QuestionData<T> extends Equatable with ApiObject {
         throw UnimplementedError();
     }
   }
+
+  Map<String, dynamic> toJson({ThemeExtension<dynamic>? commonTheme});
 }

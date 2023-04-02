@@ -1,3 +1,4 @@
+import 'package:flutter/src/material/theme_data.dart';
 import 'package:survey_core/src/domain/entities/constants/question_types.dart';
 import 'package:survey_core/src/domain/entities/question_types/question_data.dart';
 import 'package:survey_core/src/domain/entities/themes/intro_question_theme.dart';
@@ -13,6 +14,7 @@ class IntroQuestionData extends QuestionData {
   @override
   List<Object?> get props => [
         buttonText,
+        theme,
         index,
         title,
         subtitle,
@@ -82,16 +84,26 @@ class IntroQuestionData extends QuestionData {
   }
 
   @override
-  Map<String, dynamic> toJson() => {
-        'index': index,
-        'title': title,
-        'subtitle': subtitle,
-        'type': type,
-        'isSkip': isSkip,
-        'content': content,
-        'theme': theme,
-        'payload': {
-          'buttonText': buttonText,
-        },
-      };
+  // TODO(dev): recheck.
+  Map<String, dynamic> toJson({dynamic commonTheme}) {
+    late final IntroQuestionTheme? theme;
+    //ignore: prefer-conditional-expressions
+    if (commonTheme != null) {
+      theme = commonTheme == this.theme ? null : this.theme;
+    } else {
+      theme = this.theme;
+    }
+    return {
+      'index': index,
+      'title': title,
+      'subtitle': subtitle,
+      'type': type,
+      'isSkip': isSkip,
+      'content': content,
+      'theme': theme,
+      'payload': {
+        'buttonText': buttonText,
+      },
+    };
+  }
 }

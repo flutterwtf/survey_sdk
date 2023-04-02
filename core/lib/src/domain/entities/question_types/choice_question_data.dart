@@ -22,15 +22,15 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
 
   @override
   List<Object?> get props => [
-    isMultipleChoice,
-    ...options,
-    index,
-    title,
-    subtitle,
-    isSkip,
-    content,
-    selectedOptions,
-  ];
+        isMultipleChoice,
+        ...options,
+        index,
+        title,
+        subtitle,
+        isSkip,
+        content,
+        selectedOptions,
+      ];
 
   const ChoiceQuestionData({
     required this.isMultipleChoice,
@@ -53,6 +53,7 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
           'case of multiple choice higher than zero',
         );
 
+  // TODO(dev): remove common.
   const ChoiceQuestionData.common({int index = 0})
       : this(
           // TODO(dev): To localization somehow.
@@ -122,24 +123,33 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
   }
 
   @override
-  Map<String, dynamic> toJson() => {
-        'index': index,
-        'title': title,
-        'subtitle': subtitle,
-        'type': type,
-        'isSkip': isSkip,
-        'content': content,
-        'theme': theme?.toJson(),
-        // TODO(dev): Do we need payload?
-        // TODO(dev): Should we move keys to const?
-        'payload': {
-          'isMultipleChoice': isMultipleChoice,
-          'options': options,
-          'selectedOptions': selectedOptions,
-          'ruleType': ruleType.index,
-          'ruleValue': ruleValue,
-        },
-      };
+  Map<String, dynamic> toJson({dynamic commonTheme}) {
+    late final ChoiceQuestionTheme? theme;
+    //ignore: prefer-conditional-expressions
+    if (commonTheme != null) {
+      theme = commonTheme == this.theme ? null : this.theme;
+    } else {
+      theme = this.theme;
+    }
+    return {
+      'index': index,
+      'title': title,
+      'subtitle': subtitle,
+      'type': type,
+      'isSkip': isSkip,
+      'content': content,
+      'theme': theme?.toJson(),
+      // TODO(dev): Do we need payload?
+      // TODO(dev): Should we move keys to const?
+      'payload': {
+        'isMultipleChoice': isMultipleChoice,
+        'options': options,
+        'selectedOptions': selectedOptions,
+        'ruleType': ruleType.index,
+        'ruleValue': ruleValue,
+      },
+    };
+  }
 }
 
 enum RuleType {

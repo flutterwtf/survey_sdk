@@ -23,10 +23,6 @@ class ChoiceCustomizationPanel extends StatefulWidget {
 }
 
 class _ChoiceCustomizationPanelState extends State<ChoiceCustomizationPanel> {
-  @override
-  void initState() {
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {

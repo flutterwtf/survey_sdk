@@ -18,16 +18,16 @@ class InputQuestionData extends QuestionData<InputQuestionTheme> {
 
   @override
   List<Object?> get props => [
-    validator,
-    index,
-    title,
-    subtitle,
-    isSkip,
-    content,
-    hintText,
-    buttonText,
-    theme,
-  ];
+        validator,
+        index,
+        title,
+        subtitle,
+        isSkip,
+        content,
+        hintText,
+        buttonText,
+        theme,
+      ];
 
   const InputQuestionData({
     required this.validator,
@@ -95,18 +95,27 @@ class InputQuestionData extends QuestionData<InputQuestionTheme> {
   }
 
   @override
-  Map<String, dynamic> toJson() => {
-        'index': index,
-        'title': title,
-        'subtitle': subtitle,
-        'type': type,
-        'isSkip': isSkip,
-        'content': content,
-        'theme': theme?.toJson(),
-        'payload': {
-          ...validator.toJson(),
-          'hintText': hintText,
-          'buttonText': buttonText,
-        },
-      };
+  Map<String, dynamic> toJson({dynamic commonTheme}) {
+    late final InputQuestionTheme? theme;
+    //ignore: prefer-conditional-expressions
+    if (commonTheme != null) {
+      theme = commonTheme == this.theme ? null : this.theme;
+    } else {
+      theme = this.theme;
+    }
+    return {
+      'index': index,
+      'title': title,
+      'subtitle': subtitle,
+      'type': type,
+      'isSkip': isSkip,
+      'content': content,
+      'theme': theme?.toJson(),
+      'payload': {
+        ...validator.toJson(),
+        'hintText': hintText,
+        'buttonText': buttonText,
+      },
+    };
+  }
 }

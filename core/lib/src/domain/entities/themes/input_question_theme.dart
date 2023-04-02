@@ -167,7 +167,7 @@ class InputQuestionTheme extends ThemeExtension<InputQuestionTheme>
         'lines': lines,
         'isMultiline': isMultiline,
         'errorText': errorText,
-        'inputType': inputType,
+        'inputType': inputType.index,
         'verticalPadding': verticalPadding,
         'horizontalPadding': horizontalPadding,
         'fill': fill.value,

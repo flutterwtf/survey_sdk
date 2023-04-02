@@ -51,7 +51,8 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = widget.data.theme ?? const InputQuestionTheme.common();
+    final theme =
+        widget.data.theme ?? Theme.of(context).extension<InputQuestionTheme>()!;
     final border = OutlineInputBorder(
       borderSide: BorderSide(
         color: theme.borderColor,
@@ -101,6 +102,7 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
                       }
                     },
                     textFieldKey: _textFieldKey,
+                    // TODO(dev): pass args instead of theme.
                     theme: theme,
                     validator: (text) => _canBeSkippedNumber
                         ? null

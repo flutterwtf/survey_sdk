@@ -79,11 +79,9 @@ class _NewQuestionPageState extends State<NewQuestionPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: NewQuestionTabs.values.map(_questionTab).toList(),
                   ),
-                  Expanded(
-                    child: _QuestionOptionsListView(
-                      options: _selectedTab.options,
-                      selectedOption: _selectedOption ?? '',
-                    ),
+                  _QuestionOptionsListView(
+                    options: _selectedTab.options,
+                    selectedOption: _selectedOption ?? '',
                   ),
                   EditorBar(
                     onChange: _cubit.updateCommon,

@@ -22,16 +22,16 @@ class SliderQuestionData extends QuestionData<SliderThemeData> {
 
   @override
   List<Object?> get props => [
-    minValue,
-    maxValue,
-    initialValue,
-    divisions,
-    index,
-    title,
-    subtitle,
-    isSkip,
-    content,
-  ];
+        minValue,
+        maxValue,
+        initialValue,
+        divisions,
+        index,
+        title,
+        subtitle,
+        isSkip,
+        content,
+      ];
 
   const SliderQuestionData({
     required this.minValue,
@@ -109,17 +109,26 @@ class SliderQuestionData extends QuestionData<SliderThemeData> {
   }
 
   @override
-  Map<String, dynamic> toJson() => {
-        'index': index,
-        'theme': theme?.toJson(),
-        'minValue': minValue,
-        'maxValue': maxValue,
-        'divisions': divisions,
-        'initialValue': initialValue,
-        'title': title,
-        'subtitle': subtitle,
-        'type': type,
-        'isSkip': isSkip,
-        'content': content,
-      };
+  Map<String, dynamic> toJson({dynamic commonTheme}) {
+    late final SliderQuestionTheme? theme;
+    //ignore: prefer-conditional-expressions
+    if (commonTheme != null) {
+      theme = commonTheme == this.theme ? null : this.theme;
+    } else {
+      theme = this.theme;
+    }
+    return {
+      'index': index,
+      'theme': theme?.toJson(),
+      'minValue': minValue,
+      'maxValue': maxValue,
+      'divisions': divisions,
+      'initialValue': initialValue,
+      'title': title,
+      'subtitle': subtitle,
+      'type': type,
+      'isSkip': isSkip,
+      'content': content,
+    };
+  }
 }

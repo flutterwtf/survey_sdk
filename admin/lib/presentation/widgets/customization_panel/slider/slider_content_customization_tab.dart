@@ -31,57 +31,54 @@ class SliderContentCustomizationTabState
     extends CustomizationTabState<SliderContentCustomizationTab> {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<BuilderCubit, BuilderState>(
-      builder: (context, state) {
-        final data = widget.editable;
-        return ListView(
+    return ListView(
+      children: [
+        CustomizationItemsContainer(
+          title: context.localization.title,
+          isTopDividerShown: true,
           children: [
-            CustomizationItemsContainer(
-              title: context.localization.title,
-              isTopDividerShown: true,
-              children: [
-                CustomizationMultilineTextField(
-                  maxHeight: AppDimensions.sizeXL,
-                  onChanged: (title) => widget.onChange(
-                    data.copyWith(title: title),
-                  ),
-                ),
-              ],
-            ),
-            CustomizationItemsContainer(
-              title: context.localization.subtitle,
-              children: [
-                CustomizationMultilineTextField(
-                  maxHeight: AppDimensions.sizeXL,
-                  onChanged: (subtitle) => widget.onChange(
-                    data.copyWith(title: subtitle),
-                  ),
-                ),
-              ],
-            ),
-            CustomizationItemsContainer(
-              title: context.localization.value,
-              children: [
-                MinMaxCustomizationItem(
-                  onChanged: (min, max) => widget.onChange(
-                    data.copyWith(minValue: min, maxValue: max),
-                  ),
-                ),
-              ],
-            ),
-            CustomizationItemsContainer(
-              title: context.localization.divisions,
-              children: [
-                DivisionsCustomizationItem(
-                  onChanged: (divisions) => widget.onChange(
-                    data.copyWith(divisions: divisions),
-                  ),
-                ),
-              ],
+            CustomizationMultilineTextField(
+              value: widget.editable.title,
+              maxHeight: AppDimensions.sizeXL,
+              onChanged: (title) => widget.onChange(
+                widget.editable.copyWith(title: title),
+              ),
             ),
           ],
-        );
-      },
+        ),
+        CustomizationItemsContainer(
+          title: context.localization.subtitle,
+          children: [
+            CustomizationMultilineTextField(
+              value: widget.editable.subtitle,
+              maxHeight: AppDimensions.sizeXL,
+              onChanged: (subtitle) => widget.onChange(
+                widget.editable.copyWith(title: subtitle),
+              ),
+            ),
+          ],
+        ),
+        CustomizationItemsContainer(
+          title: context.localization.value,
+          children: [
+            MinMaxCustomizationItem(
+              onChanged: (min, max) => widget.onChange(
+                widget.editable.copyWith(minValue: min, maxValue: max),
+              ),
+            ),
+          ],
+        ),
+        CustomizationItemsContainer(
+          title: context.localization.divisions,
+          children: [
+            DivisionsCustomizationItem(
+              onChanged: (divisions) => widget.onChange(
+                widget.editable.copyWith(divisions: divisions),
+              ),
+            ),
+          ],
+        ),
+      ],
     );
   }
 }

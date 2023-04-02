@@ -7,16 +7,10 @@ import 'package:survey_admin/presentation/widgets/customization_items/customizat
 class ColorCustomizationItem extends StatefulWidget {
   final Color initialColor;
   final ValueChanged<Color> onColorPicked;
-  final String? initialSize;
-  final ValueChanged<double>? onSizeChanged;
-  final InputDecoration? decoration;
 
   const ColorCustomizationItem({
     required this.initialColor,
     required this.onColorPicked,
-    this.initialSize,
-    this.onSizeChanged,
-    this.decoration,
     super.key,
   });
 
@@ -29,21 +23,21 @@ class _ColorCustomizationItemState extends State<ColorCustomizationItem> {
   final TextEditingController _controller = TextEditingController();
   bool _isPickerOpened = false;
   final _pickerAreaHeightPercent = 0.4;
-  final _lengthInputFormatters = 8;
+  final _lengthLimit = 8;
   final _radix = 16;
 
   @override
   void initState() {
     super.initState();
-
     _controller.text = _colorToString(widget.initialColor);
     _pickedColor = widget.initialColor;
   }
 
-  void _onChangedTextField(String? value) {
+  void _onChanged(String? value) {
     if (value != null) {
       final color = int.tryParse(value.padRight(8, '0'), radix: 16);
       if (color != null) {
+        widget.onColorPicked(Color(color));
         setState(() => _pickedColor = Color(color));
       }
     }
@@ -60,15 +54,9 @@ class _ColorCustomizationItemState extends State<ColorCustomizationItem> {
   String _colorToString(Color color) =>
       color.value.toRadixString(_radix).toUpperCase();
 
-  void _updateTextField() {
-    widget.onColorPicked(_pickedColor);
-    setState(() => _controller.text = _colorToString(_pickedColor));
-  }
-
   @override
   void dispose() {
     _controller.dispose();
-
     super.dispose();
   }
 
@@ -96,19 +84,14 @@ class _ColorCustomizationItemState extends State<ColorCustomizationItem> {
                 margin: const EdgeInsets.all(AppDimensions.margin2XS),
                 child: CustomizationTextField(
                   controller: _controller,
-                  onEditingComplete: _updateTextField,
                   inputFormatters: [
+                    // TODO(dev): move input formatters?
                     FilteringTextInputFormatter.allow(
                       RegExp('[0-9a-fA-F]'),
                     ),
-                    LengthLimitingTextInputFormatter(_lengthInputFormatters),
+                    LengthLimitingTextInputFormatter(_lengthLimit),
                   ],
-                  decoration: widget.decoration ??
-                      const InputDecoration(
-                        isCollapsed: true,
-                        border: InputBorder.none,
-                      ),
-                  onChanged: _onChangedTextField,
+                  onChanged: _onChanged,
                 ),
               ),
             ),

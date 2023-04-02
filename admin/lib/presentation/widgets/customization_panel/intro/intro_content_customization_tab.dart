@@ -30,61 +30,59 @@ class IntroContentCustomizationTabState
     extends CustomizationTabState<IntroContentCustomizationTab> {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<BuilderCubit, BuilderState>(
-      builder: (context, state) {
-        final data = widget.editable;
-        return ListView(
+    return ListView(
+      children: [
+        CustomizationItemsContainer(
+          title: context.localization.title,
+          isTopDividerShown: true,
           children: [
-            CustomizationItemsContainer(
-              title: context.localization.title,
-              isTopDividerShown: true,
-              children: [
-                CustomizationMultilineTextField(
-                  maxHeight: AppDimensions.sizeL,
-                  onChanged: (title) => widget.onChange(
-                    data.copyWith(title: title),
-                  ),
-                ),
-              ],
-            ),
-            CustomizationItemsContainer(
-              title: context.localization.subtitle,
-              children: [
-                CustomizationMultilineTextField(
-                  maxHeight: AppDimensions.sizeL,
-                  onChanged: (subtitle) => widget.onChange(
-                    data.copyWith(title: subtitle),
-                  ),
-                ),
-              ],
-            ),
-            CustomizationItemsContainer(
-              title: context.localization.primary_button,
-              children: [
-                CustomizationMultilineTextField(
-                  maxHeight: AppDimensions.sizeL,
-                  onChanged: (text) => widget.onChange(
-                    data.copyWith(buttonText: text),
-                  ),
-                ),
-              ],
-            ),
-            CustomizationItemsContainer(
-              itemsPadding: const EdgeInsets.all(
-                AppDimensions.marginM,
+            CustomizationMultilineTextField(
+              value: widget.editable.title,
+              maxHeight: AppDimensions.sizeL,
+              onChanged: (title) => widget.onChange(
+                widget.editable.copyWith(title: title),
               ),
-              children: [
-                SecondaryButtonCustomizationItem(
-                  // TODO(dev): Do we plan to change title?
-                  onChanged: (canSkip, title) => widget.onChange(
-                    data.copyWith(isSkip: canSkip),
-                  ),
-                ),
-              ],
             ),
           ],
-        );
-      },
+        ),
+        CustomizationItemsContainer(
+          title: context.localization.subtitle,
+          children: [
+            CustomizationMultilineTextField(
+              value: widget.editable.subtitle,
+              maxHeight: AppDimensions.sizeL,
+              onChanged: (subtitle) => widget.onChange(
+                widget.editable.copyWith(subtitle: subtitle),
+              ),
+            ),
+          ],
+        ),
+        CustomizationItemsContainer(
+          title: context.localization.primary_button,
+          children: [
+            CustomizationMultilineTextField(
+              value: widget.editable.buttonText,
+              maxHeight: AppDimensions.sizeL,
+              onChanged: (text) => widget.onChange(
+                widget.editable.copyWith(buttonText: text),
+              ),
+            ),
+          ],
+        ),
+        CustomizationItemsContainer(
+          itemsPadding: const EdgeInsets.all(
+            AppDimensions.marginM,
+          ),
+          children: [
+            SecondaryButtonCustomizationItem(
+              // TODO(dev): Do we plan to change title?
+              onChanged: (canSkip, title) => widget.onChange(
+                widget.editable.copyWith(isSkip: canSkip),
+              ),
+            ),
+          ],
+        ),
+      ],
     );
   }
 }

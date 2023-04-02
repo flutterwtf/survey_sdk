@@ -37,17 +37,16 @@ class _BuilderPageState extends State<BuilderPage> {
         bloc: _cubit,
         listener: (oldState, newState) {
           final selected = (newState is EditQuestionBuilderState)
-              ? newState.selectedQuestion
-              : null;
-          if (selected != null) {
-            // TODO(dev): animate to edited
-            //  _surveyController.animateTo(selected.index - 1).
+              ? newState.selectedIndex
+              : 0;
+          if (selected != 0) {
+            _surveyController.animateTo(selected - 1);
           }
         },
         builder: (context, state) => Scaffold(
           appBar: AppBar(
             title: const _BuilderPageTabBar(),
-            actions: const [_CreateTab(), _PreviewTab()],
+            actions: const [_ImportButton(), _ExportButton()],
             centerTitle: true,
           ),
           body: Row(
@@ -70,7 +69,9 @@ class _BuilderPageState extends State<BuilderPage> {
               EditorBar(
                 onChange: _cubit.updateQuestionData,
                 editableQuestion: (state is EditQuestionBuilderState)
-                    ? state.selectedQuestion
+                    ? state.surveyData.questions.firstWhere(
+                        (q) => q.index == state.selectedIndex,
+                      )
                     : null,
               ),
             ],
@@ -111,8 +112,8 @@ class _BuilderPageTabBar extends StatelessWidget {
   }
 }
 
-class _CreateTab extends StatelessWidget {
-  const _CreateTab();
+class _ImportButton extends StatelessWidget {
+  const _ImportButton();
 
   @override
   Widget build(BuildContext context) {
@@ -144,8 +145,8 @@ class _CreateTab extends StatelessWidget {
   }
 }
 
-class _PreviewTab extends StatelessWidget {
-  const _PreviewTab();
+class _ExportButton extends StatelessWidget {
+  const _ExportButton();
 
   @override
   Widget build(BuildContext context) {
@@ -160,8 +161,8 @@ class _PreviewTab extends StatelessWidget {
         onPressed: () {
           showExportFloatingWindow(
             context,
-            onDownloadPressed: cubit.downloadExportedQuestions,
-            onCopyPressed: () {},
+            onDownloadPressed: cubit.downloadSurveyData,
+            onCopy: cubit.copySurveyData,
           );
         },
         child: Padding(

@@ -14,23 +14,23 @@ abstract class BuilderState extends Equatable {
 }
 
 class EditQuestionBuilderState extends BuilderState {
-  final QuestionData? selectedQuestion;
+  final int selectedIndex;
 
   @override
-  List<Object?> get props => [selectedQuestion, surveyData];
+  List<Object?> get props => [selectedIndex, surveyData];
 
   const EditQuestionBuilderState({
-    required this.selectedQuestion,
+    required this.selectedIndex,
     required super.surveyData,
   });
 
   @override
   BuilderState copyWith({
-    QuestionData? selectedQuestion,
+    int? selectedIndex,
     SurveyData? surveyData,
   }) {
     return EditQuestionBuilderState(
-      selectedQuestion: selectedQuestion ?? this.selectedQuestion,
+      selectedIndex: selectedIndex ?? this.selectedIndex,
       surveyData: surveyData ?? this.surveyData,
     );
   }

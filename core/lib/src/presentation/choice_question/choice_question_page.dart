@@ -39,9 +39,6 @@ class _ChoiceQuestionPageState extends State<ChoiceQuestionPage>
   bool _canBeSend = false;
   List<String> _selectedItems = List.empty();
 
-  ChoiceQuestionTheme get _theme =>
-      widget.data.theme ?? const ChoiceQuestionTheme.common();
-
   @override
   void initState() {
     final selectedOptions = widget.data.selectedOptions;
@@ -66,6 +63,8 @@ class _ChoiceQuestionPageState extends State<ChoiceQuestionPage>
 
   @override
   Widget build(BuildContext context) {
+    final theme = widget.data.theme ??
+        Theme.of(context).extension<ChoiceQuestionTheme>()!;
     final content = widget.data.content;
     final options = widget.data.options;
     return Padding(
@@ -98,8 +97,8 @@ class _ChoiceQuestionPageState extends State<ChoiceQuestionPage>
                 ? _QuestionCheckboxes(
                     options: options,
                     onChanged: _onInputChanged,
-                    activeColor: _theme.activeColor,
-                    inactiveColor: _theme.inactiveColor,
+                    activeColor: theme.activeColor,
+                    inactiveColor: theme.inactiveColor,
                     selectedOptions: List.of(_selectedItems),
                   )
                 : _QuestionRadioButtons(
@@ -109,8 +108,8 @@ class _ChoiceQuestionPageState extends State<ChoiceQuestionPage>
                     onChanged: (selectedItem) => _onInputChanged(
                       selectedItem == null ? null : [selectedItem],
                     ),
-                    activeColor: _theme.activeColor,
-                    inactiveColor: _theme.inactiveColor,
+                    activeColor: theme.activeColor,
+                    inactiveColor: theme.inactiveColor,
                   ),
           ),
           const Spacer(),

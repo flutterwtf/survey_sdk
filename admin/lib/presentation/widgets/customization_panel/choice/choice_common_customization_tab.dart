@@ -7,6 +7,7 @@ import 'package:survey_admin/presentation/utils/utils.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/color_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/radius_customization_item.dart';
+import 'package:survey_admin/presentation/widgets/customization_items/text_style_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/customization_tab.dart';
 import 'package:survey_core/survey_core.dart';
 
@@ -29,10 +30,7 @@ class CommonCustomizationTabState
     extends CustomizationTabState<ChoiceCommonCustomizationTab> {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<BuilderCubit, BuilderState>(
-      builder: (context, state) {
-        final data = widget.editable;
-        final theme = data.theme ?? const ChoiceQuestionTheme.common();
+        final theme = widget.editable.theme ?? const ChoiceQuestionTheme.common();
         return ListView(
           children: [
             CustomizationItemsContainer(
@@ -42,7 +40,7 @@ class CommonCustomizationTabState
                 ColorCustomizationItem(
                   initialColor: AppColors.white,
                   onColorPicked: (color) => widget.onChange(
-                    data.copyWith(
+                    widget.editable.copyWith(
                       theme: theme.copyWith(fill: color),
                     ),
                   ),
@@ -52,16 +50,16 @@ class CommonCustomizationTabState
             CustomizationItemsContainer(
               title: context.localization.title,
               children: [
-                ColorCustomizationItem(
+                TextStyleCustomizationItem(
                   initialColor: AppColors.black,
                   onColorPicked: (color) => widget.onChange(
-                    data.copyWith(
+                    widget.editable.copyWith(
                       theme: theme.copyWith(titleColor: color),
                     ),
                   ),
-                  initialSize: AppFonts.sizeL.toString(),
+                  initialSize: AppFonts.sizeL,
                   onSizeChanged: (size) => widget.onChange(
-                    data.copyWith(
+                    widget.editable.copyWith(
                       theme: theme.copyWith(titleSize: size),
                     ),
                   ),
@@ -71,16 +69,16 @@ class CommonCustomizationTabState
             CustomizationItemsContainer(
               title: context.localization.subtitle,
               children: [
-                ColorCustomizationItem(
+                TextStyleCustomizationItem(
                   initialColor: AppColors.black,
                   onColorPicked: (color) => widget.onChange(
-                    data.copyWith(
+                    widget.editable.copyWith(
                       theme: theme.copyWith(subtitleColor: color),
                     ),
                   ),
-                  initialSize: AppFonts.sizeS.toString(),
+                  initialSize: AppFonts.sizeS,
                   onSizeChanged: (size) => widget.onChange(
-                    data.copyWith(
+                    widget.editable.copyWith(
                       theme: theme.copyWith(subtitleSize: size),
                     ),
                   ),
@@ -90,16 +88,16 @@ class CommonCustomizationTabState
             CustomizationItemsContainer(
               title: context.localization.button,
               children: [
-                ColorCustomizationItem(
+                TextStyleCustomizationItem(
                   initialColor: AppColors.black,
                   onColorPicked: (color) => widget.onChange(
-                    data.copyWith(
+                    widget.editable.copyWith(
                       theme: theme.copyWith(buttonTextColor: color),
                     ),
                   ),
-                  initialSize: AppFonts.sizeS.toString(),
+                  initialSize: AppFonts.sizeS,
                   onSizeChanged: (size) => widget.onChange(
-                    data.copyWith(
+                    widget.editable.copyWith(
                       theme: theme.copyWith(buttonTextSize: size),
                     ),
                   ),
@@ -107,7 +105,7 @@ class CommonCustomizationTabState
                 RadiusCustomizationItem(
                   initialValue: AppDimensions.circularRadiusS,
                   onRadiusChanged: (radius) => widget.onChange(
-                    data.copyWith(
+                    widget.editable.copyWith(
                       theme: theme.copyWith(buttonRadius: radius),
                     ),
                   ),
@@ -116,7 +114,5 @@ class CommonCustomizationTabState
             ),
           ],
         );
-      },
-    );
   }
 }

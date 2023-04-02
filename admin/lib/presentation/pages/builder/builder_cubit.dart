@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:survey_admin/domain/repository_interfaces/file_system_repository.dart.dart';
 import 'package:survey_admin/domain/repository_interfaces/session_storage_repository.dart';
@@ -16,21 +19,19 @@ class BuilderCubit extends Cubit<BuilderState> {
   ) : super(
           EditQuestionBuilderState(
             surveyData: i.get<CommonData>().surveyData,
-            selectedQuestion: null,
+            selectedIndex: 1,
           ),
         ) {
     _init();
   }
 
-  void downloadExportedQuestions() {
-    final questions = state.surveyData.questions;
-    if (questions.isNotEmpty) {
-      final rawMap = <String, dynamic>{};
-      for (final element in questions) {
-        rawMap[element.index.toString()] = element.toJson();
-      }
-      _fileSystemRepository.downloadSurveyData(rawMap);
-    }
+  void downloadSurveyData() {
+    _fileSystemRepository.downloadSurveyData(state.surveyData.toJson());
+  }
+
+  void copySurveyData() {
+    final jsonText = jsonEncode(state.surveyData.toJson());
+    Clipboard.setData(ClipboardData(text: jsonText));
   }
 
   void updateCommon(QuestionData data) {
@@ -78,7 +79,7 @@ class BuilderCubit extends Cubit<BuilderState> {
 
   void select(QuestionData data) => emit(
         EditQuestionBuilderState(
-          selectedQuestion: data,
+          selectedIndex: data.index,
           surveyData: state.surveyData,
         ),
       );
@@ -108,14 +109,6 @@ class BuilderCubit extends Cubit<BuilderState> {
     emit(
       state.copyWith(
         surveyData: state.surveyData.copyWith(questions: questions),
-      ),
-    );
-  }
-
-  void updateTheme(CommonTheme theme) {
-    emit(
-      state.copyWith(
-        surveyData: state.surveyData.copyWith(commonTheme: theme),
       ),
     );
   }
