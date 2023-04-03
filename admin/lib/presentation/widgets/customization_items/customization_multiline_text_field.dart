@@ -3,7 +3,7 @@ import 'package:survey_admin/presentation/app/localization/app_localizations_ext
 import 'package:survey_admin/presentation/utils/utils.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
 
-class CustomizationMultilineTextField extends StatelessWidget {
+class CustomizationMultilineTextField extends StatefulWidget {
   final double maxHeight;
   final void Function(String text) onChanged;
   final String value;
@@ -16,15 +16,20 @@ class CustomizationMultilineTextField extends StatelessWidget {
   });
 
   @override
+  State<CustomizationMultilineTextField> createState() => _CustomizationMultilineTextFieldState();
+}
+
+class _CustomizationMultilineTextFieldState extends State<CustomizationMultilineTextField> {
+  @override
   Widget build(BuildContext context) {
     /// LimitedBox, isCollapsed: true, maxLines: null - used to make
     /// this TextField expandable.
     return LimitedBox(
-      maxHeight: maxHeight,
+      maxHeight: widget.maxHeight,
       child: CustomizationTextField(
-        initialValue: value,
+        initialValue: widget.value,
         onChanged: (value) {
-          if (value != null) onChanged(value);
+          if (value != null) widget.onChanged(value);
         },
         style: context.theme.textTheme.bodyLarge,
         hintText: context.localization.enter_text,

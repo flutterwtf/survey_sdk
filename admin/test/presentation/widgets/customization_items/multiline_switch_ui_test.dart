@@ -60,7 +60,7 @@ void main() {
         await tester.pumpWidget(
           AppTester(
             child: MultilineSwitch(
-              isMultiline: true,
+              value: true,
               onChanged: ({
                 required bool isMultiline,
                 required int lineAmount,

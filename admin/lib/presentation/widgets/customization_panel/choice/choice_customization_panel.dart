@@ -42,8 +42,6 @@ class _ChoiceCustomizationPanelState extends State<ChoiceCustomizationPanel> {
         ),
         ChoiceContentCustomizationTab(
           onChange: widget.onChange,
-          // TODO(dev): do we need this?
-          key: UniqueKey(),
           title: context.localization.content,
           editable: widget.editable,
         ),

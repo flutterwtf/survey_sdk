@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:survey_admin/presentation/app/localization/app_localizations_ext.dart';
+import 'package:survey_admin/presentation/utils/double_input_formatter.dart';
 import 'package:survey_admin/presentation/utils/theme_extension.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/color_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
@@ -35,9 +36,13 @@ class _ColorThicknessCustomizationItemState
   }
 
   void _onThicknessChanged(String? text) {
-    final thickness = double.tryParse(text ?? '') ?? 0;
-    widget.onThicknessChanged(thickness);
-    setState(() => _controller.text = thickness.toString());
+      //It is not null anyway because of formatter
+      final textFieldText = text!;
+      final textToParse = textFieldText[textFieldText.length - 1] == '.'
+          ? textFieldText.substring(0, textFieldText.length - 1)
+          : textFieldText;
+      final thickness = double.tryParse(textToParse) ?? 0;
+      widget.onThicknessChanged(thickness);
   }
 
   @override
@@ -54,9 +59,7 @@ class _ColorThicknessCustomizationItemState
           child: CustomizationTextField(
             controller: _controller,
             inputFormatters: [
-              FilteringTextInputFormatter.allow(
-                RegExp(r'^(\d+){0,2}?\.?\d{0,2}'),
-              ),
+              DoubleInputFormatter(),
             ],
             onChanged: _onThicknessChanged,
             decoration: InputDecoration(

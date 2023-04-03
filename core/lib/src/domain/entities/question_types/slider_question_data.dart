@@ -7,13 +7,13 @@ import 'package:survey_core/src/domain/entities/themes/slider_question_theme.dar
 /// minimum and maximum range
 class SliderQuestionData extends QuestionData<SliderThemeData> {
   /// The minimum value of the slider
-  final num minValue;
+  final int minValue;
 
   /// The maximum value of the slider
-  final num maxValue;
+  final int maxValue;
 
   /// The initial value of the slider
-  final num initialValue;
+  final int initialValue;
   final int divisions;
   final SliderQuestionTheme? theme;
 
@@ -31,6 +31,7 @@ class SliderQuestionData extends QuestionData<SliderThemeData> {
         subtitle,
         isSkip,
         content,
+        theme,
       ];
 
   const SliderQuestionData({
@@ -84,9 +85,9 @@ class SliderQuestionData extends QuestionData<SliderThemeData> {
 
   @override
   SliderQuestionData copyWith({
-    num? minValue,
-    num? maxValue,
-    num? initialValue,
+    int? minValue,
+    int? maxValue,
+    int? initialValue,
     int? divisions,
     int? index,
     String? title,

@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:survey_admin/presentation/app/localization/app_localizations_ext.dart';
-import 'package:survey_admin/presentation/pages/builder/builder_cubit.dart';
-import 'package:survey_admin/presentation/pages/builder/builder_state.dart';
 import 'package:survey_admin/presentation/utils/constants/app_dimensions.dart';
 import 'package:survey_admin/presentation/utils/utils.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
@@ -35,7 +32,7 @@ class SliderContentCustomizationTabState
       children: [
         CustomizationItemsContainer(
           title: context.localization.title,
-          isTopDividerShown: true,
+          shouldShowTopDivider: true,
           children: [
             CustomizationMultilineTextField(
               value: widget.editable.title,
@@ -53,7 +50,7 @@ class SliderContentCustomizationTabState
               value: widget.editable.subtitle,
               maxHeight: AppDimensions.sizeXL,
               onChanged: (subtitle) => widget.onChange(
-                widget.editable.copyWith(title: subtitle),
+                widget.editable.copyWith(subtitle: subtitle),
               ),
             ),
           ],
@@ -62,6 +59,8 @@ class SliderContentCustomizationTabState
           title: context.localization.value,
           children: [
             MinMaxCustomizationItem(
+              initialMax: widget.editable.maxValue,
+              initialMin: widget.editable.minValue,
               onChanged: (min, max) => widget.onChange(
                 widget.editable.copyWith(minValue: min, maxValue: max),
               ),
@@ -72,6 +71,7 @@ class SliderContentCustomizationTabState
           title: context.localization.divisions,
           children: [
             DivisionsCustomizationItem(
+              initialValue: widget.editable.initialValue,
               onChanged: (divisions) => widget.onChange(
                 widget.editable.copyWith(divisions: divisions),
               ),

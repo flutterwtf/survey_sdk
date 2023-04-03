@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:survey_admin/presentation/utils/double_input_formatter.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/color_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
 
@@ -18,22 +18,28 @@ class TextStyleCustomizationItem extends StatefulWidget {
   });
 
   @override
-  State<TextStyleCustomizationItem> createState() => _TextStyleCustomizationItemState();
+  State<TextStyleCustomizationItem> createState() =>
+      _TextStyleCustomizationItemState();
 }
 
-class _TextStyleCustomizationItemState extends State<TextStyleCustomizationItem> {
+class _TextStyleCustomizationItemState
+    extends State<TextStyleCustomizationItem> {
   final _controller = TextEditingController();
 
   @override
   void initState() {
-    _controller.text = widget.initialSize.toString();
+    _controller.text =  widget.initialSize.toString();
     super.initState();
   }
 
   void _onSizeChanged(String? text) {
-    final size = double.tryParse(text ?? '') ?? 0;
-        widget.onSizeChanged(size);
-        setState(() => _controller.text = size.toString());
+    //It is not null anyway because of formatter
+    final textFieldText = text!;
+    final textToParse = textFieldText[textFieldText.length - 1] == '.'
+        ? textFieldText.substring(0, textFieldText.length - 1)
+        : textFieldText;
+    final size = double.tryParse(textToParse) ?? 0;
+    widget.onSizeChanged(size);
   }
 
   @override
@@ -50,9 +56,7 @@ class _TextStyleCustomizationItemState extends State<TextStyleCustomizationItem>
           child: CustomizationTextField(
             controller: _controller,
             inputFormatters: [
-              FilteringTextInputFormatter.allow(
-                RegExp(r'^(\d+){0,2}?\.?\d{0,2}'),
-              ),
+              DoubleInputFormatter(),
             ],
             onChanged: _onSizeChanged,
           ),

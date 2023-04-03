@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:survey_admin/presentation/app/localization/app_localizations_ext.dart';
-import 'package:survey_admin/presentation/pages/builder/builder_cubit.dart';
-import 'package:survey_admin/presentation/pages/builder/builder_state.dart';
 import 'package:survey_admin/presentation/utils/utils.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/color_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
@@ -27,19 +24,22 @@ class ChoiceButtonsCustomizationTab extends CustomizationTab {
 
 class ChoiceButtonsCustomizationTabState
     extends CustomizationTabState<ChoiceButtonsCustomizationTab> {
+  ChoiceQuestionTheme get theme =>
+      widget.editable.theme ?? const ChoiceQuestionTheme.common();
+
   @override
   Widget build(BuildContext context) {
-    final theme = widget.editable.theme ?? const ChoiceQuestionTheme.common();
     return ListView(
       children: [
         CustomizationItemsContainer(
-          isTopDividerShown: true,
+          shouldShowTopDivider: true,
           itemsPadding: const EdgeInsets.all(
             AppDimensions.marginM,
           ),
           children: [
             // TODO(dev): Move to the other tab.
             MultipleChoiceCustomizationItem(
+              value: widget.editable.isMultipleChoice,
               onChanged: (isMultipleChoice) => widget.onChange(
                 widget.editable.copyWith(isMultipleChoice: isMultipleChoice),
               ),
@@ -48,10 +48,10 @@ class ChoiceButtonsCustomizationTabState
         ),
         CustomizationItemsContainer(
           title: context.localization.active,
-          isTopDividerShown: true,
+          shouldShowTopDivider: true,
           children: [
             ColorCustomizationItem(
-              initialColor: AppColors.black,
+              initialColor: theme.activeColor,
               onColorPicked: (color) => widget.onChange(
                 widget.editable.copyWith(
                   theme: theme.copyWith(activeColor: color),
@@ -64,7 +64,7 @@ class ChoiceButtonsCustomizationTabState
           title: context.localization.inactive,
           children: [
             ColorCustomizationItem(
-              initialColor: AppColors.inactiveElementGrey,
+              initialColor: theme.inactiveColor,
               onColorPicked: (color) => widget.onChange(
                 widget.editable.copyWith(
                   theme: theme.copyWith(inactiveColor: color),

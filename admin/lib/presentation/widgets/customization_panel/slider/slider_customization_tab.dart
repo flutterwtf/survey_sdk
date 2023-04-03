@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:survey_admin/presentation/app/localization/app_localizations_ext.dart';
 import 'package:survey_admin/presentation/utils/utils.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/color_customization_item.dart';
+import 'package:survey_admin/presentation/widgets/customization_items/color_thickness_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/text_style_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/thickness_customization_item.dart';
@@ -25,14 +26,16 @@ class SliderCustomizationTab extends CustomizationTab {
 
 class SliderCustomizationTabState
     extends CustomizationTabState<SliderCustomizationTab> {
+  SliderQuestionTheme get theme =>
+      widget.editable.theme ?? const SliderQuestionTheme.common();
+
   @override
   Widget build(BuildContext context) {
-    final theme = widget.editable.theme ?? const SliderQuestionTheme.common();
     return ListView(
       children: [
         CustomizationItemsContainer(
           title: context.localization.thickness,
-          isTopDividerShown: true,
+          shouldShowTopDivider: true,
           children: [
             ThicknessCustomizationItem(
               onThicknessChanged: (value) {
@@ -47,7 +50,7 @@ class SliderCustomizationTabState
                   );
                 }
               },
-              initialSize: AppFonts.sizeL,
+              initialSize: theme.thickness,
             ),
           ],
         ),
@@ -55,7 +58,7 @@ class SliderCustomizationTabState
           title: context.localization.active,
           children: [
             ColorCustomizationItem(
-              initialColor: AppColors.switchBackgroundActive,
+              initialColor: theme.activeColor,
               onColorPicked: (color) => widget.onChange(
                 widget.editable.copyWith(
                   theme: theme.copyWith(activeColor: color),
@@ -68,7 +71,7 @@ class SliderCustomizationTabState
           title: context.localization.inactive,
           children: [
             ColorCustomizationItem(
-              initialColor: AppColors.switchBackgroundInactive,
+              initialColor: theme.inactiveColor,
               onColorPicked: (color) => widget.onChange(
                 widget.editable.copyWith(
                   theme: theme.copyWith(inactiveColor: color),
@@ -80,15 +83,15 @@ class SliderCustomizationTabState
         CustomizationItemsContainer(
           title: context.localization.thumb,
           children: [
-            TextStyleCustomizationItem(
-              initialColor: AppColors.textHintGrey,
+            ColorThicknessCustomizationItem(
+              initialColor: theme.thumbColor,
               onColorPicked: (color) => widget.onChange(
                 widget.editable.copyWith(
                   theme: theme.copyWith(thumbColor: color),
                 ),
               ),
-              initialSize: AppFonts.sizeL,
-              onSizeChanged: (radius) => widget.onChange(
+              initialThickness: theme.thumbRadius,
+              onThicknessChanged: (radius) => widget.onChange(
                 widget.editable.copyWith(
                   theme: theme.copyWith(thumbRadius: radius),
                 ),

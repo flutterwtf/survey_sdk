@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:survey_admin/presentation/app/localization/app_localizations_ext.dart';
-import 'package:survey_admin/presentation/pages/builder/builder_cubit.dart';
-import 'package:survey_admin/presentation/pages/builder/builder_state.dart';
 import 'package:survey_admin/presentation/utils/utils.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_multiline_text_field.dart';
@@ -34,7 +31,7 @@ class ChoiceContentCustomizationTabState
       children: [
         CustomizationItemsContainer(
           title: context.localization.title,
-          isTopDividerShown: true,
+          shouldShowTopDivider: true,
           children: [
             CustomizationMultilineTextField(
               value: widget.editable.title,

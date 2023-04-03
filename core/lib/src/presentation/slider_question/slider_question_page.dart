@@ -41,57 +41,66 @@ class _SliderQuestionPageState extends State<SliderQuestionPage> {
   Widget build(BuildContext context) {
     final theme = widget.data.theme ??
         Theme.of(context).extension<SliderQuestionTheme>()!;
-    return Padding(
-      padding: const EdgeInsets.only(
-        left: AppDimensions.margin2XL,
-        right: AppDimensions.margin2XL,
-        top: AppDimensions.margin3XL,
-        bottom: AppDimensions.marginXL,
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          QuestionTitle(
-            title: widget.data.title,
-          ),
-          Padding(
-            padding: const EdgeInsets.only(
-              top: AppDimensions.margin2XL,
+    return Scaffold(
+      backgroundColor: theme.fill,
+      body: Padding(
+        padding: const EdgeInsets.only(
+          left: AppDimensions.margin2XL,
+          right: AppDimensions.margin2XL,
+          top: AppDimensions.margin3XL,
+          bottom: AppDimensions.marginXL,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            QuestionTitle(
+              title: widget.data.title,
+              textSize: theme.titleSize,
+              textColor: theme.titleColor,
             ),
-            child: QuestionContent(
-              content: widget.data.subtitle,
+            Padding(
+              padding: const EdgeInsets.only(
+                top: AppDimensions.margin2XL,
+              ),
+              child: QuestionContent(
+                content: widget.data.subtitle,
+                textSize: theme.subtitleSize,
+                textColor: theme.subtitleColor,
+              ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: AppDimensions.marginM),
-            child: _QuestionSlider(
-              minValue: widget.data.minValue,
-              maxValue: widget.data.maxValue,
-              initialValue: widget.data.initialValue,
-              onChanged: (value) => setState(() => _answer = value),
-              theme: theme,
+            Padding(
+              padding: const EdgeInsets.only(top: AppDimensions.marginM),
+              child: _QuestionSlider(
+                minValue: widget.data.minValue,
+                maxValue: widget.data.maxValue,
+                initialValue: widget.data.initialValue,
+                onChanged: (value) => setState(() => _answer = value),
+                theme: theme,
+                divisions: widget.data.divisions,
+              ),
             ),
-          ),
-          const Spacer(),
-          QuestionBottomButton(
-            text: context.localization.next,
-            onPressed: () {
-              widget.onSend.call(
-                index: widget.data.index,
-                answer: QuestionAnswer<double>(_answer),
-              );
-            },
-          ),
-        ],
+            const Spacer(),
+            QuestionBottomButton(
+              text: context.localization.next,
+              onPressed: () {
+                widget.onSend.call(
+                  index: widget.data.index,
+                  answer: QuestionAnswer<double>(_answer),
+                );
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
 }
 
 class _QuestionSlider extends StatefulWidget {
-  final num minValue;
-  final num maxValue;
-  final num initialValue;
+  final int minValue;
+  final int maxValue;
+  final int initialValue;
+  final int divisions;
   final ValueChanged<double> onChanged;
   final SliderQuestionTheme theme;
 
@@ -99,6 +108,7 @@ class _QuestionSlider extends StatefulWidget {
     required this.minValue,
     required this.maxValue,
     required this.onChanged,
+    required this.divisions,
     required this.theme,
     required this.initialValue,
   });
@@ -137,6 +147,7 @@ class _QuestionSliderState extends State<_QuestionSlider> {
       child: Column(
         children: [
           Slider(
+            divisions: widget.divisions,
             value: _value,
             onChanged: (newValue) => setState(() {
               _value = _onlyInt ? newValue.roundToDouble() : newValue;

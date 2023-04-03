@@ -65,65 +65,76 @@ class _ChoiceQuestionPageState extends State<ChoiceQuestionPage>
   Widget build(BuildContext context) {
     final theme = widget.data.theme ??
         Theme.of(context).extension<ChoiceQuestionTheme>()!;
-    final content = widget.data.content;
+    final content = widget.data.subtitle;
     final options = widget.data.options;
-    return Padding(
-      padding: const EdgeInsets.only(
-        left: AppDimensions.margin2XL,
-        right: AppDimensions.margin2XL,
-        top: AppDimensions.margin3XL,
-        bottom: AppDimensions.marginXL,
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          QuestionTitle(
-            title: widget.data.title,
-          ),
-          if (content != null)
+    return Scaffold(
+      backgroundColor: theme.fill,
+      body: Padding(
+        padding: const EdgeInsets.only(
+          left: AppDimensions.margin2XL,
+          right: AppDimensions.margin2XL,
+          top: AppDimensions.margin3XL,
+          bottom: AppDimensions.marginXL,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            QuestionTitle(
+              title: widget.data.title,
+              textColor: theme.titleColor,
+              textSize: theme.titleSize,
+            ),
+            if (content != null)
+              Padding(
+                padding: const EdgeInsets.only(
+                  top: AppDimensions.marginXL,
+                ),
+                child: QuestionContent(
+                  content: content,
+                  textColor: theme.subtitleColor,
+                  textSize: theme.subtitleSize,
+                ),
+              ),
             Padding(
               padding: const EdgeInsets.only(
-                top: AppDimensions.marginXL,
+                top: AppDimensions.margin2XL,
               ),
-              child: QuestionContent(
-                content: content,
-              ),
-            ),
-          Padding(
-            padding: const EdgeInsets.only(
-              top: AppDimensions.margin2XL,
-            ),
-            child: widget.data.isMultipleChoice
-                ? _QuestionCheckboxes(
-                    options: options,
-                    onChanged: _onInputChanged,
-                    activeColor: theme.activeColor,
-                    inactiveColor: theme.inactiveColor,
-                    selectedOptions: List.of(_selectedItems),
-                  )
-                : _QuestionRadioButtons(
-                    selectedOption:
-                        _selectedItems.isEmpty ? null : _selectedItems.first,
-                    options: options,
-                    onChanged: (selectedItem) => _onInputChanged(
-                      selectedItem == null ? null : [selectedItem],
+              child: widget.data.isMultipleChoice
+                  ? _QuestionCheckboxes(
+                      options: options,
+                      onChanged: _onInputChanged,
+                      activeColor: theme.activeColor,
+                      inactiveColor: theme.inactiveColor,
+                      selectedOptions: List.of(_selectedItems),
+                    )
+                  : _QuestionRadioButtons(
+                      selectedOption:
+                          _selectedItems.isEmpty ? null : _selectedItems.first,
+                      options: options,
+                      onChanged: (selectedItem) => _onInputChanged(
+                        selectedItem == null ? null : [selectedItem],
+                      ),
+                      activeColor: theme.activeColor,
+                      inactiveColor: theme.inactiveColor,
                     ),
-                    activeColor: theme.activeColor,
-                    inactiveColor: theme.inactiveColor,
-                  ),
-          ),
-          const Spacer(),
-          QuestionBottomButton(
-            text: context.localization.next,
-            onPressed: () {
-              widget.onSend.call(
-                index: widget.data.index,
-                answer: QuestionAnswer<List<String>>(_selectedItems),
-              );
-            },
-            isEnabled: widget.data.isSkip || _canBeSend,
-          ),
-        ],
+            ),
+            const Spacer(),
+            QuestionBottomButton(
+              text: context.localization.next,
+              onPressed: () {
+                widget.onSend.call(
+                  index: widget.data.index,
+                  answer: QuestionAnswer<List<String>>(_selectedItems),
+                );
+              },
+              isEnabled: widget.data.isSkip || _canBeSend,
+              color: theme.buttonFill,
+              textColor: theme.buttonTextColor,
+              textSize: theme.buttonTextSize,
+              radius: theme.buttonRadius,
+            ),
+          ],
+        ),
       ),
     );
   }

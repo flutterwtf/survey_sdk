@@ -30,6 +30,9 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
         isSkip,
         content,
         selectedOptions,
+        theme,
+        ruleType,
+        ruleValue,
       ];
 
   const ChoiceQuestionData({

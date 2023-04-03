@@ -10,7 +10,7 @@ class InputQuestionData extends QuestionData<InputQuestionTheme> {
 
   /// Text to display as a hint in the input field
   final String? hintText;
-  final String? buttonText;
+  final String buttonText;
   final InputQuestionTheme? theme;
 
   @override
@@ -30,6 +30,7 @@ class InputQuestionData extends QuestionData<InputQuestionTheme> {
       ];
 
   const InputQuestionData({
+    required this.buttonText,
     required this.validator,
     required this.theme,
     required super.index,
@@ -38,7 +39,6 @@ class InputQuestionData extends QuestionData<InputQuestionTheme> {
     required super.isSkip,
     super.content,
     this.hintText,
-    this.buttonText,
   });
 
   InputQuestionData.common({int index = 0})
@@ -52,6 +52,7 @@ class InputQuestionData extends QuestionData<InputQuestionTheme> {
           isSkip: false,
           content: 'Doing so can help you gather the information most '
               'relevant and useful to you',
+          buttonText: 'NEXT',
         );
 
   factory InputQuestionData.fromJson(Map<String, dynamic> json) {
@@ -66,7 +67,7 @@ class InputQuestionData extends QuestionData<InputQuestionTheme> {
       content: json['content'],
       validator: InputValidator.fromJson(payload),
       hintText: payload['hintText'],
-      buttonText: payload['buttonText'],
+      buttonText: payload['buttonText'] ?? '',
     );
   }
 

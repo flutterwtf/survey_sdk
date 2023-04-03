@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:survey_admin/presentation/app/localization/app_localizations_ext.dart';
-import 'package:survey_admin/presentation/pages/builder/builder_cubit.dart';
-import 'package:survey_admin/presentation/pages/builder/builder_state.dart';
-import 'package:survey_admin/presentation/utils/utils.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/color_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/radius_customization_item.dart';
@@ -37,7 +33,7 @@ class CommonCustomizationTabState
       children: [
         CustomizationItemsContainer(
           title: context.localization.fill,
-          isTopDividerShown: true,
+          shouldShowTopDivider: true,
           children: [
             ColorCustomizationItem(
               initialColor: theme.fill,
@@ -72,13 +68,13 @@ class CommonCustomizationTabState
           title: context.localization.subtitle,
           children: [
             TextStyleCustomizationItem(
-              initialColor: AppColors.black,
+              initialColor: theme.subtitleColor,
               onColorPicked: (color) => widget.onChange(
                 widget.editable.copyWith(
                   theme: theme.copyWith(subtitleColor: color),
                 ),
               ),
-              initialSize: AppFonts.sizeS,
+              initialSize: theme.subtitleSize,
               onSizeChanged: (size) => widget.onChange(
                 widget.editable.copyWith(
                   theme: theme.copyWith(subtitleSize: size),
@@ -90,14 +86,22 @@ class CommonCustomizationTabState
         CustomizationItemsContainer(
           title: context.localization.button,
           children: [
+            ColorCustomizationItem(
+              initialColor: theme.buttonFill,
+              onColorPicked: (color) => widget.onChange(
+                widget.editable.copyWith(
+                  theme: theme.copyWith(buttonFill: color),
+                ),
+              ),
+            ),
             TextStyleCustomizationItem(
-              initialColor: AppColors.black,
+              initialColor: theme.buttonTextColor,
               onColorPicked: (color) => widget.onChange(
                 widget.editable.copyWith(
                   theme: theme.copyWith(buttonTextColor: color),
                 ),
               ),
-              initialSize: AppFonts.sizeS,
+              initialSize: theme.buttonTextSize,
               onSizeChanged: (size) => widget.onChange(
                 widget.editable.copyWith(
                   theme: theme.copyWith(buttonTextSize: size),
@@ -105,7 +109,7 @@ class CommonCustomizationTabState
               ),
             ),
             RadiusCustomizationItem(
-              initialValue: AppDimensions.circularRadiusS,
+              initialValue: theme.buttonRadius,
               onRadiusChanged: (radius) => widget.onChange(
                 widget.editable.copyWith(
                   theme: theme.copyWith(buttonRadius: radius),

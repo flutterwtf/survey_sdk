@@ -55,6 +55,7 @@ class CommonData {
       isSkip: false,
       content: context.localization.question_content,
       theme: const InputQuestionTheme.common(),
+      buttonText: context.localization.next,
     );
   }
 

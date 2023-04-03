@@ -10,7 +10,7 @@ import 'package:survey_core/src/presentation/utils/app_fonts.dart';
 class InputQuestionTheme extends ThemeExtension<InputQuestionTheme>
     with ApiObject, EquatableMixin {
   /// Background color of the text field. Common value is [Colors.white]
-  final Color backgroundColor;
+  final Color inputFill;
 
   /// Color of the border around the text field.
   /// Common value is [Colors.black]
@@ -35,12 +35,12 @@ class InputQuestionTheme extends ThemeExtension<InputQuestionTheme>
   final double textSize;
 
   /// Number of lines that the text field can display
-  final int? lines;
+  final int lines;
 
-  final double? verticalPadding;
+  final double verticalPadding;
 
   /// Padding added to the left and right of the text field
-  final double? horizontalPadding;
+  final double horizontalPadding;
   final bool isMultiline;
   final String errorText;
   final InputType inputType;
@@ -56,7 +56,7 @@ class InputQuestionTheme extends ThemeExtension<InputQuestionTheme>
 
   @override
   List<Object?> get props => [
-        backgroundColor,
+        inputFill,
         borderColor,
         borderWidth,
         inputType,
@@ -82,7 +82,7 @@ class InputQuestionTheme extends ThemeExtension<InputQuestionTheme>
 
   // TODO(dev): Add hint text.
   const InputQuestionTheme({
-    required this.backgroundColor,
+    required this.inputFill,
     required this.borderColor,
     required this.borderWidth,
     required this.hintColor,
@@ -101,13 +101,13 @@ class InputQuestionTheme extends ThemeExtension<InputQuestionTheme>
     required this.buttonTextColor,
     required this.buttonTextSize,
     required this.buttonRadius,
-    this.lines,
-    this.verticalPadding,
-    this.horizontalPadding,
+    required this.lines,
+    required this.verticalPadding,
+    required this.horizontalPadding,
   });
 
   InputQuestionTheme.fromJson(Map<String, dynamic> json)
-      : backgroundColor = Color(json['backgroundColor']),
+      : inputFill = Color(json['inputFill']),
         borderColor = Color(json['borderColor']),
         borderWidth = json['borderWidth'],
         hintColor = Color(json['hintColor']),
@@ -133,9 +133,10 @@ class InputQuestionTheme extends ThemeExtension<InputQuestionTheme>
   /// Default color and size values of input question page
   const InputQuestionTheme.common()
       : this(
-          backgroundColor: Colors.white,
+          inputFill: Colors.white,
           borderColor: Colors.black,
           borderWidth: 1,
+          lines: 1,
           hintColor: AppColors.textLightGrey,
           hintSize: AppFonts.sizeL,
           textColor: AppColors.black,
@@ -153,11 +154,13 @@ class InputQuestionTheme extends ThemeExtension<InputQuestionTheme>
           buttonTextColor: Colors.white,
           buttonTextSize: 12,
           buttonRadius: 10,
+          horizontalPadding: 14,
+          verticalPadding: 14,
         );
 
   @override
   Map<String, dynamic> toJson() => {
-        'backgroundColor': backgroundColor.value,
+        'inputFill': inputFill.value,
         'borderColor': borderColor.value,
         'borderWidth': borderWidth,
         'hintColor': hintColor.value,
@@ -183,7 +186,7 @@ class InputQuestionTheme extends ThemeExtension<InputQuestionTheme>
 
   @override
   InputQuestionTheme copyWith({
-    Color? backgroundColor,
+    Color? inputFill,
     Color? borderColor,
     double? borderWidth,
     Color? hintColor,
@@ -209,7 +212,7 @@ class InputQuestionTheme extends ThemeExtension<InputQuestionTheme>
     double? buttonRadius,
   }) {
     return InputQuestionTheme(
-      backgroundColor: backgroundColor ?? this.backgroundColor,
+      inputFill: inputFill ?? this.inputFill,
       borderColor: borderColor ?? this.borderColor,
       borderWidth: borderWidth ?? this.borderWidth,
       hintColor: hintColor ?? this.hintColor,
@@ -243,17 +246,17 @@ class InputQuestionTheme extends ThemeExtension<InputQuestionTheme>
       return this;
     }
     return InputQuestionTheme(
-      backgroundColor: Color.lerp(backgroundColor, other.backgroundColor, t)!,
+      inputFill: Color.lerp(inputFill, other.inputFill, t)!,
       borderColor: Color.lerp(borderColor, other.borderColor, t)!,
       borderWidth: lerpDouble(borderWidth, other.borderWidth, t)!,
       hintColor: Color.lerp(hintColor, other.hintColor, t)!,
       hintSize: lerpDouble(hintSize, other.hintSize, t)!,
       textColor: Color.lerp(textColor, other.textColor, t)!,
       textSize: lerpDouble(textSize, other.textSize, t)!,
-      lines: lerpDouble(lines, other.lines, t)?.toInt(),
-      verticalPadding: lerpDouble(verticalPadding, other.verticalPadding, t),
+      lines: lines,
+      verticalPadding: lerpDouble(verticalPadding, other.verticalPadding, t)!,
       horizontalPadding:
-          lerpDouble(horizontalPadding, other.horizontalPadding, t),
+          lerpDouble(horizontalPadding, other.horizontalPadding, t)!,
       isMultiline: isMultiline,
       inputType: inputType,
       errorText: errorText,

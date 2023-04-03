@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:survey_admin/presentation/app/localization/app_localizations_ext.dart';
-import 'package:survey_admin/presentation/pages/builder/builder_cubit.dart';
-import 'package:survey_admin/presentation/pages/builder/builder_state.dart';
 import 'package:survey_admin/presentation/utils/constants/app_dimensions.dart';
 import 'package:survey_admin/presentation/utils/utils.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
@@ -33,7 +30,7 @@ class InputContentCustomizationTabState
       children: [
         CustomizationItemsContainer(
           title: context.localization.title,
-          isTopDividerShown: true,
+          shouldShowTopDivider: true,
           children: [
             CustomizationMultilineTextField(
               value: widget.editable.title,
@@ -68,12 +65,11 @@ class InputContentCustomizationTabState
             ),
           ],
         ),
-        // TODO(dev): Kind of strange to put this here.
         CustomizationItemsContainer(
           title: context.localization.button,
           children: [
             CustomizationMultilineTextField(
-              value: widget.editable.buttonText ?? '',
+              value: widget.editable.buttonText,
               maxHeight: AppDimensions.maxTextFieldHeight,
               onChanged: (text) => widget.onChange(
                 widget.editable.copyWith(buttonText: text),

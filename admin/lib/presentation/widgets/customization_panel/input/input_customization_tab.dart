@@ -29,15 +29,19 @@ class InputCustomizationTab extends CustomizationTab {
 
 class InputCustomizationTabState
     extends CustomizationTabState<InputCustomizationTab> {
+  InputQuestionTheme get theme =>
+      widget.editable.theme ?? const InputQuestionTheme.common();
+
   @override
   Widget build(BuildContext context) {
-    final theme = widget.editable.theme ?? const InputQuestionTheme.common();
     return ListView(
       children: [
         CustomizationItemsContainer(
-          isTopDividerShown: true,
+          shouldShowTopDivider: true,
           children: [
             MultilineSwitch(
+              value: theme.isMultiline,
+              lines: theme.lines,
               onChanged: (isMultiline, lines) => widget.onChange(
                 widget.editable.copyWith(
                   theme: theme.copyWith(
@@ -53,11 +57,11 @@ class InputCustomizationTabState
           title: context.localization.fill,
           children: [
             ColorCustomizationItem(
-              initialColor: AppColors.white,
+              initialColor: theme.inputFill,
               onColorPicked: (color) => widget.onChange(
                 widget.editable.copyWith(
                   theme: theme.copyWith(
-                    backgroundColor: color,
+                    inputFill: color,
                   ),
                 ),
               ),
@@ -68,7 +72,7 @@ class InputCustomizationTabState
           title: context.localization.border,
           children: [
             ColorThicknessCustomizationItem(
-              initialColor: AppColors.black,
+              initialColor: theme.borderColor,
               onColorPicked: (color) => widget.onChange(
                 widget.editable.copyWith(
                   theme: theme.copyWith(
@@ -76,7 +80,7 @@ class InputCustomizationTabState
                   ),
                 ),
               ),
-              initialThickness: AppDimensions.defaultBorderWidth,
+              initialThickness: theme.borderWidth,
               onThicknessChanged: (width) => widget.onChange(
                 widget.editable.copyWith(
                   theme: theme.copyWith(
@@ -91,8 +95,8 @@ class InputCustomizationTabState
           title: context.localization.padding,
           children: [
             PaddingCustomizationItem(
-              initialHorizontalPadding: AppDimensions.marginS,
-              initialVerticalPadding: AppDimensions.marginS,
+              initialHorizontalPadding: theme.horizontalPadding,
+              initialVerticalPadding: theme.verticalPadding,
               // TODO(dev): Move theme change to a method.
               onHorizontalPaddingChange: (padding) => widget.onChange(
                 widget.editable.copyWith(
@@ -115,7 +119,7 @@ class InputCustomizationTabState
           title: context.localization.hint,
           children: [
             TextStyleCustomizationItem(
-              initialColor: AppColors.textLightGrey,
+              initialColor: theme.hintColor,
               onColorPicked: (color) => widget.onChange(
                 widget.editable.copyWith(
                   theme: theme.copyWith(
@@ -123,7 +127,7 @@ class InputCustomizationTabState
                   ),
                 ),
               ),
-              initialSize: AppFonts.sizeL,
+              initialSize: theme.hintSize,
               onSizeChanged: (size) => widget.onChange(
                 widget.editable.copyWith(
                   theme: theme.copyWith(
@@ -138,7 +142,7 @@ class InputCustomizationTabState
           title: context.localization.text,
           children: [
             TextStyleCustomizationItem(
-              initialColor: AppColors.black,
+              initialColor: theme.textColor,
               onColorPicked: (color) => widget.onChange(
                 widget.editable.copyWith(
                   theme: theme.copyWith(
@@ -146,7 +150,7 @@ class InputCustomizationTabState
                   ),
                 ),
               ),
-              initialSize: AppFonts.sizeL,
+              initialSize: theme.textSize,
               onSizeChanged: (size) => widget.onChange(
                 widget.editable.copyWith(
                   theme: theme.copyWith(

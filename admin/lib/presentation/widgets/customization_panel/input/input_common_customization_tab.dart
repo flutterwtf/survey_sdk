@@ -29,17 +29,19 @@ class InputCommonCustomizationTab extends CustomizationTab {
 
 class CommonCustomizationTabState
     extends CustomizationTabState<InputCommonCustomizationTab> {
+  InputQuestionTheme get theme =>
+      widget.editable.theme ?? const InputQuestionTheme.common();
+
   @override
   Widget build(BuildContext context) {
-    final theme = widget.editable.theme ?? const InputQuestionTheme.common();
     return ListView(
       children: [
         CustomizationItemsContainer(
           title: context.localization.fill,
-          isTopDividerShown: true,
+          shouldShowTopDivider: true,
           children: [
             ColorCustomizationItem(
-              initialColor: AppColors.white,
+              initialColor: theme.fill,
               onColorPicked: (color) => widget.onChange(
                 widget.editable.copyWith(
                   theme: theme.copyWith(fill: color),
@@ -52,13 +54,13 @@ class CommonCustomizationTabState
           title: context.localization.title,
           children: [
             TextStyleCustomizationItem(
-              initialColor: AppColors.black,
+              initialColor: theme.titleColor,
               onColorPicked: (color) => widget.onChange(
                 widget.editable.copyWith(
                   theme: theme.copyWith(titleColor: color),
                 ),
               ),
-              initialSize: AppFonts.sizeL,
+              initialSize: theme.titleSize,
               onSizeChanged: (size) => widget.onChange(
                 widget.editable.copyWith(
                   theme: theme.copyWith(titleSize: size),
@@ -71,13 +73,13 @@ class CommonCustomizationTabState
           title: context.localization.subtitle,
           children: [
             TextStyleCustomizationItem(
-              initialColor: AppColors.black,
+              initialColor: theme.subtitleColor,
               onColorPicked: (color) => widget.onChange(
                 widget.editable.copyWith(
                   theme: theme.copyWith(subtitleColor: color),
                 ),
               ),
-              initialSize: AppFonts.sizeS,
+              initialSize: theme.subtitleSize,
               onSizeChanged: (size) => widget.onChange(
                 widget.editable.copyWith(
                   theme: theme.copyWith(subtitleSize: size),
@@ -89,14 +91,22 @@ class CommonCustomizationTabState
         CustomizationItemsContainer(
           title: context.localization.button,
           children: [
+            ColorCustomizationItem(
+              initialColor: theme.buttonFill,
+              onColorPicked: (color) => widget.onChange(
+                widget.editable.copyWith(
+                  theme: theme.copyWith(buttonFill: color),
+                ),
+              ),
+            ),
             TextStyleCustomizationItem(
-              initialColor: AppColors.black,
+              initialColor: theme.buttonTextColor,
               onColorPicked: (color) => widget.onChange(
                 widget.editable.copyWith(
                   theme: theme.copyWith(buttonTextColor: color),
                 ),
               ),
-              initialSize: AppFonts.sizeS,
+              initialSize: theme.buttonTextSize,
               onSizeChanged: (size) => widget.onChange(
                 widget.editable.copyWith(
                   theme: theme.copyWith(buttonTextSize: size),

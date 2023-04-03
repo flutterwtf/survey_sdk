@@ -47,7 +47,7 @@ class _OptionCustomizationItemState extends State<OptionCustomizationItem> {
       widget.onRuleValueChanged(0);
     }
     setState(() => _options.remove(option));
-    widget.onChanged(_options);
+    widget.onChanged(List.of(_options));
   }
 
   @override

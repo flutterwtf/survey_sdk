@@ -33,8 +33,6 @@ class _InputCustomizationPanelState extends State<InputCustomizationPanel> {
         ),
         InputCustomizationTab(
           onChange: widget.onChange,
-          // TODO(dev): do we need this here?
-          key: UniqueKey(),
           title: context.localization.input,
           editable: widget.editable,
         ),

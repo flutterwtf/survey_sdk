@@ -21,6 +21,7 @@ class ColorCustomizationItem extends StatefulWidget {
 class _ColorCustomizationItemState extends State<ColorCustomizationItem> {
   late Color _pickedColor;
   final TextEditingController _controller = TextEditingController();
+  final FocusNode _focusNode = FocusNode();
   bool _isPickerOpened = false;
   final _pickerAreaHeightPercent = 0.4;
   final _lengthLimit = 8;
@@ -31,6 +32,7 @@ class _ColorCustomizationItemState extends State<ColorCustomizationItem> {
     super.initState();
     _controller.text = _colorToString(widget.initialColor);
     _pickedColor = widget.initialColor;
+    _focusNode.addListener(_complete);
   }
 
   void _onChanged(String? value) {
@@ -51,12 +53,26 @@ class _ColorCustomizationItemState extends State<ColorCustomizationItem> {
     });
   }
 
+  void _complete() {
+    if (!_focusNode.hasFocus) {
+      _controller
+        ..text = _colorToString(_pickedColor)
+        ..selection = TextSelection.collapsed(
+          offset: _controller.text.length,
+        );
+    }
+  }
+
   String _colorToString(Color color) =>
-      color.value.toRadixString(_radix).toUpperCase();
+      color.value.toRadixString(_radix).toUpperCase().padRight(
+            _lengthLimit,
+            '0',
+          );
 
   @override
   void dispose() {
     _controller.dispose();
+    _focusNode.removeListener(_complete);
     super.dispose();
   }
 
@@ -83,6 +99,7 @@ class _ColorCustomizationItemState extends State<ColorCustomizationItem> {
               child: Container(
                 margin: const EdgeInsets.all(AppDimensions.margin2XS),
                 child: CustomizationTextField(
+                  focusNode: _focusNode,
                   controller: _controller,
                   inputFormatters: [
                     // TODO(dev): move input formatters?
