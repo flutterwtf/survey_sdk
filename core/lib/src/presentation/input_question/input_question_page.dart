@@ -69,96 +69,109 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
     final isValid = _textFieldKey.currentState?.isValid;
     return Scaffold(
       backgroundColor: theme.fill,
-      body: Padding(
-        padding: const EdgeInsets.only(
-          left: AppDimensions.margin2XL,
-          right: AppDimensions.margin2XL,
-          top: AppDimensions.margin3XL,
-          bottom: AppDimensions.marginXL,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            QuestionTitle(
-              title: widget.data.title,
-              textSize: theme.titleSize,
-              textColor: theme.titleColor,
-            ),
-            Padding(
+      body: CustomScrollView(
+        slivers: [
+          SliverFillRemaining(
+            hasScrollBody: false,
+            child: Padding(
               padding: const EdgeInsets.only(
-                top: AppDimensions.margin2XL,
+                left: AppDimensions.margin2XL,
+                right: AppDimensions.margin2XL,
+                top: AppDimensions.margin3XL,
+                bottom: AppDimensions.marginXL,
               ),
-              child: QuestionContent(
-                content: widget.data.subtitle,
-                textSize: theme.subtitleSize,
-                textColor: theme.subtitleColor,
-              ),
-            ),
-            // TODO(dev): maybe create generic widget for some inputs
-            //  (date,number,string and etc).
-            Padding(
-              padding: EdgeInsets.only(
-                top: AppDimensions.marginM + theme.verticalPadding,
-                bottom: theme.verticalPadding,
-                left: theme.horizontalPadding,
-                right: theme.horizontalPadding,
-              ),
-              child: isDateType
-                  ? _InputDate(
-                      border: border,
-                      dateTime: _dateTime,
-                      hintText: hintText ?? '',
-                      onChanged: (value) {
-                        if (value != null) {
-                          setState(() => _dateTime = value);
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  if (widget.data.title.isNotEmpty)
+                    QuestionTitle(
+                      title: widget.data.title,
+                      textSize: theme.titleSize,
+                      textColor: theme.titleColor,
+                    ),
+                  if (widget.data.subtitle.isNotEmpty)
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        top: AppDimensions.marginS,
+                      ),
+                      child: QuestionContent(
+                        content: widget.data.subtitle,
+                        textSize: theme.subtitleSize,
+                        textColor: theme.subtitleColor,
+                      ),
+                    ),
+                  // TODO(dev): maybe create generic widget for some inputs
+                  //  (date,number,string and etc).
+                  Padding(
+                    padding: EdgeInsets.only(
+                      top: AppDimensions.marginM + theme.verticalPadding,
+                      bottom: theme.verticalPadding,
+                      left: theme.horizontalPadding,
+                      right: theme.horizontalPadding,
+                    ),
+                    child: isDateType
+                        ? _InputDate(
+                            border: border,
+                            dateTime: _dateTime,
+                            hintText: hintText ?? '',
+                            onChanged: (value) {
+                              if (value != null) {
+                                setState(() => _dateTime = value);
+                              }
+                            },
+                            textFieldKey: _textFieldKey,
+                            // TODO(dev): pass args instead of theme.
+                            theme: theme,
+                            validator: (text) => _canBeSkippedNumber
+                                ? null
+                                : widget.data.validator
+                                    .validate(_dateTime.toString()),
+                          )
+                        : _InputNumber(
+                            border: border,
+                            hintText: hintText ?? '',
+                            onChanged: (input) =>
+                                setState(() => _input = input),
+                            theme: theme,
+                            textFieldKey: _textFieldKey,
+                            validator: (text) => _canBeSkippedNumber
+                                ? null
+                                : widget.data.validator.validate(text),
+                          ),
+                  ),
+                  const Spacer(),
+                  Padding(
+                    padding: const EdgeInsets.only(top: AppDimensions.marginS),
+                    child: QuestionBottomButton(
+                      text: widget.data.buttonText,
+                      onPressed: () {
+                        if ((_textFieldKey.currentState?.validate() ?? false) ||
+                            widget.data.isSkip) {
+                          isDateType
+                              ? widget.onSend.call(
+                                  index: widget.data.index,
+                                  answer: QuestionAnswer<DateTime>(_dateTime),
+                                )
+                              : widget.onSend.call(
+                                  index: widget.data.index,
+                                  answer: QuestionAnswer<String>(_input),
+                                );
                         }
                       },
-                      textFieldKey: _textFieldKey,
-                      // TODO(dev): pass args instead of theme.
-                      theme: theme,
-                      validator: (text) => _canBeSkippedNumber
-                          ? null
-                          : widget.data.validator
-                              .validate(_dateTime.toString()),
-                    )
-                  : _InputNumber(
-                      border: border,
-                      hintText: hintText ?? '',
-                      onChanged: (input) => setState(() => _input = input),
-                      theme: theme,
-                      textFieldKey: _textFieldKey,
-                      validator: (text) => _canBeSkippedNumber
-                          ? null
-                          : widget.data.validator.validate(text),
+                      isEnabled: isDateType
+                          ? _canBeSkippedDate || (isValid ?? false)
+                          : _canBeSkippedNumber || (isValid ?? false),
+                      color: theme.buttonFill,
+                      textSize: theme.buttonTextSize,
+                      textColor: theme.buttonTextColor,
+                      radius: theme.buttonRadius,
                     ),
+                  ),
+                ],
+              ),
             ),
-            const Spacer(),
-            QuestionBottomButton(
-              text: widget.data.buttonText,
-              onPressed: () {
-                if ((_textFieldKey.currentState?.validate() ?? false) ||
-                    widget.data.isSkip) {
-                  isDateType
-                      ? widget.onSend.call(
-                          index: widget.data.index,
-                          answer: QuestionAnswer<DateTime>(_dateTime),
-                        )
-                      : widget.onSend.call(
-                          index: widget.data.index,
-                          answer: QuestionAnswer<String>(_input),
-                        );
-                }
-              },
-              isEnabled: isDateType
-                  ? _canBeSkippedDate || (isValid ?? false)
-                  : _canBeSkippedNumber || (isValid ?? false),
-              color: theme.buttonFill,
-              textSize: theme.buttonTextSize,
-              textColor: theme.buttonTextColor,
-              radius: theme.buttonRadius,
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

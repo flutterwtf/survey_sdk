@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:survey_core/src/domain/entities/input_validator.dart';
 import 'package:survey_core/src/domain/entities/question_answer.dart';
@@ -16,37 +17,10 @@ import 'package:survey_core/src/presentation/utils/data_to_widget_util.dart';
 void _mockOnSend({required int index, required QuestionAnswer answer}) {}
 
 void main() {
-  const mockSliderData = SliderQuestionData(
-    minValue: 0,
-    maxValue: 10,
-    initialValue: 5,
-    index: 0,
-    title: 'title',
-    subtitle: 'subtitle',
-    isSkip: false,
-  );
-  const mockChoiceData = ChoiceQuestionData(
-    isMultipleChoice: true,
-    options: ['option 1', 'option 2', 'option 3'],
-    index: 0,
-    title: 'title',
-    subtitle: 'subtitle',
-    isSkip: false,
-  );
-  final mockInputData = InputQuestionData(
-    validator: InputValidator.text(),
-    index: 0,
-    title: 'title',
-    subtitle: 'subtitle',
-    isSkip: false,
-  );
-  const mockIntroData = IntroQuestionData(
-    buttonText: 'button title',
-    index: 0,
-    title: 'title',
-    subtitle: 'subtitle',
-    isSkip: false,
-  );
+  const mockSliderData = SliderQuestionData.common();
+  const mockChoiceData = ChoiceQuestionData.common();
+  final mockInputData = InputQuestionData.common();
+  const mockIntroData = IntroQuestionData.common();
 
   group('createWidget method', () {
     test('Call with SliderQuestionData}', () {
@@ -109,9 +83,6 @@ class _BadQuestionData extends QuestionData {
         );
 
   @override
-  Map<String, dynamic> toJson() => throw UnimplementedError();
-
-  @override
   QuestionData copyWith({
     int? index,
     String? title,
@@ -119,6 +90,11 @@ class _BadQuestionData extends QuestionData {
     String? content,
     bool? isSkip,
   }) {
+    throw UnimplementedError();
+  }
+
+  @override
+  Map<String, dynamic> toJson({ThemeExtension<dynamic>? commonTheme}) {
     throw UnimplementedError();
   }
 }

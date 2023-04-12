@@ -12,8 +12,9 @@ class DoubleInputFormatter extends TextInputFormatter {
     TextEditingValue newValue,
   ) {
     //Trim leading zero
-    var newTrimmed =
-        newValue.text[0] == '0' ? newValue.text.substring(1) : newValue.text;
+    var newTrimmed =  newValue.text.isNotEmpty && newValue.text[0] == '0'
+        ? newValue.text.substring(1)
+        : newValue.text;
 
     // allow only numbers that are less than 100
     newTrimmed = newTrimmed.contains('.')

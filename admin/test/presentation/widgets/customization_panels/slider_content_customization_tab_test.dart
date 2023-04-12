@@ -2,6 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/slider/slider_content_customization_tab.dart';
+import 'package:survey_core/survey_core.dart';
 
 import '../app_tester.dart';
 
@@ -12,22 +13,15 @@ void main() {
     var title = '';
     var subtitle = '';
     late int divisions;
+
+    var data = const SliderQuestionData.common();
     final page = AppTester(
       child: SliderContentCustomizationTab(
         title: 'Content',
-        onDivisionsChanged: (newValue) {
-          divisions = newValue;
+        onChange: (QuestionData<dynamic> newData) {
+          data = newData as SliderQuestionData;
         },
-        onMinMaxChanged: (newMin, newMax) {
-          min = newMin;
-          max = newMax;
-        },
-        onSubtitleChanged: (newSubtitle) {
-          subtitle = newSubtitle;
-        },
-        onTitleChanged: (newTitle) {
-          title = newTitle;
-        },
+        editable: data,
       ),
     );
 
@@ -66,7 +60,7 @@ void main() {
         '1',
       );
       expect(find.text('1'), findsOneWidget);
-      expect(divisions, 1);
+      expect(data.divisions, 1);
     });
 
     testWidgets('Input text for Divisions', (tester) async {
@@ -75,9 +69,9 @@ void main() {
         find.widgetWithText(CustomizationItemsContainer, 'Divisions'),
         'q',
       );
-      final divisionsBeforeEnter = divisions;
+      final divisionsBeforeEnter = data.divisions;
       expect(find.text('q'), findsNothing);
-      expect(divisions, divisionsBeforeEnter);
+      expect(data.divisions, divisionsBeforeEnter);
     });
 
     testWidgets('Validate length > 3 input for Divisions', (tester) async {
@@ -87,32 +81,32 @@ void main() {
         '1234',
       );
       expect(find.text('1234'), findsNothing);
-      expect(divisions, 123);
+      expect(data.divisions, 123);
     });
 
     testWidgets('Input min,max for Value(num)', (tester) async {
       await tester.pumpWidget(page);
       await tester.enterText(find.byType(CustomizationTextField).first, '5');
       expect(find.text('5'), findsOneWidget);
-      expect(min, 5);
+      expect(data.minValue, 5);
 
       await tester.enterText(find.byType(CustomizationTextField).at(1), '15');
       expect(find.text('15'), findsOneWidget);
-      expect(max, 15);
+      expect(data.maxValue, 15);
     });
 
     testWidgets('Input min,max for Value(string)', (tester) async {
       await tester.pumpWidget(page);
 
-      final minBeforeEnter = min;
+      final minBeforeEnter = data.minValue;
       await tester.enterText(find.byType(CustomizationTextField).first, 'qw');
       expect(find.text('qw'), findsNothing);
-      expect(min, minBeforeEnter);
+      expect(data.minValue, minBeforeEnter);
 
       await tester.enterText(find.byType(CustomizationTextField).at(1), 'qw');
-      final maxBeforeEnter = max;
+      final maxBeforeEnter = data.maxValue;
       expect(find.text('qw'), findsNothing);
-      expect(max, maxBeforeEnter);
+      expect(data.maxValue, maxBeforeEnter);
     });
 
     testWidgets('Validate length > 6 input min,max for Value', (tester) async {
@@ -122,29 +116,29 @@ void main() {
         '9876543',
       );
       expect(find.text('987654'), findsOneWidget);
-      expect(max, 987654);
+      expect(data.maxValue, 987654);
 
       await tester.enterText(
         find.byType(CustomizationTextField).first,
         '2345678',
       );
       expect(find.text('234567'), findsOneWidget);
-      expect(min, 234567);
+      expect(data.minValue, 234567);
     });
 
     testWidgets('Validate min>max for Value', (tester) async {
       await tester.pumpWidget(page);
       await tester.enterText(find.byType(CustomizationTextField).at(1), '100');
-      expect(max, 100);
+      expect(data.maxValue, 100);
 
       await tester.enterText(find.byType(CustomizationTextField).first, '101');
-      expect(min, 0);
+      expect(data.minValue, 0);
 
       await tester.enterText(find.byType(CustomizationTextField).first, '505');
-      expect(min, 0);
+      expect(data.minValue, 0);
 
       await tester.enterText(find.byType(CustomizationTextField).first, '99');
-      expect(min, 99);
+      expect(data.minValue, 99);
     });
   });
 }

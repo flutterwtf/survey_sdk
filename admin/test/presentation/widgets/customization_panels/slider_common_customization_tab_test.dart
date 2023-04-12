@@ -4,6 +4,7 @@ import 'package:survey_admin/presentation/widgets/customization_items/color_cust
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/slider/slider_common_customization_tab.dart';
+import 'package:survey_core/survey_core.dart';
 
 import '../app_tester.dart';
 
@@ -18,36 +19,15 @@ void main() {
     var subtitleSize = 0.0;
     var buttonDownSize = 0.0;
     var buttonBorder = 0;
+
+    var data = const SliderQuestionData.common();
     final page = AppTester(
       child: SliderCommonCustomizationTab(
         title: 'Common',
-        onButtonDownColorChanged: (newButtonDownColor) {
-          buttonDownColor = newButtonDownColor;
+        onChange: (QuestionData<dynamic> newData) {
+          data = newData as SliderQuestionData;
         },
-        onButtonUpColorChanged: (newButtonUpColor) {
-          buttonUpColor = newButtonUpColor;
-        },
-        onFillColorChanged: (newFill) {
-          fill = newFill;
-        },
-        onSubtitleColorChanged: (newSubtitleColor) {
-          subtitleColor = newSubtitleColor;
-        },
-        onTitleColorChanged: (newTitleColor) {
-          titleColor = newTitleColor;
-        },
-        onTitleFontSizeChanged: (newTitleSize) {
-          titleSize = newTitleSize;
-        },
-        onSubtitleFontSizeChanged: (newSubtitleSize) {
-          subtitleSize = newSubtitleSize;
-        },
-        onButtonFontSizeChanged: (newButtonDownSize) {
-          buttonDownSize = newButtonDownSize;
-        },
-        onButtonRadiusChanged: (newButtonBorder) {
-          buttonBorder = newButtonBorder;
-        },
+        editable: data,
       ),
     );
 

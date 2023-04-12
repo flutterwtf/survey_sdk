@@ -1,12 +1,19 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/slider/slider_customization_panel.dart';
+import 'package:survey_core/survey_core.dart';
 
 import '../app_tester.dart';
 
 void main() {
-  const page = AppTester(
-    child: SliderCustomizationPanel(),
+  var data = const SliderQuestionData.common();
+
+  final page = AppTester(
+    child: SliderCustomizationPanel(
+      onChange: (QuestionData<dynamic> newData) {
+        data = newData as SliderQuestionData;
+      }, editable: data,
+    ),
   );
 
   group('SliderCustomizationPanel test', () {

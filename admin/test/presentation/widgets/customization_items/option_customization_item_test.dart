@@ -20,7 +20,7 @@ void main() {
               onChanged: (newOptions) {
                 options = newOptions;
               },
-              onRuleLimitedChanged: (newRuleValue) {
+              onRuleValueChanged: (newRuleValue) {
                 ruleValue = newRuleValue;
               },
             ),
@@ -52,7 +52,7 @@ void main() {
               onChanged: (newOptions) {
                 options = newOptions;
               },
-              onRuleLimitedChanged: (newRuleValue) {
+              onRuleValueChanged: (newRuleValue) {
                 ruleValue = newRuleValue;
               },
             ),
@@ -86,7 +86,7 @@ void main() {
               onChanged: (newOptions) {
                 options = newOptions;
               },
-              onRuleLimitedChanged: (newRuleValue) {
+              onRuleValueChanged: (newRuleValue) {
                 ruleValue = newRuleValue;
               },
             ),

@@ -11,7 +11,7 @@ void main() {
       await tester.pumpWidget(
         AppTester(
           child: DivisionsCustomizationItem(
-            onChanged: (int? divisions) {},
+            onChanged: (int? divisions) {}, initialValue: 10,
           ),
         ),
       );

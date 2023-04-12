@@ -2,35 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/intro/intro_content_customization_tab.dart';
+import 'package:survey_core/survey_core.dart';
 
 import '../app_tester.dart';
 
 void main() {
   group('Tests for IntroContentCustomizationTab', () {
-    var isVisible = false;
-    var textSecondaryButton = '';
-    var textTitle = '';
-    var textSubtitle = '';
-    var textPrimaryButton = '';
+    var data = const IntroQuestionData.common();
+
     final page = AppTester(
       child: IntroContentCustomizationTab(
         title: 'Content',
-        onTitleChanged: (newTitle) {
-          textTitle = newTitle;
+        onChange: (QuestionData<dynamic> newData) {
+          data = newData as IntroQuestionData;
         },
-        onPrimaryButtonTextUpdate: (newTextPrimaryButton) {
-          textPrimaryButton = newTextPrimaryButton;
-        },
-        onSecondaryButtonChanged: ({
-          required bool isShown,
-          required String text,
-        }) {
-          isVisible = isShown;
-          textSecondaryButton = text;
-        },
-        onSubtitleChanged: (newSubtitle) {
-          textSubtitle = newSubtitle;
-        },
+        editable: data,
       ),
     );
 
@@ -49,7 +35,7 @@ void main() {
         'Intro',
       );
       expect(find.text('Intro'), findsOneWidget);
-      expect(textTitle, 'Intro');
+      expect(data.title, 'Intro');
     });
 
     testWidgets('Input text for Subtitle', (tester) async {
@@ -59,7 +45,7 @@ void main() {
         'sub',
       );
       expect(find.text('sub'), findsOneWidget);
-      expect(textSubtitle, 'sub');
+      expect(data.subtitle, 'sub');
     });
 
     testWidgets('Input text for Primary button', (tester) async {
@@ -69,14 +55,14 @@ void main() {
         'primary',
       );
       expect(find.text('primary'), findsOneWidget);
-      expect(textPrimaryButton, 'primary');
+      expect(data.buttonText, 'primary');
     });
 
     testWidgets('Unlock Secondary button', (tester) async {
       await tester.pumpWidget(page);
       await tester.tap(find.byType(InkWell));
       await tester.pump();
-      expect(isVisible, isTrue);
+      expect(data.isSkip, isTrue);
     });
 
     testWidgets('Lock Secondary button', (tester) async {
@@ -85,19 +71,7 @@ void main() {
       await tester.pump();
       await tester.tap(find.byType(InkWell));
       await tester.pump();
-      expect(isVisible, isFalse);
-    });
-
-    testWidgets('Input text for Secondary button', (tester) async {
-      await tester.pumpWidget(page);
-      await tester.tap(find.byType(InkWell));
-      await tester.pump();
-      await tester.enterText(
-        find.widgetWithText(CustomizationItemsContainer, 'Secondary button'),
-        'qq',
-      );
-      expect(find.text('qq'), findsOneWidget);
-      expect(textSecondaryButton, 'qq');
+      expect(data.isSkip, isFalse);
     });
   });
 }

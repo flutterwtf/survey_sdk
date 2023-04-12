@@ -43,54 +43,63 @@ class _SliderQuestionPageState extends State<SliderQuestionPage> {
         Theme.of(context).extension<SliderQuestionTheme>()!;
     return Scaffold(
       backgroundColor: theme.fill,
-      body: Padding(
-        padding: const EdgeInsets.only(
-          left: AppDimensions.margin2XL,
-          right: AppDimensions.margin2XL,
-          top: AppDimensions.margin3XL,
-          bottom: AppDimensions.marginXL,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            QuestionTitle(
-              title: widget.data.title,
-              textSize: theme.titleSize,
-              textColor: theme.titleColor,
-            ),
-            Padding(
+      body: CustomScrollView(
+        slivers: [
+          SliverFillRemaining(
+            hasScrollBody: false,
+            child: Padding(
               padding: const EdgeInsets.only(
-                top: AppDimensions.margin2XL,
+                left: AppDimensions.margin2XL,
+                right: AppDimensions.margin2XL,
+                top: AppDimensions.margin3XL,
+                bottom: AppDimensions.marginXL,
               ),
-              child: QuestionContent(
-                content: widget.data.subtitle,
-                textSize: theme.subtitleSize,
-                textColor: theme.subtitleColor,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  if (widget.data.title.isNotEmpty)
+                    QuestionTitle(
+                      title: widget.data.title,
+                      textSize: theme.titleSize,
+                      textColor: theme.titleColor,
+                    ),
+                  if (widget.data.subtitle.isNotEmpty)
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        top: AppDimensions.marginS,
+                      ),
+                      child: QuestionContent(
+                        content: widget.data.subtitle,
+                        textSize: theme.subtitleSize,
+                        textColor: theme.subtitleColor,
+                      ),
+                    ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: AppDimensions.marginM),
+                    child: _QuestionSlider(
+                      minValue: widget.data.minValue,
+                      maxValue: widget.data.maxValue,
+                      initialValue: widget.data.initialValue,
+                      onChanged: (value) => setState(() => _answer = value),
+                      theme: theme,
+                      divisions: widget.data.divisions,
+                    ),
+                  ),
+                  const Spacer(),
+                  QuestionBottomButton(
+                    text: context.localization.next,
+                    onPressed: () {
+                      widget.onSend.call(
+                        index: widget.data.index,
+                        answer: QuestionAnswer<double>(_answer),
+                      );
+                    },
+                  ),
+                ],
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(top: AppDimensions.marginM),
-              child: _QuestionSlider(
-                minValue: widget.data.minValue,
-                maxValue: widget.data.maxValue,
-                initialValue: widget.data.initialValue,
-                onChanged: (value) => setState(() => _answer = value),
-                theme: theme,
-                divisions: widget.data.divisions,
-              ),
-            ),
-            const Spacer(),
-            QuestionBottomButton(
-              text: context.localization.next,
-              onPressed: () {
-                widget.onSend.call(
-                  index: widget.data.index,
-                  answer: QuestionAnswer<double>(_answer),
-                );
-              },
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
