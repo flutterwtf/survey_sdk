@@ -79,6 +79,9 @@ class _ColorCustomizationItemState extends State<ColorCustomizationItem> {
               child: Container(
                 decoration: BoxDecoration(
                   color: _pickedColor,
+                  border: const Border.fromBorderSide(
+                    BorderSide(color: AppColors.greyBackground),
+                  ),
                 ),
                 width: AppDimensions.sizeM,
                 height: AppDimensions.sizeM,

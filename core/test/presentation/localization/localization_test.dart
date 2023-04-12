@@ -6,26 +6,28 @@ import 'package:flutter_test/flutter_test.dart';
 
 const filePath = 'lib/src/presentation/localization/l10n/app_en.arb';
 
-void main() async {
-  if (filePath.isEmpty) {
-    _asyncThrows('Expected filepath to arb file: $filePath');
-  }
+Future<void> asyncThrows(String exError) async => throw Exception(exError);
 
-  final file = File(filePath);
+void main() {
+  group('Localization tests', () {
+    final file = File(filePath);
 
-  final arbContents = await file.readAsString();
+    final arbContents = file.readAsStringSync();
 
-  final arbIsSorted = _isSorted(arbContents);
-  if (!arbIsSorted) {
-    _asyncThrows('Test Failed. Arb File is not sorted.');
-  }
-
-  final notInCamelCaseList = _notInCamelCase(arbContents);
-  if (notInCamelCaseList.isNotEmpty) {
-    _asyncThrows(
-      'Test Failed. Arb File contains not camelCase keys:\n$notInCamelCaseList',
+    test(
+      'Localizations keys sort test',
+      () {
+        expect(_isSorted(arbContents), true);
+      },
     );
-  }
+
+    test(
+      'Localizations keys are in camel-case',
+      () {
+        expect(_notInCamelCase(arbContents).isEmpty, true);
+      },
+    );
+  });
 }
 
 List<String> _notInCamelCase(String arbContents) {
@@ -82,5 +84,3 @@ int _commonCompareFunction(
       ? ascending * compareNatural(firstStr, secondStr)
       : ascending * firstStr.compareTo(secondStr);
 }
-
-Future<void> _asyncThrows(String exError) async => throw Exception(exError);

@@ -4,8 +4,13 @@ import 'package:survey_core/src/data/mappers/slider_theme_data_mapper.dart';
 import 'package:survey_core/src/domain/entities/api_object.dart';
 import 'package:survey_core/src/domain/entities/themes/text_field_theme_data.dart';
 
+/// Defines the theme for the entire app
 class CommonTheme extends ApiObject with EquatableMixin {
+  /// Holds the color, shape, and typography values for a Material Design
+  /// slider theme
   final SliderThemeData sliderThemeData;
+
+  /// Defines the theme for text fields throughout the app
   final TextFieldThemeData textFieldThemeData;
 
   @override

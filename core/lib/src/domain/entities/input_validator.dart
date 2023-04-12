@@ -9,13 +9,20 @@ abstract class _ValidatorKeys {
   static const validatorError = 'Validation error';
 }
 
+/// Used to validate user input based on predefined rules for different types
+/// of inputs in input question
 class InputValidator implements ApiObject {
+  /// The type of the input being validated
   late final InputType type;
+
+  /// Determines if the input value should be obscured
   late final bool? isObscured;
+
   late final String? _regex;
 
   RegExp get _reg => RegExp(_regex ?? ValidatorRegexes.text);
 
+  /// Validator with type [InputType.number]
   InputValidator.number({
     String? regex,
     bool? isObscured,
@@ -25,6 +32,7 @@ class InputValidator implements ApiObject {
     this.isObscured = isObscured ?? false;
   }
 
+  /// Validator with type [InputType.date]
   InputValidator.date({
     String? regex,
     bool? isObscured,
@@ -34,12 +42,14 @@ class InputValidator implements ApiObject {
     this.isObscured = isObscured ?? false;
   }
 
+  /// Validator with type [InputType.email]
   InputValidator.email() {
     type = InputType.email;
     _regex = null;
     isObscured = null;
   }
 
+  /// Validator for with type [InputType.password]
   InputValidator.password({
     String? regex,
     bool? isObscured,
@@ -49,6 +59,7 @@ class InputValidator implements ApiObject {
     this.isObscured = isObscured ?? true;
   }
 
+  /// Validator with type [InputType.phone]
   InputValidator.phone({
     String? regex,
     bool? isObscured,
@@ -58,6 +69,7 @@ class InputValidator implements ApiObject {
     this.isObscured = isObscured ?? false;
   }
 
+  /// Validator with type [InputType.text]
   InputValidator.text({
     String? regex,
     bool? isObscured,
@@ -67,6 +79,7 @@ class InputValidator implements ApiObject {
     this.isObscured = isObscured ?? false;
   }
 
+  /// Creates the validator based on the given input type
   factory InputValidator.fromType({
     required InputType type,
     String? regex,
@@ -105,6 +118,8 @@ class InputValidator implements ApiObject {
     );
   }
 
+  /// If the input is valid, the method returns null, otherwise, it returns
+  /// an error message
   String? validate(String? input) {
     return input == null || _reg.hasMatch(input)
         ? null

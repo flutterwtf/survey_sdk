@@ -5,16 +5,34 @@ import 'package:flutter/material.dart';
 import 'package:survey_core/src/domain/entities/api_object.dart';
 import 'package:survey_core/src/presentation/utils/utils.dart';
 
+/// Defines the visual properties for an intro question page
 class IntroQuestionTheme extends ThemeExtension<IntroQuestionTheme>
     with ApiObject, EquatableMixin {
+  /// Background color of the intro page
   final Color fillColor;
+
+  /// Color of the title text
   final Color titleTextColor;
+
+  /// Font size of the title text
   final double titleTextSize;
+
+  /// Color of the subtitle text
   final Color subTitleTextColor;
+
+  /// Font size of the subtitle text
   final double subTitleTextSize;
+
+  /// Background color of the main button
   final Color mainButtonColor;
+
+  /// Color of the text on the main button
   final Color mainButtonTextColor;
+
+  /// Font size of the text on the main button
   final double mainButtonTextSize;
+
+  /// Border radius of the main button
   final double mainButtonRadius;
 
   @override
@@ -42,16 +60,17 @@ class IntroQuestionTheme extends ThemeExtension<IntroQuestionTheme>
     required this.mainButtonRadius,
   });
 
+  /// Default color values of intro question page
   const IntroQuestionTheme.common()
       : this(
           fillColor: AppColors.white,
           titleTextColor: AppColors.black,
-          titleTextSize: AppFonts.sizeL,
+          titleTextSize: AppFonts.size2XL,
           subTitleTextColor: AppColors.black,
-          subTitleTextSize: AppFonts.sizeS,
+          subTitleTextSize: AppFonts.sizeL,
           mainButtonColor: AppColors.black,
           mainButtonTextColor: AppColors.white,
-          mainButtonTextSize: AppFonts.sizeS,
+          mainButtonTextSize: AppFonts.sizeXL,
           mainButtonRadius: AppDimensions.circularRadiusS,
         );
 
