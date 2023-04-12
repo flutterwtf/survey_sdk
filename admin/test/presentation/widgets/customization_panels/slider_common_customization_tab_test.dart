@@ -10,15 +10,15 @@ import '../app_tester.dart';
 
 void main() {
   group('Tests for SliderCommonCustomizationTab', () {
-    Color fill = Colors.red;
-    Color buttonDownColor = Colors.red;
-    Color buttonUpColor = Colors.red;
-    Color titleColor = Colors.red;
-    Color subtitleColor = Colors.red;
-    var titleSize = 0.0;
-    var subtitleSize = 0.0;
-    var buttonDownSize = 0.0;
-    var buttonBorder = 0;
+    const fill = Colors.red;
+    const buttonDownColor = Colors.red;
+    const buttonUpColor = Colors.red;
+    const titleColor = Colors.red;
+    const subtitleColor = Colors.red;
+    const titleSize = 0.0;
+    const subtitleSize = 0.0;
+    const buttonDownSize = 0.0;
+    const buttonBorder = 0;
 
     var data = const SliderQuestionData.common();
     final page = AppTester(

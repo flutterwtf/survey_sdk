@@ -23,7 +23,6 @@ class ChoiceCustomizationPanel extends StatefulWidget {
 }
 
 class _ChoiceCustomizationPanelState extends State<ChoiceCustomizationPanel> {
-
   @override
   Widget build(BuildContext context) {
     return QuestionSettingsTabBar(

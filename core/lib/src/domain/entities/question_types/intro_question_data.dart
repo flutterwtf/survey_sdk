@@ -1,4 +1,3 @@
-import 'package:flutter/src/material/theme_data.dart';
 import 'package:survey_core/src/domain/entities/constants/question_types.dart';
 import 'package:survey_core/src/domain/entities/question_types/question_data.dart';
 import 'package:survey_core/src/domain/entities/themes/intro_question_theme.dart';

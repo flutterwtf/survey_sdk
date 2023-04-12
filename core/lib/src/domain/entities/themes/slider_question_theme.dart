@@ -4,6 +4,13 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:survey_core/src/domain/entities/api_object.dart';
 
+const _thumbRadius = 16.0;
+const _thickness = 8.0;
+const _titleSize = 16.0;
+const _subtitleSize = 12.0;
+const _buttonTextSize = 12.0;
+const _buttonRadius = 10.0;
+
 // TODO(dev): Can we move equatable mixin to ApiObject?
 class SliderQuestionTheme extends ThemeExtension<SliderQuestionTheme>
     with ApiObject, EquatableMixin {
@@ -24,21 +31,21 @@ class SliderQuestionTheme extends ThemeExtension<SliderQuestionTheme>
 
   @override
   List<Object?> get props => [
-    activeColor,
-    inactiveColor,
-    thumbColor,
-    thumbRadius,
-    thickness,
-    fill,
-    titleColor,
-    titleSize,
-    subtitleColor,
-    subtitleSize,
-    buttonFill,
-    buttonTextColor,
-    buttonTextSize,
-    buttonRadius,
-  ];
+        activeColor,
+        inactiveColor,
+        thumbColor,
+        thumbRadius,
+        thickness,
+        fill,
+        titleColor,
+        titleSize,
+        subtitleColor,
+        subtitleSize,
+        buttonFill,
+        buttonTextColor,
+        buttonTextSize,
+        buttonRadius,
+      ];
 
   // TODO(dev): Add hint text.
   const SliderQuestionTheme({
@@ -60,21 +67,21 @@ class SliderQuestionTheme extends ThemeExtension<SliderQuestionTheme>
 
   const SliderQuestionTheme.common()
       : this(
-    activeColor: const Color(0xFF000000),
-    inactiveColor: const Color(0xFFCCCCCC),
-    thumbColor: const Color(0xFF000000),
-    thumbRadius: 16,
-    thickness: 8,
-    fill: Colors.white,
-    titleColor: Colors.black,
-    titleSize: 16,
-    subtitleColor: Colors.black,
-    subtitleSize: 12,
-    buttonFill: Colors.black,
-    buttonTextColor: Colors.white,
-    buttonTextSize: 12,
-    buttonRadius: 10,
-  );
+          activeColor: const Color(0xFF000000),
+          inactiveColor: const Color(0xFFCCCCCC),
+          thumbColor: const Color(0xFF000000),
+          thumbRadius: _thumbRadius,
+          thickness: _thickness,
+          fill: Colors.white,
+          titleColor: Colors.black,
+          titleSize: _titleSize,
+          subtitleColor: Colors.black,
+          subtitleSize: _subtitleSize,
+          buttonFill: Colors.black,
+          buttonTextColor: Colors.white,
+          buttonTextSize: _buttonTextSize,
+          buttonRadius: _buttonRadius,
+        );
 
   SliderQuestionTheme.fromJson(Map<String, dynamic> json)
       : activeColor = Color(json['activeColor']),

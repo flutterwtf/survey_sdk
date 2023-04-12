@@ -3,6 +3,10 @@ import 'package:survey_core/src/domain/entities/constants/question_types.dart';
 import 'package:survey_core/src/domain/entities/question_types/question_data.dart';
 import 'package:survey_core/src/domain/entities/themes/slider_question_theme.dart';
 
+const _maxValue = 10;
+const _divisions = 8;
+const _initialValue = 5;
+
 /// Contains the content for a page with slider to choose a value between
 /// minimum and maximum range
 class SliderQuestionData extends QuestionData<SliderThemeData> {
@@ -51,9 +55,9 @@ class SliderQuestionData extends QuestionData<SliderThemeData> {
       : this(
           // TODO(dev): to localization somehow
           minValue: 0,
-          maxValue: 10,
-          divisions: 10,
-          initialValue: 5,
+          maxValue: _maxValue,
+          divisions: _divisions,
+          initialValue: _initialValue,
           title: 'Intro',
           index: index,
           subtitle: '',

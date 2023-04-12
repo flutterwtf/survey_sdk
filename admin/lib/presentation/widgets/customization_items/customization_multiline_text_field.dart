@@ -16,10 +16,12 @@ class CustomizationMultilineTextField extends StatefulWidget {
   });
 
   @override
-  State<CustomizationMultilineTextField> createState() => _CustomizationMultilineTextFieldState();
+  State<CustomizationMultilineTextField> createState() =>
+      _CustomizationMultilineTextFieldState();
 }
 
-class _CustomizationMultilineTextFieldState extends State<CustomizationMultilineTextField> {
+class _CustomizationMultilineTextFieldState
+    extends State<CustomizationMultilineTextField> {
   @override
   Widget build(BuildContext context) {
     /// LimitedBox, isCollapsed: true, maxLines: null - used to make

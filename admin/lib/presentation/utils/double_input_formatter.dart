@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class DoubleInputFormatter extends TextInputFormatter {
@@ -12,14 +13,16 @@ class DoubleInputFormatter extends TextInputFormatter {
     TextEditingValue newValue,
   ) {
     //Trim leading zero
-    var newTrimmed =  newValue.text.isNotEmpty && newValue.text[0] == '0'
-        ? newValue.text.substring(1)
+    var newTrimmed = newValue.text.isNotEmpty && newValue.text[0] == '0'
+        ? newValue.text.characters.getRange(1).toString()
         : newValue.text;
 
     // allow only numbers that are less than 100
     newTrimmed = newTrimmed.contains('.')
         ? newTrimmed
-        : newTrimmed.substring(0, min(digitsBeforeDot, newTrimmed.length));
+        : newTrimmed.characters
+            .getRange(0, min(digitsBeforeDot, newTrimmed.length))
+            .toString();
 
     final outText = _calculateOutText(oldValue.text, newTrimmed);
     final selection = _calculateTextOffset(oldValue, outText);

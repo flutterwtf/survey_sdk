@@ -4,6 +4,11 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:survey_core/src/domain/entities/api_object.dart';
 
+const _titleSize = 16.0;
+const _subtitleSize = 12.0;
+const _buttonTextSize = 12.0;
+const _buttonRadius = 10.0;
+
 /// Defines the visual properties for a choice question options
 class ChoiceQuestionTheme extends ThemeExtension<ChoiceQuestionTheme>
     with ApiObject, EquatableMixin {
@@ -60,13 +65,13 @@ class ChoiceQuestionTheme extends ThemeExtension<ChoiceQuestionTheme>
           inactiveColor: Colors.grey,
           fill: Colors.white,
           titleColor: Colors.black,
-          titleSize: 16,
+          titleSize: _titleSize,
           subtitleColor: Colors.black,
-          subtitleSize: 12,
+          subtitleSize: _subtitleSize,
           buttonFill: Colors.black,
           buttonTextColor: Colors.white,
-          buttonTextSize: 12,
-          buttonRadius: 10,
+          buttonTextSize: _buttonTextSize,
+          buttonRadius: _buttonRadius,
         );
 
   ChoiceQuestionTheme.fromJson(Map<String, dynamic> json)

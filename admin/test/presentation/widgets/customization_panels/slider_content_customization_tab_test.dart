@@ -8,11 +8,8 @@ import '../app_tester.dart';
 
 void main() {
   group('Tests for SliderContentCustomizationTab', () {
-    late int min;
-    late int max;
-    var title = '';
-    var subtitle = '';
-    late int divisions;
+    const title = '';
+    const subtitle = '';
 
     var data = const SliderQuestionData.common();
     final page = AppTester(

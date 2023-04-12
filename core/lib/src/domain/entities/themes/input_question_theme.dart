@@ -6,6 +6,13 @@ import 'package:survey_core/src/domain/entities/api_object.dart';
 import 'package:survey_core/src/presentation/utils/app_colors.dart';
 import 'package:survey_core/src/presentation/utils/app_fonts.dart';
 
+const _titleSize = 16.0;
+const _subtitleSize = 12.0;
+const _buttonTextSize = 12.0;
+const _buttonRadius = 10.0;
+const _horizontalPadding = 14.0;
+const _verticalPadding = 14.0;
+
 /// Defines the visual properties for an input question options
 class InputQuestionTheme extends ThemeExtension<InputQuestionTheme>
     with ApiObject, EquatableMixin {
@@ -147,15 +154,15 @@ class InputQuestionTheme extends ThemeExtension<InputQuestionTheme>
           isMultiline: false,
           fill: Colors.white,
           titleColor: Colors.black,
-          titleSize: 16,
+          titleSize: _titleSize,
           subtitleColor: Colors.black,
-          subtitleSize: 12,
+          subtitleSize: _subtitleSize,
           buttonFill: Colors.black,
           buttonTextColor: Colors.white,
-          buttonTextSize: 12,
-          buttonRadius: 10,
-          horizontalPadding: 14,
-          verticalPadding: 14,
+          buttonTextSize: _buttonTextSize,
+          buttonRadius: _buttonRadius,
+          horizontalPadding: _horizontalPadding,
+          verticalPadding: _verticalPadding,
         );
 
   @override

@@ -28,7 +28,7 @@ class _TextStyleCustomizationItemState
 
   @override
   void initState() {
-    _controller.text =  widget.initialSize.toString();
+    _controller.text = widget.initialSize.toString();
     super.initState();
   }
 
@@ -36,7 +36,9 @@ class _TextStyleCustomizationItemState
     //It is not null anyway because of formatter
     final textFieldText = text!;
     final textToParse = textFieldText[textFieldText.length - 1] == '.'
-        ? textFieldText.substring(0, textFieldText.length - 1)
+        ? textFieldText.characters
+            .getRange(0, textFieldText.length - 1)
+            .toString()
         : textFieldText;
     final size = double.tryParse(textToParse) ?? 0;
     widget.onSizeChanged(size);

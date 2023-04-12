@@ -15,5 +15,5 @@ export 'package:survey_core/src/domain/entities/themes/common_theme.dart';
 export 'package:survey_core/src/domain/entities/themes/input_question_theme.dart';
 export 'package:survey_core/src/domain/entities/themes/intro_question_theme.dart';
 export 'package:survey_core/src/domain/entities/themes/slider_question_theme.dart';
-export 'package:survey_core/src/presentation/survey/survey_controller.dart';
 export 'package:survey_core/src/presentation/survey/survey.dart';
+export 'package:survey_core/src/presentation/survey/survey_controller.dart';

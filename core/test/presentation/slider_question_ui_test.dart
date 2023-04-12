@@ -18,9 +18,6 @@ void main() {
       const subTitle = 'Question widget subtitle';
       const minValue = 1.0;
       const maxValue = 2.0;
-      const initialValue = 1.0;
-      const id = 1;
-      const isSkip = false;
 
       final sliderQuestionPage = AppTest(
         child: SliderQuestionPage(

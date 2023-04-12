@@ -11,10 +11,10 @@ void main() {
     'Input content customization tab tests',
     () {
       const testText = 'Text for test';
-      var textTitle = '';
-      var textSubtitle = '';
-      var textHint = '';
-      var textButton = '';
+      const textTitle = '';
+      const textSubtitle = '';
+      const textHint = '';
+      const textButton = '';
 
       var data = InputQuestionData.common();
       final page = AppTester(

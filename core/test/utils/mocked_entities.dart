@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:survey_core/src/domain/entities/input_validator.dart';
 import 'package:survey_core/src/domain/entities/question_types/choice_question_data.dart';
 import 'package:survey_core/src/domain/entities/question_types/input_question_data.dart';
@@ -10,7 +9,6 @@ import 'package:survey_core/src/domain/entities/themes/common_theme.dart';
 import 'package:survey_core/src/domain/entities/themes/input_question_theme.dart';
 import 'package:survey_core/src/domain/entities/themes/intro_question_theme.dart';
 import 'package:survey_core/src/domain/entities/themes/slider_question_theme.dart';
-import 'package:survey_core/src/domain/entities/themes/text_field_theme_data.dart';
 
 abstract class MockedEntities {
   static const choice1 = ChoiceQuestionData(
