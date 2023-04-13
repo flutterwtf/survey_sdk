@@ -18,14 +18,8 @@ class ChoiceButtonsCustomizationTab extends CustomizationTab {
     super.key,
   });
 
-  @override
-  State<CustomizationTab> createState() => ChoiceButtonsCustomizationTabState();
-}
-
-class ChoiceButtonsCustomizationTabState
-    extends CustomizationTabState<ChoiceButtonsCustomizationTab> {
   ChoiceQuestionTheme get theme =>
-      widget.editable.theme ?? const ChoiceQuestionTheme.common();
+      editable.theme ?? const ChoiceQuestionTheme.common();
 
   @override
   Widget build(BuildContext context) {
@@ -39,9 +33,9 @@ class ChoiceButtonsCustomizationTabState
           children: [
             // TODO(dev): Move to the other tab.
             MultipleChoiceCustomizationItem(
-              value: widget.editable.isMultipleChoice,
-              onChanged: (isMultipleChoice) => widget.onChange(
-                widget.editable.copyWith(isMultipleChoice: isMultipleChoice),
+              value: editable.isMultipleChoice,
+              onChanged: (isMultipleChoice) => onChange(
+                editable.copyWith(isMultipleChoice: isMultipleChoice),
               ),
             ),
           ],
@@ -52,8 +46,8 @@ class ChoiceButtonsCustomizationTabState
           children: [
             ColorCustomizationItem(
               initialColor: theme.activeColor,
-              onColorPicked: (color) => widget.onChange(
-                widget.editable.copyWith(
+              onColorPicked: (color) => onChange(
+                editable.copyWith(
                   theme: theme.copyWith(activeColor: color),
                 ),
               ),
@@ -65,8 +59,8 @@ class ChoiceButtonsCustomizationTabState
           children: [
             ColorCustomizationItem(
               initialColor: theme.inactiveColor,
-              onColorPicked: (color) => widget.onChange(
-                widget.editable.copyWith(
+              onColorPicked: (color) => onChange(
+                editable.copyWith(
                   theme: theme.copyWith(inactiveColor: color),
                 ),
               ),

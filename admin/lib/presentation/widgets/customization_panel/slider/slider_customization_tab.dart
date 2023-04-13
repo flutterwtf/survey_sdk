@@ -18,14 +18,8 @@ class SliderCustomizationTab extends CustomizationTab {
     super.key,
   });
 
-  @override
-  State<CustomizationTab> createState() => SliderCustomizationTabState();
-}
-
-class SliderCustomizationTabState
-    extends CustomizationTabState<SliderCustomizationTab> {
   SliderQuestionTheme get theme =>
-      widget.editable.theme ?? const SliderQuestionTheme.common();
+      editable.theme ?? const SliderQuestionTheme.common();
 
   @override
   Widget build(BuildContext context) {
@@ -41,8 +35,8 @@ class SliderCustomizationTabState
                 // TODO(dev): replace with onSizeChanged?
                 final thickness = double.tryParse(value);
                 if (thickness != null) {
-                  widget.onChange(
-                    widget.editable.copyWith(
+                  onChange(
+                    editable.copyWith(
                       theme: theme.copyWith(thickness: thickness),
                     ),
                   );
@@ -57,8 +51,8 @@ class SliderCustomizationTabState
           children: [
             ColorCustomizationItem(
               initialColor: theme.activeColor,
-              onColorPicked: (color) => widget.onChange(
-                widget.editable.copyWith(
+              onColorPicked: (color) => onChange(
+                editable.copyWith(
                   theme: theme.copyWith(activeColor: color),
                 ),
               ),
@@ -70,8 +64,8 @@ class SliderCustomizationTabState
           children: [
             ColorCustomizationItem(
               initialColor: theme.inactiveColor,
-              onColorPicked: (color) => widget.onChange(
-                widget.editable.copyWith(
+              onColorPicked: (color) => onChange(
+                editable.copyWith(
                   theme: theme.copyWith(inactiveColor: color),
                 ),
               ),
@@ -83,14 +77,14 @@ class SliderCustomizationTabState
           children: [
             ColorThicknessCustomizationItem(
               initialColor: theme.thumbColor,
-              onColorPicked: (color) => widget.onChange(
-                widget.editable.copyWith(
+              onColorPicked: (color) => onChange(
+                editable.copyWith(
                   theme: theme.copyWith(thumbColor: color),
                 ),
               ),
               initialThickness: theme.thumbRadius,
-              onThicknessChanged: (radius) => widget.onChange(
-                widget.editable.copyWith(
+              onThicknessChanged: (radius) => onChange(
+                editable.copyWith(
                   theme: theme.copyWith(thumbRadius: radius),
                 ),
               ),

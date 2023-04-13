@@ -11,12 +11,14 @@ import 'package:survey_core/survey_core.dart';
 class QuestionList extends StatefulWidget {
   final ValueChanged<QuestionData> onSelect;
   final ValueChanged<QuestionData> onAdd;
+  final ValueChanged<QuestionData> onDelete;
   final List<QuestionData> questions;
 
   const QuestionList({
     required this.onSelect,
     required this.onAdd,
     required this.questions,
+    required this.onDelete,
     super.key,
   });
 
@@ -119,8 +121,10 @@ class _QuestionListState extends State<QuestionList> {
                       key: ValueKey(index),
                       index: index,
                       isSelected: index == _selectedIndex,
-                      onDeleteButtonPressed: () =>
-                          setState(() => _questionList.removeAt(index)),
+                      onDeleteButtonPressed: () {
+                        widget.onDelete(_questionList[_selectedIndex]);
+                        setState(() => _questionList.removeAt(index));
+                      },
                       question: _questionList[index],
                       onQuestionTap: (data) {
                         widget.onSelect(data);

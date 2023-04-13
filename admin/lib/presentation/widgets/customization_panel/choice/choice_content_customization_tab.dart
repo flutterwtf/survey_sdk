@@ -20,12 +20,6 @@ class ChoiceContentCustomizationTab extends CustomizationTab {
   });
 
   @override
-  State<CustomizationTab> createState() => ChoiceContentCustomizationTabState();
-}
-
-class ChoiceContentCustomizationTabState
-    extends CustomizationTabState<ChoiceContentCustomizationTab> {
-  @override
   Widget build(BuildContext context) {
     return ListView(
       children: [
@@ -34,10 +28,10 @@ class ChoiceContentCustomizationTabState
           shouldShowTopDivider: true,
           children: [
             CustomizationMultilineTextField(
-              value: widget.editable.title,
+              value: editable.title,
               maxHeight: AppDimensions.sizeXL,
-              onChanged: (title) => widget.onChange(
-                widget.editable.copyWith(title: title),
+              onChanged: (title) => onChange(
+                editable.copyWith(title: title),
               ),
             ),
           ],
@@ -46,10 +40,10 @@ class ChoiceContentCustomizationTabState
           title: context.localization.subtitle,
           children: [
             CustomizationMultilineTextField(
-              value: widget.editable.subtitle,
+              value: editable.subtitle,
               maxHeight: AppDimensions.sizeXL,
-              onChanged: (subtitle) => widget.onChange(
-                widget.editable.copyWith(subtitle: subtitle),
+              onChanged: (subtitle) => onChange(
+                editable.copyWith(subtitle: subtitle),
               ),
             ),
           ],
@@ -59,20 +53,21 @@ class ChoiceContentCustomizationTabState
           children: [
             // TODO(dev): Split to items.
             OptionCustomizationItem(
-              options: widget.editable.options,
-              ruleValue: widget.editable.ruleValue,
-              onChanged: (options) => widget.onChange(
-                widget.editable.copyWith(options: options),
+              options: editable.options,
+              ruleValue: editable.ruleValue,
+              onChanged: (options) => onChange(
+                editable.copyWith(options: options),
               ),
               // TODO(dev): Move repeated method somewhere.
-              onRuleValueChanged: (ruleValue) => widget.onChange(
-                widget.editable.copyWith(ruleValue: ruleValue),
+              onRuleValueChanged: (ruleValue) => onChange(
+                editable.copyWith(ruleValue: ruleValue),
               ),
             ),
           ],
         ),
-        if (widget.editable.isMultipleChoice)
+        if (editable.isMultipleChoice)
           CustomizationItemsContainer(
+            key: UniqueKey(),
             title: context.localization.rule,
             children: [
               Row(
@@ -84,8 +79,8 @@ class ChoiceContentCustomizationTabState
                           .map(
                             (e) => DropdownCustomizationItem<RuleType>(
                               value: e,
-                              onChange: (rule) => widget.onChange(
-                                widget.editable.copyWith(ruleType: rule),
+                              onChange: (rule) => onChange(
+                                editable.copyWith(ruleType: rule),
                               ),
                               child: Text(
                                 e.name,
@@ -94,22 +89,22 @@ class ChoiceContentCustomizationTabState
                             ),
                           )
                           .toList(),
-                      value: widget.editable.ruleType,
+                      value: editable.ruleType,
                       withColor: true,
                     ),
                   ),
                   const SizedBox(width: AppDimensions.marginXS),
                   Expanded(
-                    child: widget.editable.ruleType != RuleType.none
+                    child: editable.ruleType != RuleType.none
                         ? _RuleDropdown(
-                            onChanged: (ruleValue) => widget.onChange(
-                              widget.editable.copyWith(ruleValue: ruleValue),
+                            onChanged: (ruleValue) => onChange(
+                              editable.copyWith(ruleValue: ruleValue),
                             ),
                             values: List<int>.generate(
-                              widget.editable.options.length + 1,
+                              editable.options.length + 1,
                               (i) => i++,
                             ),
-                            value: widget.editable.ruleValue,
+                            value: editable.ruleValue,
                           )
                         : const SizedBox(),
                   ),

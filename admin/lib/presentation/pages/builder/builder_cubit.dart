@@ -84,9 +84,27 @@ class BuilderCubit extends Cubit<BuilderState> {
         ),
       );
 
+  void deleteQuestionData(QuestionData data) {
+    final questionList = List<QuestionData>.of(state.surveyData.questions)
+      ..remove(data);
+
+    if ((state as EditQuestionBuilderState).selectedIndex == data.index) {
+      emit(
+        EditQuestionBuilderState(
+          selectedIndex: data.index - 1,
+          surveyData: state.surveyData,
+        ),
+      );
+    }
+    final surveyData = state.surveyData.copyWith(questions: questionList);
+    _sessionStorageRepository.saveSurveyData(surveyData);
+    emit(state.copyWith(surveyData: surveyData));
+  }
+
   void addQuestionData(QuestionData data) {
     final questionList = List<QuestionData>.of(state.surveyData.questions)
       ..add(data);
+
     final surveyData = state.surveyData.copyWith(questions: questionList);
     _sessionStorageRepository.saveSurveyData(surveyData);
     emit(state.copyWith(surveyData: surveyData));
@@ -104,6 +122,7 @@ class BuilderCubit extends Cubit<BuilderState> {
 
   void updateQuestionData(QuestionData data) {
     final questions = List.of(state.surveyData.questions);
+
     // TODO(dev): Rewrite index system maybe?
     questions[data.index - 1] = data;
     emit(

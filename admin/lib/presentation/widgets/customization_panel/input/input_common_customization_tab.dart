@@ -20,14 +20,8 @@ class InputCommonCustomizationTab extends CustomizationTab {
     super.key,
   });
 
-  @override
-  State<CustomizationTab> createState() => CommonCustomizationTabState();
-}
-
-class CommonCustomizationTabState
-    extends CustomizationTabState<InputCommonCustomizationTab> {
   InputQuestionTheme get theme =>
-      widget.editable.theme ?? const InputQuestionTheme.common();
+      editable.theme ?? const InputQuestionTheme.common();
 
   @override
   Widget build(BuildContext context) {
@@ -39,8 +33,8 @@ class CommonCustomizationTabState
           children: [
             ColorCustomizationItem(
               initialColor: theme.fill,
-              onColorPicked: (color) => widget.onChange(
-                widget.editable.copyWith(
+              onColorPicked: (color) => onChange(
+                editable.copyWith(
                   theme: theme.copyWith(fill: color),
                 ),
               ),
@@ -52,14 +46,14 @@ class CommonCustomizationTabState
           children: [
             TextStyleCustomizationItem(
               initialColor: theme.titleColor,
-              onColorPicked: (color) => widget.onChange(
-                widget.editable.copyWith(
+              onColorPicked: (color) => onChange(
+                editable.copyWith(
                   theme: theme.copyWith(titleColor: color),
                 ),
               ),
               initialSize: theme.titleSize,
-              onSizeChanged: (size) => widget.onChange(
-                widget.editable.copyWith(
+              onSizeChanged: (size) => onChange(
+                editable.copyWith(
                   theme: theme.copyWith(titleSize: size),
                 ),
               ),
@@ -71,14 +65,14 @@ class CommonCustomizationTabState
           children: [
             TextStyleCustomizationItem(
               initialColor: theme.subtitleColor,
-              onColorPicked: (color) => widget.onChange(
-                widget.editable.copyWith(
+              onColorPicked: (color) => onChange(
+                editable.copyWith(
                   theme: theme.copyWith(subtitleColor: color),
                 ),
               ),
               initialSize: theme.subtitleSize,
-              onSizeChanged: (size) => widget.onChange(
-                widget.editable.copyWith(
+              onSizeChanged: (size) => onChange(
+                editable.copyWith(
                   theme: theme.copyWith(subtitleSize: size),
                 ),
               ),
@@ -90,30 +84,30 @@ class CommonCustomizationTabState
           children: [
             ColorCustomizationItem(
               initialColor: theme.buttonFill,
-              onColorPicked: (color) => widget.onChange(
-                widget.editable.copyWith(
+              onColorPicked: (color) => onChange(
+                editable.copyWith(
                   theme: theme.copyWith(buttonFill: color),
                 ),
               ),
             ),
             TextStyleCustomizationItem(
               initialColor: theme.buttonTextColor,
-              onColorPicked: (color) => widget.onChange(
-                widget.editable.copyWith(
+              onColorPicked: (color) => onChange(
+                editable.copyWith(
                   theme: theme.copyWith(buttonTextColor: color),
                 ),
               ),
               initialSize: theme.buttonTextSize,
-              onSizeChanged: (size) => widget.onChange(
-                widget.editable.copyWith(
+              onSizeChanged: (size) => onChange(
+                editable.copyWith(
                   theme: theme.copyWith(buttonTextSize: size),
                 ),
               ),
             ),
             RadiusCustomizationItem(
               initialValue: AppDimensions.circularRadiusS,
-              onRadiusChanged: (radius) => widget.onChange(
-                widget.editable.copyWith(
+              onRadiusChanged: (radius) => onChange(
+                editable.copyWith(
                   theme: theme.copyWith(buttonRadius: radius),
                 ),
               ),

@@ -19,12 +19,6 @@ class InputContentCustomizationTab extends CustomizationTab {
   });
 
   @override
-  State<CustomizationTab> createState() => InputContentCustomizationTabState();
-}
-
-class InputContentCustomizationTabState
-    extends CustomizationTabState<InputContentCustomizationTab> {
-  @override
   Widget build(BuildContext context) {
     return ListView(
       children: [
@@ -33,10 +27,10 @@ class InputContentCustomizationTabState
           shouldShowTopDivider: true,
           children: [
             CustomizationMultilineTextField(
-              value: widget.editable.title,
+              value: editable.title,
               maxHeight: AppDimensions.maxTextFieldHeight,
-              onChanged: (title) => widget.onChange(
-                widget.editable.copyWith(title: title),
+              onChanged: (title) => onChange(
+                editable.copyWith(title: title),
               ),
             ),
           ],
@@ -45,10 +39,10 @@ class InputContentCustomizationTabState
           title: context.localization.subtitle,
           children: [
             CustomizationMultilineTextField(
-              value: widget.editable.subtitle,
+              value: editable.subtitle,
               maxHeight: AppDimensions.maxTextFieldHeight,
-              onChanged: (subtitle) => widget.onChange(
-                widget.editable.copyWith(subtitle: subtitle),
+              onChanged: (subtitle) => onChange(
+                editable.copyWith(subtitle: subtitle),
               ),
             ),
           ],
@@ -57,10 +51,10 @@ class InputContentCustomizationTabState
           title: context.localization.hint,
           children: [
             CustomizationMultilineTextField(
-              value: widget.editable.hintText ?? '',
+              value: editable.hintText ?? '',
               maxHeight: AppDimensions.maxTextFieldHeight,
-              onChanged: (hint) => widget.onChange(
-                widget.editable.copyWith(hintText: hint),
+              onChanged: (hint) => onChange(
+                editable.copyWith(hintText: hint),
               ),
             ),
           ],
@@ -69,10 +63,10 @@ class InputContentCustomizationTabState
           title: context.localization.button,
           children: [
             CustomizationMultilineTextField(
-              value: widget.editable.buttonText,
+              value: editable.buttonText,
               maxHeight: AppDimensions.maxTextFieldHeight,
-              onChanged: (text) => widget.onChange(
-                widget.editable.copyWith(buttonText: text),
+              onChanged: (text) => onChange(
+                editable.copyWith(buttonText: text),
               ),
             ),
           ],

@@ -52,6 +52,7 @@ class _BuilderPageState extends State<BuilderPage> {
           body: Row(
             children: [
               QuestionList(
+                onDelete: _cubit.deleteQuestionData,
                 onSelect: _cubit.select,
                 onAdd: _cubit.addQuestionData,
                 questions: List<QuestionData>.of(

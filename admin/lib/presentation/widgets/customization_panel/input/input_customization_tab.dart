@@ -23,14 +23,8 @@ class InputCustomizationTab extends CustomizationTab {
     super.key,
   });
 
-  @override
-  State<CustomizationTab> createState() => InputCustomizationTabState();
-}
-
-class InputCustomizationTabState
-    extends CustomizationTabState<InputCustomizationTab> {
   InputQuestionTheme get theme =>
-      widget.editable.theme ?? const InputQuestionTheme.common();
+      editable.theme ?? const InputQuestionTheme.common();
 
   @override
   Widget build(BuildContext context) {
@@ -42,8 +36,8 @@ class InputCustomizationTabState
             MultilineSwitch(
               value: theme.isMultiline,
               lines: theme.lines,
-              onChanged: (isMultiline, lines) => widget.onChange(
-                widget.editable.copyWith(
+              onChanged: (isMultiline, lines) => onChange(
+                editable.copyWith(
                   theme: theme.copyWith(
                     isMultiline: isMultiline,
                     lines: lines,
@@ -58,8 +52,8 @@ class InputCustomizationTabState
           children: [
             ColorCustomizationItem(
               initialColor: theme.inputFill,
-              onColorPicked: (color) => widget.onChange(
-                widget.editable.copyWith(
+              onColorPicked: (color) => onChange(
+                editable.copyWith(
                   theme: theme.copyWith(
                     inputFill: color,
                   ),
@@ -73,16 +67,16 @@ class InputCustomizationTabState
           children: [
             ColorThicknessCustomizationItem(
               initialColor: theme.borderColor,
-              onColorPicked: (color) => widget.onChange(
-                widget.editable.copyWith(
+              onColorPicked: (color) => onChange(
+                editable.copyWith(
                   theme: theme.copyWith(
                     borderColor: color,
                   ),
                 ),
               ),
               initialThickness: theme.borderWidth,
-              onThicknessChanged: (width) => widget.onChange(
-                widget.editable.copyWith(
+              onThicknessChanged: (width) => onChange(
+                editable.copyWith(
                   theme: theme.copyWith(
                     borderWidth: width,
                   ),
@@ -98,15 +92,15 @@ class InputCustomizationTabState
               initialHorizontalPadding: theme.horizontalPadding,
               initialVerticalPadding: theme.verticalPadding,
               // TODO(dev): Move theme change to a method.
-              onHorizontalPaddingChange: (padding) => widget.onChange(
-                widget.editable.copyWith(
+              onHorizontalPaddingChange: (padding) => onChange(
+                editable.copyWith(
                   theme: theme.copyWith(
                     horizontalPadding: padding,
                   ),
                 ),
               ),
-              onVerticalPaddingChange: (padding) => widget.onChange(
-                widget.editable.copyWith(
+              onVerticalPaddingChange: (padding) => onChange(
+                editable.copyWith(
                   theme: theme.copyWith(
                     verticalPadding: padding,
                   ),
@@ -120,16 +114,16 @@ class InputCustomizationTabState
           children: [
             TextStyleCustomizationItem(
               initialColor: theme.hintColor,
-              onColorPicked: (color) => widget.onChange(
-                widget.editable.copyWith(
+              onColorPicked: (color) => onChange(
+                editable.copyWith(
                   theme: theme.copyWith(
                     hintColor: color,
                   ),
                 ),
               ),
               initialSize: theme.hintSize,
-              onSizeChanged: (size) => widget.onChange(
-                widget.editable.copyWith(
+              onSizeChanged: (size) => onChange(
+                editable.copyWith(
                   theme: theme.copyWith(
                     hintSize: size,
                   ),
@@ -143,16 +137,16 @@ class InputCustomizationTabState
           children: [
             TextStyleCustomizationItem(
               initialColor: theme.textColor,
-              onColorPicked: (color) => widget.onChange(
-                widget.editable.copyWith(
+              onColorPicked: (color) => onChange(
+                editable.copyWith(
                   theme: theme.copyWith(
                     textColor: color,
                   ),
                 ),
               ),
               initialSize: theme.textSize,
-              onSizeChanged: (size) => widget.onChange(
-                widget.editable.copyWith(
+              onSizeChanged: (size) => onChange(
+                editable.copyWith(
                   theme: theme.copyWith(
                     textSize: size,
                   ),
@@ -162,6 +156,7 @@ class InputCustomizationTabState
           ],
         ),
         CustomizationItemsContainer(
+          // key: UniqueKey(),
           title: context.localization.input_type,
           itemsPadding: const EdgeInsets.only(
             bottom: AppDimensions.marginM,
@@ -172,8 +167,8 @@ class InputCustomizationTabState
                   .map(
                     (e) => DropdownCustomizationItem<InputType>(
                       value: e,
-                      onChange: (type) => widget.onChange(
-                        widget.editable.copyWith(
+                      onChange: (type) => onChange(
+                        editable.copyWith(
                           theme: theme.copyWith(
                             inputType: type,
                           ),
@@ -197,8 +192,8 @@ class InputCustomizationTabState
             CustomizationMultilineTextField(
               value: theme.errorText,
               maxHeight: AppDimensions.sizeXL,
-              onChanged: (text) => widget.onChange(
-                widget.editable.copyWith(
+              onChanged: (text) => onChange(
+                editable.copyWith(
                   theme: theme.copyWith(
                     errorText: text,
                   ),

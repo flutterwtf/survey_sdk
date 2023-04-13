@@ -20,12 +20,6 @@ class IntroContentCustomizationTab extends CustomizationTab {
   });
 
   @override
-  State<CustomizationTab> createState() => IntroContentCustomizationTabState();
-}
-
-class IntroContentCustomizationTabState
-    extends CustomizationTabState<IntroContentCustomizationTab> {
-  @override
   Widget build(BuildContext context) {
     return ListView(
       children: [
@@ -34,10 +28,10 @@ class IntroContentCustomizationTabState
           shouldShowTopDivider: true,
           children: [
             CustomizationMultilineTextField(
-              value: widget.editable.title,
+              value: editable.title,
               maxHeight: AppDimensions.sizeL,
-              onChanged: (title) => widget.onChange(
-                widget.editable.copyWith(title: title),
+              onChanged: (title) => onChange(
+                editable.copyWith(title: title),
               ),
             ),
           ],
@@ -46,10 +40,10 @@ class IntroContentCustomizationTabState
           title: context.localization.subtitle,
           children: [
             CustomizationMultilineTextField(
-              value: widget.editable.subtitle,
+              value: editable.subtitle,
               maxHeight: AppDimensions.sizeL,
-              onChanged: (subtitle) => widget.onChange(
-                widget.editable.copyWith(subtitle: subtitle),
+              onChanged: (subtitle) => onChange(
+                editable.copyWith(subtitle: subtitle),
               ),
             ),
           ],
@@ -58,10 +52,10 @@ class IntroContentCustomizationTabState
           title: context.localization.primary_button,
           children: [
             CustomizationMultilineTextField(
-              value: widget.editable.buttonText,
+              value: editable.buttonText,
               maxHeight: AppDimensions.sizeL,
-              onChanged: (text) => widget.onChange(
-                widget.editable.copyWith(buttonText: text),
+              onChanged: (text) => onChange(
+                editable.copyWith(buttonText: text),
               ),
             ),
           ],
@@ -73,8 +67,8 @@ class IntroContentCustomizationTabState
           children: [
             SecondaryButtonCustomizationItem(
               // TODO(dev): Do we plan to change title?
-              onChanged: (canSkip, title) => widget.onChange(
-                widget.editable.copyWith(isSkip: canSkip),
+              onChanged: (canSkip, title) => onChange(
+                editable.copyWith(isSkip: canSkip),
               ),
             ),
           ],

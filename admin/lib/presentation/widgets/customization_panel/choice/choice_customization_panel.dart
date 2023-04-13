@@ -6,7 +6,7 @@ import 'package:survey_admin/presentation/widgets/customization_panel/choice/cho
 import 'package:survey_admin/presentation/widgets/question_settings_tab_bar.dart';
 import 'package:survey_core/survey_core.dart';
 
-class ChoiceCustomizationPanel extends StatefulWidget {
+class ChoiceCustomizationPanel extends StatelessWidget {
   // TODO(dev): to defines.
   final void Function(QuestionData data) onChange;
   final ChoiceQuestionData editable;
@@ -18,31 +18,25 @@ class ChoiceCustomizationPanel extends StatefulWidget {
   });
 
   @override
-  State<ChoiceCustomizationPanel> createState() =>
-      _ChoiceCustomizationPanelState();
-}
-
-class _ChoiceCustomizationPanelState extends State<ChoiceCustomizationPanel> {
-  @override
   Widget build(BuildContext context) {
     return QuestionSettingsTabBar(
       tabs: [
         ChoiceCommonCustomizationTab(
-          onChange: widget.onChange,
+          onChange: onChange,
           title: context.localization.common,
-          editable: widget.editable,
+          editable: editable,
         ),
         ChoiceButtonsCustomizationTab(
-          onChange: widget.onChange,
-          title: widget.editable.isMultipleChoice
+          onChange: onChange,
+          title: editable.isMultipleChoice
               ? context.localization.check_box
               : context.localization.radio_button,
-          editable: widget.editable,
+          editable: editable,
         ),
         ChoiceContentCustomizationTab(
-          onChange: widget.onChange,
+          onChange: onChange,
           title: context.localization.content,
-          editable: widget.editable,
+          editable: editable,
         ),
       ],
     );

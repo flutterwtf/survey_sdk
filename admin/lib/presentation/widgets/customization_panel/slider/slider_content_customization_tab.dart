@@ -21,12 +21,6 @@ class SliderContentCustomizationTab extends CustomizationTab {
   });
 
   @override
-  State<CustomizationTab> createState() => SliderContentCustomizationTabState();
-}
-
-class SliderContentCustomizationTabState
-    extends CustomizationTabState<SliderContentCustomizationTab> {
-  @override
   Widget build(BuildContext context) {
     return ListView(
       children: [
@@ -35,10 +29,10 @@ class SliderContentCustomizationTabState
           shouldShowTopDivider: true,
           children: [
             CustomizationMultilineTextField(
-              value: widget.editable.title,
+              value: editable.title,
               maxHeight: AppDimensions.sizeXL,
-              onChanged: (title) => widget.onChange(
-                widget.editable.copyWith(title: title),
+              onChanged: (title) => onChange(
+                editable.copyWith(title: title),
               ),
             ),
           ],
@@ -47,10 +41,10 @@ class SliderContentCustomizationTabState
           title: context.localization.subtitle,
           children: [
             CustomizationMultilineTextField(
-              value: widget.editable.subtitle,
+              value: editable.subtitle,
               maxHeight: AppDimensions.sizeXL,
-              onChanged: (subtitle) => widget.onChange(
-                widget.editable.copyWith(subtitle: subtitle),
+              onChanged: (subtitle) => onChange(
+                editable.copyWith(subtitle: subtitle),
               ),
             ),
           ],
@@ -59,10 +53,10 @@ class SliderContentCustomizationTabState
           title: context.localization.value,
           children: [
             MinMaxCustomizationItem(
-              initialMax: widget.editable.maxValue,
-              initialMin: widget.editable.minValue,
-              onChanged: (min, max) => widget.onChange(
-                widget.editable.copyWith(minValue: min, maxValue: max),
+              initialMax: editable.maxValue,
+              initialMin: editable.minValue,
+              onChanged: (min, max) => onChange(
+                editable.copyWith(minValue: min, maxValue: max),
               ),
             ),
           ],
@@ -71,9 +65,9 @@ class SliderContentCustomizationTabState
           title: context.localization.divisions,
           children: [
             DivisionsCustomizationItem(
-              initialValue: widget.editable.initialValue,
-              onChanged: (divisions) => widget.onChange(
-                widget.editable.copyWith(divisions: divisions),
+              initialValue: editable.initialValue,
+              onChanged: (divisions) => onChange(
+                editable.copyWith(divisions: divisions),
               ),
             ),
           ],
