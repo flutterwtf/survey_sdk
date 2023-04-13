@@ -76,17 +76,14 @@ class IntroQuestionTheme extends ThemeExtension<IntroQuestionTheme>
 
   // TODO(dev): rewrite.
   IntroQuestionTheme.fromJson(Map<String, dynamic> json)
-      : fill = Color(int.parse(json['fill'].toString())),
-        titleColor = Color(int.parse(json['titleColor'].toString())),
+      : fill = Color(json['fill']),
+        titleColor = Color(json['titleColor']),
         titleSize = double.parse(json['titleSize'].toString()),
-        subtitleColor =
-            Color(int.parse(json['subtitleColor'].toString())),
+        subtitleColor = Color(json['subtitleColor']),
         subtitleSize = double.parse(json['subtitleSize'].toString()),
-        buttonFill = Color(int.parse(json['buttonFill'].toString())),
-        buttonTextColor =
-            Color(int.parse(json['buttonTextColor'].toString())),
-        buttonTextSize =
-            double.parse(json['buttonTextSize'].toString()),
+        buttonFill = Color(json['buttonFill']),
+        buttonTextColor = Color(json['buttonTextColor']),
+        buttonTextSize = double.parse(json['buttonTextSize'].toString()),
         buttonRadius = double.parse(json['buttonRadius'].toString());
 
   @override
@@ -126,17 +123,12 @@ class IntroQuestionTheme extends ThemeExtension<IntroQuestionTheme>
       fill: Color.lerp(fill, other.fill, t)!,
       titleColor: Color.lerp(titleColor, other.titleColor, t)!,
       titleSize: lerpDouble(titleSize, other.titleSize, t)!,
-      subtitleColor:
-          Color.lerp(subtitleColor, other.subtitleColor, t)!,
-      subtitleSize:
-          lerpDouble(subtitleSize, other.subtitleSize, t)!,
+      subtitleColor: Color.lerp(subtitleColor, other.subtitleColor, t)!,
+      subtitleSize: lerpDouble(subtitleSize, other.subtitleSize, t)!,
       buttonFill: Color.lerp(buttonFill, other.buttonFill, t)!,
-      buttonTextColor:
-          Color.lerp(buttonTextColor, other.buttonTextColor, t)!,
-      buttonTextSize:
-          lerpDouble(buttonTextSize, other.buttonTextSize, t)!,
-      buttonRadius:
-          lerpDouble(buttonRadius, other.buttonRadius, t)!,
+      buttonTextColor: Color.lerp(buttonTextColor, other.buttonTextColor, t)!,
+      buttonTextSize: lerpDouble(buttonTextSize, other.buttonTextSize, t)!,
+      buttonRadius: lerpDouble(buttonRadius, other.buttonRadius, t)!,
     );
   }
 

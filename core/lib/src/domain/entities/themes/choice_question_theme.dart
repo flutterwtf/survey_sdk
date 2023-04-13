@@ -77,13 +77,13 @@ class ChoiceQuestionTheme extends ThemeExtension<ChoiceQuestionTheme>
   ChoiceQuestionTheme.fromJson(Map<String, dynamic> json)
       : activeColor = Color(json['activeColor']),
         inactiveColor = Color(json['inactiveColor']),
-        fill = json['fill'],
-        titleColor = json['titleColor'],
+        fill = Color(json['fill']),
+        titleColor = Color(json['titleColor']),
         titleSize = json['titleSize'],
-        subtitleColor = json['subtitleColor'],
+        subtitleColor = Color(json['subtitleColor']),
         subtitleSize = json['subtitleSize'],
-        buttonFill = json['buttonFill'],
-        buttonTextColor = json['buttonTextColor'],
+        buttonFill = Color(json['buttonFill']),
+        buttonTextColor = Color(json['buttonTextColor']),
         buttonTextSize = json['buttonTextSize'],
         buttonRadius = json['buttonRadius'];
 

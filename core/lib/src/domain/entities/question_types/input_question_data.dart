@@ -56,7 +56,7 @@ class InputQuestionData extends QuestionData<InputQuestionTheme> {
         );
 
   factory InputQuestionData.fromJson(Map<String, dynamic> json) {
-    final Map<String, String> payload = json['payload'];
+    final Map<String, dynamic> payload = json['payload'];
     final theme = json['theme'];
     return InputQuestionData(
       theme: theme != null ? InputQuestionTheme.fromJson(theme) : null,

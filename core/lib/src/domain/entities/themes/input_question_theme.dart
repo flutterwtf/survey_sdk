@@ -123,17 +123,17 @@ class InputQuestionTheme extends ThemeExtension<InputQuestionTheme>
         textSize = json['textSize'],
         lines = json['lines'],
         verticalPadding = json['verticalPadding'],
-        isMultiline = json['isMultiLine'],
+        isMultiline = json['isMultiLine'] == 1,
         errorText = json['errorText'],
-        inputType = json['inputType'],
+        inputType = InputType.fromJson(json['inputType']),
         horizontalPadding = json['horizontalPadding'],
-        fill = json['fill'],
-        titleColor = json['titleColor'],
+        fill = Color(json['fill']),
+        titleColor = Color(json['titleColor']),
         titleSize = json['titleSize'],
-        subtitleColor = json['subtitleColor'],
+        subtitleColor = Color(json['subtitleColor']),
         subtitleSize = json['subtitleSize'],
-        buttonFill = json['buttonFill'],
-        buttonTextColor = json['buttonTextColor'],
+        buttonFill = Color(json['buttonFill']),
+        buttonTextColor = Color(json['buttonTextColor']),
         buttonTextSize = json['buttonTextSize'],
         buttonRadius = json['buttonRadius'];
 
@@ -175,9 +175,9 @@ class InputQuestionTheme extends ThemeExtension<InputQuestionTheme>
         'textColor': textColor.value,
         'textSize': textSize,
         'lines': lines,
-        'isMultiline': isMultiline,
+        'isMultiline': isMultiline ? 1 : 0,
         'errorText': errorText,
-        'inputType': inputType.index,
+        'inputType': inputType.toJson(),
         'verticalPadding': verticalPadding,
         'horizontalPadding': horizontalPadding,
         'fill': fill.value,
@@ -287,4 +287,7 @@ enum InputType {
   email,
   password,
   phone;
+
+  String toJson() => name;
+  static InputType fromJson(String json) => values.byName(json);
 }
