@@ -43,49 +43,46 @@ class _BuilderPageState extends State<BuilderPage> {
             _surveyController.animateTo(selected - 1);
           }
         },
-        builder: (context, state) =>
-            Scaffold(
-              appBar: AppBar(
-                title: const _BuilderPageTabBar(),
-                actions: const [_ImportButton(), _ExportButton()],
-                centerTitle: true,
-              ),
-              body: Row(
-                children: [
-                  QuestionList(
-                    onDelete: _cubit.deleteQuestionData,
-                    onSelect: _cubit.select,
-                    onAdd: _cubit.addQuestionData,
-                    questions: _cubit.state.surveyData.questions.isNotEmpty
-                        ? List<QuestionData>.of(
-                      _cubit.state.surveyData.questions,
-                    )
-                        : [],
-                    onUpdate: _cubit.updateQuestions,
-                    selectedIndex: 1,
-                  ),
-                  Expanded(
-                    child: PhoneView(
-                      child: state.surveyData.questions.isNotEmpty
-                          ? Survey(
-                        surveyData: state.surveyData,
-                        controller: _surveyController,
+        builder: (context, state) => Scaffold(
+          appBar: AppBar(
+            title: const _BuilderPageTabBar(),
+            actions: const [_ImportButton(), _ExportButton()],
+            centerTitle: true,
+          ),
+          body: Row(
+            children: [
+              QuestionList(
+                onDelete: _cubit.deleteQuestionData,
+                onSelect: _cubit.select,
+                onAdd: _cubit.addQuestionData,
+                questions: _cubit.state.surveyData.questions.isNotEmpty
+                    ? List<QuestionData>.of(
+                        _cubit.state.surveyData.questions,
                       )
-                          : const SizedBox.shrink(),
-                    ),
-                  ),
-                  EditorBar(
-                    onChange: _cubit.updateQuestionData,
-                    editableQuestion: (state is EditQuestionBuilderState &&
-                        state.surveyData.questions.isNotEmpty)
-                        ? state.surveyData.questions.firstWhere(
-                          (q) => q.index == state.selectedIndex,
-                    )
-                        : null,
-                  ),
-                ],
+                    : [],
+                onUpdate: _cubit.updateQuestions,
+                selectedIndex:
+                    (state as EditQuestionBuilderState).selectedIndex - 1,
               ),
-            ),
+              Expanded(
+                child: PhoneView(
+                  child: Survey(
+                    surveyData: state.surveyData,
+                    controller: _surveyController,
+                  ),
+                ),
+              ),
+              EditorBar(
+                onChange: _cubit.updateQuestionData,
+                editableQuestion: (state.surveyData.questions.isNotEmpty)
+                    ? state.surveyData.questions.firstWhere(
+                        (q) => q.index == state.selectedIndex,
+                      )
+                    : null,
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

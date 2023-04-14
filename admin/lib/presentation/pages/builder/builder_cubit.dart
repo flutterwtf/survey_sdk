@@ -83,6 +83,7 @@ class BuilderCubit extends Cubit<BuilderState> {
           surveyData: state.surveyData,
         ),
       );
+
   void deleteQuestionData(QuestionData data) {
     final questionList = List<QuestionData>.of(state.surveyData.questions)
       ..remove(data);
@@ -92,8 +93,16 @@ class BuilderCubit extends Cubit<BuilderState> {
     final surveyData = state.surveyData.copyWith(questions: questionList);
     _sessionStorageRepository.saveSurveyData(surveyData);
     emit(state.copyWith(surveyData: surveyData));
-
-    select(state.surveyData.questions.first);
+    if (state.surveyData.questions.isEmpty) {
+      emit(
+        EditQuestionBuilderState(
+          selectedIndex: 0,
+          surveyData: state.surveyData,
+        ),
+      );
+    } else {
+      select(state.surveyData.questions.first);
+    }
   }
 
   void addQuestionData(QuestionData data) {
@@ -103,6 +112,7 @@ class BuilderCubit extends Cubit<BuilderState> {
     final surveyData = state.surveyData.copyWith(questions: questionList);
     _sessionStorageRepository.saveSurveyData(surveyData);
     emit(state.copyWith(surveyData: surveyData));
+    select(state.surveyData.questions.last);
   }
 
   // TODO(message): show message in case of error/empty data.

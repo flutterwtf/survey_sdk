@@ -1,6 +1,5 @@
 import 'package:context_menus/context_menus.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:survey_admin/presentation/app/localization/app_localizations_ext.dart';
 import 'package:survey_admin/presentation/pages/new_question_page/new_question_page.dart';
@@ -13,7 +12,7 @@ class QuestionList extends StatelessWidget {
   final ValueChanged<QuestionData> onAdd;
   final ValueChanged<QuestionData> onDelete;
   final ValueChanged<List<QuestionData>> onUpdate;
-  final int selectedIndex;
+  final int? selectedIndex;
   final List<QuestionData> questions;
 
   const QuestionList({
@@ -25,15 +24,6 @@ class QuestionList extends StatelessWidget {
     required this.selectedIndex,
     super.key,
   });
-
-  // void _handleKeyDown(RawKeyEvent value) {
-  //   if (value is RawKeyDownEvent) {
-  //     final key = value.logicalKey;
-  //     if (key == LogicalKeyboardKey.delete) {
-  //       //setState(() => _questionList.removeAt(_selectedIndex));
-  //     }
-  //   }
-  // }
 
   void _addQuestion(QuestionData data) {
     final index = questions.length + 1;
@@ -90,7 +80,7 @@ class QuestionList extends StatelessWidget {
                       index: index,
                       isSelected: index == selectedIndex,
                       onDeleteButtonPressed: () {
-                        onDelete(questions[selectedIndex]);
+                        onDelete(questions[selectedIndex!]);
                       },
                       question: questions[index],
                       onQuestionTap: onSelect,
