@@ -156,6 +156,7 @@ class InputCustomizationTab extends CustomizationTab {
           ],
         ),
         CustomizationItemsContainer(
+          // key: UniqueKey(),
           title: context.localization.input_type,
           itemsPadding: const EdgeInsets.only(
             bottom: AppDimensions.marginM,

@@ -67,6 +67,7 @@ class ChoiceContentCustomizationTab extends CustomizationTab {
         ),
         if (editable.isMultipleChoice)
           CustomizationItemsContainer(
+            key: UniqueKey(),
             title: context.localization.rule,
             children: [
               Row(
