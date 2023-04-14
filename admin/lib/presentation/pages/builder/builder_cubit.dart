@@ -84,21 +84,23 @@ class BuilderCubit extends Cubit<BuilderState> {
         ),
       );
 
+  void _updateIndex(List<QuestionData> data) {
+    for (var i = 0; i < data.length; i++) {
+      data[i] = data[i].copyWith(index: i + 1);
+    }
+  }
+
   void deleteQuestionData(QuestionData data) {
     final questionList = List<QuestionData>.of(state.surveyData.questions)
       ..remove(data);
 
-    if ((state as EditQuestionBuilderState).selectedIndex == data.index) {
-      emit(
-        EditQuestionBuilderState(
-          selectedIndex: data.index - 1,
-          surveyData: state.surveyData,
-        ),
-      );
-    }
+    _updateIndex(questionList);
+
     final surveyData = state.surveyData.copyWith(questions: questionList);
     _sessionStorageRepository.saveSurveyData(surveyData);
     emit(state.copyWith(surveyData: surveyData));
+
+    select(state.surveyData.questions.first);
   }
 
   void addQuestionData(QuestionData data) {

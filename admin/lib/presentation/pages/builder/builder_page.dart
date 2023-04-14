@@ -55,21 +55,26 @@ class _BuilderPageState extends State<BuilderPage> {
                 onDelete: _cubit.deleteQuestionData,
                 onSelect: _cubit.select,
                 onAdd: _cubit.addQuestionData,
-                questions: List<QuestionData>.of(
-                  _cubit.state.surveyData.questions,
-                ),
+                questions: _cubit.state.surveyData.questions.isNotEmpty
+                    ? List<QuestionData>.of(
+                        _cubit.state.surveyData.questions,
+                      )
+                    : [],
               ),
               Expanded(
                 child: PhoneView(
-                  child: Survey(
-                    surveyData: state.surveyData,
-                    controller: _surveyController,
-                  ),
+                  child: state.surveyData.questions.isNotEmpty
+                      ? Survey(
+                          surveyData: state.surveyData,
+                          controller: _surveyController,
+                        )
+                      : const SizedBox.shrink(),
                 ),
               ),
               EditorBar(
                 onChange: _cubit.updateQuestionData,
-                editableQuestion: (state is EditQuestionBuilderState)
+                editableQuestion: (state is EditQuestionBuilderState &&
+                        state.surveyData.questions.isNotEmpty)
                     ? state.surveyData.questions.firstWhere(
                         (q) => q.index == state.selectedIndex,
                       )

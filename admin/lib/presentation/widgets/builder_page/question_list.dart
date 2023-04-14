@@ -123,7 +123,7 @@ class _QuestionListState extends State<QuestionList> {
                       isSelected: index == _selectedIndex,
                       onDeleteButtonPressed: () {
                         widget.onDelete(_questionList[_selectedIndex]);
-                        setState(() => _questionList.removeAt(index));
+                        // setState(() => _questionList.removeAt(index));
                       },
                       question: _questionList[index],
                       onQuestionTap: (data) {

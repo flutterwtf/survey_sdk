@@ -25,6 +25,7 @@ class CommonData {
       questions: [
         intro(index: _firstIndex),
         input(index: _secondIndex),
+        choice(index: 3),
       ],
       commonTheme: commonTheme,
     );
