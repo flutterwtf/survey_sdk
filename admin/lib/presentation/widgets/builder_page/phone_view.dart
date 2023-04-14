@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:survey_admin/presentation/utils/utils.dart';
 
+const _marginHorizontal = 25.0;
+const _marginVertical = 22.0;
+
 class PhoneView extends StatelessWidget {
   final Widget child;
 
@@ -24,7 +27,10 @@ class PhoneView extends StatelessWidget {
                 SvgPicture.asset(AppAssets.iphoneImage),
                 Positioned.fill(
                   child: Container(
-                    margin: const EdgeInsets.all(AppDimensions.marginL),
+                    margin: const EdgeInsets.symmetric(
+                      vertical: _marginVertical,
+                      horizontal: _marginHorizontal,
+                    ),
                     child: ClipRRect(
                       borderRadius: const BorderRadius.all(
                         Radius.circular(AppDimensions.circularRadiusXL),

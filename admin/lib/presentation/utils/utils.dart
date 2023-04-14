@@ -1,6 +1,3 @@
-/// All utils
-library utils;
-
 export 'package:survey_admin/presentation/utils/app_colors.dart';
 export 'package:survey_admin/presentation/utils/app_fonts.dart';
 export 'package:survey_admin/presentation/utils/app_theme.dart';

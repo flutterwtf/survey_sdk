@@ -8,7 +8,7 @@ import 'package:survey_core/src/presentation/widgets/question_content.dart';
 import 'package:survey_core/src/presentation/widgets/question_title.dart';
 
 /// The question page with a question, question description, and buttons
-class IntroQuestionPage extends StatelessWidget {
+class IntroQuestionPage extends StatefulWidget {
   /// Contains the content for a page
   final IntroQuestionData data;
 
@@ -29,63 +29,81 @@ class IntroQuestionPage extends StatelessWidget {
     super.key,
   });
 
-  IntroQuestionTheme get _theme =>
-      data.theme ?? const IntroQuestionTheme.common();
+  @override
+  State<IntroQuestionPage> createState() => _IntroQuestionPageState();
+}
 
+class _IntroQuestionPageState extends State<IntroQuestionPage> {
   @override
   Widget build(BuildContext context) {
-    final onSecondaryButtonTap = this.onSecondaryButtonTap;
-    final content = data.content;
-    return Padding(
-      padding: const EdgeInsets.only(
-        left: AppDimensions.margin2XL,
-        right: AppDimensions.margin2XL,
-        top: AppDimensions.margin3XL,
-        bottom: AppDimensions.marginXL,
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          QuestionTitle(
-            title: data.title,
-            textColor: _theme.titleTextColor,
-            textSize: _theme.titleTextSize,
-          ),
-          if (content != null)
-            Padding(
+    final theme =
+        widget.data.theme ?? Theme.of(context).extension<IntroQuestionTheme>()!;
+    final onSecondaryButtonTap = widget.onSecondaryButtonTap;
+    return Scaffold(
+      backgroundColor: theme.fill,
+      body: CustomScrollView(
+        slivers: [
+          SliverFillRemaining(
+            hasScrollBody: false,
+            child: Padding(
               padding: const EdgeInsets.only(
-                top: AppDimensions.margin2XL,
+                left: AppDimensions.margin2XL,
+                right: AppDimensions.margin2XL,
+                top: AppDimensions.margin3XL,
+                bottom: AppDimensions.marginXL,
               ),
-              child: QuestionContent(
-                content: content,
-                textColor: _theme.subTitleTextColor,
-                textSize: _theme.subTitleTextSize,
-              ),
-            ),
-          const Spacer(),
-          Row(
-            children: [
-              if (onSecondaryButtonTap != null)
-                Flexible(
-                  child: Padding(
-                    padding: const EdgeInsets.only(right: 8),
-                    child: QuestionBottomButton(
-                      text: context.localization.skip,
-                      onPressed: onSecondaryButtonTap,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  if (widget.data.title.isNotEmpty)
+                    QuestionTitle(
+                      title: widget.data.title,
+                      textColor: theme.titleColor,
+                      textSize: theme.titleSize,
+                    ),
+                  if (widget.data.subtitle.isNotEmpty)
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        top: AppDimensions.marginS,
+                      ),
+                      child: QuestionContent(
+                        content: widget.data.subtitle,
+                        textColor: theme.subtitleColor,
+                        textSize: theme.subtitleSize,
+                      ),
+                    ),
+                  const Spacer(),
+                  Padding(
+                    padding: const EdgeInsets.only(top: AppDimensions.marginS),
+                    child: Row(
+                      children: [
+                        if (onSecondaryButtonTap != null)
+                          Flexible(
+                            child: Padding(
+                              padding: const EdgeInsets.only(right: 8),
+                              child: QuestionBottomButton(
+                                text: context.localization.skip,
+                                onPressed: onSecondaryButtonTap,
+                              ),
+                            ),
+                          ),
+                        Flexible(
+                          child: QuestionBottomButton(
+                            text: widget.data.buttonText,
+                            color: theme.buttonFill,
+                            textColor: theme.buttonTextColor,
+                            textSize: theme.buttonTextSize,
+                            radius: theme.buttonRadius,
+                            onPressed: widget.onMainButtonTap ?? () {},
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                ),
-              Flexible(
-                child: QuestionBottomButton(
-                  text: data.mainButtonTitle,
-                  color: _theme.mainButtonColor,
-                  textColor: _theme.mainButtonTextColor,
-                  textSize: _theme.mainButtonTextSize,
-                  radius: _theme.mainButtonRadius,
-                  onPressed: onMainButtonTap ?? () {},
-                ),
+                ],
               ),
-            ],
+            ),
           ),
         ],
       ),

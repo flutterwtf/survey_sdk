@@ -18,21 +18,10 @@ void main() {
       const subTitle = 'Question widget subtitle';
       const minValue = 1.0;
       const maxValue = 2.0;
-      const initialValue = 1.0;
-      const id = 1;
-      const isSkip = false;
 
       final sliderQuestionPage = AppTest(
         child: SliderQuestionPage(
-          data: const SliderQuestionData(
-            minValue: minValue,
-            maxValue: maxValue,
-            index: id,
-            title: title,
-            subtitle: subTitle,
-            isSkip: isSkip,
-            initialValue: initialValue,
-          ),
+          data: const SliderQuestionData.common(),
           onSend: ({required int index, required QuestionAnswer answer}) {
             completerOnSendButtonTap.complete();
           },
@@ -75,15 +64,7 @@ void main() {
           const dragValue = 0.5;
           final sliderQuestionPage = AppTest(
             child: SliderQuestionPage(
-              data: const SliderQuestionData(
-                minValue: minValue,
-                maxValue: maxValue,
-                index: id,
-                title: title,
-                subtitle: subTitle,
-                isSkip: isSkip,
-                initialValue: initialValue,
-              ),
+              data: const SliderQuestionData.common(),
               onSend: ({required int index, required QuestionAnswer answer}) {
                 expect(
                   (answer as QuestionAnswer<double>).answer.toStringAsFixed(1),
@@ -111,15 +92,7 @@ void main() {
           const dragValue = 2.0;
           final sliderQuestionPage = AppTest(
             child: SliderQuestionPage(
-              data: const SliderQuestionData(
-                minValue: minValue,
-                maxValue: maxValue,
-                index: id,
-                title: title,
-                subtitle: subTitle,
-                isSkip: isSkip,
-                initialValue: initialValue,
-              ),
+              data: const SliderQuestionData.common(),
               onSend: ({required int index, required QuestionAnswer answer}) {
                 expect(
                   (answer as QuestionAnswer<double>).answer.toStringAsFixed(1),
@@ -147,15 +120,7 @@ void main() {
           const dragValue = 1.0;
           final sliderQuestionPage = AppTest(
             child: SliderQuestionPage(
-              data: const SliderQuestionData(
-                minValue: minValue,
-                maxValue: maxValue,
-                index: id,
-                title: title,
-                subtitle: subTitle,
-                isSkip: isSkip,
-                initialValue: initialValue,
-              ),
+              data: const SliderQuestionData.common(),
               onSend: ({required int index, required QuestionAnswer answer}) {
                 expect(
                   (answer as QuestionAnswer<double>).answer.toStringAsFixed(1),

@@ -37,40 +37,47 @@ class _BuilderPageState extends State<BuilderPage> {
         bloc: _cubit,
         listener: (oldState, newState) {
           final selected = (newState is EditQuestionBuilderState)
-              ? newState.selectedQuestion
-              : null;
-          if (selected != null) {
-            // TODO(dev): animate to edited
-            //  _surveyController.animateTo(selected.index - 1).
+              ? newState.selectedIndex
+              : 0;
+          if (selected != 0) {
+            _surveyController.animateTo(selected - 1);
           }
         },
         builder: (context, state) => Scaffold(
           appBar: AppBar(
             title: const _BuilderPageTabBar(),
-            actions: const [_CreateTab(), _PreviewTab()],
+            actions: const [_ImportButton(), _ExportButton()],
             centerTitle: true,
           ),
           body: Row(
             children: [
               QuestionList(
+                onDelete: _cubit.deleteQuestionData,
                 onSelect: _cubit.select,
                 onAdd: _cubit.addQuestionData,
-                onEditCommonTheme: _cubit.editCommonTheme,
-                questions: List<QuestionData>.of(
-                  _cubit.state.surveyData.questions,
-                ),
+                questions: _cubit.state.surveyData.questions.isNotEmpty
+                    ? List<QuestionData>.of(
+                        _cubit.state.surveyData.questions,
+                      )
+                    : [],
               ),
               Expanded(
                 child: PhoneView(
-                  child: Survey(
-                    surveyData: state.surveyData,
-                    controller: _surveyController,
-                  ),
+                  child: state.surveyData.questions.isNotEmpty
+                      ? Survey(
+                          surveyData: state.surveyData,
+                          controller: _surveyController,
+                        )
+                      : const SizedBox.shrink(),
                 ),
               ),
               EditorBar(
-                editableQuestion: (state is EditQuestionBuilderState)
-                    ? state.selectedQuestion
+                onChange: _cubit.updateQuestionData,
+                editableQuestion: (state is EditQuestionBuilderState &&
+                        state.surveyData.questions.isNotEmpty)
+                    ? state.surveyData.questions.firstWhere(
+                        (q) => q.index == state.selectedIndex,
+                      )
                     : null,
               ),
             ],
@@ -111,8 +118,8 @@ class _BuilderPageTabBar extends StatelessWidget {
   }
 }
 
-class _CreateTab extends StatelessWidget {
-  const _CreateTab();
+class _ImportButton extends StatelessWidget {
+  const _ImportButton();
 
   @override
   Widget build(BuildContext context) {
@@ -144,8 +151,8 @@ class _CreateTab extends StatelessWidget {
   }
 }
 
-class _PreviewTab extends StatelessWidget {
-  const _PreviewTab();
+class _ExportButton extends StatelessWidget {
+  const _ExportButton();
 
   @override
   Widget build(BuildContext context) {
@@ -160,8 +167,8 @@ class _PreviewTab extends StatelessWidget {
         onPressed: () {
           showExportFloatingWindow(
             context,
-            onDownloadPressed: cubit.downloadExportedQuestions,
-            onCopyPressed: () {},
+            onDownloadPressed: cubit.downloadSurveyData,
+            onCopy: cubit.copySurveyData,
           );
         },
         child: Padding(

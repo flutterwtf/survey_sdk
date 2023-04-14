@@ -39,9 +39,6 @@ class _ChoiceQuestionPageState extends State<ChoiceQuestionPage>
   bool _canBeSend = false;
   List<String> _selectedItems = List.empty();
 
-  ChoiceQuestionTheme get _theme =>
-      widget.data.theme ?? const ChoiceQuestionTheme.common();
-
   @override
   void initState() {
     final selectedOptions = widget.data.selectedOptions;
@@ -66,63 +63,87 @@ class _ChoiceQuestionPageState extends State<ChoiceQuestionPage>
 
   @override
   Widget build(BuildContext context) {
-    final content = widget.data.content;
+    final theme = widget.data.theme ??
+        Theme.of(context).extension<ChoiceQuestionTheme>()!;
     final options = widget.data.options;
-    return Padding(
-      padding: const EdgeInsets.only(
-        left: AppDimensions.margin2XL,
-        right: AppDimensions.margin2XL,
-        top: AppDimensions.margin3XL,
-        bottom: AppDimensions.marginXL,
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          QuestionTitle(
-            title: widget.data.title,
-          ),
-          if (content != null)
-            Padding(
+    return Scaffold(
+      backgroundColor: theme.fill,
+      body: CustomScrollView(
+        slivers: [
+          SliverFillRemaining(
+            hasScrollBody: false,
+            child: Padding(
               padding: const EdgeInsets.only(
-                top: AppDimensions.marginXL,
+                left: AppDimensions.margin2XL,
+                right: AppDimensions.margin2XL,
+                top: AppDimensions.margin3XL,
+                bottom: AppDimensions.marginXL,
               ),
-              child: QuestionContent(
-                content: content,
-              ),
-            ),
-          Padding(
-            padding: const EdgeInsets.only(
-              top: AppDimensions.margin2XL,
-            ),
-            child: widget.data.isMultipleChoice
-                ? _QuestionCheckboxes(
-                    options: options,
-                    onChanged: _onInputChanged,
-                    activeColor: _theme.activeColor,
-                    inactiveColor: _theme.inactiveColor,
-                    selectedOptions: List.of(_selectedItems),
-                  )
-                : _QuestionRadioButtons(
-                    selectedOption:
-                        _selectedItems.isEmpty ? null : _selectedItems.first,
-                    options: options,
-                    onChanged: (selectedItem) => _onInputChanged(
-                      selectedItem == null ? null : [selectedItem],
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  if (widget.data.title.isNotEmpty)
+                    QuestionTitle(
+                      title: widget.data.title,
+                      textColor: theme.titleColor,
+                      textSize: theme.titleSize,
                     ),
-                    activeColor: _theme.activeColor,
-                    inactiveColor: _theme.inactiveColor,
+                  if (widget.data.subtitle.isNotEmpty)
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        top: AppDimensions.marginS,
+                      ),
+                      child: QuestionContent(
+                        content: widget.data.subtitle,
+                        textColor: theme.subtitleColor,
+                        textSize: theme.subtitleSize,
+                      ),
+                    ),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      top: AppDimensions.marginM,
+                    ),
+                    child: widget.data.isMultipleChoice
+                        ? _QuestionCheckboxes(
+                            options: options,
+                            onChanged: _onInputChanged,
+                            activeColor: theme.activeColor,
+                            inactiveColor: theme.inactiveColor,
+                            selectedOptions: List.of(_selectedItems),
+                          )
+                        : _QuestionRadioButtons(
+                            selectedOption: _selectedItems.isEmpty
+                                ? null
+                                : _selectedItems.first,
+                            options: options,
+                            onChanged: (selectedItem) => _onInputChanged(
+                              selectedItem == null ? null : [selectedItem],
+                            ),
+                            activeColor: theme.activeColor,
+                            inactiveColor: theme.inactiveColor,
+                          ),
                   ),
-          ),
-          const Spacer(),
-          QuestionBottomButton(
-            text: context.localization.next,
-            onPressed: () {
-              widget.onSend.call(
-                index: widget.data.index,
-                answer: QuestionAnswer<List<String>>(_selectedItems),
-              );
-            },
-            isEnabled: widget.data.isSkip || _canBeSend,
+                  const Spacer(),
+                  Padding(
+                    padding: const EdgeInsets.only(top: AppDimensions.marginS),
+                    child: QuestionBottomButton(
+                      text: context.localization.next,
+                      onPressed: () {
+                        widget.onSend.call(
+                          index: widget.data.index,
+                          answer: QuestionAnswer<List<String>>(_selectedItems),
+                        );
+                      },
+                      isEnabled: widget.data.isSkip || _canBeSend,
+                      color: theme.buttonFill,
+                      textColor: theme.buttonTextColor,
+                      textSize: theme.buttonTextSize,
+                      radius: theme.buttonRadius,
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ),
         ],
       ),

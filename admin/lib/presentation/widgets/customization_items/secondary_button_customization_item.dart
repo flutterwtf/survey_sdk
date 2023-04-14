@@ -5,7 +5,7 @@ import 'package:survey_admin/presentation/widgets/customization_items/customizat
 import 'package:survey_admin/presentation/widgets/customization_items/switch_customization_item.dart';
 
 class SecondaryButtonCustomizationItem extends StatefulWidget {
-  final void Function({required bool isShown, required String text}) onChanged;
+  final void Function(bool isShown, String text) onChanged;
   final String initialText;
   final bool isShown;
 
@@ -43,7 +43,7 @@ class _SecondaryButtonCustomizationItemState
           title: context.localization.secondary_button,
           onChanged: (isToggled) {
             setState(() => _isShown = isToggled);
-            widget.onChanged(isShown: _isShown, text: _text);
+            widget.onChanged(_isShown, _text);
           },
         ),
         AnimatedSize(
@@ -59,7 +59,7 @@ class _SecondaryButtonCustomizationItemState
                       if (text != null) {
                         setState(() => _text = text);
                       }
-                      widget.onChanged(isShown: _isShown, text: _text);
+                      widget.onChanged(_isShown, _text);
                     },
                     decoration: InputDecoration(
                       hintText: context.localization.enter_text,

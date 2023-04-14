@@ -16,20 +16,10 @@ void main() {
 
   const validationErrorMessage = 'Validation error';
 
-  final mockInputData = InputQuestionData(
-    validator: InputValidator.text(),
-    index: 0,
-    title: 'title',
-    subtitle: 'subtitle',
-    isSkip: true,
-  );
+  final mockInputData = InputQuestionData.common();
 
-  final mockInputWithNumber = InputQuestionData(
+  final mockInputWithNumber = mockInputData.copyWith(
     validator: InputValidator.number(),
-    index: 0,
-    title: 'title',
-    subtitle: 'subtitle',
-    isSkip: true,
   );
 
   group(

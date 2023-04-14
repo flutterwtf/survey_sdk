@@ -6,63 +6,34 @@ import 'package:survey_admin/presentation/widgets/customization_panel/input/inpu
 import 'package:survey_admin/presentation/widgets/question_settings_tab_bar.dart';
 import 'package:survey_core/survey_core.dart';
 
-class InputCustomizationPanel extends StatefulWidget {
-  const InputCustomizationPanel({super.key});
+class InputCustomizationPanel extends StatelessWidget {
+  final void Function(QuestionData data) onChange;
+  final InputQuestionData editable;
 
-  @override
-  State<InputCustomizationPanel> createState() =>
-      _InputCustomizationPanelState();
-}
-
-class _InputCustomizationPanelState extends State<InputCustomizationPanel> {
-  InputType inputType = InputType.text;
+  const InputCustomizationPanel({
+    required this.onChange,
+    required this.editable,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
     return QuestionSettingsTabBar(
       tabs: [
         InputCommonCustomizationTab(
+          onChange: onChange,
           title: context.localization.common,
-          onFillColorPicked: (color) {},
-          onTitleColorPicked: (color) {},
-          onTitleFontSizeChanged: (size) {},
-          onSubtitleColorPicked: (color) {},
-          onSubtitleFontSizeChanged: (size) {},
-          onButtonFirstColorPicked: (color) {},
-          onButtonSecondColorPicked: (color) {},
-          onButtonFontSizeChanged: (size) {},
+          editable: editable,
         ),
         InputCustomizationTab(
-          key: UniqueKey(),
+          onChange: onChange,
           title: context.localization.input,
-          onMultilineChanged: ({
-            required bool isMultiline,
-            required int lineAmount,
-          }) {},
-          onFillColorChanged: (color) {},
-          onBorderColorChanged: (color) {},
-          onBorderSizeChanged: (size) {},
-          onBorderWidthChanged: (size) {},
-          onHorizontalPaddingUpdate: (size) {},
-          onVerticalPaddingUpdate: (size) {},
-          onHintColorChanged: (color) {},
-          onHintFontSizeChanged: (size) {},
-          onTextColorChanged: (color) {},
-          onTextFontSizeChanged: (size) {},
-          onInputTypeChanged: (newInputType) {
-            setState(() {
-              inputType = newInputType;
-            });
-          },
-          inputType: inputType,
-          onValidatorErrorChanged: (errorText) {},
+          editable: editable,
         ),
         InputContentCustomizationTab(
+          onChange: onChange,
           title: context.localization.content,
-          onTitleChanged: (text) {},
-          onSubtitleChanged: (text) {},
-          onHintTextChanged: (text) {},
-          onButtonTextChanged: (text) {},
+          editable: editable,
         ),
       ],
     );
