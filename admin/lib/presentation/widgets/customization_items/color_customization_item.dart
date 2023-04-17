@@ -26,6 +26,9 @@ class _ColorCustomizationItemState extends State<ColorCustomizationItem> {
   final _pickerAreaHeightPercent = 0.4;
   final _lengthLimit = 8;
   final _radix = 16;
+  final globalKey = GlobalKey();
+  late OverlayEntry _overlayEntry;
+  late OverlayState _overlayState;
 
   @override
   void initState() {
@@ -69,6 +72,74 @@ class _ColorCustomizationItemState extends State<ColorCustomizationItem> {
             '0',
           );
 
+  OverlayEntry _colorPickerEntry(Offset pos) {
+    final height = MediaQuery.of(context).size.height;
+    const colorPickerHeight =
+        AppDimensions.surveyEditorBarWidth - AppDimensions.marginL;
+    final top = pos.dy + colorPickerHeight + AppDimensions.marginXS > height
+        ? pos.dy - colorPickerHeight + AppDimensions.marginXS
+        : pos.dy + AppDimensions.marginXS;
+    return OverlayEntry(
+      builder: (context) {
+        return Stack(
+          children: [
+            Positioned(
+              top: top,
+              left: pos.dx + AppDimensions.marginXS,
+              width:
+                  AppDimensions.surveyEditorBarWidth - AppDimensions.margin4XL,
+              height: colorPickerHeight,
+              child: Material(
+                child: DecoratedBox(
+                  decoration: const BoxDecoration(
+                    color: AppColors.whitePrimaryBackground,
+                    boxShadow: [
+                      BoxShadow(
+                        color: AppColors.greyBackground,
+                        spreadRadius: 5,
+                        blurRadius: 7,
+                        offset: Offset(0, 3),
+                      ),
+                    ],
+                  ),
+                  child: ColorPicker(
+                    pickerColor: _pickedColor,
+                    onColorChanged: _onColorChanged,
+                    portraitOnly: true,
+                    pickerAreaHeightPercent: _pickerAreaHeightPercent,
+                  ),
+                ),
+              ),
+            ),
+            Positioned.fill(
+              child: GestureDetector(
+                onTap: _hideColorPicker,
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void _showColorPicker() {
+    final renderBox = context.findRenderObject() as RenderBox?;
+    final pos = renderBox!.localToGlobal(Offset.zero);
+    _overlayState = Overlay.of(context);
+    _overlayEntry = _colorPickerEntry(pos);
+    if (!_isPickerOpened) {
+      _overlayState.insert(_overlayEntry);
+      setState(() => _isPickerOpened = true);
+    }
+  }
+
+  void _hideColorPicker() {
+    if (_isPickerOpened) {
+      _overlayEntry.remove();
+      setState(() => _isPickerOpened = false);
+    }
+  }
+
   @override
   void dispose() {
     _controller.dispose();
@@ -83,7 +154,7 @@ class _ColorCustomizationItemState extends State<ColorCustomizationItem> {
         Row(
           children: [
             GestureDetector(
-              onTap: () => setState(() => _isPickerOpened = !_isPickerOpened),
+              onTap: _showColorPicker,
               child: Container(
                 decoration: BoxDecoration(
                   color: _pickedColor,
@@ -114,17 +185,6 @@ class _ColorCustomizationItemState extends State<ColorCustomizationItem> {
             ),
           ],
         ),
-        if (_isPickerOpened) ...[
-          const SizedBox(
-            height: AppDimensions.margin2XS,
-          ),
-          ColorPicker(
-            pickerColor: _pickedColor,
-            onColorChanged: _onColorChanged,
-            portraitOnly: true,
-            pickerAreaHeightPercent: _pickerAreaHeightPercent,
-          ),
-        ],
       ],
     );
   }
