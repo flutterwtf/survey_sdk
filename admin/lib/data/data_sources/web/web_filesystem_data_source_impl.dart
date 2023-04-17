@@ -29,7 +29,11 @@ class WebFilesystemDataSourceImpl implements FilesystemDataSource {
 
   @override
   Future<SurveyData?> importSurveyData() async {
-    final result = await FilePicker.platform.pickFiles();
+    final result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['json'],
+    );
+
     if (result != null) {
       final bytes = result.files.single.bytes;
       if (bytes != null) {

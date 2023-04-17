@@ -123,6 +123,7 @@ class _ImportButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cubit = BlocProvider.of<BuilderCubit>(context);
     return Padding(
       padding: const EdgeInsets.only(
         top: AppDimensions.margin2XS,
@@ -130,7 +131,7 @@ class _ImportButton extends StatelessWidget {
         bottom: AppDimensions.margin2XS,
       ),
       child: OutlinedButton(
-        onPressed: () {},
+        onPressed: cubit.importData,
         style: OutlinedButton.styleFrom(
           side: const BorderSide(),
         ),
