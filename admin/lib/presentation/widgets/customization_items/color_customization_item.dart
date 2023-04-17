@@ -26,7 +26,6 @@ class _ColorCustomizationItemState extends State<ColorCustomizationItem> {
   final _pickerAreaHeightPercent = 0.4;
   final _lengthLimit = 8;
   final _radix = 16;
-  final globalKey = GlobalKey();
   late OverlayEntry _overlayEntry;
   late OverlayState _overlayState;
 
