@@ -7,7 +7,7 @@ import 'package:survey_admin/presentation/utils/utils.dart';
 import 'package:survey_admin/presentation/widgets/builder_page/question_list_item.dart';
 import 'package:survey_core/survey_core.dart';
 
-class QuestionList extends StatelessWidget {
+class QuestionList extends StatefulWidget {
   final ValueChanged<QuestionData> onSelect;
   final ValueChanged<QuestionData> onAdd;
   final ValueChanged<QuestionData> onDelete;
@@ -25,21 +25,29 @@ class QuestionList extends StatelessWidget {
     super.key,
   });
 
+  @override
+  State<QuestionList> createState() => _QuestionListState();
+}
+
+class _QuestionListState extends State<QuestionList> {
   void _addQuestion(QuestionData data) {
-    final index = questions.length + 1;
-    onAdd(data.copyWith(index: index));
+    final index = widget.questions.length + 1;
+    widget.onAdd(data.copyWith(index: index));
   }
 
   void _updateQuestion(int oldIndex, int newIndex) {
-    final itemOld = questions.removeAt(oldIndex);
-    questions.insert(
+    final itemOld = widget.questions.removeAt(oldIndex);
+
+    widget.questions.insert(
       newIndex,
       itemOld,
     );
-    for (var i = 0; i < questions.length; i++) {
-      questions[i] = questions[i].copyWith(index: i + 1);
+
+    for (var i = 0; i < widget.questions.length; i++) {
+      widget.questions[i] = widget.questions[i].copyWith(index: i + 1);
     }
-    onUpdate(questions);
+
+    widget.onUpdate(widget.questions);
   }
 
   @override
@@ -62,28 +70,32 @@ class QuestionList extends StatelessWidget {
                 _addQuestion(questionData);
               }
             },
-            isEditingCommonTheme: selectedIndex == -1,
-            questionList: questions,
+            isEditingCommonTheme: widget.selectedIndex == -1,
+            questionList: widget.questions,
           ),
           Expanded(
             child: ContextMenuOverlay(
               child: ReorderableListView(
+                proxyDecorator: (widget, _, __) => widget,
                 onReorder: (oldIndex, newIndex) {
-                  if (newIndex > oldIndex) newIndex--;
-                  _updateQuestion(oldIndex, newIndex);
+                  setState(() {
+                    if (newIndex > oldIndex) newIndex--;
+                    _updateQuestion(oldIndex, newIndex);
+                  });
                 },
                 buildDefaultDragHandles: false,
                 children: [
-                  for (int index = 0; index < questions.length; index++)
+                  for (int index = 0; index < widget.questions.length; index++)
                     _Question(
                       key: ValueKey(index),
                       index: index,
-                      isSelected: index == selectedIndex,
+                      isSelected: index == widget.selectedIndex,
                       onDeleteButtonPressed: () {
-                        onDelete(questions[selectedIndex!]);
+                        widget
+                            .onDelete(widget.questions[widget.selectedIndex!]);
                       },
-                      question: questions[index],
-                      onQuestionTap: onSelect,
+                      question: widget.questions[index],
+                      onQuestionTap: widget.onSelect,
                     ),
                 ],
               ),
