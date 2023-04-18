@@ -4,15 +4,28 @@ import 'package:intl/intl.dart';
 import 'package:survey_core/src/domain/entities/question_answer.dart';
 import 'package:survey_core/src/domain/entities/question_types/input_question_data.dart';
 import 'package:survey_core/src/domain/entities/themes/input_question_theme.dart';
-import 'package:survey_core/src/presentation/localization/app_localizations_ext.dart';
 import 'package:survey_core/src/presentation/utils/utils.dart';
 import 'package:survey_core/src/presentation/widgets/question_bottom_button.dart';
 import 'package:survey_core/src/presentation/widgets/question_content.dart';
 import 'package:survey_core/src/presentation/widgets/question_title.dart';
 
+const _radius = AppDimensions.circularRadiusXS;
+
+/// The question page with an input field for the
+/// user to enter a response. It includes a question, question description,
+/// button to submit the response, and an input widget to enter the response.
+///
+/// The [InputQuestionData.validator.type] determines the type of input field
+/// displayed on the page. If [InputType.number], a [TextFormField] that only
+/// allows numbers is displayed. If [InputType.date], a [DateTimeField] is
+/// displayed to select a date.
 // TODO(dev): create child<T> widget for date,password,text,number etc.
 class InputQuestionPage extends StatefulWidget {
+  /// Contains the content for a page
   final InputQuestionData data;
+
+  /// Callback that is called after pressing bottom button if input data is
+  /// valid or when the question can be skipped
   final OnSendCallback onSend;
 
   const InputQuestionPage({
@@ -39,7 +52,8 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = widget.data.theme ?? const InputQuestionTheme.common();
+    final theme =
+        widget.data.theme ?? Theme.of(context).extension<InputQuestionTheme>()!;
     final border = OutlineInputBorder(
       borderSide: BorderSide(
         color: theme.borderColor,
@@ -47,84 +61,115 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
       ),
       borderRadius: const BorderRadius.all(
         Radius.circular(
-          AppDimensions.circularRadiusXS,
+          _radius,
         ),
       ),
     );
     final hintText = widget.data.hintText;
     final isValid = _textFieldKey.currentState?.isValid;
-    return Padding(
-      padding: const EdgeInsets.only(
-        left: AppDimensions.margin2XL,
-        right: AppDimensions.margin2XL,
-        top: AppDimensions.margin3XL,
-        bottom: AppDimensions.marginXL,
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          QuestionTitle(
-            title: widget.data.title,
-          ),
-          Padding(
-            padding: const EdgeInsets.only(
-              top: AppDimensions.margin2XL,
-            ),
-            child: QuestionContent(
-              content: widget.data.subtitle,
-            ),
-          ),
-          // TODO(dev): maybe create generic widget for some inputs
-          //  (date,number,string and etc).
-          Padding(
-            padding: const EdgeInsets.only(top: AppDimensions.marginM),
-            child: isDateType
-                ? _InputDate(
-                    border: border,
-                    dateTime: _dateTime,
-                    hintText: hintText ?? '',
-                    onChanged: (value) {
-                      if (value != null) {
-                        setState(() => _dateTime = value);
-                      }
-                    },
-                    textFieldKey: _textFieldKey,
-                    theme: theme,
-                    validator: (text) => _canBeSkippedNumber
-                        ? null
-                        : widget.data.validator.validate(_dateTime.toString()),
-                  )
-                : _InputNumber(
-                    border: border,
-                    hintText: hintText ?? '',
-                    onChanged: (input) => setState(() => _input = input),
-                    theme: theme,
-                    textFieldKey: _textFieldKey,
-                    validator: (text) => _canBeSkippedNumber
-                        ? null
-                        : widget.data.validator.validate(text),
+    return Scaffold(
+      backgroundColor: theme.fill,
+      body: CustomScrollView(
+        slivers: [
+          SliverFillRemaining(
+            hasScrollBody: false,
+            child: Padding(
+              padding: const EdgeInsets.only(
+                left: AppDimensions.margin2XL,
+                right: AppDimensions.margin2XL,
+                top: AppDimensions.margin3XL,
+                bottom: AppDimensions.marginXL,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  if (widget.data.title.isNotEmpty)
+                    QuestionTitle(
+                      title: widget.data.title,
+                      textSize: theme.titleSize,
+                      textColor: theme.titleColor,
+                    ),
+                  if (widget.data.subtitle.isNotEmpty)
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        top: AppDimensions.marginS,
+                      ),
+                      child: QuestionContent(
+                        content: widget.data.subtitle,
+                        textSize: theme.subtitleSize,
+                        textColor: theme.subtitleColor,
+                      ),
+                    ),
+                  // TODO(dev): maybe create generic widget for some inputs
+                  //  (date,number,string and etc).
+                  Padding(
+                    padding: EdgeInsets.only(
+                      top: AppDimensions.marginM + theme.verticalPadding,
+                      bottom: theme.verticalPadding,
+                      left: theme.horizontalPadding,
+                      right: theme.horizontalPadding,
+                    ),
+                    child: isDateType
+                        ? _InputDate(
+                            border: border,
+                            dateTime: _dateTime,
+                            hintText: hintText ?? '',
+                            onChanged: (value) {
+                              if (value != null) {
+                                setState(() => _dateTime = value);
+                              }
+                            },
+                            textFieldKey: _textFieldKey,
+                            // TODO(dev): pass args instead of theme.
+                            theme: theme,
+                            validator: (text) => _canBeSkippedNumber
+                                ? null
+                                : widget.data.validator
+                                    .validate(_dateTime.toString()),
+                          )
+                        : _InputNumber(
+                            border: border,
+                            hintText: hintText ?? '',
+                            onChanged: (input) =>
+                                setState(() => _input = input),
+                            theme: theme,
+                            textFieldKey: _textFieldKey,
+                            validator: (text) => _canBeSkippedNumber
+                                ? null
+                                : widget.data.validator.validate(text),
+                          ),
                   ),
-          ),
-          const Spacer(),
-          QuestionBottomButton(
-            text: context.localization.next,
-            onPressed: () {
-              if ((_textFieldKey.currentState?.validate() ?? false) ||
-                  widget.data.isSkip) {
-                isDateType
-                    ? widget.onSend.call(
-                        index: widget.data.index,
-                        answer: QuestionAnswer<DateTime>(_dateTime),
-                      )
-                    : widget.onSend.call(
-                        index: widget.data.index,
-                        answer: QuestionAnswer<String>(_input),
-                      );
-              }
-            },
-            isEnabled: isDateType
-                ? _canBeSkippedDate || (isValid ?? false)
-                : _canBeSkippedNumber || (isValid ?? false),
+                  const Spacer(),
+                  Padding(
+                    padding: const EdgeInsets.only(top: AppDimensions.marginS),
+                    child: QuestionBottomButton(
+                      text: widget.data.buttonText,
+                      onPressed: () {
+                        if ((_textFieldKey.currentState?.validate() ?? false) ||
+                            widget.data.isSkip) {
+                          isDateType
+                              ? widget.onSend.call(
+                                  index: widget.data.index,
+                                  answer: QuestionAnswer<DateTime>(_dateTime),
+                                )
+                              : widget.onSend.call(
+                                  index: widget.data.index,
+                                  answer: QuestionAnswer<String>(_input),
+                                );
+                        }
+                      },
+                      isEnabled: isDateType
+                          ? _canBeSkippedDate || (isValid ?? false)
+                          : _canBeSkippedNumber || (isValid ?? false),
+                      color: theme.buttonFill,
+                      textSize: theme.buttonTextSize,
+                      textColor: theme.buttonTextColor,
+                      radius: theme.buttonRadius,
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ),
         ],
       ),
@@ -160,7 +205,7 @@ class _InputDate extends StatelessWidget {
         fontSize: theme.textSize,
       ),
       decoration: InputDecoration(
-        fillColor: theme.backgroundColor,
+        fillColor: theme.inputFill,
         hintText: hintText,
         hintStyle: TextStyle(
           color: theme.hintColor,
@@ -209,28 +254,33 @@ class _InputNumber extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-      key: textFieldKey,
-      child: TextFormField(
-        minLines: theme.minLines,
-        maxLines: theme.maxLines,
-        style: TextStyle(
-          color: theme.textColor,
-          fontSize: theme.textSize,
-        ),
-        autovalidateMode: AutovalidateMode.onUserInteraction,
-        validator: validator,
-        onChanged: onChanged,
-        decoration: InputDecoration(
-          fillColor: theme.backgroundColor,
-          hintText: hintText,
-          hintStyle: TextStyle(
-            color: theme.hintColor,
-            fontSize: theme.hintSize,
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        borderRadius: const BorderRadius.all(Radius.circular(_radius)),
+        color: theme.inputFill,
+      ),
+      child: Form(
+        key: textFieldKey,
+        child: TextFormField(
+          maxLines: theme.lines,
+          style: TextStyle(
+            color: theme.textColor,
+            fontSize: theme.textSize,
           ),
-          enabledBorder: border,
-          focusedBorder: border,
-          border: border,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
+          validator: validator,
+          onChanged: onChanged,
+          decoration: InputDecoration(
+            fillColor: theme.inputFill,
+            hintText: hintText,
+            hintStyle: TextStyle(
+              color: theme.hintColor,
+              fontSize: theme.hintSize,
+            ),
+            enabledBorder: border,
+            focusedBorder: border,
+            border: border,
+          ),
         ),
       ),
     );

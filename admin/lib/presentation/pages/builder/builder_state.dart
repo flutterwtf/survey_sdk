@@ -4,44 +4,33 @@ import 'package:survey_core/survey_core.dart';
 abstract class BuilderState extends Equatable {
   final SurveyData surveyData;
 
-  const BuilderState(this.surveyData);
+  const BuilderState({
+    required this.surveyData,
+  });
 
-  BuilderState copyWith({SurveyData? surveyData});
+  BuilderState copyWith({
+    SurveyData? surveyData,
+  });
 }
 
 class EditQuestionBuilderState extends BuilderState {
-  final QuestionData? selectedQuestion;
+  final int selectedIndex;
 
   @override
-  List<Object?> get props => [selectedQuestion, surveyData];
+  List<Object?> get props => [selectedIndex, surveyData];
 
   const EditQuestionBuilderState({
-    required this.selectedQuestion,
-    required SurveyData surveyData,
-  }) : super(surveyData);
+    required this.selectedIndex,
+    required super.surveyData,
+  });
 
   @override
   BuilderState copyWith({
-    QuestionData? selectedQuestion,
+    int? selectedIndex,
     SurveyData? surveyData,
   }) {
     return EditQuestionBuilderState(
-      selectedQuestion: selectedQuestion ?? this.selectedQuestion,
-      surveyData: surveyData ?? this.surveyData,
-    );
-  }
-}
-
-class EditCommonThemeBuilderState extends BuilderState {
-  @override
-  List<Object?> get props => [surveyData];
-
-  const EditCommonThemeBuilderState({required SurveyData surveyData})
-      : super(surveyData);
-
-  @override
-  EditCommonThemeBuilderState copyWith({SurveyData? surveyData}) {
-    return EditCommonThemeBuilderState(
+      selectedIndex: selectedIndex ?? this.selectedIndex,
       surveyData: surveyData ?? this.surveyData,
     );
   }

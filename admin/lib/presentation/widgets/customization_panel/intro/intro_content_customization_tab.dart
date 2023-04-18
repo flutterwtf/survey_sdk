@@ -1,26 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:survey_admin/presentation/app/localization/app_localizations_ext.dart';
+import 'package:survey_admin/presentation/utils/constants/app_dimensions.dart';
 import 'package:survey_admin/presentation/utils/utils.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_multiline_text_field.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/secondary_button_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/customization_tab.dart';
+import 'package:survey_core/survey_core.dart';
 
 class IntroContentCustomizationTab extends CustomizationTab {
-  final ValueChanged<String> onTitleChanged;
-  final ValueChanged<String> onSubtitleChanged;
-  final ValueChanged<String> onPrimaryButtonTextUpdate;
-  final void Function({
-    required bool isShown,
-    required String text,
-  }) onSecondaryButtonChanged;
+  final void Function(QuestionData data) onChange;
+  final IntroQuestionData editable;
 
   const IntroContentCustomizationTab({
+    required this.onChange,
     required super.title,
-    required this.onTitleChanged,
-    required this.onSubtitleChanged,
-    required this.onPrimaryButtonTextUpdate,
-    required this.onSecondaryButtonChanged,
+    required this.editable,
     super.key,
   });
 
@@ -30,11 +25,14 @@ class IntroContentCustomizationTab extends CustomizationTab {
       children: [
         CustomizationItemsContainer(
           title: context.localization.title,
-          isTopDividerShown: true,
+          shouldShowTopDivider: true,
           children: [
             CustomizationMultilineTextField(
+              value: editable.title,
               maxHeight: AppDimensions.sizeL,
-              onChanged: onTitleChanged,
+              onChanged: (title) => onChange(
+                editable.copyWith(title: title),
+              ),
             ),
           ],
         ),
@@ -42,8 +40,11 @@ class IntroContentCustomizationTab extends CustomizationTab {
           title: context.localization.subtitle,
           children: [
             CustomizationMultilineTextField(
+              value: editable.subtitle,
               maxHeight: AppDimensions.sizeL,
-              onChanged: onSubtitleChanged,
+              onChanged: (subtitle) => onChange(
+                editable.copyWith(subtitle: subtitle),
+              ),
             ),
           ],
         ),
@@ -51,8 +52,11 @@ class IntroContentCustomizationTab extends CustomizationTab {
           title: context.localization.primary_button,
           children: [
             CustomizationMultilineTextField(
+              value: editable.buttonText,
               maxHeight: AppDimensions.sizeL,
-              onChanged: onPrimaryButtonTextUpdate,
+              onChanged: (text) => onChange(
+                editable.copyWith(buttonText: text),
+              ),
             ),
           ],
         ),
@@ -62,7 +66,10 @@ class IntroContentCustomizationTab extends CustomizationTab {
           ),
           children: [
             SecondaryButtonCustomizationItem(
-              onChanged: onSecondaryButtonChanged,
+              // TODO(dev): Do we plan to change title?
+              onChanged: (canSkip, title) => onChange(
+                editable.copyWith(isSkip: canSkip),
+              ),
             ),
           ],
         ),

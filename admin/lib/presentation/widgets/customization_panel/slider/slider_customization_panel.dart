@@ -4,40 +4,36 @@ import 'package:survey_admin/presentation/widgets/customization_panel/slider/sli
 import 'package:survey_admin/presentation/widgets/customization_panel/slider/slider_content_customization_tab.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/slider/slider_customization_tab.dart';
 import 'package:survey_admin/presentation/widgets/question_settings_tab_bar.dart';
+import 'package:survey_core/survey_core.dart';
 
 class SliderCustomizationPanel extends StatelessWidget {
-  const SliderCustomizationPanel({super.key});
+  final void Function(QuestionData data) onChange;
+  final SliderQuestionData editable;
+
+  const SliderCustomizationPanel({
+    required this.onChange,
+    required this.editable,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
     return QuestionSettingsTabBar(
       tabs: [
         SliderCommonCustomizationTab(
+          onChange: onChange,
           title: context.localization.common,
-          onButtonDownColorChanged: (value) {},
-          onButtonUpColorChanged: (value) {},
-          onFillColorChanged: (value) {},
-          onSubtitleColorChanged: (value) {},
-          onTitleColorChanged: (value) {},
-          onTitleFontSizeChanged: (size) {},
-          onSubtitleFontSizeChanged: (size) {},
-          onButtonFontSizeChanged: (size) {},
-          onButtonRadiusChanged: (radius) {},
+          editable: editable,
         ),
         SliderCustomizationTab(
+          onChange: onChange,
           title: context.localization.slider,
-          onActiveColorChanged: (color) {},
-          onInactiveColorChanged: (color) {},
-          onThicknessChanged: (thickness) {},
-          onThumbSizeChanged: (size) {},
-          onThumbColorChanged: (color) {},
+          editable: editable,
         ),
         SliderContentCustomizationTab(
+          onChange: onChange,
           title: context.localization.content,
-          onDivisionsChanged: (value) {},
-          onMinMaxChanged: (min, max) {},
-          onSubtitleChanged: (value) {},
-          onTitleChanged: (value) {},
+          editable: editable,
         ),
       ],
     );

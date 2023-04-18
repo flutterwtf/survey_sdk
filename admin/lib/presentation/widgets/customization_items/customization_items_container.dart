@@ -7,7 +7,7 @@ class CustomizationItemsContainer extends StatefulWidget {
   final EdgeInsets? itemsPadding;
   final bool isFontBold;
   final double itemsSeparatorHeight;
-  final bool isTopDividerShown;
+  final bool shouldShowTopDivider;
   final bool isBottomDividerShown;
   final List<Widget> children;
 
@@ -18,7 +18,7 @@ class CustomizationItemsContainer extends StatefulWidget {
     this.itemsPadding,
     this.isFontBold = false,
     this.itemsSeparatorHeight = AppDimensions.marginS,
-    this.isTopDividerShown = false,
+    this.shouldShowTopDivider = false,
     this.isBottomDividerShown = true,
     super.key,
   }) : assert(children.isNotEmpty, 'children must not be empty');
@@ -57,7 +57,7 @@ class _CustomizationItemsContainerState
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if (widget.isTopDividerShown) const Divider(),
+        if (widget.shouldShowTopDivider) const Divider(),
         if (widget.title != null)
           Padding(
             padding: widget.titlePadding ??

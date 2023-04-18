@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/choice/choice_content_customization_tab.dart';
-import 'package:survey_admin/presentation/widgets/customization_panel/choice/choice_customization_panel.dart';
 import 'package:survey_core/survey_core.dart';
 
 import '../app_tester.dart';
@@ -12,29 +11,14 @@ void main() {
   group(
     'Choice content customization tab tests',
     () {
-      var options = <String>[];
-      var title = '';
-      var subtitle = '';
+      var data = const ChoiceQuestionData.common();
       final page = AppTester(
         child: ChoiceContentCustomizationTab(
           title: 'Content',
-          onOptionsChanged: (newOptions) => options = newOptions,
-          onSubTitleChanged: (newSubtitle) => subtitle = newSubtitle,
-          onTitleChanged: (newTitle) => title = newTitle,
-          onRuleChanged: (value) {},
-          ruleType: RuleType.none,
-          ruleValue: 0,
-          listOptions: const [],
-          onRuleLimitedChanged: (value) {},
-          editableQuestion: const ChoiceQuestionData(
-            isMultipleChoice: true,
-            options: [],
-            title: 'title',
-            subtitle: 'subtitle',
-            isSkip: false,
-            content: 'content',
-            index: 1,
-          ),
+          onChange: (QuestionData<dynamic> newData) {
+            data = newData as ChoiceQuestionData;
+          },
+          editable: data,
         ),
       );
 
@@ -65,7 +49,7 @@ void main() {
           await tester.pumpAndSettle();
 
           await tester.enterText(find.byType(TextField).first, 'title text');
-          expect(title, 'title text');
+          expect(data.title, 'title text');
           expect(find.text('title text'), findsOneWidget);
         },
       );
@@ -77,7 +61,7 @@ void main() {
           await tester.pumpAndSettle();
 
           await tester.enterText(find.byType(TextField).at(1), 'subtitle text');
-          expect(subtitle, 'subtitle text');
+          expect(data.subtitle, 'subtitle text');
           expect(find.text('subtitle text'), findsOneWidget);
         },
       );
@@ -94,13 +78,13 @@ void main() {
           await tester.enterText(optionsInputField, 'first');
           await tester.pump();
           expect(find.text('first'), findsOneWidget);
-          expect(options, []);
+          expect(data.options, []);
 
           // Click done
           await tester.testTextInput.receiveAction(TextInputAction.done);
           await tester.pump();
           expect(find.text('first'), findsOneWidget);
-          expect(options, ['first']);
+          expect(data.options, ['first']);
 
           // Add second option
           await tester.enterText(optionsInputField, 'second');
@@ -108,13 +92,13 @@ void main() {
           await tester.pump();
           expect(find.text('first'), findsOneWidget);
           expect(find.text('second'), findsOneWidget);
-          expect(options, ['first', 'second']);
+          expect(data.options, ['first', 'second']);
 
           // Remove first option
           await tester.tap(find.byType(IconButton).first);
           await tester.pump();
           expect(find.text('second'), findsOneWidget);
-          expect(options, ['second']);
+          expect(data.options, ['second']);
         },
       );
     },

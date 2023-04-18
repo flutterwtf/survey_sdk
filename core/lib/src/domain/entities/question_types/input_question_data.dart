@@ -3,9 +3,18 @@ import 'package:survey_core/src/domain/entities/input_validator.dart';
 import 'package:survey_core/src/domain/entities/question_types/question_data.dart';
 import 'package:survey_core/src/domain/entities/themes/input_question_theme.dart';
 
+/// The data class for an input question
 class InputQuestionData extends QuestionData<InputQuestionTheme> {
+  /// Input validation rules.
   final InputValidator validator;
+
+  /// Text to display as a hint in the input field
   final String? hintText;
+  final String buttonText;
+  final InputQuestionTheme? theme;
+
+  @override
+  String get type => QuestionTypes.input;
 
   @override
   List<Object?> get props => [
@@ -16,16 +25,14 @@ class InputQuestionData extends QuestionData<InputQuestionTheme> {
         isSkip,
         content,
         hintText,
+        buttonText,
+        theme,
       ];
 
-  @override
-  InputQuestionTheme? get theme => const InputQuestionTheme.common();
-
-  @override
-  String get type => QuestionTypes.input;
-
   const InputQuestionData({
+    required this.buttonText,
     required this.validator,
+    required this.theme,
     required super.index,
     required super.title,
     required super.subtitle,
@@ -34,9 +41,25 @@ class InputQuestionData extends QuestionData<InputQuestionTheme> {
     this.hintText,
   });
 
+  InputQuestionData.common({int index = 0})
+      : this(
+          // TODO(dev): to localization somehow
+          validator: InputValidator.number(),
+          theme: null,
+          index: index,
+          title: 'Why is asking the right type of questions important?',
+          subtitle: '',
+          isSkip: false,
+          content: 'Doing so can help you gather the information most '
+              'relevant and useful to you',
+          buttonText: 'NEXT',
+        );
+
   factory InputQuestionData.fromJson(Map<String, dynamic> json) {
-    final payload = json['payload'] as Map<String, dynamic>;
+    final Map<String, dynamic> payload = json['payload'];
+    final theme = json['theme'];
     return InputQuestionData(
+      theme: theme != null ? InputQuestionTheme.fromJson(theme) : null,
       index: json['index'],
       title: json['title'],
       subtitle: json['subtitle'],
@@ -44,6 +67,7 @@ class InputQuestionData extends QuestionData<InputQuestionTheme> {
       content: json['content'],
       validator: InputValidator.fromJson(payload),
       hintText: payload['hintText'],
+      buttonText: payload['buttonText'] ?? '',
     );
   }
 
@@ -55,38 +79,44 @@ class InputQuestionData extends QuestionData<InputQuestionTheme> {
     String? title,
     String? subtitle,
     String? content,
+    String? buttonText,
     bool? isSkip,
+    InputQuestionTheme? theme,
   }) {
     return InputQuestionData(
       validator: validator ?? this.validator,
-      hintText: hintText,
+      hintText: hintText ?? this.hintText,
       index: index ?? this.index,
       title: title ?? this.title,
       subtitle: subtitle ?? this.subtitle,
       isSkip: isSkip ?? this.isSkip,
+      buttonText: buttonText ?? this.buttonText,
+      theme: theme ?? this.theme,
     );
   }
 
   @override
-  Map<String, dynamic> toJson() => {
-        'index': index,
-        'title': title,
-        'subtitle': subtitle,
-        'type': type,
-        'isSkip': isSkip,
-        'content': content,
-        'payload': {
-          ...validator.toJson(),
-          'hintText': hintText,
-        },
-      };
-}
-
-enum InputType {
-  text,
-  number,
-  date,
-  email,
-  password,
-  phone;
+  Map<String, dynamic> toJson({dynamic commonTheme}) {
+    late final InputQuestionTheme? theme;
+    //ignore: prefer-conditional-expressions
+    if (commonTheme != null) {
+      theme = commonTheme == this.theme ? null : this.theme;
+    } else {
+      theme = this.theme;
+    }
+    return {
+      'index': index,
+      'title': title,
+      'subtitle': subtitle,
+      'type': type,
+      'isSkip': isSkip,
+      'content': content,
+      'theme': theme?.toJson(),
+      'payload': {
+        ...validator.toJson(),
+        'hintText': hintText,
+        'buttonText': buttonText,
+      },
+    };
+  }
 }

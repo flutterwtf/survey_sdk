@@ -7,16 +7,10 @@ import 'package:survey_admin/presentation/widgets/customization_items/customizat
 class ColorCustomizationItem extends StatefulWidget {
   final Color initialColor;
   final ValueChanged<Color> onColorPicked;
-  final String? initialSize;
-  final ValueChanged<double>? onSizeChanged;
-  final InputDecoration? decoration;
 
   const ColorCustomizationItem({
     required this.initialColor,
     required this.onColorPicked,
-    this.initialSize,
-    this.onSizeChanged,
-    this.decoration,
     super.key,
   });
 
@@ -27,23 +21,25 @@ class ColorCustomizationItem extends StatefulWidget {
 class _ColorCustomizationItemState extends State<ColorCustomizationItem> {
   late Color _pickedColor;
   final TextEditingController _controller = TextEditingController();
+  final FocusNode _focusNode = FocusNode();
   bool _isPickerOpened = false;
   final _pickerAreaHeightPercent = 0.4;
-  final _lengthInputFormatters = 8;
+  final _lengthLimit = 8;
   final _radix = 16;
 
   @override
   void initState() {
     super.initState();
-
     _controller.text = _colorToString(widget.initialColor);
     _pickedColor = widget.initialColor;
+    _focusNode.addListener(_complete);
   }
 
-  void _onChangedTextField(String? value) {
+  void _onChanged(String? value) {
     if (value != null) {
       final color = int.tryParse(value.padRight(8, '0'), radix: 16);
       if (color != null) {
+        widget.onColorPicked(Color(color));
         setState(() => _pickedColor = Color(color));
       }
     }
@@ -57,18 +53,26 @@ class _ColorCustomizationItemState extends State<ColorCustomizationItem> {
     });
   }
 
-  String _colorToString(Color color) =>
-      color.value.toRadixString(_radix).toUpperCase();
-
-  void _updateTextField() {
-    widget.onColorPicked(_pickedColor);
-    setState(() => _controller.text = _colorToString(_pickedColor));
+  void _complete() {
+    if (!_focusNode.hasFocus) {
+      _controller
+        ..text = _colorToString(_pickedColor)
+        ..selection = TextSelection.collapsed(
+          offset: _controller.text.length,
+        );
+    }
   }
+
+  String _colorToString(Color color) =>
+      color.value.toRadixString(_radix).toUpperCase().padRight(
+            _lengthLimit,
+            '0',
+          );
 
   @override
   void dispose() {
     _controller.dispose();
-
+    _focusNode.removeListener(_complete);
     super.dispose();
   }
 
@@ -95,20 +99,16 @@ class _ColorCustomizationItemState extends State<ColorCustomizationItem> {
               child: Container(
                 margin: const EdgeInsets.all(AppDimensions.margin2XS),
                 child: CustomizationTextField(
+                  focusNode: _focusNode,
                   controller: _controller,
-                  onEditingComplete: _updateTextField,
                   inputFormatters: [
+                    // TODO(dev): move input formatters?
                     FilteringTextInputFormatter.allow(
                       RegExp('[0-9a-fA-F]'),
                     ),
-                    LengthLimitingTextInputFormatter(_lengthInputFormatters),
+                    LengthLimitingTextInputFormatter(_lengthLimit),
                   ],
-                  decoration: widget.decoration ??
-                      const InputDecoration(
-                        isCollapsed: true,
-                        border: InputBorder.none,
-                      ),
-                  onChanged: _onChangedTextField,
+                  onChanged: _onChanged,
                 ),
               ),
             ),

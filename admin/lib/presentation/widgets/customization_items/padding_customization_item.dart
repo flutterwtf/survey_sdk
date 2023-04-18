@@ -22,6 +22,7 @@ class PaddingCustomizationItem extends StatefulWidget {
       _PaddingCustomizationItemState();
 }
 
+// TODO(dev): we can make this widget better.
 class _PaddingCustomizationItemState extends State<PaddingCustomizationItem> {
   final horizontalPaddingFocus = FocusNode();
   final verticalPaddingFocus = FocusNode();

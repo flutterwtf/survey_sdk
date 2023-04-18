@@ -6,39 +6,33 @@ import 'package:survey_admin/presentation/utils/utils.dart';
 void showExportFloatingWindow(
   BuildContext context, {
   required VoidCallback onDownloadPressed,
-  required VoidCallback onCopyPressed,
+  required VoidCallback onCopy,
 }) {
-  final overlayState = Overlay.of(context);
-  late OverlayEntry overlayEntry;
-
-  overlayEntry = OverlayEntry(
-    builder: (context) {
-      return ExportFloatingWindow(
-        onClosePressed: overlayEntry.remove,
-        onDownloadPressed: () {
-          onDownloadPressed();
-          overlayEntry.remove();
-        },
-        onCopyPressed: () {
-          onCopyPressed();
-          overlayEntry.remove();
-        },
-      );
-    },
+  showDialog(
+    context: context,
+    builder: (context) => ExportFloatingWindow(
+      onClose: () => Navigator.pop(context),
+      onDownload: () {
+        onDownloadPressed();
+        Navigator.pop(context);
+      },
+      onCopyPressed: () {
+        onCopy();
+        Navigator.pop(context);
+      },
+    ),
   );
-
-  overlayState.insert(overlayEntry);
 }
 
 @visibleForTesting
 class ExportFloatingWindow extends StatelessWidget {
-  final VoidCallback onClosePressed;
-  final VoidCallback onDownloadPressed;
+  final VoidCallback onClose;
+  final VoidCallback onDownload;
   final VoidCallback onCopyPressed;
 
   const ExportFloatingWindow({
-    required this.onClosePressed,
-    required this.onDownloadPressed,
+    required this.onClose,
+    required this.onDownload,
     required this.onCopyPressed,
     super.key,
   });
@@ -64,10 +58,11 @@ class ExportFloatingWindow extends StatelessWidget {
               Align(
                 alignment: Alignment.centerRight,
                 child: IconButton(
-                  onPressed: onClosePressed,
+                  onPressed: onClose,
                   icon: const Icon(Icons.close),
                   splashRadius: AppDimensions.sizeS,
                   iconSize: AppDimensions.sizeS,
+                  color: AppColors.black,
                 ),
               ),
               Padding(
@@ -122,7 +117,7 @@ class ExportFloatingWindow extends StatelessWidget {
                       ),
                     ),
                     FilledButton(
-                      onPressed: onDownloadPressed,
+                      onPressed: onDownload,
                       style: const ButtonStyle(
                         backgroundColor: MaterialStatePropertyAll(
                           AppColors.black,

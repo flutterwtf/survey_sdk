@@ -1,22 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:survey_admin/presentation/app/localization/app_localizations_ext.dart';
+import 'package:survey_admin/presentation/utils/constants/app_dimensions.dart';
 import 'package:survey_admin/presentation/utils/utils.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_multiline_text_field.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/customization_tab.dart';
+import 'package:survey_core/survey_core.dart';
 
 class InputContentCustomizationTab extends CustomizationTab {
-  final ValueChanged<String> onTitleChanged;
-  final ValueChanged<String> onSubtitleChanged;
-  final ValueChanged<String> onHintTextChanged;
-  final ValueChanged<String> onButtonTextChanged;
+  final void Function(QuestionData data) onChange;
+  final InputQuestionData editable;
 
   const InputContentCustomizationTab({
+    required this.onChange,
     required super.title,
-    required this.onTitleChanged,
-    required this.onSubtitleChanged,
-    required this.onHintTextChanged,
-    required this.onButtonTextChanged,
+    required this.editable,
     super.key,
   });
 
@@ -26,11 +24,14 @@ class InputContentCustomizationTab extends CustomizationTab {
       children: [
         CustomizationItemsContainer(
           title: context.localization.title,
-          isTopDividerShown: true,
+          shouldShowTopDivider: true,
           children: [
             CustomizationMultilineTextField(
+              value: editable.title,
               maxHeight: AppDimensions.maxTextFieldHeight,
-              onChanged: onTitleChanged,
+              onChanged: (title) => onChange(
+                editable.copyWith(title: title),
+              ),
             ),
           ],
         ),
@@ -38,8 +39,11 @@ class InputContentCustomizationTab extends CustomizationTab {
           title: context.localization.subtitle,
           children: [
             CustomizationMultilineTextField(
+              value: editable.subtitle,
               maxHeight: AppDimensions.maxTextFieldHeight,
-              onChanged: onSubtitleChanged,
+              onChanged: (subtitle) => onChange(
+                editable.copyWith(subtitle: subtitle),
+              ),
             ),
           ],
         ),
@@ -47,8 +51,11 @@ class InputContentCustomizationTab extends CustomizationTab {
           title: context.localization.hint,
           children: [
             CustomizationMultilineTextField(
+              value: editable.hintText ?? '',
               maxHeight: AppDimensions.maxTextFieldHeight,
-              onChanged: onHintTextChanged,
+              onChanged: (hint) => onChange(
+                editable.copyWith(hintText: hint),
+              ),
             ),
           ],
         ),
@@ -56,8 +63,11 @@ class InputContentCustomizationTab extends CustomizationTab {
           title: context.localization.button,
           children: [
             CustomizationMultilineTextField(
+              value: editable.buttonText,
               maxHeight: AppDimensions.maxTextFieldHeight,
-              onChanged: onButtonTextChanged,
+              onChanged: (text) => onChange(
+                editable.copyWith(buttonText: text),
+              ),
             ),
           ],
         ),

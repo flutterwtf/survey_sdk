@@ -20,11 +20,13 @@ class SurveyController {
   }
 
   void animateTo(int index) {
-    _pageController.animateTo(
-      index.toDouble(),
-      duration: const Duration(seconds: 1),
-      curve: Curves.linear,
-    );
+    if (_pageController.hasClients && _pageController.page != null) {
+      _pageController.animateToPage(
+        index,
+        duration: const Duration(milliseconds: 500),
+        curve: Curves.easeOutCubic,
+      );
+    }
   }
 
   void onBack() {
