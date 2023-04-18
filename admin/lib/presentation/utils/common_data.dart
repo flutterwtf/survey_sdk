@@ -47,7 +47,7 @@ class CommonData {
 
   InputQuestionData input({int index = 0}) {
     return InputQuestionData(
-      validator: InputValidator.number(),
+      validator: InputValidator.text(),
       index: index,
       title: context.localization.input,
       subtitle: context.localization.empty_subtitle,

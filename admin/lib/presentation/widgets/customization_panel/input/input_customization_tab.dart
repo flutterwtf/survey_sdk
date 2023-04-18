@@ -172,6 +172,7 @@ class InputCustomizationTab extends CustomizationTab {
                           theme: theme.copyWith(
                             inputType: type,
                           ),
+                          validator: InputValidator.fromType(type: type),
                         ),
                       ),
                       child: Text(
