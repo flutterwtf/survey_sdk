@@ -22,7 +22,7 @@ class DropdownCustomizationButton<T> extends StatefulWidget {
 class _DropdownCustomizationButtonState<T>
     extends State<DropdownCustomizationButton<T>>
     with TickerProviderStateMixin {
-  late bool _isExpanded;
+  late bool _isExpanded = false;
   late final AnimationController _iconAnimationController;
   late final Animation<double> _animation;
 
@@ -53,13 +53,22 @@ class _DropdownCustomizationButtonState<T>
   }
 
   @override
+  void didUpdateWidget(DropdownCustomizationButton<T> oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (_isExpanded) {
+      _iconAnimationController.reverse();
+    }
+    _isExpanded = false;
+  }
+
+  @override
   Widget build(BuildContext context) {
     return DecoratedBox(
       decoration: widget.withColor
           ? BoxDecoration(
               color: _isExpanded
                   ? AppColors.dropdownMenuBackground
-                  : AppColors.white,
+                  : AppColors.whitePrimaryBackground,
               borderRadius: const BorderRadius.all(
                 Radius.circular(AppDimensions.circularRadiusS),
               ),

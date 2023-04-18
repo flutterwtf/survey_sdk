@@ -35,6 +35,10 @@ class _CustomizationItemsContainerState
   @override
   void initState() {
     super.initState();
+    _fillItems();
+  }
+
+  void _fillItems() {
     _items.add(widget.children.first);
     final length = widget.children.length;
 
@@ -51,6 +55,13 @@ class _CustomizationItemsContainerState
   }
 
   Widget _itemSeparator() => SizedBox(height: widget.itemsSeparatorHeight);
+
+  @override
+  void didUpdateWidget(CustomizationItemsContainer oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    _items.clear();
+    _fillItems();
+  }
 
   @override
   Widget build(BuildContext context) {
