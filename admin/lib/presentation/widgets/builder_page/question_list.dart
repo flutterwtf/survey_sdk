@@ -38,6 +38,7 @@ class _QuestionListState extends State<QuestionList> {
       widget.onSelect(widget.questions.first);
     }
     RawKeyboard.instance.addListener(_handleKeyDown);
+    _questionList = widget.questions;
   }
 
   void _handleKeyDown(RawKeyEvent value) {
@@ -71,8 +72,8 @@ class _QuestionListState extends State<QuestionList> {
   }
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
+  void didUpdateWidget(QuestionList oldWidget) {
+    super.didUpdateWidget(oldWidget);
     _questionList = widget.questions;
   }
 
