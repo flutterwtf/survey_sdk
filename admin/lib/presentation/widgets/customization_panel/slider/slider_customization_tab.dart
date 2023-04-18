@@ -7,6 +7,8 @@ import 'package:survey_admin/presentation/widgets/customization_items/thickness_
 import 'package:survey_admin/presentation/widgets/customization_panel/customization_tab.dart';
 import 'package:survey_core/survey_core.dart';
 
+const _maxThumbRadius = 24.0;
+
 class SliderCustomizationTab extends CustomizationTab {
   final void Function(QuestionData data) onChange;
   final SliderQuestionData editable;
@@ -83,6 +85,7 @@ class SliderCustomizationTab extends CustomizationTab {
                 ),
               ),
               initialThickness: theme.thumbRadius,
+              maxThickness: _maxThumbRadius,
               onThicknessChanged: (radius) => onChange(
                 editable.copyWith(
                   theme: theme.copyWith(thumbRadius: radius),

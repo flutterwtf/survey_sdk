@@ -9,6 +9,7 @@ class ColorThicknessCustomizationItem extends StatefulWidget {
   final Color initialColor;
   final ValueChanged<Color> onColorPicked;
   final double initialThickness;
+  final double? maxThickness;
   final ValueChanged<double> onThicknessChanged;
 
   const ColorThicknessCustomizationItem({
@@ -16,6 +17,7 @@ class ColorThicknessCustomizationItem extends StatefulWidget {
     required this.onColorPicked,
     required this.initialThickness,
     required this.onThicknessChanged,
+    this.maxThickness,
     super.key,
   });
 
@@ -43,7 +45,18 @@ class _ColorThicknessCustomizationItemState
             .toString()
         : textFieldText;
     final thickness = double.tryParse(textToParse) ?? 0;
-    widget.onThicknessChanged(thickness);
+
+    if (widget.maxThickness != null) {
+      final validThickness =
+          thickness > widget.maxThickness! ? widget.maxThickness! : thickness;
+      widget.onThicknessChanged(validThickness);
+      _controller.value = _controller.value.copyWith(
+        text: validThickness.toString(),
+        selection: TextSelection.collapsed(offset: _controller.text.length),
+      );
+    } else {
+      widget.onThicknessChanged(thickness);
+    }
   }
 
   @override
