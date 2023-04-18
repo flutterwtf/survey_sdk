@@ -21,6 +21,8 @@ abstract class MockedEntities {
     ruleType: RuleType.none,
     ruleValue: 0,
     theme: ChoiceQuestionTheme.common(),
+    secondaryButtonText: 'SKIP',
+    primaryButtonText: 'Next',
   );
 
   static const choice2 = ChoiceQuestionData(
@@ -34,6 +36,8 @@ abstract class MockedEntities {
     ruleType: RuleType.none,
     ruleValue: 0,
     theme: ChoiceQuestionTheme.common(),
+    secondaryButtonText: 'SKIP',
+    primaryButtonText: 'Next',
   );
 
   static const choice3 = ChoiceQuestionData(
@@ -47,6 +51,8 @@ abstract class MockedEntities {
     ruleType: RuleType.none,
     ruleValue: 0,
     theme: ChoiceQuestionTheme.common(),
+    secondaryButtonText: 'SKIP',
+    primaryButtonText: 'Next',
   );
 
   static final input1 = InputQuestionData(
@@ -55,8 +61,9 @@ abstract class MockedEntities {
     title: 'title',
     subtitle: 'subtitle',
     isSkip: false,
-    buttonText: 'NEXT',
+    primaryButtonText: 'NEXT',
     theme: const InputQuestionTheme.common(),
+    secondaryButtonText: 'SKIP',
   );
 
   static final input2 = InputQuestionData(
@@ -66,27 +73,30 @@ abstract class MockedEntities {
     subtitle: 'Another subtitle',
     isSkip: true,
     hintText: 'hint',
-    buttonText: 'NEXT',
+    primaryButtonText: 'NEXT',
     theme: const InputQuestionTheme.common(),
+    secondaryButtonText: 'SKIP',
   );
 
   static const intro1 = IntroQuestionData(
-    buttonText: 'Next',
+    primaryButtonText: 'Next',
     index: 0,
     title: 'title',
     subtitle: 'subtitle',
     isSkip: false,
     theme: IntroQuestionTheme.common(),
+    secondaryButtonText: 'SKIP',
   );
 
   static const intro2 = IntroQuestionData(
-    buttonText: 'Next',
     index: 1,
     title: 'Another title',
     subtitle: 'Another subtitle',
     isSkip: true,
     content: 'content',
     theme: IntroQuestionTheme.common(),
+    secondaryButtonText: 'SKIP',
+    primaryButtonText: 'Next',
   );
 
   static const slider1 = SliderQuestionData(
@@ -99,6 +109,8 @@ abstract class MockedEntities {
     isSkip: false,
     divisions: 0,
     theme: SliderQuestionTheme.common(),
+    secondaryButtonText: 'SKIP',
+    primaryButtonText: 'Next',
   );
 
   static const slider2 = SliderQuestionData(
@@ -111,6 +123,8 @@ abstract class MockedEntities {
     isSkip: true,
     divisions: 0,
     theme: SliderQuestionTheme.common(),
+    secondaryButtonText: 'SKIP',
+    primaryButtonText: 'Next',
   );
 
   static final data1 = SurveyData(

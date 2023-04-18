@@ -55,7 +55,7 @@ void main() {
         'primary',
       );
       expect(find.text('primary'), findsOneWidget);
-      expect(data.buttonText, 'primary');
+      expect(data.primaryButtonText, 'primary');
     });
 
     testWidgets('Unlock Secondary button', (tester) async {

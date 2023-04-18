@@ -28,6 +28,10 @@ abstract class QuestionData<T> extends Equatable {
   /// providing an answer
   final bool isSkip;
 
+  final String primaryButtonText;
+
+  final String secondaryButtonText;
+
   /// Question type
   String get type;
 
@@ -36,6 +40,8 @@ abstract class QuestionData<T> extends Equatable {
     required this.title,
     required this.subtitle,
     required this.isSkip,
+    required this.secondaryButtonText,
+    required this.primaryButtonText,
     this.content,
   });
 
@@ -45,6 +51,8 @@ abstract class QuestionData<T> extends Equatable {
     String? subtitle,
     String? content,
     bool? isSkip,
+    String? secondaryButtonText,
+    String? primaryButtonText,
   });
 
   /// Used to convert a Map from JSON to a [QuestionData] based on the

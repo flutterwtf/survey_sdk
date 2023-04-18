@@ -4,6 +4,7 @@ import 'package:survey_admin/presentation/utils/constants/app_dimensions.dart';
 import 'package:survey_admin/presentation/utils/utils.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_multiline_text_field.dart';
+import 'package:survey_admin/presentation/widgets/customization_items/secondary_button_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/customization_tab.dart';
 import 'package:survey_core/survey_core.dart';
 
@@ -60,14 +61,27 @@ class InputContentCustomizationTab extends CustomizationTab {
           ],
         ),
         CustomizationItemsContainer(
-          title: context.localization.button,
+          title: context.localization.primary_button,
           children: [
             CustomizationMultilineTextField(
-              value: editable.buttonText,
+              value: editable.primaryButtonText,
               maxHeight: AppDimensions.maxTextFieldHeight,
               onChanged: (text) => onChange(
-                editable.copyWith(buttonText: text),
+                editable.copyWith(primaryButtonText: text),
               ),
+            ),
+          ],
+        ),
+        CustomizationItemsContainer(
+          itemsPadding: const EdgeInsets.all(
+            AppDimensions.marginM,
+          ),
+          children: [
+            SecondaryButtonCustomizationItem(
+              onChanged: (canSkip, title) => onChange(
+                editable.copyWith(isSkip: canSkip, secondaryButtonText: title),
+              ),
+              initialText: editable.secondaryButtonText,
             ),
           ],
         ),

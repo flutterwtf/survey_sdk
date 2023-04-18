@@ -52,10 +52,10 @@ class IntroContentCustomizationTab extends CustomizationTab {
           title: context.localization.primary_button,
           children: [
             CustomizationMultilineTextField(
-              value: editable.buttonText,
+              value: editable.primaryButtonText,
               maxHeight: AppDimensions.sizeL,
               onChanged: (text) => onChange(
-                editable.copyWith(buttonText: text),
+                editable.copyWith(primaryButtonText: text),
               ),
             ),
           ],
@@ -66,10 +66,10 @@ class IntroContentCustomizationTab extends CustomizationTab {
           ),
           children: [
             SecondaryButtonCustomizationItem(
-              // TODO(dev): Do we plan to change title?
               onChanged: (canSkip, title) => onChange(
-                editable.copyWith(isSkip: canSkip),
+                editable.copyWith(isSkip: canSkip, secondaryButtonText: title),
               ),
+              initialText: editable.secondaryButtonText,
             ),
           ],
         ),

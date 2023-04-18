@@ -24,9 +24,12 @@ class ChoiceQuestionPage extends StatefulWidget {
   /// least one option has been selected
   final OnSendCallback onSend;
 
+  final VoidCallback? onSecondaryButtonTap;
+
   const ChoiceQuestionPage({
     required this.data,
     required this.onSend,
+    this.onSecondaryButtonTap,
     super.key,
   });
 
@@ -126,19 +129,38 @@ class _ChoiceQuestionPageState extends State<ChoiceQuestionPage>
                   const Spacer(),
                   Padding(
                     padding: const EdgeInsets.only(top: AppDimensions.marginS),
-                    child: QuestionBottomButton(
-                      text: context.localization.next,
-                      onPressed: () {
-                        widget.onSend.call(
-                          index: widget.data.index,
-                          answer: QuestionAnswer<List<String>>(_selectedItems),
-                        );
-                      },
-                      isEnabled: widget.data.isSkip || _canBeSend,
-                      color: theme.buttonFill,
-                      textColor: theme.buttonTextColor,
-                      textSize: theme.buttonTextSize,
-                      radius: theme.buttonRadius,
+                    child: Row(
+                      children: [
+                        if (widget.data.isSkip)
+                          Flexible(
+                            child: Padding(
+                              padding: const EdgeInsets.only(right: 8),
+                              child: QuestionBottomButton(
+                                text: widget.data.secondaryButtonText,
+                                radius: theme.buttonRadius,
+                                onPressed: widget.onSecondaryButtonTap ?? () {},
+                              ),
+                            ),
+                          ),
+                        Flexible(
+                          child: QuestionBottomButton(
+                            text: widget.data.primaryButtonText,
+                            onPressed: () {
+                              widget.onSend.call(
+                                index: widget.data.index,
+                                answer: QuestionAnswer<List<String>>(
+                                  _selectedItems,
+                                ),
+                              );
+                            },
+                            isEnabled: widget.data.isSkip || _canBeSend,
+                            color: theme.buttonFill,
+                            textColor: theme.buttonTextColor,
+                            textSize: theme.buttonTextSize,
+                            radius: theme.buttonRadius,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ],

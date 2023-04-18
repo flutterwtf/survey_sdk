@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:survey_core/src/domain/entities/question_types/intro_question_data.dart';
 import 'package:survey_core/src/domain/entities/themes/intro_question_theme.dart';
-import 'package:survey_core/src/presentation/localization/app_localizations_ext.dart';
 import 'package:survey_core/src/presentation/utils/utils.dart';
 import 'package:survey_core/src/presentation/widgets/question_bottom_button.dart';
 import 'package:survey_core/src/presentation/widgets/question_content.dart';
@@ -38,7 +37,6 @@ class _IntroQuestionPageState extends State<IntroQuestionPage> {
   Widget build(BuildContext context) {
     final theme =
         widget.data.theme ?? Theme.of(context).extension<IntroQuestionTheme>()!;
-    final onSecondaryButtonTap = widget.onSecondaryButtonTap;
     return Scaffold(
       backgroundColor: theme.fill,
       body: CustomScrollView(
@@ -78,19 +76,20 @@ class _IntroQuestionPageState extends State<IntroQuestionPage> {
                     padding: const EdgeInsets.only(top: AppDimensions.marginS),
                     child: Row(
                       children: [
-                        if (onSecondaryButtonTap != null)
+                        if (widget.data.isSkip)
                           Flexible(
                             child: Padding(
                               padding: const EdgeInsets.only(right: 8),
                               child: QuestionBottomButton(
-                                text: context.localization.skip,
-                                onPressed: onSecondaryButtonTap,
+                                text: widget.data.secondaryButtonText,
+                                radius: theme.buttonRadius,
+                                onPressed: widget.onSecondaryButtonTap ?? () {},
                               ),
                             ),
                           ),
                         Flexible(
                           child: QuestionBottomButton(
-                            text: widget.data.buttonText,
+                            text: widget.data.primaryButtonText,
                             color: theme.buttonFill,
                             textColor: theme.buttonTextColor,
                             textSize: theme.buttonTextSize,

@@ -28,9 +28,12 @@ class InputQuestionPage extends StatefulWidget {
   /// valid or when the question can be skipped
   final OnSendCallback onSend;
 
+  final VoidCallback? onSecondaryButtonTap;
+
   const InputQuestionPage({
     required this.data,
     required this.onSend,
+    this.onSecondaryButtonTap,
     super.key,
   });
 
@@ -142,29 +145,48 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
                   const Spacer(),
                   Padding(
                     padding: const EdgeInsets.only(top: AppDimensions.marginS),
-                    child: QuestionBottomButton(
-                      text: widget.data.buttonText,
-                      onPressed: () {
-                        if ((_textFieldKey.currentState?.validate() ?? false) ||
-                            widget.data.isSkip) {
-                          isDateType
-                              ? widget.onSend.call(
-                                  index: widget.data.index,
-                                  answer: QuestionAnswer<DateTime>(_dateTime),
-                                )
-                              : widget.onSend.call(
-                                  index: widget.data.index,
-                                  answer: QuestionAnswer<String>(_input),
-                                );
-                        }
-                      },
-                      isEnabled: isDateType
-                          ? _canBeSkippedDate || (isValid ?? false)
-                          : _canBeSkippedNumber || (isValid ?? false),
-                      color: theme.buttonFill,
-                      textSize: theme.buttonTextSize,
-                      textColor: theme.buttonTextColor,
-                      radius: theme.buttonRadius,
+                    child: Row(
+                      children: [
+                        if (widget.data.isSkip)
+                          Flexible(
+                            child: Padding(
+                              padding: const EdgeInsets.only(right: 8),
+                              child: QuestionBottomButton(
+                                text: widget.data.secondaryButtonText,
+                                radius: theme.buttonRadius,
+                                onPressed: widget.onSecondaryButtonTap ?? () {},
+                              ),
+                            ),
+                          ),
+                        Flexible(
+                          child: QuestionBottomButton(
+                            text: widget.data.primaryButtonText,
+                            onPressed: () {
+                              if ((_textFieldKey.currentState?.validate() ??
+                                      false) ||
+                                  widget.data.isSkip) {
+                                isDateType
+                                    ? widget.onSend.call(
+                                        index: widget.data.index,
+                                        answer:
+                                            QuestionAnswer<DateTime>(_dateTime),
+                                      )
+                                    : widget.onSend.call(
+                                        index: widget.data.index,
+                                        answer: QuestionAnswer<String>(_input),
+                                      );
+                              }
+                            },
+                            isEnabled: isDateType
+                                ? _canBeSkippedDate || (isValid ?? false)
+                                : _canBeSkippedNumber || (isValid ?? false),
+                            color: theme.buttonFill,
+                            textSize: theme.buttonTextSize,
+                            textColor: theme.buttonTextColor,
+                            radius: theme.buttonRadius,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ],

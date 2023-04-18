@@ -5,6 +5,7 @@ import 'package:survey_admin/presentation/widgets/customization_items/customizat
 import 'package:survey_admin/presentation/widgets/customization_items/customization_multiline_text_field.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/dropdown_customization_button.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/option_customization_item.dart';
+import 'package:survey_admin/presentation/widgets/customization_items/secondary_button_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/customization_tab.dart';
 import 'package:survey_core/survey_core.dart';
 
@@ -112,6 +113,31 @@ class ChoiceContentCustomizationTab extends CustomizationTab {
               ),
             ],
           ),
+        CustomizationItemsContainer(
+          title: context.localization.primary_button,
+          children: [
+            CustomizationMultilineTextField(
+              value: editable.primaryButtonText,
+              maxHeight: AppDimensions.maxTextFieldHeight,
+              onChanged: (text) => onChange(
+                editable.copyWith(primaryButtonText: text),
+              ),
+            ),
+          ],
+        ),
+        CustomizationItemsContainer(
+          itemsPadding: const EdgeInsets.all(
+            AppDimensions.marginM,
+          ),
+          children: [
+            SecondaryButtonCustomizationItem(
+              onChanged: (canSkip, title) => onChange(
+                editable.copyWith(isSkip: canSkip, secondaryButtonText: title),
+              ),
+              initialText: editable.secondaryButtonText,
+            ),
+          ],
+        ),
       ],
     );
   }
