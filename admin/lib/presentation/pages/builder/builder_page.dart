@@ -22,6 +22,37 @@ class _BuilderPageState extends State<BuilderPage> {
   late final BuilderCubit _cubit;
   final _surveyController = SurveyController();
 
+  Future<void> _showImportDialog() {
+    return showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: Text(context.localization.empty_data_message),
+          actions: <Widget>[
+            TextButton(
+              child: Text(
+                context.localization.ok,
+                style: const TextStyle(
+                  color: AppColors.white,
+                ),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Future<void> _onImportPressed() async {
+    final data = await BlocProvider.of<BuilderCubit>(context).importData();
+    if (data == null) {
+      _showImportDialog();
+    }
+  }
+
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -46,7 +77,7 @@ class _BuilderPageState extends State<BuilderPage> {
         builder: (context, state) => Scaffold(
           appBar: AppBar(
             title: const _BuilderPageTabBar(),
-            actions: const [_ImportButton(), _ExportButton()],
+            actions: [_ImportButton(onImportPressed: _onImportPressed), _ExportButton()],
             centerTitle: true,
           ),
           body: Row(
@@ -119,7 +150,9 @@ class _BuilderPageTabBar extends StatelessWidget {
 }
 
 class _ImportButton extends StatelessWidget {
-  const _ImportButton();
+  final VoidCallback onImportPressed;
+
+  const _ImportButton({required this.onImportPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -130,7 +163,7 @@ class _ImportButton extends StatelessWidget {
         bottom: AppDimensions.margin2XS,
       ),
       child: OutlinedButton(
-        onPressed: () {},
+        onPressed: onImportPressed,
         style: OutlinedButton.styleFrom(
           side: const BorderSide(),
         ),
