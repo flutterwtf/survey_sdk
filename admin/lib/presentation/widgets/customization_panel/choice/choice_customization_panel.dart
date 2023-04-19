@@ -29,8 +29,8 @@ class ChoiceCustomizationPanel extends StatelessWidget {
         ChoiceButtonsCustomizationTab(
           onChange: onChange,
           title: editable.isMultipleChoice
-              ? context.localization.check_box
-              : context.localization.radio_button,
+              ? context.localization.checkBox
+              : context.localization.radioButton,
           editable: editable,
         ),
         ChoiceContentCustomizationTab(

@@ -19,7 +19,7 @@ class MultipleChoiceCustomizationItem extends StatelessWidget {
       children: [
         SwitchCustomizationItem(
           initialValue: value,
-          title: context.localization.multiple_choice,
+          title: context.localization.multipleChoice,
           onChanged: onChanged,
         ),
       ],
