@@ -132,8 +132,10 @@ abstract class MockedEntities {
       input1,
     ],
     commonTheme: CommonTheme(
-      textFieldThemeData: const TextFieldThemeData.common(),
-      sliderThemeData: const SliderThemeData(),
+      slider: const SliderQuestionData.common(),
+      input: InputQuestionData.common(),
+      choice: const ChoiceQuestionData.common(),
+      intro: const IntroQuestionData.common(),
     ),
   );
 }
