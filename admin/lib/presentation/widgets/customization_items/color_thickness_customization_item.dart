@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:survey_admin/presentation/app/localization/app_localizations_ext.dart';
 import 'package:survey_admin/presentation/utils/double_input_formatter.dart';
@@ -47,8 +49,7 @@ class _ColorThicknessCustomizationItemState
     final thickness = double.tryParse(textToParse) ?? 0;
 
     if (widget.maxThickness != null) {
-      final validThickness =
-          thickness > widget.maxThickness! ? widget.maxThickness! : thickness;
+      final validThickness = min(thickness, widget.maxThickness!);
       widget.onThicknessChanged(validThickness);
       _controller.value = _controller.value.copyWith(
         text: validThickness.toString(),
