@@ -43,17 +43,17 @@ class MockFilesystemDataSource extends _i1.Mock
   }
 
   @override
-  _i4.Future<_i2.SurveyData> getSurveyData(String? asset) =>
+  _i4.Future<_i2.SurveyData> getSurveyData(String? filePath) =>
       (super.noSuchMethod(
         Invocation.method(
           #getSurveyData,
-          [asset],
+          [filePath],
         ),
         returnValue: _i4.Future<_i2.SurveyData>.value(_FakeSurveyData_0(
           this,
           Invocation.method(
             #getSurveyData,
-            [asset],
+            [filePath],
           ),
         )),
       ) as _i4.Future<_i2.SurveyData>);
@@ -69,17 +69,17 @@ class MockSurveyDataRepositoryImpl extends _i1.Mock
   }
 
   @override
-  _i4.Future<_i2.SurveyData> getSurveyData(String? asset) =>
+  _i4.Future<_i2.SurveyData> getSurveyData(String? filePath) =>
       (super.noSuchMethod(
         Invocation.method(
           #getSurveyData,
-          [asset],
+          [filePath],
         ),
         returnValue: _i4.Future<_i2.SurveyData>.value(_FakeSurveyData_0(
           this,
           Invocation.method(
             #getSurveyData,
-            [asset],
+            [filePath],
           ),
         )),
       ) as _i4.Future<_i2.SurveyData>);

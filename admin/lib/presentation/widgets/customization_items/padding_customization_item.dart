@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:survey_admin/presentation/utils/utils.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
 
+// TODO(dev): we can make this widget better.
 class PaddingCustomizationItem extends StatelessWidget {
   final double initialHorizontalPadding;
   final double initialVerticalPadding;

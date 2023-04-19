@@ -2,61 +2,48 @@ import 'package:flutter/material.dart';
 import 'package:survey_admin/presentation/app/localization/app_localizations_ext.dart';
 import 'package:survey_admin/presentation/utils/utils.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/color_customization_item.dart';
+import 'package:survey_admin/presentation/widgets/customization_items/color_thickness_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_multiline_text_field.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/dropdown_customization_button.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/multiline_switch.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/padding_customization_item.dart';
+import 'package:survey_admin/presentation/widgets/customization_items/text_style_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/customization_tab.dart';
 import 'package:survey_core/survey_core.dart';
 
 class InputCustomizationTab extends CustomizationTab {
-  final void Function({
-    required bool isMultiline,
-    required int lineAmount,
-  }) onMultilineChanged;
-  final ValueChanged<Color> onFillColorChanged;
-  final ValueChanged<Color> onBorderColorChanged;
-  final ValueChanged<double> onBorderSizeChanged;
-  final ValueChanged<double> onBorderWidthChanged;
-  final void Function(double size) onHorizontalPaddingUpdate;
-  final void Function(double size) onVerticalPaddingUpdate;
-  final ValueChanged<Color> onHintColorChanged;
-  final ValueChanged<double> onHintFontSizeChanged;
-  final ValueChanged<Color> onTextColorChanged;
-  final ValueChanged<double> onTextFontSizeChanged;
-  final ValueChanged<InputType> onInputTypeChanged;
-  final InputType inputType;
-  final ValueChanged<String> onValidatorErrorChanged;
+  final void Function(QuestionData data) onChange;
+  final InputQuestionData editable;
 
   const InputCustomizationTab({
+    required this.onChange,
     required super.title,
-    required this.onMultilineChanged,
-    required this.onFillColorChanged,
-    required this.onBorderColorChanged,
-    required this.onBorderSizeChanged,
-    required this.onBorderWidthChanged,
-    required this.onHorizontalPaddingUpdate,
-    required this.onVerticalPaddingUpdate,
-    required this.onHintColorChanged,
-    required this.onHintFontSizeChanged,
-    required this.onTextColorChanged,
-    required this.onTextFontSizeChanged,
-    required this.onInputTypeChanged,
-    required this.inputType,
-    required this.onValidatorErrorChanged,
+    required this.editable,
     super.key,
   });
+
+  InputQuestionTheme get theme =>
+      editable.theme ?? const InputQuestionTheme.common();
 
   @override
   Widget build(BuildContext context) {
     return ListView(
       children: [
         CustomizationItemsContainer(
-          isTopDividerShown: true,
+          shouldShowTopDivider: true,
           children: [
             MultilineSwitch(
-              onChanged: onMultilineChanged,
+              value: theme.isMultiline,
+              lines: theme.lines,
+              onChanged: (isMultiline, lines) => onChange(
+                editable.copyWith(
+                  theme: theme.copyWith(
+                    isMultiline: isMultiline,
+                    lines: lines,
+                  ),
+                ),
+              ),
             ),
           ],
         ),
@@ -64,17 +51,37 @@ class InputCustomizationTab extends CustomizationTab {
           title: context.localization.fill,
           children: [
             ColorCustomizationItem(
-              initialColor: AppColors.white,
-              onColorPicked: onFillColorChanged,
+              initialColor: theme.inputFill,
+              onColorPicked: (color) => onChange(
+                editable.copyWith(
+                  theme: theme.copyWith(
+                    inputFill: color,
+                  ),
+                ),
+              ),
             ),
           ],
         ),
         CustomizationItemsContainer(
           title: context.localization.border,
           children: [
-            ColorCustomizationItem(
-              initialColor: AppColors.black,
-              onColorPicked: onBorderColorChanged,
+            ColorThicknessCustomizationItem(
+              initialColor: theme.borderColor,
+              onColorPicked: (color) => onChange(
+                editable.copyWith(
+                  theme: theme.copyWith(
+                    borderColor: color,
+                  ),
+                ),
+              ),
+              initialThickness: theme.borderWidth,
+              onThicknessChanged: (width) => onChange(
+                editable.copyWith(
+                  theme: theme.copyWith(
+                    borderWidth: width,
+                  ),
+                ),
+              ),
             ),
           ],
         ),
@@ -82,32 +89,74 @@ class InputCustomizationTab extends CustomizationTab {
           title: context.localization.padding,
           children: [
             PaddingCustomizationItem(
-              initialHorizontalPadding: AppDimensions.marginS,
-              initialVerticalPadding: AppDimensions.marginS,
-              onHorizontalPaddingChange: onHorizontalPaddingUpdate,
-              onVerticalPaddingChange: onVerticalPaddingUpdate,
+              initialHorizontalPadding: theme.horizontalPadding,
+              initialVerticalPadding: theme.verticalPadding,
+              // TODO(dev): Move theme change to a method.
+              onHorizontalPaddingChange: (padding) => onChange(
+                editable.copyWith(
+                  theme: theme.copyWith(
+                    horizontalPadding: padding,
+                  ),
+                ),
+              ),
+              onVerticalPaddingChange: (padding) => onChange(
+                editable.copyWith(
+                  theme: theme.copyWith(
+                    verticalPadding: padding,
+                  ),
+                ),
+              ),
             ),
           ],
         ),
         CustomizationItemsContainer(
           title: context.localization.hint,
           children: [
-            ColorCustomizationItem(
-              initialColor: AppColors.textLightGrey,
-              onColorPicked: onHintColorChanged,
+            TextStyleCustomizationItem(
+              initialColor: theme.hintColor,
+              onColorPicked: (color) => onChange(
+                editable.copyWith(
+                  theme: theme.copyWith(
+                    hintColor: color,
+                  ),
+                ),
+              ),
+              initialSize: theme.hintSize,
+              onSizeChanged: (size) => onChange(
+                editable.copyWith(
+                  theme: theme.copyWith(
+                    hintSize: size,
+                  ),
+                ),
+              ),
             ),
           ],
         ),
         CustomizationItemsContainer(
           title: context.localization.text,
           children: [
-            ColorCustomizationItem(
-              initialColor: AppColors.black,
-              onColorPicked: onTextColorChanged,
+            TextStyleCustomizationItem(
+              initialColor: theme.textColor,
+              onColorPicked: (color) => onChange(
+                editable.copyWith(
+                  theme: theme.copyWith(
+                    textColor: color,
+                  ),
+                ),
+              ),
+              initialSize: theme.textSize,
+              onSizeChanged: (size) => onChange(
+                editable.copyWith(
+                  theme: theme.copyWith(
+                    textSize: size,
+                  ),
+                ),
+              ),
             ),
           ],
         ),
         CustomizationItemsContainer(
+          // key: UniqueKey(),
           title: context.localization.input_type,
           itemsPadding: const EdgeInsets.only(
             bottom: AppDimensions.marginM,
@@ -118,7 +167,14 @@ class InputCustomizationTab extends CustomizationTab {
                   .map(
                     (e) => DropdownCustomizationItem<InputType>(
                       value: e,
-                      onChange: onInputTypeChanged,
+                      onChange: (type) => onChange(
+                        editable.copyWith(
+                          theme: theme.copyWith(
+                            inputType: type,
+                          ),
+                          validator: InputValidator.fromType(type: type),
+                        ),
+                      ),
                       // TODO(dev): We have localization names for it.
                       child: Text(
                         e.name,
@@ -127,7 +183,7 @@ class InputCustomizationTab extends CustomizationTab {
                     ),
                   )
                   .toList(),
-              value: inputType,
+              value: theme.inputType,
               withColor: false,
             ),
           ],
@@ -136,8 +192,15 @@ class InputCustomizationTab extends CustomizationTab {
           title: context.localization.validator_error_text_title,
           children: [
             CustomizationMultilineTextField(
+              value: theme.errorText,
               maxHeight: AppDimensions.sizeXL,
-              onChanged: onValidatorErrorChanged,
+              onChanged: (text) => onChange(
+                editable.copyWith(
+                  theme: theme.copyWith(
+                    errorText: text,
+                  ),
+                ),
+              ),
             ),
           ],
         ),

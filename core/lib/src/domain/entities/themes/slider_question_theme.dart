@@ -4,21 +4,21 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:survey_core/src/domain/entities/api_object.dart';
 
+const _thumbRadius = 16.0;
+const _thickness = 8.0;
 const _titleSize = 16.0;
 const _subtitleSize = 12.0;
 const _buttonTextSize = 12.0;
 const _buttonRadius = 10.0;
 
-/// Defines the visual properties for a choice question options
-class ChoiceQuestionTheme extends ThemeExtension<ChoiceQuestionTheme>
+// TODO(dev): Can we move equatable mixin to ApiObject?
+class SliderQuestionTheme extends ThemeExtension<SliderQuestionTheme>
     with ApiObject, EquatableMixin {
-  /// Color of the active radio or checkbox option.
-  /// By default is set to [Colors.black]
   final Color activeColor;
-
-  /// Color of the inactive radio or checkbox option.
-  /// By default is set to [Colors.grey]
   final Color inactiveColor;
+  final Color thumbColor;
+  final double thumbRadius;
+  final double thickness;
   final Color fill;
   final Color titleColor;
   final double titleSize;
@@ -33,6 +33,9 @@ class ChoiceQuestionTheme extends ThemeExtension<ChoiceQuestionTheme>
   List<Object?> get props => [
         activeColor,
         inactiveColor,
+        thumbColor,
+        thumbRadius,
+        thickness,
         fill,
         titleColor,
         titleSize,
@@ -44,9 +47,13 @@ class ChoiceQuestionTheme extends ThemeExtension<ChoiceQuestionTheme>
         buttonRadius,
       ];
 
-  const ChoiceQuestionTheme({
+  // TODO(dev): Add hint text.
+  const SliderQuestionTheme({
     required this.activeColor,
     required this.inactiveColor,
+    required this.thumbColor,
+    required this.thumbRadius,
+    required this.thickness,
     required this.fill,
     required this.titleColor,
     required this.titleSize,
@@ -58,11 +65,13 @@ class ChoiceQuestionTheme extends ThemeExtension<ChoiceQuestionTheme>
     required this.buttonRadius,
   });
 
-  /// Default color values of choice question options
-  const ChoiceQuestionTheme.common()
+  const SliderQuestionTheme.common()
       : this(
-          activeColor: Colors.black,
-          inactiveColor: Colors.grey,
+          activeColor: const Color(0xFF000000),
+          inactiveColor: const Color(0xFFCCCCCC),
+          thumbColor: const Color(0xFF000000),
+          thumbRadius: _thumbRadius,
+          thickness: _thickness,
           fill: Colors.white,
           titleColor: Colors.black,
           titleSize: _titleSize,
@@ -74,9 +83,12 @@ class ChoiceQuestionTheme extends ThemeExtension<ChoiceQuestionTheme>
           buttonRadius: _buttonRadius,
         );
 
-  ChoiceQuestionTheme.fromJson(Map<String, dynamic> json)
+  SliderQuestionTheme.fromJson(Map<String, dynamic> json)
       : activeColor = Color(json['activeColor']),
         inactiveColor = Color(json['inactiveColor']),
+        thumbColor = Color(json['thumbColor']),
+        thumbRadius = json['thumbRadius'],
+        thickness = json['thickness'],
         fill = Color(json['fill']),
         titleColor = Color(json['titleColor']),
         titleSize = json['titleSize'],
@@ -88,9 +100,30 @@ class ChoiceQuestionTheme extends ThemeExtension<ChoiceQuestionTheme>
         buttonRadius = json['buttonRadius'];
 
   @override
-  ChoiceQuestionTheme copyWith({
+  Map<String, dynamic> toJson() => {
+        'activeColor': activeColor.value,
+        'inactiveColor': inactiveColor.value,
+        'thumbColor': thumbColor.value,
+        'thumbRadius': thumbRadius,
+        'thickness': thickness,
+        'fill': fill.value,
+        'titleColor': titleColor.value,
+        'titleSize': titleSize,
+        'subtitleColor': subtitleColor.value,
+        'subtitleSize': subtitleSize,
+        'buttonFill': buttonFill.value,
+        'buttonTextColor': buttonTextColor.value,
+        'buttonTextSize': buttonTextSize,
+        'buttonRadius': buttonRadius,
+      };
+
+  @override
+  SliderQuestionTheme copyWith({
     Color? activeColor,
     Color? inactiveColor,
+    Color? thumbColor,
+    double? thumbRadius,
+    double? thickness,
     Color? fill,
     Color? titleColor,
     double? titleSize,
@@ -101,9 +134,12 @@ class ChoiceQuestionTheme extends ThemeExtension<ChoiceQuestionTheme>
     double? buttonTextSize,
     double? buttonRadius,
   }) {
-    return ChoiceQuestionTheme(
+    return SliderQuestionTheme(
       activeColor: activeColor ?? this.activeColor,
       inactiveColor: inactiveColor ?? this.inactiveColor,
+      thumbColor: thumbColor ?? this.thumbColor,
+      thumbRadius: thumbRadius ?? this.thumbRadius,
+      thickness: thickness ?? this.thickness,
       fill: fill ?? this.fill,
       titleColor: titleColor ?? this.titleColor,
       titleSize: titleSize ?? this.titleSize,
@@ -117,16 +153,19 @@ class ChoiceQuestionTheme extends ThemeExtension<ChoiceQuestionTheme>
   }
 
   @override
-  ChoiceQuestionTheme lerp(
-    covariant ChoiceQuestionTheme? other,
+  SliderQuestionTheme lerp(
+    covariant SliderQuestionTheme? other,
     double t,
   ) {
-    if (other is! ChoiceQuestionTheme) {
+    if (other is! SliderQuestionTheme) {
       return this;
     }
-    return ChoiceQuestionTheme(
+    return SliderQuestionTheme(
       activeColor: Color.lerp(activeColor, other.activeColor, t)!,
       inactiveColor: Color.lerp(inactiveColor, other.inactiveColor, t)!,
+      thumbColor: Color.lerp(thumbColor, other.thumbColor, t)!,
+      thumbRadius: lerpDouble(thumbRadius, other.thumbRadius, t)!,
+      thickness: lerpDouble(thickness, other.thickness, t)!,
       fill: Color.lerp(fill, other.fill, t)!,
       titleColor: Color.lerp(titleColor, other.titleColor, t)!,
       titleSize: lerpDouble(titleSize, other.titleSize, t)!,
@@ -138,19 +177,4 @@ class ChoiceQuestionTheme extends ThemeExtension<ChoiceQuestionTheme>
       buttonRadius: lerpDouble(buttonRadius, other.buttonRadius, t)!,
     );
   }
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'activeColor': activeColor.value,
-        'inactiveColor': inactiveColor.value,
-        'fill': fill.value,
-        'titleColor': titleColor.value,
-        'titleSize': titleSize,
-        'subtitleColor': subtitleColor.value,
-        'subtitleSize': subtitleSize,
-        'buttonFill': buttonFill.value,
-        'buttonTextColor': buttonTextColor.value,
-        'buttonTextSize': buttonTextSize,
-        'buttonRadius': buttonRadius,
-      };
 }

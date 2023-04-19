@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:survey_core/src/domain/entities/survey_data.dart';
 import 'package:survey_core/src/presentation/di/injector.dart';
-import 'package:survey_core/src/presentation/survey/controller/survey_controller.dart';
+import 'package:survey_core/src/presentation/survey/survey_controller.dart';
 import 'package:survey_core/src/presentation/survey/survey_cubit.dart';
 import 'package:survey_core/src/presentation/survey/survey_state.dart';
 import 'package:survey_core/src/presentation/utils/utils.dart';
@@ -42,7 +42,11 @@ class _SurveyState extends State<Survey> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    _cubit.initData(widget.filePath, widget.surveyData);
+    if (widget.surveyData == null) {
+      _cubit.initData(widget.filePath);
+    } else {
+      _cubit.setSurveyData(widget.surveyData!);
+    }
   }
 
   @override
@@ -51,8 +55,17 @@ class _SurveyState extends State<Survey> {
       bloc: _cubit,
       builder: (BuildContext context, state) {
         if (state is SurveyLoadedState) {
+          final data = widget.surveyData ?? state.surveyData;
+          final commonTheme = data.commonTheme;
           return Theme(
-            data: state.surveyData.commonTheme.toThemeData(),
+            data: ThemeData(
+              extensions: [
+                commonTheme.choice.theme!,
+                commonTheme.slider.theme!,
+                commonTheme.input.theme!,
+                commonTheme.intro.theme!,
+              ],
+            ),
             child: WillPopScope(
               onWillPop: () async {
                 _surveyController.onBack();
@@ -61,7 +74,7 @@ class _SurveyState extends State<Survey> {
               child: PageView(
                 controller: _surveyController.pageController,
                 physics: const NeverScrollableScrollPhysics(),
-                children: state.surveyData.questions
+                children: data.questions
                     .map<Widget>(
                       (question) => DataToWidgetUtil.createWidget(
                         question,

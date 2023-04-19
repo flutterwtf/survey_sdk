@@ -28,7 +28,7 @@ class CommonThemeCustomizationTab extends CustomizationTab {
       children: [
         CustomizationItemsContainer(
           title: context.localization.fill,
-          isTopDividerShown: true,
+          shouldShowTopDivider: true,
           children: [
             ColorCustomizationItem(
               initialColor: AppColors.white,

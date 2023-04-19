@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:survey_admin/presentation/utils/app_colors.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/color_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/radius_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/intro/intro_common_customization_tab.dart';
+import 'package:survey_core/survey_core.dart';
 
 import '../app_tester.dart';
 
@@ -19,28 +19,17 @@ void main() {
       const textSizeWithLetters = 1;
       const textSizeStringMoreThan2 = '233';
       const redColor = Color(0xfff44336);
-      var fillTextColor = AppColors.black;
-      var titleTextColor = AppColors.black;
-      var subtitleTextColor = AppColors.black;
-      var buttonColor = AppColors.black;
-      var buttonTextColor = AppColors.black;
-      double? titleTextSize = 10;
-      double? subtitleTextSize = 10;
-      double? buttonTextSize = 10;
-      int? radius = 10;
+      const radius = 10;
+
+      var data = const IntroQuestionData.common();
 
       final introCommonCustomPanel = AppTester(
         child: IntroCommonCustomizationTab(
           title: 'title',
-          onFillColorPicked: (value) => fillTextColor = value,
-          onTitleColorPicked: (value) => titleTextColor = value,
-          onTitleFontSizeChanged: (value) => titleTextSize = value,
-          onSubtitleColorPicked: (value) => subtitleTextColor = value,
-          onSubtitleFontSizeChanged: (value) => subtitleTextSize = value,
-          onButtonColorPicked: (value) => buttonColor = value,
-          onButtonTextColorPicked: (value) => buttonTextColor = value,
-          onButtonFontSizeChanged: (value) => buttonTextSize = value,
-          onButtonRadiusChanged: (value) => radius = value,
+          onChange: (QuestionData<dynamic> newData) {
+            data = newData as IntroQuestionData;
+          },
+          editable: data,
         ),
       );
 
@@ -67,11 +56,127 @@ void main() {
           }
           await tester.pump();
           expect(find.text(redColorCode), findsNWidgets(5));
-          expect(fillTextColor, redColor);
-          expect(titleTextColor, redColor);
-          expect(subtitleTextColor, redColor);
-          expect(buttonColor, redColor);
-          expect(buttonTextColor, redColor);
+          expect(data.theme?.fill, redColor);
+          expect(data.theme?.titleColor, redColor);
+          expect(data.theme?.subtitleColor, redColor);
+          expect(data.theme?.buttonFill, redColor);
+          expect(data.theme?.buttonTextColor, redColor);
+        },
+      );
+      testWidgets(
+        'pick text width and radius test',
+        (tester) async {
+          await tester.pumpWidget(introCommonCustomPanel);
+
+          await tester.enterText(
+            find.byType(CustomizationTextField).at(2),
+            textSizeString,
+          );
+          await tester.testTextInput.receiveAction(TextInputAction.done);
+          await tester.pump();
+          expect(data.theme?.titleSize, textSize);
+
+          await tester.enterText(
+            find.byType(CustomizationTextField).at(4),
+            textSizeString,
+          );
+          await tester.testTextInput.receiveAction(TextInputAction.done);
+          await tester.pump();
+          expect(data.theme?.subtitleSize, textSize);
+
+          await tester.enterText(
+            find.byType(CustomizationTextField).at(7),
+            textSizeString,
+          );
+          await tester.testTextInput.receiveAction(TextInputAction.done);
+          await tester.pump();
+          expect(data.theme?.buttonTextSize, textSize);
+
+          await tester.enterText(
+            find.byType(CustomizationTextField).at(8),
+            textSizeString,
+          );
+          await tester.testTextInput.receiveAction(TextInputAction.done);
+          await tester.pump();
+          expect(radius, textSize);
+
+          expect(find.text(textSizeString), findsNWidgets(4));
+        },
+      );
+      testWidgets(
+        'pick text width and radius with letters',
+        (tester) async {
+          await tester.pumpWidget(introCommonCustomPanel);
+
+          await tester.enterText(
+            find.byType(CustomizationTextField).at(2),
+            textSizeStringWithLetters,
+          );
+          await tester.testTextInput.receiveAction(TextInputAction.done);
+          await tester.pump();
+          expect(data.theme?.titleSize, textSizeWithLetters);
+
+          await tester.enterText(
+            find.byType(CustomizationTextField).at(4),
+            textSizeStringWithLetters,
+          );
+          await tester.testTextInput.receiveAction(TextInputAction.done);
+          await tester.pump();
+          expect(data.theme?.subtitleSize, textSizeWithLetters);
+
+          await tester.enterText(
+            find.byType(CustomizationTextField).at(7),
+            textSizeStringWithLetters,
+          );
+          await tester.testTextInput.receiveAction(TextInputAction.done);
+          await tester.pump();
+          expect(data.theme?.buttonTextSize, textSizeWithLetters);
+
+          await tester.enterText(
+            find.byType(CustomizationTextField).at(8),
+            textSizeStringWithLetters,
+          );
+          await tester.testTextInput.receiveAction(TextInputAction.done);
+          await tester.pump();
+          expect(radius, textSizeWithLetters);
+
+          expect(find.text(textSizeStringWithLetters), findsNothing);
+        },
+      );
+      testWidgets(
+        'pick text width and radius with more than 2 digits',
+        (tester) async {
+          await tester.pumpWidget(introCommonCustomPanel);
+
+          await tester.enterText(
+            find.byType(CustomizationTextField).at(2),
+            textSizeStringMoreThan2,
+          );
+          await tester.testTextInput.receiveAction(TextInputAction.done);
+          await tester.pump();
+
+          await tester.enterText(
+            find.byType(CustomizationTextField).at(4),
+            textSizeStringMoreThan2,
+          );
+          await tester.testTextInput.receiveAction(TextInputAction.done);
+          await tester.pump();
+
+          await tester.enterText(
+            find.byType(CustomizationTextField).at(7),
+            textSizeStringMoreThan2,
+          );
+          await tester.testTextInput.receiveAction(TextInputAction.done);
+          await tester.pump();
+
+          await tester.enterText(
+            find.byType(CustomizationTextField).at(8),
+            textSizeStringMoreThan2,
+          );
+          await tester.testTextInput.receiveAction(TextInputAction.done);
+          await tester.pump();
+
+          expect(find.text(textSizeStringMoreThan2), findsNothing);
         },
       );
     },

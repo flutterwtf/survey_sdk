@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:survey_admin/presentation/app/localization/app_localizations_ext.dart';
-import 'package:survey_admin/presentation/utils/utils.dart';
 import 'package:survey_core/survey_core.dart';
 
 class CommonData {
@@ -10,29 +9,14 @@ class CommonData {
   static const _initialValue = 5;
   static const _firstIndex = 1;
   static const _secondIndex = 2;
+  static const _dividers = 10;
 
   CommonTheme get commonTheme {
     return CommonTheme(
-      textFieldThemeData: const TextFieldThemeData(
-        fillCommonColor: AppColors.white,
-        fillInputColor: AppColors.white,
-        borderColor: AppColors.black,
-        borderWidth: AppDimensions.circularRadiusXS,
-        verticalPadding: AppDimensions.marginM,
-        horizontalPadding: AppDimensions.marginM,
-        hintColor: AppColors.textGrey,
-        hintSize: AppDimensions.marginM,
-        textColor: AppColors.black,
-        textSize: AppDimensions.marginM,
-        titleColor: AppColors.black,
-        titleSize: AppDimensions.marginM,
-        subtitleColor: AppColors.black,
-        subtitleSize: AppDimensions.marginS,
-        buttonTextSize: AppDimensions.marginS,
-        buttonColor: AppColors.black,
-        buttonTextColor: AppColors.white,
-      ),
-      sliderThemeData: Theme.of(context).sliderTheme,
+      slider: slider(),
+      intro: intro(),
+      input: input(),
+      choice: choice(),
     );
   }
 
@@ -41,6 +25,7 @@ class CommonData {
       questions: [
         intro(index: _firstIndex),
         input(index: _secondIndex),
+        choice(index: 3),
       ],
       commonTheme: commonTheme,
     );
@@ -50,23 +35,26 @@ class CommonData {
 
   IntroQuestionData intro({int index = 0}) {
     return IntroQuestionData(
-      mainButtonTitle: context.localization.next,
+      buttonText: context.localization.next,
       title: context.localization.intro,
       index: index,
       subtitle: context.localization.empty_subtitle,
       isSkip: false,
       content: context.localization.question_content,
+      theme: const IntroQuestionTheme.common(),
     );
   }
 
   InputQuestionData input({int index = 0}) {
     return InputQuestionData(
-      validator: InputValidator.number(),
+      validator: InputValidator.text(),
       index: index,
       title: context.localization.input,
       subtitle: context.localization.empty_subtitle,
       isSkip: false,
       content: context.localization.question_content,
+      theme: const InputQuestionTheme.common(),
+      buttonText: context.localization.next,
     );
   }
 
@@ -83,6 +71,9 @@ class CommonData {
       isSkip: false,
       content: context.localization.question_content,
       index: index,
+      ruleType: RuleType.none,
+      ruleValue: 0,
+      theme: const ChoiceQuestionTheme.common(),
     );
   }
 
@@ -96,6 +87,8 @@ class CommonData {
       subtitle: context.localization.empty_subtitle,
       isSkip: false,
       content: context.localization.question_content,
+      divisions: _dividers,
+      theme: const SliderQuestionTheme.common(),
     );
   }
 }

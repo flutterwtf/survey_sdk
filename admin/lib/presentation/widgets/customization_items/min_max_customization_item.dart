@@ -4,9 +4,6 @@ import 'package:survey_admin/presentation/app/localization/app_localizations_ext
 import 'package:survey_admin/presentation/utils/utils.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
 
-const _minValue = 0;
-const _maxValue = 10;
-
 class MinMaxCustomizationItem extends StatefulWidget {
   final int initialMin;
   final int initialMax;
@@ -14,8 +11,8 @@ class MinMaxCustomizationItem extends StatefulWidget {
 
   const MinMaxCustomizationItem({
     required this.onChanged,
-    this.initialMin = _minValue,
-    this.initialMax = _maxValue,
+    required this.initialMin,
+    required this.initialMax,
     super.key,
   }) : assert(
           initialMax > initialMin,
@@ -133,7 +130,8 @@ class _MinMaxInputField extends StatelessWidget {
             ],
             autovalidateMode: AutovalidateMode.onUserInteraction,
             validator: _validator,
-            onChanged: (value) => SizeHandler.onIntSizeChanged(value, onChanged),
+            onChanged: (value) =>
+                SizeHandler.onIntSizeChanged(value, onChanged),
           ),
         ),
       ],

@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/color_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
@@ -15,26 +14,15 @@ void main() {
   group(
     'Input customization tab tests',
     () {
+      var data = InputQuestionData.common();
+
       final page = AppTester(
         child: InputCustomizationTab(
-          onBorderColorChanged: (Color value) {},
-          onBorderSizeChanged: (double? value) {},
-          onBorderWidthChanged: (double? value) {},
-          onFillColorChanged: (Color value) {},
-          onHintColorChanged: (Color value) {},
-          onHintFontSizeChanged: (double? value) {},
-          onHorizontalPaddingUpdate: (double size) {},
-          onInputTypeChanged: (InputType value) {},
-          onMultilineChanged: ({
-            required bool isMultiline,
-            required int lineAmount,
-          }) {},
-          onTextColorChanged: (Color value) {},
-          onTextFontSizeChanged: (double? value) {},
-          onVerticalPaddingUpdate: (double size) {},
-          onValidatorErrorChanged: (String errorText) {},
+          onChange: (QuestionData<dynamic> newData) {
+            data = newData as InputQuestionData;
+          },
           title: 'test',
-          inputType: InputType.text,
+          editable: data,
         ),
       );
 

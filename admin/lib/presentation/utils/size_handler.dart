@@ -1,3 +1,4 @@
+// TODO(dev): rethink this.
 abstract class SizeHandler {
   static void onIntSizeChanged(String? value, void Function(int size) action) {
     final size = int.tryParse(value ?? '');

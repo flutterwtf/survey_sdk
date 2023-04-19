@@ -2,6 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_multiline_text_field.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/input/input_content_customization_tab.dart';
+import 'package:survey_core/survey_core.dart';
 
 import '../app_tester.dart';
 
@@ -10,17 +11,19 @@ void main() {
     'Input content customization tab tests',
     () {
       const testText = 'Text for test';
-      var textTitle = '';
-      var textSubtitle = '';
-      var textHint = '';
-      var textButton = '';
+      const textTitle = '';
+      const textSubtitle = '';
+      const textHint = '';
+      const textButton = '';
+
+      var data = InputQuestionData.common();
       final page = AppTester(
         child: InputContentCustomizationTab(
           title: 'title',
-          onTitleChanged: (value) => textTitle = value,
-          onSubtitleChanged: (value) => textSubtitle = value,
-          onHintTextChanged: (value) => textHint = value,
-          onButtonTextChanged: (value) => textButton = value,
+          editable: data,
+          onChange: (QuestionData<dynamic> newData) {
+            data = newData as InputQuestionData;
+          },
         ),
       );
 

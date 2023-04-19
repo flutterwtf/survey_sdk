@@ -1,33 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:survey_admin/presentation/app/localization/app_localizations_ext.dart';
-import 'package:survey_admin/presentation/utils/utils.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/color_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/radius_customization_item.dart';
+import 'package:survey_admin/presentation/widgets/customization_items/text_style_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/customization_tab.dart';
+import 'package:survey_core/survey_core.dart';
 
 class ChoiceCommonCustomizationTab extends CustomizationTab {
-  final ValueChanged<Color> onFillColorPicked;
-  final ValueChanged<Color> onTitleColorPicked;
-  final ValueChanged<double> onTitleFontSizeChanged;
-  final ValueChanged<Color> onSubtitleColorPicked;
-  final ValueChanged<double> onSubtitleFontSizeChanged;
-  final ValueChanged<Color> onButtonColorPicked;
-  final ValueChanged<double> onButtonFontSizeChanged;
-  final ValueChanged<int> onButtonRadiusChanged;
+  final void Function(QuestionData data) onChange;
+  final ChoiceQuestionData editable;
 
   const ChoiceCommonCustomizationTab({
+    required this.onChange,
     required super.title,
-    required this.onFillColorPicked,
-    required this.onTitleColorPicked,
-    required this.onTitleFontSizeChanged,
-    required this.onSubtitleColorPicked,
-    required this.onSubtitleFontSizeChanged,
-    required this.onButtonColorPicked,
-    required this.onButtonFontSizeChanged,
-    required this.onButtonRadiusChanged,
+    required this.editable,
     super.key,
   });
+
+  ChoiceQuestionTheme get theme =>
+      editable.theme ?? const ChoiceQuestionTheme.common();
 
   @override
   Widget build(BuildContext context) {
@@ -35,29 +27,53 @@ class ChoiceCommonCustomizationTab extends CustomizationTab {
       children: [
         CustomizationItemsContainer(
           title: context.localization.fill,
-          isTopDividerShown: true,
+          shouldShowTopDivider: true,
           children: [
             ColorCustomizationItem(
-              initialColor: AppColors.white,
-              onColorPicked: onFillColorPicked,
+              initialColor: theme.fill,
+              onColorPicked: (color) => onChange(
+                editable.copyWith(
+                  theme: theme.copyWith(fill: color),
+                ),
+              ),
             ),
           ],
         ),
         CustomizationItemsContainer(
           title: context.localization.title,
           children: [
-            ColorCustomizationItem(
-              initialColor: AppColors.black,
-              onColorPicked: onTitleColorPicked,
+            TextStyleCustomizationItem(
+              initialColor: theme.titleColor,
+              onColorPicked: (color) => onChange(
+                editable.copyWith(
+                  theme: theme.copyWith(titleColor: color),
+                ),
+              ),
+              initialSize: theme.titleSize,
+              onSizeChanged: (size) => onChange(
+                editable.copyWith(
+                  theme: theme.copyWith(titleSize: size),
+                ),
+              ),
             ),
           ],
         ),
         CustomizationItemsContainer(
           title: context.localization.subtitle,
           children: [
-            ColorCustomizationItem(
-              initialColor: AppColors.black,
-              onColorPicked: onSubtitleColorPicked,
+            TextStyleCustomizationItem(
+              initialColor: theme.subtitleColor,
+              onColorPicked: (color) => onChange(
+                editable.copyWith(
+                  theme: theme.copyWith(subtitleColor: color),
+                ),
+              ),
+              initialSize: theme.subtitleSize,
+              onSizeChanged: (size) => onChange(
+                editable.copyWith(
+                  theme: theme.copyWith(subtitleSize: size),
+                ),
+              ),
             ),
           ],
         ),
@@ -65,12 +81,34 @@ class ChoiceCommonCustomizationTab extends CustomizationTab {
           title: context.localization.button,
           children: [
             ColorCustomizationItem(
-              initialColor: AppColors.black,
-              onColorPicked: onButtonColorPicked,
+              initialColor: theme.buttonFill,
+              onColorPicked: (color) => onChange(
+                editable.copyWith(
+                  theme: theme.copyWith(buttonFill: color),
+                ),
+              ),
+            ),
+            TextStyleCustomizationItem(
+              initialColor: theme.buttonTextColor,
+              onColorPicked: (color) => onChange(
+                editable.copyWith(
+                  theme: theme.copyWith(buttonTextColor: color),
+                ),
+              ),
+              initialSize: theme.buttonTextSize,
+              onSizeChanged: (size) => onChange(
+                editable.copyWith(
+                  theme: theme.copyWith(buttonTextSize: size),
+                ),
+              ),
             ),
             RadiusCustomizationItem(
-              initialValue: AppDimensions.circularRadiusS,
-              onRadiusChanged: onButtonRadiusChanged,
+              initialValue: theme.buttonRadius,
+              onRadiusChanged: (radius) => onChange(
+                editable.copyWith(
+                  theme: theme.copyWith(buttonRadius: radius),
+                ),
+              ),
             ),
           ],
         ),

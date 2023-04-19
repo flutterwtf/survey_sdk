@@ -4,30 +4,20 @@ import 'package:survey_admin/presentation/widgets/customization_items/color_cust
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/thickness_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/slider/slider_customization_tab.dart';
+import 'package:survey_core/survey_core.dart';
 
 import '../app_tester.dart';
 
 void main() {
   group('Tests for SliderCustomizationTab', () {
-    var thickness = 0;
-    Color active = Colors.red;
-    Color inactive = Colors.red;
-    Color colorThumb = Colors.red;
+    var data = const SliderQuestionData.common();
     final page = AppTester(
       child: SliderCustomizationTab(
         title: 'Slider',
-        onActiveColorChanged: (newActive) {
-          active = newActive;
+        onChange: (QuestionData<dynamic> newData) {
+          data = newData as SliderQuestionData;
         },
-        onInactiveColorChanged: (newInactive) {
-          inactive = newInactive;
-        },
-        onThicknessChanged: (newThickness) {
-          thickness = newThickness;
-        },
-        onThumbColorChanged: (newColorThumb) {
-          colorThumb = newColorThumb;
-        },
+        editable: data,
       ),
     );
 
@@ -58,7 +48,7 @@ void main() {
         '10',
       );
       expect(find.text('10'), findsOneWidget);
-      expect(thickness, 10);
+      expect(data.theme?.thickness, 10);
     });
 
     testWidgets('Input string for Thickness', (tester) async {
@@ -68,7 +58,7 @@ void main() {
         'qw1',
       );
       expect(find.text('qw'), findsNothing);
-      expect(thickness, 1);
+      expect(data.theme?.thickness, 1);
     });
 
     testWidgets('Validate input length > 2 for Thickness', (tester) async {
@@ -78,7 +68,7 @@ void main() {
         '123',
       );
       expect(find.text('123'), findsNothing);
-      expect(thickness, 12);
+      expect(data.theme?.thickness, 12);
     });
 
     testWidgets('Input color for Active', (tester) async {
@@ -90,7 +80,7 @@ void main() {
       await tester.testTextInput.receiveAction(TextInputAction.done);
       await tester.pump();
       expect(find.text('FFF44336'), findsOneWidget);
-      expect(active, const Color(0xFFF44336));
+      expect(data.theme?.activeColor, const Color(0xFFF44336));
 
       await tester.enterText(
         find.widgetWithText(CustomizationItemsContainer, 'Active'),
@@ -99,7 +89,7 @@ void main() {
       await tester.testTextInput.receiveAction(TextInputAction.done);
       await tester.pump();
       expect(find.text('F0000000'), findsOneWidget);
-      expect(active, const Color(0xF0000000));
+      expect(data.theme?.activeColor, const Color(0xF0000000));
 
       await tester.enterText(
         find.widgetWithText(CustomizationItemsContainer, 'Active'),
@@ -108,7 +98,7 @@ void main() {
       await tester.testTextInput.receiveAction(TextInputAction.done);
       await tester.pump();
       expect(find.text('0'), findsOneWidget);
-      expect(active, const Color(0x00000000));
+      expect(data.theme?.activeColor, const Color(0x00000000));
     });
 
     testWidgets('Input color for Inactive', (tester) async {
@@ -120,7 +110,7 @@ void main() {
       await tester.testTextInput.receiveAction(TextInputAction.done);
       await tester.pump();
       expect(find.text('FFD9D9D9'), findsOneWidget);
-      expect(inactive, const Color(0xFFD9D9D9));
+      expect(data.theme?.inactiveColor, const Color(0xFFD9D9D9));
 
       await tester.enterText(
         find.widgetWithText(CustomizationItemsContainer, 'Inactive'),
@@ -129,7 +119,7 @@ void main() {
       await tester.testTextInput.receiveAction(TextInputAction.done);
       await tester.pump();
       expect(find.text('D0000000'), findsOneWidget);
-      expect(inactive, const Color(0xD0000000));
+      expect(data.theme?.inactiveColor, const Color(0xD0000000));
 
       await tester.enterText(
         find.widgetWithText(CustomizationItemsContainer, 'Inactive'),
@@ -138,7 +128,7 @@ void main() {
       await tester.testTextInput.receiveAction(TextInputAction.done);
       await tester.pump();
       expect(find.text('0'), findsOneWidget);
-      expect(inactive, const Color(0x00000000));
+      expect(data.theme?.inactiveColor, const Color(0x00000000));
     });
 
     testWidgets('Input color and num for Thumb', (tester) async {
@@ -150,22 +140,23 @@ void main() {
       await tester.testTextInput.receiveAction(TextInputAction.done);
       await tester.pump();
       expect(find.text('FF717171'), findsOneWidget);
-      expect(colorThumb, const Color(0xFF717171));
+      expect(data.theme?.thumbColor, const Color(0xFF717171));
 
       await tester.enterText(find.byType(ColorCustomizationItem).last, 'C');
       await tester.testTextInput.receiveAction(TextInputAction.done);
       await tester.pump();
       expect(find.text('C0000000'), findsOneWidget);
-      expect(colorThumb, const Color(0xC0000000));
+      expect(data.theme?.thumbColor, const Color(0xC0000000));
 
       await tester.enterText(find.byType(ColorCustomizationItem).last, '');
       await tester.testTextInput.receiveAction(TextInputAction.done);
       await tester.pump();
       expect(find.text('0'), findsOneWidget);
-      expect(colorThumb, const Color(0x00000000));
+      expect(data.theme?.thumbColor, const Color(0x00000000));
 
       await tester.enterText(find.byType(ThicknessCustomizationItem).last, '8');
       expect(find.text('8'), findsOneWidget);
+      expect(data.divisions, 8);
     });
 
     testWidgets('Validate input string for Thumb', (tester) async {
@@ -175,6 +166,7 @@ void main() {
         'q3',
       );
       expect(find.text('3'), findsOneWidget);
+      expect(data.divisions, 3);
     });
 
     testWidgets('Validate input length > 2 for Thumb', (tester) async {
@@ -184,6 +176,7 @@ void main() {
         '873',
       );
       expect(find.text('87'), findsOneWidget);
+      expect(data.divisions, 87);
     });
   });
 }
