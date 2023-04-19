@@ -91,21 +91,21 @@ class _BuilderPageState extends State<BuilderPage> {
                         _cubit.state.surveyData.questions,
                       )
                     : [],
+                onUpdate: _cubit.updateQuestions,
+                selectedIndex:
+                    (state as EditQuestionBuilderState).selectedIndex - 1,
               ),
               Expanded(
                 child: PhoneView(
-                  child: state.surveyData.questions.isNotEmpty
-                      ? Survey(
-                          surveyData: state.surveyData,
-                          controller: _surveyController,
-                        )
-                      : const SizedBox.shrink(),
+                  child: Survey(
+                    surveyData: state.surveyData,
+                    controller: _surveyController,
+                  ),
                 ),
               ),
               EditorBar(
                 onChange: _cubit.updateQuestionData,
-                editableQuestion: (state is EditQuestionBuilderState &&
-                        state.surveyData.questions.isNotEmpty)
+                editableQuestion: (state.surveyData.questions.isNotEmpty)
                     ? state.surveyData.questions.firstWhere(
                         (q) => q.index == state.selectedIndex,
                       )

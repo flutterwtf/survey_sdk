@@ -1,6 +1,5 @@
 import 'package:context_menus/context_menus.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:survey_admin/presentation/app/localization/app_localizations_ext.dart';
 import 'package:survey_admin/presentation/pages/new_question_page/new_question_page.dart';
@@ -12,13 +11,17 @@ class QuestionList extends StatefulWidget {
   final ValueChanged<QuestionData> onSelect;
   final ValueChanged<QuestionData> onAdd;
   final ValueChanged<QuestionData> onDelete;
+  final ValueChanged<List<QuestionData>> onUpdate;
+  final int? selectedIndex;
   final List<QuestionData> questions;
 
   const QuestionList({
     required this.onSelect,
     required this.onAdd,
     required this.questions,
+    required this.onUpdate,
     required this.onDelete,
+    required this.selectedIndex,
     super.key,
   });
 
@@ -27,59 +30,24 @@ class QuestionList extends StatefulWidget {
 }
 
 class _QuestionListState extends State<QuestionList> {
-  late List<QuestionData> _questionList;
-  int _selectedIndex = 0;
-  final _commonThemeIndex = -1;
-
-  @override
-  void initState() {
-    super.initState();
-    if (widget.questions.isNotEmpty) {
-      widget.onSelect(widget.questions.first);
-    }
-    RawKeyboard.instance.addListener(_handleKeyDown);
-  }
-
-  void _handleKeyDown(RawKeyEvent value) {
-    if (value is RawKeyDownEvent) {
-      final key = value.logicalKey;
-      if (key == LogicalKeyboardKey.delete) {
-        setState(() => _questionList.removeAt(_selectedIndex));
-      }
-    }
-  }
-
   void _addQuestion(QuestionData data) {
-    final index = _questionList.length + 1;
-    setState(() {
-      _questionList.add(
-        data.copyWith(index: index),
-      );
-    });
+    final index = widget.questions.length + 1;
     widget.onAdd(data.copyWith(index: index));
   }
 
   void _updateQuestion(int oldIndex, int newIndex) {
-    final itemOld = _questionList.removeAt(oldIndex);
-    _questionList.insert(
+    final itemOld = widget.questions.removeAt(oldIndex);
+
+    widget.questions.insert(
       newIndex,
       itemOld,
     );
-    for (var i = 0; i < _questionList.length; i++) {
-      _questionList[i] = _questionList[i].copyWith(index: i + 1);
+
+    for (var i = 0; i < widget.questions.length; i++) {
+      widget.questions[i] = widget.questions[i].copyWith(index: i + 1);
     }
-  }
 
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    _questionList = widget.questions;
-  }
-
-  @override
-  void dispose() {
-    RawKeyboard.instance.removeListener(_handleKeyDown);
-    super.dispose();
+    widget.onUpdate(widget.questions);
   }
 
   @override
@@ -102,38 +70,32 @@ class _QuestionListState extends State<QuestionList> {
                 _addQuestion(questionData);
               }
             },
-            isEditingCommonTheme: _selectedIndex == _commonThemeIndex,
-            questionList: _questionList,
+            isEditingCommonTheme: widget.selectedIndex == -1,
+            questionList: widget.questions,
           ),
           Expanded(
             child: ContextMenuOverlay(
               child: ReorderableListView(
+                proxyDecorator: (widget, _, __) => widget,
                 onReorder: (oldIndex, newIndex) {
-                  if (newIndex > oldIndex) newIndex--;
                   setState(() {
+                    if (newIndex > oldIndex) newIndex--;
                     _updateQuestion(oldIndex, newIndex);
                   });
                 },
                 buildDefaultDragHandles: false,
                 children: [
-                  for (int index = 0; index < _questionList.length; index++)
+                  for (int index = 0; index < widget.questions.length; index++)
                     _Question(
                       key: ValueKey(index),
                       index: index,
-                      isSelected: index == _selectedIndex,
+                      isSelected: index == widget.selectedIndex,
                       onDeleteButtonPressed: () {
-                        widget.onDelete(_questionList[_selectedIndex]);
-                        // setState(() => _questionList.removeAt(index));
+                        widget
+                            .onDelete(widget.questions[widget.selectedIndex!]);
                       },
-                      question: _questionList[index],
-                      onQuestionTap: (data) {
-                        widget.onSelect(data);
-                        setState(
-                          () {
-                            _selectedIndex = index;
-                          },
-                        );
-                      },
+                      question: widget.questions[index],
+                      onQuestionTap: widget.onSelect,
                     ),
                 ],
               ),
