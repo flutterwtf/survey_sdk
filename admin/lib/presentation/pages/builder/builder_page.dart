@@ -77,7 +77,10 @@ class _BuilderPageState extends State<BuilderPage> {
         builder: (context, state) => Scaffold(
           appBar: AppBar(
             title: const _BuilderPageTabBar(),
-            actions: [_ImportButton(onImportPressed: _onImportPressed), _ExportButton()],
+            actions: [
+              _ImportButton(onImportPressed: _onImportPressed),
+              const _ExportButton(),
+            ],
             centerTitle: true,
           ),
           body: Row(
