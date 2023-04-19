@@ -40,7 +40,7 @@ class _SecondaryButtonCustomizationItemState
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SwitchCustomizationItem(
-          title: context.localization.secondary_button,
+          title: context.localization.secondaryButton,
           onChanged: (isToggled) {
             setState(() => _isShown = isToggled);
             widget.onChanged(_isShown, _text);
@@ -62,7 +62,7 @@ class _SecondaryButtonCustomizationItemState
                       widget.onChanged(_isShown, _text);
                     },
                     decoration: InputDecoration(
-                      hintText: context.localization.enter_text,
+                      hintText: context.localization.enterText,
                       isCollapsed: true,
                       border: InputBorder.none,
                     ),

@@ -34,7 +34,7 @@ class _CustomizationMultilineTextFieldState
           if (value != null) widget.onChanged(value);
         },
         style: context.theme.textTheme.bodyLarge,
-        hintText: context.localization.enter_text,
+        hintText: context.localization.enterText,
         maxLines: null,
       ),
     );

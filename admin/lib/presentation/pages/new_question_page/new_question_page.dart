@@ -130,7 +130,7 @@ class _AppBarTitle extends StatelessWidget {
     return Align(
       alignment: Alignment.centerLeft,
       child: Text(
-        context.localization.new_screen,
+        context.localization.newScreen,
         style: context.theme.textTheme.labelLarge?.copyWith(
           fontWeight: AppFonts.weightRegular,
         ),
