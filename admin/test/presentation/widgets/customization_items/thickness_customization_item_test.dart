@@ -4,6 +4,7 @@ import 'package:survey_admin/presentation/widgets/customization_items/thickness_
 
 import '../app_tester.dart';
 
+//TODO: rebuild this test
 void main() {
   group(
     'Tests for ThicknessCustomizationItem',
@@ -15,6 +16,7 @@ void main() {
       const inputValidation = '100';
       final page = AppTester(
         child: ThicknessCustomizationItem(
+          maxThickness: initialSize,
           initialSize: initialSize,
           onThicknessChanged: (value) {},
         ),
