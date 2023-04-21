@@ -31,17 +31,14 @@ class SliderCustomizationTab extends CustomizationTab {
           shouldShowTopDivider: true,
           children: [
             ThicknessCustomizationItem(
+              maxThickness:
+                  CustomizationPanelDimensions.sliderThicknessMaxValue,
               onThicknessChanged: (value) {
-                if (value == null) return;
-                // TODO(dev): replace with onSizeChanged?
-                final thickness = double.tryParse(value);
-                if (thickness != null) {
-                  onChange(
-                    editable.copyWith(
-                      theme: theme.copyWith(thickness: thickness),
-                    ),
-                  );
-                }
+                onChange(
+                  editable.copyWith(
+                    theme: theme.copyWith(thickness: value),
+                  ),
+                );
               },
               initialSize: theme.thickness,
             ),
