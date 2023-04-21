@@ -20,7 +20,7 @@ class ColorPickerDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
       title: Text(
-        context.localization.pick_a_color,
+        context.localization.pickColor,
       ),
       content: ListView(
         children: [

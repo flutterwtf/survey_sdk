@@ -81,7 +81,7 @@ class _OptionCustomizationItemState extends State<OptionCustomizationItem> {
                 controller: _controller,
                 onEditingComplete: _onEditingComplete,
                 decoration: InputDecoration.collapsed(
-                  hintText: context.localization.type_new_option_here,
+                  hintText: context.localization.typeNewOptionHere,
                   hintStyle: const TextStyle(
                     color: AppColors.textHintGrey,
                   ),

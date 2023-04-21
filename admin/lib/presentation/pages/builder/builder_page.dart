@@ -27,7 +27,7 @@ class _BuilderPageState extends State<BuilderPage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          content: Text(context.localization.empty_data_message),
+          content: Text(context.localization.emptyDataMessage),
           actions: <Widget>[
             TextButton(
               child: Text(
