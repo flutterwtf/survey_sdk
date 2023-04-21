@@ -79,31 +79,20 @@ void main() {
         final nextButton = find.text('NEXT');
         //final skipButton = find.text('SKIP');
 
-        /*// click SKIP without data
-        await tester.tap(skipButton);
-        tester.pumpAndSettle();
-        expect((cubit.state as SurveyLoadedState).answers.length, 0);*/
         // click NEXT without data
         await tester.tap(nextButton);
         expect((cubit.state as SurveyLoadedState).answers.length, 0);
 
-        await tester.enterText(inputField, 'user@gmail.com');
-        // click Skip with valid data
-        /*await tester.tap(skipButton);
-        tester.pumpAndSettle();
-        expect((cubit.state as SurveyLoadedState).answers.length, 0);*/
-        // click NEXT with valid data
-        await tester.pumpAndSettle();
-        await tester.tap(nextButton);
-        expect((cubit.state as SurveyLoadedState).answers.length, 1);
-        // click Skip with invalid data
-        /*await tester.enterText(inputField, 'user@gmail');
-        await tester.tap(skipButton);
-        tester.pumpAndSettle();
-        expect((cubit.state as SurveyLoadedState).answers.length, 1);*/
         // click NEXT with invalid data
+        await tester.enterText(inputField, 'user@gmail');
         await tester.tap(nextButton);
         await tester.pumpAndSettle();
+        expect((cubit.state as SurveyLoadedState).answers.length, 0);
+
+        // click NEXT with valid data
+        await tester.enterText(inputField, 'user@gmail.com');
+        await tester.pumpAndSettle();
+        await tester.tap(nextButton);
         expect((cubit.state as SurveyLoadedState).answers.length, 1);
       },
     );
@@ -172,6 +161,62 @@ void main() {
         ),
         DateFormat('dd.MM.yyyy').format(DateTime.now()),
       );
+    });
+
+    testWidgets('input with password validator', (tester) async {
+      await tester.pumpWidget(
+        app(
+          [
+            MockedEntities.input1.copyWith(
+              validator: InputValidator.password(),
+              theme: const InputQuestionTheme.common()
+                  .copyWith(inputType: InputType.password),
+            ),
+          ],
+        ),
+      );
+      final cubit = Injector().surveyCubit;
+      final inputField = find.byType(TextFormField);
+      final nextButton = find.text('NEXT');
+      // click NEXT without data
+      await tester.tap(nextButton);
+      expect((cubit.state as SurveyLoadedState).answers.length, 0);
+
+      // click NEXT with input length < 8
+      await tester.enterText(inputField, 'Pass1&');
+      await tester.tap(nextButton);
+      await tester.pumpAndSettle();
+      expect((cubit.state as SurveyLoadedState).answers.length, 0);
+
+      // click NEXT without uppercase
+      await tester.enterText(inputField, 'password1&');
+      await tester.tap(nextButton);
+      await tester.pumpAndSettle();
+      expect((cubit.state as SurveyLoadedState).answers.length, 0);
+
+      // click NEXT without lowercase
+      await tester.enterText(inputField, 'PASSWORD1&');
+      await tester.tap(nextButton);
+      await tester.pumpAndSettle();
+      expect((cubit.state as SurveyLoadedState).answers.length, 0);
+
+      // click NEXT without digits
+      await tester.enterText(inputField, 'Password&');
+      await tester.tap(nextButton);
+      await tester.pumpAndSettle();
+      expect((cubit.state as SurveyLoadedState).answers.length, 0);
+
+      // click NEXT without other symbols
+      await tester.enterText(inputField, 'Password1');
+      await tester.tap(nextButton);
+      await tester.pumpAndSettle();
+      expect((cubit.state as SurveyLoadedState).answers.length, 0);
+
+      // click NEXT with valid data
+      await tester.enterText(inputField, 'Password1&');
+      await tester.pumpAndSettle();
+      await tester.tap(nextButton);
+      expect((cubit.state as SurveyLoadedState).answers.length, 1);
     });
   });
 }
