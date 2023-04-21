@@ -56,7 +56,11 @@ class SliderContentCustomizationTab extends CustomizationTab {
               initialMax: editable.maxValue,
               initialMin: editable.minValue,
               onChanged: (min, max) => onChange(
-                editable.copyWith(minValue: min, maxValue: max),
+                editable.copyWith(
+                  minValue: min,
+                  maxValue: max,
+                  initialValue: min,
+                ),
               ),
             ),
           ],
