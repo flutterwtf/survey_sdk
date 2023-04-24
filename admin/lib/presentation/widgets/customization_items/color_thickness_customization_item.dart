@@ -30,11 +30,12 @@ class ColorThicknessCustomizationItem extends StatefulWidget {
 
 class _ColorThicknessCustomizationItemState
     extends State<ColorThicknessCustomizationItem> {
-  final _controller = TextEditingController();
+  late final TextEditingController _textEditingController;
 
   @override
   void initState() {
-    _controller.text = widget.initialThickness.toString();
+    _textEditingController = TextEditingController();
+    _textEditingController.text = widget.initialThickness.toString();
     super.initState();
   }
 
@@ -51,13 +52,20 @@ class _ColorThicknessCustomizationItemState
     if (widget.maxThickness != null) {
       final validThickness = min(thickness, widget.maxThickness!);
       widget.onThicknessChanged(validThickness);
-      _controller.value = _controller.value.copyWith(
+      _textEditingController.value = _textEditingController.value.copyWith(
         text: validThickness.toString(),
-        selection: TextSelection.collapsed(offset: _controller.text.length),
+        selection:
+            TextSelection.collapsed(offset: _textEditingController.text.length),
       );
     } else {
       widget.onThicknessChanged(thickness);
     }
+  }
+
+  @override
+  void dispose() {
+    _textEditingController.dispose();
+    super.dispose();
   }
 
   @override
@@ -72,7 +80,7 @@ class _ColorThicknessCustomizationItemState
         ),
         Expanded(
           child: CustomizationTextField(
-            controller: _controller,
+            controller: _textEditingController,
             inputFormatters: [
               DoubleInputFormatter(),
             ],

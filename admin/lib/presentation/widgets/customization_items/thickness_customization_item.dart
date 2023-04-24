@@ -34,12 +34,6 @@ class _ThicknessCustomizationItemState
     super.initState();
   }
 
-  @override
-  void dispose() {
-    _textEditingController.dispose();
-    super.dispose();
-  }
-
   void _thicknessChanged(String? text) {
     if (text != null) {
       final thickness = double.tryParse(text) ?? 1;
@@ -53,6 +47,12 @@ class _ThicknessCustomizationItemState
     } else {
       widget.onThicknessChanged(widget.maxThickness);
     }
+  }
+
+  @override
+  void dispose() {
+    _textEditingController.dispose();
+    super.dispose();
   }
 
   @override
