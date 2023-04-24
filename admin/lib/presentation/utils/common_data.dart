@@ -21,11 +21,13 @@ class CommonData {
   }
 
   SurveyData get surveyData {
+    const index = 3;
+
     return SurveyData(
       questions: [
         intro(index: _firstIndex),
         input(index: _secondIndex),
-        choice(index: 3),
+        choice(index: index),
       ],
       commonTheme: commonTheme,
     );

@@ -20,12 +20,19 @@ class BuilderPage extends StatefulWidget {
 
 class _BuilderPageState extends State<BuilderPage> {
   late final BuilderCubit _cubit;
-  final _surveyController = SurveyController();
+  late final SurveyController _surveyController;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _surveyController = SurveyController();
+  }
 
   Future<void> _showImportDialog() {
     return showDialog<void>(
       context: context,
-      builder: (BuildContext context) {
+      builder: (context) {
         return AlertDialog(
           content: Text(context.localization.emptyDataMessage),
           actions: <Widget>[
@@ -37,7 +44,7 @@ class _BuilderPageState extends State<BuilderPage> {
                 ),
               ),
               onPressed: () {
-                Navigator.of(context).pop();
+                Navigator.pop(context);
               },
             ),
           ],
@@ -47,8 +54,7 @@ class _BuilderPageState extends State<BuilderPage> {
   }
 
   Future<void> _onImportPressed() async {
-    final data = await BlocProvider.of<BuilderCubit>(context).importData();
-    if (data == null) {
+    if (await _cubit.importData() == null) {
       _showImportDialog();
     }
   }
@@ -56,66 +62,74 @@ class _BuilderPageState extends State<BuilderPage> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+
     initCommonData(context);
     _cubit = i.get<BuilderCubit>();
   }
 
   @override
+  void dispose() {
+    _surveyController.dispose();
+
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return BlocProvider<BuilderCubit>(
-      create: (context) => _cubit,
-      child: BlocConsumer<BuilderCubit, BuilderState>(
-        bloc: _cubit,
-        listener: (oldState, newState) {
-          final selected = (newState is EditQuestionBuilderState)
-              ? newState.selectedIndex
-              : 0;
-          if (selected != 0) {
-            _surveyController.animateTo(selected - 1);
-          }
-        },
-        builder: (context, state) => Scaffold(
-          appBar: AppBar(
-            title: const _BuilderPageTabBar(),
-            actions: [
-              _ImportButton(onImportPressed: _onImportPressed),
-              _ExportButton()
-            ],
-            centerTitle: true,
-          ),
-          body: Row(
-            children: [
-              QuestionList(
-                onDelete: _cubit.deleteQuestionData,
-                onSelect: _cubit.select,
-                onAdd: _cubit.addQuestionData,
-                questions: _cubit.state.surveyData.questions.isNotEmpty
-                    ? List<QuestionData>.of(
-                        _cubit.state.surveyData.questions,
-                      )
-                    : [],
-                onUpdate: _cubit.updateQuestions,
-                selectedIndex:
-                    (state as EditQuestionBuilderState).selectedIndex - 1,
-              ),
-              Expanded(
-                child: PhoneView(
-                  child: Survey(
-                    surveyData: state.surveyData,
-                    controller: _surveyController,
-                  ),
+    return BlocConsumer<BuilderCubit, BuilderState>(
+      bloc: _cubit,
+      listener: (_, newState) {
+        final selected =
+            newState is EditQuestionBuilderState ? newState.selectedIndex : 0;
+        if (selected != 0) {
+          _surveyController.animateTo(selected - 1);
+        }
+      },
+      builder: (_, state) => Scaffold(
+        appBar: AppBar(
+          title: const _BuilderPageTabBar(),
+          actions: [
+            // ignore_for_file: avoid-passing-async-when-sync-expected
+            _ImportButton(onImportPressed: _onImportPressed),
+            _ExportButton(
+              downloadSurveyData: _cubit.downloadSurveyData,
+              copySurveyData: _cubit.copySurveyData,
+            ),
+          ],
+          centerTitle: true,
+        ),
+        body: Row(
+          children: [
+            QuestionList(
+              onDelete: _cubit.deleteQuestionData,
+              onSelect: _cubit.select,
+              onAdd: _cubit.addQuestionData,
+              questions: _cubit.state.surveyData.questions.isNotEmpty
+                  ? List<QuestionData>.of(
+                      _cubit.state.surveyData.questions,
+                    )
+                  : [],
+              onUpdate: _cubit.updateQuestions,
+              selectedIndex:
+                  (state as EditQuestionBuilderState).selectedIndex - 1,
+            ),
+            Expanded(
+              child: PhoneView(
+                child: Survey(
+                  surveyData: state.surveyData,
+                  controller: _surveyController,
                 ),
               ),
-              EditorBar(
-                onChange: _cubit.updateQuestionData,
-                editableQuestion: (state.surveyData.questions.isNotEmpty)
-                    ? state.surveyData.questions.firstWhere(
-                        (q) => q.index == state.selectedIndex,
-                      )
-                    : null,
-              ),
-            ],
-          ),
+            ),
+            EditorBar(
+              onChange: _cubit.updateQuestionData,
+              editableQuestion: state.surveyData.questions.isNotEmpty
+                  ? state.surveyData.questions.firstWhere(
+                      (q) => q.index == state.selectedIndex,
+                    )
+                  : null,
+            ),
+          ],
         ),
       ),
     );
@@ -188,11 +202,16 @@ class _ImportButton extends StatelessWidget {
 }
 
 class _ExportButton extends StatelessWidget {
-  const _ExportButton();
+  final VoidCallback downloadSurveyData;
+  final VoidCallback copySurveyData;
+
+  const _ExportButton({
+    required this.downloadSurveyData,
+    required this.copySurveyData,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final cubit = BlocProvider.of<BuilderCubit>(context);
     return Padding(
       padding: const EdgeInsets.only(
         top: AppDimensions.margin2XS,
@@ -203,8 +222,8 @@ class _ExportButton extends StatelessWidget {
         onPressed: () {
           showExportFloatingWindow(
             context,
-            onDownloadPressed: cubit.downloadSurveyData,
-            onCopy: cubit.copySurveyData,
+            onDownloadPressed: downloadSurveyData,
+            onCopy: copySurveyData,
           );
         },
         child: Padding(

@@ -129,8 +129,11 @@ class BuilderCubit extends Cubit<BuilderState> {
   void updateQuestionData(QuestionData data) {
     final questions = List.of(state.surveyData.questions);
 
-    // TODO(dev): Rewrite index system maybe?
-    questions[data.index - 1] = data;
+    final index = questions.indexWhere(
+      (question) => question.index == data.index,
+    );
+    if (index != -1) questions[index] = data;
+
     emit(
       state.copyWith(
         surveyData: state.surveyData.copyWith(questions: questions),

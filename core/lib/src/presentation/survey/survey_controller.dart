@@ -35,4 +35,9 @@ class SurveyController {
       curve: Curves.linear,
     );
   }
+
+  void dispose() {
+    _pageController.dispose();
+    pageController.dispose();
+  }
 }
