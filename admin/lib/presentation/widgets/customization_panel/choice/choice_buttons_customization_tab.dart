@@ -31,7 +31,6 @@ class ChoiceButtonsCustomizationTab extends CustomizationTab {
             AppDimensions.marginM,
           ),
           children: [
-            // TODO(dev): Move to the other tab.
             MultipleChoiceCustomizationItem(
               value: editable.isMultipleChoice,
               onChanged: (isMultipleChoice) => onChange(
