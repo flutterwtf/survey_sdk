@@ -43,10 +43,10 @@ class InputValidator implements ApiObject {
   }
 
   /// Validator with type [InputType.email]
-  InputValidator.email() {
+  InputValidator.email({String? regex, bool? isObscured}) {
     type = InputType.email;
-    _regex = null;
-    isObscured = null;
+    _regex = regex ?? ValidatorRegexes.email;
+    isObscured = isObscured ?? true;
   }
 
   /// Validator for with type [InputType.password]
