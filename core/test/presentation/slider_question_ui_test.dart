@@ -7,7 +7,7 @@ import 'package:survey_core/src/domain/entities/question_types/slider_question_d
 import 'package:survey_core/src/presentation/slider_question/slider_question_page.dart';
 import 'package:survey_core/src/presentation/widgets/question_bottom_button.dart';
 
-import 'widget/app_test.dart';
+import 'widget/app_tester.dart';
 
 void main() {
   group(
@@ -19,7 +19,7 @@ void main() {
       const minValue = 1.0;
       const maxValue = 2.0;
 
-      final sliderQuestionPage = AppTest(
+      final sliderQuestionPage = AppTester(
         child: SliderQuestionPage(
           data: const SliderQuestionData.common(),
           onSend: ({required int index, required QuestionAnswer answer}) {
@@ -62,7 +62,7 @@ void main() {
         (widgetTester) async {
           final completer = Completer<void>();
           const dragValue = 0.5;
-          final sliderQuestionPage = AppTest(
+          final sliderQuestionPage = AppTester(
             child: SliderQuestionPage(
               data: const SliderQuestionData.common(),
               onSend: ({required int index, required QuestionAnswer answer}) {
@@ -90,7 +90,7 @@ void main() {
         (widgetTester) async {
           final completer = Completer<void>();
           const dragValue = 2.0;
-          final sliderQuestionPage = AppTest(
+          final sliderQuestionPage = AppTester(
             child: SliderQuestionPage(
               data: const SliderQuestionData.common(),
               onSend: ({required int index, required QuestionAnswer answer}) {
@@ -118,7 +118,7 @@ void main() {
         (widgetTester) async {
           final completer = Completer<void>();
           const dragValue = 1.0;
-          final sliderQuestionPage = AppTest(
+          final sliderQuestionPage = AppTester(
             child: SliderQuestionPage(
               data: const SliderQuestionData.common(),
               onSend: ({required int index, required QuestionAnswer answer}) {
