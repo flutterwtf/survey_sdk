@@ -61,7 +61,7 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
       : this(
           // TODO(dev): To localization somehow.
           isMultipleChoice: false,
-          theme: null,
+          theme: const ChoiceQuestionTheme.common(),
           options: const ['First option', 'Second option', 'Third option'],
           ruleType: RuleType.none,
           ruleValue: 0,
@@ -93,7 +93,9 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
           : null,
       ruleType: RuleType.values[payload['ruleType']],
       ruleValue: payload['ruleValue'],
-      theme: theme != null ? ChoiceQuestionTheme.fromJson(theme) : null,
+      theme: theme != null
+          ? ChoiceQuestionTheme.fromJson(theme)
+          : const ChoiceQuestionTheme.common(),
     );
   }
 
@@ -120,6 +122,7 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
       index: index ?? this.index,
       title: title ?? this.title,
       subtitle: subtitle ?? this.subtitle,
+      content: content ?? this.content,
       isSkip: isSkip ?? this.isSkip,
       selectedOptions: selectedOptions ?? this.selectedOptions,
     );

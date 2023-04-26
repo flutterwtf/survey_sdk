@@ -115,9 +115,10 @@ abstract class MockedEntities {
 
   static final data1 = SurveyData(
     questions: [
-      intro1,
-      choice1,
-      choice2,
+      intro1.copyWith(index: 1),
+      choice1.copyWith(index: 2),
+      choice2.copyWith(index: 3),
+      slider1.copyWith(index: 4),
     ],
     commonTheme: CommonTheme(
       slider: const SliderQuestionData.common(),
