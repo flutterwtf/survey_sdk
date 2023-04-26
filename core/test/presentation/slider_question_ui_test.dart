@@ -90,68 +90,6 @@ void main() {
           await widgetTester.tap(find.text('NEXT'));
         },
       );
-      // TODO(dev): Is it even possible?
-      /*testWidgets(
-        'Move slider to more then maxValue',
-        (widgetTester) async {
-          final completer = Completer<void>();
-          const dragValue = 2.0;
-          final sliderQuestionPage = AppTester(
-            child: SliderQuestionPage(
-              data: const SliderQuestionData.common().copyWith(
-                theme: const SliderQuestionTheme.common(),
-              ),
-              onSend: ({required int index, required QuestionAnswer answer}) {
-                expect(
-                  (answer as QuestionAnswer<double>).answer.toStringAsFixed(1),
-                  maxValue.toStringAsFixed(1),
-                );
-                completer.complete();
-              },
-            ),
-          );
-          await widgetTester.pumpWidget(sliderQuestionPage);
-          final slider = find.byType(Slider);
-          final totalWidth = widgetTester.getSize(slider).width;
-          final zeroPoint = widgetTester.getTopLeft(slider);
-          final calculatedOffset =
-              dragValue * (totalWidth / (maxValue - minValue));
-          await widgetTester.dragFrom(zeroPoint, Offset(calculatedOffset, 0));
-          await widgetTester.pumpAndSettle();
-          await widgetTester.tap(find.text('NEXT'));
-        },
-      );*/
-      // TODO(dev): Is it even possible?
-      /*testWidgets(
-        'Move slider to less then minValue',
-        (widgetTester) async {
-          final completer = Completer<void>();
-          const dragValue = 1.0;
-          final sliderQuestionPage = AppTester(
-            child: SliderQuestionPage(
-              data: const SliderQuestionData.common().copyWith(
-                theme: const SliderQuestionTheme.common(),
-              ),
-              onSend: ({required int index, required QuestionAnswer answer}) {
-                expect(
-                  (answer as QuestionAnswer<double>).answer.toStringAsFixed(1),
-                  minValue.toStringAsFixed(1),
-                );
-                completer.complete();
-              },
-            ),
-          );
-          await widgetTester.pumpWidget(sliderQuestionPage);
-          final slider = find.byType(Slider);
-          final totalWidth = widgetTester.getSize(slider).width;
-          final zeroPoint = widgetTester.getTopLeft(slider);
-          final calculatedOffset =
-              dragValue * (totalWidth / (maxValue - minValue));
-          await widgetTester.dragFrom(zeroPoint, Offset(-calculatedOffset, 0));
-          await widgetTester.pumpAndSettle();
-          await widgetTester.tap(find.text('NEXT'));
-        },
-      );*/
     },
   );
 }
