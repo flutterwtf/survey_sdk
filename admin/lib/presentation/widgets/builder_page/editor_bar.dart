@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:survey_admin/presentation/utils/utils.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/choice/choice_customization_panel.dart';
@@ -20,9 +22,7 @@ class EditorBar extends StatelessWidget {
     final freeSpaceWidth =
         MediaQuery.of(context).size.width - AppDimensions.surveyContentBarWidth;
 
-    return freeSpaceWidth >= AppDimensions.surveyEditorBarWidth
-        ? AppDimensions.surveyEditorBarWidth
-        : freeSpaceWidth;
+    return min(AppDimensions.surveyEditorBarWidth, freeSpaceWidth);
   }
 
   @override
