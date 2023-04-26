@@ -72,7 +72,7 @@ class ExportFloatingWindow extends StatelessWidget {
                   right: AppDimensions.margin2XL,
                 ),
                 child: Text(
-                  context.localization.export_floating_window_title,
+                  context.localization.exportFloatingWindowTitle,
                   textAlign: TextAlign.center,
                   style: context.textTheme.headLineMediumBold,
                 ),
