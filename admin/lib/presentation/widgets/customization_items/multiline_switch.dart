@@ -63,7 +63,7 @@ class _MultilineSwitchState extends State<MultilineSwitch> {
               ? _LineAmountInputField(
                   defaultLineAmount: widget.lines,
                   onChanged: (amount) {
-                    _lineAmount = amount;
+                    _lineAmount = amount != 0 ? amount : 1;
                     widget.onChanged(
                       _isMultiline,
                       _lineAmount,
