@@ -58,7 +58,7 @@ class SliderQuestionData extends QuestionData<SliderThemeData> {
           maxValue: _maxValue,
           divisions: _divisions,
           initialValue: _initialValue,
-          title: 'Intro',
+          title: 'Slider',
           index: index,
           subtitle: '',
           isSkip: false,

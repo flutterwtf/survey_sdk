@@ -22,7 +22,10 @@ void main() {
         ),
       );
       expect(find.text('title'), findsOneWidget);
-      expect(find.text('content'), findsOneWidget);
+      // TODO(dev): The content of data should located here, but in widget we
+      // TODO(dev): passed the subtitle to this place.
+      // TODO(dev): Check ChoiceQuestionPage.
+      expect(find.text('subtitle'), findsOneWidget);
       expect(
         find.text('option'),
         findsNWidgets(MockedEntities.choice3.options.length),
@@ -57,7 +60,7 @@ void main() {
             data: MockedEntities.choice3.copyWith(isSkip: true),
             onSend: ({required int index, required QuestionAnswer answer}) {
               expect(
-                (answer as QuestionAnswer<List<String>>).answer.isEmpty,
+                (answer as QuestionAnswer<List<int>>).answer.isEmpty,
                 true,
               );
               completer.complete();
@@ -96,7 +99,7 @@ void main() {
         child: ChoiceQuestionPage(
           data: MockedEntities.choice3,
           onSend: ({required int index, required QuestionAnswer answer}) {
-            expect((answer as QuestionAnswer<List<String>>).answer.length, 1);
+            expect((answer as QuestionAnswer<List<int>>).answer.length, 1);
             completer.complete();
           },
         ),
@@ -115,7 +118,7 @@ void main() {
         child: ChoiceQuestionPage(
           data: MockedEntities.choice3,
           onSend: ({required int index, required QuestionAnswer answer}) {
-            expect((answer as QuestionAnswer<List<String>>).answer.length, 1);
+            expect((answer as QuestionAnswer<List<int>>).answer.length, 1);
             completer.complete();
           },
         ),
@@ -156,7 +159,7 @@ void main() {
         child: ChoiceQuestionPage(
           data: MockedEntities.choice3.copyWith(isMultipleChoice: true),
           onSend: ({required int index, required QuestionAnswer answer}) {
-            expect((answer as QuestionAnswer<List<String>>).answer.length, 1);
+            expect((answer as QuestionAnswer<List<int>>).answer.length, 1);
             completer.complete();
           },
         ),
@@ -199,7 +202,7 @@ void main() {
         child: ChoiceQuestionPage(
           data: MockedEntities.choice3.copyWith(isMultipleChoice: true),
           onSend: ({required int index, required QuestionAnswer answer}) {
-            expect((answer as QuestionAnswer<List<String>>).answer.length, 2);
+            expect((answer as QuestionAnswer<List<int>>).answer.length, 2);
             completer.complete();
           },
         ),

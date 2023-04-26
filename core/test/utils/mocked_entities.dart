@@ -43,7 +43,7 @@ abstract class MockedEntities {
     isMultipleChoice: false,
     isSkip: false,
     index: 0,
-    subtitle: '',
+    subtitle: 'subtitle',
     ruleType: RuleType.none,
     ruleValue: 0,
     theme: ChoiceQuestionTheme.common(),

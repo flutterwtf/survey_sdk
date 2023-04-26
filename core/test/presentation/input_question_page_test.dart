@@ -6,6 +6,7 @@ import 'package:survey_core/src/domain/entities/question_types/input_question_da
 import 'package:survey_core/src/presentation/input_question/input_question_page.dart';
 import 'package:survey_core/src/presentation/widgets/question_bottom_button.dart';
 
+import '../utils/mocked_entities.dart';
 import 'widget/app_tester.dart';
 
 // TODO(dev): Make a test for input date
@@ -16,7 +17,7 @@ void main() {
 
   const validationErrorMessage = 'Validation error';
 
-  final mockInputData = InputQuestionData.common();
+  final mockInputData = MockedEntities.input1;
 
   final mockInputWithNumber = mockInputData.copyWith(
     validator: InputValidator.number(),
@@ -91,7 +92,7 @@ void main() {
           await tester.tap(find.byType(QuestionBottomButton));
           await tester.pumpAndSettle();
 
-          expect(sendData, equals(testInvalidNumberString));
+          expect(sendData, isNull);
           expect(validationResult, equals(validationErrorMessage));
         },
       );
