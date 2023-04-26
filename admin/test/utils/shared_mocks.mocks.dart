@@ -3,9 +3,12 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'dart:async' as _i3;
+
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:survey_admin/data/data_sources/interfaces/filesystem_data_source.dart'
     as _i2;
+import 'package:survey_core/survey_core.dart' as _i4;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -36,4 +39,12 @@ class MockFilesystemDataSource extends _i1.Mock
         ),
         returnValueForMissingStub: null,
       );
+  @override
+  _i3.Future<_i4.SurveyData?> importSurveyData() => (super.noSuchMethod(
+        Invocation.method(
+          #importSurveyData,
+          [],
+        ),
+        returnValue: _i3.Future<_i4.SurveyData?>.value(),
+      ) as _i3.Future<_i4.SurveyData?>);
 }
