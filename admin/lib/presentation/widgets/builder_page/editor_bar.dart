@@ -16,11 +16,20 @@ class EditorBar extends StatelessWidget {
     super.key,
   });
 
+  double _calculateWidth(BuildContext context) {
+    final freeSpaceWidth =
+        MediaQuery.of(context).size.width - AppDimensions.surveyContentBarWidth;
+
+    return freeSpaceWidth >= AppDimensions.surveyEditorBarWidth
+        ? AppDimensions.surveyEditorBarWidth
+        : freeSpaceWidth;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
       color: AppColors.whitePrimaryBackground,
-      width: AppDimensions.surveyEditorBarWidth,
+      width: _calculateWidth(context),
       child: Builder(
         builder: (context) {
           final questionData = editableQuestion;
