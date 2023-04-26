@@ -44,7 +44,7 @@ void main() {
         (WidgetTester tester) async {
           String? sendData;
           await tester.pumpWidget(
-            AppTest(
+            AppTester(
               child: InputQuestionPage(
                 data: mockInputData,
                 onSend: ({
@@ -72,7 +72,7 @@ void main() {
 
           String? sendData;
           await tester.pumpWidget(
-            AppTest(
+            AppTester(
               child: InputQuestionPage(
                 data: mockInputWithNumber,
                 onSend: ({
@@ -101,7 +101,7 @@ void main() {
         (WidgetTester tester) async {
           var isPressed = false;
           await tester.pumpWidget(
-            AppTest(
+            AppTester(
               child: InputQuestionPage(
                 data: mockInputData,
                 onSend: ({
@@ -124,7 +124,7 @@ void main() {
         (WidgetTester tester) async {
           String? sentData;
           await tester.pumpWidget(
-            AppTest(
+            AppTester(
               child: InputQuestionPage(
                 data: mockInputData,
                 onSend: ({

@@ -14,7 +14,7 @@ void main() {
   group('components of Choice Question widget', () {
     testWidgets('Load widget', (tester) async {
       await tester.pumpWidget(
-        const AppTest(
+        const AppTester(
           child: ChoiceQuestionPage(
             data: MockedEntities.choice3,
             onSend: _mockOnSend,
@@ -32,7 +32,7 @@ void main() {
     testWidgets('Non skippable without answer', (tester) async {
       final completer = Completer<void>();
       await tester.pumpWidget(
-        AppTest(
+        AppTester(
           child: ChoiceQuestionPage(
             data: MockedEntities.choice3,
             onSend: ({required int index, required QuestionAnswer answer}) {
@@ -52,7 +52,7 @@ void main() {
     testWidgets('Skippable without answer', (tester) async {
       final completer = Completer<void>();
       await tester.pumpWidget(
-        AppTest(
+        AppTester(
           child: ChoiceQuestionPage(
             data: MockedEntities.choice3.copyWith(isSkip: true),
             onSend: ({required int index, required QuestionAnswer answer}) {
@@ -73,7 +73,7 @@ void main() {
   testWidgets('Single choice without answer', (tester) async {
     final completer = Completer<void>();
     await tester.pumpWidget(
-      AppTest(
+      AppTester(
         child: ChoiceQuestionPage(
           data: MockedEntities.choice3,
           onSend: ({required int index, required QuestionAnswer answer}) {
@@ -92,7 +92,7 @@ void main() {
   testWidgets('Single choice with answer', (tester) async {
     final completer = Completer<void>();
     await tester.pumpWidget(
-      AppTest(
+      AppTester(
         child: ChoiceQuestionPage(
           data: MockedEntities.choice3,
           onSend: ({required int index, required QuestionAnswer answer}) {
@@ -111,7 +111,7 @@ void main() {
   testWidgets('Single choice with 2 taps option answer', (tester) async {
     final completer = Completer<void>();
     await tester.pumpWidget(
-      AppTest(
+      AppTester(
         child: ChoiceQuestionPage(
           data: MockedEntities.choice3,
           onSend: ({required int index, required QuestionAnswer answer}) {
@@ -132,7 +132,7 @@ void main() {
   testWidgets('Multiple choice without answer', (tester) async {
     final completer = Completer<void>();
     await tester.pumpWidget(
-      AppTest(
+      AppTester(
         child: ChoiceQuestionPage(
           data: MockedEntities.choice3.copyWith(isMultipleChoice: true),
           onSend: ({required int index, required QuestionAnswer answer}) {
@@ -152,7 +152,7 @@ void main() {
   testWidgets('Multiple choice with 1 answer', (tester) async {
     final completer = Completer<void>();
     await tester.pumpWidget(
-      AppTest(
+      AppTester(
         child: ChoiceQuestionPage(
           data: MockedEntities.choice3.copyWith(isMultipleChoice: true),
           onSend: ({required int index, required QuestionAnswer answer}) {
@@ -171,7 +171,7 @@ void main() {
   testWidgets('Multiple choice with 2 taps option answer', (tester) async {
     final completer = Completer<void>();
     await tester.pumpWidget(
-      AppTest(
+      AppTester(
         child: ChoiceQuestionPage(
           data: MockedEntities.choice3.copyWith(isMultipleChoice: true),
           onSend: ({required int index, required QuestionAnswer answer}) {
@@ -195,7 +195,7 @@ void main() {
   testWidgets('Multiple choice with 2 answers', (tester) async {
     final completer = Completer<void>();
     await tester.pumpWidget(
-      AppTest(
+      AppTester(
         child: ChoiceQuestionPage(
           data: MockedEntities.choice3.copyWith(isMultipleChoice: true),
           onSend: ({required int index, required QuestionAnswer answer}) {

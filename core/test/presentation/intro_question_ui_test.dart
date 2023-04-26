@@ -19,7 +19,7 @@ void main() {
       const content =
           'You may simply need a single, brief answer without discussion.';
 
-      final introQuestionPage = AppTest(
+      final introQuestionPage = AppTester(
         child: IntroQuestionPage(
           data: const IntroQuestionData.common(),
           onMainButtonTap: completerOnMainButtonTap.complete,

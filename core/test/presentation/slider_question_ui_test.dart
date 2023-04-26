@@ -19,7 +19,7 @@ void main() {
       const minValue = 1.0;
       const maxValue = 2.0;
 
-      final sliderQuestionPage = AppTest(
+      final sliderQuestionPage = AppTester(
         child: SliderQuestionPage(
           data: const SliderQuestionData.common(),
           onSend: ({required int index, required QuestionAnswer answer}) {
@@ -62,7 +62,7 @@ void main() {
         (widgetTester) async {
           final completer = Completer<void>();
           const dragValue = 0.5;
-          final sliderQuestionPage = AppTest(
+          final sliderQuestionPage = AppTester(
             child: SliderQuestionPage(
               data: const SliderQuestionData.common(),
               onSend: ({required int index, required QuestionAnswer answer}) {
@@ -90,7 +90,7 @@ void main() {
         (widgetTester) async {
           final completer = Completer<void>();
           const dragValue = 2.0;
-          final sliderQuestionPage = AppTest(
+          final sliderQuestionPage = AppTester(
             child: SliderQuestionPage(
               data: const SliderQuestionData.common(),
               onSend: ({required int index, required QuestionAnswer answer}) {
@@ -118,7 +118,7 @@ void main() {
         (widgetTester) async {
           final completer = Completer<void>();
           const dragValue = 1.0;
-          final sliderQuestionPage = AppTest(
+          final sliderQuestionPage = AppTester(
             child: SliderQuestionPage(
               data: const SliderQuestionData.common(),
               onSend: ({required int index, required QuestionAnswer answer}) {

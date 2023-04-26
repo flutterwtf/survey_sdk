@@ -9,13 +9,13 @@ import 'widget/app_tester.dart';
 void main() {
   final completerActive = Completer<void>();
   final completerInactive = Completer<void>();
-  final pageActiveButton = AppTest(
+  final pageActiveButton = AppTester(
     child: QuestionBottomButton(
       text: 'next',
       onPressed: completerActive.complete,
     ),
   );
-  final pageInactiveButton = AppTest(
+  final pageInactiveButton = AppTester(
     child: QuestionBottomButton(
       text: 'next',
       isEnabled: false,
