@@ -1,0 +1,27 @@
+{
+  "1": {
+    "index": 1,
+    "title": "Intro",
+    "subtitle": "",
+    "type": "Intro",
+    "isSkip": false,
+    "content": "You may simply need a single, brief answer without discussion. Other times, you may want to talk through a scenario, evaluate how well a group is learning new material or solicit feedback. The types of questions you ask directly impact the type of answer you receive.",
+    "payload": {
+      "mainButtonTitle": "NEXT"
+    }
+  },
+  "2": {
+    "index": 2,
+    "title": "Input",
+    "subtitle": "",
+    "type": "Input",
+    "isSkip": false,
+    "content": "You may simply need a single, brief answer without discussion. Other times, you may want to talk through a scenario, evaluate how well a group is learning new material or solicit feedback. The types of questions you ask directly impact the type of answer you receive.",
+    "payload": {
+      "validator": 1,
+      "regex": "^[0-9]+$",
+      "is_obscured": false,
+      "hintText": null
+    }
+  }
+}
