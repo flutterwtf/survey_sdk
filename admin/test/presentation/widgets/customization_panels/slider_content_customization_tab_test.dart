@@ -8,9 +8,6 @@ import '../app_tester.dart';
 
 void main() {
   group('Tests for SliderContentCustomizationTab', () {
-    const title = '';
-    const subtitle = '';
-
     var data = const SliderQuestionData.common();
     final page = AppTester(
       child: SliderContentCustomizationTab(
