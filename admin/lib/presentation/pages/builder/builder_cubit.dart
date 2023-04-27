@@ -108,6 +108,7 @@ class BuilderCubit extends Cubit<BuilderState> {
       emit(
         state.copyWith(surveyData: surveyData),
       );
+      select(surveyData.questions.first);
     }
     return surveyData;
   }
