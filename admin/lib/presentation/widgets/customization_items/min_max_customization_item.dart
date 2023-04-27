@@ -98,10 +98,10 @@ class _MinMaxInputField extends StatelessWidget {
 
     if (inputNumber != null) {
       if (minValue != null) {
-        return inputNumber < minValue! ? '$prefix > $minValue' : null;
+        return inputNumber <= minValue! ? '$prefix > $minValue' : null;
       }
       if (maxValue != null) {
-        return inputNumber > maxValue! ? '$prefix < $maxValue' : null;
+        return inputNumber >= maxValue! ? '$prefix < $maxValue' : null;
       }
     }
     return null;
