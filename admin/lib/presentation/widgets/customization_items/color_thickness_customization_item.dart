@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:survey_admin/presentation/app/localization/app_localizations_ext.dart';
 import 'package:survey_admin/presentation/utils/constants/app_dimensions.dart';
@@ -10,6 +12,7 @@ class ColorThicknessCustomizationItem extends StatefulWidget {
   final Color initialColor;
   final ValueChanged<Color> onColorPicked;
   final double initialThickness;
+  final double? maxThickness;
   final ValueChanged<double> onThicknessChanged;
 
   const ColorThicknessCustomizationItem({
@@ -17,6 +20,7 @@ class ColorThicknessCustomizationItem extends StatefulWidget {
     required this.onColorPicked,
     required this.initialThickness,
     required this.onThicknessChanged,
+    this.maxThickness,
     super.key,
   });
 
@@ -27,11 +31,12 @@ class ColorThicknessCustomizationItem extends StatefulWidget {
 
 class _ColorThicknessCustomizationItemState
     extends State<ColorThicknessCustomizationItem> {
-  final _controller = TextEditingController();
+  late final TextEditingController _textEditingController;
 
   @override
   void initState() {
-    _controller.text = widget.initialThickness.toString();
+    _textEditingController = TextEditingController();
+    _textEditingController.text = widget.initialThickness.toString();
     super.initState();
   }
 
@@ -44,7 +49,24 @@ class _ColorThicknessCustomizationItemState
             .toString()
         : textFieldText;
     final thickness = double.tryParse(textToParse) ?? 0;
-    widget.onThicknessChanged(thickness);
+
+    if (widget.maxThickness != null) {
+      final validThickness = min(thickness, widget.maxThickness!);
+      widget.onThicknessChanged(validThickness);
+      _textEditingController.value = _textEditingController.value.copyWith(
+        text: validThickness.toString(),
+        selection:
+            TextSelection.collapsed(offset: _textEditingController.text.length),
+      );
+    } else {
+      widget.onThicknessChanged(thickness);
+    }
+  }
+
+  @override
+  void dispose() {
+    _textEditingController.dispose();
+    super.dispose();
   }
 
   @override
@@ -61,7 +83,7 @@ class _ColorThicknessCustomizationItemState
           child: Padding(
             padding: const EdgeInsets.only(right: AppDimensions.margin5XL),
             child: CustomizationTextField(
-              controller: _controller,
+              controller: _textEditingController,
               inputFormatters: [
                 DoubleInputFormatter(),
               ],
