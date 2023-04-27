@@ -17,8 +17,6 @@ void main() {
       const mainButtonTitle = 'NEXT';
       const secondaryButtonTitle = 'SKIP';
       const subtitleInCommonData = '';
-      const content =
-          'You may simply need a single, brief answer without discussion.';
 
       final introQuestionPage = AppTester(
         child: IntroQuestionPage(

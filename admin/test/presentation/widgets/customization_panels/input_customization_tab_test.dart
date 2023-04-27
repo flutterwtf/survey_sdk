@@ -70,11 +70,11 @@ void main() {
           await widgetTester.pumpWidget(page);
           await widgetTester.pumpAndSettle();
 
-          // Multiline widget switch is off
           expect(
             find.widgetWithText(CustomizationItemsContainer, 'Lines'),
             findsNothing,
           );
+          // Multiline widget switch is off
           expect(
             find.widgetWithText(CustomizationItemsContainer, 'FFFFFFFF'),
             findsOneWidget,
@@ -87,11 +87,18 @@ void main() {
             find.widgetWithText(CustomizationItemsContainer, 'FF727272'),
             findsOneWidget,
           );
-          // expect(find.text('1'), findsOneWidget);
-          // expect(
-          //   find.widgetWithText(CustomizationItemsContainer, '16'),
-          //   findsNWidgets(2),
-          // );
+          expect(
+            find.widgetWithText(CustomizationTextField, '1.0'),
+            findsOneWidget,
+          );
+          expect(
+            find.widgetWithText(CustomizationTextField, '16.0'),
+            findsNWidgets(2),
+          );
+          expect(data.theme?.borderWidth, 1);
+          expect(data.theme?.hintSize, 16);
+          expect(data.theme?.textSize, 16);
+
           expect(
             find.widgetWithText(DropdownCustomizationButton<InputType>, 'text'),
             findsOneWidget,

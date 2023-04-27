@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:survey_core/src/domain/entities/input_validator.dart';
 import 'package:survey_core/src/domain/entities/question_answer.dart';
-import 'package:survey_core/src/domain/entities/question_types/input_question_data.dart';
 import 'package:survey_core/src/presentation/input_question/input_question_page.dart';
 import 'package:survey_core/src/presentation/widgets/question_bottom_button.dart';
 

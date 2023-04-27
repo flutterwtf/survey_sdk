@@ -63,24 +63,38 @@ void main() {
         (tester) async {
           await tester.pumpWidget(page);
           await tester.pumpAndSettle();
-          // final colorTextFields = find.byType(ColorCustomizationItem);
 
-          // for (var i = 0; i < colorTextFields.evaluate().length; i++) {
-          //   await tester.enterText(
-          //     colorTextFields.at(i),
-          //     redColorCode,
-          //   );
-          //   await tester.testTextInput.receiveAction(TextInputAction.done);
-          // }
-          // await tester.pump();
+          await tester.enterText(
+            find.byType(ColorCustomizationItem).at(0),
+            redColorCode,
+          );
+          expect(data.theme?.fill, redColor);
 
-          // expect(find.text(redColorCode), findsNWidgets(5));
+          await tester.enterText(
+            find.byType(ColorCustomizationItem).at(1),
+            redColorCode,
+          );
+          expect(data.theme?.titleColor, redColor);
 
-          // expect(data.theme?.fill, redColor);
-          // expect(data.theme?.titleColor, redColor);
-          // expect(data.theme?.subtitleColor, redColor);
-          // expect(data.theme?.buttonFill, redColor);
-          // expect(data.theme?.buttonTextColor, redColor);
+          await tester.enterText(
+            find.byType(ColorCustomizationItem).at(2),
+            redColorCode,
+          );
+          expect(data.theme?.subtitleColor, redColor);
+
+          await tester.enterText(
+            find.byType(ColorCustomizationItem).at(3),
+            redColorCode,
+          );
+          expect(data.theme?.buttonFill, redColor);
+
+          await tester.enterText(
+            find.byType(ColorCustomizationItem).at(4),
+            redColorCode,
+          );
+          expect(data.theme?.buttonTextColor, redColor);
+
+          expect(find.text(redColorCode), findsNWidgets(5));
         },
       );
       testWidgets(
