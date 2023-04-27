@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:survey_admin/presentation/app/localization/app_localizations_ext.dart';
+import 'package:survey_admin/presentation/utils/constants/app_dimensions.dart';
 import 'package:survey_admin/presentation/utils/double_input_formatter.dart';
 import 'package:survey_admin/presentation/utils/theme_extension.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/color_customization_item.dart';
@@ -79,17 +80,26 @@ class _ColorThicknessCustomizationItemState
           ),
         ),
         Expanded(
-          child: CustomizationTextField(
-            controller: _textEditingController,
-            inputFormatters: [
-              DoubleInputFormatter(),
-            ],
-            onChanged: _onThicknessChanged,
-            decoration: InputDecoration(
-              isCollapsed: true,
-              border: InputBorder.none,
-              suffixText: context.localization.px,
-              suffixStyle: context.theme.textTheme.bodyLarge,
+          child: Padding(
+            padding: const EdgeInsets.only(right: AppDimensions.margin5XL),
+            child: CustomizationTextField(
+              controller: _textEditingController,
+              inputFormatters: [
+                DoubleInputFormatter(),
+              ],
+              onChanged: _onThicknessChanged,
+              decoration: InputDecoration(
+                isCollapsed: true,
+                border: InputBorder.none,
+                suffix: Padding(
+                  padding: const EdgeInsets.only(left: AppDimensions.margin2XS),
+                  child: Text(
+                    context.localization.px,
+                    style: context.theme.textTheme.bodyLarge,
+                  ),
+                ),
+              ),
+              textAlign: TextAlign.end,
             ),
           ),
         ),
