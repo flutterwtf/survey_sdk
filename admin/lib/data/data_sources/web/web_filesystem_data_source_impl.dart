@@ -1,10 +1,9 @@
 import 'dart:convert';
 
-// ignore: avoid_web_libraries_in_flutter
-import 'dart:html' as html;
 import 'package:file_picker/file_picker.dart';
 import 'package:survey_admin/data/data_sources/interfaces/filesystem_data_source.dart';
 import 'package:survey_core/survey_core.dart';
+import 'package:universal_html/html.dart' as html;
 
 class WebFilesystemDataSourceImpl implements FilesystemDataSource {
   @override

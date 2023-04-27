@@ -97,6 +97,7 @@ class _ChoiceQuestionPageState extends State<ChoiceQuestionPage>
                       padding: const EdgeInsets.only(
                         top: AppDimensions.marginS,
                       ),
+                      // TODO(dev): We passed a subtitle to widget for content?
                       child: QuestionContent(
                         content: widget.data.subtitle,
                         textColor: theme.subtitleColor,

@@ -45,7 +45,7 @@ class InputQuestionData extends QuestionData<InputQuestionTheme> {
       : this(
           // TODO(dev): to localization somehow
           validator: InputValidator.number(),
-          theme: null,
+          theme: const InputQuestionTheme.common(),
           index: index,
           title: 'Why is asking the right type of questions important?',
           subtitle: '',
@@ -59,7 +59,6 @@ class InputQuestionData extends QuestionData<InputQuestionTheme> {
     final Map<String, dynamic> payload = json['payload'];
     final theme = json['theme'];
     return InputQuestionData(
-      theme: theme != null ? InputQuestionTheme.fromJson(theme) : null,
       index: json['index'],
       title: json['title'],
       subtitle: json['subtitle'],
@@ -68,6 +67,9 @@ class InputQuestionData extends QuestionData<InputQuestionTheme> {
       validator: InputValidator.fromJson(payload),
       hintText: payload['hintText'],
       buttonText: payload['buttonText'] ?? '',
+      theme: theme != null
+          ? InputQuestionTheme.fromJson(theme)
+          : const InputQuestionTheme.common(),
     );
   }
 
@@ -89,6 +91,7 @@ class InputQuestionData extends QuestionData<InputQuestionTheme> {
       index: index ?? this.index,
       title: title ?? this.title,
       subtitle: subtitle ?? this.subtitle,
+      content: content ?? this.content,
       isSkip: isSkip ?? this.isSkip,
       buttonText: buttonText ?? this.buttonText,
       theme: theme ?? this.theme,
