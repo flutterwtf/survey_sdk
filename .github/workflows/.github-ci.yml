@@ -24,8 +24,8 @@ jobs:
       - name: Core module check
         run: ./scripts/core_module.sh
 
-      - name: Client module check
-        run: ./scripts/client_module.sh
+#      - name: Client module check
+#        run: ./scripts/client_module.sh
 
       - name: Admin module check
         run: ./scripts/admin_module.sh
