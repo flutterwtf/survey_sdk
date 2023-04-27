@@ -27,7 +27,7 @@ class _BuilderPageState extends State<BuilderPage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          content: Text(context.localization.empty_data_message),
+          content: Text(context.localization.emptyDataMessage),
           actions: <Widget>[
             TextButton(
               child: Text(
@@ -77,7 +77,10 @@ class _BuilderPageState extends State<BuilderPage> {
         builder: (context, state) => Scaffold(
           appBar: AppBar(
             title: const _BuilderPageTabBar(),
-            actions: [_ImportButton(onImportPressed: _onImportPressed), _ExportButton()],
+            actions: [
+              _ImportButton(onImportPressed: _onImportPressed),
+              const _ExportButton()
+            ],
             centerTitle: true,
           ),
           body: Row(

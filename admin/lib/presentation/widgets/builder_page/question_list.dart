@@ -186,7 +186,7 @@ class _Question extends StatelessWidget {
         contextMenu: GenericContextMenu(
           buttonConfigs: [
             ContextMenuButtonConfig(
-              context.localization.delete_question,
+              context.localization.deleteQuestion,
               onPressed: onDeleteButtonPressed,
             ),
           ],

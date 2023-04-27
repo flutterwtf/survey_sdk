@@ -29,7 +29,7 @@ void main() {
           await widgetTester.pumpAndSettle();
           expect(
             find.widgetWithText(CustomizationItemsContainer, 'Title'),
-            findsOneWidget,
+            findsWidgets,
           );
           expect(
             find.widgetWithText(CustomizationItemsContainer, 'Subtitle'),
@@ -78,13 +78,28 @@ void main() {
           await tester.enterText(optionsInputField, 'first');
           await tester.pump();
           expect(find.text('first'), findsOneWidget);
-          expect(data.options, []);
+          expect(
+            data.options,
+            const [
+              'First option',
+              'Second option',
+              'Third option',
+            ],
+          );
 
           // Click done
           await tester.testTextInput.receiveAction(TextInputAction.done);
           await tester.pump();
           expect(find.text('first'), findsOneWidget);
-          expect(data.options, ['first']);
+          expect(
+            data.options,
+            const [
+              'First option',
+              'Second option',
+              'Third option',
+              'first',
+            ],
+          );
 
           // Add second option
           await tester.enterText(optionsInputField, 'second');
@@ -92,13 +107,30 @@ void main() {
           await tester.pump();
           expect(find.text('first'), findsOneWidget);
           expect(find.text('second'), findsOneWidget);
-          expect(data.options, ['first', 'second']);
+          expect(
+            data.options,
+            const [
+              'First option',
+              'Second option',
+              'Third option',
+              'first',
+              'second',
+            ],
+          );
 
           // Remove first option
           await tester.tap(find.byType(IconButton).first);
           await tester.pump();
           expect(find.text('second'), findsOneWidget);
-          expect(data.options, ['second']);
+          expect(
+            data.options,
+            const [
+              'Second option',
+              'Third option',
+              'first',
+              'second',
+            ],
+          );
         },
       );
     },

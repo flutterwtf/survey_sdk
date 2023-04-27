@@ -9,6 +9,7 @@ import 'package:survey_admin/presentation/widgets/customization_items/dropdown_c
 import 'package:survey_admin/presentation/widgets/customization_items/multiline_switch.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/padding_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/text_style_customization_item.dart';
+import 'package:survey_admin/presentation/widgets/customization_panel/constants/customization_panel_dimensions.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/customization_tab.dart';
 import 'package:survey_core/survey_core.dart';
 
@@ -75,6 +76,7 @@ class InputCustomizationTab extends CustomizationTab {
                 ),
               ),
               initialThickness: theme.borderWidth,
+              maxThickness: CustomizationPanelDimensions.inputBorderMaxWidth,
               onThicknessChanged: (width) => onChange(
                 editable.copyWith(
                   theme: theme.copyWith(
@@ -157,7 +159,7 @@ class InputCustomizationTab extends CustomizationTab {
         ),
         CustomizationItemsContainer(
           // key: UniqueKey(),
-          title: context.localization.input_type,
+          title: context.localization.inputType,
           itemsPadding: const EdgeInsets.only(
             bottom: AppDimensions.marginM,
           ),
@@ -188,7 +190,7 @@ class InputCustomizationTab extends CustomizationTab {
           ],
         ),
         CustomizationItemsContainer(
-          title: context.localization.validator_error_text_title,
+          title: context.localization.validatorErrorTextTitle,
           children: [
             CustomizationMultilineTextField(
               value: theme.errorText,

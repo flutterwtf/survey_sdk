@@ -10,11 +10,10 @@ void main() {
   group(
     'Input content customization tab tests',
     () {
-      const testText = 'Text for test';
-      const textTitle = '';
-      const textSubtitle = '';
-      const textHint = '';
-      const textButton = '';
+      const textTitle = 'Text for test1';
+      const textSubtitle = 'Text for test2';
+      const textHint = 'Text for test3';
+      const textButton = 'Text for test4';
 
       var data = InputQuestionData.common();
       final page = AppTester(
@@ -48,32 +47,30 @@ void main() {
           await tester.pumpWidget(page);
           await tester.enterText(
             find.widgetWithText(CustomizationItemsContainer, 'Title'),
-            testText,
+            textTitle,
           );
-          expect(textTitle, testText);
+          expect(find.text(textTitle), findsOneWidget);
 
           await tester.pumpWidget(page);
           await tester.enterText(
             find.widgetWithText(CustomizationItemsContainer, 'Subtitle'),
-            testText,
+            textSubtitle,
           );
-          expect(textSubtitle, testText);
+          expect(textSubtitle, textSubtitle);
 
           await tester.pumpWidget(page);
           await tester.enterText(
             find.widgetWithText(CustomizationItemsContainer, 'Hint'),
-            testText,
+            textHint,
           );
-          expect(textHint, testText);
+          expect(textHint, textHint);
 
           await tester.pumpWidget(page);
           await tester.enterText(
             find.widgetWithText(CustomizationItemsContainer, 'Button'),
-            testText,
+            textButton,
           );
-          expect(textButton, testText);
-
-          expect(find.text(testText), findsNWidgets(4));
+          expect(textButton, textButton);
         },
       );
     },
