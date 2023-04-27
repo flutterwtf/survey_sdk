@@ -166,6 +166,10 @@ class _QuestionSliderState extends State<_QuestionSlider> {
     final textStyle = context.theme.textTheme.bodyMedium?.copyWith(
       fontFamily: AppFonts.inter,
     );
+    _value = _value >= widget.minValue.toDouble() &&
+            _value <= widget.maxValue.toDouble()
+        ? _value
+        : widget.initialValue.toDouble();
     return SliderTheme(
       data: SliderThemeData(
         activeTrackColor: widget.theme.activeColor,

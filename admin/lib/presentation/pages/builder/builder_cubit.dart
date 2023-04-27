@@ -35,46 +35,32 @@ class BuilderCubit extends Cubit<BuilderState> {
   }
 
   void updateCommon(QuestionData data) {
-    final surveyData = state.surveyData;
+    var surveyData = state.surveyData;
     final common = state.surveyData.commonTheme;
     switch (data.type) {
       case QuestionTypes.choice:
-        emit(
-          state.copyWith(
-            surveyData: surveyData.copyWith(
-              commonTheme: common.copyWith(choice: data as ChoiceQuestionData),
-            ),
-          ),
+        surveyData = surveyData.copyWith(
+          commonTheme: common.copyWith(choice: data as ChoiceQuestionData),
         );
         break;
       case QuestionTypes.input:
-        emit(
-          state.copyWith(
-            surveyData: surveyData.copyWith(
-              commonTheme: common.copyWith(input: data as InputQuestionData),
-            ),
-          ),
+        surveyData = surveyData.copyWith(
+          commonTheme: common.copyWith(input: data as InputQuestionData),
         );
         break;
       case QuestionTypes.intro:
-        emit(
-          state.copyWith(
-            surveyData: surveyData.copyWith(
-              commonTheme: common.copyWith(intro: data as IntroQuestionData),
-            ),
-          ),
+        surveyData = surveyData.copyWith(
+          commonTheme: common.copyWith(intro: data as IntroQuestionData),
         );
         break;
       case QuestionTypes.slider:
-        emit(
-          state.copyWith(
-            surveyData: surveyData.copyWith(
-              commonTheme: common.copyWith(slider: data as SliderQuestionData),
-            ),
-          ),
+        surveyData = surveyData.copyWith(
+          commonTheme: common.copyWith(slider: data as SliderQuestionData),
         );
         break;
     }
+    _sessionStorageRepository.saveSurveyData(surveyData);
+    emit(state.copyWith(surveyData: surveyData));
   }
 
   void select(QuestionData data) => emit(
@@ -83,12 +69,6 @@ class BuilderCubit extends Cubit<BuilderState> {
           surveyData: state.surveyData,
         ),
       );
-
-  void _updateIndex(List<QuestionData> data) {
-    for (var i = 0; i < data.length; i++) {
-      data[i] = data[i].copyWith(index: i + 1);
-    }
-  }
 
   void deleteQuestionData(QuestionData data) {
     final questionList = List<QuestionData>.of(state.surveyData.questions)
@@ -99,8 +79,16 @@ class BuilderCubit extends Cubit<BuilderState> {
     final surveyData = state.surveyData.copyWith(questions: questionList);
     _sessionStorageRepository.saveSurveyData(surveyData);
     emit(state.copyWith(surveyData: surveyData));
-
-    select(state.surveyData.questions.first);
+    if (state.surveyData.questions.isEmpty) {
+      emit(
+        EditQuestionBuilderState(
+          selectedIndex: 0,
+          surveyData: state.surveyData,
+        ),
+      );
+    } else {
+      select(state.surveyData.questions.first);
+    }
   }
 
   void addQuestionData(QuestionData data) {
@@ -110,16 +98,19 @@ class BuilderCubit extends Cubit<BuilderState> {
     final surveyData = state.surveyData.copyWith(questions: questionList);
     _sessionStorageRepository.saveSurveyData(surveyData);
     emit(state.copyWith(surveyData: surveyData));
+    select(state.surveyData.questions.last);
   }
 
   // TODO(message): show message in case of error/empty data.
-  Future<void> importData() async {
+  Future<SurveyData?> importData() async {
     final surveyData = await _fileSystemRepository.importSurveyData();
     if (surveyData != null) {
       emit(
         state.copyWith(surveyData: surveyData),
       );
+      select(surveyData.questions.first);
     }
+    return surveyData;
   }
 
   void updateQuestionData(QuestionData data) {
@@ -127,11 +118,21 @@ class BuilderCubit extends Cubit<BuilderState> {
 
     // TODO(dev): Rewrite index system maybe?
     questions[data.index - 1] = data;
-    emit(
-      state.copyWith(
-        surveyData: state.surveyData.copyWith(questions: questions),
-      ),
-    );
+    final surveyData = state.surveyData.copyWith(questions: questions);
+    _sessionStorageRepository.saveSurveyData(surveyData);
+    emit(state.copyWith(surveyData: surveyData));
+  }
+
+  void updateQuestions(List<QuestionData> questionList) {
+    final surveyData = state.surveyData.copyWith(questions: questionList);
+    _sessionStorageRepository.saveSurveyData(surveyData);
+    emit(state.copyWith(surveyData: surveyData));
+  }
+
+  void _updateIndex(List<QuestionData> data) {
+    for (var i = 0; i < data.length; i++) {
+      data[i] = data[i].copyWith(index: i + 1);
+    }
   }
 
   void _init() {

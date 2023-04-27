@@ -42,7 +42,6 @@ class InputQuestionPage extends StatefulWidget {
 }
 
 class _InputQuestionPageState extends State<InputQuestionPage> {
-  final _textFieldKey = GlobalKey<FormFieldState>();
   DateTime _dateTime = DateTime.now();
   String _input = '';
 
@@ -69,7 +68,7 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
       ),
     );
     final hintText = widget.data.hintText;
-    final isValid = _textFieldKey.currentState?.isValid;
+    final isValid = widget.data.validator.validate(_input);
     return Scaffold(
       backgroundColor: theme.fill,
       body: CustomScrollView(
@@ -122,7 +121,6 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
                                 setState(() => _dateTime = value);
                               }
                             },
-                            textFieldKey: _textFieldKey,
                             // TODO(dev): pass args instead of theme.
                             theme: theme,
                             validator: (text) => _canBeSkippedNumber
@@ -136,7 +134,6 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
                             onChanged: (input) =>
                                 setState(() => _input = input),
                             theme: theme,
-                            textFieldKey: _textFieldKey,
                             validator: (text) => _canBeSkippedNumber
                                 ? null
                                 : widget.data.validator.validate(text),
@@ -162,8 +159,8 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
                           child: QuestionBottomButton(
                             text: widget.data.primaryButtonText,
                             onPressed: () {
-                              if ((_textFieldKey.currentState?.validate() ??
-                                      false) ||
+                              if ((widget.data.validator.validate(_input) ==
+                                      null) ||
                                   widget.data.isSkip) {
                                 isDateType
                                     ? widget.onSend.call(
@@ -178,8 +175,8 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
                               }
                             },
                             isEnabled: isDateType
-                                ? _canBeSkippedDate || (isValid ?? false)
-                                : _canBeSkippedNumber || (isValid ?? false),
+                                ? _canBeSkippedDate || (isValid == null)
+                                : _canBeSkippedNumber || (isValid == null),
                             color: theme.buttonFill,
                             textSize: theme.buttonTextSize,
                             textColor: theme.buttonTextColor,
@@ -204,7 +201,6 @@ class _InputDate extends StatelessWidget {
   final DateTime dateTime;
   final String hintText;
   final Function(DateTime?) onChanged;
-  final GlobalKey<FormFieldState> textFieldKey;
   final InputQuestionTheme theme;
   final String? Function(DateTime?) validator;
 
@@ -213,7 +209,6 @@ class _InputDate extends StatelessWidget {
     required this.dateTime,
     required this.hintText,
     required this.onChanged,
-    required this.textFieldKey,
     required this.theme,
     required this.validator,
   });
@@ -221,7 +216,6 @@ class _InputDate extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DateTimeField(
-      key: textFieldKey,
       style: TextStyle(
         color: theme.textColor,
         fontSize: theme.textSize,
@@ -261,7 +255,6 @@ class _InputNumber extends StatelessWidget {
   final OutlineInputBorder border;
   final String hintText;
   final Function(String)? onChanged;
-  final GlobalKey<FormFieldState> textFieldKey;
   final InputQuestionTheme theme;
   final String? Function(String?) validator;
 
@@ -269,7 +262,6 @@ class _InputNumber extends StatelessWidget {
     required this.border,
     required this.hintText,
     required this.onChanged,
-    required this.textFieldKey,
     required this.theme,
     required this.validator,
   });
@@ -282,7 +274,6 @@ class _InputNumber extends StatelessWidget {
         color: theme.inputFill,
       ),
       child: Form(
-        key: textFieldKey,
         child: TextFormField(
           maxLines: theme.lines,
           style: TextStyle(

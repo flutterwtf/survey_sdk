@@ -4,6 +4,7 @@ import 'package:survey_admin/presentation/widgets/customization_items/color_cust
 import 'package:survey_admin/presentation/widgets/customization_items/color_thickness_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/thickness_customization_item.dart';
+import 'package:survey_admin/presentation/widgets/customization_panel/constants/customization_panel_dimensions.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/customization_tab.dart';
 import 'package:survey_core/survey_core.dart';
 
@@ -30,17 +31,14 @@ class SliderCustomizationTab extends CustomizationTab {
           shouldShowTopDivider: true,
           children: [
             ThicknessCustomizationItem(
+              maxThickness:
+                  CustomizationPanelDimensions.sliderThicknessMaxValue,
               onThicknessChanged: (value) {
-                if (value == null) return;
-                // TODO(dev): replace with onSizeChanged?
-                final thickness = double.tryParse(value);
-                if (thickness != null) {
-                  onChange(
-                    editable.copyWith(
-                      theme: theme.copyWith(thickness: thickness),
-                    ),
-                  );
-                }
+                onChange(
+                  editable.copyWith(
+                    theme: theme.copyWith(thickness: value),
+                  ),
+                );
               },
               initialSize: theme.thickness,
             ),
@@ -83,6 +81,7 @@ class SliderCustomizationTab extends CustomizationTab {
                 ),
               ),
               initialThickness: theme.thumbRadius,
+              maxThickness: CustomizationPanelDimensions.sliderThumbMaxRadius,
               onThicknessChanged: (radius) => onChange(
                 editable.copyWith(
                   theme: theme.copyWith(thumbRadius: radius),
