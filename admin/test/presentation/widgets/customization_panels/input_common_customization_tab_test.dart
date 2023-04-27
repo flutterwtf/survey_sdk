@@ -18,6 +18,7 @@ void main() {
       const textSizeStringWithLetters = '1LLL';
       const textSizeWithLetters = '1';
       const textSizeDoubleWithLetters = 1.0;
+      // ignore: prefer-correct-identifier-length
       const textSizeDoubleWithLetters2 = 12.0;
       const textSizeStringMoreThan2 = '233';
       const redColor = Color(0xfff44336);
