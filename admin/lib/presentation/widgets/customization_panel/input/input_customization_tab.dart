@@ -159,7 +159,7 @@ class InputCustomizationTab extends CustomizationTab {
         ),
         CustomizationItemsContainer(
           // key: UniqueKey(),
-          title: context.localization.input_type,
+          title: context.localization.inputType,
           itemsPadding: const EdgeInsets.only(
             bottom: AppDimensions.marginM,
           ),
@@ -174,6 +174,7 @@ class InputCustomizationTab extends CustomizationTab {
                           theme: theme.copyWith(
                             inputType: type,
                           ),
+                          validator: InputValidator.fromType(type: type),
                         ),
                       ),
                       child: Text(
@@ -189,7 +190,7 @@ class InputCustomizationTab extends CustomizationTab {
           ],
         ),
         CustomizationItemsContainer(
-          title: context.localization.validator_error_text_title,
+          title: context.localization.validatorErrorTextTitle,
           children: [
             CustomizationMultilineTextField(
               value: theme.errorText,

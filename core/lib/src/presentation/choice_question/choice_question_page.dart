@@ -3,6 +3,7 @@ import 'package:survey_core/src/domain/entities/question_answer.dart';
 import 'package:survey_core/src/domain/entities/question_types/choice_question_data.dart';
 import 'package:survey_core/src/domain/entities/themes/choice_question_theme.dart';
 import 'package:survey_core/src/presentation/localization/app_localizations_ext.dart';
+import 'package:survey_core/src/presentation/utils/rule_type_extension.dart';
 import 'package:survey_core/src/presentation/utils/utils.dart';
 import 'package:survey_core/src/presentation/widgets/question_bottom_button.dart';
 import 'package:survey_core/src/presentation/widgets/question_content.dart';
@@ -37,7 +38,7 @@ class ChoiceQuestionPage extends StatefulWidget {
 class _ChoiceQuestionPageState extends State<ChoiceQuestionPage>
     with SingleTickerProviderStateMixin {
   bool _canBeSend = false;
-  List<String> _selectedItems = List.empty();
+  List<int> _selectedItems = List.empty();
 
   @override
   void initState() {
@@ -49,15 +50,18 @@ class _ChoiceQuestionPageState extends State<ChoiceQuestionPage>
     }
   }
 
-  void _onInputChanged(List<String>? selectedItems) {
+  void _onInputChanged(List<int>? selectedItems) {
     setState(() {
       _selectedItems = selectedItems ?? List.empty();
     });
 
     if (!widget.data.isSkip) {
-      setState(() {
-        _canBeSend = _selectedItems.isNotEmpty;
-      });
+      final canBeSend = widget.data.ruleType.canBeSend(
+            widget.data.ruleValue,
+            _selectedItems.length,
+          ) &&
+          _selectedItems.isNotEmpty;
+      setState(() => _canBeSend = canBeSend);
     }
   }
 
@@ -131,7 +135,7 @@ class _ChoiceQuestionPageState extends State<ChoiceQuestionPage>
                       onPressed: () {
                         widget.onSend.call(
                           index: widget.data.index,
-                          answer: QuestionAnswer<List<String>>(_selectedItems),
+                          answer: QuestionAnswer<List<int>>(_selectedItems),
                         );
                       },
                       isEnabled: widget.data.isSkip || _canBeSend,
@@ -161,47 +165,46 @@ class _QuestionCheckboxes extends StatelessWidget {
   });
 
   final List<String> options;
-  final List<String> selectedOptions;
-  final void Function(List<String>? selectedItems) onChanged;
+  final List<int> selectedOptions;
+  final void Function(List<int>? selectedItems) onChanged;
   final Color activeColor;
   final Color inactiveColor;
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: options
-          .map(
-            (option) => CheckboxListTile(
-              controlAffinity: ListTileControlAffinity.leading,
-              title: Text(
-                option,
-                style: context.theme.textTheme.bodyMedium,
-              ),
-              value: selectedOptions.contains(option),
-              activeColor: Colors.transparent,
-              checkColor: AppColors.black,
-              side: MaterialStateBorderSide.resolveWith((states) {
-                return states.contains(MaterialState.selected)
-                    ? BorderSide(color: activeColor)
-                    : BorderSide(color: inactiveColor);
-              }),
-              checkboxShape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(5)),
-              ),
-              onChanged: (shouldAdd) {
-                if (shouldAdd != null) {
-                  final options = selectedOptions;
-                  if (shouldAdd) {
-                    options.add(option);
-                  } else {
-                    options.remove(option);
-                  }
-                  onChanged(options);
-                }
-              },
+      children: [
+        for (int i = 0; i < options.length; i++)
+          CheckboxListTile(
+            controlAffinity: ListTileControlAffinity.leading,
+            title: Text(
+              options[i],
+              style: context.theme.textTheme.bodyMedium,
             ),
-          )
-          .toList(),
+            value: selectedOptions.contains(i),
+            activeColor: Colors.transparent,
+            checkColor: AppColors.black,
+            side: MaterialStateBorderSide.resolveWith((states) {
+              return states.contains(MaterialState.selected)
+                  ? BorderSide(color: activeColor)
+                  : BorderSide(color: inactiveColor);
+            }),
+            checkboxShape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(5)),
+            ),
+            onChanged: (shouldAdd) {
+              if (shouldAdd != null) {
+                final options = selectedOptions;
+                if (shouldAdd) {
+                  options.add(i);
+                } else {
+                  options.remove(i);
+                }
+                onChanged(options);
+              }
+            },
+          ),
+      ],
     );
   }
 }
@@ -216,8 +219,8 @@ class _QuestionRadioButtons extends StatelessWidget {
   });
 
   final List<String> options;
-  final String? selectedOption;
-  final ValueChanged<String?> onChanged;
+  final int? selectedOption;
+  final ValueChanged<int?> onChanged;
   final Color activeColor;
   final Color inactiveColor;
 
@@ -228,21 +231,20 @@ class _QuestionRadioButtons extends StatelessWidget {
         unselectedWidgetColor: inactiveColor,
       ),
       child: Column(
-        children: options
-            .map(
-              (option) => RadioListTile<String?>(
-                groupValue: selectedOption,
-                controlAffinity: ListTileControlAffinity.leading,
-                title: Text(
-                  option,
-                  style: context.theme.textTheme.bodyMedium,
-                ),
-                value: option,
-                activeColor: activeColor,
-                onChanged: onChanged,
+        children: [
+          for (int i = 0; i < options.length; i++)
+            RadioListTile<int?>(
+              groupValue: selectedOption,
+              controlAffinity: ListTileControlAffinity.leading,
+              title: Text(
+                options[i],
+                style: context.theme.textTheme.bodyMedium,
               ),
-            )
-            .toList(),
+              value: i,
+              activeColor: activeColor,
+              onChanged: onChanged,
+            ),
+        ],
       ),
     );
   }
