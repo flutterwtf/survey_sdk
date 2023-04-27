@@ -8,7 +8,7 @@ import 'dart:async' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:survey_admin/data/data_sources/interfaces/filesystem_data_source.dart'
     as _i2;
-import 'package:survey_core/survey_core.dart' as _i4;
+import 'package:survey_client/survey_client.dart' as _i4;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values

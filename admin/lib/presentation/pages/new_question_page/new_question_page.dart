@@ -8,7 +8,7 @@ import 'package:survey_admin/presentation/pages/new_question_page/new_question_t
 import 'package:survey_admin/presentation/utils/utils.dart';
 import 'package:survey_admin/presentation/widgets/builder_page/editor_bar.dart';
 import 'package:survey_admin/presentation/widgets/vector_image.dart';
-import 'package:survey_core/survey_core.dart';
+import 'package:survey_client/survey_client.dart';
 
 class NewQuestionPage extends StatefulWidget {
   const NewQuestionPage({super.key});

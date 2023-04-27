@@ -5,7 +5,7 @@ import 'package:survey_admin/presentation/app/localization/app_localizations_ext
 import 'package:survey_admin/presentation/pages/new_question_page/new_question_page.dart';
 import 'package:survey_admin/presentation/utils/utils.dart';
 import 'package:survey_admin/presentation/widgets/builder_page/question_list_item.dart';
-import 'package:survey_core/survey_core.dart';
+import 'package:survey_client/survey_client.dart';
 
 class QuestionList extends StatefulWidget {
   final ValueChanged<QuestionData> onSelect;

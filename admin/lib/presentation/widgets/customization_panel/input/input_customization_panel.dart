@@ -4,7 +4,7 @@ import 'package:survey_admin/presentation/widgets/customization_panel/input/inpu
 import 'package:survey_admin/presentation/widgets/customization_panel/input/input_content_customization_tab.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/input/input_customization_tab.dart';
 import 'package:survey_admin/presentation/widgets/question_settings_tab_bar.dart';
-import 'package:survey_core/survey_core.dart';
+import 'package:survey_client/survey_client.dart';
 
 class InputCustomizationPanel extends StatelessWidget {
   final void Function(QuestionData data) onChange;

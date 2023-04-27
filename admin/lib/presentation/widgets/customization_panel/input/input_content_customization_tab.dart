@@ -5,7 +5,7 @@ import 'package:survey_admin/presentation/utils/utils.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_multiline_text_field.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/customization_tab.dart';
-import 'package:survey_core/survey_core.dart';
+import 'package:survey_client/survey_client.dart';
 
 class InputContentCustomizationTab extends CustomizationTab {
   final void Function(QuestionData data) onChange;

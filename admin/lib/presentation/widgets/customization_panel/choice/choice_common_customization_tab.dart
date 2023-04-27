@@ -5,7 +5,7 @@ import 'package:survey_admin/presentation/widgets/customization_items/customizat
 import 'package:survey_admin/presentation/widgets/customization_items/radius_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/text_style_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/customization_tab.dart';
-import 'package:survey_core/survey_core.dart';
+import 'package:survey_client/survey_client.dart';
 
 class ChoiceCommonCustomizationTab extends CustomizationTab {
   final void Function(QuestionData data) onChange;

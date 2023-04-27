@@ -18,6 +18,7 @@ analyzer:
     sort_pub_dependencies: ignore
     unawaited_futures: ignore
     sort_constructors_first: ignore
+    mixin_inherits_from_not_object: ignore
 
   exclude:
     - "build/**"
@@ -30,6 +31,9 @@ dart_code_metrics:
   extends:
     - package:dart_code_metrics_presets/all.yaml
   rules:
+    - prefer-moving-to-variable:
+        allowed-duplicated-chains: 3
+    - arguments-ordering: false
     - avoid-banned-imports: false
     - avoid-missing-enum-constant-in-map: false
     - avoid-non-null-assertion: false
@@ -39,30 +43,27 @@ dart_code_metrics:
     - prefer-extracting-callbacks: false
     - consistent-update-render-object: false
     - prefer-correct-identifier-length:
-        max-identifier-length: 25
         min-identifier-length: 1
+        max-identifier-length: 25
     - avoid-late-keyword: false
     - newline-before-return: false
     - avoid-ignoring-return-values: false
     - prefer-commenting-analyzer-ignores: false
-    - no-equal-arguments:
-        ignore-parameters:
-          - top
-          - left
-          - right
-          - bottom
-          - height
-          - width
+    - no-equal-arguments: false
     - avoid-dynamic: false
     - prefer-single-widget-per-file: false
     - avoid-nested-conditional-expressions:
         acceptable-level: 2
     - format-comment: false
     - prefer-static-class: false
+    - no-magic-number:
+        exclude:
+          - test/**
   metrcis:
     - cyclomatic-complexity: 10
     - maximum-nesting-level: 5
     - source-lines-of-code: 50
+
 
 linter:
   rules:

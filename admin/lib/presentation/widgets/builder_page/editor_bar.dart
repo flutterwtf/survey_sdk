@@ -4,7 +4,7 @@ import 'package:survey_admin/presentation/widgets/customization_panel/choice/cho
 import 'package:survey_admin/presentation/widgets/customization_panel/input/input_customization_panel.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/intro/intro_customization_panel.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/slider/slider_customization_panel.dart';
-import 'package:survey_core/survey_core.dart';
+import 'package:survey_client/survey_client.dart';
 
 class EditorBar extends StatelessWidget {
   final QuestionData? editableQuestion;
