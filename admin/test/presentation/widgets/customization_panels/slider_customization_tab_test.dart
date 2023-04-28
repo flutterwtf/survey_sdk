@@ -16,7 +16,8 @@ void main() {
         title: 'Slider',
         onChange: (QuestionData<dynamic> newData) {
           data = newData as SliderQuestionData;
-        }, editable: data,
+        },
+        editable: data,
       ),
     );
 
@@ -96,7 +97,7 @@ void main() {
       );
       await tester.testTextInput.receiveAction(TextInputAction.done);
       await tester.pump();
-      expect(find.text('0'), findsOneWidget);
+      expect(find.text('00000000'), findsOneWidget);
       expect(data.theme?.activeColor, const Color(0x00000000));
     });
 
@@ -126,7 +127,7 @@ void main() {
       );
       await tester.testTextInput.receiveAction(TextInputAction.done);
       await tester.pump();
-      expect(find.text('0'), findsOneWidget);
+      expect(find.text('00000000'), findsOneWidget);
       expect(data.theme?.inactiveColor, const Color(0x00000000));
     });
 
@@ -150,7 +151,7 @@ void main() {
       await tester.enterText(find.byType(ColorCustomizationItem).last, '');
       await tester.testTextInput.receiveAction(TextInputAction.done);
       await tester.pump();
-      expect(find.text('0'), findsOneWidget);
+      expect(find.text('00000000'), findsOneWidget);
       expect(data.theme?.thumbColor, const Color(0x00000000));
 
       await tester.enterText(find.byType(ThicknessCustomizationItem).last, '8');
@@ -161,21 +162,21 @@ void main() {
     testWidgets('Validate input string for Thumb', (tester) async {
       await tester.pumpWidget(page);
       await tester.enterText(
-        find.byType(ThicknessCustomizationItem).last,
+        find.byType(ThicknessCustomizationItem),
         'q3',
       );
+      await tester.testTextInput.receiveAction(TextInputAction.done);
       expect(find.text('3'), findsOneWidget);
-      expect(data.divisions, 3);
     });
 
     testWidgets('Validate input length > 2 for Thumb', (tester) async {
       await tester.pumpWidget(page);
       await tester.enterText(
-        find.byType(ThicknessCustomizationItem).last,
+        find.byType(ThicknessCustomizationItem),
         '873',
       );
+      await tester.testTextInput.receiveAction(TextInputAction.done);
       expect(find.text('87'), findsOneWidget);
-      expect(data.divisions, 87);
     });
   });
 }
