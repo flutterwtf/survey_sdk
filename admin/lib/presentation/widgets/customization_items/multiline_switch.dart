@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:survey_admin/presentation/app/localization/app_localizations_ext.dart';
@@ -63,7 +65,7 @@ class _MultilineSwitchState extends State<MultilineSwitch> {
               ? _LineAmountInputField(
                   defaultLineAmount: widget.lines,
                   onChanged: (amount) {
-                    _lineAmount = amount;
+                    _lineAmount = max(amount, 1);
                     widget.onChanged(
                       _isMultiline,
                       _lineAmount,
