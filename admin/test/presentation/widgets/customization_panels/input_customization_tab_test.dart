@@ -55,7 +55,7 @@ void main() {
           );
           expect(
             find.widgetWithText(CustomizationItemsContainer, 'Text'),
-            findsNWidgets(2),
+            findsOneWidget,
           );
           expect(
             find.widgetWithText(CustomizationItemsContainer, 'Input type'),
@@ -70,11 +70,11 @@ void main() {
           await widgetTester.pumpWidget(page);
           await widgetTester.pumpAndSettle();
 
-          // Multiline widget switch is off
           expect(
             find.widgetWithText(CustomizationItemsContainer, 'Lines'),
             findsNothing,
           );
+          // Multiline widget switch is off
           expect(
             find.widgetWithText(CustomizationItemsContainer, 'FFFFFFFF'),
             findsOneWidget,
@@ -84,19 +84,23 @@ void main() {
             findsNWidgets(2),
           );
           expect(
-            find.widgetWithText(CustomizationItemsContainer, 'FF929292'),
+            find.widgetWithText(CustomizationItemsContainer, 'FF727272'),
             findsOneWidget,
           );
           expect(
-            find.widgetWithText(CustomizationItemsContainer, '1'),
+            find.widgetWithText(CustomizationTextField, '1.0'),
             findsOneWidget,
           );
           expect(
-            find.widgetWithText(CustomizationItemsContainer, '16'),
+            find.widgetWithText(CustomizationTextField, '16.0'),
             findsNWidgets(2),
           );
+          expect(data.theme?.borderWidth, 1);
+          expect(data.theme?.hintSize, 16);
+          expect(data.theme?.textSize, 16);
+
           expect(
-            find.widgetWithText(DropdownCustomizationButton<InputType>, 'Text'),
+            find.widgetWithText(DropdownCustomizationButton<InputType>, 'text'),
             findsOneWidget,
           );
         },
@@ -108,7 +112,7 @@ void main() {
           await widgetTester.pumpWidget(page);
           await widgetTester.pumpAndSettle();
 
-          expect(find.byType(CustomizationItemsContainer), findsNWidgets(8));
+          expect(find.byType(CustomizationItemsContainer), findsNWidgets(7));
           expect(find.byType(MultilineSwitch), findsOneWidget);
           expect(
             find.byType(DropdownCustomizationButton<InputType>),

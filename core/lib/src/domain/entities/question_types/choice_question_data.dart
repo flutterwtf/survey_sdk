@@ -12,7 +12,7 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
   final List<String> options;
 
   /// Options that have been selected
-  final List<String>? selectedOptions;
+  final List<int>? selectedOptions;
   final RuleType ruleType;
   final int ruleValue;
   final ChoiceQuestionTheme? theme;
@@ -61,7 +61,7 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
       : this(
           // TODO(dev): To localization somehow.
           isMultipleChoice: false,
-          theme: null,
+          theme: const ChoiceQuestionTheme.common(),
           options: const ['First option', 'Second option', 'Third option'],
           ruleType: RuleType.none,
           ruleValue: 0,
@@ -89,11 +89,13 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
       isMultipleChoice: payload['isMultipleChoice'],
       options: (payload['options'] as List<dynamic>).cast<String>(),
       selectedOptions: payload['selectedOptions'] != null
-          ? (payload['selectedOptions'] as List<dynamic>).cast<String>()
+          ? (payload['selectedOptions'] as List<dynamic>).cast<int>()
           : null,
       ruleType: RuleType.values[payload['ruleType']],
       ruleValue: payload['ruleValue'],
-      theme: theme != null ? ChoiceQuestionTheme.fromJson(theme) : null,
+      theme: theme != null
+          ? ChoiceQuestionTheme.fromJson(theme)
+          : const ChoiceQuestionTheme.common(),
     );
   }
 
@@ -106,7 +108,7 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
     String? subtitle,
     String? content,
     bool? isSkip,
-    List<String>? selectedOptions,
+    List<int>? selectedOptions,
     RuleType? ruleType,
     int? ruleValue,
     ChoiceQuestionTheme? theme,
@@ -120,6 +122,7 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
       index: index ?? this.index,
       title: title ?? this.title,
       subtitle: subtitle ?? this.subtitle,
+      content: content ?? this.content,
       isSkip: isSkip ?? this.isSkip,
       selectedOptions: selectedOptions ?? this.selectedOptions,
     );

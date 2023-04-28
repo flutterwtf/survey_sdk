@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:survey_core/src/domain/entities/api_object.dart';
+import 'package:survey_core/src/presentation/utils/app_colors.dart';
 
 const _titleSize = 16.0;
 const _subtitleSize = 12.0;
@@ -61,15 +62,15 @@ class ChoiceQuestionTheme extends ThemeExtension<ChoiceQuestionTheme>
   /// Default color values of choice question options
   const ChoiceQuestionTheme.common()
       : this(
-          activeColor: Colors.black,
-          inactiveColor: Colors.grey,
-          fill: Colors.white,
-          titleColor: Colors.black,
+          activeColor: AppColors.black,
+          inactiveColor: AppColors.grey,
+          fill: AppColors.white,
+          titleColor: AppColors.black,
           titleSize: _titleSize,
-          subtitleColor: Colors.black,
+          subtitleColor: AppColors.black,
           subtitleSize: _subtitleSize,
-          buttonFill: Colors.black,
-          buttonTextColor: Colors.white,
+          buttonFill: AppColors.black,
+          buttonTextColor: AppColors.white,
           buttonTextSize: _buttonTextSize,
           buttonRadius: _buttonRadius,
         );

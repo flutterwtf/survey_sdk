@@ -16,6 +16,7 @@ class CustomizationTextField extends StatelessWidget {
   final String? hintText;
   final int? maxLines;
   final TextStyle? style;
+  final TextAlign textAlign;
 
   const CustomizationTextField({
     super.key,
@@ -35,11 +36,13 @@ class CustomizationTextField extends StatelessWidget {
       isCollapsed: true,
       border: InputBorder.none,
     ),
+    this.textAlign = TextAlign.start,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      textAlign: textAlign,
       controller: controller,
       initialValue: initialValue,
       validator: validator,

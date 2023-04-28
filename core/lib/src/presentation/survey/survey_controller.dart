@@ -38,6 +38,5 @@ class SurveyController {
 
   void dispose() {
     _pageController.dispose();
-    pageController.dispose();
   }
 }

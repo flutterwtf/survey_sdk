@@ -32,7 +32,7 @@ class _BuilderPageState extends State<BuilderPage> {
   Future<void> _showImportDialog() {
     return showDialog<void>(
       context: context,
-      builder: (context) {
+      builder: (BuildContext context) {
         return AlertDialog(
           content: Text(context.localization.emptyDataMessage),
           actions: <Widget>[
@@ -44,7 +44,7 @@ class _BuilderPageState extends State<BuilderPage> {
                 ),
               ),
               onPressed: () {
-                Navigator.pop(context);
+                Navigator.of(context).pop();
               },
             ),
           ],
@@ -62,7 +62,6 @@ class _BuilderPageState extends State<BuilderPage> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-
     initCommonData(context);
     _cubit = i.get<BuilderCubit>();
   }
@@ -80,7 +79,7 @@ class _BuilderPageState extends State<BuilderPage> {
       bloc: _cubit,
       listener: (_, newState) {
         final selected =
-            newState is EditQuestionBuilderState ? newState.selectedIndex : 0;
+            (newState is EditQuestionBuilderState) ? newState.selectedIndex : 0;
         if (selected != 0) {
           _surveyController.animateTo(selected - 1);
         }
@@ -89,7 +88,7 @@ class _BuilderPageState extends State<BuilderPage> {
         appBar: AppBar(
           title: const _BuilderPageTabBar(),
           actions: [
-            // ignore_for_file: avoid-passing-async-when-sync-expected
+            // ignore: avoid-passing-async-when-sync-expected
             _ImportButton(onImportPressed: _onImportPressed),
             _ExportButton(
               downloadSurveyData: _cubit.downloadSurveyData,
@@ -123,7 +122,7 @@ class _BuilderPageState extends State<BuilderPage> {
             ),
             EditorBar(
               onChange: _cubit.updateQuestionData,
-              editableQuestion: state.surveyData.questions.isNotEmpty
+              editableQuestion: (state.surveyData.questions.isNotEmpty)
                   ? state.surveyData.questions.firstWhere(
                       (q) => q.index == state.selectedIndex,
                     )

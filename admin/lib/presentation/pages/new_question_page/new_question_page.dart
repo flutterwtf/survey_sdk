@@ -113,13 +113,11 @@ class _BackButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      behavior: HitTestBehavior.opaque,
       onTap: () => Navigator.pop(context),
-      child: Container(
-        margin: const EdgeInsets.only(right: AppDimensions.marginL),
-        child: const Align(
-          alignment: Alignment.centerRight,
-          child: VectorImage(assetName: AppAssets.closeIcon),
-        ),
+      child: const Padding(
+        padding: EdgeInsets.only(right: AppDimensions.marginL),
+        child: VectorImage(assetName: AppAssets.closeIcon),
       ),
     );
   }
@@ -190,15 +188,17 @@ class _QuestionOptionsListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: ListView.builder(
-        itemCount: options.length,
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (context, index) {
-          return _AssetTextOption(
-            assetName: options[index].asset,
-            titleText: options[index].name(context),
-          );
-        },
+      child: FittedBox(
+        fit: BoxFit.scaleDown,
+        child: Row(
+          children: [
+            for (final option in options)
+              _AssetTextOption(
+                assetName: option.asset,
+                titleText: option.name(context),
+              ),
+          ],
+        ),
       ),
     );
   }

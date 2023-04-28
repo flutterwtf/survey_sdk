@@ -19,17 +19,19 @@ void main() {
       const textSizeWithLetters = 1;
       const textSizeStringMoreThan2 = '233';
       const redColor = Color(0xfff44336);
-      const radius = 10;
 
-      var data = const IntroQuestionData.common();
-
+      final data =
+          ValueNotifier<IntroQuestionData>(const IntroQuestionData.common());
       final introCommonCustomPanel = AppTester(
-        child: IntroCommonCustomizationTab(
-          title: 'title',
-          onChange: (QuestionData<dynamic> newData) {
-            data = newData as IntroQuestionData;
-          },
-          editable: data,
+        child: ValueListenableBuilder<IntroQuestionData>(
+          valueListenable: data,
+          builder: (_, value, child) => IntroCommonCustomizationTab(
+            title: 'title',
+            onChange: (QuestionData<dynamic> newData) {
+              data.value = newData as IntroQuestionData;
+            },
+            editable: value,
+          ),
         ),
       );
 
@@ -56,11 +58,11 @@ void main() {
           }
           await tester.pump();
           expect(find.text(redColorCode), findsNWidgets(5));
-          expect(data.theme?.fill, redColor);
-          expect(data.theme?.titleColor, redColor);
-          expect(data.theme?.subtitleColor, redColor);
-          expect(data.theme?.buttonFill, redColor);
-          expect(data.theme?.buttonTextColor, redColor);
+          expect(data.value.theme?.fill, redColor);
+          expect(data.value.theme?.titleColor, redColor);
+          expect(data.value.theme?.subtitleColor, redColor);
+          expect(data.value.theme?.buttonFill, redColor);
+          expect(data.value.theme?.buttonTextColor, redColor);
         },
       );
       testWidgets(
@@ -74,7 +76,7 @@ void main() {
           );
           await tester.testTextInput.receiveAction(TextInputAction.done);
           await tester.pump();
-          expect(data.theme?.titleSize, textSize);
+          expect(data.value.theme?.titleSize, textSize);
 
           await tester.enterText(
             find.byType(CustomizationTextField).at(4),
@@ -82,7 +84,7 @@ void main() {
           );
           await tester.testTextInput.receiveAction(TextInputAction.done);
           await tester.pump();
-          expect(data.theme?.subtitleSize, textSize);
+          expect(data.value.theme?.subtitleSize, textSize);
 
           await tester.enterText(
             find.byType(CustomizationTextField).at(7),
@@ -90,7 +92,7 @@ void main() {
           );
           await tester.testTextInput.receiveAction(TextInputAction.done);
           await tester.pump();
-          expect(data.theme?.buttonTextSize, textSize);
+          expect(data.value.theme?.buttonTextSize, textSize);
 
           await tester.enterText(
             find.byType(CustomizationTextField).at(8),
@@ -98,7 +100,7 @@ void main() {
           );
           await tester.testTextInput.receiveAction(TextInputAction.done);
           await tester.pump();
-          expect(radius, textSize);
+          expect(data.value.theme?.buttonRadius, textSize);
 
           expect(find.text(textSizeString), findsNWidgets(4));
         },
@@ -110,35 +112,55 @@ void main() {
 
           await tester.enterText(
             find.byType(CustomizationTextField).at(2),
-            textSizeStringWithLetters,
+            '',
           );
+          for (var i = 0; i < textSizeStringWithLetters.length; i++) {
+            tester.testTextInput.updateEditingValue(
+              TextEditingValue(text: textSizeStringWithLetters[i]),
+            );
+          }
           await tester.testTextInput.receiveAction(TextInputAction.done);
           await tester.pump();
-          expect(data.theme?.titleSize, textSizeWithLetters);
+          expect(data.value.theme?.titleSize, textSizeWithLetters);
 
           await tester.enterText(
             find.byType(CustomizationTextField).at(4),
-            textSizeStringWithLetters,
+            '',
           );
+          for (var i = 0; i < textSizeStringWithLetters.length; i++) {
+            tester.testTextInput.updateEditingValue(
+              TextEditingValue(text: textSizeStringWithLetters[i]),
+            );
+          }
           await tester.testTextInput.receiveAction(TextInputAction.done);
           await tester.pump();
-          expect(data.theme?.subtitleSize, textSizeWithLetters);
+          expect(data.value.theme?.subtitleSize, textSizeWithLetters);
 
           await tester.enterText(
             find.byType(CustomizationTextField).at(7),
-            textSizeStringWithLetters,
+            '',
           );
+          for (var i = 0; i < textSizeStringWithLetters.length; i++) {
+            tester.testTextInput.updateEditingValue(
+              TextEditingValue(text: textSizeStringWithLetters[i]),
+            );
+          }
           await tester.testTextInput.receiveAction(TextInputAction.done);
           await tester.pump();
-          expect(data.theme?.buttonTextSize, textSizeWithLetters);
+          expect(data.value.theme?.buttonTextSize, textSizeWithLetters);
 
           await tester.enterText(
             find.byType(CustomizationTextField).at(8),
-            textSizeStringWithLetters,
+            '',
           );
+          for (var i = 0; i < textSizeStringWithLetters.length; i++) {
+            tester.testTextInput.updateEditingValue(
+              TextEditingValue(text: textSizeStringWithLetters[i]),
+            );
+          }
           await tester.testTextInput.receiveAction(TextInputAction.done);
           await tester.pump();
-          expect(radius, textSizeWithLetters);
+          expect(data.value.theme?.buttonRadius, textSizeWithLetters);
 
           expect(find.text(textSizeStringWithLetters), findsNothing);
         },

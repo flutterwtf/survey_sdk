@@ -9,6 +9,7 @@ class CommonData {
   static const _initialValue = 5;
   static const _firstIndex = 1;
   static const _secondIndex = 2;
+  static const _thirdIndex = 3;
   static const _dividers = 10;
 
   CommonTheme get commonTheme {
@@ -21,13 +22,11 @@ class CommonData {
   }
 
   SurveyData get surveyData {
-    const index = 3;
-
     return SurveyData(
       questions: [
         intro(index: _firstIndex),
         input(index: _secondIndex),
-        choice(index: index),
+        choice(index: _thirdIndex),
       ],
       commonTheme: commonTheme,
     );
