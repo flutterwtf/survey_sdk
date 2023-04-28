@@ -65,7 +65,9 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
       ),
     );
     final hintText = widget.data.hintText;
-    final isValid = widget.data.validator.validate(_input);
+    final isValid = widget.data.validator.validate(
+      isDateType ? _dateTime.toString() : _input,
+    );
     return Scaffold(
       backgroundColor: theme.fill,
       body: CustomScrollView(
@@ -110,31 +112,31 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
                     ),
                     child: isDateType
                         ? _InputDate(
-                      border: border,
-                      dateTime: _dateTime,
-                      hintText: hintText ?? '',
-                      onChanged: (value) {
-                        if (value != null) {
-                          setState(() => _dateTime = value);
-                        }
-                      },
-                      // TODO(dev): pass args instead of theme.
-                      theme: theme,
-                      validator: (text) => _canBeSkippedNumber
-                          ? null
-                          : widget.data.validator
-                          .validate(_dateTime.toString()),
-                    )
+                            border: border,
+                            dateTime: _dateTime,
+                            hintText: hintText ?? '',
+                            onChanged: (value) {
+                              if (value != null) {
+                                setState(() => _dateTime = value);
+                              }
+                            },
+                            // TODO(dev): pass args instead of theme.
+                            theme: theme,
+                            validator: (text) => _canBeSkippedNumber
+                                ? null
+                                : widget.data.validator
+                                    .validate(_dateTime.toString()),
+                          )
                         : _InputNumber(
-                      border: border,
-                      hintText: hintText ?? '',
-                      onChanged: (input) =>
-                          setState(() => _input = input),
-                      theme: theme,
-                      validator: (text) => _canBeSkippedNumber
-                          ? null
-                          : widget.data.validator.validate(text),
-                    ),
+                            border: border,
+                            hintText: hintText ?? '',
+                            onChanged: (input) =>
+                                setState(() => _input = input),
+                            theme: theme,
+                            validator: (text) => _canBeSkippedNumber
+                                ? null
+                                : widget.data.validator.validate(text),
+                          ),
                   ),
                   const Spacer(),
                   Padding(
@@ -142,17 +144,16 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
                     child: QuestionBottomButton(
                       text: widget.data.buttonText,
                       onPressed: () {
-                        if ((widget.data.validator.validate(_input) == null) ||
-                            widget.data.isSkip) {
+                        if ((isValid == null) || widget.data.isSkip) {
                           isDateType
                               ? widget.onSend.call(
-                            index: widget.data.index,
-                            answer: QuestionAnswer<DateTime>(_dateTime),
-                          )
+                                  index: widget.data.index,
+                                  answer: QuestionAnswer<DateTime>(_dateTime),
+                                )
                               : widget.onSend.call(
-                            index: widget.data.index,
-                            answer: QuestionAnswer<String>(_input),
-                          );
+                                  index: widget.data.index,
+                                  answer: QuestionAnswer<String>(_input),
+                                );
                         }
                       },
                       isEnabled: isDateType
