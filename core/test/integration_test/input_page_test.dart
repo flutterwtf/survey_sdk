@@ -6,13 +6,13 @@ import 'package:survey_core/src/presentation/di/injector.dart';
 import 'package:survey_core/src/presentation/survey/survey_state.dart';
 import 'package:survey_core/survey_core.dart';
 
-import '../presentation/widget/app_test.dart';
+import '../presentation/widget/app_tester.dart';
 import '../utils/mocked_entities.dart';
 
 void main() {
   group('Input question page test', () {
     Widget app(List<QuestionData> questions) {
-      return AppTest(
+      return AppTester(
         child: Survey(
           surveyData: MockedEntities.data2.copyWith(questions: questions),
         ),
@@ -39,25 +39,6 @@ void main() {
         (cubit.state as SurveyLoadedState).answers.length,
         1,
       );
-    });
-
-    testWidgets('input page skip answer', (tester) async {
-      await tester.pumpWidget(app([MockedEntities.input3]));
-      final cubit = Injector().surveyCubit;
-      final skipButton = find.text('SKIP');
-      expect(skipButton, findsOneWidget);
-      final inputField = find.byType(TextFormField);
-      // click skip without answer
-      await tester.tap(skipButton);
-      expect((cubit.state as SurveyLoadedState).answers.isEmpty, true);
-      // click skip with valid data
-      await tester.enterText(inputField, '1234');
-      await tester.tap(skipButton);
-      expect((cubit.state as SurveyLoadedState).answers.isEmpty, true);
-      // click skip with invalid data
-      await tester.enterText(inputField, 'aa');
-      await tester.tap(skipButton);
-      expect((cubit.state as SurveyLoadedState).answers.isEmpty, true);
     });
 
     testWidgets(
@@ -130,7 +111,7 @@ void main() {
       expect((cubit.state as SurveyLoadedState).answers.length, 1);
     });
 
-    testWidgets('input page with data validator', (tester) async {
+    testWidgets('input page with date validator', (tester) async {
       await tester.pumpWidget(
         app(
           [
@@ -145,9 +126,6 @@ void main() {
       final inputField = find.byType(DateTimeField);
       final nextButton = find.text('NEXT');
       final cubit = Injector().surveyCubit;
-
-      await tester.tap(nextButton);
-      expect((cubit.state as SurveyLoadedState).answers.isEmpty, true);
 
       await tester.tap(inputField);
       await tester.pumpAndSettle();

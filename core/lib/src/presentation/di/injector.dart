@@ -5,10 +5,10 @@ import 'package:survey_core/src/domain/repository_interfaces/survey_data_reposit
 import 'package:survey_core/src/presentation/survey/survey_cubit.dart';
 
 class Injector {
-  late final SurveyCubit surveyCubit;
+  late SurveyCubit surveyCubit;
   static final Injector _singleton = Injector._internal();
-  late final FilesystemDataSource _filesystemDataSource;
-  late final SurveyDataRepository _surveyDataRepository;
+  late FilesystemDataSource _filesystemDataSource;
+  late SurveyDataRepository _surveyDataRepository;
 
   factory Injector() {
     return _singleton;

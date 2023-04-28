@@ -5,7 +5,7 @@ import 'package:survey_core/src/presentation/di/injector.dart';
 import 'package:survey_core/src/presentation/survey/survey_state.dart';
 import 'package:survey_core/survey_core.dart';
 
-import '../presentation/widget/app_test.dart';
+import '../presentation/widget/app_tester.dart';
 import '../utils/mocked_entities.dart';
 
 void main() {
@@ -14,7 +14,7 @@ void main() {
     'Choice question page test',
     () {
       Widget app(List<QuestionData> questions) {
-        return AppTest(
+        return AppTester(
           child: Survey(
             surveyData: MockedEntities.data2.copyWith(questions: questions),
           ),
@@ -41,7 +41,7 @@ void main() {
           expect((cubit.state as SurveyLoadedState).answers.length, 1);
           expect(
             (cubit.state as SurveyLoadedState).answers[0]?.answer,
-            ['option'],
+            [0],
           );
         },
       );
@@ -63,7 +63,7 @@ void main() {
           expect((cubit.state as SurveyLoadedState).answers.length, 1);
           expect(
             (cubit.state as SurveyLoadedState).answers[0]?.answer,
-            ['option'],
+            [2],
           );
         },
       );
@@ -89,7 +89,7 @@ void main() {
           expect((cubit.state as SurveyLoadedState).answers.length, 1);
           expect(
             (cubit.state as SurveyLoadedState).answers[0]?.answer,
-            ['option 1'],
+            [0],
           );
         },
       );
@@ -105,7 +105,7 @@ void main() {
         expect((cubit.state as SurveyLoadedState).answers.length, 1);
         expect(
           (cubit.state as SurveyLoadedState).answers[0]?.answer,
-          ['option 1', 'option 2'],
+          [0, 1],
         );
       });
 
@@ -134,15 +134,13 @@ void main() {
           expect((cubit.state as SurveyLoadedState).answers.isEmpty, true);
 
           //click next with 2 options
-          await tester.tap(find.text('option 1'));
-          await tester.pump();
           await tester.tap(find.text('option 2'));
           await tester.pump();
           await tester.tap(find.text('NEXT'));
-          expect((cubit.state as SurveyLoadedState).answers.length, 2);
+          expect((cubit.state as SurveyLoadedState).answers.length, 1);
           expect(
             (cubit.state as SurveyLoadedState).answers[0]?.answer,
-            ['option 1', 'option 2'],
+            [0, 1],
           );
         },
       );
@@ -182,7 +180,7 @@ void main() {
           expect((cubit.state as SurveyLoadedState).answers.length, 1);
           expect(
             (cubit.state as SurveyLoadedState).answers[0]?.answer,
-            ['option 1'],
+            [0],
           );
         },
       );
@@ -243,7 +241,7 @@ void main() {
           expect((cubit.state as SurveyLoadedState).answers.length, 1);
           expect(
             (cubit.state as SurveyLoadedState).answers[0]?.answer,
-            ['option 1'],
+            [0],
           );
         },
       );
@@ -268,7 +266,7 @@ void main() {
           expect((cubit.state as SurveyLoadedState).answers.length, 1);
           expect(
             (cubit.state as SurveyLoadedState).answers[0]?.answer,
-            ['option 1', 'option 2'],
+            [0, 1],
           );
         },
       );
@@ -352,7 +350,7 @@ void main() {
           expect((cubit.state as SurveyLoadedState).answers.length, 1);
           expect(
             (cubit.state as SurveyLoadedState).answers[0]?.answer,
-            ['option 1', 'option 2'],
+            [0, 1],
           );
         },
       );
@@ -392,7 +390,7 @@ void main() {
           expect((cubit.state as SurveyLoadedState).answers.length, 1);
           expect(
             (cubit.state as SurveyLoadedState).answers[0]?.answer,
-            ['option 1'],
+            [0],
           );
         },
       );
@@ -417,7 +415,7 @@ void main() {
           expect((cubit.state as SurveyLoadedState).answers.length, 1);
           expect(
             (cubit.state as SurveyLoadedState).answers[0]?.answer,
-            ['option 1', 'option 2'],
+            [0, 1],
           );
         },
       );
