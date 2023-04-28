@@ -78,8 +78,9 @@ class _BuilderPageState extends State<BuilderPage> {
           appBar: AppBar(
             title: const _BuilderPageTabBar(),
             actions: [
+              // ignore: avoid-passing-async-when-sync-expected
               _ImportButton(onImportPressed: _onImportPressed),
-              _ExportButton()
+              const _ExportButton(),
             ],
             centerTitle: true,
           ),

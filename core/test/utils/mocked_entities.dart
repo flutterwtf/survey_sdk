@@ -43,7 +43,19 @@ abstract class MockedEntities {
     isMultipleChoice: false,
     isSkip: false,
     index: 0,
-    subtitle: '',
+    subtitle: 'subtitle',
+    ruleType: RuleType.none,
+    ruleValue: 0,
+    theme: ChoiceQuestionTheme.common(),
+  );
+
+  static const choice4 = ChoiceQuestionData(
+    isMultipleChoice: true,
+    options: ['option 1', 'option 2', 'option 3'],
+    index: 0,
+    title: 'title',
+    subtitle: 'subtitle',
+    isSkip: false,
     ruleType: RuleType.none,
     ruleValue: 0,
     theme: ChoiceQuestionTheme.common(),
@@ -68,6 +80,19 @@ abstract class MockedEntities {
     hintText: 'hint',
     buttonText: 'NEXT',
     theme: const InputQuestionTheme.common(),
+  );
+
+  static final input3 = InputQuestionData(
+    validator: InputValidator.number(),
+    index: 1,
+    title: 'input',
+    subtitle: 'subtitle',
+    isSkip: true,
+    hintText: 'hint',
+    buttonText: 'NEXT',
+    theme: const InputQuestionTheme.common().copyWith(
+      inputType: InputType.number,
+    ),
   );
 
   static const intro1 = IntroQuestionData(
@@ -113,17 +138,45 @@ abstract class MockedEntities {
     theme: SliderQuestionTheme.common(),
   );
 
+  static const slider3 = SliderQuestionData(
+    minValue: 0,
+    maxValue: 10,
+    initialValue: 1,
+    index: 0,
+    title: 'title',
+    subtitle: 'subtitle',
+    isSkip: false,
+    divisions: 12,
+    theme: SliderQuestionTheme.common(),
+  );
+
   static final data1 = SurveyData(
     questions: [
-      intro1,
-      choice1,
-      choice2,
+      intro1.copyWith(index: 1),
+      choice1.copyWith(index: 2),
+      choice2.copyWith(index: 3),
+      slider1.copyWith(index: 4),
     ],
     commonTheme: CommonTheme(
       slider: const SliderQuestionData.common(),
       choice: const ChoiceQuestionData.common(),
       input: InputQuestionData.common(),
       intro: const IntroQuestionData.common(),
+    ),
+  );
+
+  static final data2 = SurveyData(
+    questions: [intro1, input1, choice1, slider1],
+    commonTheme: CommonTheme(
+      slider: const SliderQuestionData.common()
+          .copyWith(theme: const SliderQuestionTheme.common()),
+      choice: const ChoiceQuestionData.common()
+          .copyWith(theme: const ChoiceQuestionTheme.common()),
+      input: InputQuestionData.common().copyWith(
+        theme: const InputQuestionTheme.common(),
+      ),
+      intro: const IntroQuestionData.common()
+          .copyWith(theme: const IntroQuestionTheme.common()),
     ),
   );
 }

@@ -74,17 +74,19 @@ class IntroQuestionTheme extends ThemeExtension<IntroQuestionTheme>
           buttonRadius: AppDimensions.circularRadiusS,
         );
 
-  // TODO(dev): rewrite.
-  IntroQuestionTheme.fromJson(Map<String, dynamic> json)
-      : fill = Color(json['fill']),
-        titleColor = Color(json['titleColor']),
-        titleSize = double.parse(json['titleSize'].toString()),
-        subtitleColor = Color(json['subtitleColor']),
-        subtitleSize = double.parse(json['subtitleSize'].toString()),
-        buttonFill = Color(json['buttonFill']),
-        buttonTextColor = Color(json['buttonTextColor']),
-        buttonTextSize = double.parse(json['buttonTextSize'].toString()),
-        buttonRadius = double.parse(json['buttonRadius'].toString());
+  factory IntroQuestionTheme.fromJson(Map<String, dynamic> json) {
+    return IntroQuestionTheme(
+      fill: Color(json['fill']),
+      titleColor: Color(json['titleColor']),
+      titleSize: json['titleSize'],
+      subtitleColor: Color(json['subtitleColor']),
+      subtitleSize: json['subtitleSize'],
+      buttonFill: Color(json['buttonFill']),
+      buttonTextColor: Color(json['buttonTextColor']),
+      buttonTextSize: json['buttonTextSize'],
+      buttonRadius: json['buttonRadius'],
+    );
+  }
 
   @override
   IntroQuestionTheme copyWith({

@@ -8,9 +8,6 @@ import '../app_tester.dart';
 
 void main() {
   group('Tests for SliderContentCustomizationTab', () {
-    const title = '';
-    const subtitle = '';
-
     var data = const SliderQuestionData.common();
     final page = AppTester(
       child: SliderContentCustomizationTab(
@@ -37,7 +34,7 @@ void main() {
         'title',
       );
       expect(find.text('title'), findsOneWidget);
-      expect(title, 'title');
+      expect(data.title, 'title');
     });
 
     testWidgets('Input text for Subtitle', (tester) async {
@@ -47,7 +44,7 @@ void main() {
         'sub',
       );
       expect(find.text('sub'), findsOneWidget);
-      expect(subtitle, 'sub');
+      expect(data.subtitle, 'sub');
     });
 
     testWidgets('Input num for Divisions', (tester) async {
@@ -83,11 +80,11 @@ void main() {
 
     testWidgets('Input min,max for Value(num)', (tester) async {
       await tester.pumpWidget(page);
-      await tester.enterText(find.byType(CustomizationTextField).first, '5');
-      expect(find.text('5'), findsOneWidget);
-      expect(data.minValue, 5);
+      await tester.enterText(find.byType(CustomizationTextField).at(2), '6');
+      expect(find.text('6'), findsOneWidget);
+      expect(data.minValue, 6);
 
-      await tester.enterText(find.byType(CustomizationTextField).at(1), '15');
+      await tester.enterText(find.byType(CustomizationTextField).at(3), '15');
       expect(find.text('15'), findsOneWidget);
       expect(data.maxValue, 15);
     });
@@ -96,11 +93,11 @@ void main() {
       await tester.pumpWidget(page);
 
       final minBeforeEnter = data.minValue;
-      await tester.enterText(find.byType(CustomizationTextField).first, 'qw');
+      await tester.enterText(find.byType(CustomizationTextField).at(2), 'qw');
       expect(find.text('qw'), findsNothing);
       expect(data.minValue, minBeforeEnter);
 
-      await tester.enterText(find.byType(CustomizationTextField).at(1), 'qw');
+      await tester.enterText(find.byType(CustomizationTextField).at(3), 'qw');
       final maxBeforeEnter = data.maxValue;
       expect(find.text('qw'), findsNothing);
       expect(data.maxValue, maxBeforeEnter);
@@ -109,14 +106,14 @@ void main() {
     testWidgets('Validate length > 6 input min,max for Value', (tester) async {
       await tester.pumpWidget(page);
       await tester.enterText(
-        find.byType(CustomizationTextField).at(1),
+        find.byType(CustomizationTextField).at(3),
         '9876543',
       );
       expect(find.text('987654'), findsOneWidget);
       expect(data.maxValue, 987654);
 
       await tester.enterText(
-        find.byType(CustomizationTextField).first,
+        find.byType(CustomizationTextField).at(2),
         '2345678',
       );
       expect(find.text('234567'), findsOneWidget);
@@ -125,16 +122,16 @@ void main() {
 
     testWidgets('Validate min>max for Value', (tester) async {
       await tester.pumpWidget(page);
-      await tester.enterText(find.byType(CustomizationTextField).at(1), '100');
+      await tester.enterText(find.byType(CustomizationTextField).at(3), '100');
       expect(data.maxValue, 100);
 
-      await tester.enterText(find.byType(CustomizationTextField).first, '101');
+      await tester.enterText(find.byType(CustomizationTextField).at(2), '101');
       expect(data.minValue, 0);
 
-      await tester.enterText(find.byType(CustomizationTextField).first, '505');
+      await tester.enterText(find.byType(CustomizationTextField).at(2), '505');
       expect(data.minValue, 0);
 
-      await tester.enterText(find.byType(CustomizationTextField).first, '99');
+      await tester.enterText(find.byType(CustomizationTextField).at(2), '99');
       expect(data.minValue, 99);
     });
   });

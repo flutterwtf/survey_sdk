@@ -1,6 +1,11 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:survey_core/src/data/data_sources/filesystem_data_source_impl.dart';
 import 'package:survey_core/src/data/data_sources/interfaces/filesystem_data_source.dart';
+
+import '../../utils/mocked_entities.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -22,12 +27,14 @@ void main() {
     });
 
     test('Call with good parameter', () async {
-      // This line should not throw exceptions
-      await dataSource.getSurveyData(
-        'test/assets/test_survey_data.json',
-      );
+      const path = 'test/assets/test_survey_data.json';
+      final mockedSurveyData = jsonEncode(MockedEntities.data1.toJson());
+      await File(path).writeAsString(mockedSurveyData);
 
-      // TODO(dev): compare SurveyData from assets with mock SurveyData
+      expect(
+        await dataSource.getSurveyData(path),
+        MockedEntities.data1,
+      );
     });
   });
 }
