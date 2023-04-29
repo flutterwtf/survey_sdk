@@ -53,12 +53,6 @@ class _BuilderPageState extends State<BuilderPage> {
     );
   }
 
-  Future<void> _onImportPressed() async {
-    if (await _cubit.importData() == null) {
-      _showImportDialog();
-    }
-  }
-
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -78,6 +72,9 @@ class _BuilderPageState extends State<BuilderPage> {
     return BlocConsumer<BuilderCubit, BuilderState>(
       bloc: _cubit,
       listener: (_, newState) {
+        if (newState is ImportSurveyDataBuilderState && !newState.isImported!) {
+          _showImportDialog();
+        }
         final selected =
             (newState is EditQuestionBuilderState) ? newState.selectedIndex : 0;
         if (selected != 0) {
@@ -89,7 +86,7 @@ class _BuilderPageState extends State<BuilderPage> {
           title: const _BuilderPageTabBar(),
           actions: [
             // ignore: avoid-passing-async-when-sync-expected
-            _ImportButton(onImportPressed: _onImportPressed),
+            _ImportButton(onImportPressed: _cubit.importData),
             _ExportButton(
               downloadSurveyData: _cubit.downloadSurveyData,
               copySurveyData: _cubit.copySurveyData,

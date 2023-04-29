@@ -35,3 +35,26 @@ class EditQuestionBuilderState extends BuilderState {
     );
   }
 }
+
+class ImportSurveyDataBuilderState extends BuilderState {
+  final bool? isImported;
+
+  @override
+  List<Object?> get props => [surveyData];
+
+  const ImportSurveyDataBuilderState({
+    required super.surveyData,
+    this.isImported,
+  });
+
+  @override
+  BuilderState copyWith({
+    SurveyData? surveyData,
+    bool? isImported,
+  }) {
+    return ImportSurveyDataBuilderState(
+      surveyData: surveyData ?? this.surveyData,
+      isImported: isImported ?? this.isImported,
+    );
+  }
+}
