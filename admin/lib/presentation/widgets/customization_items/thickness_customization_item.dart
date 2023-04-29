@@ -37,7 +37,7 @@ class _ThicknessCustomizationItemState
 
     _focusNode.addListener(
       () {
-        if (!_focusNode.hasFocus) {
+        if (!_focusNode.hasFocus && _textEditingController.text.isEmpty) {
           _textEditingController.text = widget.initialSize.toString();
         }
       },

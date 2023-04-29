@@ -158,5 +158,25 @@ void main() {
       expect(find.text('8.0'), findsOneWidget);
       expect(data.divisions, 8);
     });
+
+    testWidgets('Validate input string for Thumb', (tester) async {
+      await tester.pumpWidget(page);
+      await tester.enterText(
+        find.byType(ThicknessCustomizationItem),
+        'q3',
+      );
+      await tester.testTextInput.receiveAction(TextInputAction.done);
+      expect(find.text('3.0'), findsOneWidget);
+    });
+
+    testWidgets('Validate input length > 2 for Thumb', (tester) async {
+      await tester.pumpWidget(page);
+      await tester.enterText(
+        find.byType(ThicknessCustomizationItem),
+        '873',
+      );
+      await tester.testTextInput.receiveAction(TextInputAction.done);
+      expect(find.text('15.0'), findsOneWidget);
+    });
   });
 }
