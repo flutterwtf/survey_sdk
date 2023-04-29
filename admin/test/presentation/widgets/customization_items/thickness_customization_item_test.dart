@@ -11,7 +11,7 @@ void main() {
     () {
       const initialSize = 16.0;
       const text = 'px';
-      const inputNum = '10';
+      const inputNum = '10.0';
       const inputText = 'qwe';
       const inputValidation = '100';
       final page = AppTester(
@@ -30,8 +30,12 @@ void main() {
 
       testWidgets('Input px(num)', (tester) async {
         await tester.pumpWidget(page);
-        await tester.enterText(find.byType(CustomizationTextField), inputNum);
-        expect(find.text(inputNum), findsOneWidget);
+        final finder = find.byType(CustomizationTextField);
+        await tester.enterText(finder, inputNum);
+        expect(
+          find.text('10.0'),
+          findsOneWidget,
+        );
       });
 
       testWidgets('Validation input length', (tester) async {

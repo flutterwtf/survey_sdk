@@ -110,18 +110,12 @@ class BuilderCubit extends Cubit<BuilderState> {
 
     if (surveyData != null) {
       emit(
-        ImportSurveyDataBuilderState(
-          surveyData: surveyData,
-          isImported: true,
-        ),
+        ImportSuccessSurveyDataBuilderState(surveyData: surveyData),
       );
       select(surveyData.questions.first);
     } else {
       emit(
-        ImportSurveyDataBuilderState(
-          surveyData: state.surveyData,
-          isImported: false,
-        ),
+        ImportErrorSurveyDataBuilderState(surveyData: state.surveyData),
       );
       emit(
         EditQuestionBuilderState(

@@ -72,9 +72,8 @@ class _BuilderPageState extends State<BuilderPage> {
     return BlocConsumer<BuilderCubit, BuilderState>(
       bloc: _cubit,
       listener: (_, newState) {
-        if (newState is ImportSurveyDataBuilderState && !newState.isImported!) {
-          _showImportDialog();
-        }
+        if (newState is ImportErrorSurveyDataBuilderState) _showImportDialog();
+
         final selected =
             (newState is EditQuestionBuilderState) ? newState.selectedIndex : 0;
         if (selected != 0) {

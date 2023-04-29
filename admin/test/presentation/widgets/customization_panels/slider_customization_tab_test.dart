@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/color_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
+import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/thickness_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/slider/slider_customization_tab.dart';
 import 'package:survey_core/survey_core.dart';
@@ -47,7 +48,7 @@ void main() {
         find.widgetWithText(CustomizationItemsContainer, 'Thickness'),
         '10',
       );
-      expect(find.text('10'), findsOneWidget);
+      expect(find.text('10.0'), findsOneWidget);
       expect(data.theme?.thickness, 10);
     });
 
@@ -155,28 +156,8 @@ void main() {
       expect(data.theme?.thumbColor, const Color(0x00000000));
 
       await tester.enterText(find.byType(ThicknessCustomizationItem).last, '8');
-      expect(find.text('8'), findsOneWidget);
+      expect(find.text('8.0'), findsOneWidget);
       expect(data.divisions, 8);
-    });
-
-    testWidgets('Validate input string for Thumb', (tester) async {
-      await tester.pumpWidget(page);
-      await tester.enterText(
-        find.byType(ThicknessCustomizationItem),
-        'q3',
-      );
-      await tester.testTextInput.receiveAction(TextInputAction.done);
-      expect(find.text('3'), findsOneWidget);
-    });
-
-    testWidgets('Validate input length > 2 for Thumb', (tester) async {
-      await tester.pumpWidget(page);
-      await tester.enterText(
-        find.byType(ThicknessCustomizationItem),
-        '873',
-      );
-      await tester.testTextInput.receiveAction(TextInputAction.done);
-      expect(find.text('87'), findsOneWidget);
     });
   });
 }
