@@ -10,11 +10,11 @@ void main() {
     const title = 'Multiline';
     const inputNum = '12';
     const inputText = 'qwe';
-    const inputTitle = 'Lines';
+    const inputTitle = 'Lines:';
     final page = AppTester(
       child: MultilineSwitch(
         onChanged: (isMultiline, lineAmount) {},
-        value: true,
+        value: false,
         lines: 10,
       ),
     );

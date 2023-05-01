@@ -68,7 +68,9 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
       ),
     );
     final hintText = widget.data.hintText;
-    final isValid = widget.data.validator.validate(_input);
+    final isValid = widget.data.validator.validate(
+      isDateType ? _dateTime.toString() : _input,
+    );
     return Scaffold(
       backgroundColor: theme.fill,
       body: CustomScrollView(
@@ -159,9 +161,7 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
                           child: QuestionBottomButton(
                             text: widget.data.primaryButtonText,
                             onPressed: () {
-                              if ((widget.data.validator.validate(_input) ==
-                                      null) ||
-                                  widget.data.isSkip) {
+                              if ((isValid == null) || widget.data.isSkip) {
                                 isDateType
                                     ? widget.onSend.call(
                                         index: widget.data.index,

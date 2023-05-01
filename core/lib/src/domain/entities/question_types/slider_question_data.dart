@@ -62,11 +62,11 @@ class SliderQuestionData extends QuestionData<SliderThemeData> {
           maxValue: _maxValue,
           divisions: _divisions,
           initialValue: _initialValue,
-          title: 'Intro',
+          title: 'Slider',
           index: index,
           subtitle: '',
           isSkip: false,
-          theme: null,
+          theme: const SliderQuestionTheme.common(),
           content:
               'You may simply need a single, brief answer without discussion. '
               'Other times, you may want to talk through a scenario, evaluate '
@@ -89,7 +89,9 @@ class SliderQuestionData extends QuestionData<SliderThemeData> {
       subtitle: json['subtitle'],
       isSkip: json['isSkip'],
       content: json['content'],
-      theme: theme != null ? SliderQuestionTheme.fromJson(theme) : null,
+      theme: theme != null
+          ? SliderQuestionTheme.fromJson(theme)
+          : const SliderQuestionTheme.common(),
       secondaryButtonText: json['secondaryButtonText'],
       primaryButtonText: json['primaryButtonText'],
     );
@@ -117,6 +119,7 @@ class SliderQuestionData extends QuestionData<SliderThemeData> {
       index: index ?? this.index,
       title: title ?? this.title,
       subtitle: subtitle ?? this.subtitle,
+      content: content ?? this.content,
       divisions: divisions ?? this.divisions,
       isSkip: isSkip ?? this.isSkip,
       theme: theme ?? this.theme,

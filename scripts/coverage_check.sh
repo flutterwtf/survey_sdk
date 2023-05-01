@@ -6,7 +6,6 @@ if [ "$coverage_check" == "PASSED" ]
 then
   echo "Good coverage"
   exit 0
-# else exit 1
 else
   echo "Coverage less than $min_coverage"
   exit 1

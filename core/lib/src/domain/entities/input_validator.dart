@@ -1,3 +1,4 @@
+import 'package:equatable/equatable.dart';
 import 'package:survey_core/src/domain/entities/api_object.dart';
 import 'package:survey_core/src/domain/entities/constants/validator_regexes.dart';
 import 'package:survey_core/src/domain/entities/themes/input_question_theme.dart';
@@ -11,7 +12,7 @@ abstract class _ValidatorKeys {
 
 /// Used to validate user input based on predefined rules for different types
 /// of inputs in input question
-class InputValidator implements ApiObject {
+class InputValidator extends Equatable implements ApiObject {
   /// The type of the input being validated
   late final InputType type;
 
@@ -132,4 +133,12 @@ class InputValidator implements ApiObject {
         _ValidatorKeys.regex: _regex,
         _ValidatorKeys.isObscured: isObscured,
       };
+
+  //ignore: member-ordering 
+  @override
+  List<Object?> get props => [
+        type,
+        isObscured,
+        _regex,
+      ];
 }

@@ -58,7 +58,9 @@ class IntroQuestionData extends QuestionData {
       subtitle: json['subtitle'],
       isSkip: json['isSkip'],
       content: json['content'],
-      theme: theme != null ? IntroQuestionTheme.fromJson(theme) : null,
+      theme: theme != null
+          ? IntroQuestionTheme.fromJson(theme)
+          : const IntroQuestionTheme.common(),
       secondaryButtonText: json['secondaryButtonText'],
       primaryButtonText: json['primaryButtonText'],
     );
@@ -79,6 +81,7 @@ class IntroQuestionData extends QuestionData {
       index: index ?? this.index,
       title: title ?? this.title,
       subtitle: subtitle ?? this.subtitle,
+      content: content ?? this.content,
       isSkip: isSkip ?? this.isSkip,
       theme: theme ?? this.theme,
       secondaryButtonText: secondaryButtonText ?? this.secondaryButtonText,
@@ -103,7 +106,7 @@ class IntroQuestionData extends QuestionData {
       'type': type,
       'isSkip': isSkip,
       'content': content,
-      'theme': theme,
+      'theme': theme?.toJson(),
       'secondaryButtonText': secondaryButtonText,
       'primaryButtonText': primaryButtonText,
     };

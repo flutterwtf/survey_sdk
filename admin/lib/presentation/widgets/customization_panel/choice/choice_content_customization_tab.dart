@@ -56,12 +56,8 @@ class ChoiceContentCustomizationTab extends CustomizationTab {
             OptionCustomizationItem(
               options: editable.options,
               ruleValue: editable.ruleValue,
-              onChanged: (options) => onChange(
-                editable.copyWith(options: options),
-              ),
-              // TODO(dev): Move repeated method somewhere.
-              onRuleValueChanged: (ruleValue) => onChange(
-                editable.copyWith(ruleValue: ruleValue),
+              onChanged: (options, ruleValue) => onChange(
+                editable.copyWith(options: options, ruleValue: ruleValue),
               ),
             ),
           ],

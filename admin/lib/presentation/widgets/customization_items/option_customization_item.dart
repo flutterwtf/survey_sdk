@@ -5,14 +5,12 @@ import 'package:survey_admin/presentation/widgets/customization_items/customizat
 
 class OptionCustomizationItem extends StatefulWidget {
   final List<String> options;
-  final ValueChanged<List<String>> onChanged;
-  final ValueChanged<int> onRuleValueChanged;
+  final void Function(List<String>, int) onChanged;
   final int ruleValue;
 
   const OptionCustomizationItem({
     required this.options,
     required this.onChanged,
-    required this.onRuleValueChanged,
     required this.ruleValue,
     super.key,
   });
@@ -39,16 +37,17 @@ class _OptionCustomizationItemState extends State<OptionCustomizationItem> {
     }
 
     _controller.clear();
-    widget.onChanged(_options);
+    widget.onChanged(_options, widget.ruleValue);
   }
 
   void _delete(String option) {
     if (widget.ruleValue == _options.length) {
-      widget.onRuleValueChanged(0);
+      setState(() => _options.remove(option));
+      widget.onChanged(List.of(_options), 0);
+    } else {
+      setState(() => _options.remove(option));
+      widget.onChanged(List.of(_options), widget.ruleValue);
     }
-    final options = List.of(_options)..remove(option);
-    setState(() => _options = options);
-    widget.onChanged(options);
   }
 
   @override
