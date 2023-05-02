@@ -1,27 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:survey_admin/presentation/app/localization/localizations.dart';
-import 'package:survey_admin/presentation/utils/utils.dart';
+import 'package:survey_admin/presentation/app/localization/app_localizations_ext.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/color_customization_item.dart';
+import 'package:survey_admin/presentation/widgets/customization_items/color_thickness_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/thickness_customization_item.dart';
+import 'package:survey_admin/presentation/widgets/customization_panel/constants/customization_panel_dimensions.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/customization_tab.dart';
+import 'package:survey_core/survey_core.dart';
 
 class SliderCustomizationTab extends CustomizationTab {
-  final ValueChanged<int> onThicknessChanged;
-  final ValueChanged<Color> onActiveColorChanged;
-  final ValueChanged<Color> onInactiveColorChanged;
-  final ValueChanged<Color> onThumbColorChanged;
-  final ValueChanged<double> onThumbSizeChanged;
+  final void Function(QuestionData data) onChange;
+  final SliderQuestionData editable;
 
   const SliderCustomizationTab({
+    required this.onChange,
     required super.title,
-    required this.onActiveColorChanged,
-    required this.onInactiveColorChanged,
-    required this.onThicknessChanged,
-    required this.onThumbSizeChanged,
-    required this.onThumbColorChanged,
+    required this.editable,
     super.key,
   });
+
+  SliderQuestionTheme get theme =>
+      editable.theme ?? const SliderQuestionTheme.common();
 
   @override
   Widget build(BuildContext context) {
@@ -29,14 +28,19 @@ class SliderCustomizationTab extends CustomizationTab {
       children: [
         CustomizationItemsContainer(
           title: context.localization.thickness,
-          isTopDividerShown: true,
+          shouldShowTopDivider: true,
           children: [
             ThicknessCustomizationItem(
-              onThicknessChanged: (value) => SizeHandler.onSizeChanged(
-                value,
-                onThicknessChanged,
-              ),
-              initialSize: AppFonts.sizeL,
+              maxThickness:
+                  CustomizationPanelDimensions.sliderThicknessMaxValue,
+              onThicknessChanged: (value) {
+                onChange(
+                  editable.copyWith(
+                    theme: theme.copyWith(thickness: value),
+                  ),
+                );
+              },
+              initialSize: theme.thickness,
             ),
           ],
         ),
@@ -44,8 +48,12 @@ class SliderCustomizationTab extends CustomizationTab {
           title: context.localization.active,
           children: [
             ColorCustomizationItem(
-              initialColor: AppColors.switchBackgroundActive,
-              onColorPicked: onActiveColorChanged,
+              initialColor: theme.activeColor,
+              onColorPicked: (color) => onChange(
+                editable.copyWith(
+                  theme: theme.copyWith(activeColor: color),
+                ),
+              ),
             ),
           ],
         ),
@@ -53,25 +61,32 @@ class SliderCustomizationTab extends CustomizationTab {
           title: context.localization.inactive,
           children: [
             ColorCustomizationItem(
-              initialColor: AppColors.switchBackgroundInactive,
-              onColorPicked: onInactiveColorChanged,
+              initialColor: theme.inactiveColor,
+              onColorPicked: (color) => onChange(
+                editable.copyWith(
+                  theme: theme.copyWith(inactiveColor: color),
+                ),
+              ),
             ),
           ],
         ),
         CustomizationItemsContainer(
           title: context.localization.thumb,
           children: [
-            ColorCustomizationItem(
-              initialColor: AppColors.textHintGrey,
-              onColorPicked: onThumbColorChanged,
-              initialSize: AppFonts.sizeL.toString(),
-              decoration: InputDecoration(
-                isCollapsed: true,
-                border: InputBorder.none,
-                suffixText: context.localization.px,
-                suffixStyle: context.theme.textTheme.bodyLarge,
+            ColorThicknessCustomizationItem(
+              initialColor: theme.thumbColor,
+              onColorPicked: (color) => onChange(
+                editable.copyWith(
+                  theme: theme.copyWith(thumbColor: color),
+                ),
               ),
-              onSizeChanged: onThumbSizeChanged,
+              initialThickness: theme.thumbRadius,
+              maxThickness: CustomizationPanelDimensions.sliderThumbMaxRadius,
+              onThicknessChanged: (radius) => onChange(
+                editable.copyWith(
+                  theme: theme.copyWith(thumbRadius: radius),
+                ),
+              ),
             ),
           ],
         ),

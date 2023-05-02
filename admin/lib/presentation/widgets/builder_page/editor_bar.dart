@@ -1,26 +1,35 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:survey_admin/presentation/utils/utils.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/choice/choice_customization_panel.dart';
-import 'package:survey_admin/presentation/widgets/customization_panel/common_theme/common_theme_customization_panel.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/input/input_customization_panel.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/intro/intro_customization_panel.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/slider/slider_customization_panel.dart';
 import 'package:survey_core/survey_core.dart';
 
-// TODO(dev): will we use this?
 class EditorBar extends StatelessWidget {
   final QuestionData? editableQuestion;
+  final void Function(QuestionData data) onChange;
 
   const EditorBar({
+    required this.onChange,
     required this.editableQuestion,
     super.key,
   });
+
+  double _calculateWidth(BuildContext context) {
+    final freeSpaceWidth =
+        MediaQuery.of(context).size.width - AppDimensions.surveyContentBarWidth;
+
+    return min(AppDimensions.surveyEditorBarWidth, freeSpaceWidth);
+  }
 
   @override
   Widget build(BuildContext context) {
     return Container(
       color: AppColors.whitePrimaryBackground,
-      width: AppDimensions.surveyEditorBarWidth,
+      width: _calculateWidth(context),
       child: Builder(
         builder: (context) {
           final questionData = editableQuestion;
@@ -28,22 +37,27 @@ class EditorBar extends StatelessWidget {
             switch (questionData.type) {
               case QuestionTypes.choice:
                 return ChoiceCustomizationPanel(
-                  editableQuestion: questionData,
-                  isMultipleChoice:
-                      (questionData as ChoiceQuestionData).isMultipleChoice,
+                  onChange: onChange,
+                  editable: questionData as ChoiceQuestionData,
                 );
               case QuestionTypes.input:
-                return const InputCustomizationPanel();
+                return InputCustomizationPanel(
+                  onChange: onChange,
+                  editable: questionData as InputQuestionData,
+                );
               case QuestionTypes.intro:
-                return const IntroCustomizationPanel();
+                return IntroCustomizationPanel(
+                  onChange: onChange,
+                  editable: questionData as IntroQuestionData,
+                );
               case QuestionTypes.slider:
-                return const SliderCustomizationPanel();
-              default:
-                return const SizedBox.shrink();
+                return SliderCustomizationPanel(
+                  onChange: onChange,
+                  editable: questionData as SliderQuestionData,
+                );
             }
-          } else {
-            return const CommonThemeCustomizationPanel();
           }
+          return const SizedBox.shrink();
         },
       ),
     );

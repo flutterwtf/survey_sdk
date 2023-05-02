@@ -6,7 +6,7 @@ import 'package:survey_admin/presentation/widgets/customization_items/customizat
 
 class RadiusCustomizationItem extends StatelessWidget {
   final double initialValue;
-  final ValueChanged<int> onRadiusChanged;
+  final ValueChanged<double> onRadiusChanged;
 
   const RadiusCustomizationItem({
     required this.initialValue,

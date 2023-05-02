@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:survey_admin/presentation/app/localization/localizations.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:survey_admin/presentation/app/di/injector.dart';
+import 'package:survey_admin/presentation/app/localization/app_localizations_ext.dart';
+import 'package:survey_admin/presentation/pages/builder/builder_cubit.dart';
+import 'package:survey_admin/presentation/pages/builder/builder_state.dart';
 import 'package:survey_admin/presentation/pages/new_question_page/new_question_tabs.dart';
 import 'package:survey_admin/presentation/utils/utils.dart';
+import 'package:survey_admin/presentation/widgets/builder_page/editor_bar.dart';
 import 'package:survey_admin/presentation/widgets/vector_image.dart';
+import 'package:survey_core/survey_core.dart';
 
 class NewQuestionPage extends StatefulWidget {
   const NewQuestionPage({super.key});
@@ -14,6 +20,8 @@ class NewQuestionPage extends StatefulWidget {
 class _NewQuestionPageState extends State<NewQuestionPage> {
   NewQuestionTabs _selectedTab = NewQuestionTabs.intro;
   String? _selectedOption;
+
+  final BuilderCubit _cubit = i.get<BuilderCubit>();
 
   Widget _questionTab(NewQuestionTabs tab) {
     return _TabButton(
@@ -27,47 +35,71 @@ class _NewQuestionPageState extends State<NewQuestionPage> {
     );
   }
 
+  QuestionData _selectCommon(BuilderState state, NewQuestionTabs tab) {
+    switch (tab) {
+      case NewQuestionTabs.intro:
+        return state.surveyData.commonTheme.intro;
+      case NewQuestionTabs.choice:
+        return state.surveyData.commonTheme.choice;
+      case NewQuestionTabs.slider:
+        return state.surveyData.commonTheme.slider;
+      case NewQuestionTabs.customInput:
+        return state.surveyData.commonTheme.input;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.white,
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(AppDimensions.appbarHeight),
-        child: AppBar(
-          automaticallyImplyLeading: false,
-          title: const _AppBarTitle(),
-          actions: const [
-            _BackButton(),
-          ],
-        ),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(
-          vertical: AppDimensions.margin2XS,
-          horizontal: AppDimensions.marginM,
-        ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: NewQuestionTabs.values.map(_questionTab).toList(),
+    return BlocProvider<BuilderCubit>(
+      create: (context) => _cubit,
+      child: BlocBuilder<BuilderCubit, BuilderState>(
+        builder: (context, state) {
+          return Scaffold(
+            backgroundColor: AppColors.white,
+            appBar: PreferredSize(
+              preferredSize: const Size.fromHeight(AppDimensions.appbarHeight),
+              child: AppBar(
+                automaticallyImplyLeading: false,
+                title: const _AppBarTitle(),
+                actions: const [
+                  _BackButton(),
+                ],
+              ),
             ),
-            _QuestionOptionsListView(
-              options: _selectedTab.options,
-              selectedOption: _selectedOption ?? '',
+            body: Padding(
+              padding: const EdgeInsets.symmetric(
+                vertical: AppDimensions.margin2XS,
+                horizontal: AppDimensions.marginM,
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: NewQuestionTabs.values.map(_questionTab).toList(),
+                  ),
+                  _QuestionOptionsListView(
+                    options: _selectedTab.options,
+                    selectedOption: _selectedOption ?? '',
+                  ),
+                  EditorBar(
+                    onChange: _cubit.updateCommon,
+                    editableQuestion: _selectCommon(state, _selectedTab),
+                  ),
+                ],
+              ),
             ),
-          ],
-        ),
+            persistentFooterButtons: [
+              _AddButton(
+                onPressed: () {
+                  Navigator.pop(context, _selectedTab.data);
+                },
+              ),
+            ],
+          );
+        },
       ),
-      persistentFooterButtons: [
-        _AddButton(
-          onPressed: () {
-            Navigator.pop(context, _selectedTab.data);
-          },
-        ),
-      ],
     );
   }
 }
@@ -78,13 +110,11 @@ class _BackButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      behavior: HitTestBehavior.opaque,
       onTap: () => Navigator.pop(context),
-      child: Container(
-        margin: const EdgeInsets.only(right: AppDimensions.marginL),
-        child: const Align(
-          alignment: Alignment.centerRight,
-          child: VectorImage(assetName: AppAssets.closeIcon),
-        ),
+      child: const Padding(
+        padding: EdgeInsets.only(right: AppDimensions.marginL),
+        child: VectorImage(assetName: AppAssets.closeIcon),
       ),
     );
   }
@@ -98,7 +128,7 @@ class _AppBarTitle extends StatelessWidget {
     return Align(
       alignment: Alignment.centerLeft,
       child: Text(
-        context.localization.new_screen,
+        context.localization.newScreen,
         style: context.theme.textTheme.labelLarge?.copyWith(
           fontWeight: AppFonts.weightRegular,
         ),
@@ -155,15 +185,17 @@ class _QuestionOptionsListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: ListView.builder(
-        itemCount: options.length,
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (context, index) {
-          return _AssetTextOption(
-            assetName: options[index].asset,
-            titleText: options[index].name(context),
-          );
-        },
+      child: FittedBox(
+        fit: BoxFit.scaleDown,
+        child: Row(
+          children: [
+            for (final option in options)
+              _AssetTextOption(
+                assetName: option.asset,
+                titleText: option.name(context),
+              ),
+          ],
+        ),
       ),
     );
   }

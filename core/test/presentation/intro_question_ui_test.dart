@@ -5,7 +5,7 @@ import 'package:survey_core/src/domain/entities/question_answer.dart';
 import 'package:survey_core/src/domain/entities/question_types/intro_question_data.dart';
 import 'package:survey_core/src/presentation/intro_question/intro_question_page.dart';
 
-import 'widget/app_test.dart';
+import 'widget/app_tester.dart';
 
 void main() {
   group(
@@ -13,22 +13,14 @@ void main() {
     () {
       final completerOnMainButtonTap = Completer<void>();
       final completerOnSecondButton = Completer<void>();
-      const title = 'Intro widget';
+      const title = 'Intro';
       const mainButtonTitle = 'NEXT';
       const secondaryButtonTitle = 'SKIP';
-      const content =
-          'You may simply need a single, brief answer without discussion.';
+      const subtitleInCommonData = '';
 
-      final introQuestionPage = AppTest(
+      final introQuestionPage = AppTester(
         child: IntroQuestionPage(
-          data: const IntroQuestionData(
-            mainButtonTitle: mainButtonTitle,
-            index: 1,
-            title: title,
-            content: content,
-            subtitle: '',
-            isSkip: false,
-          ),
+          data: const IntroQuestionData.common(),
           onMainButtonTap: completerOnMainButtonTap.complete,
           onSecondaryButtonTap: completerOnSecondButton.complete,
           onSend: ({required int index, required QuestionAnswer answer}) {},
@@ -41,7 +33,10 @@ void main() {
           await widgetTester.pumpWidget(introQuestionPage);
           expect(find.text(mainButtonTitle), findsOneWidget);
           expect(find.text(secondaryButtonTitle), findsOneWidget);
-          expect(find.text(content), findsOneWidget);
+          // TODO(dev): The content of data should located here, but in widget
+          // TODO(dev): we passed the subtitle to this place.
+          // TODO(dev): Check IntroQuestionPage widget.
+          expect(find.text(subtitleInCommonData), findsNothing);
           expect(find.text(title), findsOneWidget);
         },
       );

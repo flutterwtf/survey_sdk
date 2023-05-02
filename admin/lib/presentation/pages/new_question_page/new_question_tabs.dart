@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:survey_admin/presentation/app/di/injector.dart';
-import 'package:survey_admin/presentation/app/localization/localizations.dart';
+import 'package:survey_admin/presentation/app/localization/app_localizations_ext.dart';
 import 'package:survey_admin/presentation/utils/utils.dart';
 import 'package:survey_core/survey_core.dart';
 
@@ -21,7 +21,7 @@ extension NewQuestionTabsExt on NewQuestionTabs {
       case NewQuestionTabs.slider:
         return context.localization.slider;
       case NewQuestionTabs.customInput:
-        return context.localization.custom_input;
+        return context.localization.customInput;
     }
   }
 
@@ -71,17 +71,17 @@ extension NewQuestionOptionsExt on NewQuestionOptions {
       case NewQuestionOptions.title:
         return context.localization.title;
       case NewQuestionOptions.imageIntro:
-        return context.localization.image_intro;
+        return context.localization.imageIntro;
       case NewQuestionOptions.radioButton:
-        return context.localization.radio_button;
+        return context.localization.radioButton;
       case NewQuestionOptions.slider:
         return context.localization.slider;
       case NewQuestionOptions.checkBox:
-        return context.localization.check_box;
+        return context.localization.checkBox;
       case NewQuestionOptions.singleLineInput:
-        return context.localization.single_line_input;
+        return context.localization.singleLineInput;
       case NewQuestionOptions.multiLineInput:
-        return context.localization.multi_line_input;
+        return context.localization.multiLineInput;
     }
   }
 

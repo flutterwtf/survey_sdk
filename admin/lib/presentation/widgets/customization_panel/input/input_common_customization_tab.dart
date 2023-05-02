@@ -1,67 +1,81 @@
 import 'package:flutter/cupertino.dart';
-import 'package:survey_admin/presentation/app/localization/localizations.dart';
+import 'package:flutter/material.dart';
+import 'package:survey_admin/presentation/app/localization/app_localizations_ext.dart';
 import 'package:survey_admin/presentation/utils/utils.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/color_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
+import 'package:survey_admin/presentation/widgets/customization_items/radius_customization_item.dart';
+import 'package:survey_admin/presentation/widgets/customization_items/text_style_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/customization_tab.dart';
+import 'package:survey_core/survey_core.dart';
 
 class InputCommonCustomizationTab extends CustomizationTab {
-  final ValueChanged<Color> onFillColorPicked;
-  final ValueChanged<Color> onTitleColorPicked;
-  final ValueChanged<double> onTitleFontSizeChanged;
-  final ValueChanged<Color> onSubtitleColorPicked;
-  final ValueChanged<double> onSubtitleFontSizeChanged;
-  final ValueChanged<Color> onButtonFirstColorPicked;
-  final ValueChanged<Color> onButtonSecondColorPicked;
-  final ValueChanged<double> onButtonFontSizeChanged;
+  final void Function(QuestionData data) onChange;
+  final InputQuestionData editable;
 
   const InputCommonCustomizationTab({
+    required this.onChange,
     required super.title,
-    required this.onFillColorPicked,
-    required this.onTitleColorPicked,
-    required this.onTitleFontSizeChanged,
-    required this.onSubtitleColorPicked,
-    required this.onSubtitleFontSizeChanged,
-    required this.onButtonFirstColorPicked,
-    required this.onButtonSecondColorPicked,
-    required this.onButtonFontSizeChanged,
+    required this.editable,
     super.key,
   });
 
+  InputQuestionTheme get theme =>
+      editable.theme ?? const InputQuestionTheme.common();
+
   @override
   Widget build(BuildContext context) {
-    final fontSize = AppFonts.sizeS.toString();
     return ListView(
       children: [
         CustomizationItemsContainer(
           title: context.localization.fill,
-          isTopDividerShown: true,
+          shouldShowTopDivider: true,
           children: [
             ColorCustomizationItem(
-              initialColor: AppColors.black,
-              onColorPicked: onFillColorPicked,
+              initialColor: theme.fill,
+              onColorPicked: (color) => onChange(
+                editable.copyWith(
+                  theme: theme.copyWith(fill: color),
+                ),
+              ),
             ),
           ],
         ),
         CustomizationItemsContainer(
           title: context.localization.title,
           children: [
-            ColorCustomizationItem(
-              initialColor: AppColors.black,
-              onColorPicked: onTitleColorPicked,
-              initialSize: AppFonts.sizeL.toString(),
-              onSizeChanged: onTitleFontSizeChanged,
+            TextStyleCustomizationItem(
+              initialColor: theme.titleColor,
+              onColorPicked: (color) => onChange(
+                editable.copyWith(
+                  theme: theme.copyWith(titleColor: color),
+                ),
+              ),
+              initialSize: theme.titleSize,
+              onSizeChanged: (size) => onChange(
+                editable.copyWith(
+                  theme: theme.copyWith(titleSize: size),
+                ),
+              ),
             ),
           ],
         ),
         CustomizationItemsContainer(
           title: context.localization.subtitle,
           children: [
-            ColorCustomizationItem(
-              initialColor: AppColors.black,
-              onColorPicked: onSubtitleColorPicked,
-              initialSize: fontSize,
-              onSizeChanged: onSubtitleFontSizeChanged,
+            TextStyleCustomizationItem(
+              initialColor: theme.subtitleColor,
+              onColorPicked: (color) => onChange(
+                editable.copyWith(
+                  theme: theme.copyWith(subtitleColor: color),
+                ),
+              ),
+              initialSize: theme.subtitleSize,
+              onSizeChanged: (size) => onChange(
+                editable.copyWith(
+                  theme: theme.copyWith(subtitleSize: size),
+                ),
+              ),
             ),
           ],
         ),
@@ -69,14 +83,34 @@ class InputCommonCustomizationTab extends CustomizationTab {
           title: context.localization.button,
           children: [
             ColorCustomizationItem(
-              initialColor: AppColors.black,
-              onColorPicked: onButtonFirstColorPicked,
+              initialColor: theme.buttonFill,
+              onColorPicked: (color) => onChange(
+                editable.copyWith(
+                  theme: theme.copyWith(buttonFill: color),
+                ),
+              ),
             ),
-            ColorCustomizationItem(
-              initialColor: AppColors.white,
-              onColorPicked: onButtonSecondColorPicked,
-              initialSize: fontSize,
-              onSizeChanged: onButtonFontSizeChanged,
+            TextStyleCustomizationItem(
+              initialColor: theme.buttonTextColor,
+              onColorPicked: (color) => onChange(
+                editable.copyWith(
+                  theme: theme.copyWith(buttonTextColor: color),
+                ),
+              ),
+              initialSize: theme.buttonTextSize,
+              onSizeChanged: (size) => onChange(
+                editable.copyWith(
+                  theme: theme.copyWith(buttonTextSize: size),
+                ),
+              ),
+            ),
+            RadiusCustomizationItem(
+              initialValue: AppDimensions.circularRadiusS,
+              onRadiusChanged: (radius) => onChange(
+                editable.copyWith(
+                  theme: theme.copyWith(buttonRadius: radius),
+                ),
+              ),
             ),
           ],
         ),

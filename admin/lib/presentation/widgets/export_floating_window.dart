@@ -1,51 +1,48 @@
 import 'package:flutter/material.dart';
-import 'package:survey_admin/presentation/app/localization/localizations.dart';
+import 'package:survey_admin/presentation/app/localization/app_localizations_ext.dart';
 import 'package:survey_admin/presentation/utils/utils.dart';
 
+//ignore_for_file: prefer-static-class
 void showExportFloatingWindow(
   BuildContext context, {
   required VoidCallback onDownloadPressed,
-  required VoidCallback onCopyPressed,
+  required VoidCallback onCopy,
 }) {
-  final overlayState = Overlay.of(context);
-  late OverlayEntry overlayEntry;
-
-  overlayEntry = OverlayEntry(
-    builder: (context) {
-      return ExportFloatingWindow(
-        onClosePressed: overlayEntry.remove,
-        onDownloadPressed: () {
-          onDownloadPressed();
-          overlayEntry.remove();
-        },
-        onCopyPressed: () {
-          onCopyPressed();
-          overlayEntry.remove();
-        },
-      );
-    },
+  showDialog(
+    context: context,
+    builder: (context) => ExportFloatingWindow(
+      onClose: () => Navigator.pop(context),
+      onDownload: () {
+        onDownloadPressed();
+        Navigator.pop(context);
+      },
+      onCopyPressed: () {
+        onCopy();
+        Navigator.pop(context);
+      },
+    ),
   );
-
-  overlayState.insert(overlayEntry);
 }
 
 @visibleForTesting
 class ExportFloatingWindow extends StatelessWidget {
-  final VoidCallback onClosePressed;
-  final VoidCallback onDownloadPressed;
+  final VoidCallback onClose;
+  final VoidCallback onDownload;
   final VoidCallback onCopyPressed;
 
   const ExportFloatingWindow({
-    required this.onClosePressed,
-    required this.onDownloadPressed,
+    required this.onClose,
+    required this.onDownload,
     required this.onCopyPressed,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
+    const opacity = 0.2;
+    final labelLarge = context.theme.textTheme.labelLarge;
     return Material(
-      color: AppColors.black.withOpacity(0.2),
+      color: AppColors.black.withOpacity(opacity),
       child: Center(
         child: Container(
           decoration: const BoxDecoration(
@@ -61,10 +58,11 @@ class ExportFloatingWindow extends StatelessWidget {
               Align(
                 alignment: Alignment.centerRight,
                 child: IconButton(
-                  onPressed: onClosePressed,
+                  onPressed: onClose,
                   icon: const Icon(Icons.close),
                   splashRadius: AppDimensions.sizeS,
                   iconSize: AppDimensions.sizeS,
+                  color: AppColors.black,
                 ),
               ),
               Padding(
@@ -74,7 +72,7 @@ class ExportFloatingWindow extends StatelessWidget {
                   right: AppDimensions.margin2XL,
                 ),
                 child: Text(
-                  context.localization.export_floating_window_title,
+                  context.localization.exportFloatingWindowTitle,
                   textAlign: TextAlign.center,
                   style: context.textTheme.headLineMediumBold,
                 ),
@@ -112,14 +110,14 @@ class ExportFloatingWindow extends StatelessWidget {
                         ),
                         child: Text(
                           context.localization.copy,
-                          style: context.theme.textTheme.labelLarge?.copyWith(
+                          style: labelLarge?.copyWith(
                             fontFamily: AppFonts.karla,
                           ),
                         ),
                       ),
                     ),
                     FilledButton(
-                      onPressed: onDownloadPressed,
+                      onPressed: onDownload,
                       style: const ButtonStyle(
                         backgroundColor: MaterialStatePropertyAll(
                           AppColors.black,
@@ -138,7 +136,7 @@ class ExportFloatingWindow extends StatelessWidget {
                         ),
                         child: Text(
                           context.localization.download,
-                          style: context.theme.textTheme.labelLarge?.copyWith(
+                          style: labelLarge?.copyWith(
                             fontFamily: AppFonts.karla,
                             color: AppColors.white,
                           ),

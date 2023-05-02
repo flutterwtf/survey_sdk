@@ -21,8 +21,8 @@ void main() {
     ],
     home: Material(
       child: ExportFloatingWindow(
-        onClosePressed: closeCompleter.complete,
-        onDownloadPressed: downloadCompleter.complete,
+        onClose: closeCompleter.complete,
+        onDownload: downloadCompleter.complete,
         onCopyPressed: copyCompleter.complete,
       ),
     ),

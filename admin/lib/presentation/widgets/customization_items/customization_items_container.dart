@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:survey_admin/presentation/utils/utils.dart';
 
-class CustomizationItemsContainer extends StatefulWidget {
+class CustomizationItemsContainer extends StatelessWidget {
   final String? title;
   final EdgeInsets? titlePadding;
   final EdgeInsets? itemsPadding;
   final bool isFontBold;
   final double itemsSeparatorHeight;
-  final bool isTopDividerShown;
+  final bool shouldShowTopDivider;
   final bool isBottomDividerShown;
   final List<Widget> children;
 
@@ -18,49 +18,20 @@ class CustomizationItemsContainer extends StatefulWidget {
     this.itemsPadding,
     this.isFontBold = false,
     this.itemsSeparatorHeight = AppDimensions.marginS,
-    this.isTopDividerShown = false,
+    this.shouldShowTopDivider = false,
     this.isBottomDividerShown = true,
     super.key,
   }) : assert(children.isNotEmpty, 'children must not be empty');
-
-  @override
-  State<CustomizationItemsContainer> createState() =>
-      _CustomizationItemsContainerState();
-}
-
-class _CustomizationItemsContainerState
-    extends State<CustomizationItemsContainer> {
-  final List<Widget> _items = [];
-
-  @override
-  void initState() {
-    super.initState();
-    _items.add(widget.children.first);
-    final length = widget.children.length;
-
-    if (length > 1) {
-      _items.add(_itemSeparator());
-
-      for (var i = 1; i < length - 1; i++) {
-        _items
-          ..add(widget.children[i])
-          ..add(_itemSeparator());
-      }
-      _items.add(widget.children.last);
-    }
-  }
-
-  Widget _itemSeparator() => SizedBox(height: widget.itemsSeparatorHeight);
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if (widget.isTopDividerShown) const Divider(),
-        if (widget.title != null)
+        if (shouldShowTopDivider) const Divider(),
+        if (title != null)
           Padding(
-            padding: widget.titlePadding ??
+            padding: titlePadding ??
                 const EdgeInsets.only(
                   left: AppDimensions.marginM,
                   top: AppDimensions.marginM,
@@ -68,23 +39,23 @@ class _CustomizationItemsContainerState
                   bottom: AppDimensions.marginS,
                 ),
             child: Text(
-              widget.title!,
+              title!,
               style: context.theme.textTheme.titleSmall,
             ),
           ),
         Padding(
-          padding: widget.itemsPadding ??
+          padding: itemsPadding ??
               const EdgeInsets.only(
                 left: AppDimensions.marginM,
                 right: AppDimensions.marginM,
                 bottom: AppDimensions.marginM,
               ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: _items,
+          child: Wrap(
+            runSpacing: itemsSeparatorHeight,
+            children: children,
           ),
         ),
-        if (widget.isBottomDividerShown) const Divider(),
+        if (isBottomDividerShown) const Divider(),
       ],
     );
   }

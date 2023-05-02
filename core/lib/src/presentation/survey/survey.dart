@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:survey_core/src/domain/entities/survey_data.dart';
 import 'package:survey_core/src/presentation/di/injector.dart';
-import 'package:survey_core/src/presentation/survey/controller/survey_controller.dart';
+import 'package:survey_core/src/presentation/survey/survey_controller.dart';
 import 'package:survey_core/src/presentation/survey/survey_cubit.dart';
 import 'package:survey_core/src/presentation/survey/survey_state.dart';
 import 'package:survey_core/src/presentation/utils/utils.dart';
@@ -74,7 +74,6 @@ class _SurveyState extends State<Survey> {
     _surveyController = widget.controller ?? SurveyController();
   }
 
-
   /// Called when a dependency of this [State] object changes.
   ///
   /// The method initializes the survey data for [SurveyCubit] using the
@@ -82,7 +81,11 @@ class _SurveyState extends State<Survey> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    _cubit.initData(widget.filePath, widget.surveyData);
+    if (widget.surveyData == null) {
+      _cubit.initData(widget.filePath);
+    } else {
+      _cubit.setSurveyData(widget.surveyData!);
+    }
   }
 
   /// Builds the survey form using a PageView widget.
@@ -101,33 +104,43 @@ class _SurveyState extends State<Survey> {
     return BlocBuilder<SurveyCubit, SurveyState>(
       bloc: _cubit,
       builder: (BuildContext context, state) {
-        return state is SurveyLoadedState
-            ? Theme(
-                data: state.surveyData.commonTheme.toThemeData(),
-                child: WillPopScope(
-                  onWillPop: () async {
-                    _surveyController.onBack();
-                    return false;
-                  },
-                  child: PageView(
-                    controller: _surveyController.pageController,
-                    physics: const NeverScrollableScrollPhysics(),
-                    children: state.surveyData.questions
-                        .map<Widget>(
-                          (question) => DataToWidgetUtil.createWidget(
-                            question,
-                            _cubit.saveAnswer,
-                          ),
-                        )
-                        .toList(),
-                  ),
-                ),
-              )
-            : const Center(
-                child: CircularProgressIndicator(
-                  color: AppColors.black,
-                ),
-              );
+        if (state is SurveyLoadedState) {
+          final data = widget.surveyData ?? state.surveyData;
+          final commonTheme = data.commonTheme;
+          return Theme(
+            data: ThemeData(
+              extensions: [
+                commonTheme.choice.theme!,
+                commonTheme.slider.theme!,
+                commonTheme.input.theme!,
+                commonTheme.intro.theme!,
+              ],
+            ),
+            child: WillPopScope(
+              onWillPop: () async {
+                _surveyController.onBack();
+                return false;
+              },
+              child: PageView(
+                controller: _surveyController.pageController,
+                physics: const NeverScrollableScrollPhysics(),
+                children: data.questions
+                    .map<Widget>(
+                      (question) => DataToWidgetUtil.createWidget(
+                        question,
+                        _cubit.saveAnswer,
+                      ),
+                    )
+                    .toList(),
+              ),
+            ),
+          );
+        }
+        return const Center(
+          child: CircularProgressIndicator(
+            color: AppColors.black,
+          ),
+        );
       },
     );
   }

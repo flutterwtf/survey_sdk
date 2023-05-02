@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/color_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
@@ -15,23 +14,15 @@ void main() {
   group(
     'Input customization tab tests',
     () {
+      var data = InputQuestionData.common();
+
       final page = AppTester(
         child: InputCustomizationTab(
-          onBorderColorChanged: (Color value) {},
-          onBorderSizeChanged: (double? value) {},
-          onBorderWidthChanged: (double? value) {},
-          onFillColorChanged: (Color value) {},
-          onHintColorChanged: (Color value) {},
-          onHintFontSizeChanged: (double? value) {},
-          onHorizontalPaddingChanged: (double size) {},
-          onInputTypeChanged: (InputType value) {},
-          onMultilineChanged: (bool isMultiline, int lineAmount) {},
-          onTextColorChanged: (Color value) {},
-          onTextFontSizeChanged: (double? value) {},
-          onVerticalPaddingChanged: (double size) {},
-          onValidatorErrorTextChanged: (String errorText) {},
+          onChange: (QuestionData<dynamic> newData) {
+            data = newData as InputQuestionData;
+          },
           title: 'test',
-          inputType: InputType.text,
+          editable: data,
         ),
       );
 
@@ -64,7 +55,7 @@ void main() {
           );
           expect(
             find.widgetWithText(CustomizationItemsContainer, 'Text'),
-            findsNWidgets(2),
+            findsOneWidget,
           );
           expect(
             find.widgetWithText(CustomizationItemsContainer, 'Input type'),
@@ -79,11 +70,11 @@ void main() {
           await widgetTester.pumpWidget(page);
           await widgetTester.pumpAndSettle();
 
-          // Multiline widget switch is off
           expect(
             find.widgetWithText(CustomizationItemsContainer, 'Lines'),
             findsNothing,
           );
+          // Multiline widget switch is off
           expect(
             find.widgetWithText(CustomizationItemsContainer, 'FFFFFFFF'),
             findsOneWidget,
@@ -93,19 +84,23 @@ void main() {
             findsNWidgets(2),
           );
           expect(
-            find.widgetWithText(CustomizationItemsContainer, 'FF929292'),
+            find.widgetWithText(CustomizationItemsContainer, 'FF727272'),
             findsOneWidget,
           );
           expect(
-            find.widgetWithText(CustomizationItemsContainer, '1'),
+            find.widgetWithText(CustomizationTextField, '1.0'),
             findsOneWidget,
           );
           expect(
-            find.widgetWithText(CustomizationItemsContainer, '16'),
+            find.widgetWithText(CustomizationTextField, '16.0'),
             findsNWidgets(2),
           );
+          expect(data.theme?.borderWidth, 1);
+          expect(data.theme?.hintSize, 16);
+          expect(data.theme?.textSize, 16);
+
           expect(
-            find.widgetWithText(DropdownCustomizationButton<InputType>, 'Text'),
+            find.widgetWithText(DropdownCustomizationButton<InputType>, 'text'),
             findsOneWidget,
           );
         },
@@ -117,7 +112,7 @@ void main() {
           await widgetTester.pumpWidget(page);
           await widgetTester.pumpAndSettle();
 
-          expect(find.byType(CustomizationItemsContainer), findsNWidgets(8));
+          expect(find.byType(CustomizationItemsContainer), findsNWidgets(7));
           expect(find.byType(MultilineSwitch), findsOneWidget);
           expect(
             find.byType(DropdownCustomizationButton<InputType>),

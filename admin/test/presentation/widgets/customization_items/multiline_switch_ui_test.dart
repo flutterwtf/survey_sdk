@@ -10,10 +10,12 @@ void main() {
     const title = 'Multiline';
     const inputNum = '12';
     const inputText = 'qwe';
-    const inputTitle = 'Lines';
+    const inputTitle = 'Lines:';
     final page = AppTester(
       child: MultilineSwitch(
-        onChanged: (bool isMultiline, int lineAmount) {},
+        onChanged: (isMultiline, lineAmount) {},
+        value: false,
+        lines: 10,
       ),
     );
 
@@ -60,8 +62,12 @@ void main() {
         await tester.pumpWidget(
           AppTester(
             child: MultilineSwitch(
-              isMultiline: true,
-              onChanged: (bool isMultiline, int lineAmount) {},
+              value: true,
+              lines: 10,
+              onChanged: (
+                isMultiline,
+                lineAmount,
+              ) {},
             ),
           ),
         );

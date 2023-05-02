@@ -10,15 +10,10 @@ class SurveyCubit extends Cubit<SurveyState> {
 
   SurveyCubit(this._surveyDataRepository) : super(const SurveyEmptyState());
 
-  // TODO(dev): split into two methods.
-  Future<void> initData(String? filePath, SurveyData? surveyData) async {
+  Future<void> initData(String? filePath) async {
     if (filePath != null) {
       final data = await _surveyDataRepository.getSurveyData(filePath);
-      _setSurveyData(data);
-    } else {
-      if (surveyData != null) {
-        _setSurveyData(surveyData);
-      }
+      setSurveyData(data);
     }
   }
 
@@ -31,11 +26,7 @@ class SurveyCubit extends Cubit<SurveyState> {
     }
   }
 
-  void _setSurveyData(SurveyData surveyData) {
+  void setSurveyData(SurveyData surveyData) {
     emit(SurveyLoadedState(surveyData: surveyData));
-    // final currentState = state;
-    // if (currentState is SurveyLoadedState) {
-    //   emit(currentState.copyWith(surveyData: surveyData));
-    // }
   }
 }

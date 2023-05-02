@@ -31,6 +31,8 @@ dart_code_metrics:
   extends:
     - package:dart_code_metrics_presets/all.yaml
   rules:
+    - prefer-moving-to-variable:
+        allowed-duplicated-chains: 3
     - arguments-ordering: false
     - avoid-banned-imports: false
     - avoid-missing-enum-constant-in-map: false

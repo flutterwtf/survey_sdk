@@ -17,10 +17,8 @@ void main() {
             child: OptionCustomizationItem(
               options: options,
               ruleValue: ruleValue,
-              onChanged: (newOptions) {
+              onChanged: (newOptions, newRuleValue) {
                 options = newOptions;
-              },
-              onRuleLimitedChanged: (newRuleValue) {
                 ruleValue = newRuleValue;
               },
             ),
@@ -49,10 +47,8 @@ void main() {
             child: OptionCustomizationItem(
               options: options,
               ruleValue: ruleValue,
-              onChanged: (newOptions) {
+              onChanged: (newOptions, newRuleValue) {
                 options = newOptions;
-              },
-              onRuleLimitedChanged: (newRuleValue) {
                 ruleValue = newRuleValue;
               },
             ),
@@ -83,10 +79,8 @@ void main() {
             child: OptionCustomizationItem(
               options: options,
               ruleValue: ruleValue,
-              onChanged: (newOptions) {
+              onChanged: (newOptions, newRuleValue) {
                 options = newOptions;
-              },
-              onRuleLimitedChanged: (newRuleValue) {
                 ruleValue = newRuleValue;
               },
             ),

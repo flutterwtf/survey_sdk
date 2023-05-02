@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:survey_core/src/domain/entities/input_validator.dart';
 import 'package:survey_core/src/domain/entities/question_answer.dart';
-import 'package:survey_core/src/domain/entities/question_types/input_question_data.dart';
 import 'package:survey_core/src/presentation/input_question/input_question_page.dart';
 import 'package:survey_core/src/presentation/widgets/question_bottom_button.dart';
 
-import 'widget/app_test.dart';
+import '../utils/mocked_entities.dart';
+import 'widget/app_tester.dart';
 
 // TODO(dev): Make a test for input date
 void main() {
@@ -16,20 +16,10 @@ void main() {
 
   const validationErrorMessage = 'Validation error';
 
-  final mockInputData = InputQuestionData(
-    validator: InputValidator.text(),
-    index: 0,
-    title: 'title',
-    subtitle: 'subtitle',
-    isSkip: true,
-  );
+  final mockInputData = MockedEntities.input1;
 
-  final mockInputWithNumber = InputQuestionData(
+  final mockInputWithNumber = mockInputData.copyWith(
     validator: InputValidator.number(),
-    index: 0,
-    title: 'title',
-    subtitle: 'subtitle',
-    isSkip: true,
   );
 
   group(
@@ -54,7 +44,7 @@ void main() {
         (WidgetTester tester) async {
           String? sendData;
           await tester.pumpWidget(
-            AppTest(
+            AppTester(
               child: InputQuestionPage(
                 data: mockInputData,
                 onSend: ({
@@ -82,7 +72,7 @@ void main() {
 
           String? sendData;
           await tester.pumpWidget(
-            AppTest(
+            AppTester(
               child: InputQuestionPage(
                 data: mockInputWithNumber,
                 onSend: ({
@@ -101,7 +91,7 @@ void main() {
           await tester.tap(find.byType(QuestionBottomButton));
           await tester.pumpAndSettle();
 
-          expect(sendData, equals(testInvalidNumberString));
+          expect(sendData, isNull);
           expect(validationResult, equals(validationErrorMessage));
         },
       );
@@ -111,7 +101,7 @@ void main() {
         (WidgetTester tester) async {
           var isPressed = false;
           await tester.pumpWidget(
-            AppTest(
+            AppTester(
               child: InputQuestionPage(
                 data: mockInputData,
                 onSend: ({
@@ -134,7 +124,7 @@ void main() {
         (WidgetTester tester) async {
           String? sentData;
           await tester.pumpWidget(
-            AppTest(
+            AppTester(
               child: InputQuestionPage(
                 data: mockInputData,
                 onSend: ({

@@ -1,52 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:survey_admin/presentation/app/localization/localizations.dart';
+import 'package:survey_admin/presentation/app/localization/app_localizations_ext.dart';
 import 'package:survey_admin/presentation/utils/utils.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_multiline_text_field.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/dropdown_customization_button.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/option_customization_item.dart';
-import 'package:survey_admin/presentation/widgets/customization_panel/choice/choice_customization_panel.dart';
+import 'package:survey_admin/presentation/widgets/customization_items/secondary_button_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/customization_tab.dart';
 import 'package:survey_core/survey_core.dart';
 
 class ChoiceContentCustomizationTab extends CustomizationTab {
-  final ValueChanged<String> onTitleChanged;
-  final ValueChanged<String> onSubTitleChanged;
-  final ValueChanged<List<String>> onOptionsChanged;
-  final ValueChanged<RuleType> onRuleChanged;
-  final ValueChanged<int> onRuleLimitedChanged;
-  final QuestionData editableQuestion;
-  final RuleType ruleType;
-  final int ruleValue;
-  final List<String> listOptions;
+  final void Function(QuestionData data) onChange;
+  final ChoiceQuestionData editable;
 
   const ChoiceContentCustomizationTab({
+    required this.onChange,
     required super.title,
-    required this.onTitleChanged,
-    required this.onSubTitleChanged,
-    required this.onOptionsChanged,
-    required this.onRuleChanged,
-    required this.editableQuestion,
-    required this.ruleType,
-    required this.listOptions,
-    required this.onRuleLimitedChanged,
-    required this.ruleValue,
+    required this.editable,
     super.key,
   });
-
-  List<int> _initialLimitedList(List<String> listOptions) {
-    // TODO(dev): we should rethink this.
-    final limitedList = <int>[];
-    if (listOptions.isEmpty) {
-      limitedList.add(0);
-    } else {
-      // TODO(dev): do-while loop maybe?
-      for (var i = 0; i <= listOptions.length; i++) {
-        limitedList.add(i);
-      }
-    }
-    return limitedList;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,11 +26,14 @@ class ChoiceContentCustomizationTab extends CustomizationTab {
       children: [
         CustomizationItemsContainer(
           title: context.localization.title,
-          isTopDividerShown: true,
+          shouldShowTopDivider: true,
           children: [
             CustomizationMultilineTextField(
+              value: editable.title,
               maxHeight: AppDimensions.sizeXL,
-              onChanged: onTitleChanged,
+              onChanged: (title) => onChange(
+                editable.copyWith(title: title),
+              ),
             ),
           ],
         ),
@@ -66,23 +41,28 @@ class ChoiceContentCustomizationTab extends CustomizationTab {
           title: context.localization.subtitle,
           children: [
             CustomizationMultilineTextField(
+              value: editable.subtitle,
               maxHeight: AppDimensions.sizeXL,
-              onChanged: onSubTitleChanged,
+              onChanged: (subtitle) => onChange(
+                editable.copyWith(subtitle: subtitle),
+              ),
             ),
           ],
         ),
         CustomizationItemsContainer(
           title: context.localization.options,
           children: [
+            // TODO(dev): Split to items.
             OptionCustomizationItem(
-              options: listOptions,
-              onChanged: onOptionsChanged,
-              onRuleLimitedChanged: onRuleLimitedChanged,
-              ruleValue: ruleValue,
+              options: editable.options,
+              ruleValue: editable.ruleValue,
+              onChanged: (options, ruleValue) => onChange(
+                editable.copyWith(options: options, ruleValue: ruleValue),
+              ),
             ),
           ],
         ),
-        if (!(editableQuestion as ChoiceQuestionData).isMultipleChoice)
+        if (editable.isMultipleChoice)
           CustomizationItemsContainer(
             title: context.localization.rule,
             children: [
@@ -95,7 +75,9 @@ class ChoiceContentCustomizationTab extends CustomizationTab {
                           .map(
                             (e) => DropdownCustomizationItem<RuleType>(
                               value: e,
-                              onChange: onRuleChanged,
+                              onChange: (rule) => onChange(
+                                editable.copyWith(ruleType: rule),
+                              ),
                               child: Text(
                                 e.name,
                                 style: context.theme.textTheme.bodyLarge,
@@ -103,17 +85,22 @@ class ChoiceContentCustomizationTab extends CustomizationTab {
                             ),
                           )
                           .toList(),
-                      value: ruleType,
+                      value: editable.ruleType,
                       withColor: true,
                     ),
                   ),
                   const SizedBox(width: AppDimensions.marginXS),
                   Expanded(
-                    child: ruleType != RuleType.none
+                    child: editable.ruleType != RuleType.none
                         ? _RuleDropdown(
-                            onChanged: onRuleLimitedChanged,
-                            values: _initialLimitedList(listOptions),
-                            value: ruleValue,
+                            onChanged: (ruleValue) => onChange(
+                              editable.copyWith(ruleValue: ruleValue),
+                            ),
+                            values: List<int>.generate(
+                              editable.options.length + 1,
+                              (i) => i++,
+                            ),
+                            value: editable.ruleValue,
                           )
                         : const SizedBox(),
                   ),
@@ -121,6 +108,31 @@ class ChoiceContentCustomizationTab extends CustomizationTab {
               ),
             ],
           ),
+        CustomizationItemsContainer(
+          title: context.localization.primaryButton,
+          children: [
+            CustomizationMultilineTextField(
+              value: editable.primaryButtonText,
+              maxHeight: AppDimensions.maxTextFieldHeight,
+              onChanged: (text) => onChange(
+                editable.copyWith(primaryButtonText: text),
+              ),
+            ),
+          ],
+        ),
+        CustomizationItemsContainer(
+          itemsPadding: const EdgeInsets.all(
+            AppDimensions.marginM,
+          ),
+          children: [
+            SecondaryButtonCustomizationItem(
+              onChanged: (canSkip, title) => onChange(
+                editable.copyWith(isSkip: canSkip, secondaryButtonText: title),
+              ),
+              initialText: editable.secondaryButtonText,
+            ),
+          ],
+        ),
       ],
     );
   }

@@ -22,7 +22,7 @@ class DropdownCustomizationButton<T> extends StatefulWidget {
 class _DropdownCustomizationButtonState<T>
     extends State<DropdownCustomizationButton<T>>
     with TickerProviderStateMixin {
-  late bool _isExpanded;
+  late bool _isExpanded = false;
   late final AnimationController _iconAnimationController;
   late final Animation<double> _animation;
 
@@ -35,7 +35,7 @@ class _DropdownCustomizationButtonState<T>
     _isExpanded = false;
     _iconAnimationController = AnimationController(
       vsync: this,
-      duration: AppDurations.customizationItemAnimation,
+      duration: AppDurations.customizationItem,
     );
     // ignore: prefer_int_literals
     _animation = Tween(begin: tweenBegin, end: tweenEnd).animate(
@@ -53,13 +53,22 @@ class _DropdownCustomizationButtonState<T>
   }
 
   @override
+  void didUpdateWidget(DropdownCustomizationButton<T> oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (_isExpanded) {
+      _iconAnimationController.reverse();
+    }
+    _isExpanded = false;
+  }
+
+  @override
   Widget build(BuildContext context) {
     return DecoratedBox(
       decoration: widget.withColor
           ? BoxDecoration(
               color: _isExpanded
                   ? AppColors.dropdownMenuBackground
-                  : AppColors.white,
+                  : AppColors.whitePrimaryBackground,
               borderRadius: const BorderRadius.all(
                 Radius.circular(AppDimensions.circularRadiusS),
               ),
@@ -96,7 +105,7 @@ class _DropdownCustomizationButtonState<T>
             ),
           ),
           AnimatedSize(
-            duration: AppDurations.customizationItemAnimation,
+            duration: AppDurations.customizationItem,
             child: _isExpanded
                 ? Column(
                     crossAxisAlignment: CrossAxisAlignment.start,

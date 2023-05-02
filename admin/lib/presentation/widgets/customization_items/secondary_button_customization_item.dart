@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:survey_admin/presentation/app/localization/localizations.dart';
+import 'package:survey_admin/presentation/app/localization/app_localizations_ext.dart';
 import 'package:survey_admin/presentation/utils/utils.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/switch_customization_item.dart';
@@ -40,14 +40,14 @@ class _SecondaryButtonCustomizationItemState
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SwitchCustomizationItem(
-          title: context.localization.secondary_button,
+          title: context.localization.secondaryButton,
           onChanged: (isToggled) {
             setState(() => _isShown = isToggled);
             widget.onChanged(_isShown, _text);
           },
         ),
         AnimatedSize(
-          duration: AppDurations.customizationItemAnimation,
+          duration: AppDurations.customizationItem,
           child: _isShown
               ? Padding(
                   padding: const EdgeInsets.only(
@@ -62,7 +62,7 @@ class _SecondaryButtonCustomizationItemState
                       widget.onChanged(_isShown, _text);
                     },
                     decoration: InputDecoration(
-                      hintText: context.localization.enter_text,
+                      hintText: context.localization.enterText,
                       isCollapsed: true,
                       border: InputBorder.none,
                     ),

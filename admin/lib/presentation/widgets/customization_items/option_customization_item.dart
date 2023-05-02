@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:survey_admin/presentation/app/localization/localizations.dart';
+import 'package:survey_admin/presentation/app/localization/app_localizations_ext.dart';
 import 'package:survey_admin/presentation/utils/utils.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
 
 class OptionCustomizationItem extends StatefulWidget {
   final List<String> options;
+  final void Function(List<String>, int) onChanged;
   final int ruleValue;
-  final ValueChanged<List<String>> onChanged;
-  final ValueChanged<int> onRuleLimitedChanged;
 
   const OptionCustomizationItem({
     required this.options,
-    required this.ruleValue,
     required this.onChanged,
-    required this.onRuleLimitedChanged,
+    required this.ruleValue,
     super.key,
   });
 
@@ -39,15 +37,17 @@ class _OptionCustomizationItemState extends State<OptionCustomizationItem> {
     }
 
     _controller.clear();
-    widget.onChanged(_options);
+    widget.onChanged(_options, widget.ruleValue);
   }
 
   void _delete(String option) {
     if (widget.ruleValue == _options.length) {
-      widget.onRuleLimitedChanged(0);
+      setState(() => _options.remove(option));
+      widget.onChanged(List.of(_options), 0);
+    } else {
+      setState(() => _options.remove(option));
+      widget.onChanged(List.of(_options), widget.ruleValue);
     }
-    setState(() => _options.remove(option));
-    widget.onChanged(_options);
   }
 
   @override
@@ -81,7 +81,7 @@ class _OptionCustomizationItemState extends State<OptionCustomizationItem> {
                 controller: _controller,
                 onEditingComplete: _onEditingComplete,
                 decoration: InputDecoration.collapsed(
-                  hintText: context.localization.type_new_option_here,
+                  hintText: context.localization.typeNewOptionHere,
                   hintStyle: const TextStyle(
                     color: AppColors.textHintGrey,
                   ),

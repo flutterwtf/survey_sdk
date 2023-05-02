@@ -6,19 +6,35 @@ import '../../utils/shared_mocks.mocks.dart';
 
 void main() {
   final mockFilesystemDataSource = MockFilesystemDataSource();
+  final mockSurveyData = MockSurveyData();
   final surveyDataRepository =
       FileSystemRepositoryImpl(mockFilesystemDataSource);
   var surveyData = <String, dynamic>{};
 
   group('test SurveyDataRepository', () {
-    when(mockFilesystemDataSource.downloadSurveyData({'test': 'test'}))
-        .thenAnswer(
+    when(
+      mockFilesystemDataSource.downloadSurveyData({'test': 'test'}),
+    )
+    .thenAnswer(
       (_) => surveyData = {'test': 'test'},
     );
+
+    when(
+      mockFilesystemDataSource.importSurveyData(),
+    )
+    .thenAnswer(
+      (_) => Future.value(mockSurveyData),
+    );
+      
 
     test('get survey data', () {
       surveyDataRepository.downloadSurveyData({'test': 'test'});
       expect(surveyData, {'test': 'test'});
+    });
+
+    test('import survey data', () async {
+      final surveyData = await surveyDataRepository.importSurveyData();
+      expect(surveyData, mockSurveyData);
     });
   });
 }

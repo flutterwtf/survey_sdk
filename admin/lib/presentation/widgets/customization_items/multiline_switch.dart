@@ -1,25 +1,28 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:survey_admin/presentation/app/localization/localizations.dart';
+import 'package:survey_admin/presentation/app/localization/app_localizations_ext.dart';
 import 'package:survey_admin/presentation/utils/utils.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/switch_customization_item.dart';
 
-const _lineAmount = 3;
-
 class MultilineSwitch extends StatefulWidget {
   const MultilineSwitch({
+    required this.value,
     required this.onChanged,
-    this.isMultiline = false,
-    this.defaultLineAmount = _lineAmount,
+    required this.lines,
     super.key,
   });
 
-  /// If [isMultiline] equals `false` then `lineAmount` is always equals 1.
+  /// If [value] equals `false` then `lineAmount` is always equals 1.
   /// In case of any input error `lineAmount` is always equals 1.
-  final void Function(bool isMultiline, int lineAmount) onChanged;
-  final bool isMultiline;
-  final int defaultLineAmount;
+  final void Function(
+    bool isMultiline,
+    int lineAmount,
+  ) onChanged;
+  final bool value;
+  final int lines;
 
   @override
   State<MultilineSwitch> createState() => _MultilineSwitchState();
@@ -32,34 +35,41 @@ class _MultilineSwitchState extends State<MultilineSwitch> {
   @override
   void initState() {
     super.initState();
-
-    _isMultiline = widget.isMultiline;
-    _lineAmount = widget.defaultLineAmount;
+    _isMultiline = widget.value;
+    _lineAmount = widget.lines;
   }
 
   @override
   Widget build(BuildContext context) {
+    // TODO(dev): It is not smooth enough.
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
           padding: const EdgeInsets.only(top: AppDimensions.marginS),
           child: SwitchCustomizationItem(
+            initialValue: _isMultiline,
             title: context.localization.multiline,
             onChanged: (isToggled) {
               setState(() => _isMultiline = isToggled);
-              widget.onChanged(_isMultiline, _isMultiline ? _lineAmount : 1);
+              widget.onChanged(
+                _isMultiline,
+                _isMultiline ? _lineAmount : 1,
+              );
             },
           ),
         ),
         AnimatedSize(
-          duration: AppDurations.customizationItemAnimation,
+          duration: AppDurations.customizationItem,
           child: _isMultiline
               ? _LineAmountInputField(
-                  defaultLineAmount: widget.defaultLineAmount,
+                  defaultLineAmount: widget.lines,
                   onChanged: (amount) {
-                    _lineAmount = amount;
-                    widget.onChanged(_isMultiline, _lineAmount);
+                    _lineAmount = max(amount, 1);
+                    widget.onChanged(
+                      _isMultiline,
+                      _lineAmount,
+                    );
                   },
                 )
               : const SizedBox.shrink(),
@@ -88,7 +98,7 @@ class _LineAmountInputField extends StatelessWidget {
       child: Row(
         children: [
           Text(
-            context.localization.lines,
+            '${context.localization.lines}:',
             style: context.theme.textTheme.bodyMedium,
           ),
           const SizedBox(width: AppDimensions.margin2XS),
