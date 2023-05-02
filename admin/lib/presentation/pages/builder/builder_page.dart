@@ -19,7 +19,6 @@ class BuilderPage extends StatefulWidget {
 }
 
 class _BuilderPageState extends State<BuilderPage> {
-  late final BuilderCubit _cubit;
   late final SurveyController _surveyController;
 
   @override
@@ -27,6 +26,8 @@ class _BuilderPageState extends State<BuilderPage> {
     super.initState();
 
     _surveyController = SurveyController();
+
+    initCommonData(context);
   }
 
   Future<void> _showImportDialog() {
@@ -54,13 +55,6 @@ class _BuilderPageState extends State<BuilderPage> {
   }
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    initCommonData(context);
-    _cubit = i.get<BuilderCubit>();
-  }
-
-  @override
   void dispose() {
     _surveyController.dispose();
 
@@ -70,7 +64,6 @@ class _BuilderPageState extends State<BuilderPage> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<BuilderCubit, BuilderState>(
-      bloc: _cubit,
       listener: (_, newState) {
         if (newState is ImportErrorSurveyDataBuilderState) _showImportDialog();
 
@@ -80,53 +73,60 @@ class _BuilderPageState extends State<BuilderPage> {
           _surveyController.animateTo(selected - 1);
         }
       },
-      builder: (_, state) => Scaffold(
-        appBar: AppBar(
-          title: const _BuilderPageTabBar(),
-          actions: [
-            // ignore: avoid-passing-async-when-sync-expected
-            _ImportButton(onImportPressed: _cubit.importData),
-            _ExportButton(
-              downloadSurveyData: _cubit.downloadSurveyData,
-              copySurveyData: _cubit.copySurveyData,
-            ),
-          ],
-          centerTitle: true,
-        ),
-        body: Row(
-          children: [
-            QuestionList(
-              onDelete: _cubit.deleteQuestionData,
-              onSelect: _cubit.select,
-              onAdd: _cubit.addQuestionData,
-              questions: _cubit.state.surveyData.questions.isNotEmpty
-                  ? List<QuestionData>.of(
-                      _cubit.state.surveyData.questions,
-                    )
-                  : [],
-              onUpdate: _cubit.updateQuestions,
-              selectedIndex:
-                  (state as EditQuestionBuilderState).selectedIndex - 1,
-            ),
-            Expanded(
-              child: PhoneView(
-                child: Survey(
-                  surveyData: state.surveyData,
-                  controller: _surveyController,
+      builder: (_, state) {
+        final cubit = context.read<BuilderCubit>();
+
+        return Scaffold(
+          appBar: AppBar(
+            title: const _BuilderPageTabBar(),
+            actions: [
+              // ignore: avoid-passing-async-when-sync-expected
+              _ImportButton(onImportPressed: cubit.importData),
+              _ExportButton(
+                downloadSurveyData: cubit.downloadSurveyData,
+                copySurveyData: cubit.copySurveyData,
+              ),
+            ],
+            centerTitle: true,
+          ),
+          body: Row(
+            children: [
+              QuestionList(
+                onDelete: cubit.deleteQuestionData,
+                onSelect: cubit.select,
+                onAdd: cubit.addQuestionData,
+                questions: cubit.state.surveyData.questions.isNotEmpty
+                    ? List<QuestionData>.of(
+                        cubit.state.surveyData.questions,
+                      )
+                    : [],
+                onUpdate: cubit.updateQuestions,
+                selectedIndex: state is EditQuestionBuilderState
+                    ? state.selectedIndex - 1
+                    : 1,
+              ),
+              Expanded(
+                child: PhoneView(
+                  child: Survey(
+                    surveyData: state.surveyData,
+                    controller: _surveyController,
+                  ),
                 ),
               ),
-            ),
-            EditorBar(
-              onChange: _cubit.updateQuestionData,
-              editableQuestion: (state.surveyData.questions.isNotEmpty)
-                  ? state.surveyData.questions.firstWhere(
-                      (q) => q.index == state.selectedIndex,
-                    )
-                  : null,
-            ),
-          ],
-        ),
-      ),
+              EditorBar(
+                onChange: cubit.updateQuestionData,
+                editableQuestion: state.surveyData.questions.isNotEmpty
+                    ? state is EditQuestionBuilderState
+                        ? state.surveyData.questions.firstWhere(
+                            (q) => q.index == state.selectedIndex,
+                          )
+                        : null
+                    : null,
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }
