@@ -61,7 +61,7 @@ class InputContentCustomizationTab extends CustomizationTab {
           ],
         ),
         CustomizationItemsContainer(
-          title: context.localization.primary_button,
+          title: context.localization.primaryButton,
           children: [
             CustomizationMultilineTextField(
               value: editable.primaryButtonText,
