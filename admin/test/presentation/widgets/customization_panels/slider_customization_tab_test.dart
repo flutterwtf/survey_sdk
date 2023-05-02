@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/color_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
-import 'package:survey_admin/presentation/widgets/customization_items/thickness_customization_item.dart';
+import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
+import 'package:survey_admin/presentation/widgets/customization_panel/constants/customization_panel_dimensions.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/slider/slider_customization_tab.dart';
 import 'package:survey_core/survey_core.dart';
 
@@ -10,6 +11,7 @@ import '../app_tester.dart';
 
 void main() {
   group('Tests for SliderCustomizationTab', () {
+    const commonTheme = SliderQuestionTheme.common();
     var data = const SliderQuestionData.common();
     final page = AppTester(
       child: SliderCustomizationTab(
@@ -43,11 +45,19 @@ void main() {
 
     testWidgets('Input num for Thickness', (tester) async {
       await tester.pumpWidget(page);
+      expect(data.theme?.thickness, commonTheme.thickness);
+
+      final thicknessField = find.widgetWithText(
+        CustomizationItemsContainer,
+        'Thickness',
+      );
+      await tester.enterText(thicknessField, '');
+      expect(data.theme?.thickness, 1);
+
       await tester.enterText(
         find.widgetWithText(CustomizationItemsContainer, 'Thickness'),
         '10',
       );
-      expect(find.text('10'), findsOneWidget);
       expect(data.theme?.thickness, 10);
     });
 
@@ -131,7 +141,7 @@ void main() {
       expect(data.theme?.inactiveColor, const Color(0x00000000));
     });
 
-    testWidgets('Input color and num for Thumb', (tester) async {
+    testWidgets('Input color for Thumb', (tester) async {
       await tester.pumpWidget(page);
       await tester.enterText(
         find.byType(ColorCustomizationItem).last,
@@ -153,30 +163,37 @@ void main() {
       await tester.pump();
       expect(find.text('00000000'), findsOneWidget);
       expect(data.theme?.thumbColor, const Color(0x00000000));
-
-      await tester.enterText(find.byType(ThicknessCustomizationItem).last, '8');
-      expect(find.text('8'), findsOneWidget);
-      expect(data.divisions, 8);
     });
 
     testWidgets('Validate input string for Thumb', (tester) async {
       await tester.pumpWidget(page);
-      await tester.enterText(
-        find.byType(ThicknessCustomizationItem),
-        'q3',
-      );
+      expect(data.theme?.thumbRadius, commonTheme.thumbRadius);
+
+      final thumbTextField = find.byType(CustomizationTextField).last;
+      await tester.enterText(thumbTextField, '');
       await tester.testTextInput.receiveAction(TextInputAction.done);
-      expect(find.text('3'), findsOneWidget);
+      expect(data.theme?.thumbRadius, 0);
+
+      await tester.enterText(thumbTextField, '38');
+      await tester.testTextInput.receiveAction(TextInputAction.done);
+      expect(
+        data.theme?.thumbRadius,
+        CustomizationPanelDimensions.sliderThumbMaxRadius,
+      );
     });
 
     testWidgets('Validate input length > 2 for Thumb', (tester) async {
       await tester.pumpWidget(page);
-      await tester.enterText(
-        find.byType(ThicknessCustomizationItem),
-        '873',
-      );
+      expect(data.theme?.thumbRadius, commonTheme.thumbRadius);
+
+      final thumbTextField = find.byType(CustomizationTextField).last;
+      await tester.enterText(thumbTextField, '');
       await tester.testTextInput.receiveAction(TextInputAction.done);
-      expect(find.text('87'), findsOneWidget);
+      expect(data.theme?.thumbRadius, 0);
+
+      await tester.enterText(thumbTextField, '112');
+      await tester.testTextInput.receiveAction(TextInputAction.done);
+      expect(data.theme?.thumbRadius, 11);
     });
   });
 }
