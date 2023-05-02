@@ -143,7 +143,7 @@ class _ChoiceQuestionPageState extends State<ChoiceQuestionPage>
                               child: QuestionBottomButton(
                                 text: widget.data.secondaryButtonText,
                                 radius: theme.buttonRadius,
-                                onPressed: widget.onSecondaryButtonTap ?? () {},
+                                onPressed: widget.onSecondaryButtonTap,
                               ),
                             ),
                           ),

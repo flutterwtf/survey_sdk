@@ -97,7 +97,7 @@ class _SliderQuestionPageState extends State<SliderQuestionPage> {
                             child: QuestionBottomButton(
                               text: widget.data.secondaryButtonText,
                               radius: theme.buttonRadius,
-                              onPressed: widget.onSecondaryButtonTap ?? () {},
+                              onPressed: widget.onSecondaryButtonTap,
                             ),
                           ),
                         ),

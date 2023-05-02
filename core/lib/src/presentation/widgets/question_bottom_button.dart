@@ -7,7 +7,7 @@ class QuestionBottomButton extends StatelessWidget {
   final Color? textColor;
   final double? textSize;
   final double? radius;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
   final bool isEnabled;
 
   const QuestionBottomButton({

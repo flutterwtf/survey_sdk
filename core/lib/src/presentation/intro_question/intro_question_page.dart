@@ -83,7 +83,7 @@ class _IntroQuestionPageState extends State<IntroQuestionPage> {
                               child: QuestionBottomButton(
                                 text: widget.data.secondaryButtonText,
                                 radius: theme.buttonRadius,
-                                onPressed: widget.onSecondaryButtonTap ?? () {},
+                                onPressed: widget.onSecondaryButtonTap,
                               ),
                             ),
                           ),
@@ -94,7 +94,7 @@ class _IntroQuestionPageState extends State<IntroQuestionPage> {
                             textColor: theme.buttonTextColor,
                             textSize: theme.buttonTextSize,
                             radius: theme.buttonRadius,
-                            onPressed: widget.onMainButtonTap ?? () {},
+                            onPressed: widget.onMainButtonTap,
                           ),
                         ),
                       ],

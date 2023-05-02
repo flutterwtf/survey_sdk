@@ -51,6 +51,8 @@ abstract class MockedEntities {
     ruleType: RuleType.none,
     ruleValue: 0,
     theme: ChoiceQuestionTheme.common(),
+    primaryButtonText: 'NEXT',
+    secondaryButtonText: 'EXIT',
   );
 
   static const choice4 = ChoiceQuestionData(
@@ -97,7 +99,8 @@ abstract class MockedEntities {
     subtitle: 'subtitle',
     isSkip: true,
     hintText: 'hint',
-    buttonText: 'NEXT',
+    primaryButtonText: 'NEXT',
+    secondaryButtonText: 'EXIT',
     theme: const InputQuestionTheme.common().copyWith(
       inputType: InputType.number,
     ),
@@ -162,6 +165,8 @@ abstract class MockedEntities {
     isSkip: false,
     divisions: 12,
     theme: SliderQuestionTheme.common(),
+    primaryButtonText: 'NEXT',
+    secondaryButtonText: 'EXIT',
   );
 
   static final data1 = SurveyData(
