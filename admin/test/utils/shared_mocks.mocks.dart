@@ -3,12 +3,18 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i3;
+import 'dart:async' as _i4;
 
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:survey_admin/data/data_sources/interfaces/filesystem_data_source.dart'
-    as _i2;
-import 'package:survey_core/survey_core.dart' as _i4;
+    as _i3;
+import 'package:survey_admin/data/data_sources/interfaces/session_storage_data_source.dart'
+    as _i5;
+import 'package:survey_admin/domain/repository_interfaces/file_system_repository.dart.dart'
+    as _i6;
+import 'package:survey_admin/domain/repository_interfaces/session_storage_repository.dart'
+    as _i7;
+import 'package:survey_core/survey_core.dart' as _i2;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -21,11 +27,31 @@ import 'package:survey_core/survey_core.dart' as _i4;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
+class _FakeCommonTheme_0 extends _i1.SmartFake implements _i2.CommonTheme {
+  _FakeCommonTheme_0(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeSurveyData_1 extends _i1.SmartFake implements _i2.SurveyData {
+  _FakeSurveyData_1(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
 /// A class which mocks [FilesystemDataSource].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockFilesystemDataSource extends _i1.Mock
-    implements _i2.FilesystemDataSource {
+    implements _i3.FilesystemDataSource {
   MockFilesystemDataSource() {
     _i1.throwOnMissingStub(this);
   }
@@ -40,11 +66,139 @@ class MockFilesystemDataSource extends _i1.Mock
         returnValueForMissingStub: null,
       );
   @override
-  _i3.Future<_i4.SurveyData?> importSurveyData() => (super.noSuchMethod(
+  _i4.Future<_i2.SurveyData?> importSurveyData() => (super.noSuchMethod(
         Invocation.method(
           #importSurveyData,
           [],
         ),
-        returnValue: _i3.Future<_i4.SurveyData?>.value(),
-      ) as _i3.Future<_i4.SurveyData?>);
+        returnValue: _i4.Future<_i2.SurveyData?>.value(),
+      ) as _i4.Future<_i2.SurveyData?>);
+}
+
+/// A class which mocks [SessionStorageDataSource].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockSessionStorageDataSource extends _i1.Mock
+    implements _i5.SessionStorageDataSource {
+  MockSessionStorageDataSource() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  void saveSurveyData(_i2.SurveyData? surveyData) => super.noSuchMethod(
+        Invocation.method(
+          #saveSurveyData,
+          [surveyData],
+        ),
+        returnValueForMissingStub: null,
+      );
+}
+
+/// A class which mocks [FileSystemRepository].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockFileSystemRepository extends _i1.Mock
+    implements _i6.FileSystemRepository {
+  MockFileSystemRepository() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  void downloadSurveyData(Map<String, dynamic>? exportJson) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #downloadSurveyData,
+          [exportJson],
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  _i4.Future<_i2.SurveyData?> importSurveyData() => (super.noSuchMethod(
+        Invocation.method(
+          #importSurveyData,
+          [],
+        ),
+        returnValue: _i4.Future<_i2.SurveyData?>.value(),
+      ) as _i4.Future<_i2.SurveyData?>);
+}
+
+/// A class which mocks [SessionStorageRepository].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockSessionStorageRepository extends _i1.Mock
+    implements _i7.SessionStorageRepository {
+  MockSessionStorageRepository() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  void saveSurveyData(_i2.SurveyData? surveyData) => super.noSuchMethod(
+        Invocation.method(
+          #saveSurveyData,
+          [surveyData],
+        ),
+        returnValueForMissingStub: null,
+      );
+}
+
+/// A class which mocks [SurveyData].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockSurveyData extends _i1.Mock implements _i2.SurveyData {
+  MockSurveyData() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  List<_i2.QuestionData<dynamic>> get questions => (super.noSuchMethod(
+        Invocation.getter(#questions),
+        returnValue: <_i2.QuestionData<dynamic>>[],
+      ) as List<_i2.QuestionData<dynamic>>);
+  @override
+  _i2.CommonTheme get commonTheme => (super.noSuchMethod(
+        Invocation.getter(#commonTheme),
+        returnValue: _FakeCommonTheme_0(
+          this,
+          Invocation.getter(#commonTheme),
+        ),
+      ) as _i2.CommonTheme);
+  @override
+  List<Object?> get props => (super.noSuchMethod(
+        Invocation.getter(#props),
+        returnValue: <Object?>[],
+      ) as List<Object?>);
+  @override
+  _i2.SurveyData copyWith({
+    List<_i2.QuestionData<dynamic>>? questions,
+    _i2.CommonTheme? commonTheme,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #copyWith,
+          [],
+          {
+            #questions: questions,
+            #commonTheme: commonTheme,
+          },
+        ),
+        returnValue: _FakeSurveyData_1(
+          this,
+          Invocation.method(
+            #copyWith,
+            [],
+            {
+              #questions: questions,
+              #commonTheme: commonTheme,
+            },
+          ),
+        ),
+      ) as _i2.SurveyData);
+  @override
+  Map<String, dynamic> toJson() => (super.noSuchMethod(
+        Invocation.method(
+          #toJson,
+          [],
+        ),
+        returnValue: <String, dynamic>{},
+      ) as Map<String, dynamic>);
 }
