@@ -157,19 +157,15 @@ abstract class MockedEntities {
       choice2.copyWith(index: 3),
       slider1.copyWith(index: 4),
     ],
-    commonTheme: CommonTheme(
-      slider: const SliderQuestionData.common(),
-      choice: const ChoiceQuestionData.common(),
-      input: InputQuestionData.common(),
-      intro: const IntroQuestionData.common(),
-    ),
+    commonTheme: _commonTheme,
   );
 
-  static final data2 = SurveyData(
+  static final data2 = data1.copyWith(
     questions: [intro1, input1, choice1, slider1],
-    commonTheme: CommonTheme(
-      slider: const SliderQuestionData.common()
-          .copyWith(theme: const SliderQuestionTheme.common()),
+    commonTheme: _commonTheme.copyWith(
+      slider: const SliderQuestionData.common().copyWith(
+        theme: const SliderQuestionTheme.common(),
+      ),
       choice: const ChoiceQuestionData.common()
           .copyWith(theme: const ChoiceQuestionTheme.common()),
       input: InputQuestionData.common().copyWith(
@@ -178,5 +174,12 @@ abstract class MockedEntities {
       intro: const IntroQuestionData.common()
           .copyWith(theme: const IntroQuestionTheme.common()),
     ),
+  );
+
+  static final _commonTheme = CommonTheme(
+    slider: const SliderQuestionData.common(),
+    choice: const ChoiceQuestionData.common(),
+    input: InputQuestionData.common(),
+    intro: const IntroQuestionData.common(),
   );
 }
