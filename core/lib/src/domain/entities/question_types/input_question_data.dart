@@ -10,7 +10,6 @@ class InputQuestionData extends QuestionData<InputQuestionTheme> {
 
   /// Text to display as a hint in the input field
   final String? hintText;
-  final String buttonText;
   final InputQuestionTheme? theme;
 
   @override
@@ -25,18 +24,20 @@ class InputQuestionData extends QuestionData<InputQuestionTheme> {
         isSkip,
         content,
         hintText,
-        buttonText,
         theme,
+        secondaryButtonText,
+        primaryButtonText,
       ];
 
   const InputQuestionData({
-    required this.buttonText,
     required this.validator,
     required this.theme,
     required super.index,
     required super.title,
     required super.subtitle,
     required super.isSkip,
+    required super.secondaryButtonText,
+    required super.primaryButtonText,
     super.content,
     this.hintText,
   });
@@ -52,7 +53,8 @@ class InputQuestionData extends QuestionData<InputQuestionTheme> {
           isSkip: false,
           content: 'Doing so can help you gather the information most '
               'relevant and useful to you',
-          buttonText: 'NEXT',
+          primaryButtonText: 'NEXT',
+          secondaryButtonText: 'SKIP',
         );
 
   factory InputQuestionData.fromJson(Map<String, dynamic> json) {
@@ -66,7 +68,8 @@ class InputQuestionData extends QuestionData<InputQuestionTheme> {
       content: json['content'],
       validator: InputValidator.fromJson(payload),
       hintText: payload['hintText'],
-      buttonText: payload['buttonText'] ?? '',
+      secondaryButtonText: json['secondaryButtonText'],
+      primaryButtonText: json['primaryButtonText'],
       theme: theme != null
           ? InputQuestionTheme.fromJson(theme)
           : const InputQuestionTheme.common(),
@@ -81,9 +84,10 @@ class InputQuestionData extends QuestionData<InputQuestionTheme> {
     String? title,
     String? subtitle,
     String? content,
-    String? buttonText,
     bool? isSkip,
     InputQuestionTheme? theme,
+    String? secondaryButtonText,
+    String? primaryButtonText,
   }) {
     return InputQuestionData(
       validator: validator ?? this.validator,
@@ -93,8 +97,9 @@ class InputQuestionData extends QuestionData<InputQuestionTheme> {
       subtitle: subtitle ?? this.subtitle,
       content: content ?? this.content,
       isSkip: isSkip ?? this.isSkip,
-      buttonText: buttonText ?? this.buttonText,
+      primaryButtonText: primaryButtonText ?? this.primaryButtonText,
       theme: theme ?? this.theme,
+      secondaryButtonText: secondaryButtonText ?? this.secondaryButtonText,
     );
   }
 
@@ -118,8 +123,9 @@ class InputQuestionData extends QuestionData<InputQuestionTheme> {
       'payload': {
         ...validator.toJson(),
         'hintText': hintText,
-        'buttonText': buttonText,
       },
+      'secondaryButtonText': secondaryButtonText,
+      'primaryButtonText': primaryButtonText,
     };
   }
 }

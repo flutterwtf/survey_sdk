@@ -4,7 +4,6 @@ import 'package:survey_core/src/domain/entities/themes/intro_question_theme.dart
 
 /// Contains the content for the introduction question
 class IntroQuestionData extends QuestionData {
-  final String buttonText;
   final IntroQuestionTheme? theme;
 
   @override
@@ -12,29 +11,30 @@ class IntroQuestionData extends QuestionData {
 
   @override
   List<Object?> get props => [
-        buttonText,
         theme,
         index,
         title,
         subtitle,
         isSkip,
         content,
+        secondaryButtonText,
+        primaryButtonText,
       ];
 
   const IntroQuestionData({
-    required this.buttonText,
     required this.theme,
     required super.index,
     required super.title,
     required super.subtitle,
     required super.isSkip,
+    required super.secondaryButtonText,
+    required super.primaryButtonText,
     super.content,
   });
 
   const IntroQuestionData.common({int index = 0})
       : this(
           // TODO(dev): to localization somehow
-          buttonText: 'NEXT',
           title: 'Intro',
           index: index,
           subtitle: '',
@@ -46,10 +46,11 @@ class IntroQuestionData extends QuestionData {
               'The types of questions you ask directly impact the type of '
               'answer you receive.',
           theme: const IntroQuestionTheme.common(),
+          secondaryButtonText: 'SKIP',
+          primaryButtonText: 'NEXT',
         );
 
   factory IntroQuestionData.fromJson(Map<String, dynamic> json) {
-    final payload = json['payload'] as Map<String, dynamic>;
     final theme = json['theme'];
     return IntroQuestionData(
       index: json['index'],
@@ -57,31 +58,34 @@ class IntroQuestionData extends QuestionData {
       subtitle: json['subtitle'],
       isSkip: json['isSkip'],
       content: json['content'],
-      buttonText: payload['buttonText'],
       theme: theme != null
           ? IntroQuestionTheme.fromJson(theme)
           : const IntroQuestionTheme.common(),
+      secondaryButtonText: json['secondaryButtonText'],
+      primaryButtonText: json['primaryButtonText'],
     );
   }
 
   @override
   IntroQuestionData copyWith({
-    String? buttonText,
     int? index,
     String? title,
     String? subtitle,
     String? content,
     bool? isSkip,
     IntroQuestionTheme? theme,
+    String? secondaryButtonText,
+    String? primaryButtonText,
   }) {
     return IntroQuestionData(
-      buttonText: buttonText ?? this.buttonText,
       index: index ?? this.index,
       title: title ?? this.title,
       subtitle: subtitle ?? this.subtitle,
       content: content ?? this.content,
       isSkip: isSkip ?? this.isSkip,
       theme: theme ?? this.theme,
+      secondaryButtonText: secondaryButtonText ?? this.secondaryButtonText,
+      primaryButtonText: primaryButtonText ?? this.primaryButtonText,
     );
   }
 
@@ -103,9 +107,8 @@ class IntroQuestionData extends QuestionData {
       'isSkip': isSkip,
       'content': content,
       'theme': theme?.toJson(),
-      'payload': {
-        'buttonText': buttonText,
-      },
+      'secondaryButtonText': secondaryButtonText,
+      'primaryButtonText': primaryButtonText,
     };
   }
 }
