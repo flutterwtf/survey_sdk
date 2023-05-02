@@ -36,6 +36,8 @@ class SliderQuestionData extends QuestionData<SliderThemeData> {
         isSkip,
         content,
         theme,
+        secondaryButtonText,
+        primaryButtonText,
       ];
 
   const SliderQuestionData({
@@ -48,6 +50,8 @@ class SliderQuestionData extends QuestionData<SliderThemeData> {
     required super.title,
     required super.subtitle,
     required super.isSkip,
+    required super.secondaryButtonText,
+    required super.primaryButtonText,
     super.content,
   });
 
@@ -69,6 +73,8 @@ class SliderQuestionData extends QuestionData<SliderThemeData> {
               'how well a group is learning new material or solicit feedback. '
               'The types of questions you ask directly impact the type of '
               'answer you receive.',
+          primaryButtonText: 'NEXT',
+          secondaryButtonText: 'SKIP',
         );
 
   factory SliderQuestionData.fromJson(Map<String, dynamic> json) {
@@ -86,6 +92,8 @@ class SliderQuestionData extends QuestionData<SliderThemeData> {
       theme: theme != null
           ? SliderQuestionTheme.fromJson(theme)
           : const SliderQuestionTheme.common(),
+      secondaryButtonText: json['secondaryButtonText'],
+      primaryButtonText: json['primaryButtonText'],
     );
   }
 
@@ -101,6 +109,8 @@ class SliderQuestionData extends QuestionData<SliderThemeData> {
     String? content,
     bool? isSkip,
     SliderQuestionTheme? theme,
+    String? secondaryButtonText,
+    String? primaryButtonText,
   }) {
     return SliderQuestionData(
       minValue: minValue ?? this.minValue,
@@ -113,6 +123,8 @@ class SliderQuestionData extends QuestionData<SliderThemeData> {
       divisions: divisions ?? this.divisions,
       isSkip: isSkip ?? this.isSkip,
       theme: theme ?? this.theme,
+      secondaryButtonText: secondaryButtonText ?? this.secondaryButtonText,
+      primaryButtonText: primaryButtonText ?? this.primaryButtonText,
     );
   }
 
@@ -137,6 +149,8 @@ class SliderQuestionData extends QuestionData<SliderThemeData> {
       'type': type,
       'isSkip': isSkip,
       'content': content,
+      'secondaryButtonText': secondaryButtonText,
+      'primaryButtonText': primaryButtonText,
     };
   }
 }

@@ -6,6 +6,7 @@ import 'package:survey_admin/presentation/widgets/customization_items/customizat
 import 'package:survey_admin/presentation/widgets/customization_items/customization_multiline_text_field.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/divisions_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/min_max_customization_item.dart';
+import 'package:survey_admin/presentation/widgets/customization_items/secondary_button_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/customization_tab.dart';
 import 'package:survey_core/survey_core.dart';
 
@@ -73,6 +74,31 @@ class SliderContentCustomizationTab extends CustomizationTab {
               onChanged: (divisions) => onChange(
                 editable.copyWith(divisions: divisions),
               ),
+            ),
+          ],
+        ),
+        CustomizationItemsContainer(
+          title: context.localization.primaryButton,
+          children: [
+            CustomizationMultilineTextField(
+              value: editable.primaryButtonText,
+              maxHeight: AppDimensions.maxTextFieldHeight,
+              onChanged: (text) => onChange(
+                editable.copyWith(primaryButtonText: text),
+              ),
+            ),
+          ],
+        ),
+        CustomizationItemsContainer(
+          itemsPadding: const EdgeInsets.all(
+            AppDimensions.marginM,
+          ),
+          children: [
+            SecondaryButtonCustomizationItem(
+              onChanged: (canSkip, title) => onChange(
+                editable.copyWith(isSkip: canSkip, secondaryButtonText: title),
+              ),
+              initialText: editable.secondaryButtonText,
             ),
           ],
         ),

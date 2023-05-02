@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:survey_core/src/domain/entities/question_answer.dart';
 import 'package:survey_core/src/domain/entities/question_types/slider_question_data.dart';
 import 'package:survey_core/src/domain/entities/themes/slider_question_theme.dart';
-import 'package:survey_core/src/presentation/localization/app_localizations_ext.dart';
 import 'package:survey_core/src/presentation/utils/utils.dart';
 import 'package:survey_core/src/presentation/widgets/question_bottom_button.dart';
 import 'package:survey_core/src/presentation/widgets/question_content.dart';
@@ -18,9 +17,12 @@ class SliderQuestionPage extends StatefulWidget {
   /// Callback that is called after pressing bottom button
   final OnSendCallback onSend;
 
+  final VoidCallback? onSecondaryButtonTap;
+
   const SliderQuestionPage({
     required this.data,
     required this.onSend,
+    this.onSecondaryButtonTap,
     super.key,
   });
 
@@ -86,14 +88,35 @@ class _SliderQuestionPageState extends State<SliderQuestionPage> {
                     ),
                   ),
                   const Spacer(),
-                  QuestionBottomButton(
-                    text: context.localization.next,
-                    onPressed: () {
-                      widget.onSend.call(
-                        index: widget.data.index,
-                        answer: QuestionAnswer<double>(_answer),
-                      );
-                    },
+                  Row(
+                    children: [
+                      if (widget.data.isSkip)
+                        Flexible(
+                          child: Padding(
+                            padding: const EdgeInsets.only(right: 8),
+                            child: QuestionBottomButton(
+                              text: widget.data.secondaryButtonText,
+                              radius: theme.buttonRadius,
+                              onPressed: widget.onSecondaryButtonTap,
+                            ),
+                          ),
+                        ),
+                      Flexible(
+                        child: QuestionBottomButton(
+                          text: widget.data.primaryButtonText,
+                          onPressed: () {
+                            widget.onSend.call(
+                              index: widget.data.index,
+                              answer: QuestionAnswer<double>(_answer),
+                            );
+                          },
+                          radius: theme.buttonRadius,
+                          color: theme.buttonFill,
+                          textColor: theme.buttonTextColor,
+                          textSize: theme.buttonTextSize,
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),

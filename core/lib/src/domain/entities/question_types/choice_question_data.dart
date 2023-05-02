@@ -33,6 +33,8 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
         theme,
         ruleType,
         ruleValue,
+        secondaryButtonText,
+        primaryButtonText,
       ];
 
   const ChoiceQuestionData({
@@ -45,6 +47,8 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
     required super.title,
     required super.subtitle,
     required super.isSkip,
+    required super.secondaryButtonText,
+    required super.primaryButtonText,
     super.content,
     this.selectedOptions,
   }) : assert(
@@ -75,6 +79,8 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
               'The types of questions you ask directly impact the type of '
               'answer you receive.',
           index: index,
+          primaryButtonText: 'NEXT',
+          secondaryButtonText: 'SKIP',
         );
 
   factory ChoiceQuestionData.fromJson(Map<String, dynamic> json) {
@@ -96,6 +102,8 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
       theme: theme != null
           ? ChoiceQuestionTheme.fromJson(theme)
           : const ChoiceQuestionTheme.common(),
+      primaryButtonText: json['primaryButtonText'],
+      secondaryButtonText: json['secondaryButtonText'],
     );
   }
 
@@ -112,6 +120,8 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
     RuleType? ruleType,
     int? ruleValue,
     ChoiceQuestionTheme? theme,
+    String? secondaryButtonText,
+    String? primaryButtonText,
   }) {
     return ChoiceQuestionData(
       isMultipleChoice: isMultipleChoice ?? this.isMultipleChoice,
@@ -125,6 +135,8 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
       content: content ?? this.content,
       isSkip: isSkip ?? this.isSkip,
       selectedOptions: selectedOptions ?? this.selectedOptions,
+      secondaryButtonText: secondaryButtonText ?? this.secondaryButtonText,
+      primaryButtonText: primaryButtonText ?? this.primaryButtonText,
     );
   }
 
@@ -154,6 +166,8 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
         'ruleType': ruleType.index,
         'ruleValue': ruleValue,
       },
+      'secondaryButtonText': secondaryButtonText,
+      'primaryButtonText': primaryButtonText,
     };
   }
 }

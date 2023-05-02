@@ -10,6 +10,7 @@ class CommonData {
   static const _firstIndex = 1;
   static const _secondIndex = 2;
   static const _thirdIndex = 3;
+  static const _fourthIndex = 4;
   static const _dividers = 10;
 
   CommonTheme get commonTheme {
@@ -27,6 +28,7 @@ class CommonData {
         intro(index: _firstIndex),
         input(index: _secondIndex),
         choice(index: _thirdIndex),
+        slider(index: _fourthIndex),
       ],
       commonTheme: commonTheme,
     );
@@ -36,13 +38,14 @@ class CommonData {
 
   IntroQuestionData intro({int index = 0}) {
     return IntroQuestionData(
-      buttonText: context.localization.next,
+      primaryButtonText: context.localization.next,
       title: context.localization.intro,
       index: index,
       subtitle: context.localization.emptySubtitle,
       isSkip: false,
       content: context.localization.questionContent,
       theme: const IntroQuestionTheme.common(),
+      secondaryButtonText: context.localization.skip,
     );
   }
 
@@ -55,7 +58,8 @@ class CommonData {
       isSkip: false,
       content: context.localization.questionContent,
       theme: const InputQuestionTheme.common(),
-      buttonText: context.localization.next,
+      primaryButtonText: context.localization.next,
+      secondaryButtonText: context.localization.skip,
     );
   }
 
@@ -75,6 +79,8 @@ class CommonData {
       ruleType: RuleType.none,
       ruleValue: 0,
       theme: const ChoiceQuestionTheme.common(),
+      primaryButtonText: context.localization.next,
+      secondaryButtonText: context.localization.skip,
     );
   }
 
@@ -90,6 +96,8 @@ class CommonData {
       content: context.localization.questionContent,
       divisions: _dividers,
       theme: const SliderQuestionTheme.common(),
+      secondaryButtonText: context.localization.skip,
+      primaryButtonText: context.localization.next,
     );
   }
 }

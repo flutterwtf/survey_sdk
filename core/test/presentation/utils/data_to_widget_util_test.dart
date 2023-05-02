@@ -79,6 +79,8 @@ class _BadQuestionData extends QuestionData {
           title: 'title',
           subtitle: 'subtitle',
           isSkip: true,
+          secondaryButtonText: 'SKIP',
+          primaryButtonText: 'NEXT',
         );
 
   @override
@@ -88,6 +90,8 @@ class _BadQuestionData extends QuestionData {
     String? subtitle,
     String? content,
     bool? isSkip,
+    String? secondaryButtonText,
+    String? primaryButtonText,
   }) {
     throw UnimplementedError();
   }
