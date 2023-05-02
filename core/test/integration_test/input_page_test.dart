@@ -11,6 +11,7 @@ import '../utils/mocked_entities.dart';
 
 void main() {
   group('Input question page test', () {
+    const commonInputQuestionTheme = InputQuestionTheme.common();
     Widget app(List<QuestionData> questions) {
       return AppTester(
         child: Survey(
@@ -49,8 +50,12 @@ void main() {
             [
               MockedEntities.input1.copyWith(
                 validator: InputValidator.email(),
-                theme: const InputQuestionTheme.common()
-                    .copyWith(inputType: InputType.email),
+                theme: commonInputQuestionTheme
+                    .copyWith(inputType: InputType.email)
+                    .lerp(
+                      commonInputQuestionTheme,
+                      0,
+                    ),
               ),
             ],
           ),
@@ -84,8 +89,9 @@ void main() {
           [
             MockedEntities.input1.copyWith(
               validator: InputValidator.phone(),
-              theme: const InputQuestionTheme.common()
-                  .copyWith(inputType: InputType.phone),
+              theme: commonInputQuestionTheme.copyWith(
+                inputType: InputType.phone,
+              ),
             ),
           ],
         ),
@@ -111,33 +117,73 @@ void main() {
       expect((cubit.state as SurveyLoadedState).answers.length, 1);
     });
 
-    testWidgets('input page with date validator', (tester) async {
-      await tester.pumpWidget(
-        app(
-          [
-            MockedEntities.input1.copyWith(
-              validator: InputValidator.date(),
-              theme: const InputQuestionTheme.common()
-                  .copyWith(inputType: InputType.date),
+    group('input page with date validator', () {
+      testWidgets(
+        'input page with date validator (variant: valid date)',
+        (tester) async {
+          await tester.pumpWidget(
+            app(
+              [
+                MockedEntities.input1.copyWith(
+                  validator: InputValidator.date(),
+                  theme: commonInputQuestionTheme.copyWith(
+                    inputType: InputType.date,
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
-      );
-      final inputField = find.byType(DateTimeField);
-      final nextButton = find.text('NEXT');
-      final cubit = Injector().surveyCubit;
+          );
+          final inputField = find.byType(DateTimeField);
+          final nextButton = find.text('NEXT');
+          final cubit = Injector().surveyCubit;
 
-      await tester.tap(inputField);
-      await tester.pumpAndSettle();
-      await tester.tap(find.text('OK'));
-      await tester.pumpAndSettle();
-      await tester.tap(nextButton);
-      expect((cubit.state as SurveyLoadedState).answers.length, 1);
-      expect(
-        DateFormat('dd.MM.yyyy').format(
-          (cubit.state as SurveyLoadedState).answers[0]?.answer,
-        ),
-        DateFormat('dd.MM.yyyy').format(DateTime.now()),
+          await tester.tap(inputField);
+          await tester.pumpAndSettle();
+          await tester.tap(find.text('OK'));
+          await tester.pumpAndSettle();
+          await tester.tap(nextButton);
+          expect((cubit.state as SurveyLoadedState).answers.length, 1);
+          expect(
+            DateFormat('dd.MM.yyyy').format(
+              (cubit.state as SurveyLoadedState).answers[0]?.answer,
+            ),
+            DateFormat('dd.MM.yyyy').format(DateTime.now()),
+          );
+        },
+      );
+
+      testWidgets(
+        'input page with date validator (variant: invalid date)',
+        (tester) async {
+          await tester.pumpWidget(
+            app(
+              [
+                MockedEntities.input1.copyWith(
+                  validator: InputValidator.date(),
+                  theme: commonInputQuestionTheme.copyWith(
+                    inputType: InputType.date,
+                  ),
+                ),
+              ],
+            ),
+          );
+          final inputField = find.byType(DateTimeField);
+          final editIcon = find.byIcon(Icons.edit);
+          final cubit = Injector().surveyCubit;
+
+          await tester.tap(inputField);
+          await tester.pumpAndSettle();
+          await tester.tap(editIcon);
+          await tester.pumpAndSettle();
+
+          final textField = find.byType(TextFormField);
+
+          await tester.enterText(textField, 'invalid data');
+          await tester.tap(find.text('OK'));
+          await tester.pumpAndSettle();
+          expect(find.text('Invalid format.'), findsOneWidget);
+          expect((cubit.state as SurveyLoadedState).answers.length, 0);
+        },
       );
     });
 
@@ -147,8 +193,9 @@ void main() {
           [
             MockedEntities.input1.copyWith(
               validator: InputValidator.password(),
-              theme: const InputQuestionTheme.common()
-                  .copyWith(inputType: InputType.password),
+              theme: commonInputQuestionTheme.copyWith(
+                inputType: InputType.password,
+              ),
             ),
           ],
         ),
