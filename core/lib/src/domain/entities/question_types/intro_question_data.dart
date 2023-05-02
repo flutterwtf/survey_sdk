@@ -38,7 +38,7 @@ class IntroQuestionData extends QuestionData {
           title: 'Intro',
           index: index,
           subtitle: '',
-          isSkip: false,
+          isSkip: true,
           content:
               'You may simply need a single, brief answer without discussion. '
               'Other times, you may want to talk through a scenario, evaluate '
