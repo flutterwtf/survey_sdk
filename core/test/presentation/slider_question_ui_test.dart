@@ -17,16 +17,68 @@ void main() {
       final completerOnSendButtonTap = Completer<void>();
       const title = 'Slider';
       const subTitle = '';
+      const commonSliderQuestionTheme = SliderQuestionTheme.common();
+      const expectedSliderQuestionThemeResult = SliderQuestionTheme(
+        activeColor: Colors.black,
+        inactiveColor: Colors.black,
+        thumbColor: Colors.black,
+        thumbRadius: 1,
+        thickness: 1,
+        fill: Colors.black,
+        titleColor: Colors.black,
+        titleSize: 1,
+        subtitleColor: Colors.black,
+        subtitleSize: 1,
+        buttonFill: Colors.black,
+        buttonTextColor: Colors.black,
+        buttonTextSize: 1,
+        buttonRadius: 1,
+      );
 
       final sliderQuestionPage = AppTester(
         child: SliderQuestionPage(
           data: const SliderQuestionData.common().copyWith(
-            theme: const SliderQuestionTheme.common(),
+            theme: commonSliderQuestionTheme.lerp(
+              commonSliderQuestionTheme,
+              0,
+            ),
           ),
           onSend: ({required int index, required QuestionAnswer answer}) {
             completerOnSendButtonTap.complete();
           },
         ),
+      );
+
+      test(
+        "SliderQuestionData's copyWith without arguments",
+        () {
+          final result = commonSliderQuestionTheme.copyWith();
+          expect(result, commonSliderQuestionTheme);
+        },
+      );
+
+      test(
+        "SliderQuestionData's copyWith with arguments",
+        () {
+          final result = commonSliderQuestionTheme.copyWith(
+            activeColor: Colors.black,
+            inactiveColor: Colors.black,
+            thumbColor: Colors.black,
+            thumbRadius: 1,
+            thickness: 1,
+            fill: Colors.black,
+            titleColor: Colors.black,
+            titleSize: 1,
+            subtitleColor: Colors.black,
+            subtitleSize: 1,
+            buttonFill: Colors.black,
+            buttonTextColor: Colors.black,
+            buttonTextSize: 1,
+            buttonRadius: 1,
+          );
+
+          expect(result, expectedSliderQuestionThemeResult);
+        },
       );
 
       testWidgets(
@@ -67,7 +119,7 @@ void main() {
             child: SliderQuestionPage(
               data: const SliderQuestionData.common().copyWith(
                 minValue: 0,
-                theme: const SliderQuestionTheme.common(),
+                theme: commonSliderQuestionTheme,
               ),
               onSend: ({required int index, required QuestionAnswer answer}) {
                 expect(

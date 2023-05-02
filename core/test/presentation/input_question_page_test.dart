@@ -13,6 +13,7 @@ void main() {
   const testValidTextString = 'test string1';
   const testInvalidNumberString = 'test string2';
   const testValidNumberString = '12';
+  const testValidDateString = '28.04.2023';
 
   const validationErrorMessage = 'Validation error';
 
@@ -35,6 +36,13 @@ void main() {
       test('Valid number returns null', () {
         final result = InputValidator.number().validate(
           testValidNumberString,
+        );
+        expect(result, null);
+      });
+
+      test('Valid date returns null', () {
+        final result = InputValidator.date().validate(
+          testValidDateString,
         );
         expect(result, null);
       });
