@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:survey_admin/presentation/app/localization/app_localizations_ext.dart';
-import 'package:survey_admin/presentation/utils/utils.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/color_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/color_thickness_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
@@ -10,7 +9,7 @@ import 'package:survey_admin/presentation/widgets/customization_panel/customizat
 import 'package:survey_core/survey_core.dart';
 
 class SliderCustomizationTab extends CustomizationTab {
-  final OnChangeCallback onChange;
+  final ValueChanged<QuestionData> onChange;
   final SliderQuestionData editable;
 
   const SliderCustomizationTab({

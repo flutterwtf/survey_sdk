@@ -14,7 +14,7 @@ import 'package:survey_admin/presentation/widgets/customization_panel/customizat
 import 'package:survey_core/survey_core.dart';
 
 class InputCustomizationTab extends CustomizationTab {
-  final OnChangeCallback onChange;
+  final ValueChanged<QuestionData> onChange;
   final InputQuestionData editable;
 
   const InputCustomizationTab({
