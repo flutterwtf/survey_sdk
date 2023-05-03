@@ -41,13 +41,13 @@ class _OptionCustomizationItemState extends State<OptionCustomizationItem> {
   }
 
   void _delete(String option) {
-    if (widget.ruleValue == _options.length) {
-      setState(() => _options.remove(option));
-      widget.onChanged(List.of(_options), 0);
-    } else {
-      setState(() => _options.remove(option));
-      widget.onChanged(List.of(_options), widget.ruleValue);
-    }
+    final ruleValue =
+        widget.ruleValue == _options.length ? 0 : widget.ruleValue;
+    final newOptions = List.of(_options)..remove(option);
+    setState(() {
+      widget.onChanged(newOptions, ruleValue);
+      _options = newOptions;
+    });
   }
 
   @override
