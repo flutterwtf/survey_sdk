@@ -26,11 +26,13 @@ class ThicknessCustomizationItem extends StatefulWidget {
 class _ThicknessCustomizationItemState
     extends State<ThicknessCustomizationItem> {
   late final TextEditingController _textEditingController;
+  late final FocusNode _textEditingFocusNode;
 
   @override
   void initState() {
     _textEditingController = TextEditingController();
     _textEditingController.text = widget.initialSize.toString();
+    _textEditingFocusNode = FocusNode();
     super.initState();
   }
 
@@ -52,30 +54,31 @@ class _ThicknessCustomizationItemState
   @override
   void dispose() {
     _textEditingController.dispose();
+    _textEditingFocusNode.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     const lengthInputFormatter = 2;
-    return Row(
-      children: [
-        SizedBox(
-          width: AppDimensions.marginXL,
-          child: CustomizationTextField(
-            controller: _textEditingController,
-            onChanged: _thicknessChanged,
-            inputFormatters: [
-              FilteringTextInputFormatter.digitsOnly,
-              LengthLimitingTextInputFormatter(lengthInputFormatter),
-            ],
+    return SizedBox(
+      width: AppDimensions.margin3XL,
+      child: CustomizationTextField(
+        controller: _textEditingController,
+        inputFormatters: [
+          FilteringTextInputFormatter.digitsOnly,
+          LengthLimitingTextInputFormatter(lengthInputFormatter),
+        ],
+        onChanged: _thicknessChanged,
+        decoration: InputDecoration(
+          isCollapsed: true,
+          border: InputBorder.none,
+          suffix: Text(
+            context.localization.px,
+            style: context.theme.textTheme.bodyLarge,
           ),
         ),
-        Text(
-          context.localization.px,
-          style: context.theme.textTheme.bodyLarge,
-        ),
-      ],
+      ),
     );
   }
 }
