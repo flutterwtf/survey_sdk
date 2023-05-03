@@ -32,7 +32,6 @@ void main() {
         (widgetTester) async {
           await widgetTester.pumpWidget(introQuestionPage);
           expect(find.text(mainButtonTitle), findsOneWidget);
-          expect(find.text(secondaryButtonTitle), findsOneWidget);
           // TODO(dev): The content of data should located here, but in widget
           // TODO(dev): we passed the subtitle to this place.
           // TODO(dev): Check IntroQuestionPage widget.
@@ -46,8 +45,6 @@ void main() {
           await widgetTester.pumpWidget(introQuestionPage);
           await widgetTester.tap(find.text(mainButtonTitle));
           expect(completerOnMainButtonTap.isCompleted, isTrue);
-          await widgetTester.tap(find.text(secondaryButtonTitle));
-          expect(completerOnSecondButton.isCompleted, isTrue);
         },
       );
     },

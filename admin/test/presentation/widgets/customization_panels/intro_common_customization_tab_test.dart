@@ -39,8 +39,8 @@ void main() {
         'load widget',
         (tester) async {
           await tester.pumpWidget(introCommonCustomPanel);
-          expect(find.byType(ColorCustomizationItem), findsNWidgets(7));
-          expect(find.byType(RadiusCustomizationItem), findsNWidgets(2));
+          expect(find.byType(ColorCustomizationItem), findsNWidgets(5));
+          expect(find.byType(RadiusCustomizationItem), findsNWidgets(1));
         },
       );
       testWidgets(
@@ -57,14 +57,12 @@ void main() {
             await tester.testTextInput.receiveAction(TextInputAction.done);
           }
           await tester.pump();
-          expect(find.text(redColorCode), findsNWidgets(7));
+          expect(find.text(redColorCode), findsNWidgets(5));
           expect(data.value.theme?.fill, redColor);
           expect(data.value.theme?.titleColor, redColor);
           expect(data.value.theme?.subtitleColor, redColor);
           expect(data.value.theme?.primaryButtonFill, redColor);
           expect(data.value.theme?.primaryButtonTextColor, redColor);
-          expect(data.value.theme?.secondaryButtonFill, redColor);
-          expect(data.value.theme?.secondaryButtonTextColor, redColor);
         },
       );
       testWidgets(

@@ -112,41 +112,42 @@ class ChoiceCommonCustomizationTab extends CustomizationTab {
             ),
           ],
         ),
-        CustomizationItemsContainer(
-          title: context.localization.secondaryButton,
-          children: [
-            ColorCustomizationItem(
-              initialColor: theme.secondaryButtonFill,
-              onColorPicked: (color) => onChange(
-                editable.copyWith(
-                  theme: theme.copyWith(secondaryButtonFill: color),
+        if (editable.isSkip)
+          CustomizationItemsContainer(
+            title: context.localization.secondaryButton,
+            children: [
+              ColorCustomizationItem(
+                initialColor: theme.secondaryButtonFill,
+                onColorPicked: (color) => onChange(
+                  editable.copyWith(
+                    theme: theme.copyWith(secondaryButtonFill: color),
+                  ),
                 ),
               ),
-            ),
-            TextStyleCustomizationItem(
-              initialColor: theme.secondaryButtonTextColor,
-              onColorPicked: (color) => onChange(
-                editable.copyWith(
-                  theme: theme.copyWith(secondaryButtonTextColor: color),
+              TextStyleCustomizationItem(
+                initialColor: theme.secondaryButtonTextColor,
+                onColorPicked: (color) => onChange(
+                  editable.copyWith(
+                    theme: theme.copyWith(secondaryButtonTextColor: color),
+                  ),
+                ),
+                initialSize: theme.secondaryButtonTextSize,
+                onSizeChanged: (size) => onChange(
+                  editable.copyWith(
+                    theme: theme.copyWith(secondaryButtonTextSize: size),
+                  ),
                 ),
               ),
-              initialSize: theme.secondaryButtonTextSize,
-              onSizeChanged: (size) => onChange(
-                editable.copyWith(
-                  theme: theme.copyWith(secondaryButtonTextSize: size),
+              RadiusCustomizationItem(
+                initialValue: theme.secondaryButtonRadius,
+                onRadiusChanged: (radius) => onChange(
+                  editable.copyWith(
+                    theme: theme.copyWith(secondaryButtonRadius: radius),
+                  ),
                 ),
               ),
-            ),
-            RadiusCustomizationItem(
-              initialValue: theme.secondaryButtonRadius,
-              onRadiusChanged: (radius) => onChange(
-                editable.copyWith(
-                  theme: theme.copyWith(secondaryButtonRadius: radius),
-                ),
-              ),
-            ),
-          ],
-        ),
+            ],
+          ),
       ],
     );
   }

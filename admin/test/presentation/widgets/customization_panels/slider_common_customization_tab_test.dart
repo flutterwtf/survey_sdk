@@ -36,7 +36,7 @@ void main() {
         findsOneWidget,
       );
       expect(
-        find.widgetWithText(CustomizationItemsContainer, 'Button'),
+        find.widgetWithText(CustomizationItemsContainer, 'Primary button'),
         findsOneWidget,
       );
     });
@@ -209,7 +209,7 @@ void main() {
 
     testWidgets('Input size(num) for DownButton', (tester) async {
       await tester.pumpWidget(page);
-      await tester.enterText(find.byType(CustomizationTextField).at(6), '14');
+      await tester.enterText(find.byType(CustomizationTextField).at(7), '14');
       expect(find.text('14'), findsOneWidget);
       expect(data.theme?.primaryButtonTextSize, 14);
     });
@@ -225,7 +225,7 @@ void main() {
       (tester) async {
         await tester.pumpWidget(page);
         await tester.enterText(
-          find.byType(CustomizationTextField).at(6),
+          find.byType(CustomizationTextField).at(7),
           '143',
         );
         expect(find.text('143'), findsNothing);
@@ -235,14 +235,14 @@ void main() {
 
     testWidgets('Input size(num) for BorderButton', (tester) async {
       await tester.pumpWidget(page);
-      await tester.enterText(find.byType(CustomizationTextField).at(7), '18');
+      await tester.enterText(find.byType(CustomizationTextField).at(8), '18');
       expect(find.text('18'), findsOneWidget);
       expect(data.theme?.primaryButtonRadius, 18);
     });
 
     testWidgets('Input size(string) for BorderButton', (tester) async {
       await tester.pumpWidget(page);
-      await tester.enterText(find.byType(CustomizationTextField).at(7), 'q8');
+      await tester.enterText(find.byType(CustomizationTextField).at(8), 'q8');
       expect(find.text('q8'), findsNothing);
       expect(data.theme?.primaryButtonRadius, 8);
     });
@@ -252,7 +252,7 @@ void main() {
       (tester) async {
         await tester.pumpWidget(page);
         await tester.enterText(
-          find.byType(CustomizationTextField).at(7),
+          find.byType(CustomizationTextField).at(8),
           '198',
         );
         expect(find.text('198'), findsNothing);
