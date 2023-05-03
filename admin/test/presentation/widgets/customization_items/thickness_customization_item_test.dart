@@ -11,7 +11,7 @@ void main() {
     () {
       const initialSize = 16.0;
       const text = 'px';
-      const inputNum = '10';
+      const inputNum = '10.0';
       const inputText = 'qwe';
       const inputValidation = '100';
       final page = AppTester(
