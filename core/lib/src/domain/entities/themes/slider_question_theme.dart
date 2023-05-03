@@ -24,11 +24,14 @@ class SliderQuestionTheme extends ThemeExtension<SliderQuestionTheme>
   final double titleSize;
   final Color subtitleColor;
   final double subtitleSize;
-  final Color buttonFill;
-  final Color buttonTextColor;
-  final double buttonTextSize;
-  final double buttonRadius;
-
+  final Color primaryButtonFill;
+  final Color primaryButtonTextColor;
+  final double primaryButtonTextSize;
+  final double primaryButtonRadius;
+  final Color secondaryButtonFill;
+  final Color secondaryButtonTextColor;
+  final double secondaryButtonTextSize;
+  final double secondaryButtonRadius;
   @override
   List<Object?> get props => [
         activeColor,
@@ -41,10 +44,14 @@ class SliderQuestionTheme extends ThemeExtension<SliderQuestionTheme>
         titleSize,
         subtitleColor,
         subtitleSize,
-        buttonFill,
-        buttonTextColor,
-        buttonTextSize,
-        buttonRadius,
+        primaryButtonFill,
+        primaryButtonTextColor,
+        primaryButtonTextSize,
+        primaryButtonRadius,
+        secondaryButtonFill,
+        secondaryButtonTextColor,
+        secondaryButtonTextSize,
+        secondaryButtonRadius,
       ];
 
   // TODO(dev): Add hint text.
@@ -59,10 +66,14 @@ class SliderQuestionTheme extends ThemeExtension<SliderQuestionTheme>
     required this.titleSize,
     required this.subtitleColor,
     required this.subtitleSize,
-    required this.buttonFill,
-    required this.buttonTextColor,
-    required this.buttonTextSize,
-    required this.buttonRadius,
+    required this.primaryButtonFill,
+    required this.primaryButtonTextColor,
+    required this.primaryButtonTextSize,
+    required this.primaryButtonRadius,
+    required this.secondaryButtonFill,
+    required this.secondaryButtonTextColor,
+    required this.secondaryButtonTextSize,
+    required this.secondaryButtonRadius,
   });
 
   const SliderQuestionTheme.common()
@@ -77,10 +88,14 @@ class SliderQuestionTheme extends ThemeExtension<SliderQuestionTheme>
           titleSize: _titleSize,
           subtitleColor: Colors.black,
           subtitleSize: _subtitleSize,
-          buttonFill: Colors.black,
-          buttonTextColor: Colors.white,
-          buttonTextSize: _buttonTextSize,
-          buttonRadius: _buttonRadius,
+          primaryButtonFill: Colors.black,
+          primaryButtonTextColor: Colors.white,
+          primaryButtonTextSize: _buttonTextSize,
+          primaryButtonRadius: _buttonRadius,
+          secondaryButtonFill: Colors.black,
+          secondaryButtonTextColor: Colors.white,
+          secondaryButtonTextSize: _buttonTextSize,
+          secondaryButtonRadius: _buttonRadius,
         );
 
   SliderQuestionTheme.fromJson(Map<String, dynamic> json)
@@ -94,10 +109,14 @@ class SliderQuestionTheme extends ThemeExtension<SliderQuestionTheme>
         titleSize = json['titleSize'],
         subtitleColor = Color(json['subtitleColor']),
         subtitleSize = json['subtitleSize'],
-        buttonFill = Color(json['buttonFill']),
-        buttonTextColor = Color(json['buttonTextColor']),
-        buttonTextSize = json['buttonTextSize'],
-        buttonRadius = json['buttonRadius'];
+        primaryButtonFill = Color(json['primaryButtonFill']),
+        primaryButtonTextColor = Color(json['primaryButtonTextColor']),
+        primaryButtonTextSize = json['primaryButtonTextSize'],
+        primaryButtonRadius = json['primaryButtonRadius'],
+        secondaryButtonFill = Color(json['secondaryButtonFill']),
+        secondaryButtonTextColor = Color(json['secondaryButtonTextColor']),
+        secondaryButtonTextSize = json['secondaryButtonTextSize'],
+        secondaryButtonRadius = json['secondaryButtonRadius'];
 
   @override
   Map<String, dynamic> toJson() => {
@@ -111,10 +130,14 @@ class SliderQuestionTheme extends ThemeExtension<SliderQuestionTheme>
         'titleSize': titleSize,
         'subtitleColor': subtitleColor.value,
         'subtitleSize': subtitleSize,
-        'buttonFill': buttonFill.value,
-        'buttonTextColor': buttonTextColor.value,
-        'buttonTextSize': buttonTextSize,
-        'buttonRadius': buttonRadius,
+        'primaryButtonFill': primaryButtonFill.value,
+        'primaryButtonTextColor': primaryButtonTextColor.value,
+        'primaryButtonTextSize': primaryButtonTextSize,
+        'primaryButtonRadius': primaryButtonRadius,
+        'secondaryButtonFill': secondaryButtonFill.value,
+        'secondaryButtonTextColor': secondaryButtonTextColor.value,
+        'secondaryButtonTextSize': secondaryButtonTextSize,
+        'secondaryButtonRadius': secondaryButtonRadius,
       };
 
   @override
@@ -129,10 +152,14 @@ class SliderQuestionTheme extends ThemeExtension<SliderQuestionTheme>
     double? titleSize,
     Color? subtitleColor,
     double? subtitleSize,
-    Color? buttonFill,
-    Color? buttonTextColor,
-    double? buttonTextSize,
-    double? buttonRadius,
+    Color? primaryButtonFill,
+    Color? primaryButtonTextColor,
+    double? primaryButtonTextSize,
+    double? primaryButtonRadius,
+    Color? secondaryButtonFill,
+    Color? secondaryButtonTextColor,
+    double? secondaryButtonTextSize,
+    double? secondaryButtonRadius,
   }) {
     return SliderQuestionTheme(
       activeColor: activeColor ?? this.activeColor,
@@ -145,10 +172,19 @@ class SliderQuestionTheme extends ThemeExtension<SliderQuestionTheme>
       titleSize: titleSize ?? this.titleSize,
       subtitleColor: subtitleColor ?? this.subtitleColor,
       subtitleSize: subtitleSize ?? this.subtitleSize,
-      buttonFill: buttonFill ?? this.buttonFill,
-      buttonTextColor: buttonTextColor ?? this.buttonTextColor,
-      buttonTextSize: buttonTextSize ?? this.buttonTextSize,
-      buttonRadius: buttonRadius ?? this.buttonRadius,
+      primaryButtonFill: primaryButtonFill ?? this.primaryButtonFill,
+      primaryButtonTextColor:
+          primaryButtonTextColor ?? this.primaryButtonTextColor,
+      primaryButtonTextSize:
+          primaryButtonTextSize ?? this.primaryButtonTextSize,
+      primaryButtonRadius: primaryButtonRadius ?? this.primaryButtonRadius,
+      secondaryButtonFill: secondaryButtonFill ?? this.secondaryButtonFill,
+      secondaryButtonTextColor:
+          secondaryButtonTextColor ?? this.secondaryButtonTextColor,
+      secondaryButtonTextSize:
+          secondaryButtonTextSize ?? this.secondaryButtonTextSize,
+      secondaryButtonRadius:
+          secondaryButtonRadius ?? this.secondaryButtonRadius,
     );
   }
 
@@ -171,10 +207,46 @@ class SliderQuestionTheme extends ThemeExtension<SliderQuestionTheme>
       titleSize: lerpDouble(titleSize, other.titleSize, t)!,
       subtitleColor: Color.lerp(subtitleColor, other.subtitleColor, t)!,
       subtitleSize: lerpDouble(subtitleSize, other.subtitleSize, t)!,
-      buttonFill: Color.lerp(buttonFill, other.buttonFill, t)!,
-      buttonTextColor: Color.lerp(buttonTextColor, other.buttonTextColor, t)!,
-      buttonTextSize: lerpDouble(buttonTextSize, other.buttonTextSize, t)!,
-      buttonRadius: lerpDouble(buttonRadius, other.buttonRadius, t)!,
+      primaryButtonFill: Color.lerp(
+        primaryButtonFill,
+        other.primaryButtonFill,
+        t,
+      )!,
+      primaryButtonTextColor: Color.lerp(
+        primaryButtonTextColor,
+        other.primaryButtonTextColor,
+        t,
+      )!,
+      primaryButtonTextSize: lerpDouble(
+        primaryButtonTextSize,
+        other.primaryButtonTextSize,
+        t,
+      )!,
+      primaryButtonRadius: lerpDouble(
+        primaryButtonRadius,
+        other.primaryButtonRadius,
+        t,
+      )!,
+      secondaryButtonFill: Color.lerp(
+        secondaryButtonFill,
+        other.secondaryButtonFill,
+        t,
+      )!,
+      secondaryButtonTextColor: Color.lerp(
+        secondaryButtonTextColor,
+        other.secondaryButtonTextColor,
+        t,
+      )!,
+      secondaryButtonTextSize: lerpDouble(
+        secondaryButtonTextSize,
+        other.secondaryButtonTextSize,
+        t,
+      )!,
+      secondaryButtonRadius: lerpDouble(
+        secondaryButtonRadius,
+        other.secondaryButtonRadius,
+        t,
+      )!,
     );
   }
 }

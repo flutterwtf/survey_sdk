@@ -11,8 +11,8 @@ class SecondaryButtonCustomizationItem extends StatefulWidget {
 
   const SecondaryButtonCustomizationItem({
     required this.onChanged,
+    required this.isShown,
     this.initialText = '',
-    this.isShown = false,
     super.key,
   });
 
@@ -41,6 +41,7 @@ class _SecondaryButtonCustomizationItemState
       children: [
         SwitchCustomizationItem(
           title: context.localization.secondaryButton,
+          initialValue: _isShown,
           onChanged: (isToggled) {
             setState(() => _isShown = isToggled);
             widget.onChanged(_isShown, _text);

@@ -24,16 +24,28 @@ class IntroQuestionTheme extends ThemeExtension<IntroQuestionTheme>
   final double subtitleSize;
 
   /// Background color of the main button
-  final Color buttonFill;
+  final Color primaryButtonFill;
 
   /// Color of the text on the main button
-  final Color buttonTextColor;
+  final Color primaryButtonTextColor;
 
   /// Font size of the text on the main button
-  final double buttonTextSize;
+  final double primaryButtonTextSize;
 
   /// Border radius of the main button
-  final double buttonRadius;
+  final double primaryButtonRadius;
+
+  /// Background color of the secondary button
+  final Color secondaryButtonFill;
+
+  /// Color of the text on the secondary button
+  final Color secondaryButtonTextColor;
+
+  /// Font size of the text on the secondary button
+  final double secondaryButtonTextSize;
+
+  /// Border radius of the secondary button
+  final double secondaryButtonRadius;
 
   @override
   List<Object?> get props => [
@@ -42,10 +54,14 @@ class IntroQuestionTheme extends ThemeExtension<IntroQuestionTheme>
         titleSize,
         subtitleColor,
         subtitleSize,
-        buttonFill,
-        buttonTextColor,
-        buttonTextSize,
-        buttonRadius,
+        primaryButtonFill,
+        primaryButtonTextColor,
+        primaryButtonTextSize,
+        primaryButtonRadius,
+        secondaryButtonFill,
+        secondaryButtonTextColor,
+        secondaryButtonTextSize,
+        secondaryButtonRadius,
       ];
 
   const IntroQuestionTheme({
@@ -54,10 +70,14 @@ class IntroQuestionTheme extends ThemeExtension<IntroQuestionTheme>
     required this.titleSize,
     required this.subtitleColor,
     required this.subtitleSize,
-    required this.buttonFill,
-    required this.buttonTextColor,
-    required this.buttonTextSize,
-    required this.buttonRadius,
+    required this.primaryButtonFill,
+    required this.primaryButtonTextColor,
+    required this.primaryButtonTextSize,
+    required this.primaryButtonRadius,
+    required this.secondaryButtonFill,
+    required this.secondaryButtonTextColor,
+    required this.secondaryButtonTextSize,
+    required this.secondaryButtonRadius,
   });
 
   /// Default color values of intro question page
@@ -68,10 +88,14 @@ class IntroQuestionTheme extends ThemeExtension<IntroQuestionTheme>
           titleSize: AppFonts.sizeL,
           subtitleColor: AppColors.black,
           subtitleSize: AppFonts.sizeS,
-          buttonFill: AppColors.black,
-          buttonTextColor: AppColors.white,
-          buttonTextSize: AppFonts.sizeS,
-          buttonRadius: AppDimensions.circularRadiusS,
+          primaryButtonFill: AppColors.black,
+          primaryButtonTextColor: AppColors.white,
+          primaryButtonTextSize: AppFonts.sizeS,
+          primaryButtonRadius: AppDimensions.circularRadiusS,
+          secondaryButtonFill: AppColors.black,
+          secondaryButtonTextColor: AppColors.white,
+          secondaryButtonTextSize: AppFonts.sizeS,
+          secondaryButtonRadius: AppDimensions.circularRadiusS,
         );
 
   factory IntroQuestionTheme.fromJson(Map<String, dynamic> json) {
@@ -81,10 +105,14 @@ class IntroQuestionTheme extends ThemeExtension<IntroQuestionTheme>
       titleSize: json['titleSize'],
       subtitleColor: Color(json['subtitleColor']),
       subtitleSize: json['subtitleSize'],
-      buttonFill: Color(json['buttonFill']),
-      buttonTextColor: Color(json['buttonTextColor']),
-      buttonTextSize: json['buttonTextSize'],
-      buttonRadius: json['buttonRadius'],
+      primaryButtonFill: Color(json['primaryButtonFill']),
+      primaryButtonTextColor: Color(json['primaryButtonTextColor']),
+      primaryButtonTextSize: json['primaryButtonTextSize'],
+      primaryButtonRadius: json['primaryButtonRadius'],
+      secondaryButtonFill: Color(json['secondaryButtonFill']),
+      secondaryButtonTextColor: Color(json['secondaryButtonTextColor']),
+      secondaryButtonTextSize: json['secondaryButtonTextSize'],
+      secondaryButtonRadius: json['secondaryButtonRadius'],
     );
   }
 
@@ -95,10 +123,14 @@ class IntroQuestionTheme extends ThemeExtension<IntroQuestionTheme>
     double? titleSize,
     Color? subtitleColor,
     double? subtitleSize,
-    Color? buttonFill,
-    Color? buttonTextColor,
-    double? buttonTextSize,
-    double? buttonRadius,
+    Color? primaryButtonFill,
+    Color? primaryButtonTextColor,
+    double? primaryButtonTextSize,
+    double? primaryButtonRadius,
+    Color? secondaryButtonFill,
+    Color? secondaryButtonTextColor,
+    double? secondaryButtonTextSize,
+    double? secondaryButtonRadius,
   }) {
     return IntroQuestionTheme(
       fill: fill ?? this.fill,
@@ -106,10 +138,19 @@ class IntroQuestionTheme extends ThemeExtension<IntroQuestionTheme>
       titleSize: titleSize ?? this.titleSize,
       subtitleColor: subtitleColor ?? this.subtitleColor,
       subtitleSize: subtitleSize ?? this.subtitleSize,
-      buttonFill: buttonFill ?? this.buttonFill,
-      buttonTextColor: buttonTextColor ?? this.buttonTextColor,
-      buttonTextSize: buttonTextSize ?? this.buttonTextSize,
-      buttonRadius: buttonRadius ?? this.buttonRadius,
+      primaryButtonFill: primaryButtonFill ?? this.primaryButtonFill,
+      primaryButtonTextColor:
+          primaryButtonTextColor ?? this.primaryButtonTextColor,
+      primaryButtonTextSize:
+          primaryButtonTextSize ?? this.primaryButtonTextSize,
+      primaryButtonRadius: primaryButtonRadius ?? this.primaryButtonRadius,
+      secondaryButtonFill: secondaryButtonFill ?? this.secondaryButtonFill,
+      secondaryButtonTextColor:
+          secondaryButtonTextColor ?? this.secondaryButtonTextColor,
+      secondaryButtonTextSize:
+          secondaryButtonTextSize ?? this.secondaryButtonTextSize,
+      secondaryButtonRadius:
+          secondaryButtonRadius ?? this.secondaryButtonRadius,
     );
   }
 
@@ -127,10 +168,46 @@ class IntroQuestionTheme extends ThemeExtension<IntroQuestionTheme>
       titleSize: lerpDouble(titleSize, other.titleSize, t)!,
       subtitleColor: Color.lerp(subtitleColor, other.subtitleColor, t)!,
       subtitleSize: lerpDouble(subtitleSize, other.subtitleSize, t)!,
-      buttonFill: Color.lerp(buttonFill, other.buttonFill, t)!,
-      buttonTextColor: Color.lerp(buttonTextColor, other.buttonTextColor, t)!,
-      buttonTextSize: lerpDouble(buttonTextSize, other.buttonTextSize, t)!,
-      buttonRadius: lerpDouble(buttonRadius, other.buttonRadius, t)!,
+      primaryButtonFill: Color.lerp(
+        primaryButtonFill,
+        other.primaryButtonFill,
+        t,
+      )!,
+      primaryButtonTextColor: Color.lerp(
+        primaryButtonTextColor,
+        other.primaryButtonTextColor,
+        t,
+      )!,
+      primaryButtonTextSize: lerpDouble(
+        primaryButtonTextSize,
+        other.primaryButtonTextSize,
+        t,
+      )!,
+      primaryButtonRadius: lerpDouble(
+        primaryButtonRadius,
+        other.primaryButtonRadius,
+        t,
+      )!,
+      secondaryButtonFill: Color.lerp(
+        secondaryButtonFill,
+        other.secondaryButtonFill,
+        t,
+      )!,
+      secondaryButtonTextColor: Color.lerp(
+        secondaryButtonTextColor,
+        other.secondaryButtonTextColor,
+        t,
+      )!,
+      secondaryButtonTextSize: lerpDouble(
+        secondaryButtonTextSize,
+        other.secondaryButtonTextSize,
+        t,
+      )!,
+      secondaryButtonRadius: lerpDouble(
+        secondaryButtonRadius,
+        other.secondaryButtonRadius,
+        t,
+      )!,
     );
   }
 
@@ -141,9 +218,13 @@ class IntroQuestionTheme extends ThemeExtension<IntroQuestionTheme>
         'titleSize': titleSize,
         'subtitleColor': subtitleColor.value,
         'subtitleSize': subtitleSize,
-        'buttonFill': buttonFill.value,
-        'buttonTextColor': buttonTextColor.value,
-        'buttonTextSize': buttonTextSize,
-        'buttonRadius': buttonRadius,
+        'primaryButtonFill': primaryButtonFill.value,
+        'primaryButtonTextColor': primaryButtonTextColor.value,
+        'primaryButtonTextSize': primaryButtonTextSize,
+        'primaryButtonRadius': primaryButtonRadius,
+        'secondaryButtonFill': secondaryButtonFill.value,
+        'secondaryButtonTextColor': secondaryButtonTextColor.value,
+        'secondaryButtonTextSize': secondaryButtonTextSize,
+        'secondaryButtonRadius': secondaryButtonRadius,
       };
 }

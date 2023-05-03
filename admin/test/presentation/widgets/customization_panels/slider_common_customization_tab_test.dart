@@ -192,26 +192,26 @@ void main() {
       await tester.testTextInput.receiveAction(TextInputAction.done);
       await tester.pump();
       expect(find.text('F4321234'), findsOneWidget);
-      expect(data.theme?.buttonTextColor, const Color(0xF4321234));
+      expect(data.theme?.primaryButtonTextColor, const Color(0xF4321234));
 
       await tester.enterText(find.byType(ColorCustomizationItem).last, 'F9');
       await tester.testTextInput.receiveAction(TextInputAction.done);
       await tester.pump();
       expect(find.text('F9000000'), findsOneWidget);
-      expect(data.theme?.buttonTextColor, const Color(0xF9000000));
+      expect(data.theme?.primaryButtonTextColor, const Color(0xF9000000));
 
       await tester.enterText(find.byType(ColorCustomizationItem).last, '');
       await tester.testTextInput.receiveAction(TextInputAction.done);
       await tester.pump();
       expect(find.text('00000000'), findsOneWidget);
-      expect(data.theme?.buttonTextColor, const Color(0x00000000));
+      expect(data.theme?.primaryButtonTextColor, const Color(0x00000000));
     });
 
     testWidgets('Input size(num) for DownButton', (tester) async {
       await tester.pumpWidget(page);
       await tester.enterText(find.byType(CustomizationTextField).at(6), '14');
       expect(find.text('14'), findsOneWidget);
-      expect(data.theme?.buttonTextSize, 14);
+      expect(data.theme?.primaryButtonTextSize, 14);
     });
 
     testWidgets('Input size(string) for DownButton', (tester) async {
@@ -229,7 +229,7 @@ void main() {
           '143',
         );
         expect(find.text('143'), findsNothing);
-        expect(data.theme?.buttonTextSize, 14);
+        expect(data.theme?.primaryButtonTextSize, 14);
       },
     );
 
@@ -237,14 +237,14 @@ void main() {
       await tester.pumpWidget(page);
       await tester.enterText(find.byType(CustomizationTextField).at(7), '18');
       expect(find.text('18'), findsOneWidget);
-      expect(data.theme?.buttonRadius, 18);
+      expect(data.theme?.primaryButtonRadius, 18);
     });
 
     testWidgets('Input size(string) for BorderButton', (tester) async {
       await tester.pumpWidget(page);
       await tester.enterText(find.byType(CustomizationTextField).at(7), 'q8');
       expect(find.text('q8'), findsNothing);
-      expect(data.theme?.buttonRadius, 8);
+      expect(data.theme?.primaryButtonRadius, 8);
     });
 
     testWidgets(
@@ -256,7 +256,7 @@ void main() {
           '198',
         );
         expect(find.text('198'), findsNothing);
-        expect(data.theme?.buttonRadius, 19);
+        expect(data.theme?.primaryButtonRadius, 19);
       },
     );
   });

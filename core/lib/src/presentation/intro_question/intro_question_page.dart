@@ -82,7 +82,10 @@ class _IntroQuestionPageState extends State<IntroQuestionPage> {
                               padding: const EdgeInsets.only(right: 8),
                               child: QuestionBottomButton(
                                 text: widget.data.secondaryButtonText,
-                                radius: theme.buttonRadius,
+                                color: theme.secondaryButtonFill,
+                                textColor: theme.secondaryButtonTextColor,
+                                textSize: theme.secondaryButtonTextSize,
+                                radius: theme.secondaryButtonRadius,
                                 onPressed: widget.onSecondaryButtonTap,
                               ),
                             ),
@@ -90,10 +93,10 @@ class _IntroQuestionPageState extends State<IntroQuestionPage> {
                         Flexible(
                           child: QuestionBottomButton(
                             text: widget.data.primaryButtonText,
-                            color: theme.buttonFill,
-                            textColor: theme.buttonTextColor,
-                            textSize: theme.buttonTextSize,
-                            radius: theme.buttonRadius,
+                            color: theme.primaryButtonFill,
+                            textColor: theme.primaryButtonTextColor,
+                            textSize: theme.primaryButtonTextSize,
+                            radius: theme.primaryButtonRadius,
                             onPressed: widget.onMainButtonTap,
                           ),
                         ),

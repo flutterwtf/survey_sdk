@@ -80,40 +80,76 @@ class InputCommonCustomizationTab extends CustomizationTab {
           ],
         ),
         CustomizationItemsContainer(
-          title: context.localization.button,
+          title: context.localization.primaryButton,
           children: [
             ColorCustomizationItem(
-              initialColor: theme.buttonFill,
+              initialColor: theme.primaryButtonFill,
               onColorPicked: (color) => onChange(
                 editable.copyWith(
-                  theme: theme.copyWith(buttonFill: color),
+                  theme: theme.copyWith(primaryButtonFill: color),
                 ),
               ),
             ),
             TextStyleCustomizationItem(
-              initialColor: theme.buttonTextColor,
+              initialColor: theme.primaryButtonTextColor,
               onColorPicked: (color) => onChange(
                 editable.copyWith(
-                  theme: theme.copyWith(buttonTextColor: color),
+                  theme: theme.copyWith(primaryButtonTextColor: color),
                 ),
               ),
-              initialSize: theme.buttonTextSize,
+              initialSize: theme.primaryButtonTextSize,
               onSizeChanged: (size) => onChange(
                 editable.copyWith(
-                  theme: theme.copyWith(buttonTextSize: size),
+                  theme: theme.copyWith(primaryButtonTextSize: size),
                 ),
               ),
             ),
             RadiusCustomizationItem(
-              initialValue: AppDimensions.circularRadiusS,
+              initialValue: theme.primaryButtonRadius,
               onRadiusChanged: (radius) => onChange(
                 editable.copyWith(
-                  theme: theme.copyWith(buttonRadius: radius),
+                  theme: theme.copyWith(primaryButtonRadius: radius),
                 ),
               ),
             ),
           ],
         ),
+        if (editable.isSkip)
+          CustomizationItemsContainer(
+            title: context.localization.secondaryButton,
+            children: [
+              ColorCustomizationItem(
+                initialColor: theme.secondaryButtonFill,
+                onColorPicked: (color) => onChange(
+                  editable.copyWith(
+                    theme: theme.copyWith(secondaryButtonFill: color),
+                  ),
+                ),
+              ),
+              TextStyleCustomizationItem(
+                initialColor: theme.secondaryButtonTextColor,
+                onColorPicked: (color) => onChange(
+                  editable.copyWith(
+                    theme: theme.copyWith(secondaryButtonTextColor: color),
+                  ),
+                ),
+                initialSize: theme.secondaryButtonTextSize,
+                onSizeChanged: (size) => onChange(
+                  editable.copyWith(
+                    theme: theme.copyWith(secondaryButtonTextSize: size),
+                  ),
+                ),
+              ),
+              RadiusCustomizationItem(
+                initialValue: theme.secondaryButtonRadius,
+                onRadiusChanged: (radius) => onChange(
+                  editable.copyWith(
+                    theme: theme.copyWith(secondaryButtonRadius: radius),
+                  ),
+                ),
+              ),
+            ],
+          ),
       ],
     );
   }
