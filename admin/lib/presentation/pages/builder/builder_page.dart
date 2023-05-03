@@ -45,7 +45,7 @@ class _BuilderPageState extends State<BuilderPage> {
                 ),
               ),
               onPressed: () {
-                Navigator.of(context).pop();
+                Navigator.pop(context);
               },
             ),
           ],

@@ -33,7 +33,7 @@ void main() {
           expect(find.text('Title'), findsOneWidget);
           expect(find.text('Subtitle'), findsOneWidget);
           expect(find.text('Hint'), findsOneWidget);
-          expect(find.text('Button'), findsOneWidget);
+          expect(find.text('Primary button'), findsOneWidget);
           expect(
             find.byType(CustomizationMultilineTextField),
             findsNWidgets(4),
@@ -50,27 +50,31 @@ void main() {
             textTitle,
           );
           expect(find.text(textTitle), findsOneWidget);
+          expect(data.title, textTitle);
 
           await tester.pumpWidget(page);
           await tester.enterText(
             find.widgetWithText(CustomizationItemsContainer, 'Subtitle'),
             textSubtitle,
           );
-          expect(textSubtitle, textSubtitle);
+          expect(find.text(textSubtitle), findsOneWidget);
+          expect(data.subtitle, textSubtitle);
 
           await tester.pumpWidget(page);
           await tester.enterText(
             find.widgetWithText(CustomizationItemsContainer, 'Hint'),
             textHint,
           );
-          expect(textHint, textHint);
+          expect(find.text(textHint), findsOneWidget);
+          expect(data.hintText, textHint);
 
           await tester.pumpWidget(page);
           await tester.enterText(
-            find.widgetWithText(CustomizationItemsContainer, 'Button'),
+            find.widgetWithText(CustomizationItemsContainer, 'Primary button'),
             textButton,
           );
-          expect(textButton, textButton);
+          expect(find.text(textButton), findsOneWidget);
+          expect(data.primaryButtonText, textButton);
         },
       );
     },

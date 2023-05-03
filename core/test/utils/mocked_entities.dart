@@ -66,7 +66,7 @@ abstract class MockedEntities {
     ruleValue: 0,
     theme: ChoiceQuestionTheme.common(),
     secondaryButtonText: 'SKIP',
-    primaryButtonText: 'Next',
+    primaryButtonText: 'NEXT',
   );
 
   static final input1 = InputQuestionData(
