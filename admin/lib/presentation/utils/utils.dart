@@ -5,6 +5,7 @@ export 'package:survey_admin/presentation/utils/common_data.dart';
 export 'package:survey_admin/presentation/utils/constants/app_assets.dart';
 export 'package:survey_admin/presentation/utils/constants/app_dimensions.dart';
 export 'package:survey_admin/presentation/utils/constants/app_durations.dart';
+export 'package:survey_admin/presentation/utils/functions_typedef.dart';
 export 'package:survey_admin/presentation/utils/size_handler.dart';
 export 'package:survey_admin/presentation/utils/theme_extension.dart';
 export 'package:survey_admin/presentation/utils/utils.dart';

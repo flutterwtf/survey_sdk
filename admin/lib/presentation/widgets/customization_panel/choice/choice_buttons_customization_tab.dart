@@ -8,7 +8,7 @@ import 'package:survey_admin/presentation/widgets/customization_panel/customizat
 import 'package:survey_core/survey_core.dart';
 
 class ChoiceButtonsCustomizationTab extends CustomizationTab {
-  final void Function(QuestionData data) onChange;
+  final OnChangeCallback onChange;
   final ChoiceQuestionData editable;
 
   const ChoiceButtonsCustomizationTab({
