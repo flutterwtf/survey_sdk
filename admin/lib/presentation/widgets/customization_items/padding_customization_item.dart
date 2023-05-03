@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:survey_admin/presentation/utils/utils.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
 
-class PaddingCustomizationItem extends StatefulWidget {
+class PaddingCustomizationItem extends StatelessWidget {
   final double initialHorizontalPadding;
   final double initialVerticalPadding;
   final ValueChanged<double> onHorizontalPaddingChange;
@@ -18,61 +18,39 @@ class PaddingCustomizationItem extends StatefulWidget {
   });
 
   @override
-  State<PaddingCustomizationItem> createState() =>
-      _PaddingCustomizationItemState();
-}
-
-// TODO(dev): we can make this widget better.
-class _PaddingCustomizationItemState extends State<PaddingCustomizationItem> {
-  final horizontalPaddingFocus = FocusNode();
-  final verticalPaddingFocus = FocusNode();
-  late double horizontalPadding;
-  late double verticalPadding;
-
-  @override
-  void initState() {
-    super.initState();
-
-    horizontalPadding = widget.initialHorizontalPadding;
-    verticalPadding = widget.initialVerticalPadding;
-    horizontalPaddingFocus.addListener(() {
-      if (!horizontalPaddingFocus.hasFocus) {
-        widget.onHorizontalPaddingChange(horizontalPadding);
-      }
-    });
-    verticalPaddingFocus.addListener(() {
-      if (!verticalPaddingFocus.hasFocus) {
-        widget.onVerticalPaddingChange(verticalPadding);
-      }
-    });
-  }
-
-  @override
-  void dispose() {
-    horizontalPaddingFocus.dispose();
-    verticalPaddingFocus.dispose();
-
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    const lengthInputFormatter = 3;
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        _PaddingItem(
-          isHorizontal: true,
-          focusNode: horizontalPaddingFocus,
-          initialValue: horizontalPadding.toString(),
-          onChanged: (value) =>
-              setState(() => horizontalPadding = double.parse(value)),
+        const _PaddingItem(isHorizontal: true),
+        Flexible(
+          child: CustomizationTextField(
+            initialValue: initialHorizontalPadding.toString(),
+            inputFormatters: [
+              FilteringTextInputFormatter.digitsOnly,
+              LengthLimitingTextInputFormatter(lengthInputFormatter),
+            ],
+            onChanged: (value) => SizeHandler.onSizeChanged(
+              value,
+              onHorizontalPaddingChange,
+            ),
+          ),
         ),
-        _PaddingItem(
-          isHorizontal: false,
-          focusNode: verticalPaddingFocus,
-          initialValue: verticalPadding.toString(),
-          onChanged: (value) =>
-              setState(() => verticalPadding = double.parse(value)),
+        const _PaddingItem(isHorizontal: false),
+        Flexible(
+          child: CustomizationTextField(
+            initialValue: initialVerticalPadding.toString(),
+            inputFormatters: [
+              FilteringTextInputFormatter.digitsOnly,
+              LengthLimitingTextInputFormatter(lengthInputFormatter),
+            ],
+            onChanged: (value) => SizeHandler.onSizeChanged(
+              value,
+              onVerticalPaddingChange,
+            ),
+          ),
         ),
       ],
     );
@@ -81,54 +59,25 @@ class _PaddingCustomizationItemState extends State<PaddingCustomizationItem> {
 
 class _PaddingItem extends StatelessWidget {
   final bool isHorizontal;
-  final FocusNode focusNode;
-  final String initialValue;
-  final ValueChanged<String> onChanged;
 
-  const _PaddingItem({
-    required this.focusNode,
-    required this.initialValue,
-    required this.onChanged,
-    required this.isHorizontal,
-  });
+  const _PaddingItem({required this.isHorizontal});
 
   @override
   Widget build(BuildContext context) {
-    const lengthInputFormatter = 3;
-    return Expanded(
-      child: Row(
-        children: [
-          Container(
-            decoration: BoxDecoration(
-              border: isHorizontal
-                  ? const Border.symmetric(
-                      horizontal: BorderSide(),
-                    )
-                  : const Border.symmetric(
-                      vertical: BorderSide(),
-                    ),
-              color: AppColors.white,
-            ),
-            width: AppDimensions.sizeM,
-            height: AppDimensions.sizeM,
-          ),
-          Container(
-            margin: const EdgeInsets.only(left: AppDimensions.marginXS),
-            width: AppDimensions.sizeXL,
-            child: CustomizationTextField(
-              focusNode: focusNode,
-              initialValue: initialValue,
-              inputFormatters: [
-                FilteringTextInputFormatter.digitsOnly,
-                LengthLimitingTextInputFormatter(lengthInputFormatter),
-              ],
-              onChanged: (value) {
-                if (value != null) onChanged(value);
-              },
-            ),
-          ),
-        ],
+    return Container(
+      margin: const EdgeInsets.only(right: AppDimensions.sizeS),
+      decoration: BoxDecoration(
+        border: isHorizontal
+            ? const Border.symmetric(
+                vertical: BorderSide(),
+              )
+            : const Border.symmetric(
+                horizontal: BorderSide(),
+              ),
+        color: AppColors.white,
       ),
+      width: AppDimensions.sizeM,
+      height: AppDimensions.sizeM,
     );
   }
 }

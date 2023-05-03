@@ -180,6 +180,8 @@ void main() {
         data.theme?.thumbRadius,
         CustomizationPanelDimensions.sliderThumbMaxRadius,
       );
+
+      await tester.enterText(thumbTextField, '16');
     });
 
     testWidgets('Validate input length > 2 for Thumb', (tester) async {
