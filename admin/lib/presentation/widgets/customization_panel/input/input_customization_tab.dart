@@ -27,6 +27,17 @@ class InputCustomizationTab extends CustomizationTab {
   InputQuestionTheme get theme =>
       editable.theme ?? const InputQuestionTheme.common();
 
+  void _changeTheme({
+    required double padding,
+    required bool isHorizontal,
+  }) {
+    final newTheme = isHorizontal
+        ? theme.copyWith(horizontalPadding: padding)
+        : theme.copyWith(verticalPadding: padding);
+
+    onChange(editable.copyWith(theme: newTheme));
+  }
+
   @override
   Widget build(BuildContext context) {
     return ListView(
@@ -93,20 +104,13 @@ class InputCustomizationTab extends CustomizationTab {
             PaddingCustomizationItem(
               initialHorizontalPadding: theme.horizontalPadding,
               initialVerticalPadding: theme.verticalPadding,
-              // TODO(dev): Move theme change to a method.
-              onHorizontalPaddingChange: (padding) => onChange(
-                editable.copyWith(
-                  theme: theme.copyWith(
-                    horizontalPadding: padding,
-                  ),
-                ),
+              onHorizontalPaddingChange: (padding) => _changeTheme(
+                padding: padding,
+                isHorizontal: true,
               ),
-              onVerticalPaddingChange: (padding) => onChange(
-                editable.copyWith(
-                  theme: theme.copyWith(
-                    verticalPadding: padding,
-                  ),
-                ),
+              onVerticalPaddingChange: (padding) => _changeTheme(
+                padding: padding,
+                isHorizontal: false,
               ),
             ),
           ],
