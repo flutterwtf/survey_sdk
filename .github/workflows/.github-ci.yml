@@ -34,8 +34,8 @@ jobs:
         continue-on-error: false
 
       - name: Fail build on test failure
-          if: ${{ failure() }}
-          run: exit 1
+        if: ${{ failure() }}
+        run: exit 1
 
 
 #      - name: Upload production-ready build files
