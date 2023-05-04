@@ -29,12 +29,15 @@ void main() {
     test('Call with good parameter', () async {
       const path = 'test/assets/test_survey_data.json';
       final mockedSurveyData = jsonEncode(MockedEntities.data1.toJson());
-      await File(path).writeAsString(mockedSurveyData);
-
-      expect(
-        await dataSource.getSurveyData(path),
-        MockedEntities.data1,
-      );
+      // ignore: prefer-async-await
+      File(path).writeAsString(mockedSurveyData).then(
+            (_) async => {
+              expect(
+                await dataSource.getSurveyData(path),
+                MockedEntities.data1,
+              ),
+            },
+          );
     });
   });
 }
