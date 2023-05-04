@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:survey_admin/presentation/app/di/injector.dart';
@@ -78,7 +80,13 @@ class _BuilderPageState extends State<BuilderPage> {
 
         return Scaffold(
           appBar: AppBar(
-            title: const _BuilderPageTabBar(),
+            title: _BuilderPageTabBar(
+              onTap: (tabIndex) => cubit.toggleMode(
+                isEditMode: tabIndex == 0,
+                selectedIndex:
+                    (state as EditQuestionBuilderState).selectedIndex,
+              ),
+            ),
             actions: [
               // ignore: avoid-passing-async-when-sync-expected
               _ImportButton(onImportPressed: cubit.importData),
@@ -91,19 +99,25 @@ class _BuilderPageState extends State<BuilderPage> {
           ),
           body: Row(
             children: [
-              QuestionList(
-                onDelete: cubit.deleteQuestionData,
-                onSelect: cubit.select,
-                onAdd: cubit.addQuestionData,
-                questions: cubit.state.surveyData.questions.isNotEmpty
-                    ? List<QuestionData>.of(
-                        cubit.state.surveyData.questions,
+              AnimatedSwitcher(
+                duration: const Duration(milliseconds: 500),
+                child: (state as EditQuestionBuilderState).isEditMode
+                    ? QuestionList(
+                        onDelete: cubit.deleteQuestionData,
+                        onSelect: cubit.select,
+                        onAdd: cubit.addQuestionData,
+                        questions: cubit.state.surveyData.questions.isNotEmpty
+                            ? List<QuestionData>.of(
+                                cubit.state.surveyData.questions,
+                              )
+                            : [],
+                        onUpdate: cubit.updateQuestions,
+                        selectedIndex: state.selectedIndex - 1,
                       )
-                    : [],
-                onUpdate: cubit.updateQuestions,
-                selectedIndex: state is EditQuestionBuilderState
-                    ? state.selectedIndex - 1
-                    : 1,
+                    : Container(
+                        color: AppColors.greyBackground,
+                        width: AppDimensions.surveyContentBarWidth,
+                      ),
               ),
               Expanded(
                 child: PhoneView(
@@ -113,15 +127,25 @@ class _BuilderPageState extends State<BuilderPage> {
                   ),
                 ),
               ),
-              EditorBar(
-                onChange: cubit.updateQuestionData,
-                editableQuestion: state.surveyData.questions.isNotEmpty
-                    ? state is EditQuestionBuilderState
-                        ? state.surveyData.questions.firstWhere(
-                            (q) => q.index == state.selectedIndex,
-                          )
-                        : null
-                    : null,
+              AnimatedSwitcher(
+                duration: const Duration(milliseconds: 500),
+                child: state.isEditMode
+                    ? EditorBar(
+                        onChange: cubit.updateQuestionData,
+                        editableQuestion: state.surveyData.questions.isNotEmpty
+                            ? state.surveyData.questions.firstWhere(
+                                (q) => q.index == state.selectedIndex,
+                              )
+                            : null,
+                      )
+                    : Container(
+                        color: AppColors.greyBackground,
+                        width: min(
+                          AppDimensions.surveyEditorBarWidth,
+                          MediaQuery.of(context).size.width -
+                              AppDimensions.surveyContentBarWidth,
+                        ),
+                      ),
               ),
             ],
           ),
@@ -132,7 +156,11 @@ class _BuilderPageState extends State<BuilderPage> {
 }
 
 class _BuilderPageTabBar extends StatelessWidget {
-  const _BuilderPageTabBar();
+  final ValueChanged<int> onTap;
+
+  const _BuilderPageTabBar({
+    required this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -155,6 +183,7 @@ class _BuilderPageTabBar extends StatelessWidget {
           ),
           labelStyle: context.theme.textTheme.titleMedium
               ?.copyWith(fontWeight: AppFonts.weightBold),
+          onTap: onTap,
         ),
       ),
     );

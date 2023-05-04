@@ -145,6 +145,16 @@ class BuilderCubit extends Cubit<BuilderState> {
     emit(state.copyWith(surveyData: surveyData));
   }
 
+  void toggleMode({required bool isEditMode, int selectedIndex = 1}) {
+    emit(
+      EditQuestionBuilderState(
+        selectedIndex: selectedIndex,
+        isEditMode: isEditMode,
+        surveyData: state.surveyData,
+      ),
+    );
+  }
+
   void _updateIndex(List<QuestionData> data) {
     for (var i = 0; i < data.length; i++) {
       data[i] = data[i].copyWith(index: i + 1);
