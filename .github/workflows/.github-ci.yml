@@ -21,8 +21,8 @@ jobs:
       - name: Install lcov
         run: sudo apt-get install lcov
 
-      - name: Survey SDK module check
-        run: ./scripts/survey_sdk_module.sh
+      - name: Core module check
+        run: ./scripts/core_module.sh
 
 #      - name: Client module check
 #        run: ./scripts/client_module.sh
