@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mockito/mockito.dart';
@@ -10,6 +11,7 @@ import 'package:survey_admin/data/repositories/file_system_repository_impl.dart'
 import 'package:survey_admin/data/repositories/session_storage_repository_impl.dart';
 import 'package:survey_admin/domain/repository_interfaces/file_system_repository.dart.dart';
 import 'package:survey_admin/domain/repository_interfaces/session_storage_repository.dart';
+import 'package:survey_admin/presentation/app/di/injector.dart';
 import 'package:survey_admin/presentation/pages/builder/builder_cubit.dart';
 import 'package:survey_admin/presentation/pages/builder/builder_page.dart';
 import 'package:survey_admin/presentation/pages/new_question_page/new_question_cubit.dart';
@@ -26,11 +28,14 @@ void main() {
     final mockObserver = MockNavigatorObserver();
     final page = AppTester(
       navigatorObservers: [mockObserver],
-      child: Builder(
-        builder: (context) {
-          _inject(getIt);
-          return const BuilderPage();
-        },
+      child: BlocProvider(
+        create: (context) => i.get<BuilderCubit>(),
+        child: Builder(
+          builder: (_) {
+            _inject(getIt);
+            return const BuilderPage();
+          },
+        ),
       ),
     );
 
@@ -108,21 +113,20 @@ void _inject(GetIt getIt) {
     ..reset()
     ..registerFactory<FilesystemDataSource>(
       WebFilesystemDataSourceImpl.new,
-    )
-    ..registerFactory<SessionStorageDataSource>(
-      WebSessionStorageDataSource.new,
-    )
+    )..registerFactory<SessionStorageDataSource>(
+    WebSessionStorageDataSource.new,
+  )
     ..registerSingleton<FileSystemRepository>(
       FileSystemRepositoryImpl(getIt.get()),
-    )
-    ..registerSingleton<SessionStorageRepository>(
-      SessionStorageRepositoryImpl(getIt.get()),
-    )
-    ..registerFactory<NewQuestionCubit>(NewQuestionCubit.new)
-    ..registerFactory<BuilderCubit>(
-      () => BuilderCubit(
-        getIt.get(),
-        getIt.get(),
-      ),
-    );
+    )..registerSingleton<SessionStorageRepository>(
+    SessionStorageRepositoryImpl(getIt.get()),
+  )
+    ..registerFactory<NewQuestionCubit>(NewQuestionCubit.new)..registerFactory<
+      BuilderCubit>(
+        () =>
+        BuilderCubit(
+          getIt.get(),
+          getIt.get(),
+        ),
+  );
 }

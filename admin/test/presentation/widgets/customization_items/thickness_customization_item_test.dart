@@ -4,7 +4,7 @@ import 'package:survey_admin/presentation/widgets/customization_items/thickness_
 
 import '../app_tester.dart';
 
-//TODO: rebuild this test
+// TODO(dev): rebuild this test
 void main() {
   group(
     'Tests for ThicknessCustomizationItem',
@@ -30,8 +30,12 @@ void main() {
 
       testWidgets('Input px(num)', (tester) async {
         await tester.pumpWidget(page);
-        await tester.enterText(find.byType(CustomizationTextField), inputNum);
-        expect(find.text(inputNum), findsOneWidget);
+        final finder = find.byType(CustomizationTextField);
+        await tester.enterText(finder, inputNum);
+        expect(
+          find.text('10.0'),
+          findsOneWidget,
+        );
       });
 
       testWidgets('Validation input length', (tester) async {

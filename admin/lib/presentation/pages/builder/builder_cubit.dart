@@ -101,23 +101,39 @@ class BuilderCubit extends Cubit<BuilderState> {
     select(state.surveyData.questions.last);
   }
 
-  // TODO(message): show message in case of error/empty data.
-  Future<SurveyData?> importData() async {
+  Future<void> importData() async {
+    final selectedIndex = (state is EditQuestionBuilderState)
+        ? (state as EditQuestionBuilderState).selectedIndex
+        : 1;
+
     final surveyData = await _fileSystemRepository.importSurveyData();
+
     if (surveyData != null) {
       emit(
-        state.copyWith(surveyData: surveyData),
+        ImportSuccessSurveyDataBuilderState(surveyData: surveyData),
       );
       select(surveyData.questions.first);
+    } else {
+      emit(
+        ImportErrorSurveyDataBuilderState(surveyData: state.surveyData),
+      );
+      emit(
+        EditQuestionBuilderState(
+          selectedIndex: selectedIndex,
+          surveyData: state.surveyData,
+        ),
+      );
     }
-    return surveyData;
   }
 
   void updateQuestionData(QuestionData data) {
     final questions = List.of(state.surveyData.questions);
 
-    // TODO(dev): Rewrite index system maybe?
-    questions[data.index - 1] = data;
+    final index = questions.indexWhere(
+      (question) => question.index == data.index,
+    );
+    if (index != -1) questions[index] = data;
+
     final surveyData = state.surveyData.copyWith(questions: questions);
     _sessionStorageRepository.saveSurveyData(surveyData);
     emit(state.copyWith(surveyData: surveyData));

@@ -103,7 +103,7 @@ class _SurveyState extends State<Survey> {
   Widget build(BuildContext context) {
     return BlocBuilder<SurveyCubit, SurveyState>(
       bloc: _cubit,
-      builder: (BuildContext context, state) {
+      builder: (_, state) {
         if (state is SurveyLoadedState) {
           final data = widget.surveyData ?? state.surveyData;
           final commonTheme = data.commonTheme;

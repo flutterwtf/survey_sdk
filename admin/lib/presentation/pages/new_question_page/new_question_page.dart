@@ -35,23 +35,23 @@ class _NewQuestionPageState extends State<NewQuestionPage> {
     );
   }
 
-  QuestionData _selectCommon(BuilderState state, NewQuestionTabs tab) {
+  QuestionData _selectCommon(CommonTheme theme, NewQuestionTabs tab) {
     switch (tab) {
       case NewQuestionTabs.intro:
-        return state.surveyData.commonTheme.intro;
+        return theme.intro;
       case NewQuestionTabs.choice:
-        return state.surveyData.commonTheme.choice;
+        return theme.choice;
       case NewQuestionTabs.slider:
-        return state.surveyData.commonTheme.slider;
+        return theme.slider;
       case NewQuestionTabs.customInput:
-        return state.surveyData.commonTheme.input;
+        return theme.input;
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider<BuilderCubit>(
-      create: (context) => _cubit,
+      create: (_) => _cubit,
       child: BlocBuilder<BuilderCubit, BuilderState>(
         builder: (context, state) {
           return Scaffold(
@@ -85,7 +85,10 @@ class _NewQuestionPageState extends State<NewQuestionPage> {
                   ),
                   EditorBar(
                     onChange: _cubit.updateCommon,
-                    editableQuestion: _selectCommon(state, _selectedTab),
+                    editableQuestion: _selectCommon(
+                      state.surveyData.commonTheme,
+                      _selectedTab,
+                    ),
                   ),
                 ],
               ),

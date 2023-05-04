@@ -33,14 +33,17 @@ class WebFilesystemDataSourceImpl implements FilesystemDataSource {
       allowedExtensions: ['json'],
     );
 
-    if (result != null) {
-      final bytes = result.files.single.bytes;
-      if (bytes != null) {
-        final string = const Utf8Decoder().convert(bytes);
-        final map = json.decode(string);
-        return SurveyData.fromJson(map);
-      }
+    try {
+      final bytes = result?.files.single.bytes;
+      final string = bytes?.let(const Utf8Decoder().convert);
+      final map = string?.let((str) => json.decode(str));
+      return map != null ? SurveyData.fromJson(map) : null;
+    } catch (_) {
+      return null;
     }
-    return null;
   }
+}
+
+extension _LetExtension<T> on T {
+  R let<R>(R Function(T) block) => block(this);
 }
