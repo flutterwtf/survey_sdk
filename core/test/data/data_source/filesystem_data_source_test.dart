@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:survey_core/src/data/data_sources/filesystem_data_source_impl.dart';
@@ -30,14 +29,20 @@ void main() {
       const path = 'test/assets/test_survey_data.json';
       final mockedSurveyData = jsonEncode(MockedEntities.data1.toJson());
       // ignore: prefer-async-await
-      File(path).writeAsString(mockedSurveyData).then(
+      /*File(path).writeAsString(mockedSurveyData).then(
             (_) async => {
               expect(
                 await dataSource.getSurveyData(path),
                 MockedEntities.data1,
               ),
             },
-          );
+          );*/
+      await File(path).writeAsString(mockedSurveyData);
+
+      expect(
+        await dataSource.getSurveyData(path),
+        MockedEntities.data1,
+      );
     });
   });
 }

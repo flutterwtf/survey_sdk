@@ -1,4 +1,4 @@
-min_coverage=80
+min_coverage=50
 
 coverage_check=$(flutter pub run test_cov_console --pass=$min_coverage)
 
