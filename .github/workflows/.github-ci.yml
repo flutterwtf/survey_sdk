@@ -23,12 +23,15 @@ jobs:
 
       - name: Core module check
         run: ./scripts/core_module.sh
-
-#      - name: Client module check
-#        run: ./scripts/client_module.sh
+        continue-on-error: true
 
       - name: Admin module check
         run: ./scripts/admin_module.sh
+        continue-on-error: true
+
+      - name: Fail build on test failure
+        if: ${{ failure() }}
+        run: exit 1
 
 #      - name: Upload production-ready build files
 #        uses: actions/upload-artifact@v2

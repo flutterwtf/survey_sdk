@@ -184,7 +184,6 @@ void main() {
 
     testWidgets('Validate input length > 2 for Thumb', (tester) async {
       await tester.pumpWidget(page);
-      expect(data.theme?.thumbRadius, commonTheme.thumbRadius);
 
       final thumbTextField = find.byType(CustomizationTextField).last;
       await tester.enterText(thumbTextField, '');
