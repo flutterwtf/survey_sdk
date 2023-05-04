@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:survey_admin/data/data_sources/interfaces/filesystem_data_source.dart';
-import 'package:survey_core/survey_core.dart';
+import 'package:survey_sdk/survey_sdk.dart';
 import 'package:universal_html/html.dart' as html;
 
 class WebFilesystemDataSourceImpl implements FilesystemDataSource {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:survey_admin/presentation/app/localization/app_localizations_ext.dart';
-import 'package:survey_core/survey_core.dart';
+import 'package:survey_sdk/survey_sdk.dart';
 
 class CommonData {
   final BuildContext context;

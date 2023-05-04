@@ -4,7 +4,7 @@ import 'package:survey_admin/presentation/widgets/customization_items/color_cust
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/input/input_common_customization_tab.dart';
-import 'package:survey_core/survey_core.dart';
+import 'package:survey_sdk/survey_sdk.dart';
 
 import '../app_tester.dart';
 

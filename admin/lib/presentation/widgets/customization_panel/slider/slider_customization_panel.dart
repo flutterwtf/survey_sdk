@@ -4,7 +4,7 @@ import 'package:survey_admin/presentation/widgets/customization_panel/slider/sli
 import 'package:survey_admin/presentation/widgets/customization_panel/slider/slider_content_customization_tab.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/slider/slider_customization_tab.dart';
 import 'package:survey_admin/presentation/widgets/question_settings_tab_bar.dart';
-import 'package:survey_core/survey_core.dart';
+import 'package:survey_sdk/survey_sdk.dart';
 
 class SliderCustomizationPanel extends StatelessWidget {
   final ValueChanged<QuestionData> onChange;

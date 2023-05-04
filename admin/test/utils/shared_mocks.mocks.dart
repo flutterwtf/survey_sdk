@@ -14,7 +14,7 @@ import 'package:survey_admin/domain/repository_interfaces/file_system_repository
     as _i6;
 import 'package:survey_admin/domain/repository_interfaces/session_storage_repository.dart'
     as _i7;
-import 'package:survey_core/survey_core.dart' as _i2;
+import 'package:survey_sdk/survey_sdk.dart' as _i2;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values

@@ -9,7 +9,7 @@ import 'package:survey_admin/presentation/widgets/builder_page/editor_bar.dart';
 import 'package:survey_admin/presentation/widgets/builder_page/phone_view.dart';
 import 'package:survey_admin/presentation/widgets/builder_page/question_list.dart';
 import 'package:survey_admin/presentation/widgets/export_floating_window.dart';
-import 'package:survey_core/survey_core.dart';
+import 'package:survey_sdk/survey_sdk.dart';
 
 class BuilderPage extends StatefulWidget {
   const BuilderPage({super.key});

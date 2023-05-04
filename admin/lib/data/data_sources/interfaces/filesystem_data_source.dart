@@ -1,4 +1,4 @@
-import 'package:survey_core/survey_core.dart';
+import 'package:survey_sdk/survey_sdk.dart';
 
 abstract class FilesystemDataSource {
   void downloadSurveyData(Map<String, dynamic> exportJson);
