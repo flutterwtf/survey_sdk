@@ -24,7 +24,7 @@ void main() {
       testWidgets('single choice with no answer without skip', (tester) async {
         await tester.pumpWidget(app([MockedEntities.choice3]));
         final cubit = Injector().surveyCubit;
-        await tester.tap(find.text('NEXT'));
+        await tester.tap(find.text('NEX'));
         expect((cubit.state as SurveyLoadedState).answers.isEmpty, true);
       });
 
