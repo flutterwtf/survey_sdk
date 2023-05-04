@@ -62,7 +62,7 @@ class _ThicknessCustomizationItemState
   Widget build(BuildContext context) {
     const lengthInputFormatter = 2;
     return SizedBox(
-      width: AppDimensions.margin3XL,
+      width: AppDimensions.thicknessItemWidth,
       child: CustomizationTextField(
         controller: _textEditingController,
         inputFormatters: [
