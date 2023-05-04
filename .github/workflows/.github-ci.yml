@@ -25,7 +25,7 @@ jobs:
         run: ./scripts/core_module.sh
         continue-on-error: false
 
-      - name: Fail build on test failure
+      - name: Fail build on core failure
         if: ${{ failure() }}
         run: exit 1
 
@@ -33,7 +33,7 @@ jobs:
         run: ./scripts/admin_module.sh
         continue-on-error: false
 
-      - name: Fail build on test failure
+      - name: Fail build on admin failure
         if: ${{ failure() }}
         run: exit 1
 
