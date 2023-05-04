@@ -25,9 +25,17 @@ jobs:
         run: ./scripts/core_module.sh
         continue-on-error: false
 
+      - name: Fail build on test failure
+        if: ${{ failure() }}
+        run: exit 1
+
       - name: Admin module check
         run: ./scripts/admin_module.sh
         continue-on-error: false
+
+      - name: Fail build on test failure
+          if: ${{ failure() }}
+          run: exit 1
 
 
 #      - name: Upload production-ready build files
