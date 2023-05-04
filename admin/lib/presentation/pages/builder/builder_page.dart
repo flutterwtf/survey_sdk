@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:survey_admin/presentation/app/di/injector.dart';
@@ -19,6 +21,7 @@ class BuilderPage extends StatefulWidget {
 }
 
 class _BuilderPageState extends State<BuilderPage> {
+  static const _switchModeDuration = Duration(milliseconds: 500); 
   late final BuilderCubit _cubit;
   final _surveyController = SurveyController();
 
@@ -76,7 +79,13 @@ class _BuilderPageState extends State<BuilderPage> {
         },
         builder: (context, state) => Scaffold(
           appBar: AppBar(
-            title: const _BuilderPageTabBar(),
+            title: _BuilderPageTabBar(
+              onChangeTab: (tab) => _cubit.toggleMode(
+                isEditMode: tab == 0,
+                selectedIndex:
+                    (state as EditQuestionBuilderState).selectedIndex,
+              ),
+            ),
             actions: [
               // ignore: avoid-passing-async-when-sync-expected
               _ImportButton(onImportPressed: _onImportPressed),
@@ -86,18 +95,25 @@ class _BuilderPageState extends State<BuilderPage> {
           ),
           body: Row(
             children: [
-              QuestionList(
-                onDelete: _cubit.deleteQuestionData,
-                onSelect: _cubit.select,
-                onAdd: _cubit.addQuestionData,
-                questions: _cubit.state.surveyData.questions.isNotEmpty
-                    ? List<QuestionData>.of(
-                        _cubit.state.surveyData.questions,
+              AnimatedSwitcher(
+                duration: _switchModeDuration,
+                child: (state as EditQuestionBuilderState).isEditMode
+                    ? QuestionList(
+                        onDelete: _cubit.deleteQuestionData,
+                        onSelect: _cubit.select,
+                        onAdd: _cubit.addQuestionData,
+                        questions: state.surveyData.questions.isNotEmpty
+                            ? List<QuestionData>.of(
+                                state.surveyData.questions,
+                              )
+                            : [],
+                        onUpdate: _cubit.updateQuestions,
+                        selectedIndex: state.selectedIndex - 1,
                       )
-                    : [],
-                onUpdate: _cubit.updateQuestions,
-                selectedIndex:
-                    (state as EditQuestionBuilderState).selectedIndex - 1,
+                    : Container(
+                        color: AppColors.greyBackground,
+                        width: AppDimensions.surveyContentBarWidth,
+                      ),
               ),
               Expanded(
                 child: PhoneView(
@@ -107,13 +123,26 @@ class _BuilderPageState extends State<BuilderPage> {
                   ),
                 ),
               ),
-              EditorBar(
-                onChange: _cubit.updateQuestionData,
-                editableQuestion: (state.surveyData.questions.isNotEmpty)
-                    ? state.surveyData.questions.firstWhere(
-                        (q) => q.index == state.selectedIndex,
+              AnimatedSwitcher(
+                duration: _switchModeDuration,
+                child: state.isEditMode
+                    ? EditorBar(
+                        onChange: _cubit.updateQuestionData,
+                        editableQuestion:
+                            (state.surveyData.questions.isNotEmpty)
+                                ? state.surveyData.questions.firstWhere(
+                                    (q) => q.index == state.selectedIndex,
+                                  )
+                                : null,
                       )
-                    : null,
+                    : Container(
+                        color: AppColors.greyBackground,
+                        width: min(
+                          AppDimensions.surveyEditorBarWidth,
+                          MediaQuery.of(context).size.width -
+                              AppDimensions.surveyContentBarWidth,
+                        ),
+                      ),
               ),
             ],
           ),
@@ -124,7 +153,11 @@ class _BuilderPageState extends State<BuilderPage> {
 }
 
 class _BuilderPageTabBar extends StatelessWidget {
-  const _BuilderPageTabBar();
+  final ValueChanged<int> onChangeTab;
+
+  const _BuilderPageTabBar({
+    required this.onChangeTab,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -147,6 +180,7 @@ class _BuilderPageTabBar extends StatelessWidget {
           ),
           labelStyle: context.theme.textTheme.titleMedium
               ?.copyWith(fontWeight: AppFonts.weightBold),
+          onTap: onChangeTab,
         ),
       ),
     );
