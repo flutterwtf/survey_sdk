@@ -7,8 +7,7 @@ import 'package:survey_admin/presentation/widgets/question_settings_tab_bar.dart
 import 'package:survey_core/survey_core.dart';
 
 class ChoiceCustomizationPanel extends StatelessWidget {
-  // TODO(dev): to defines.
-  final void Function(QuestionData data) onChange;
+  final ValueChanged<QuestionData> onChange;
   final ChoiceQuestionData editable;
 
   const ChoiceCustomizationPanel({
