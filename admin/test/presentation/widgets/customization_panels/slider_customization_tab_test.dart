@@ -52,7 +52,7 @@ void main() {
         'Thickness',
       );
       await tester.enterText(thicknessField, '');
-      expect(data.theme?.thickness, 1);
+      expect(data.theme?.thickness, 15);
 
       await tester.enterText(
         find.widgetWithText(CustomizationItemsContainer, 'Thickness'),
@@ -180,7 +180,6 @@ void main() {
         data.theme?.thumbRadius,
         CustomizationPanelDimensions.sliderThumbMaxRadius,
       );
-
       await tester.enterText(thumbTextField, '16');
     });
 

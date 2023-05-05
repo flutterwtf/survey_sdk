@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:survey_admin/presentation/utils/utils.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
+import 'package:survey_admin/presentation/widgets/vector_image.dart';
 
 class PaddingCustomizationItem extends StatelessWidget {
   final double initialHorizontalPadding;
@@ -64,20 +65,13 @@ class _PaddingItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(right: AppDimensions.sizeS),
-      decoration: BoxDecoration(
-        border: isHorizontal
-            ? const Border.symmetric(
-                vertical: BorderSide(),
-              )
-            : const Border.symmetric(
-                horizontal: BorderSide(),
-              ),
-        color: AppColors.white,
+    return Padding(
+      padding: const EdgeInsets.only(right: AppDimensions.sizeS),
+      child: VectorImage(
+        assetName: isHorizontal
+            ? AppAssets.paddingHorizontalIcon
+            : AppAssets.paddingVerticalIcon,
       ),
-      width: AppDimensions.sizeM,
-      height: AppDimensions.sizeM,
     );
   }
 }

@@ -35,3 +35,39 @@ class EditQuestionBuilderState extends BuilderState {
     );
   }
 }
+
+class ImportSuccessSurveyDataBuilderState extends BuilderState {
+  @override
+  List<Object?> get props => [surveyData];
+
+  const ImportSuccessSurveyDataBuilderState({
+    required super.surveyData,
+  });
+
+  @override
+  BuilderState copyWith({
+    SurveyData? surveyData,
+  }) {
+    return ImportSuccessSurveyDataBuilderState(
+      surveyData: surveyData ?? this.surveyData,
+    );
+  }
+}
+
+class ImportErrorSurveyDataBuilderState extends BuilderState {
+  @override
+  List<Object?> get props => [surveyData];
+
+  const ImportErrorSurveyDataBuilderState({
+    required super.surveyData,
+  });
+
+  @override
+  BuilderState copyWith({
+    SurveyData? surveyData,
+  }) {
+    return ImportErrorSurveyDataBuilderState(
+      surveyData: surveyData ?? this.surveyData,
+    );
+  }
+}
