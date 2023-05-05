@@ -26,59 +26,91 @@ class ThicknessCustomizationItem extends StatefulWidget {
 class _ThicknessCustomizationItemState
     extends State<ThicknessCustomizationItem> {
   late final TextEditingController _textEditingController;
-  late final FocusNode _textEditingFocusNode;
+  late final FocusNode _focusNode;
 
   @override
   void initState() {
+    super.initState();
+    _focusNode = FocusNode();
     _textEditingController = TextEditingController();
     _textEditingController.text = widget.initialSize.toString();
-    _textEditingFocusNode = FocusNode();
-    super.initState();
+
+    _focusNode.addListener(
+      () {
+        if (!_focusNode.hasFocus && _textEditingController.text.isEmpty) {
+          _textEditingController.text = widget.initialSize.toString();
+        }
+      },
+    );
   }
 
   void _thicknessChanged(String? text) {
-    if (text != null) {
-      final thickness = double.tryParse(text) ?? 1;
-      final validThickness = min(thickness, widget.maxThickness);
-      widget.onThicknessChanged(validThickness);
-      _textEditingController.value = _textEditingController.value.copyWith(
-        text: validThickness.toString(),
-        selection:
-            TextSelection.collapsed(offset: _textEditingController.text.length),
-      );
+    final thickness = double.tryParse(text ?? '');
+    if (_textEditingController.text == '0') {
+      _handleThicknessChange(widget.maxThickness);
+    } else if (thickness != null) {
+      _handleThicknessChange(min(thickness, widget.maxThickness));
     } else {
       widget.onThicknessChanged(widget.maxThickness);
     }
   }
 
+  void _handleThicknessChange(double thickness) {
+    widget.onThicknessChanged(thickness);
+    _textEditingController.value = _textEditingController.value.copyWith(
+      text: thickness.toString(),
+      selection: TextSelection.collapsed(
+        offset: _textEditingController.text.length,
+      ),
+    );
+  }
+
   @override
   void dispose() {
+    _focusNode.dispose();
     _textEditingController.dispose();
-    _textEditingFocusNode.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     const lengthInputFormatter = 2;
-    return SizedBox(
-      width: AppDimensions.thicknessItemWidth,
-      child: CustomizationTextField(
-        controller: _textEditingController,
-        inputFormatters: [
-          FilteringTextInputFormatter.digitsOnly,
-          LengthLimitingTextInputFormatter(lengthInputFormatter),
-        ],
-        onChanged: _thicknessChanged,
-        decoration: InputDecoration(
-          isCollapsed: true,
-          border: InputBorder.none,
-          suffix: Text(
-            context.localization.px,
-            style: context.theme.textTheme.bodyLarge,
+    return Row(
+      children: [
+        SizedBox(
+          width: AppDimensions.thicknessItemWidth,
+          child: CustomizationTextField(
+            controller: _textEditingController,
+            focusNode: _focusNode,
+            onChanged: _thicknessChanged,
+            inputFormatters: [
+              FilteringTextInputFormatter.digitsOnly,
+              _NoZeroFormatter(),
+              LengthLimitingTextInputFormatter(lengthInputFormatter),
+            ],
+            decoration: InputDecoration(
+              isCollapsed: true,
+              border: InputBorder.none,
+              suffix: Text(
+                context.localization.px,
+                style: context.theme.textTheme.bodyLarge,
+              ),
+            ),
           ),
         ),
-      ),
+      ],
     );
+  }
+}
+
+class _NoZeroFormatter extends TextInputFormatter {
+  @override
+  TextEditingValue formatEditUpdate(
+    TextEditingValue oldValue,
+    TextEditingValue newValue,
+  ) {
+    return newValue.text == '0' && newValue.selection.baseOffset > 0
+        ? oldValue
+        : newValue;
   }
 }
