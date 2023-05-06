@@ -78,32 +78,76 @@ class SliderCommonCustomizationTab extends CustomizationTab {
           ],
         ),
         CustomizationItemsContainer(
-          title: context.localization.button,
+          title: context.localization.primaryButton,
           children: [
-            TextStyleCustomizationItem(
-              initialColor: theme.buttonTextColor,
+            ColorCustomizationItem(
+              initialColor: theme.primaryButtonFill,
               onColorPicked: (color) => onChange(
                 editable.copyWith(
-                  theme: theme.copyWith(buttonTextColor: color),
+                  theme: theme.copyWith(primaryButtonFill: color),
                 ),
               ),
-              initialSize: theme.buttonTextSize,
+            ),
+            TextStyleCustomizationItem(
+              initialColor: theme.primaryButtonTextColor,
+              onColorPicked: (color) => onChange(
+                editable.copyWith(
+                  theme: theme.copyWith(primaryButtonTextColor: color),
+                ),
+              ),
+              initialSize: theme.primaryButtonTextSize,
               onSizeChanged: (size) => onChange(
                 editable.copyWith(
-                  theme: theme.copyWith(buttonTextSize: size),
+                  theme: theme.copyWith(primaryButtonTextSize: size),
                 ),
               ),
             ),
             RadiusCustomizationItem(
-              initialValue: theme.buttonRadius,
+              initialValue: theme.primaryButtonRadius,
               onRadiusChanged: (radius) => onChange(
                 editable.copyWith(
-                  theme: theme.copyWith(buttonRadius: radius),
+                  theme: theme.copyWith(primaryButtonRadius: radius),
                 ),
               ),
             ),
           ],
         ),
+        if (editable.isSkip)
+          CustomizationItemsContainer(
+            title: context.localization.secondaryButton,
+            children: [
+              ColorCustomizationItem(
+                initialColor: theme.secondaryButtonFill,
+                onColorPicked: (color) => onChange(
+                  editable.copyWith(
+                    theme: theme.copyWith(secondaryButtonFill: color),
+                  ),
+                ),
+              ),
+              TextStyleCustomizationItem(
+                initialColor: theme.secondaryButtonTextColor,
+                onColorPicked: (color) => onChange(
+                  editable.copyWith(
+                    theme: theme.copyWith(secondaryButtonTextColor: color),
+                  ),
+                ),
+                initialSize: theme.secondaryButtonTextSize,
+                onSizeChanged: (size) => onChange(
+                  editable.copyWith(
+                    theme: theme.copyWith(secondaryButtonTextSize: size),
+                  ),
+                ),
+              ),
+              RadiusCustomizationItem(
+                initialValue: theme.secondaryButtonRadius,
+                onRadiusChanged: (radius) => onChange(
+                  editable.copyWith(
+                    theme: theme.copyWith(secondaryButtonRadius: radius),
+                  ),
+                ),
+              ),
+            ],
+          ),
       ],
     );
   }

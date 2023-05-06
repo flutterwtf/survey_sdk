@@ -59,7 +59,7 @@ void main() {
       expect(find.text('Fill'), findsOneWidget);
       expect(find.text('Title'), findsOneWidget);
       expect(find.text('Subtitle'), findsOneWidget);
-      expect(find.text('Button'), findsOneWidget);
+      expect(find.text('Primary button'), findsOneWidget);
       tester.binding.platformDispatcher.clearTextScaleFactorTestValue();
     });
 

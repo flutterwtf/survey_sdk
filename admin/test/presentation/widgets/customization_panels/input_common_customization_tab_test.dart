@@ -52,7 +52,7 @@ void main() {
             findsOneWidget,
           );
           expect(
-            find.widgetWithText(CustomizationItemsContainer, 'Button'),
+            find.widgetWithText(CustomizationItemsContainer, 'Primary button'),
             findsOneWidget,
           );
           expect(find.byType(ColorCustomizationItem), findsNWidgets(5));
@@ -87,13 +87,13 @@ void main() {
             find.byType(ColorCustomizationItem).at(3),
             redColorCode,
           );
-          expect(data.theme?.buttonFill, redColor);
+          expect(data.theme?.primaryButtonFill, redColor);
 
           await tester.enterText(
             find.byType(ColorCustomizationItem).at(4),
             redColorCode,
           );
-          expect(data.theme?.buttonTextColor, redColor);
+          expect(data.theme?.primaryButtonTextColor, redColor);
 
           expect(find.text(redColorCode), findsNWidgets(5));
         },
@@ -125,7 +125,7 @@ void main() {
           );
           await tester.testTextInput.receiveAction(TextInputAction.done);
           await tester.pump();
-          expect(data.theme?.buttonTextSize, textSize);
+          expect(data.theme?.primaryButtonTextSize, textSize);
 
           expect(find.text(textSizeString), findsNWidgets(3));
         },
@@ -157,7 +157,7 @@ void main() {
           );
           await tester.testTextInput.receiveAction(TextInputAction.done);
           await tester.pump();
-          expect(data.theme?.buttonTextSize, textSizeDoubleWithLetters2);
+          expect(data.theme?.primaryButtonTextSize, textSizeDoubleWithLetters2);
 
           expect(find.text(textSizeStringWithLetters), findsNothing);
         },

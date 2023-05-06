@@ -152,7 +152,10 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
                               padding: const EdgeInsets.only(right: 8),
                               child: QuestionBottomButton(
                                 text: widget.data.secondaryButtonText,
-                                radius: theme.buttonRadius,
+                                color: theme.secondaryButtonFill,
+                                textSize: theme.secondaryButtonTextSize,
+                                textColor: theme.secondaryButtonTextColor,
+                                radius: theme.secondaryButtonRadius,
                                 onPressed: widget.onSecondaryButtonTap,
                               ),
                             ),
@@ -177,10 +180,10 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
                             isEnabled: isDateType
                                 ? _canBeSkippedDate || (isValid == null)
                                 : _canBeSkippedNumber || (isValid == null),
-                            color: theme.buttonFill,
-                            textSize: theme.buttonTextSize,
-                            textColor: theme.buttonTextColor,
-                            radius: theme.buttonRadius,
+                            color: theme.primaryButtonFill,
+                            textSize: theme.primaryButtonTextSize,
+                            textColor: theme.primaryButtonTextColor,
+                            radius: theme.primaryButtonRadius,
                           ),
                         ),
                       ],

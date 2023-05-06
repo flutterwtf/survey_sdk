@@ -12,7 +12,8 @@ void main() {
     child: SliderCustomizationPanel(
       onChange: (QuestionData<dynamic> newData) {
         data = newData as SliderQuestionData;
-      }, editable: data,
+      },
+      editable: data,
     ),
   );
 
@@ -48,7 +49,7 @@ void main() {
           findsOneWidget,
         );
         expect(
-          find.widgetWithText(CustomizationItemsContainer, 'Button'),
+          find.widgetWithText(CustomizationItemsContainer, 'Primary button'),
           findsOneWidget,
         );
       },

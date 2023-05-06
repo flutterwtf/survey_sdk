@@ -77,6 +77,7 @@ class InputContentCustomizationTab extends CustomizationTab {
           ),
           children: [
             SecondaryButtonCustomizationItem(
+              isShown: editable.isSkip,
               onChanged: (canSkip, title) => onChange(
                 editable.copyWith(isSkip: canSkip, secondaryButtonText: title),
               ),

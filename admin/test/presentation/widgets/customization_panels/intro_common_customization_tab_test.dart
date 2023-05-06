@@ -40,7 +40,7 @@ void main() {
         (tester) async {
           await tester.pumpWidget(introCommonCustomPanel);
           expect(find.byType(ColorCustomizationItem), findsNWidgets(5));
-          expect(find.byType(RadiusCustomizationItem), findsOneWidget);
+          expect(find.byType(RadiusCustomizationItem), findsNWidgets(1));
         },
       );
       testWidgets(
@@ -61,8 +61,8 @@ void main() {
           expect(data.value.theme?.fill, redColor);
           expect(data.value.theme?.titleColor, redColor);
           expect(data.value.theme?.subtitleColor, redColor);
-          expect(data.value.theme?.buttonFill, redColor);
-          expect(data.value.theme?.buttonTextColor, redColor);
+          expect(data.value.theme?.primaryButtonFill, redColor);
+          expect(data.value.theme?.primaryButtonTextColor, redColor);
         },
       );
       testWidgets(
@@ -92,7 +92,7 @@ void main() {
           );
           await tester.testTextInput.receiveAction(TextInputAction.done);
           await tester.pump();
-          expect(data.value.theme?.buttonTextSize, textSize);
+          expect(data.value.theme?.primaryButtonTextSize, textSize);
 
           await tester.enterText(
             find.byType(CustomizationTextField).at(8),
@@ -100,7 +100,7 @@ void main() {
           );
           await tester.testTextInput.receiveAction(TextInputAction.done);
           await tester.pump();
-          expect(data.value.theme?.buttonRadius, textSize);
+          expect(data.value.theme?.primaryButtonRadius, textSize);
 
           expect(find.text(textSizeString), findsNWidgets(4));
         },
@@ -147,7 +147,7 @@ void main() {
           }
           await tester.testTextInput.receiveAction(TextInputAction.done);
           await tester.pump();
-          expect(data.value.theme?.buttonTextSize, textSizeWithLetters);
+          expect(data.value.theme?.primaryButtonTextSize, textSizeWithLetters);
 
           await tester.enterText(
             find.byType(CustomizationTextField).at(8),
@@ -160,7 +160,7 @@ void main() {
           }
           await tester.testTextInput.receiveAction(TextInputAction.done);
           await tester.pump();
-          expect(data.value.theme?.buttonRadius, textSizeWithLetters);
+          expect(data.value.theme?.primaryButtonRadius, textSizeWithLetters);
 
           expect(find.text(textSizeStringWithLetters), findsNothing);
         },

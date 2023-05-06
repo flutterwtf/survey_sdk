@@ -29,10 +29,14 @@ void main() {
         titleSize: 1,
         subtitleColor: Colors.black,
         subtitleSize: 1,
-        buttonFill: Colors.black,
-        buttonTextColor: Colors.black,
-        buttonTextSize: 1,
-        buttonRadius: 1,
+        primaryButtonFill: Colors.black,
+        primaryButtonTextColor: Colors.black,
+        primaryButtonTextSize: 1,
+        primaryButtonRadius: 1,
+        secondaryButtonFill: Colors.black,
+        secondaryButtonTextColor: Colors.black,
+        secondaryButtonTextSize: 1,
+        secondaryButtonRadius: 1,
       );
 
       final sliderQuestionPage = AppTester(
@@ -71,10 +75,14 @@ void main() {
             titleSize: 1,
             subtitleColor: Colors.black,
             subtitleSize: 1,
-            buttonFill: Colors.black,
-            buttonTextColor: Colors.black,
-            buttonTextSize: 1,
-            buttonRadius: 1,
+            primaryButtonFill: Colors.black,
+            primaryButtonTextColor: Colors.black,
+            primaryButtonTextSize: 1,
+            primaryButtonRadius: 1,
+            secondaryButtonFill: Colors.black,
+            secondaryButtonTextColor: Colors.black,
+            secondaryButtonTextSize: 1,
+            secondaryButtonRadius: 1,
           );
 
           expect(result, expectedSliderQuestionThemeResult);
