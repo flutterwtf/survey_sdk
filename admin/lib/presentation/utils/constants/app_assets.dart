@@ -9,6 +9,10 @@ abstract class AppAssets {
   static const String sliderIcon = '${_iconsFolder}slider_icon.svg';
   static const String inputIcon = '${_iconsFolder}input_icon.svg';
   static const String introIcon = '${_iconsFolder}intro_icon.svg';
+  static const String paddingVerticalIcon =
+      '${_iconsFolder}padding_vertical_icon.svg';
+  static const String paddingHorizontalIcon =
+      '${_iconsFolder}padding_horizontal_icon.svg';
   static const String singleChoiceIcon =
       '${_iconsFolder}single_choice_icon.svg';
   static const String multipleChoiceIcon =
