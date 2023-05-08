@@ -11,7 +11,7 @@ dependencies:
   flutter:
     sdk: flutter
   survey_sdk:
-    path: ../../survey_sdk
+    path: ../../core
 
   cupertino_icons: ^1.0.2
 

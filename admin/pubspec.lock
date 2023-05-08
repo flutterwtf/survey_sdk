@@ -725,7 +725,7 @@ packages:
   survey_sdk:
     dependency: "direct main"
     description:
-      path: "../survey_sdk"
+      path: "../core"
       relative: true
     source: path
     version: "0.0.1"

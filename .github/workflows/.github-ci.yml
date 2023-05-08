@@ -22,7 +22,7 @@ jobs:
         run: sudo apt-get install lcov
 
       - name: Core module check
-        run: chmod +x ./scripts/core_module.sh
+        run: ./scripts/core_module.sh
 
 #      - name: Client module check
 #        run: ./scripts/client_module.sh
