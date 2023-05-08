@@ -75,10 +75,11 @@ class _ThicknessCustomizationItemState
   @override
   Widget build(BuildContext context) {
     const lengthInputFormatter = 2;
+    const thicknessItemWidth = 40.0;
     return Row(
       children: [
         SizedBox(
-          width: AppDimensions.marginXL,
+          width: thicknessItemWidth,
           child: CustomizationTextField(
             controller: _textEditingController,
             focusNode: _focusNode,
@@ -88,11 +89,15 @@ class _ThicknessCustomizationItemState
               _NoZeroFormatter(),
               LengthLimitingTextInputFormatter(lengthInputFormatter),
             ],
+            decoration: InputDecoration(
+              isCollapsed: true,
+              border: InputBorder.none,
+              suffix: Text(
+                context.localization.px,
+                style: context.theme.textTheme.bodyLarge,
+              ),
+            ),
           ),
-        ),
-        Text(
-          context.localization.px,
-          style: context.theme.textTheme.bodyLarge,
         ),
       ],
     );
