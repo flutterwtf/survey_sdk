@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:survey_admin/presentation/app/app_cubit.dart';
-import 'package:survey_admin/presentation/app/app_state.dart';
 import 'package:survey_admin/presentation/app/di/injector.dart';
 import 'package:survey_admin/presentation/pages/builder/builder_cubit.dart';
 import 'package:survey_admin/presentation/pages/builder/builder_page.dart';
@@ -19,25 +17,18 @@ class App extends StatefulWidget {
 class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<AppCubit>(
-      create: (context) => i.get<AppCubit>(),
-      child: BlocBuilder<AppCubit, AppState>(
-        builder: (context, state) {
-          return MaterialApp(
-            supportedLocales: AppLocalizations.supportedLocales,
-            localizationsDelegates: const [
-              AppLocalizations.delegate,
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-            ],
-            theme: AppTheme.theme,
-            home: BlocProvider(
-              create: (context) => i.get<BuilderCubit>(),
-              child: const BuilderPage(),
-            ),
-          );
-        },
+    return MaterialApp(
+      supportedLocales: AppLocalizations.supportedLocales,
+      localizationsDelegates: const [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      theme: AppTheme.theme,
+      home: BlocProvider(
+        create: (context) => i.get<BuilderCubit>(),
+        child: const BuilderPage(),
       ),
     );
   }
