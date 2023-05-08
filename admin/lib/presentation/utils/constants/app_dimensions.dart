@@ -49,6 +49,4 @@ abstract class AppDimensions {
   static const double tabBarPadding = 126;
   static const double tabBarWidth = 500;
   static const double exportWindowWidth = 420;
-
-  static const double thicknessItemWidth = 40;
 }

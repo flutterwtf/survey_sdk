@@ -75,10 +75,11 @@ class _ThicknessCustomizationItemState
   @override
   Widget build(BuildContext context) {
     const lengthInputFormatter = 2;
+    const thicknessItemWidth = 40.0;
     return Row(
       children: [
         SizedBox(
-          width: AppDimensions.thicknessItemWidth,
+          width: thicknessItemWidth,
           child: CustomizationTextField(
             controller: _textEditingController,
             focusNode: _focusNode,
