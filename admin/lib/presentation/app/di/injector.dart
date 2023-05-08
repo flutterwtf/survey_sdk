@@ -9,7 +9,6 @@ import 'package:survey_admin/data/repositories/file_system_repository_impl.dart'
 import 'package:survey_admin/data/repositories/session_storage_repository_impl.dart';
 import 'package:survey_admin/domain/repository_interfaces/file_system_repository.dart.dart';
 import 'package:survey_admin/domain/repository_interfaces/session_storage_repository.dart';
-import 'package:survey_admin/presentation/app/app_cubit.dart';
 import 'package:survey_admin/presentation/pages/builder/builder_cubit.dart';
 import 'package:survey_admin/presentation/pages/new_question_page/new_question_cubit.dart';
 import 'package:survey_admin/presentation/utils/common_data.dart';
@@ -38,17 +37,17 @@ Future<void> _initMobileDataSources() async {
 }
 
 void _initRepositories() {
-  i..registerSingleton<FileSystemRepository>(
-    FileSystemRepositoryImpl(i.get()),
-  )
-  ..registerSingleton<SessionStorageRepository>(
-    SessionStorageRepositoryImpl(i.get()),
-  );
+  i
+    ..registerSingleton<FileSystemRepository>(
+      FileSystemRepositoryImpl(i.get()),
+    )
+    ..registerSingleton<SessionStorageRepository>(
+      SessionStorageRepositoryImpl(i.get()),
+    );
 }
 
 void _initCubits() {
   i
-    ..registerFactory<AppCubit>(AppCubit.new)
     ..registerFactory<NewQuestionCubit>(NewQuestionCubit.new)
     ..registerFactory<BuilderCubit>(() => BuilderCubit(i.get(), i.get()));
 }
