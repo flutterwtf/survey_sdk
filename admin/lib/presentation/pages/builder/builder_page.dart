@@ -83,8 +83,9 @@ class _BuilderPageState extends State<BuilderPage> {
             title: _BuilderPageTabBar(
               onTap: (tabIndex) => cubit.toggleMode(
                 isEditMode: tabIndex == 0,
-                selectedIndex:
-                    (state as EditQuestionBuilderState).selectedIndex,
+                selectedIndex: (state is EditQuestionBuilderState)
+                    ? state.selectedIndex
+                    : 0,
               ),
             ),
             actions: [
@@ -99,26 +100,27 @@ class _BuilderPageState extends State<BuilderPage> {
           ),
           body: Row(
             children: [
-              AnimatedSwitcher(
-                duration: const Duration(milliseconds: 500),
-                child: (state as EditQuestionBuilderState).isEditMode
-                    ? QuestionList(
-                        onDelete: cubit.deleteQuestionData,
-                        onSelect: cubit.select,
-                        onAdd: cubit.addQuestionData,
-                        questions: cubit.state.surveyData.questions.isNotEmpty
-                            ? List<QuestionData>.of(
-                                cubit.state.surveyData.questions,
-                              )
-                            : [],
-                        onUpdate: cubit.updateQuestions,
-                        selectedIndex: state.selectedIndex - 1,
-                      )
-                    : Container(
-                        color: AppColors.greyBackground,
-                        width: AppDimensions.surveyContentBarWidth,
-                      ),
-              ),
+              if (state is EditQuestionBuilderState)
+                AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 500),
+                  child: state.isEditMode
+                      ? QuestionList(
+                          onDelete: cubit.deleteQuestionData,
+                          onSelect: cubit.select,
+                          onAdd: cubit.addQuestionData,
+                          questions: cubit.state.surveyData.questions.isNotEmpty
+                              ? List<QuestionData>.of(
+                                  cubit.state.surveyData.questions,
+                                )
+                              : [],
+                          onUpdate: cubit.updateQuestions,
+                          selectedIndex: state.selectedIndex - 1,
+                        )
+                      : Container(
+                          color: AppColors.greyBackground,
+                          width: AppDimensions.surveyContentBarWidth,
+                        ),
+                ),
               Expanded(
                 child: PhoneView(
                   child: Survey(
@@ -127,26 +129,28 @@ class _BuilderPageState extends State<BuilderPage> {
                   ),
                 ),
               ),
-              AnimatedSwitcher(
-                duration: const Duration(milliseconds: 500),
-                child: state.isEditMode
-                    ? EditorBar(
-                        onChange: cubit.updateQuestionData,
-                        editableQuestion: state.surveyData.questions.isNotEmpty
-                            ? state.surveyData.questions.firstWhere(
-                                (q) => q.index == state.selectedIndex,
-                              )
-                            : null,
-                      )
-                    : Container(
-                        color: AppColors.greyBackground,
-                        width: min(
-                          AppDimensions.surveyEditorBarWidth,
-                          MediaQuery.of(context).size.width -
-                              AppDimensions.surveyContentBarWidth,
+              if (state is EditQuestionBuilderState)
+                AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 500),
+                  child: state.isEditMode
+                      ? EditorBar(
+                          onChange: cubit.updateQuestionData,
+                          editableQuestion:
+                              state.surveyData.questions.isNotEmpty
+                                  ? state.surveyData.questions.firstWhere(
+                                      (q) => q.index == state.selectedIndex,
+                                    )
+                                  : null,
+                        )
+                      : Container(
+                          color: AppColors.greyBackground,
+                          width: min(
+                            AppDimensions.surveyEditorBarWidth,
+                            MediaQuery.of(context).size.width -
+                                AppDimensions.surveyContentBarWidth,
+                          ),
                         ),
-                      ),
-              ),
+                ),
             ],
           ),
         );
