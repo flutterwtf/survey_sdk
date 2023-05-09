@@ -4,12 +4,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:survey_core/src/domain/entities/survey_data.dart';
-import 'package:survey_core/src/presentation/di/injector.dart';
-import 'package:survey_core/src/presentation/survey/survey_controller.dart';
-import 'package:survey_core/src/presentation/survey/survey_cubit.dart';
-import 'package:survey_core/src/presentation/survey/survey_state.dart';
-import 'package:survey_core/src/presentation/utils/utils.dart';
+import 'package:survey_sdk/src/domain/entities/survey_data.dart';
+import 'package:survey_sdk/src/presentation/di/injector.dart';
+import 'package:survey_sdk/src/presentation/survey/survey_controller.dart';
+import 'package:survey_sdk/src/presentation/survey/survey_cubit.dart';
+import 'package:survey_sdk/src/presentation/survey/survey_state.dart';
+import 'package:survey_sdk/src/presentation/utils/utils.dart';
 
 // TODO(dev): Maybe create two classes, where one is for filePath and the other
 // TODO(dev): is for surveyData? The build method will be the same for both.

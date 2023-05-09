@@ -1,4 +1,4 @@
-import 'package:survey_core/src/domain/entities/question_types/choice_question_data.dart';
+import 'package:survey_sdk/src/domain/entities/question_types/choice_question_data.dart';
 
 extension RuleTypeExtension on RuleType {
   bool canBeSend(int ruleValue, int value) {

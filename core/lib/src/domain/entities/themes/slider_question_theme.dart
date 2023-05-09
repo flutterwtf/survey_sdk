@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:survey_core/src/domain/entities/api_object.dart';
+import 'package:survey_sdk/src/domain/entities/api_object.dart';
 
 const _thumbRadius = 16.0;
 const _thickness = 8.0;

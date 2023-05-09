@@ -1,7 +1,7 @@
-import 'package:survey_core/src/domain/entities/constants/question_types.dart';
-import 'package:survey_core/src/domain/entities/input_validator.dart';
-import 'package:survey_core/src/domain/entities/question_types/question_data.dart';
-import 'package:survey_core/src/domain/entities/themes/input_question_theme.dart';
+import 'package:survey_sdk/src/domain/entities/constants/question_types.dart';
+import 'package:survey_sdk/src/domain/entities/input_validator.dart';
+import 'package:survey_sdk/src/domain/entities/question_types/question_data.dart';
+import 'package:survey_sdk/src/domain/entities/themes/input_question_theme.dart';
 
 /// The data class for an input question
 class InputQuestionData extends QuestionData<InputQuestionTheme> {

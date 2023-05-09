@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:survey_core/src/presentation/utils/utils.dart';
+import 'package:survey_sdk/src/presentation/utils/utils.dart';
 
 class QuestionBottomButton extends StatelessWidget {
   final String text;

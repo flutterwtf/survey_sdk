@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:survey_core/src/domain/entities/question_answer.dart';
-import 'package:survey_core/src/domain/entities/question_types/slider_question_data.dart';
-import 'package:survey_core/src/domain/entities/themes/slider_question_theme.dart';
-import 'package:survey_core/src/presentation/utils/utils.dart';
-import 'package:survey_core/src/presentation/widgets/question_bottom_button.dart';
-import 'package:survey_core/src/presentation/widgets/question_content.dart';
-import 'package:survey_core/src/presentation/widgets/question_title.dart';
+import 'package:survey_sdk/src/domain/entities/question_answer.dart';
+import 'package:survey_sdk/src/domain/entities/question_types/slider_question_data.dart';
+import 'package:survey_sdk/src/domain/entities/themes/slider_question_theme.dart';
+import 'package:survey_sdk/src/presentation/utils/utils.dart';
+import 'package:survey_sdk/src/presentation/widgets/question_bottom_button.dart';
+import 'package:survey_sdk/src/presentation/widgets/question_content.dart';
+import 'package:survey_sdk/src/presentation/widgets/question_title.dart';
 
 /// The question page with a question, question description, button to submit
 /// the answer and slider to select a value from a range

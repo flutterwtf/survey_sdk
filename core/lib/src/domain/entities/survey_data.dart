@@ -1,9 +1,9 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:survey_core/src/domain/entities/api_object.dart';
-import 'package:survey_core/src/domain/entities/constants/question_types.dart';
-import 'package:survey_core/src/domain/entities/question_types/question_data.dart';
-import 'package:survey_core/src/domain/entities/themes/common_theme.dart';
+import 'package:survey_sdk/src/domain/entities/api_object.dart';
+import 'package:survey_sdk/src/domain/entities/constants/question_types.dart';
+import 'package:survey_sdk/src/domain/entities/question_types/question_data.dart';
+import 'package:survey_sdk/src/domain/entities/themes/common_theme.dart';
 
 /// Holds the core survey data used in the whole app, including the list of
 /// questions and the common theme

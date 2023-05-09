@@ -1,6 +1,6 @@
-import 'package:survey_core/src/domain/entities/constants/question_types.dart';
-import 'package:survey_core/src/domain/entities/question_types/question_data.dart';
-import 'package:survey_core/src/domain/entities/themes/choice_question_theme.dart';
+import 'package:survey_sdk/src/domain/entities/constants/question_types.dart';
+import 'package:survey_sdk/src/domain/entities/question_types/question_data.dart';
+import 'package:survey_sdk/src/domain/entities/themes/choice_question_theme.dart';
 
 /// Contains the content for a multiple-choice or single-choice question
 class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {

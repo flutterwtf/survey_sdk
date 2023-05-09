@@ -2,8 +2,8 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
-import 'package:survey_core/src/data/data_sources/interfaces/filesystem_data_source.dart';
-import 'package:survey_core/src/domain/entities/survey_data.dart';
+import 'package:survey_sdk/src/data/data_sources/interfaces/filesystem_data_source.dart';
+import 'package:survey_sdk/src/domain/entities/survey_data.dart';
 
 class FilesystemDataSourceImpl implements FilesystemDataSource {
   @override

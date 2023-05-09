@@ -1,10 +1,10 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:survey_core/src/domain/entities/constants/question_types.dart';
-import 'package:survey_core/src/domain/entities/question_types/choice_question_data.dart';
-import 'package:survey_core/src/domain/entities/question_types/input_question_data.dart';
-import 'package:survey_core/src/domain/entities/question_types/intro_question_data.dart';
-import 'package:survey_core/src/domain/entities/question_types/slider_question_data.dart';
+import 'package:survey_sdk/src/domain/entities/constants/question_types.dart';
+import 'package:survey_sdk/src/domain/entities/question_types/choice_question_data.dart';
+import 'package:survey_sdk/src/domain/entities/question_types/input_question_data.dart';
+import 'package:survey_sdk/src/domain/entities/question_types/intro_question_data.dart';
+import 'package:survey_sdk/src/domain/entities/question_types/slider_question_data.dart';
 
 /// Class that serves as a base for creating specific types of [QuestionData]
 /// classes. [QuestionData] classes are used to represent data for various

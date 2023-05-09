@@ -2,8 +2,8 @@ import 'dart:ui';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:survey_core/src/domain/entities/api_object.dart';
-import 'package:survey_core/src/presentation/utils/utils.dart';
+import 'package:survey_sdk/src/domain/entities/api_object.dart';
+import 'package:survey_sdk/src/presentation/utils/utils.dart';
 
 /// Defines the visual properties for an intro question page
 class IntroQuestionTheme extends ThemeExtension<IntroQuestionTheme>

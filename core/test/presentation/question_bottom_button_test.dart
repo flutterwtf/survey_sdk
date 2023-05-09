@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:survey_core/src/presentation/widgets/question_bottom_button.dart';
+import 'package:survey_sdk/src/presentation/widgets/question_bottom_button.dart';
 
 import 'widget/app_tester.dart';
 

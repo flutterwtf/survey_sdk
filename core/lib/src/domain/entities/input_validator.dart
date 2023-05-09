@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
-import 'package:survey_core/src/domain/entities/api_object.dart';
-import 'package:survey_core/src/domain/entities/constants/validator_regexes.dart';
-import 'package:survey_core/src/domain/entities/themes/input_question_theme.dart';
+import 'package:survey_sdk/src/domain/entities/api_object.dart';
+import 'package:survey_sdk/src/domain/entities/constants/validator_regexes.dart';
+import 'package:survey_sdk/src/domain/entities/themes/input_question_theme.dart';
 
 abstract class _ValidatorKeys {
   static const validator = 'validator';
@@ -134,7 +134,7 @@ class InputValidator extends Equatable implements ApiObject {
         _ValidatorKeys.isObscured: isObscured,
       };
 
-  //ignore: member-ordering 
+  //ignore: member-ordering
   @override
   List<Object?> get props => [
         type,

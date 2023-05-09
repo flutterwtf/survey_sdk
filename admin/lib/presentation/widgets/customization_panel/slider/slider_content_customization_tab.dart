@@ -7,7 +7,7 @@ import 'package:survey_admin/presentation/widgets/customization_items/divisions_
 import 'package:survey_admin/presentation/widgets/customization_items/min_max_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/secondary_button_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/customization_tab.dart';
-import 'package:survey_core/survey_core.dart';
+import 'package:survey_sdk/survey_sdk.dart';
 
 class SliderContentCustomizationTab extends CustomizationTab {
   final ValueChanged<QuestionData> onChange;

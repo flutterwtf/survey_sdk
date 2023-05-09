@@ -2,9 +2,9 @@ import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:intl/intl.dart';
-import 'package:survey_core/src/presentation/di/injector.dart';
-import 'package:survey_core/src/presentation/survey/survey_state.dart';
-import 'package:survey_core/survey_core.dart';
+import 'package:survey_sdk/src/presentation/di/injector.dart';
+import 'package:survey_sdk/src/presentation/survey/survey_state.dart';
+import 'package:survey_sdk/survey_sdk.dart';
 
 import '../presentation/widget/app_tester.dart';
 import '../utils/mocked_entities.dart';

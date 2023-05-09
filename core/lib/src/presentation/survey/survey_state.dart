@@ -1,5 +1,5 @@
-import 'package:survey_core/src/domain/entities/question_answer.dart';
-import 'package:survey_core/src/domain/entities/survey_data.dart';
+import 'package:survey_sdk/src/domain/entities/question_answer.dart';
+import 'package:survey_sdk/src/domain/entities/survey_data.dart';
 
 abstract class SurveyState {
   const SurveyState();

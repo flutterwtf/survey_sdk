@@ -1,9 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:survey_core/src/domain/entities/question_answer.dart';
-import 'package:survey_core/src/domain/entities/survey_data.dart';
-import 'package:survey_core/src/domain/repository_interfaces/survey_data_repository.dart';
-import 'package:survey_core/src/presentation/survey/survey_state.dart';
-import 'package:survey_core/survey_core.dart';
+import 'package:survey_sdk/src/domain/entities/question_answer.dart';
+import 'package:survey_sdk/src/domain/entities/survey_data.dart';
+import 'package:survey_sdk/src/domain/repository_interfaces/survey_data_repository.dart';
+import 'package:survey_sdk/src/presentation/survey/survey_state.dart';
+import 'package:survey_sdk/survey_sdk.dart';
 
 class SurveyCubit extends Cubit<SurveyState> {
   final SurveyDataRepository _surveyDataRepository;

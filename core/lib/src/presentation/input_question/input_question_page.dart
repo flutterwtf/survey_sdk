@@ -1,13 +1,13 @@
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:survey_core/src/domain/entities/question_answer.dart';
-import 'package:survey_core/src/domain/entities/question_types/input_question_data.dart';
-import 'package:survey_core/src/domain/entities/themes/input_question_theme.dart';
-import 'package:survey_core/src/presentation/utils/utils.dart';
-import 'package:survey_core/src/presentation/widgets/question_bottom_button.dart';
-import 'package:survey_core/src/presentation/widgets/question_content.dart';
-import 'package:survey_core/src/presentation/widgets/question_title.dart';
+import 'package:survey_sdk/src/domain/entities/question_answer.dart';
+import 'package:survey_sdk/src/domain/entities/question_types/input_question_data.dart';
+import 'package:survey_sdk/src/domain/entities/themes/input_question_theme.dart';
+import 'package:survey_sdk/src/presentation/utils/utils.dart';
+import 'package:survey_sdk/src/presentation/widgets/question_bottom_button.dart';
+import 'package:survey_sdk/src/presentation/widgets/question_content.dart';
+import 'package:survey_sdk/src/presentation/widgets/question_title.dart';
 
 const _radius = AppDimensions.circularRadiusXS;
 

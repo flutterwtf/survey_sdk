@@ -1,14 +1,14 @@
-import 'package:survey_core/src/domain/entities/input_validator.dart';
-import 'package:survey_core/src/domain/entities/question_types/choice_question_data.dart';
-import 'package:survey_core/src/domain/entities/question_types/input_question_data.dart';
-import 'package:survey_core/src/domain/entities/question_types/intro_question_data.dart';
-import 'package:survey_core/src/domain/entities/question_types/slider_question_data.dart';
-import 'package:survey_core/src/domain/entities/survey_data.dart';
-import 'package:survey_core/src/domain/entities/themes/choice_question_theme.dart';
-import 'package:survey_core/src/domain/entities/themes/common_theme.dart';
-import 'package:survey_core/src/domain/entities/themes/input_question_theme.dart';
-import 'package:survey_core/src/domain/entities/themes/intro_question_theme.dart';
-import 'package:survey_core/src/domain/entities/themes/slider_question_theme.dart';
+import 'package:survey_sdk/src/domain/entities/input_validator.dart';
+import 'package:survey_sdk/src/domain/entities/question_types/choice_question_data.dart';
+import 'package:survey_sdk/src/domain/entities/question_types/input_question_data.dart';
+import 'package:survey_sdk/src/domain/entities/question_types/intro_question_data.dart';
+import 'package:survey_sdk/src/domain/entities/question_types/slider_question_data.dart';
+import 'package:survey_sdk/src/domain/entities/survey_data.dart';
+import 'package:survey_sdk/src/domain/entities/themes/choice_question_theme.dart';
+import 'package:survey_sdk/src/domain/entities/themes/common_theme.dart';
+import 'package:survey_sdk/src/domain/entities/themes/input_question_theme.dart';
+import 'package:survey_sdk/src/domain/entities/themes/intro_question_theme.dart';
+import 'package:survey_sdk/src/domain/entities/themes/slider_question_theme.dart';
 
 abstract class MockedEntities {
   static const choice1 = ChoiceQuestionData(

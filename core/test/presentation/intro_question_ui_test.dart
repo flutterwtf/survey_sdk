@@ -1,9 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:survey_core/src/domain/entities/question_answer.dart';
-import 'package:survey_core/src/domain/entities/question_types/intro_question_data.dart';
-import 'package:survey_core/src/presentation/intro_question/intro_question_page.dart';
+import 'package:survey_sdk/src/domain/entities/question_answer.dart';
+import 'package:survey_sdk/src/domain/entities/question_types/intro_question_data.dart';
+import 'package:survey_sdk/src/presentation/intro_question/intro_question_page.dart';
 
 import 'widget/app_tester.dart';
 

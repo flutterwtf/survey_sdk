@@ -5,7 +5,7 @@ import 'package:survey_admin/presentation/widgets/customization_items/customizat
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/constants/customization_panel_dimensions.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/slider/slider_customization_tab.dart';
-import 'package:survey_core/survey_core.dart';
+import 'package:survey_sdk/survey_sdk.dart';
 
 import '../app_tester.dart';
 

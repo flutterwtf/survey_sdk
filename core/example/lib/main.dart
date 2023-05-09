@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:survey_core/survey_core.dart'; //import the library
+import 'package:survey_sdk/survey_sdk.dart'; //import the library
 
 void main() {
   runApp(const MyApp());
@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       // Add localization to your app.
-      localizationsDelegates: const [AppLocalizations.delegate],
+      localizationsDelegates: [AppLocalizations.delegate],
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
