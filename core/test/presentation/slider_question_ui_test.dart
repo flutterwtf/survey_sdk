@@ -17,8 +17,8 @@ void main() {
       final completerOnSendButtonTap = Completer<void>();
       const title = 'Slider';
       const subTitle = '';
-      const commonSliderQuestionTheme = SliderQuestionTheme.common();
-      const expectedSliderQuestionThemeResult = SliderQuestionTheme(
+      const commonTheme = SliderQuestionTheme.common();
+      const expectedThemeResult = SliderQuestionTheme(
         activeColor: Colors.black,
         inactiveColor: Colors.black,
         thumbColor: Colors.black,
@@ -42,8 +42,8 @@ void main() {
       final sliderQuestionPage = AppTester(
         child: SliderQuestionPage(
           data: const SliderQuestionData.common().copyWith(
-            theme: commonSliderQuestionTheme.lerp(
-              commonSliderQuestionTheme,
+            theme: commonTheme.lerp(
+              commonTheme,
               0,
             ),
           ),
@@ -56,15 +56,15 @@ void main() {
       test(
         "SliderQuestionData's copyWith without arguments",
         () {
-          final result = commonSliderQuestionTheme.copyWith();
-          expect(result, commonSliderQuestionTheme);
+          final result = commonTheme.copyWith();
+          expect(result, commonTheme);
         },
       );
 
       test(
         "SliderQuestionData's copyWith with arguments",
         () {
-          final result = commonSliderQuestionTheme.copyWith(
+          final result = commonTheme.copyWith(
             activeColor: Colors.black,
             inactiveColor: Colors.black,
             thumbColor: Colors.black,
@@ -85,7 +85,7 @@ void main() {
             secondaryButtonRadius: 1,
           );
 
-          expect(result, expectedSliderQuestionThemeResult);
+          expect(result, expectedThemeResult);
         },
       );
 
@@ -127,7 +127,7 @@ void main() {
             child: SliderQuestionPage(
               data: const SliderQuestionData.common().copyWith(
                 minValue: 0,
-                theme: commonSliderQuestionTheme,
+                theme: commonTheme,
               ),
               onSend: ({required int index, required QuestionAnswer answer}) {
                 expect(
