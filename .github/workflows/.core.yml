@@ -1,0 +1,40 @@
+name: Core CI/CD
+
+on:
+  push:
+    branches: [ "dev" ]
+  pull_request:
+    branches: [ "dev" ]
+
+defaults:
+  run:
+    working-directory: ./core
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.x'
+          channel: 'stable'
+
+      - name: Install lcov
+        run: sudo apt-get install lcov
+
+      - name: Getting packages
+        run: flutter packages get
+
+      - name: Analyzing
+        run: flutter analyze
+
+      - name: Running test
+        run: flutter test --coverage
+
+      - name: Coverage check
+        run: |
+          lcov --remove coverage/lcov.info '*.g.dart' '*.part.dart' '*/generated/*' -o coverage/lcov.info
+          ../scripts/coverage_check.sh

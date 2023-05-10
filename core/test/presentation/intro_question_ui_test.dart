@@ -15,7 +15,6 @@ void main() {
       final completerOnSecondButton = Completer<void>();
       const title = 'Intro';
       const mainButtonTitle = 'NEXT';
-      const secondaryButtonTitle = 'SKIP';
       const subtitleInCommonData = '';
 
       final introQuestionPage = AppTester(
