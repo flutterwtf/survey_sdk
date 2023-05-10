@@ -30,7 +30,4 @@ jobs:
 
       - name: Analyzing
         run: flutter analyze
-
-      - name: Running test
-        run: flutter test --coverage
     

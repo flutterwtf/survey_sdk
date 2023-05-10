@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:survey_sdk/src/domain/entities/question_answer.dart';
 import 'package:survey_sdk/src/domain/entities/question_types/choice_question_data.dart';
 import 'package:survey_sdk/src/domain/entities/themes/choice_question_theme.dart';
-import 'package:survey_sdk/src/presentation/localization/app_localizations_ext.dart';
 import 'package:survey_sdk/src/presentation/utils/rule_type_extension.dart';
 import 'package:survey_sdk/src/presentation/utils/utils.dart';
 import 'package:survey_sdk/src/presentation/widgets/question_bottom_button.dart';
