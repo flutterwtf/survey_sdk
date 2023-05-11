@@ -37,11 +37,12 @@ class InputCustomizationTab extends CustomizationTab {
             MultilineSwitch(
               value: theme.isMultiline,
               lines: theme.lines,
-              onChanged: (isMultiline, lines) => onChange(
+              onChanged: ({required isMultiline, required lineAmount}) =>
+                  onChange(
                 editable.copyWith(
                   theme: theme.copyWith(
                     isMultiline: isMultiline,
-                    lines: lines,
+                    lines: lineAmount,
                   ),
                 ),
               ),

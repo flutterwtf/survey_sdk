@@ -127,8 +127,8 @@ class ChoiceContentCustomizationTab extends CustomizationTab {
           children: [
             SecondaryButtonCustomizationItem(
               isShown: editable.isSkip,
-              onChanged: (canSkip, title) => onChange(
-                editable.copyWith(isSkip: canSkip, secondaryButtonText: title),
+              onChanged: ({required isShown, required text}) => onChange(
+                editable.copyWith(isSkip: isShown, secondaryButtonText: text),
               ),
               initialText: editable.secondaryButtonText,
             ),
