@@ -5,6 +5,7 @@ import 'package:survey_admin/presentation/app/di/injector.dart';
 import 'package:universal_html/html.dart' as html;
 
 void main() {
+  // some changes in admin
   if (kIsWeb) {
     html.window.document.onContextMenu.listen((evt) => evt.preventDefault());
   }
