@@ -26,9 +26,6 @@ jobs:
           flutter-version: '3.x'
           channel: 'stable'
 
-      - name: Install lcov
-        run: sudo apt-get install lcov
-
       - name: Getting packages
         run: flutter packages get
 
