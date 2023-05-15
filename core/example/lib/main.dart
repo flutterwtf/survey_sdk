@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:survey_sdk/survey_sdk.dart'; //import the library
 
 void main() {
+  // some changes in example
   runApp(const MyApp());
 }
 
