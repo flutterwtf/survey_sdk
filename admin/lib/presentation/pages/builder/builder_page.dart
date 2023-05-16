@@ -102,7 +102,7 @@ class _BuilderPageState extends State<BuilderPage> {
             children: [
               if (state is EditQuestionBuilderState)
                 AnimatedSwitcher(
-                  duration: const Duration(milliseconds: 500),
+                  duration: AppDurations.modeToggle,
                   child: state.isEditMode
                       ? QuestionList(
                           onDelete: cubit.deleteQuestionData,
@@ -131,7 +131,7 @@ class _BuilderPageState extends State<BuilderPage> {
               ),
               if (state is EditQuestionBuilderState)
                 AnimatedSwitcher(
-                  duration: const Duration(milliseconds: 500),
+                  duration: AppDurations.modeToggle,
                   child: state.isEditMode
                       ? EditorBar(
                           onChange: cubit.updateQuestionData,
