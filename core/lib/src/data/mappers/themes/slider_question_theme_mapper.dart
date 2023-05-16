@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:survey_sdk/src/data/mappers/themes/question_theme_mapper.dart';
 import 'package:survey_sdk/src/domain/entities/themes/slider_question_theme.dart';
 
-extension SliderQuestionThemeMapper on SliderQuestionTheme {
-  static SliderQuestionTheme fromJson(Map<String, dynamic> json) {
+class SliderQuestionThemeMapper
+    extends QuestionThemeMapper<SliderQuestionTheme> {
+  @override
+  SliderQuestionTheme fromJson(Map<String, dynamic> json) {
     return SliderQuestionTheme(
       activeColor: Color(json['activeColor']),
       inactiveColor: Color(json['inactiveColor']),
@@ -25,24 +28,27 @@ extension SliderQuestionThemeMapper on SliderQuestionTheme {
     );
   }
 
-  Map<String, dynamic> toJson() => {
-        'activeColor': activeColor.value,
-        'inactiveColor': inactiveColor.value,
-        'thumbColor': thumbColor.value,
-        'thumbRadius': thumbRadius,
-        'thickness': thickness,
-        'fill': fill.value,
-        'titleColor': titleColor.value,
-        'titleSize': titleSize,
-        'subtitleColor': subtitleColor.value,
-        'subtitleSize': subtitleSize,
-        'primaryButtonFill': primaryButtonFill.value,
-        'primaryButtonTextColor': primaryButtonTextColor.value,
-        'primaryButtonTextSize': primaryButtonTextSize,
-        'primaryButtonRadius': primaryButtonRadius,
-        'secondaryButtonFill': secondaryButtonFill.value,
-        'secondaryButtonTextColor': secondaryButtonTextColor.value,
-        'secondaryButtonTextSize': secondaryButtonTextSize,
-        'secondaryButtonRadius': secondaryButtonRadius,
-      };
+  @override
+  Map<String, dynamic> toJson(SliderQuestionTheme theme) {
+    return {
+      'activeColor': theme.activeColor.value,
+      'inactiveColor': theme.inactiveColor.value,
+      'thumbColor': theme.thumbColor.value,
+      'thumbRadius': theme.thumbRadius,
+      'thickness': theme.thickness,
+      'fill': theme.fill.value,
+      'titleColor': theme.titleColor.value,
+      'titleSize': theme.titleSize,
+      'subtitleColor': theme.subtitleColor.value,
+      'subtitleSize': theme.subtitleSize,
+      'primaryButtonFill': theme.primaryButtonFill.value,
+      'primaryButtonTextColor': theme.primaryButtonTextColor.value,
+      'primaryButtonTextSize': theme.primaryButtonTextSize,
+      'primaryButtonRadius': theme.primaryButtonRadius,
+      'secondaryButtonFill': theme.secondaryButtonFill.value,
+      'secondaryButtonTextColor': theme.secondaryButtonTextColor.value,
+      'secondaryButtonTextSize': theme.secondaryButtonTextSize,
+      'secondaryButtonRadius': theme.secondaryButtonRadius,
+    };
+  }
 }

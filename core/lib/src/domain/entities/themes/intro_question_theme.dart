@@ -2,12 +2,11 @@ import 'dart:ui';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:survey_sdk/src/domain/entities/api_object.dart';
 import 'package:survey_sdk/src/presentation/utils/utils.dart';
 
 /// Defines the visual properties for an intro question page
 class IntroQuestionTheme extends ThemeExtension<IntroQuestionTheme>
-    with ApiObject, EquatableMixin {
+    with EquatableMixin {
   /// Background color of the intro page
   final Color fill;
 
@@ -97,24 +96,6 @@ class IntroQuestionTheme extends ThemeExtension<IntroQuestionTheme>
           secondaryButtonTextSize: AppFonts.sizeS,
           secondaryButtonRadius: AppDimensions.circularRadiusS,
         );
-
-  factory IntroQuestionTheme.fromJson(Map<String, dynamic> json) {
-    return IntroQuestionTheme(
-      fill: Color(json['fill']),
-      titleColor: Color(json['titleColor']),
-      titleSize: json['titleSize'],
-      subtitleColor: Color(json['subtitleColor']),
-      subtitleSize: json['subtitleSize'],
-      primaryButtonFill: Color(json['primaryButtonFill']),
-      primaryButtonTextColor: Color(json['primaryButtonTextColor']),
-      primaryButtonTextSize: json['primaryButtonTextSize'],
-      primaryButtonRadius: json['primaryButtonRadius'],
-      secondaryButtonFill: Color(json['secondaryButtonFill']),
-      secondaryButtonTextColor: Color(json['secondaryButtonTextColor']),
-      secondaryButtonTextSize: json['secondaryButtonTextSize'],
-      secondaryButtonRadius: json['secondaryButtonRadius'],
-    );
-  }
 
   @override
   IntroQuestionTheme copyWith({
@@ -210,21 +191,4 @@ class IntroQuestionTheme extends ThemeExtension<IntroQuestionTheme>
       )!,
     );
   }
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'fill': fill.value,
-        'titleColor': titleColor.value,
-        'titleSize': titleSize,
-        'subtitleColor': subtitleColor.value,
-        'subtitleSize': subtitleSize,
-        'primaryButtonFill': primaryButtonFill.value,
-        'primaryButtonTextColor': primaryButtonTextColor.value,
-        'primaryButtonTextSize': primaryButtonTextSize,
-        'primaryButtonRadius': primaryButtonRadius,
-        'secondaryButtonFill': secondaryButtonFill.value,
-        'secondaryButtonTextColor': secondaryButtonTextColor.value,
-        'secondaryButtonTextSize': secondaryButtonTextSize,
-        'secondaryButtonRadius': secondaryButtonRadius,
-      };
 }

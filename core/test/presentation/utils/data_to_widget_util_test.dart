@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:survey_sdk/src/domain/entities/question_answer.dart';
 import 'package:survey_sdk/src/domain/entities/question_types/choice_question_data.dart';
@@ -93,11 +92,6 @@ class _BadQuestionData extends QuestionData {
     String? secondaryButtonText,
     String? primaryButtonText,
   }) {
-    throw UnimplementedError();
-  }
-
-  @override
-  Map<String, dynamic> toJson({ThemeExtension<dynamic>? commonTheme}) {
     throw UnimplementedError();
   }
 }

@@ -1,7 +1,11 @@
+import 'package:flutter/material.dart';
+import 'package:survey_sdk/src/data/mappers/question_types/question_data_mapper.dart';
+import 'package:survey_sdk/src/data/mappers/themes/choice_question_theme_mapper.dart';
 import 'package:survey_sdk/survey_sdk.dart';
 
-extension ChoiceQuestionDataMapper on ChoiceQuestionData {
-  static ChoiceQuestionData fromJson(Map<String, dynamic> json) {
+class ChoiceQuestionDataMapper extends QuestionDataMapper<ChoiceQuestionData> {
+  @override
+  ChoiceQuestionData fromJson(Map<String, dynamic> json) {
     final payload = json['payload'] as Map<String, dynamic>;
     final theme = json['theme'];
     return ChoiceQuestionData(
@@ -18,40 +22,47 @@ extension ChoiceQuestionDataMapper on ChoiceQuestionData {
       ruleType: RuleType.values[payload['ruleType']],
       ruleValue: payload['ruleValue'],
       theme: theme != null
-          ? ChoiceQuestionTheme.fromJson(theme)
+          ? ChoiceQuestionThemeMapper().fromJson(theme)
           : const ChoiceQuestionTheme.common(),
       primaryButtonText: json['primaryButtonText'],
       secondaryButtonText: json['secondaryButtonText'],
     );
   }
 
-  Map<String, dynamic> toJson({dynamic commonTheme}) {
+  @override
+  Map<String, dynamic> toJson(
+    ChoiceQuestionData data, {
+    ThemeExtension<dynamic>? commonTheme,
+  }) {
     late final ChoiceQuestionTheme? theme;
     //ignore: prefer-conditional-expressions
     if (commonTheme != null) {
-      theme = commonTheme == this.theme ? null : this.theme;
+      theme = commonTheme == data.theme ? null : data.theme;
     } else {
-      theme = this.theme;
+      theme = data.theme;
     }
     return {
-      'index': index,
-      'title': title,
-      'subtitle': subtitle,
-      'type': type,
-      'isSkip': isSkip,
-      'content': content,
-      'theme': theme?.toJson(),
+      'index': data.index,
+      'title': data.title,
+      'subtitle': data.subtitle,
+      'type': data.type,
+      'isSkip': data.isSkip,
+      'content': data.content,
+      'theme': theme != null
+          ? ChoiceQuestionThemeMapper().toJson(theme)
+          : ChoiceQuestionThemeMapper()
+              .toJson(const ChoiceQuestionTheme.common()),
       // TODO(dev): Do we need payload?
       // TODO(dev): Should we move keys to const?
       'payload': {
-        'isMultipleChoice': isMultipleChoice,
-        'options': options,
-        'selectedOptions': selectedOptions,
-        'ruleType': ruleType.index,
-        'ruleValue': ruleValue,
+        'isMultipleChoice': data.isMultipleChoice,
+        'options': data.options,
+        'selectedOptions': data.selectedOptions,
+        'ruleType': data.ruleType.index,
+        'ruleValue': data.ruleValue,
       },
-      'secondaryButtonText': secondaryButtonText,
-      'primaryButtonText': primaryButtonText,
+      'secondaryButtonText': data.secondaryButtonText,
+      'primaryButtonText': data.primaryButtonText,
     };
   }
 }

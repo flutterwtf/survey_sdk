@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:survey_sdk/src/data/mappers/themes/question_theme_mapper.dart';
 import 'package:survey_sdk/survey_sdk.dart';
 
-extension IntroQuestionThemeMapper on IntroQuestionTheme {
-  static IntroQuestionTheme fromJson(Map<String, dynamic> json) {
+class IntroQuestionThemeMapper extends QuestionThemeMapper<IntroQuestionTheme> {
+  @override
+  IntroQuestionTheme fromJson(Map<String, dynamic> json) {
     return IntroQuestionTheme(
       fill: Color(json['fill']),
       titleColor: Color(json['titleColor']),
@@ -20,19 +22,22 @@ extension IntroQuestionThemeMapper on IntroQuestionTheme {
     );
   }
 
-  Map<String, dynamic> toJson() => {
-        'fill': fill.value,
-        'titleColor': titleColor.value,
-        'titleSize': titleSize,
-        'subtitleColor': subtitleColor.value,
-        'subtitleSize': subtitleSize,
-        'primaryButtonFill': primaryButtonFill.value,
-        'primaryButtonTextColor': primaryButtonTextColor.value,
-        'primaryButtonTextSize': primaryButtonTextSize,
-        'primaryButtonRadius': primaryButtonRadius,
-        'secondaryButtonFill': secondaryButtonFill.value,
-        'secondaryButtonTextColor': secondaryButtonTextColor.value,
-        'secondaryButtonTextSize': secondaryButtonTextSize,
-        'secondaryButtonRadius': secondaryButtonRadius,
-      };
+  @override
+  Map<String, dynamic> toJson(IntroQuestionTheme theme) {
+    return {
+      'fill': theme.fill.value,
+      'titleColor': theme.titleColor.value,
+      'titleSize': theme.titleSize,
+      'subtitleColor': theme.subtitleColor.value,
+      'subtitleSize': theme.subtitleSize,
+      'primaryButtonFill': theme.primaryButtonFill.value,
+      'primaryButtonTextColor': theme.primaryButtonTextColor.value,
+      'primaryButtonTextSize': theme.primaryButtonTextSize,
+      'primaryButtonRadius': theme.primaryButtonRadius,
+      'secondaryButtonFill': theme.secondaryButtonFill.value,
+      'secondaryButtonTextColor': theme.secondaryButtonTextColor.value,
+      'secondaryButtonTextSize': theme.secondaryButtonTextSize,
+      'secondaryButtonRadius': theme.secondaryButtonRadius,
+    };
+  }
 }

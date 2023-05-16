@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:survey_sdk/src/data/mappers/themes/question_theme_mapper.dart';
 import 'package:survey_sdk/survey_sdk.dart';
 
-extension InputQuestionThemeMapper on InputQuestionTheme {
-  static InputQuestionTheme fromJson(Map<String, dynamic> json) {
+class InputQuestionThemeMapper extends QuestionThemeMapper<InputQuestionTheme> {
+  @override
+  InputQuestionTheme fromJson(Map<String, dynamic> json) {
     return InputQuestionTheme(
       inputFill: Color(json['inputFill']),
       borderColor: Color(json['borderColor']),
@@ -33,32 +35,35 @@ extension InputQuestionThemeMapper on InputQuestionTheme {
     );
   }
 
-  Map<String, dynamic> toJson() => {
-        'inputFill': inputFill.value,
-        'borderColor': borderColor.value,
-        'borderWidth': borderWidth,
-        'hintColor': hintColor.value,
-        'hintSize': hintSize,
-        'textColor': textColor.value,
-        'textSize': textSize,
-        'lines': lines,
-        'isMultiline': isMultiline ? 1 : 0,
-        'errorText': errorText,
-        'inputType': inputType.toJson(),
-        'verticalPadding': verticalPadding,
-        'horizontalPadding': horizontalPadding,
-        'fill': fill.value,
-        'titleColor': titleColor.value,
-        'titleSize': titleSize,
-        'subtitleColor': subtitleColor.value,
-        'subtitleSize': subtitleSize,
-        'primaryButtonFill': primaryButtonFill.value,
-        'primaryButtonTextColor': primaryButtonTextColor.value,
-        'primaryButtonTextSize': primaryButtonTextSize,
-        'primaryButtonRadius': primaryButtonRadius,
-        'secondaryButtonFill': secondaryButtonFill.value,
-        'secondaryButtonTextColor': secondaryButtonTextColor.value,
-        'secondaryButtonTextSize': secondaryButtonTextSize,
-        'secondaryButtonRadius': secondaryButtonRadius,
-      };
+  @override
+  Map<String, dynamic> toJson(InputQuestionTheme theme) {
+    return {
+      'inputFill': theme.inputFill.value,
+      'borderColor': theme.borderColor.value,
+      'borderWidth': theme.borderWidth,
+      'hintColor': theme.hintColor.value,
+      'hintSize': theme.hintSize,
+      'textColor': theme.textColor.value,
+      'textSize': theme.textSize,
+      'lines': theme.lines,
+      'isMultiline': theme.isMultiline ? 1 : 0,
+      'errorText': theme.errorText,
+      'inputType': theme.inputType.toJson(),
+      'verticalPadding': theme.verticalPadding,
+      'horizontalPadding': theme.horizontalPadding,
+      'fill': theme.fill.value,
+      'titleColor': theme.titleColor.value,
+      'titleSize': theme.titleSize,
+      'subtitleColor': theme.subtitleColor.value,
+      'subtitleSize': theme.subtitleSize,
+      'primaryButtonFill': theme.primaryButtonFill.value,
+      'primaryButtonTextColor': theme.primaryButtonTextColor.value,
+      'primaryButtonTextSize': theme.primaryButtonTextSize,
+      'primaryButtonRadius': theme.primaryButtonRadius,
+      'secondaryButtonFill': theme.secondaryButtonFill.value,
+      'secondaryButtonTextColor': theme.secondaryButtonTextColor.value,
+      'secondaryButtonTextSize': theme.secondaryButtonTextSize,
+      'secondaryButtonRadius': theme.secondaryButtonRadius,
+    };
+  }
 }

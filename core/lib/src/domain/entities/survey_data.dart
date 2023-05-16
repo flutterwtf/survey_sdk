@@ -1,10 +1,12 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:survey_sdk/src/data/mappers/question_types/choice_question_data_mapper.dart';
+import 'package:survey_sdk/src/data/mappers/question_types/input_question_data_mapper.dart';
+import 'package:survey_sdk/src/data/mappers/question_types/intro_question_data_mapper.dart';
+import 'package:survey_sdk/src/data/mappers/question_types/slider_question_data_mapper.dart';
 import 'package:survey_sdk/src/domain/entities/api_object.dart';
-import 'package:survey_sdk/src/domain/entities/constants/question_types.dart';
 import 'package:survey_sdk/src/domain/entities/constants/scheme_info.dart';
-import 'package:survey_sdk/src/domain/entities/question_types/question_data.dart';
-import 'package:survey_sdk/src/domain/entities/themes/common_theme.dart';
+import 'package:survey_sdk/survey_sdk.dart';
 
 /// Holds the core survey data used in the whole app, including the list of
 /// questions and the common theme
@@ -55,8 +57,9 @@ class SurveyData extends ApiObject with EquatableMixin {
       'commonTheme': commonTheme.toJson(),
       'questions': questions
           .map(
-            (question) => question.toJson(
-              commonTheme: _themeFromQuestionType(question.type),
+            (question) => _toJson(
+              _themeFromQuestionType(question.type),
+              question,
             ),
           )
           .toList(),
@@ -73,6 +76,35 @@ class SurveyData extends ApiObject with EquatableMixin {
         return commonTheme.input.theme;
       case QuestionTypes.intro:
         return commonTheme.intro.theme;
+    }
+    return null;
+  }
+
+  Map<String, dynamic>? _toJson(
+    ThemeExtension? themeFromQuestionType,
+    QuestionData question,
+  ) {
+    switch (question.type) {
+      case QuestionTypes.choice:
+        return ChoiceQuestionDataMapper().toJson(
+          question as ChoiceQuestionData,
+          commonTheme: themeFromQuestionType,
+        );
+      case QuestionTypes.slider:
+        return SliderQuestionDataMapper().toJson(
+          question as SliderQuestionData,
+          commonTheme: themeFromQuestionType,
+        );
+      case QuestionTypes.input:
+        return InputQuestionDataMapper().toJson(
+          question as InputQuestionData,
+          commonTheme: themeFromQuestionType,
+        );
+      case QuestionTypes.intro:
+        return IntroQuestionDataMapper().toJson(
+          question as IntroQuestionData,
+          commonTheme: themeFromQuestionType,
+        );
     }
     return null;
   }

@@ -1,7 +1,11 @@
+import 'package:flutter/material.dart';
+import 'package:survey_sdk/src/data/mappers/question_types/question_data_mapper.dart';
+import 'package:survey_sdk/src/data/mappers/themes/slider_question_theme_mapper.dart';
 import 'package:survey_sdk/survey_sdk.dart';
 
-extension SliderQuestionDataMapper on SliderQuestionData {
-  static SliderQuestionData fromJson(Map<String, dynamic> json) {
+class SliderQuestionDataMapper extends QuestionDataMapper<SliderQuestionData> {
+  @override
+  SliderQuestionData fromJson(Map<String, dynamic> json) {
     final theme = json['theme'];
     return SliderQuestionData(
       index: json['index'],
@@ -14,35 +18,42 @@ extension SliderQuestionDataMapper on SliderQuestionData {
       isSkip: json['isSkip'],
       content: json['content'],
       theme: theme != null
-          ? SliderQuestionTheme.fromJson(theme)
+          ? SliderQuestionThemeMapper().fromJson(theme)
           : const SliderQuestionTheme.common(),
       secondaryButtonText: json['secondaryButtonText'],
       primaryButtonText: json['primaryButtonText'],
     );
   }
 
-  Map<String, dynamic> toJson({dynamic commonTheme}) {
+  @override
+  Map<String, dynamic> toJson(
+    SliderQuestionData data, {
+    ThemeExtension<dynamic>? commonTheme,
+  }) {
     late final SliderQuestionTheme? theme;
     //ignore: prefer-conditional-expressions
     if (commonTheme != null) {
-      theme = commonTheme == this.theme ? null : this.theme;
+      theme = commonTheme == data.theme ? null : data.theme;
     } else {
-      theme = this.theme;
+      theme = data.theme;
     }
     return {
-      'index': index,
-      'theme': theme?.toJson(),
-      'minValue': minValue,
-      'maxValue': maxValue,
-      'divisions': divisions,
-      'initialValue': initialValue,
-      'title': title,
-      'subtitle': subtitle,
-      'type': type,
-      'isSkip': isSkip,
-      'content': content,
-      'secondaryButtonText': secondaryButtonText,
-      'primaryButtonText': primaryButtonText,
+      'index': data.index,
+      'theme': theme != null
+          ? SliderQuestionThemeMapper().toJson(theme)
+          : SliderQuestionThemeMapper()
+              .toJson(const SliderQuestionTheme.common()),
+      'minValue': data.minValue,
+      'maxValue': data.maxValue,
+      'divisions': data.divisions,
+      'initialValue': data.initialValue,
+      'title': data.title,
+      'subtitle': data.subtitle,
+      'type': data.type,
+      'isSkip': data.isSkip,
+      'content': data.content,
+      'secondaryButtonText': data.secondaryButtonText,
+      'primaryButtonText': data.primaryButtonText,
     };
   }
 }
