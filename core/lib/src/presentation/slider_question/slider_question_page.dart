@@ -198,14 +198,20 @@ class _QuestionSliderState extends State<_QuestionSlider> {
           const SizedBox(height: AppDimensions.margin2XS),
           Row(
             children: [
-              Text(
-                widget.minValue.toString(),
-                style: textStyle,
+              Padding(
+                padding: const EdgeInsets.only(left: AppDimensions.sizeM),
+                child: Text(
+                  widget.minValue.toString(),
+                  style: textStyle,
+                ),
               ),
               const Spacer(),
-              Text(
-                widget.maxValue.toString(),
-                style: textStyle,
+              Padding(
+                padding: const EdgeInsets.only(right: AppDimensions.sizeM),
+                child: Text(
+                  widget.maxValue.toString(),
+                  style: textStyle,
+                ),
               ),
             ],
           ),

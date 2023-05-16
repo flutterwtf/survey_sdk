@@ -201,6 +201,7 @@ class _QuestionCheckboxes extends StatelessWidget {
       children: [
         for (int i = 0; i < options.length; i++)
           CheckboxListTile(
+            contentPadding: EdgeInsets.zero,
             controlAffinity: ListTileControlAffinity.leading,
             title: Text(
               options[i],
@@ -259,6 +260,7 @@ class _QuestionRadioButtons extends StatelessWidget {
         children: [
           for (int i = 0; i < options.length; i++)
             RadioListTile<int?>(
+              contentPadding: EdgeInsets.zero,
               groupValue: selectedOption,
               controlAffinity: ListTileControlAffinity.leading,
               title: Text(

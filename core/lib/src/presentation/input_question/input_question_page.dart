@@ -110,8 +110,6 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
                     padding: EdgeInsets.only(
                       top: AppDimensions.marginM + theme.verticalPadding,
                       bottom: theme.verticalPadding,
-                      left: theme.horizontalPadding,
-                      right: theme.horizontalPadding,
                     ),
                     child: isDateType
                         ? _InputDate(
