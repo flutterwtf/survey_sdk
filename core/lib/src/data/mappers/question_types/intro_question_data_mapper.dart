@@ -3,21 +3,33 @@ import 'package:survey_sdk/src/data/mappers/question_types/question_data_mapper.
 import 'package:survey_sdk/src/data/mappers/themes/intro_question_theme_mapper.dart';
 import 'package:survey_sdk/survey_sdk.dart';
 
+abstract class _Fields {
+  static const String index = 'index';
+  static const String title = 'title';
+  static const String subtitle = 'subtitle';
+  static const String isSkip = 'isSkip';
+  static const String content = 'content';
+  static const String primaryButtonText = 'primaryButtonText';
+  static const String secondaryButtonText = 'secondaryButtonText';
+  static const String theme = 'theme';
+  static const String type = 'type';
+}
+
 class IntroQuestionDataMapper extends QuestionDataMapper<IntroQuestionData> {
   @override
   IntroQuestionData fromJson(Map<String, dynamic> json) {
-    final theme = json['theme'];
+    final theme = json[_Fields.theme];
     return IntroQuestionData(
-      index: json['index'],
-      title: json['title'],
-      subtitle: json['subtitle'],
-      isSkip: json['isSkip'],
-      content: json['content'],
+      index: json[_Fields.index],
+      title: json[_Fields.title],
+      subtitle: json[_Fields.subtitle],
+      isSkip: json[_Fields.isSkip],
+      content: json[_Fields.content],
       theme: theme != null
           ? IntroQuestionThemeMapper().fromJson(theme)
           : const IntroQuestionTheme.common(),
-      secondaryButtonText: json['secondaryButtonText'],
-      primaryButtonText: json['primaryButtonText'],
+      secondaryButtonText: json[_Fields.secondaryButtonText],
+      primaryButtonText: json[_Fields.primaryButtonText],
     );
   }
 
@@ -34,18 +46,18 @@ class IntroQuestionDataMapper extends QuestionDataMapper<IntroQuestionData> {
       theme = data.theme;
     }
     return {
-      'index': data.index,
-      'title': data.title,
-      'subtitle': data.subtitle,
-      'type': data.type,
-      'isSkip': data.isSkip,
-      'content': data.content,
-      'theme': theme != null
+      _Fields.index: data.index,
+      _Fields.title: data.title,
+      _Fields.subtitle: data.subtitle,
+      _Fields.type: data.type,
+      _Fields.isSkip: data.isSkip,
+      _Fields.content: data.content,
+      _Fields.theme: theme != null
           ? IntroQuestionThemeMapper().toJson(theme)
           : IntroQuestionThemeMapper()
               .toJson(const IntroQuestionTheme.common()),
-      'secondaryButtonText': data.secondaryButtonText,
-      'primaryButtonText': data.primaryButtonText,
+      _Fields.secondaryButtonText: data.secondaryButtonText,
+      _Fields.primaryButtonText: data.primaryButtonText,
     };
   }
 }

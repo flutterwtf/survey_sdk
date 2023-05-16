@@ -3,29 +3,47 @@ import 'package:survey_sdk/src/data/mappers/question_types/question_data_mapper.
 import 'package:survey_sdk/src/data/mappers/themes/choice_question_theme_mapper.dart';
 import 'package:survey_sdk/survey_sdk.dart';
 
+abstract class _Fields {
+  static const String index = 'index';
+  static const String title = 'title';
+  static const String subtitle = 'subtitle';
+  static const String isSkip = 'isSkip';
+  static const String content = 'content';
+  static const String isMultipleChoice = 'isMultipleChoice';
+  static const String options = 'options';
+  static const String selectedOptions = 'selectedOptions';
+  static const String ruleType = 'ruleType';
+  static const String ruleValue = 'ruleValue';
+  static const String primaryButtonText = 'primaryButtonText';
+  static const String secondaryButtonText = 'secondaryButtonText';
+  static const String payload = 'payload';
+  static const String theme = 'theme';
+  static const String type = 'type';
+}
+
 class ChoiceQuestionDataMapper extends QuestionDataMapper<ChoiceQuestionData> {
   @override
   ChoiceQuestionData fromJson(Map<String, dynamic> json) {
-    final payload = json['payload'] as Map<String, dynamic>;
-    final theme = json['theme'];
+    final payload = json[_Fields.payload] as Map<String, dynamic>;
+    final theme = json[_Fields.theme];
     return ChoiceQuestionData(
-      index: json['index'],
-      title: json['title'],
-      subtitle: json['subtitle'],
-      isSkip: json['isSkip'],
-      content: json['content'],
-      isMultipleChoice: payload['isMultipleChoice'],
-      options: (payload['options'] as List<dynamic>).cast<String>(),
-      selectedOptions: payload['selectedOptions'] != null
-          ? (payload['selectedOptions'] as List<dynamic>).cast<int>()
+      index: json[_Fields.index],
+      title: json[_Fields.title],
+      subtitle: json[_Fields.subtitle],
+      isSkip: json[_Fields.isSkip],
+      content: json[_Fields.content],
+      isMultipleChoice: payload[_Fields.isMultipleChoice],
+      options: (payload[_Fields.options] as List<dynamic>).cast<String>(),
+      selectedOptions: payload[_Fields.selectedOptions] != null
+          ? (payload[_Fields.selectedOptions] as List<dynamic>).cast<int>()
           : null,
-      ruleType: RuleType.values[payload['ruleType']],
-      ruleValue: payload['ruleValue'],
+      ruleType: RuleType.values[payload[_Fields.ruleType]],
+      ruleValue: payload[_Fields.ruleValue],
       theme: theme != null
           ? ChoiceQuestionThemeMapper().fromJson(theme)
           : const ChoiceQuestionTheme.common(),
-      primaryButtonText: json['primaryButtonText'],
-      secondaryButtonText: json['secondaryButtonText'],
+      primaryButtonText: json[_Fields.primaryButtonText],
+      secondaryButtonText: json[_Fields.secondaryButtonText],
     );
   }
 
@@ -42,27 +60,25 @@ class ChoiceQuestionDataMapper extends QuestionDataMapper<ChoiceQuestionData> {
       theme = data.theme;
     }
     return {
-      'index': data.index,
-      'title': data.title,
-      'subtitle': data.subtitle,
-      'type': data.type,
-      'isSkip': data.isSkip,
-      'content': data.content,
-      'theme': theme != null
+      _Fields.index: data.index,
+      _Fields.title: data.title,
+      _Fields.subtitle: data.subtitle,
+      _Fields.type: data.type,
+      _Fields.isSkip: data.isSkip,
+      _Fields.content: data.content,
+      _Fields.theme: theme != null
           ? ChoiceQuestionThemeMapper().toJson(theme)
           : ChoiceQuestionThemeMapper()
               .toJson(const ChoiceQuestionTheme.common()),
-      // TODO(dev): Do we need payload?
-      // TODO(dev): Should we move keys to const?
-      'payload': {
-        'isMultipleChoice': data.isMultipleChoice,
-        'options': data.options,
-        'selectedOptions': data.selectedOptions,
-        'ruleType': data.ruleType.index,
-        'ruleValue': data.ruleValue,
+      _Fields.payload: {
+        _Fields.isMultipleChoice: data.isMultipleChoice,
+        _Fields.options: data.options,
+        _Fields.selectedOptions: data.selectedOptions,
+        _Fields.ruleType: data.ruleType.index,
+        _Fields.ruleValue: data.ruleValue,
       },
-      'secondaryButtonText': data.secondaryButtonText,
-      'primaryButtonText': data.primaryButtonText,
+      _Fields.secondaryButtonText: data.secondaryButtonText,
+      _Fields.primaryButtonText: data.primaryButtonText,
     };
   }
 }

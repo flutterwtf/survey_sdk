@@ -2,53 +2,74 @@ import 'package:flutter/material.dart';
 import 'package:survey_sdk/src/data/mappers/themes/question_theme_mapper.dart';
 import 'package:survey_sdk/src/domain/entities/themes/slider_question_theme.dart';
 
+abstract class _Fields {
+  static const String inactiveColor = 'inactiveColor';
+  static const String thumbColor = 'thumbColor';
+  static const String thumbRadius = 'thumbRadius';
+  static const String thickness = 'thickness';
+  static const String fill = 'fill';
+  static const String titleColor = 'titleColor';
+  static const String titleSize = 'titleSize';
+  static const String subtitleColor = 'subtitleColor';
+  static const String subtitleSize = 'subtitleSize';
+  static const String primaryButtonFill = 'primaryButtonFill';
+  static const String primaryButtonTextColor = 'primaryButtonTextColor';
+  static const String primaryButtonTextSize = 'primaryButtonTextSize';
+  static const String primaryButtonRadius = 'primaryButtonRadius';
+  static const String secondaryButtonFill = 'secondaryButtonFill';
+  static const String secondaryButtonTextColor = 'secondaryButtonTextColor';
+  static const String secondaryButtonTextSize = 'secondaryButtonTextSize';
+  static const String secondaryButtonRadius = 'secondaryButtonRadius';
+  static const String activeColor = 'activeColor';
+}
+
 class SliderQuestionThemeMapper
     extends QuestionThemeMapper<SliderQuestionTheme> {
   @override
   SliderQuestionTheme fromJson(Map<String, dynamic> json) {
     return SliderQuestionTheme(
-      activeColor: Color(json['activeColor']),
-      inactiveColor: Color(json['inactiveColor']),
-      thumbColor: Color(json['thumbColor']),
-      thumbRadius: json['thumbRadius'],
-      thickness: json['thickness'],
-      fill: Color(json['fill']),
-      titleColor: Color(json['titleColor']),
-      titleSize: json['titleSize'],
-      subtitleColor: Color(json['subtitleColor']),
-      subtitleSize: json['subtitleSize'],
-      primaryButtonFill: Color(json['primaryButtonFill']),
-      primaryButtonTextColor: Color(json['primaryButtonTextColor']),
-      primaryButtonTextSize: json['primaryButtonTextSize'],
-      primaryButtonRadius: json['primaryButtonRadius'],
-      secondaryButtonFill: Color(json['secondaryButtonFill']),
-      secondaryButtonTextColor: Color(json['secondaryButtonTextColor']),
-      secondaryButtonTextSize: json['secondaryButtonTextSize'],
-      secondaryButtonRadius: json['secondaryButtonRadius'],
+      activeColor: Color(json[_Fields.activeColor]),
+      inactiveColor: Color(json[_Fields.inactiveColor]),
+      thumbColor: Color(json[_Fields.thumbColor]),
+      thumbRadius: json[_Fields.thumbRadius],
+      thickness: json[_Fields.thickness],
+      fill: Color(json[_Fields.fill]),
+      titleColor: Color(json[_Fields.titleColor]),
+      titleSize: json[_Fields.titleSize],
+      subtitleColor: Color(json[_Fields.subtitleColor]),
+      subtitleSize: json[_Fields.subtitleSize],
+      primaryButtonFill: Color(json[_Fields.primaryButtonFill]),
+      primaryButtonTextColor: Color(json[_Fields.primaryButtonTextColor]),
+      primaryButtonTextSize: json[_Fields.primaryButtonTextSize],
+      primaryButtonRadius: json[_Fields.primaryButtonRadius],
+      secondaryButtonFill: Color(json[_Fields.secondaryButtonFill]),
+      secondaryButtonTextColor: Color(json[_Fields.secondaryButtonTextColor]),
+      secondaryButtonTextSize: json[_Fields.secondaryButtonTextSize],
+      secondaryButtonRadius: json[_Fields.secondaryButtonRadius],
     );
   }
 
   @override
   Map<String, dynamic> toJson(SliderQuestionTheme theme) {
     return {
-      'activeColor': theme.activeColor.value,
-      'inactiveColor': theme.inactiveColor.value,
-      'thumbColor': theme.thumbColor.value,
-      'thumbRadius': theme.thumbRadius,
-      'thickness': theme.thickness,
-      'fill': theme.fill.value,
-      'titleColor': theme.titleColor.value,
-      'titleSize': theme.titleSize,
-      'subtitleColor': theme.subtitleColor.value,
-      'subtitleSize': theme.subtitleSize,
-      'primaryButtonFill': theme.primaryButtonFill.value,
-      'primaryButtonTextColor': theme.primaryButtonTextColor.value,
-      'primaryButtonTextSize': theme.primaryButtonTextSize,
-      'primaryButtonRadius': theme.primaryButtonRadius,
-      'secondaryButtonFill': theme.secondaryButtonFill.value,
-      'secondaryButtonTextColor': theme.secondaryButtonTextColor.value,
-      'secondaryButtonTextSize': theme.secondaryButtonTextSize,
-      'secondaryButtonRadius': theme.secondaryButtonRadius,
+      _Fields.activeColor: theme.activeColor.value,
+      _Fields.inactiveColor: theme.inactiveColor.value,
+      _Fields.thumbColor: theme.thumbColor.value,
+      _Fields.thumbRadius: theme.thumbRadius,
+      _Fields.thickness: theme.thickness,
+      _Fields.fill: theme.fill.value,
+      _Fields.titleColor: theme.titleColor.value,
+      _Fields.titleSize: theme.titleSize,
+      _Fields.subtitleColor: theme.subtitleColor.value,
+      _Fields.subtitleSize: theme.subtitleSize,
+      _Fields.primaryButtonFill: theme.primaryButtonFill.value,
+      _Fields.primaryButtonTextColor: theme.primaryButtonTextColor.value,
+      _Fields.primaryButtonTextSize: theme.primaryButtonTextSize,
+      _Fields.primaryButtonRadius: theme.primaryButtonRadius,
+      _Fields.secondaryButtonFill: theme.secondaryButtonFill.value,
+      _Fields.secondaryButtonTextColor: theme.secondaryButtonTextColor.value,
+      _Fields.secondaryButtonTextSize: theme.secondaryButtonTextSize,
+      _Fields.secondaryButtonRadius: theme.secondaryButtonRadius,
     };
   }
 }

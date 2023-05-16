@@ -2,68 +2,98 @@ import 'package:flutter/material.dart';
 import 'package:survey_sdk/src/data/mappers/themes/question_theme_mapper.dart';
 import 'package:survey_sdk/survey_sdk.dart';
 
+abstract class _Fields {
+  static const String inputFill = 'inputFill';
+  static const String borderColor = 'borderColor';
+  static const String borderWidth = 'borderWidth';
+  static const String hintColor = 'hintColor';
+  static const String hintSize = 'hintSize';
+  static const String textColor = 'textColor';
+  static const String textSize = 'textSize';
+  static const String lines = 'lines';
+  static const String verticalPadding = 'verticalPadding';
+  static const String isMultiLine = 'isMultiLine';
+  static const String errorText = 'errorText';
+  static const String inputType = 'inputType';
+  static const String horizontalPadding = 'horizontalPadding';
+  static const String fill = 'fill';
+  static const String titleColor = 'titleColor';
+  static const String titleSize = 'titleSize';
+  static const String subtitleColor = 'subtitleColor';
+  static const String subtitleSize = 'subtitleSize';
+  static const String primaryButtonFill = 'primaryButtonFill';
+  static const String primaryButtonTextColor = 'primaryButtonTextColor';
+  static const String primaryButtonTextSize = 'primaryButtonTextSize';
+  static const String primaryButtonRadius = 'primaryButtonRadius';
+  static const String secondaryButtonFill = 'secondaryButtonFill';
+  static const String secondaryButtonTextColor = 'secondaryButtonTextColor';
+  static const String secondaryButtonTextSize = 'secondaryButtonTextSize';
+  static const String secondaryButtonRadius = 'secondaryButtonRadius';
+  static const String isMultiline = 'isMultiline';
+}
+
 class InputQuestionThemeMapper extends QuestionThemeMapper<InputQuestionTheme> {
   @override
   InputQuestionTheme fromJson(Map<String, dynamic> json) {
     return InputQuestionTheme(
-      inputFill: Color(json['inputFill']),
-      borderColor: Color(json['borderColor']),
-      borderWidth: json['borderWidth'],
-      hintColor: Color(json['hintColor']),
-      hintSize: json['hintSize'],
-      textColor: Color(json['textColor']),
-      textSize: json['textSize'],
-      lines: json['lines'],
-      verticalPadding: json['verticalPadding'],
-      isMultiline: json['isMultiLine'] == 1,
-      errorText: json['errorText'],
-      inputType: InputType.fromJson(json['inputType']),
-      horizontalPadding: json['horizontalPadding'],
-      fill: Color(json['fill']),
-      titleColor: Color(json['titleColor']),
-      titleSize: json['titleSize'],
-      subtitleColor: Color(json['subtitleColor']),
-      subtitleSize: json['subtitleSize'],
-      primaryButtonFill: Color(json['primaryButtonFill']),
-      primaryButtonTextColor: Color(json['primaryButtonTextColor']),
-      primaryButtonTextSize: json['primaryButtonTextSize'],
-      primaryButtonRadius: json['primaryButtonRadius'],
-      secondaryButtonFill: Color(json['secondaryButtonFill']),
-      secondaryButtonTextColor: Color(json['secondaryButtonTextColor']),
-      secondaryButtonTextSize: json['secondaryButtonTextSize'],
-      secondaryButtonRadius: json['secondaryButtonRadius'],
+      inputFill: Color(json[_Fields.inputFill]),
+      borderColor: Color(json[_Fields.borderColor]),
+      borderWidth: json[_Fields.borderWidth],
+      hintColor: Color(json[_Fields.hintColor]),
+      hintSize: json[_Fields.hintSize],
+      textColor: Color(json[_Fields.textColor]),
+      textSize: json[_Fields.textSize],
+      lines: json[_Fields.lines],
+      verticalPadding: json[_Fields.verticalPadding],
+      isMultiline: json[_Fields.isMultiLine] == 1,
+      errorText: json[_Fields.errorText],
+      inputType: InputType.fromJson(json[_Fields.inputType]),
+      horizontalPadding: json[_Fields.horizontalPadding],
+      fill: Color(json[_Fields.fill]),
+      titleColor: Color(json[_Fields.titleColor]),
+      titleSize: json[_Fields.titleSize],
+      subtitleColor: Color(json[_Fields.subtitleColor]),
+      subtitleSize: json[_Fields.subtitleSize],
+      primaryButtonFill: Color(json[_Fields.primaryButtonFill]),
+      primaryButtonTextColor: Color(json[_Fields.primaryButtonTextColor]),
+      primaryButtonTextSize: json[_Fields.primaryButtonTextSize],
+      primaryButtonRadius: json[_Fields.primaryButtonRadius],
+      secondaryButtonFill: Color(json[_Fields.secondaryButtonFill]),
+      secondaryButtonTextColor: Color(json[_Fields.secondaryButtonTextColor]),
+      secondaryButtonTextSize: json[_Fields.secondaryButtonTextSize],
+      secondaryButtonRadius: json[_Fields.secondaryButtonRadius],
     );
   }
 
   @override
   Map<String, dynamic> toJson(InputQuestionTheme theme) {
     return {
-      'inputFill': theme.inputFill.value,
-      'borderColor': theme.borderColor.value,
-      'borderWidth': theme.borderWidth,
-      'hintColor': theme.hintColor.value,
-      'hintSize': theme.hintSize,
-      'textColor': theme.textColor.value,
-      'textSize': theme.textSize,
-      'lines': theme.lines,
-      'isMultiline': theme.isMultiline ? 1 : 0,
-      'errorText': theme.errorText,
-      'inputType': theme.inputType.toJson(),
-      'verticalPadding': theme.verticalPadding,
-      'horizontalPadding': theme.horizontalPadding,
-      'fill': theme.fill.value,
-      'titleColor': theme.titleColor.value,
-      'titleSize': theme.titleSize,
-      'subtitleColor': theme.subtitleColor.value,
-      'subtitleSize': theme.subtitleSize,
-      'primaryButtonFill': theme.primaryButtonFill.value,
-      'primaryButtonTextColor': theme.primaryButtonTextColor.value,
-      'primaryButtonTextSize': theme.primaryButtonTextSize,
-      'primaryButtonRadius': theme.primaryButtonRadius,
-      'secondaryButtonFill': theme.secondaryButtonFill.value,
-      'secondaryButtonTextColor': theme.secondaryButtonTextColor.value,
-      'secondaryButtonTextSize': theme.secondaryButtonTextSize,
-      'secondaryButtonRadius': theme.secondaryButtonRadius,
+      _Fields.inputFill: theme.inputFill.value,
+      _Fields.borderColor: theme.borderColor.value,
+      _Fields.borderWidth: theme.borderWidth,
+      _Fields.hintColor: theme.hintColor.value,
+      _Fields.hintSize: theme.hintSize,
+      _Fields.textColor: theme.textColor.value,
+      _Fields.textSize: theme.textSize,
+      _Fields.lines: theme.lines,
+      _Fields.isMultiline: theme.isMultiline ? 1 : 0,
+      _Fields.errorText: theme.errorText,
+      _Fields.inputType: theme.inputType.toJson(),
+      _Fields.verticalPadding: theme.verticalPadding,
+      _Fields.horizontalPadding: theme.horizontalPadding,
+      _Fields.fill: theme.fill.value,
+      _Fields.titleColor: theme.titleColor.value,
+      _Fields.titleSize: theme.titleSize,
+      _Fields.subtitleColor: theme.subtitleColor.value,
+      _Fields.subtitleSize: theme.subtitleSize,
+      _Fields.primaryButtonFill: theme.primaryButtonFill.value,
+      _Fields.primaryButtonTextColor: theme.primaryButtonTextColor.value,
+      _Fields.primaryButtonTextSize: theme.primaryButtonTextSize,
+      _Fields.primaryButtonRadius: theme.primaryButtonRadius,
+      _Fields.secondaryButtonFill: theme.secondaryButtonFill.value,
+      _Fields.secondaryButtonTextColor: theme.secondaryButtonTextColor.value,
+      _Fields.secondaryButtonTextSize: theme.secondaryButtonTextSize,
+      _Fields.secondaryButtonRadius: theme.secondaryButtonRadius,
     };
   }
 }

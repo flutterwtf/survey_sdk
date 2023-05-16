@@ -3,25 +3,41 @@ import 'package:survey_sdk/src/data/mappers/question_types/question_data_mapper.
 import 'package:survey_sdk/src/data/mappers/themes/slider_question_theme_mapper.dart';
 import 'package:survey_sdk/survey_sdk.dart';
 
+abstract class _Fields {
+  static const String index = 'index';
+  static const String title = 'title';
+  static const String subtitle = 'subtitle';
+  static const String isSkip = 'isSkip';
+  static const String content = 'content';
+  static const String primaryButtonText = 'primaryButtonText';
+  static const String secondaryButtonText = 'secondaryButtonText';
+  static const String theme = 'theme';
+  static const String minValue = 'minValue';
+  static const String maxValue = 'maxValue';
+  static const String divisions = 'divisions';
+  static const String initialValue = 'initialValue';
+  static const String type = 'type';
+}
+
 class SliderQuestionDataMapper extends QuestionDataMapper<SliderQuestionData> {
   @override
   SliderQuestionData fromJson(Map<String, dynamic> json) {
-    final theme = json['theme'];
+    final theme = json[_Fields.theme];
     return SliderQuestionData(
-      index: json['index'],
-      minValue: json['minValue'],
-      maxValue: json['maxValue'],
-      divisions: json['divisions'],
-      initialValue: json['initialValue'],
-      title: json['title'],
-      subtitle: json['subtitle'],
-      isSkip: json['isSkip'],
-      content: json['content'],
+      index: json[_Fields.index],
+      minValue: json[_Fields.minValue],
+      maxValue: json[_Fields.maxValue],
+      divisions: json[_Fields.divisions],
+      initialValue: json[_Fields.initialValue],
+      title: json[_Fields.title],
+      subtitle: json[_Fields.subtitle],
+      isSkip: json[_Fields.isSkip],
+      content: json[_Fields.content],
       theme: theme != null
           ? SliderQuestionThemeMapper().fromJson(theme)
           : const SliderQuestionTheme.common(),
-      secondaryButtonText: json['secondaryButtonText'],
-      primaryButtonText: json['primaryButtonText'],
+      secondaryButtonText: json[_Fields.secondaryButtonText],
+      primaryButtonText: json[_Fields.primaryButtonText],
     );
   }
 
@@ -38,22 +54,22 @@ class SliderQuestionDataMapper extends QuestionDataMapper<SliderQuestionData> {
       theme = data.theme;
     }
     return {
-      'index': data.index,
-      'theme': theme != null
+      _Fields.index: data.index,
+      _Fields.theme: theme != null
           ? SliderQuestionThemeMapper().toJson(theme)
           : SliderQuestionThemeMapper()
               .toJson(const SliderQuestionTheme.common()),
-      'minValue': data.minValue,
-      'maxValue': data.maxValue,
-      'divisions': data.divisions,
-      'initialValue': data.initialValue,
-      'title': data.title,
-      'subtitle': data.subtitle,
-      'type': data.type,
-      'isSkip': data.isSkip,
-      'content': data.content,
-      'secondaryButtonText': data.secondaryButtonText,
-      'primaryButtonText': data.primaryButtonText,
+      _Fields.minValue: data.minValue,
+      _Fields.maxValue: data.maxValue,
+      _Fields.divisions: data.divisions,
+      _Fields.initialValue: data.initialValue,
+      _Fields.title: data.title,
+      _Fields.subtitle: data.subtitle,
+      _Fields.type: data.type,
+      _Fields.isSkip: data.isSkip,
+      _Fields.content: data.content,
+      _Fields.secondaryButtonText: data.secondaryButtonText,
+      _Fields.primaryButtonText: data.primaryButtonText,
     };
   }
 }
