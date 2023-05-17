@@ -83,7 +83,7 @@ class _BuilderPageState extends State<BuilderPage> {
               // ignore: avoid-passing-async-when-sync-expected
               _ImportButton(onImportPressed: cubit.importData),
               _ExportButton(
-                isEmpty: cubit.state.surveyData.questions.isEmpty,
+                isQuestionsEmpty: cubit.state.surveyData.questions.isEmpty,
                 downloadSurveyData: cubit.downloadSurveyData,
                 copySurveyData: cubit.copySurveyData,
               ),
@@ -198,15 +198,39 @@ class _ImportButton extends StatelessWidget {
 }
 
 class _ExportButton extends StatelessWidget {
-  final bool isEmpty;
+  final bool isQuestionsEmpty;
   final VoidCallback downloadSurveyData;
   final VoidCallback copySurveyData;
 
   const _ExportButton({
-    required this.isEmpty,
+    required this.isQuestionsEmpty,
     required this.downloadSurveyData,
     required this.copySurveyData,
   });
+
+  Future<void> _showExportDialog(BuildContext context) {
+    return showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: Text(context.localization.emptyQuestionMessage),
+          actions: <Widget>[
+            TextButton(
+              child: Text(
+                context.localization.ok,
+                style: const TextStyle(
+                  color: AppColors.white,
+                ),
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -217,8 +241,8 @@ class _ExportButton extends StatelessWidget {
         bottom: AppDimensions.margin2XS,
       ),
       child: TextButton(
-        onPressed: isEmpty
-            ? null
+        onPressed: isQuestionsEmpty
+            ? () => _showExportDialog(context)
             : () {
                 showExportFloatingWindow(
                   context,
