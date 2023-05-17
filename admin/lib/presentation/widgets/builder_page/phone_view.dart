@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:survey_admin/presentation/utils/utils.dart';
 
-const _marginHorizontal = 25.0;
-const _marginVertical = 22.0;
+const _marginHorizontal = 24.0;
+const _marginVertical = 21.0;
 
 class PhoneView extends StatelessWidget {
   final Widget child;
