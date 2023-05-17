@@ -1,10 +1,9 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
+import 'package:survey_sdk/src/data/mappers/question_types/choice_question_data_mapper.dart';
+import 'package:survey_sdk/src/data/mappers/question_types/input_question_data_mapper.dart';
+import 'package:survey_sdk/src/data/mappers/question_types/intro_question_data_mapper.dart';
+import 'package:survey_sdk/src/data/mappers/question_types/slider_question_data_mapper.dart';
 import 'package:survey_sdk/src/domain/entities/constants/question_types.dart';
-import 'package:survey_sdk/src/domain/entities/question_types/choice_question_data.dart';
-import 'package:survey_sdk/src/domain/entities/question_types/input_question_data.dart';
-import 'package:survey_sdk/src/domain/entities/question_types/intro_question_data.dart';
-import 'package:survey_sdk/src/domain/entities/question_types/slider_question_data.dart';
 
 /// Class that serves as a base for creating specific types of [QuestionData]
 /// classes. [QuestionData] classes are used to represent data for various
@@ -60,17 +59,15 @@ abstract class QuestionData<T> extends Equatable {
   static QuestionData fromType(Map<String, dynamic> json) {
     switch (json['type']) {
       case QuestionTypes.slider:
-        return SliderQuestionData.fromJson(json);
+        return SliderQuestionDataMapper().fromJson(json);
       case QuestionTypes.intro:
-        return IntroQuestionData.fromJson(json);
+        return IntroQuestionDataMapper().fromJson(json);
       case QuestionTypes.input:
-        return InputQuestionData.fromJson(json);
+        return InputQuestionDataMapper().fromJson(json);
       case QuestionTypes.choice:
-        return ChoiceQuestionData.fromJson(json);
+        return ChoiceQuestionDataMapper().fromJson(json);
       default:
         throw UnimplementedError();
     }
   }
-
-  Map<String, dynamic> toJson({ThemeExtension<dynamic>? commonTheme});
 }

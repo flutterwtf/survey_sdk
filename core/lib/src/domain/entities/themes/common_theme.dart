@@ -1,5 +1,9 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:survey_sdk/src/data/mappers/question_types/choice_question_data_mapper.dart';
+import 'package:survey_sdk/src/data/mappers/question_types/input_question_data_mapper.dart';
+import 'package:survey_sdk/src/data/mappers/question_types/intro_question_data_mapper.dart';
+import 'package:survey_sdk/src/data/mappers/question_types/slider_question_data_mapper.dart';
 import 'package:survey_sdk/src/domain/entities/api_object.dart';
 import 'package:survey_sdk/src/domain/entities/question_types/choice_question_data.dart';
 import 'package:survey_sdk/src/domain/entities/question_types/input_question_data.dart';
@@ -32,19 +36,19 @@ class CommonTheme extends ThemeExtension<CommonTheme>
   @override
   factory CommonTheme.fromJson(Map<String, dynamic> json) {
     return CommonTheme(
-      slider: SliderQuestionData.fromJson(json['slider']),
-      intro: IntroQuestionData.fromJson(json['intro']),
-      input: InputQuestionData.fromJson(json['input']),
-      choice: ChoiceQuestionData.fromJson(json['choice']),
+      slider: SliderQuestionDataMapper().fromJson(json['slider']),
+      intro: IntroQuestionDataMapper().fromJson(json['intro']),
+      input: InputQuestionDataMapper().fromJson(json['input']),
+      choice: ChoiceQuestionDataMapper().fromJson(json['choice']),
     );
   }
 
   @override
   Map<String, dynamic> toJson() => {
-        'slider': slider.toJson(),
-        'intro': intro.toJson(),
-        'input': input.toJson(),
-        'choice': choice.toJson(),
+        'slider': SliderQuestionDataMapper().toJson(slider),
+        'intro': IntroQuestionDataMapper().toJson(intro),
+        'input': InputQuestionDataMapper().toJson(input),
+        'choice': ChoiceQuestionDataMapper().toJson(choice),
       };
 
   @override

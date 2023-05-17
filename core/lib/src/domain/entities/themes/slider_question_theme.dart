@@ -2,7 +2,6 @@ import 'dart:ui';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:survey_sdk/src/domain/entities/api_object.dart';
 
 const _thumbRadius = 16.0;
 const _thickness = 8.0;
@@ -13,7 +12,7 @@ const _buttonRadius = 10.0;
 
 // TODO(dev): Can we move equatable mixin to ApiObject?
 class SliderQuestionTheme extends ThemeExtension<SliderQuestionTheme>
-    with ApiObject, EquatableMixin {
+    with EquatableMixin {
   final Color activeColor;
   final Color inactiveColor;
   final Color thumbColor;
@@ -97,48 +96,6 @@ class SliderQuestionTheme extends ThemeExtension<SliderQuestionTheme>
           secondaryButtonTextSize: _buttonTextSize,
           secondaryButtonRadius: _buttonRadius,
         );
-
-  SliderQuestionTheme.fromJson(Map<String, dynamic> json)
-      : activeColor = Color(json['activeColor']),
-        inactiveColor = Color(json['inactiveColor']),
-        thumbColor = Color(json['thumbColor']),
-        thumbRadius = json['thumbRadius'],
-        thickness = json['thickness'],
-        fill = Color(json['fill']),
-        titleColor = Color(json['titleColor']),
-        titleSize = json['titleSize'],
-        subtitleColor = Color(json['subtitleColor']),
-        subtitleSize = json['subtitleSize'],
-        primaryButtonFill = Color(json['primaryButtonFill']),
-        primaryButtonTextColor = Color(json['primaryButtonTextColor']),
-        primaryButtonTextSize = json['primaryButtonTextSize'],
-        primaryButtonRadius = json['primaryButtonRadius'],
-        secondaryButtonFill = Color(json['secondaryButtonFill']),
-        secondaryButtonTextColor = Color(json['secondaryButtonTextColor']),
-        secondaryButtonTextSize = json['secondaryButtonTextSize'],
-        secondaryButtonRadius = json['secondaryButtonRadius'];
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'activeColor': activeColor.value,
-        'inactiveColor': inactiveColor.value,
-        'thumbColor': thumbColor.value,
-        'thumbRadius': thumbRadius,
-        'thickness': thickness,
-        'fill': fill.value,
-        'titleColor': titleColor.value,
-        'titleSize': titleSize,
-        'subtitleColor': subtitleColor.value,
-        'subtitleSize': subtitleSize,
-        'primaryButtonFill': primaryButtonFill.value,
-        'primaryButtonTextColor': primaryButtonTextColor.value,
-        'primaryButtonTextSize': primaryButtonTextSize,
-        'primaryButtonRadius': primaryButtonRadius,
-        'secondaryButtonFill': secondaryButtonFill.value,
-        'secondaryButtonTextColor': secondaryButtonTextColor.value,
-        'secondaryButtonTextSize': secondaryButtonTextSize,
-        'secondaryButtonRadius': secondaryButtonRadius,
-      };
 
   @override
   SliderQuestionTheme copyWith({

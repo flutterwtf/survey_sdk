@@ -2,7 +2,6 @@ import 'dart:ui';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:survey_sdk/src/domain/entities/api_object.dart';
 import 'package:survey_sdk/src/presentation/utils/app_colors.dart';
 import 'package:survey_sdk/src/presentation/utils/app_fonts.dart';
 
@@ -15,7 +14,7 @@ const _verticalPadding = 14.0;
 
 /// Defines the visual properties for an input question options
 class InputQuestionTheme extends ThemeExtension<InputQuestionTheme>
-    with ApiObject, EquatableMixin {
+    with EquatableMixin {
   /// Background color of the text field. Common value is [Colors.white]
   final Color inputFill;
 
@@ -125,34 +124,6 @@ class InputQuestionTheme extends ThemeExtension<InputQuestionTheme>
     required this.horizontalPadding,
   });
 
-  InputQuestionTheme.fromJson(Map<String, dynamic> json)
-      : inputFill = Color(json['inputFill']),
-        borderColor = Color(json['borderColor']),
-        borderWidth = json['borderWidth'],
-        hintColor = Color(json['hintColor']),
-        hintSize = json['hintSize'],
-        textColor = Color(json['textColor']),
-        textSize = json['textSize'],
-        lines = json['lines'],
-        verticalPadding = json['verticalPadding'],
-        isMultiline = json['isMultiLine'] == 1,
-        errorText = json['errorText'],
-        inputType = InputType.fromJson(json['inputType']),
-        horizontalPadding = json['horizontalPadding'],
-        fill = Color(json['fill']),
-        titleColor = Color(json['titleColor']),
-        titleSize = json['titleSize'],
-        subtitleColor = Color(json['subtitleColor']),
-        subtitleSize = json['subtitleSize'],
-        primaryButtonFill = Color(json['primaryButtonFill']),
-        primaryButtonTextColor = Color(json['primaryButtonTextColor']),
-        primaryButtonTextSize = json['primaryButtonTextSize'],
-        primaryButtonRadius = json['primaryButtonRadius'],
-        secondaryButtonFill = Color(json['secondaryButtonFill']),
-        secondaryButtonTextColor = Color(json['secondaryButtonTextColor']),
-        secondaryButtonTextSize = json['secondaryButtonTextSize'],
-        secondaryButtonRadius = json['secondaryButtonRadius'];
-
   /// Default color and size values of input question page
   const InputQuestionTheme.common()
       : this(
@@ -184,36 +155,6 @@ class InputQuestionTheme extends ThemeExtension<InputQuestionTheme>
           horizontalPadding: _horizontalPadding,
           verticalPadding: _verticalPadding,
         );
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'inputFill': inputFill.value,
-        'borderColor': borderColor.value,
-        'borderWidth': borderWidth,
-        'hintColor': hintColor.value,
-        'hintSize': hintSize,
-        'textColor': textColor.value,
-        'textSize': textSize,
-        'lines': lines,
-        'isMultiline': isMultiline ? 1 : 0,
-        'errorText': errorText,
-        'inputType': inputType.toJson(),
-        'verticalPadding': verticalPadding,
-        'horizontalPadding': horizontalPadding,
-        'fill': fill.value,
-        'titleColor': titleColor.value,
-        'titleSize': titleSize,
-        'subtitleColor': subtitleColor.value,
-        'subtitleSize': subtitleSize,
-        'primaryButtonFill': primaryButtonFill.value,
-        'primaryButtonTextColor': primaryButtonTextColor.value,
-        'primaryButtonTextSize': primaryButtonTextSize,
-        'primaryButtonRadius': primaryButtonRadius,
-        'secondaryButtonFill': secondaryButtonFill.value,
-        'secondaryButtonTextColor': secondaryButtonTextColor.value,
-        'secondaryButtonTextSize': secondaryButtonTextSize,
-        'secondaryButtonRadius': secondaryButtonRadius,
-      };
 
   @override
   InputQuestionTheme copyWith({
