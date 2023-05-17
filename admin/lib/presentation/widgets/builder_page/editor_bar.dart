@@ -16,7 +16,7 @@ class EditorBar extends StatelessWidget {
   const EditorBar({
     required this.onChange,
     required this.editableQuestion,
-    this.isEditMode = false,
+    this.isEditMode = true,
     super.key,
   });
 
@@ -32,7 +32,7 @@ class EditorBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnimatedContainer(
-      duration: AppDurations.modeToggle,
+      duration: AppDurations.panelSwitchingDuration,
       color: AppColors.whitePrimaryBackground,
       width: _calculateWidth(context),
       child: OverflowBox(

@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:survey_admin/presentation/app/di/injector.dart';
@@ -68,7 +69,7 @@ class _BuilderPageState extends State<BuilderPage> {
         if (newState is ImportErrorSurveyDataBuilderState) _showImportDialog();
 
         final selected =
-            (newState is EditQuestionBuilderState) ? newState.selectedIndex : 0;
+            newState is EditQuestionBuilderState ? newState.selectedIndex : 0;
         if (selected != 0) {
           _surveyController.animateTo(selected - 1);
         }
@@ -79,12 +80,8 @@ class _BuilderPageState extends State<BuilderPage> {
         return Scaffold(
           appBar: AppBar(
             title: _BuilderPageTabBar(
-              onTap: (tabIndex) => cubit.toggleMode(
-                isEditMode: tabIndex == 0,
-                selectedIndex: (state is EditQuestionBuilderState)
-                    ? state.selectedIndex
-                    : 0,
-              ),
+              onTapEditMode: cubit.openEditMode,
+              onTapPreviewMode: cubit.openPreviewMode,
             ),
             actions: [
               // ignore: avoid-passing-async-when-sync-expected
@@ -98,20 +95,17 @@ class _BuilderPageState extends State<BuilderPage> {
           ),
           body: Row(
             children: [
-              if (state is EditQuestionBuilderState)
-                QuestionList(
-                  isEditMode: state.isEditMode,
-                  onDelete: cubit.deleteQuestionData,
-                  onSelect: cubit.select,
-                  onAdd: cubit.addQuestionData,
-                  questions: cubit.state.surveyData.questions.isNotEmpty
-                      ? List<QuestionData>.of(
-                          cubit.state.surveyData.questions,
-                        )
-                      : [],
-                  onUpdate: cubit.updateQuestions,
-                  selectedIndex: state.selectedIndex - 1,
-                ),
+              QuestionList(
+                isEditMode: state is EditQuestionBuilderState,
+                onDelete: cubit.deleteQuestionData,
+                onSelect: cubit.select,
+                onAdd: cubit.addQuestionData,
+                questions: cubit.state.surveyData.questions,
+                onUpdate: cubit.updateQuestions,
+                selectedIndex: state is EditQuestionBuilderState
+                    ? state.selectedIndex - 1
+                    : 1,
+              ),
               Expanded(
                 child: PhoneView(
                   child: Survey(
@@ -120,16 +114,15 @@ class _BuilderPageState extends State<BuilderPage> {
                   ),
                 ),
               ),
-              if (state is EditQuestionBuilderState)
-                EditorBar(
-                  isEditMode: state.isEditMode,
-                  onChange: cubit.updateQuestionData,
-                  editableQuestion: state.surveyData.questions.isNotEmpty
-                      ? state.surveyData.questions.firstWhere(
-                          (q) => q.index == state.selectedIndex,
-                        )
-                      : null,
-                ),
+              EditorBar(
+                isEditMode: state is EditQuestionBuilderState,
+                onChange: cubit.updateQuestionData,
+                editableQuestion: state is EditQuestionBuilderState
+                    ? state.surveyData.questions.firstWhereOrNull(
+                        (q) => q.index == state.selectedIndex,
+                      )
+                    : null,
+              ),
             ],
           ),
         );
@@ -139,15 +132,19 @@ class _BuilderPageState extends State<BuilderPage> {
 }
 
 class _BuilderPageTabBar extends StatelessWidget {
-  final ValueChanged<int> onTap;
+  final VoidCallback onTapEditMode;
+  final VoidCallback onTapPreviewMode;
 
   const _BuilderPageTabBar({
-    required this.onTap,
+    required this.onTapEditMode,
+    required this.onTapPreviewMode,
   });
 
   @override
   Widget build(BuildContext context) {
+    const previewTabIndex = 1;
     const tabLength = 2;
+
     return DefaultTabController(
       length: tabLength,
       child: SizedBox(
@@ -166,7 +163,9 @@ class _BuilderPageTabBar extends StatelessWidget {
           ),
           labelStyle: context.theme.textTheme.titleMedium
               ?.copyWith(fontWeight: AppFonts.weightBold),
-          onTap: onTap,
+          onTap: (tabIndex) => tabIndex == previewTabIndex
+              ? onTapPreviewMode()
+              : onTapEditMode(),
         ),
       ),
     );

@@ -55,7 +55,7 @@ class _QuestionListState extends State<QuestionList> {
   @override
   Widget build(BuildContext context) {
     return AnimatedContainer(
-      duration: AppDurations.modeToggle,
+      duration: AppDurations.panelSwitchingDuration,
       color: AppColors.white,
       width: widget.isEditMode ? AppDimensions.surveyContentBarWidth : 0,
       child: OverflowBox(

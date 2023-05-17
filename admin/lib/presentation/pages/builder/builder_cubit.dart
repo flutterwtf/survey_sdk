@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:collection/collection.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:survey_admin/domain/repository_interfaces/file_system_repository.dart.dart';
@@ -145,11 +146,36 @@ class BuilderCubit extends Cubit<BuilderState> {
     emit(state.copyWith(surveyData: surveyData));
   }
 
-  void toggleMode({required bool isEditMode, int selectedIndex = 1}) {
+  void openPreviewMode() {
+    final QuestionData? selectedQuestion;
+    if (state is EditQuestionBuilderState) {
+      final index = (state as EditQuestionBuilderState).selectedIndex;
+      selectedQuestion =
+          state.surveyData.questions.firstWhereOrNull((e) => e.index == index);
+    } else if (state is PreviewQuestionBuilderState) {
+      selectedQuestion =
+          (state as PreviewQuestionBuilderState).selectedQuestion;
+    } else {
+      selectedQuestion = null;
+    }
+
+    emit(
+      PreviewQuestionBuilderState(
+        selectedQuestion: selectedQuestion,
+        surveyData: state.surveyData,
+      ),
+    );
+  }
+
+  void openEditMode() {
+    final int selectedIndex;
+    selectedIndex = state is EditQuestionBuilderState
+        ? (state as EditQuestionBuilderState).selectedIndex
+        : (state as PreviewQuestionBuilderState).selectedQuestion?.index ?? 1;
+
     emit(
       EditQuestionBuilderState(
         selectedIndex: selectedIndex,
-        isEditMode: isEditMode,
         surveyData: state.surveyData,
       ),
     );

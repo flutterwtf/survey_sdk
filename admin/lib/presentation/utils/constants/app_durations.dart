@@ -1,5 +1,5 @@
 class AppDurations {
   /// Animation durations.
-  static const customizationItem = Duration(milliseconds: 100);
-  static const modeToggle = Duration(milliseconds: 1000);
+  static const customizationItemDuration = Duration(milliseconds: 100);
+  static const panelSwitchingDuration = Duration(milliseconds: 1000);
 }

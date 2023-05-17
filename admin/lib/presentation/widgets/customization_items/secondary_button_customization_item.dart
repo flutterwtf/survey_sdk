@@ -47,7 +47,7 @@ class _SecondaryButtonCustomizationItemState
           },
         ),
         AnimatedSize(
-          duration: AppDurations.customizationItem,
+          duration: AppDurations.customizationItemDuration,
           child: _isShown
               ? Padding(
                   padding: const EdgeInsets.only(
