@@ -14,6 +14,7 @@ class QuestionList extends StatefulWidget {
   final ValueChanged<List<QuestionData>> onUpdate;
   final int? selectedIndex;
   final List<QuestionData> questions;
+  final bool isEditMode;
 
   const QuestionList({
     required this.onSelect,
@@ -22,6 +23,7 @@ class QuestionList extends StatefulWidget {
     required this.onUpdate,
     required this.onDelete,
     required this.selectedIndex,
+    this.isEditMode = true,
     super.key,
   });
 
@@ -52,68 +54,72 @@ class _QuestionListState extends State<QuestionList> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return AnimatedContainer(
+      duration: AppDurations.modeToggle,
       color: AppColors.white,
-      width: AppDimensions.surveyContentBarWidth,
-      child: Column(
-        children: [
-          const Divider(),
-          _ListHeader(
-            //ignore: avoid-passing-async-when-sync-expected
-            onAddButtonTap: () async {
-              final questionData = await Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => const NewQuestionPage(),
-                ),
-              );
-              if (questionData != null) {
-                _addQuestion(questionData);
-              }
-            },
-            isEditingCommonTheme: widget.selectedIndex == -1,
-            questionList: widget.questions,
-          ),
-          Expanded(
-            child: ContextMenuOverlay(
-              child: ReorderableListView(
-                proxyDecorator: (widget, _, __) => widget,
-                onReorder: (oldIndex, newIndex) {
-                  setState(() {
-                    if (newIndex > oldIndex) newIndex--;
-                    _updateQuestion(oldIndex, newIndex);
-                  });
-                },
-                buildDefaultDragHandles: false,
-                children: [
-                  for (int index = 0; index < widget.questions.length; index++)
-                    _Question(
-                      key: ValueKey(index),
-                      index: index,
-                      isSelected: index == widget.selectedIndex,
-                      onDeleteButtonPressed: () {
-                        widget
-                            .onDelete(widget.questions[widget.selectedIndex!]);
-                      },
-                      question: widget.questions[index],
-                      onQuestionTap: widget.onSelect,
-                    ),
-                ],
-              ),
-              cardBuilder: (_, children) {
-                return DecoratedBox(
-                  decoration: const BoxDecoration(
-                    color: AppColors.white,
-                    border: Border.fromBorderSide(BorderSide(width: 0.5)),
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(AppDimensions.circularRadiusXS),
-                    ),
+      width: widget.isEditMode ? AppDimensions.surveyContentBarWidth : 0,
+      child: OverflowBox(
+        maxWidth: AppDimensions.surveyContentBarWidth,
+        child: Column(
+          children: [
+            const Divider(),
+            _ListHeader(
+              //ignore: avoid-passing-async-when-sync-expected
+              onAddButtonTap: () async {
+                final questionData = await Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const NewQuestionPage(),
                   ),
-                  child: Column(children: children),
                 );
+                if (questionData != null) {
+                  _addQuestion(questionData);
+                }
               },
+              isEditingCommonTheme: widget.selectedIndex == -1,
+              questionList: widget.questions,
             ),
-          ),
-        ],
+            Expanded(
+              child: ContextMenuOverlay(
+                child: ReorderableListView(
+                  proxyDecorator: (widget, _, __) => widget,
+                  onReorder: (oldIndex, newIndex) {
+                    setState(() {
+                      if (newIndex > oldIndex) newIndex--;
+                      _updateQuestion(oldIndex, newIndex);
+                    });
+                  },
+                  buildDefaultDragHandles: false,
+                  children: [
+                    for (int index = 0; index < widget.questions.length; index++)
+                      _Question(
+                        key: ValueKey(index),
+                        index: index,
+                        isSelected: index == widget.selectedIndex,
+                        onDeleteButtonPressed: () {
+                          widget
+                              .onDelete(widget.questions[widget.selectedIndex!]);
+                        },
+                        question: widget.questions[index],
+                        onQuestionTap: widget.onSelect,
+                      ),
+                  ],
+                ),
+                cardBuilder: (_, children) {
+                  return DecoratedBox(
+                    decoration: const BoxDecoration(
+                      color: AppColors.white,
+                      border: Border.fromBorderSide(BorderSide(width: 0.5)),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(AppDimensions.circularRadiusXS),
+                      ),
+                    ),
+                    child: Column(children: children),
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

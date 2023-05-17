@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:survey_admin/presentation/app/di/injector.dart';
@@ -101,25 +99,18 @@ class _BuilderPageState extends State<BuilderPage> {
           body: Row(
             children: [
               if (state is EditQuestionBuilderState)
-                AnimatedSwitcher(
-                  duration: AppDurations.modeToggle,
-                  child: state.isEditMode
-                      ? QuestionList(
-                          onDelete: cubit.deleteQuestionData,
-                          onSelect: cubit.select,
-                          onAdd: cubit.addQuestionData,
-                          questions: cubit.state.surveyData.questions.isNotEmpty
-                              ? List<QuestionData>.of(
-                                  cubit.state.surveyData.questions,
-                                )
-                              : [],
-                          onUpdate: cubit.updateQuestions,
-                          selectedIndex: state.selectedIndex - 1,
+                QuestionList(
+                  isEditMode: state.isEditMode,
+                  onDelete: cubit.deleteQuestionData,
+                  onSelect: cubit.select,
+                  onAdd: cubit.addQuestionData,
+                  questions: cubit.state.surveyData.questions.isNotEmpty
+                      ? List<QuestionData>.of(
+                          cubit.state.surveyData.questions,
                         )
-                      : Container(
-                          color: AppColors.greyBackground,
-                          width: AppDimensions.surveyContentBarWidth,
-                        ),
+                      : [],
+                  onUpdate: cubit.updateQuestions,
+                  selectedIndex: state.selectedIndex - 1,
                 ),
               Expanded(
                 child: PhoneView(
@@ -130,26 +121,14 @@ class _BuilderPageState extends State<BuilderPage> {
                 ),
               ),
               if (state is EditQuestionBuilderState)
-                AnimatedSwitcher(
-                  duration: AppDurations.modeToggle,
-                  child: state.isEditMode
-                      ? EditorBar(
-                          onChange: cubit.updateQuestionData,
-                          editableQuestion:
-                              state.surveyData.questions.isNotEmpty
-                                  ? state.surveyData.questions.firstWhere(
-                                      (q) => q.index == state.selectedIndex,
-                                    )
-                                  : null,
+                EditorBar(
+                  isEditMode: state.isEditMode,
+                  onChange: cubit.updateQuestionData,
+                  editableQuestion: state.surveyData.questions.isNotEmpty
+                      ? state.surveyData.questions.firstWhere(
+                          (q) => q.index == state.selectedIndex,
                         )
-                      : Container(
-                          color: AppColors.greyBackground,
-                          width: min(
-                            AppDimensions.surveyEditorBarWidth,
-                            MediaQuery.of(context).size.width -
-                                AppDimensions.surveyContentBarWidth,
-                          ),
-                        ),
+                      : null,
                 ),
             ],
           ),
