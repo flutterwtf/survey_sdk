@@ -90,14 +90,17 @@ class _QuestionListState extends State<QuestionList> {
                   },
                   buildDefaultDragHandles: false,
                   children: [
-                    for (int index = 0; index < widget.questions.length; index++)
+                    for (int index = 0;
+                        index < widget.questions.length;
+                        index++)
                       _Question(
                         key: ValueKey(index),
                         index: index,
                         isSelected: index == widget.selectedIndex,
                         onDeleteButtonPressed: () {
-                          widget
-                              .onDelete(widget.questions[widget.selectedIndex!]);
+                          widget.onDelete(
+                            widget.questions[widget.selectedIndex!],
+                          );
                         },
                         question: widget.questions[index],
                         onQuestionTap: widget.onSelect,
