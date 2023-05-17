@@ -10,19 +10,6 @@ The Admin module is a web application that allows you to build, manage and custo
 - Preview: Preview your survey to see how it will appear to respondents before integrating.
 - Import and Export: Import and export surveys as JSON files for easy backup purposes and sharing them with others.
 
-## Building
-
-Build this project from the command line using:
-
-```sh
-flutter pub run build_runner build
-```
-or
-
-```sh
-flutter pub run build_runner build --delete-conflicting-outputs
-```
-
 # Usage
 
 ## Get started
