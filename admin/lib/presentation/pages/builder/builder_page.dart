@@ -83,6 +83,7 @@ class _BuilderPageState extends State<BuilderPage> {
               // ignore: avoid-passing-async-when-sync-expected
               _ImportButton(onImportPressed: cubit.importData),
               _ExportButton(
+                isEmpty: cubit.state.surveyData.questions.isEmpty,
                 downloadSurveyData: cubit.downloadSurveyData,
                 copySurveyData: cubit.copySurveyData,
               ),
@@ -197,10 +198,12 @@ class _ImportButton extends StatelessWidget {
 }
 
 class _ExportButton extends StatelessWidget {
+  final bool isEmpty;
   final VoidCallback downloadSurveyData;
   final VoidCallback copySurveyData;
 
   const _ExportButton({
+    required this.isEmpty,
     required this.downloadSurveyData,
     required this.copySurveyData,
   });
@@ -214,13 +217,15 @@ class _ExportButton extends StatelessWidget {
         bottom: AppDimensions.margin2XS,
       ),
       child: TextButton(
-        onPressed: () {
-          showExportFloatingWindow(
-            context,
-            onDownloadPressed: downloadSurveyData,
-            onCopy: copySurveyData,
-          );
-        },
+        onPressed: isEmpty
+            ? null
+            : () {
+                showExportFloatingWindow(
+                  context,
+                  onDownloadPressed: downloadSurveyData,
+                  onCopy: copySurveyData,
+                );
+              },
         child: Padding(
           padding: const EdgeInsets.symmetric(
             horizontal: AppDimensions.margin3XL,
