@@ -83,8 +83,10 @@ class _QuestionListState extends State<QuestionList> {
                 child: ReorderableListView(
                   proxyDecorator: (widget, _, __) => widget,
                   onReorder: (oldIndex, newIndex) {
-                    if (newIndex > oldIndex) newIndex--;
-                    setState(() => _updateQuestion(oldIndex, newIndex));
+                    setState(() {
+                      if (newIndex > oldIndex) newIndex--;
+                      _updateQuestion(oldIndex, newIndex);
+                    });
                   },
                   buildDefaultDragHandles: false,
                   children: [
