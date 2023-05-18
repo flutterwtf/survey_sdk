@@ -46,4 +46,4 @@ jobs:
           ../scripts/coverage_check.sh
 
       - name: Pub points check
-          run: ../scripts/pub_points_check.sh
+        run: ../scripts/pub_points_check.sh
