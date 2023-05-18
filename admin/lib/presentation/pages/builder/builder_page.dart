@@ -83,6 +83,7 @@ class _BuilderPageState extends State<BuilderPage> {
               // ignore: avoid-passing-async-when-sync-expected
               _ImportButton(onImportPressed: cubit.importData),
               _ExportButton(
+                isButtonActive: cubit.state.surveyData.questions.isEmpty,
                 downloadSurveyData: cubit.downloadSurveyData,
                 copySurveyData: cubit.copySurveyData,
               ),
@@ -197,13 +198,39 @@ class _ImportButton extends StatelessWidget {
 }
 
 class _ExportButton extends StatelessWidget {
+  final bool isButtonActive;
   final VoidCallback downloadSurveyData;
   final VoidCallback copySurveyData;
 
   const _ExportButton({
+    required this.isButtonActive,
     required this.downloadSurveyData,
     required this.copySurveyData,
   });
+
+  Future<void> _errorExportDialog(BuildContext context) {
+    return showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: Text(context.localization.emptyQuestionMessage),
+          actions: <Widget>[
+            TextButton(
+              child: Text(
+                context.localization.ok,
+                style: const TextStyle(
+                  color: AppColors.white,
+                ),
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -214,13 +241,15 @@ class _ExportButton extends StatelessWidget {
         bottom: AppDimensions.margin2XS,
       ),
       child: TextButton(
-        onPressed: () {
-          showExportFloatingWindow(
-            context,
-            onDownloadPressed: downloadSurveyData,
-            onCopy: copySurveyData,
-          );
-        },
+        onPressed: isButtonActive
+            ? () => _errorExportDialog(context)
+            : () {
+                showExportFloatingWindow(
+                  context,
+                  onDownloadPressed: downloadSurveyData,
+                  onCopy: copySurveyData,
+                );
+              },
         child: Padding(
           padding: const EdgeInsets.symmetric(
             horizontal: AppDimensions.margin3XL,
