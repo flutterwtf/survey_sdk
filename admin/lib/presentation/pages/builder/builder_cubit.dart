@@ -147,17 +147,11 @@ class BuilderCubit extends Cubit<BuilderState> {
   }
 
   void openPreviewMode() {
-    final QuestionData? selectedQuestion;
-    if (state is EditQuestionBuilderState) {
-      final index = (state as EditQuestionBuilderState).selectedIndex;
-      selectedQuestion =
-          state.surveyData.questions.firstWhereOrNull((e) => e.index == index);
-    } else if (state is PreviewQuestionBuilderState) {
-      selectedQuestion =
-          (state as PreviewQuestionBuilderState).selectedQuestion;
-    } else {
-      selectedQuestion = null;
-    }
+    if (state is! EditQuestionBuilderState) return;
+
+    final index = (state as EditQuestionBuilderState).selectedIndex;
+    final selectedQuestion =
+        state.surveyData.questions.firstWhereOrNull((e) => e.index == index);
 
     emit(
       PreviewQuestionBuilderState(
@@ -168,10 +162,10 @@ class BuilderCubit extends Cubit<BuilderState> {
   }
 
   void openEditMode() {
-    final int selectedIndex;
-    selectedIndex = state is EditQuestionBuilderState
-        ? (state as EditQuestionBuilderState).selectedIndex
-        : (state as PreviewQuestionBuilderState).selectedQuestion?.index ?? 1;
+    if (state is! PreviewQuestionBuilderState) return;
+
+    final selectedIndex =
+        (state as PreviewQuestionBuilderState).selectedQuestion?.index ?? 1;
 
     emit(
       EditQuestionBuilderState(
