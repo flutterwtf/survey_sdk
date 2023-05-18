@@ -13,7 +13,7 @@ class InputQuestionData extends QuestionData<InputQuestionTheme> {
   final InputValidator validator;
 
   /// Text to display as a hint in the input field.
-  /// Default value is [null].
+  /// Default value is [```null```].
   final String? hintText;
 
   /// The theme applied to the input question.

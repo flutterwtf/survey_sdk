@@ -8,8 +8,8 @@ import 'package:survey_sdk/src/domain/entities/constants/question_types.dart';
 /// The base class for creating specific types of question data classes.
 ///
 /// The [QuestionData] is an abstract class that serves as the foundation
-/// for creating various types of question data classes. It provides common properties
-/// and methods that are shared among different question types.
+/// for creating various types of question data classes. It provides common
+/// properties and methods that are shared among different question types.
 abstract class QuestionData<T> extends Equatable {
   /// Index number of the question
   final int index;

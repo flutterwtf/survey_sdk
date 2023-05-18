@@ -9,7 +9,7 @@ import 'package:survey_sdk/src/domain/entities/themes/choice_question_theme.dart
 class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
   /// Indicates whether the question allows multiple answers or only a
   /// single answer.
-  /// Default value is [false].
+  /// Default value is [```false```].
   final bool isMultipleChoice;
 
   /// Contains the text for each answer option
@@ -17,7 +17,7 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
   final List<String> options;
 
   /// Options that have been selected
-  /// Default value is [null].
+  /// Default value is [```null```].
   final List<int>? selectedOptions;
 
   /// The type of rule associated with the question.

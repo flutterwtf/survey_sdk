@@ -60,7 +60,7 @@ class InputQuestionTheme extends ThemeExtension<InputQuestionTheme>
   final double horizontalPadding;
 
   /// Determines if the text field supports multiple lines.
-  /// Default value is [false].
+  /// Default value is [```false```].
   final bool isMultiline;
 
   /// Error text to be displayed when there is an input validation error.
