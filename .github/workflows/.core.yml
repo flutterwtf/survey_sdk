@@ -2,12 +2,12 @@ name: Core CI/CD
 
 on:
   push:
-    branches: [ "сontinuously-achieve-the-highest-pana-score" ]
+    branches: [ "dev" ]
     paths:
       - 'core/**'
       - '!core/example/**'
   pull_request:
-    branches: [ "сontinuously-achieve-the-highest-pana-score" ]
+    branches: [ "dev" ]
     paths:
       - 'core/**'
       - '!core/example/**'
