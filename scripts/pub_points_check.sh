@@ -1,6 +1,6 @@
 threshold=50
-flutter pub add pana
-pana --exit-code-threshold $threshold
+dart pub global activate pana
+pana --exit-code-threshold $threshold ../core
 retVal=$?
 if [ $retVal -eq 0 ]
 then
