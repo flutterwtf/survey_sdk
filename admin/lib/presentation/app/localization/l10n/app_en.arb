@@ -16,7 +16,7 @@
   "download": "DOWNLOAD",
   "email": "Email",
   "emptyDataMessage": "Data has not been loaded",
-  "emptyQuestionMessage": "Data has not been export, because you don't have questions",
+  "emptyQuestionMessage": "Data cannot be exported",
   "emptySubtitle":"",
   "enterText": "Enter text",
   "export": "EXPORT",
