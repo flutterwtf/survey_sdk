@@ -5,9 +5,11 @@ import 'package:survey_sdk/src/data/mappers/question_types/intro_question_data_m
 import 'package:survey_sdk/src/data/mappers/question_types/slider_question_data_mapper.dart';
 import 'package:survey_sdk/src/domain/entities/constants/question_types.dart';
 
-/// Class that serves as a base for creating specific types of [QuestionData]
-/// classes. [QuestionData] classes are used to represent data for various
-/// types of questions and are used to display and set question data in the app
+/// The base class for creating specific types of question data classes.
+///
+/// The [QuestionData] is an abstract class that serves as the foundation
+/// for creating various types of question data classes. It provides common properties
+/// and methods that are shared among different question types.
 abstract class QuestionData<T> extends Equatable {
   /// Index number of the question
   final int index;
@@ -27,11 +29,15 @@ abstract class QuestionData<T> extends Equatable {
   /// providing an answer
   final bool isSkip;
 
+  /// The text for the primary button associated with the question.
   final String primaryButtonText;
 
+  /// The text for the secondary button associated with the question.
   final String secondaryButtonText;
 
-  /// Question type
+  /// The type of the question.
+  ///
+  /// Subclasses must provide an implementation for this property.
   String get type;
 
   const QuestionData({
@@ -54,8 +60,14 @@ abstract class QuestionData<T> extends Equatable {
     String? primaryButtonText,
   });
 
-  /// Used to convert a Map from JSON to a [QuestionData] based on the
-  /// question's type
+  /// Converts a JSON map to a [QuestionData] instance based on the question's
+  /// type.
+  ///
+  /// This method is used to deserialize a JSON map and create a specific
+  /// subclass of [QuestionData] based on the "type" field in the JSON map.
+  ///
+  /// If the "type" field does not match any predefined question types, an
+  /// [UnimplementedError] is thrown.
   static QuestionData fromType(Map<String, dynamic> json) {
     switch (json['type']) {
       case QuestionTypes.slider:

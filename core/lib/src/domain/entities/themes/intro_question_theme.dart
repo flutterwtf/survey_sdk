@@ -4,46 +4,63 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:survey_sdk/src/presentation/utils/utils.dart';
 
-/// Defines the visual properties for an intro question page
+/// The [IntroQuestionTheme] class represents the visual styling and appearance
+/// for an intro question options.
+///
+/// This class extends the [ThemeExtension] class and implements the
+/// [EquatableMixin] to provide equality checks and comparison methods.
 class IntroQuestionTheme extends ThemeExtension<IntroQuestionTheme>
     with EquatableMixin {
-  /// Background color of the intro page
+  /// Background color of the choice page.
+  /// Default value is [Colors.white].
   final Color fill;
 
-  /// Color of the title text
+  /// Color of the title text.
+  /// Default value is [Colors.black].
   final Color titleColor;
 
-  /// Font size of the title text
+  /// Font size of the title text.
+  /// Default value is [16.0].
   final double titleSize;
 
-  /// Color of the subtitle text
+  /// Color of the subtitle text.
+  /// Default value is [Colors.black].
   final Color subtitleColor;
 
-  /// Font size of the subtitle text
+  /// Font size of the subtitle text.
+  /// Default value is [12.0].
   final double subtitleSize;
 
-  /// Background color of the main button
+  /// Background color of the primary button.
+  /// Default value is [Colors.black].
   final Color primaryButtonFill;
 
-  /// Color of the text on the main button
+  /// Text color of the primary button.
+  /// Default value is [Colors.white].
   final Color primaryButtonTextColor;
 
-  /// Font size of the text on the main button
+  /// Font size of the text displayed on the primary button.
+  /// Default value is [12.0].
   final double primaryButtonTextSize;
 
-  /// Border radius of the main button
+  /// Border radius of the primary button.
+  /// Default value is [10.0].
   final double primaryButtonRadius;
 
-  /// Background color of the secondary button
+  /// Background color of the secondary button.
+  /// Default value is [Colors.black].
   final Color secondaryButtonFill;
 
-  /// Color of the text on the secondary button
+  /// Text color of the secondary button.
+  /// Default value is [Colors.white].
   final Color secondaryButtonTextColor;
 
-  /// Font size of the text on the secondary button
+  /// Font size of the text displayed on the secondary button.
+  /// Default value is [Colors.black].
   final double secondaryButtonTextSize;
 
-  /// Border radius of the secondary button
+  /// Border radius of the secondary button.
+  /// Default value is [10.0].
   final double secondaryButtonRadius;
 
   @override
@@ -79,7 +96,11 @@ class IntroQuestionTheme extends ThemeExtension<IntroQuestionTheme>
     required this.secondaryButtonRadius,
   });
 
-  /// Default color values of intro question page
+  /// Creates a common instance of [IntroQuestionTheme].
+  ///
+  /// The [IntroQuestionTheme.common] constructor is a convenience constructor
+  /// that creates a common instance of [IntroQuestionTheme] with predefined
+  /// values.
   const IntroQuestionTheme.common()
       : this(
           fill: AppColors.white,
@@ -135,6 +156,13 @@ class IntroQuestionTheme extends ThemeExtension<IntroQuestionTheme>
     );
   }
 
+  /// Linearly interpolates between two instances of [IntroQuestionTheme].
+  ///
+  /// The [lerp] method calculates the intermediate state between two instances
+  /// of [IntroQuestionTheme] based on a given interpolation factor [t].
+  ///
+  /// If the `other` instance is not of type [IntroQuestionTheme], the method
+  /// returns the current instance without any interpolation.
   @override
   IntroQuestionTheme lerp(
     covariant IntroQuestionTheme? other,

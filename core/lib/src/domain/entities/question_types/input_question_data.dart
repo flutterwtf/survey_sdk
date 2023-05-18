@@ -3,13 +3,21 @@ import 'package:survey_sdk/src/domain/entities/input_validator.dart';
 import 'package:survey_sdk/src/domain/entities/question_types/question_data.dart';
 import 'package:survey_sdk/src/domain/entities/themes/input_question_theme.dart';
 
-/// The data class for an input question
+/// Data class representing an input question.
+///
+/// The [InputQuestionData] class extends the [QuestionData] class and provides
+/// additional properties specific to input questions.
 class InputQuestionData extends QuestionData<InputQuestionTheme> {
   /// Input validation rules.
+  /// Default value is [InputValidator.number()].
   final InputValidator validator;
 
-  /// Text to display as a hint in the input field
+  /// Text to display as a hint in the input field.
+  /// Default value is [null].
   final String? hintText;
+
+  /// The theme applied to the input question.
+  /// Default value is [InputQuestionTheme.common()].
   final InputQuestionTheme? theme;
 
   @override
@@ -42,6 +50,11 @@ class InputQuestionData extends QuestionData<InputQuestionTheme> {
     this.hintText,
   });
 
+  /// Creates a common instance of [InputQuestionData].
+  ///
+  /// The [InputQuestionData.common] constructor is a convenience constructor
+  /// that creates a common instance of [InputQuestionData] with predefined
+  /// values.
   InputQuestionData.common({int index = 0})
       : this(
           // TODO(dev): to localization somehow

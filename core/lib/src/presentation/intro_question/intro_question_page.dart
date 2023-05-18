@@ -6,18 +6,22 @@ import 'package:survey_sdk/src/presentation/widgets/question_bottom_button.dart'
 import 'package:survey_sdk/src/presentation/widgets/question_content.dart';
 import 'package:survey_sdk/src/presentation/widgets/question_title.dart';
 
-/// The question page with a question, question description, and buttons
+/// The question page for displaying intro content.
+///
+/// The [IntroQuestionPage] widget is used to display introductory content to
+/// the user. It can contain a title, subtitle, and buttons for navigation.
 class IntroQuestionPage extends StatefulWidget {
   /// Contains the content for a page
   final IntroQuestionData data;
 
+  /// Callback that is called after pressing bottom button.
   final OnSendCallback onSend;
 
-  /// Optional callback that is called after pressing main button
+  /// Optional callback that is called after pressing main button.
   final VoidCallback? onMainButtonTap;
 
   // TODO(dev): onSkip.
-  /// Optional callback that is called after pressing main button
+  /// Optional callback that is called when the secondary button is tapped.
   final VoidCallback? onSecondaryButtonTap;
 
   const IntroQuestionPage({

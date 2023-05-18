@@ -10,12 +10,21 @@ import 'package:survey_sdk/src/domain/entities/question_types/input_question_dat
 import 'package:survey_sdk/src/domain/entities/question_types/intro_question_data.dart';
 import 'package:survey_sdk/src/domain/entities/question_types/slider_question_data.dart';
 
-// TODO(dev): docs.
+/// A theme class that extends the [ThemeExtension] and includes common
+/// properties for various question types. It represents the visual styling and
+/// configuration for displaying questions in a consistent manner.
 class CommonTheme extends ThemeExtension<CommonTheme>
     with ApiObject, EquatableMixin {
+  /// The theme configuration for slider questions.
   final SliderQuestionData slider;
+
+  /// The theme configuration for intro questions.
   final IntroQuestionData intro;
+
+  /// The theme configuration for input questions.
   final InputQuestionData input;
+
+  /// The theme configuration for choice questions.
   final ChoiceQuestionData choice;
 
   @override
@@ -66,6 +75,10 @@ class CommonTheme extends ThemeExtension<CommonTheme>
     );
   }
 
+  /// Linearly interpolates between two instances of [CommonTheme].
+  ///
+  /// The [lerp] method calculates the intermediate state between two instances
+  /// of [CommonTheme] based on a given interpolation factor [t].
   @override
   CommonTheme lerp(covariant CommonTheme? other, double t) {
     return CommonTheme(

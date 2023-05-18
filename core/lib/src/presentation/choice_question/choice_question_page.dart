@@ -17,13 +17,14 @@ import 'package:survey_sdk/src/presentation/widgets/question_title.dart';
 /// [ChoiceQuestionData.isMultipleChoice] is false, radio buttons will be
 /// displayed to allow selecting a single option.
 class ChoiceQuestionPage extends StatefulWidget {
-  /// This field contains the content for a page, including options
+  /// This field contains the content for a page, including options.
   final ChoiceQuestionData data;
 
   /// Callback that is called when [ChoiceQuestionData.isSkip] is true or at
-  /// least one option has been selected
+  /// least one option has been selected.
   final OnSendCallback onSend;
 
+  /// Optional callback that is called when the secondary button is tapped.
   final VoidCallback? onSecondaryButtonTap;
 
   const ChoiceQuestionPage({
@@ -39,7 +40,10 @@ class ChoiceQuestionPage extends StatefulWidget {
 
 class _ChoiceQuestionPageState extends State<ChoiceQuestionPage>
     with SingleTickerProviderStateMixin {
+  /// Indicates whether the answer can be sent.
   bool _canBeSend = false;
+
+  /// Stores the indices of the selected options.
   List<int> _selectedItems = List.empty();
 
   @override
@@ -189,10 +193,19 @@ class _QuestionCheckboxes extends StatelessWidget {
     required this.selectedOptions,
   });
 
+  /// Available options for the radio buttons.
   final List<String> options;
+
+  /// Indices of the selected options.
   final List<int> selectedOptions;
+
+  /// Callback function called when the selection of checkboxes changes.
   final void Function(List<int>? selectedItems) onChanged;
+
+  /// Color of the radio button when it is selected.
   final Color activeColor;
+
+  /// Color of the radio button when it is not selected.
   final Color inactiveColor;
 
   @override
@@ -244,10 +257,19 @@ class _QuestionRadioButtons extends StatelessWidget {
     this.selectedOption,
   });
 
+  /// Available options for the radio buttons.
   final List<String> options;
+
+  /// Index of the selected option.
   final int? selectedOption;
+
+  /// Callback function called when the selection of radio buttons changes.
   final ValueChanged<int?> onChanged;
+
+  /// Color of the radio button when it is selected.
   final Color activeColor;
+
+  /// Color of the radio button when it is not selected.
   final Color inactiveColor;
 
   @override
