@@ -11,19 +11,21 @@ abstract class _ValidatorKeys {
 }
 
 /// Used to validate user input based on predefined rules for different types
-/// of inputs in input question
+/// of inputs in input question.
 class InputValidator extends Equatable implements ApiObject {
-  /// The type of the input being validated
+  /// The type of the input being validated.
   late final InputType type;
 
-  /// Determines if the input value should be obscured
+  /// Determines if the input value should be obscured.
   late final bool? isObscured;
 
+  /// The regular expression pattern used for input validation.
   late final String? _regex;
 
+  /// Compiled `RegExp` object created from the [_regex] pattern.
   RegExp get _reg => RegExp(_regex ?? ValidatorRegexes.text);
 
-  /// Validator with type [InputType.number]
+  /// Validator with type [InputType.number].
   InputValidator.number({
     String? regex,
     bool? isObscured,
@@ -33,7 +35,7 @@ class InputValidator extends Equatable implements ApiObject {
     this.isObscured = isObscured ?? false;
   }
 
-  /// Validator with type [InputType.date]
+  /// Validator with type [InputType.date].
   InputValidator.date({
     String? regex,
     bool? isObscured,
@@ -43,14 +45,14 @@ class InputValidator extends Equatable implements ApiObject {
     this.isObscured = isObscured ?? false;
   }
 
-  /// Validator with type [InputType.email]
+  /// Validator with type [InputType.email].
   InputValidator.email({String? regex, bool? isObscured}) {
     type = InputType.email;
     _regex = regex ?? ValidatorRegexes.email;
     isObscured = isObscured ?? true;
   }
 
-  /// Validator for with type [InputType.password]
+  /// Validator for with type [InputType.password].
   InputValidator.password({
     String? regex,
     bool? isObscured,
@@ -60,7 +62,7 @@ class InputValidator extends Equatable implements ApiObject {
     this.isObscured = isObscured ?? true;
   }
 
-  /// Validator with type [InputType.phone]
+  /// Validator with type [InputType.phone].
   InputValidator.phone({
     String? regex,
     bool? isObscured,
@@ -70,7 +72,7 @@ class InputValidator extends Equatable implements ApiObject {
     this.isObscured = isObscured ?? false;
   }
 
-  /// Validator with type [InputType.text]
+  /// Validator with type [InputType.text].
   InputValidator.text({
     String? regex,
     bool? isObscured,
@@ -80,7 +82,7 @@ class InputValidator extends Equatable implements ApiObject {
     this.isObscured = isObscured ?? false;
   }
 
-  /// Creates the validator based on the given input type
+  /// Creates the validator based on the given input type.
   factory InputValidator.fromType({
     required InputType type,
     String? regex,
@@ -120,7 +122,7 @@ class InputValidator extends Equatable implements ApiObject {
   }
 
   /// If the input is valid, the method returns null, otherwise, it returns
-  /// an error message
+  /// an error message.
   String? validate(String? input) {
     return input == null || _reg.hasMatch(input)
         ? null

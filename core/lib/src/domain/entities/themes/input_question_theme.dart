@@ -12,56 +12,115 @@ const _buttonRadius = 10.0;
 const _horizontalPadding = 14.0;
 const _verticalPadding = 14.0;
 
-/// Defines the visual properties for an input question options
+/// The [InputQuestionTheme] class represents the visual styling and appearance
+/// for an input question options.
+///
+/// This class extends the [ThemeExtension] class and implements the
+/// [EquatableMixin] to provide equality checks and comparison methods.
 class InputQuestionTheme extends ThemeExtension<InputQuestionTheme>
     with EquatableMixin {
-  /// Background color of the text field. Common value is [Colors.white]
+  /// Background color of the text field.
+  /// Default value is [Colors.white]
   final Color inputFill;
 
   /// Color of the border around the text field.
-  /// Common value is [Colors.black]
+  /// Default value is [Colors.black]
   final Color borderColor;
 
-  /// Width of the border around the text field. Common value is 1
+  /// Width of the border around the text field.
+  /// Default value is [1].
   final double borderWidth;
 
   /// Color of the hint text that is displayed when the text field is empty.
-  /// Common value is [AppColors.textLightGrey]
+  /// Default value is [Color(0xFF727272)].
   final Color hintColor;
 
-  /// Font size of the hint text. Common value is 16
+  /// Font size of the hint text.
+  /// Default value is [16].
   final double hintSize;
 
   /// Color of the text that is entered into the text field.
-  /// Common value is [Colors.black]
+  /// Default value is [Colors.black].
   final Color textColor;
 
   /// Font size of the text that is entered into the text field.
-  /// Common value is 16
+  /// Default value is [16].
   final double textSize;
 
-  /// Number of lines that the text field can display
+  /// Number of lines that the text field can display.
+  /// Default value is [1].
   final int lines;
 
+  /// Padding added to the top and bottom of the text field.
+  /// Default value is [14.0].
   final double verticalPadding;
 
-  /// Padding added to the left and right of the text field
+  /// Padding added to the left and right of the text field.
+  /// Default value is [14.0].
   final double horizontalPadding;
+
+  /// Determines if the text field supports multiple lines.
+  /// Default value is [```false```].
   final bool isMultiline;
+
+  /// Error text to be displayed when there is an input validation error.
+  /// Default value is ['Error'].
   final String errorText;
+
+  /// The type of input that the text field accepts.
+  /// Default value is [InputType.text].
   final InputType inputType;
+
+  /// Background color of the choice page.
+  /// Default value is [Colors.white].
   final Color fill;
+
+  /// Color of the title text.
+  /// Default value is [Colors.black].
   final Color titleColor;
+
+  /// Font size of the title text.
+  /// Default value is [16.0].
   final double titleSize;
+
+  /// Color of the subtitle text.
+  /// Default value is [Colors.black].
   final Color subtitleColor;
+
+  /// Font size of the subtitle text.
+  /// Default value is [12.0].
   final double subtitleSize;
+
+  /// Background color of the primary button.
+  /// Default value is [Colors.black].
   final Color primaryButtonFill;
+
+  /// Text color of the primary button.
+  /// Default value is [Colors.white].
   final Color primaryButtonTextColor;
+
+  /// Font size of the text displayed on the primary button.
+  /// Default value is [12.0].
   final double primaryButtonTextSize;
+
+  /// Border radius of the primary button.
+  /// Default value is [10.0].
   final double primaryButtonRadius;
+
+  /// Background color of the secondary button.
+  /// Default value is [Colors.black].
   final Color secondaryButtonFill;
+
+  /// Text color of the secondary button.
+  /// Default value is [Colors.white].
   final Color secondaryButtonTextColor;
+
+  /// Font size of the text displayed on the secondary button.
+  /// Default value is [Colors.black].
   final double secondaryButtonTextSize;
+
+  /// Border radius of the secondary button.
+  /// Default value is [10.0].
   final double secondaryButtonRadius;
 
   @override
@@ -124,7 +183,11 @@ class InputQuestionTheme extends ThemeExtension<InputQuestionTheme>
     required this.horizontalPadding,
   });
 
-  /// Default color and size values of input question page
+  /// Creates a common instance of [InputQuestionTheme].
+  ///
+  /// The [InputQuestionTheme.common] constructor is a convenience constructor
+  /// that creates a common instance of [InputQuestionTheme] with predefined
+  /// values.
   const InputQuestionTheme.common()
       : this(
           inputFill: Colors.white,
@@ -222,6 +285,13 @@ class InputQuestionTheme extends ThemeExtension<InputQuestionTheme>
     );
   }
 
+  /// Linearly interpolates between two instances of [InputQuestionTheme].
+  ///
+  /// The [lerp] method calculates the intermediate state between two instances
+  /// of [InputQuestionTheme] based on a given interpolation factor [t].
+  ///
+  /// If the `other` instance is not of type [InputQuestionTheme], the method
+  /// returns the current instance without any interpolation.
   @override
   InputQuestionTheme lerp(
     covariant InputQuestionTheme? other,
@@ -294,14 +364,38 @@ class InputQuestionTheme extends ThemeExtension<InputQuestionTheme>
   }
 }
 
+/// The [InputType] represents different types of input fields that can be used
+/// in the input question component.
+/// It is used in conjunction with the [InputQuestionTheme] class to define the
+/// type of input field and validate the user input accordingly.
 enum InputType {
+  /// Represents a text input field where the user can enter alphanumeric
+  /// characters.
   text,
+
+  /// Represents a numeric input field where the user can enter numeric values.
   number,
+
+  /// Represents a date input field where the user can select a date from a
+  /// date picker.
   date,
+
+  /// Represents an email input field where the user can enter a valid email
+  /// address.
   email,
+
+  /// Represents a password input field where the user can enter a secure
+  /// password.
   password,
+
+  /// Represents a phone number input field where the user can enter a valid
+  /// phone number.
   phone;
 
+  /// Returns the string representation of the enum value.
   String toJson() => name;
+
+  /// Converts a string representation (in JSON format) of an [InputType]
+  /// value back into its corresponding enum value.
   static InputType fromJson(String json) => values.byName(json);
 }

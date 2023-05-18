@@ -8,15 +8,16 @@ import 'package:survey_sdk/src/presentation/widgets/question_content.dart';
 import 'package:survey_sdk/src/presentation/widgets/question_title.dart';
 
 /// The question page with a question, question description, button to submit
-/// the answer and slider to select a value from a range
+/// the answer and slider to select a value from a range.
 class SliderQuestionPage extends StatefulWidget {
   /// Contains the content for a page as minimum and maximum values of the
-  /// slider, the initial value of the slider, and other properties
+  /// slider, the initial value of the slider, and other properties.
   final SliderQuestionData data;
 
-  /// Callback that is called after pressing bottom button
+  /// Callback that is called after pressing bottom button.
   final OnSendCallback onSend;
 
+  /// Optional callback that is called when the secondary button is tapped.
   final VoidCallback? onSecondaryButtonTap;
 
   const SliderQuestionPage({
@@ -132,11 +133,22 @@ class _SliderQuestionPageState extends State<SliderQuestionPage> {
 }
 
 class _QuestionSlider extends StatefulWidget {
+  /// Minimum value of the slider.
   final int minValue;
+
+  /// Maximum value of the slider.
   final int maxValue;
+
+  /// Initial value of the slider.
   final int initialValue;
+
+  /// Number of divisions for the slider.
   final int divisions;
+
+  /// The callback function called when the value changes.
   final ValueChanged<double> onChanged;
+
+  /// The theme configuration for the slider question.
   final SliderQuestionTheme theme;
 
   const _QuestionSlider({
@@ -153,7 +165,10 @@ class _QuestionSlider extends StatefulWidget {
 }
 
 class _QuestionSliderState extends State<_QuestionSlider> {
+  /// The current value of the slider.
   late double _value;
+
+  /// A flag indicating whether the slider only allows integer values.
   late final bool _onlyInt;
 
   @override

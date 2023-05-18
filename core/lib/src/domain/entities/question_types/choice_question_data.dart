@@ -2,19 +2,42 @@ import 'package:survey_sdk/src/domain/entities/constants/question_types.dart';
 import 'package:survey_sdk/src/domain/entities/question_types/question_data.dart';
 import 'package:survey_sdk/src/domain/entities/themes/choice_question_theme.dart';
 
-/// Contains the content for a multiple-choice or single-choice question
+/// Data class representing a question with multiple or single choice.
+///
+/// The [ChoiceQuestionData] class extends the [QuestionData] class and provides
+/// additional properties and methods specific to choice questions.
 class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
   /// Indicates whether the question allows multiple answers or only a
-  /// single answer
+  /// single answer.
+  /// Default value is [```false```].
   final bool isMultipleChoice;
 
   /// Contains the text for each answer option
+  /// Default value is [['First option', 'Second option', 'Third option']].
   final List<String> options;
 
   /// Options that have been selected
+  /// Default value is [```null```].
   final List<int>? selectedOptions;
+
+  /// The type of rule associated with the question.
+  ///
+  /// The [ruleType] determines how the number of selected options is compared
+  /// with the [ruleValue]. It specifies the criteria for evaluating the answer
+  /// based on the number of selected options.
+  /// Default value is [RuleType.none].
   final RuleType ruleType;
+
+  /// The value of the rule associated with the question.
+  ///
+  /// The [ruleValue] represents the threshold against which the number of
+  /// selected options is compared based on the [ruleType]. The comparison is
+  /// performed to evaluate whether the answer meets the rule criteria.
+  /// Default value is [0].
   final int ruleValue;
+
+  /// The theme applied to the choice question.
+  /// Default value is [ChoiceQuestionTheme.common()].
   final ChoiceQuestionTheme? theme;
 
   @override
@@ -117,12 +140,29 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
   }
 }
 
+/// Enumeration representing the types of rules for a question.
 enum RuleType {
+  /// No rule associated with the question.
   none('None'),
+
+  /// Rule indicating that the answer should have more selected options than
+  /// the specified value.
   more('>'),
+
+  /// Rule indicating that the answer should have fewer options selected than
+  /// the specified value.
   less('<'),
+
+  /// Rule indicating that the answer should have more or equal selected options
+  /// than the specified value.
   moreOrEqual('>='),
+
+  /// Rule indicating that the answer should have fewer or equal selected
+  /// options than the specified value.
   lessOrEqual('<='),
+
+  /// Rule indicating that the answer should have exactly the same number of
+  /// selected options as the specified value.
   equal('=');
 
   const RuleType(

@@ -21,13 +21,14 @@ const _radius = AppDimensions.circularRadiusXS;
 /// displayed to select a date.
 // TODO(dev): create child<T> widget for date,password,text,number etc.
 class InputQuestionPage extends StatefulWidget {
-  /// Contains the content for a page
+  /// Contains the content for a page.
   final InputQuestionData data;
 
   /// Callback that is called after pressing bottom button if input data is
-  /// valid or when the question can be skipped
+  /// valid or when the question can be skipped.
   final OnSendCallback onSend;
 
+  /// Optional callback that is called when the secondary button is tapped.
   final VoidCallback? onSecondaryButtonTap;
 
   const InputQuestionPage({
@@ -197,12 +198,24 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
   }
 }
 
+/// Widget that represents an input field for selecting a date.
 class _InputDate extends StatelessWidget {
+  /// The border for the input field.
   final OutlineInputBorder border;
+
+  /// The selected date value.
   final DateTime dateTime;
+
+  /// The hint text displayed in the input field.
   final String hintText;
+
+  /// The callback function called when the selected date changes.
   final Function(DateTime?) onChanged;
+
+  /// The theme configuration for the input question.
   final InputQuestionTheme theme;
+
+  /// The validator function that validates the selected date.
   final String? Function(DateTime?) validator;
 
   const _InputDate({
@@ -252,11 +265,21 @@ class _InputDate extends StatelessWidget {
   }
 }
 
+/// Widget that represents an input field for entering a numeric value.
 class _InputNumber extends StatelessWidget {
+  /// The border for the input field.
   final OutlineInputBorder border;
+
+  /// The hint text displayed in the input field.
   final String hintText;
+
+  /// The callback function called when the input value changes.
   final Function(String)? onChanged;
+
+  /// The theme configuration for the input question.
   final InputQuestionTheme theme;
+
+  /// The validator function that validates the input value.
   final String? Function(String?) validator;
 
   const _InputNumber({

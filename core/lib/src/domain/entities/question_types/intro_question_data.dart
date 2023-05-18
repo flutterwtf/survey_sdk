@@ -2,8 +2,13 @@ import 'package:survey_sdk/src/domain/entities/constants/question_types.dart';
 import 'package:survey_sdk/src/domain/entities/question_types/question_data.dart';
 import 'package:survey_sdk/src/domain/entities/themes/intro_question_theme.dart';
 
-/// Contains the content for the introduction question
+/// Data class representing an introduction question.
+///
+/// The [IntroQuestionData] class extends the [QuestionData] class and provides
+/// additional property specific to introduction questions.
 class IntroQuestionData extends QuestionData {
+  /// The theme applied to the introduction question.
+  /// Default value is [IntroQuestionTheme.common()].
   final IntroQuestionTheme? theme;
 
   @override
@@ -32,6 +37,11 @@ class IntroQuestionData extends QuestionData {
     super.content,
   });
 
+  /// Creates a common instance of [IntroQuestionData].
+  ///
+  /// The [IntroQuestionData.common] constructor is a convenience constructor
+  /// that creates a common instance of [IntroQuestionData] with predefined
+  /// values.
   const IntroQuestionData.common({int index = 0})
       : this(
           // TODO(dev): to localization somehow

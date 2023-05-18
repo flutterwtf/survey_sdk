@@ -58,7 +58,10 @@ class Survey extends StatefulWidget {
 
 /// The private state class for the [Survey] widget.
 class _SurveyState extends State<Survey> {
+  /// Instance of the [SurveyCubit] used for managing the survey state.
   late final SurveyCubit _cubit;
+
+  /// Instance of the [SurveyController] used for controlling the survey flow.
   late final SurveyController _surveyController;
 
   /// Initializes an instance of [_SurveyState] and its dependencies.

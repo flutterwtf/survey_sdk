@@ -5,8 +5,12 @@ abstract class SurveyState {
   const SurveyState();
 }
 
+/// Represents the state when the survey data is loaded.
 class SurveyLoadedState extends SurveyState {
+  /// The loaded survey data.
   final SurveyData surveyData;
+
+  /// The map of question index to corresponding answer.
   final Map<int, QuestionAnswer> answers;
 
   List<Object?> get props => [surveyData, answers];
@@ -24,6 +28,7 @@ class SurveyLoadedState extends SurveyState {
   }
 }
 
+/// Represents the initial empty state of the survey.
 class SurveyEmptyState extends SurveyState {
   const SurveyEmptyState();
 }

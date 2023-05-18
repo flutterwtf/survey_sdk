@@ -7,18 +7,30 @@ const _maxValue = 10;
 const _divisions = 8;
 const _initialValue = 5;
 
-/// Contains the content for a page with slider to choose a value between
-/// minimum and maximum range
+/// Data class representing data for a question that uses a slider to select a
+/// value within minimum and maximum range.
+///
+/// The [SliderQuestionData] class extends the [QuestionData] class and provides
+/// additional properties specific to slider questions.
 class SliderQuestionData extends QuestionData<SliderThemeData> {
-  /// The minimum value of the slider
+  /// The minimum value of the slider.
+  /// Default value is [0].
   final int minValue;
 
-  /// The maximum value of the slider
+  /// The maximum value of the slider.
+  /// Default value is [10].
   final int maxValue;
 
-  /// The initial value of the slider
+  /// The initial value of the slider.
+  /// Default value is [5].
   final int initialValue;
+
+  /// The number of divisions for the slider.
+  /// Default value is [8].
   final int divisions;
+
+  /// The theme applied to the slider question.
+  /// Default value is [SliderQuestionTheme.common()].
   final SliderQuestionTheme? theme;
 
   @override
@@ -55,6 +67,11 @@ class SliderQuestionData extends QuestionData<SliderThemeData> {
     super.content,
   });
 
+  /// Creates a common instance of [SliderQuestionData].
+  ///
+  /// The [SliderQuestionData.common] constructor is a convenience constructor
+  /// that creates a common instance of [SliderQuestionData] with predefined
+  /// values.
   const SliderQuestionData.common({int index = 0})
       : this(
           // TODO(dev): to localization somehow
