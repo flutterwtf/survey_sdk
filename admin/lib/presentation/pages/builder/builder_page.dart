@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:survey_admin/presentation/app/di/injector.dart';
@@ -68,7 +69,7 @@ class _BuilderPageState extends State<BuilderPage> {
         if (newState is ImportErrorSurveyDataBuilderState) _showImportDialog();
 
         final selected =
-            (newState is EditQuestionBuilderState) ? newState.selectedIndex : 0;
+            newState is EditQuestionBuilderState ? newState.selectedIndex : 0;
         if (selected != 0) {
           _surveyController.animateTo(selected - 1);
         }
@@ -78,7 +79,10 @@ class _BuilderPageState extends State<BuilderPage> {
 
         return Scaffold(
           appBar: AppBar(
-            title: const _BuilderPageTabBar(),
+            title: _BuilderPageTabBar(
+              onTapEditMode: cubit.openEditMode,
+              onTapPreviewMode: cubit.openPreviewMode,
+            ),
             actions: [
               // ignore: avoid-passing-async-when-sync-expected
               _ImportButton(onImportPressed: cubit.importData),
@@ -93,14 +97,11 @@ class _BuilderPageState extends State<BuilderPage> {
           body: Row(
             children: [
               QuestionList(
+                isEditMode: state is EditQuestionBuilderState,
                 onDelete: cubit.deleteQuestionData,
                 onSelect: cubit.select,
                 onAdd: cubit.addQuestionData,
-                questions: cubit.state.surveyData.questions.isNotEmpty
-                    ? List<QuestionData>.of(
-                        cubit.state.surveyData.questions,
-                      )
-                    : [],
+                questions: cubit.state.surveyData.questions,
                 onUpdate: cubit.updateQuestions,
                 selectedIndex: state is EditQuestionBuilderState
                     ? state.selectedIndex - 1
@@ -115,13 +116,12 @@ class _BuilderPageState extends State<BuilderPage> {
                 ),
               ),
               EditorBar(
+                isEditMode: state is EditQuestionBuilderState,
                 onChange: cubit.updateQuestionData,
-                editableQuestion: state.surveyData.questions.isNotEmpty
-                    ? state is EditQuestionBuilderState
-                        ? state.surveyData.questions.firstWhere(
-                            (q) => q.index == state.selectedIndex,
-                          )
-                        : null
+                editableQuestion: state is EditQuestionBuilderState
+                    ? state.surveyData.questions.firstWhereOrNull(
+                        (q) => q.index == state.selectedIndex,
+                      )
                     : null,
               ),
             ],
@@ -133,11 +133,19 @@ class _BuilderPageState extends State<BuilderPage> {
 }
 
 class _BuilderPageTabBar extends StatelessWidget {
-  const _BuilderPageTabBar();
+  final VoidCallback onTapEditMode;
+  final VoidCallback onTapPreviewMode;
+
+  const _BuilderPageTabBar({
+    required this.onTapEditMode,
+    required this.onTapPreviewMode,
+  });
 
   @override
   Widget build(BuildContext context) {
+    const previewTabIndex = 1;
     const tabLength = 2;
+
     return DefaultTabController(
       length: tabLength,
       child: SizedBox(
@@ -156,6 +164,9 @@ class _BuilderPageTabBar extends StatelessWidget {
           ),
           labelStyle: context.theme.textTheme.titleMedium
               ?.copyWith(fontWeight: AppFonts.weightBold),
+          onTap: (tabIndex) => tabIndex == previewTabIndex
+              ? onTapPreviewMode()
+              : onTapEditMode(),
         ),
       ),
     );

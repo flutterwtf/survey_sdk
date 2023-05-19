@@ -20,8 +20,8 @@ class EditQuestionBuilderState extends BuilderState {
   List<Object?> get props => [selectedIndex, surveyData];
 
   const EditQuestionBuilderState({
-    required this.selectedIndex,
     required super.surveyData,
+    required this.selectedIndex,
   });
 
   @override
@@ -34,6 +34,30 @@ class EditQuestionBuilderState extends BuilderState {
       surveyData: surveyData ?? this.surveyData,
     );
   }
+}
+
+class PreviewQuestionBuilderState extends BuilderState {
+  final QuestionData? selectedQuestion;
+
+  @override
+  List<Object?> get props => [selectedQuestion, surveyData];
+
+  const PreviewQuestionBuilderState({
+    required super.surveyData,
+    required this.selectedQuestion,
+  });
+
+  @override
+  BuilderState copyWith({
+    SurveyData? surveyData,
+    QuestionData? selectedQuestion,
+  }) {
+    return PreviewQuestionBuilderState(
+      surveyData: surveyData ?? this.surveyData,
+      selectedQuestion: selectedQuestion ?? this.selectedQuestion,
+    );
+  }
+
 }
 
 class ImportSuccessSurveyDataBuilderState extends BuilderState {

@@ -10,15 +10,19 @@ import 'package:survey_sdk/survey_sdk.dart';
 
 class EditorBar extends StatelessWidget {
   final QuestionData? editableQuestion;
+  final bool isEditMode;
   final void Function(QuestionData data) onChange;
 
   const EditorBar({
     required this.onChange,
     required this.editableQuestion,
+    this.isEditMode = true,
     super.key,
   });
 
   double _calculateWidth(BuildContext context) {
+    if (!isEditMode) return 0;
+
     final freeSpaceWidth =
         MediaQuery.of(context).size.width - AppDimensions.surveyContentBarWidth;
 
@@ -27,38 +31,43 @@ class EditorBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return AnimatedContainer(
+      duration: AppDurations.panelSwitchingDuration,
       color: AppColors.whitePrimaryBackground,
       width: _calculateWidth(context),
-      child: Builder(
-        builder: (context) {
-          final questionData = editableQuestion;
-          if (questionData != null) {
-            switch (questionData.type) {
-              case QuestionTypes.choice:
-                return ChoiceCustomizationPanel(
-                  onChange: onChange,
-                  editable: questionData as ChoiceQuestionData,
-                );
-              case QuestionTypes.input:
-                return InputCustomizationPanel(
-                  onChange: onChange,
-                  editable: questionData as InputQuestionData,
-                );
-              case QuestionTypes.intro:
-                return IntroCustomizationPanel(
-                  onChange: onChange,
-                  editable: questionData as IntroQuestionData,
-                );
-              case QuestionTypes.slider:
-                return SliderCustomizationPanel(
-                  onChange: onChange,
-                  editable: questionData as SliderQuestionData,
-                );
+      child: OverflowBox(
+        alignment: Alignment.topLeft,
+        maxWidth: AppDimensions.surveyEditorBarWidth,
+        child: Builder(
+          builder: (context) {
+            final questionData = editableQuestion;
+            if (questionData != null) {
+              switch (questionData.type) {
+                case QuestionTypes.choice:
+                  return ChoiceCustomizationPanel(
+                    onChange: onChange,
+                    editable: questionData as ChoiceQuestionData,
+                  );
+                case QuestionTypes.input:
+                  return InputCustomizationPanel(
+                    onChange: onChange,
+                    editable: questionData as InputQuestionData,
+                  );
+                case QuestionTypes.intro:
+                  return IntroCustomizationPanel(
+                    onChange: onChange,
+                    editable: questionData as IntroQuestionData,
+                  );
+                case QuestionTypes.slider:
+                  return SliderCustomizationPanel(
+                    onChange: onChange,
+                    editable: questionData as SliderQuestionData,
+                  );
+              }
             }
-          }
-          return const SizedBox.shrink();
-        },
+            return const SizedBox.shrink();
+          },
+        ),
       ),
     );
   }

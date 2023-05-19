@@ -72,10 +72,10 @@ class _CustomSwitchState extends State<_CustomSwitch> {
             Radius.circular(AppDimensions.circularRadiusS),
           ),
         ),
-        duration: AppDurations.customizationItem,
+        duration: AppDurations.customizationItemDuration,
         child: AnimatedAlign(
           alignment: _isToggled ? Alignment.centerRight : Alignment.centerLeft,
-          duration: AppDurations.customizationItem,
+          duration: AppDurations.customizationItemDuration,
           child: Container(
             margin: const EdgeInsets.all(AppDimensions.margin3XS),
             width: AppDimensions.switchIndicatorWidth,
