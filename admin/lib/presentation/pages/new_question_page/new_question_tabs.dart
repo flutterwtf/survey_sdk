@@ -41,7 +41,7 @@ extension NewQuestionTabsExt on NewQuestionTabs {
   List<NewQuestionOptions> get options {
     switch (this) {
       case NewQuestionTabs.intro:
-        return [NewQuestionOptions.title, NewQuestionOptions.imageIntro];
+        return [NewQuestionOptions.title];
       case NewQuestionTabs.choice:
         return [NewQuestionOptions.radioButton, NewQuestionOptions.checkBox];
       case NewQuestionTabs.slider:
@@ -57,7 +57,6 @@ extension NewQuestionTabsExt on NewQuestionTabs {
 
 enum NewQuestionOptions {
   title,
-  imageIntro,
   radioButton,
   slider,
   checkBox,
@@ -70,8 +69,6 @@ extension NewQuestionOptionsExt on NewQuestionOptions {
     switch (this) {
       case NewQuestionOptions.title:
         return context.localization.title;
-      case NewQuestionOptions.imageIntro:
-        return context.localization.imageIntro;
       case NewQuestionOptions.radioButton:
         return context.localization.radioButton;
       case NewQuestionOptions.slider:
@@ -89,8 +86,6 @@ extension NewQuestionOptionsExt on NewQuestionOptions {
     switch (this) {
       case NewQuestionOptions.title:
         return AppAssets.introImage;
-      case NewQuestionOptions.imageIntro:
-        return AppAssets.imageIntroImage;
       case NewQuestionOptions.radioButton:
         return AppAssets.radioButtonImage;
       case NewQuestionOptions.slider:
