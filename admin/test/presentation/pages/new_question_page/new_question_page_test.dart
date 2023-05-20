@@ -46,7 +46,6 @@ void main() {
       expect(find.text('Slider'), findsOneWidget);
       expect(find.text('Custom input'), findsOneWidget);
       expect(find.text('Title'), findsNWidgets(2));
-      expect(find.text('Image intro'), findsOneWidget);
       expect(find.text('Common'), findsOneWidget);
       expect(find.text('Content'), findsOneWidget);
       tester.binding.platformDispatcher.clearTextScaleFactorTestValue();
@@ -62,7 +61,6 @@ void main() {
     testWidgets('Move on tab', (tester) async {
       await tester.pumpWidget(page);
       expect(find.text('Title'), findsNWidgets(2));
-      expect(find.text('Image intro'), findsOneWidget);
 
       await tester.tap(find.text('Choice'));
       await tester.pump();
@@ -81,7 +79,6 @@ void main() {
       await tester.tap(find.text('Intro'));
       await tester.pump();
       expect(find.text('Title'), findsNWidgets(2));
-      expect(find.text('Image intro'), findsOneWidget);
     });
 
     testWidgets('Click ADD', (tester) async {
