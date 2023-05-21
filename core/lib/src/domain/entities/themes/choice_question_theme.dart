@@ -69,7 +69,7 @@ class ChoiceQuestionTheme extends ThemeExtension<ChoiceQuestionTheme>
   final Color secondaryButtonTextColor;
 
   /// Font size of the text displayed on the secondary button.
-  /// Default value is [Colors.black].
+  /// Default value is [12.0].
   final double secondaryButtonTextSize;
 
   /// Border radius of the secondary button.
