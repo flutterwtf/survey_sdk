@@ -207,13 +207,25 @@ Unique fields:
 
 ***
 ## Presentation
+
 ### Choice question
 
+![choice_question_page](https://github.com/What-the-Flutter/survey_sdk/assets/94079414/6a0e08c0-146d-4358-ae04-4e736687ea4b)
+
+***
 ### Input question
 
+![input_question_page](https://github.com/What-the-Flutter/survey_sdk/assets/94079414/e0cd9e59-f996-45d0-adb8-516a8f86a0f8)
+
+***
 ### Intro question
 
+![intro_question_page](https://github.com/What-the-Flutter/survey_sdk/assets/94079414/9820aced-1bad-49bd-8d0b-8b4acab8d90c)
+
+***
 ### Slider question
 
+![slider_question_page](https://github.com/What-the-Flutter/survey_sdk/assets/94079414/ddb6660b-96af-4847-a743-798693fea229)
 
+***
 For detailed information on how to use the Survey SDK, refer to the documentation included in the package.
