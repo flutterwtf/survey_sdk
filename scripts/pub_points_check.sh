@@ -1,6 +1,6 @@
 threshold=10
 dart pub global activate pana
-pana --exit-code-threshold $threshold ../core
+pana --exit-code-threshold $threshold --no-warning ../core
 retVal=$?
 if [ $retVal -eq 0 ]
 then
