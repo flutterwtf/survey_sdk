@@ -1,4 +1,4 @@
-threshold=50
+threshold=10
 dart pub global activate pana
 pana --exit-code-threshold $threshold ../core
 retVal=$?

@@ -3,3 +3,5 @@ template-arb-file: app_en.arb
 output-localization-file: app_localizations.dart
 untranslated-messages-file: untranslatedMessages.txt
 nullable-getter: false
+synthetic-package: false
+output-dir: lib/src/presentation/localization/flutter_gen
