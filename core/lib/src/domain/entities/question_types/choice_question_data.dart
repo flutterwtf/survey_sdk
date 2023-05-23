@@ -12,11 +12,11 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
   /// Default value is [```false```].
   final bool isMultipleChoice;
 
-  /// Contains the text for each answer option
+  /// Contains the text for each answer option.
   /// Default value is [['First option', 'Second option', 'Third option']].
   final List<String> options;
 
-  /// Options that have been selected
+  /// Options that have been selected.
   /// Default value is [```null```].
   final List<int>? selectedOptions;
 
@@ -84,6 +84,11 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
         );
 
   // TODO(dev): remove common.
+  /// Creates a common instance of [ChoiceQuestionData].
+  ///
+  /// The [ChoiceQuestionData.common] constructor is a convenience constructor
+  /// that creates a common instance of [ChoiceQuestionData] with predefined
+  /// values.
   const ChoiceQuestionData.common({int index = 0})
       : this(
           // TODO(dev): To localization somehow.

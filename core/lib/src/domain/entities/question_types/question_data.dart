@@ -11,22 +11,22 @@ import 'package:survey_sdk/src/domain/entities/constants/question_types.dart';
 /// for creating various types of question data classes. It provides common
 /// properties and methods that are shared among different question types.
 abstract class QuestionData<T> extends Equatable {
-  /// Index number of the question
+  /// Index number of the question.
   final int index;
 
   /// Text that appears at the top of a question page and serves as the main
-  /// heading for the question
+  /// heading for the question.
   final String title;
 
   /// Text that appears below the question title and provides additional
-  /// context or information about the question
+  /// context or information about the question.
   final String subtitle;
 
-  /// Optional text that appears below the question title
+  /// Optional text that appears below the question title.
   final String? content;
 
   /// Indicates whether the user is allowed to skip the question without
-  /// providing an answer
+  /// providing an answer.
   final bool isSkip;
 
   /// The text for the primary button associated with the question.

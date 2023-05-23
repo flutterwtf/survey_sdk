@@ -11,7 +11,7 @@ import 'package:survey_sdk/src/presentation/widgets/question_title.dart';
 /// The [IntroQuestionPage] widget is used to display introductory content to
 /// the user. It can contain a title, subtitle, and buttons for navigation.
 class IntroQuestionPage extends StatefulWidget {
-  /// Contains the content for a page
+  /// Contains the content for a page.
   final IntroQuestionData data;
 
   /// Callback that is called after pressing bottom button.

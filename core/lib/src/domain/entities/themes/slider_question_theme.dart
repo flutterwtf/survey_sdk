@@ -23,7 +23,7 @@ class SliderQuestionTheme extends ThemeExtension<SliderQuestionTheme>
   final Color activeColor;
 
   /// The color of the inactive portion of the slider.
-  /// Default value is [Color(FFCCCCCC)].
+  /// Default value is [Color(0xFFCCCCCC)].
   final Color inactiveColor;
 
   /// The color of the slider thumb.
