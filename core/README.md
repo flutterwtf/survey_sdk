@@ -130,7 +130,7 @@ Data class representing data for a question that uses a slider to select a value
 * `maxValue` Default value is *10*.
 * `initialValue` Default value is *5*.
 * `divisions` Default value is *8*.
-* `theme` Default value is *[SliderQuestionTheme](README.md#sliderquestiontheme)common()*.
+* `theme` Default value is *[SliderQuestionTheme](README.md#sliderquestiontheme).common()*.
 
 ***
 ## Common Theme
@@ -177,14 +177,14 @@ Represents the visual styling and appearance for an input question options.
 Unique fields:
 * `inputFill` Default value is *Colors.white*.
 * `borderColor` Default value is *Colors.black*.
-* `borderWidth` Default value is *1*.
+* `borderWidth` Default value is *1.0*.
 * `hintColor` Default value is *Color(0xFF727272)*.
-* `hintSize` Default value is *16*.
+* `hintSize` Default value is *16.0*.
 * `textColor` Default value is *Colors.black*.
-* `textSize` Default value is *16*.
+* `textSize` Default value is *16.0*.
 * `lines` Default value is *1*.
 * `verticalPadding` Default value is *14.0*.
-* `horizontalPadding` Default value is *14*.
+* `horizontalPadding` Default value is *14.0*.
 * `isMultiline` Default value is *false*.
 * `errorText` Default value is *'Error'*.
 * `inputType` Default value is *InputType.text*.
