@@ -63,7 +63,7 @@ class CommonTheme extends ThemeExtension<CommonTheme>
 
   @override
   Map<String, dynamic> toJson() => {
-        'slider': InputQuestionDataMapperFactory.getMapper(
+        'slider': SliderQuestionDataMapperFactory.getMapper(
           QuestionDataMapperVer1.jsonVersion,
         ).toJson(slider),
         'intro': IntroQuestionDataMapperFactory.getMapper(
