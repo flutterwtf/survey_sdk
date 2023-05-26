@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:survey_sdk/src/data/mappers/question_types/choice_question_data_mapper.dart';
 import 'package:survey_sdk/src/data/mappers/question_types/input_question_data_mapper.dart';
 import 'package:survey_sdk/src/data/mappers/question_types/intro_question_data_mapper.dart';
+import 'package:survey_sdk/src/data/mappers/question_types/mapper_version/question_data_mapper_ver_1.dart';
 import 'package:survey_sdk/src/data/mappers/question_types/slider_question_data_mapper.dart';
 import 'package:survey_sdk/src/domain/entities/api_object.dart';
 import 'package:survey_sdk/src/domain/entities/question_types/choice_question_data.dart';
@@ -45,19 +46,35 @@ class CommonTheme extends ThemeExtension<CommonTheme>
   @override
   factory CommonTheme.fromJson(Map<String, dynamic> json) {
     return CommonTheme(
-      slider: SliderQuestionDataMapper().fromJson(json['slider']),
-      intro: IntroQuestionDataMapper().fromJson(json['intro']),
-      input: InputQuestionDataMapper().fromJson(json['input']),
-      choice: ChoiceQuestionDataMapper().fromJson(json['choice']),
+      slider: SliderQuestionDataMapperFactory.getMapper(
+        QuestionDataMapperVer1.jsonVersion,
+      ).fromJson(json['slider']),
+      intro: IntroQuestionDataMapperFactory.getMapper(
+        QuestionDataMapperVer1.jsonVersion,
+      ).fromJson(json['intro']),
+      input: InputQuestionDataMapperFactory.getMapper(
+        QuestionDataMapperVer1.jsonVersion,
+      ).fromJson(json['input']),
+      choice: ChoiceQuestionDataMapperFactory.getMapper(
+        QuestionDataMapperVer1.jsonVersion,
+      ).fromJson(json['choice']),
     );
   }
 
   @override
   Map<String, dynamic> toJson() => {
-        'slider': SliderQuestionDataMapper().toJson(slider),
-        'intro': IntroQuestionDataMapper().toJson(intro),
-        'input': InputQuestionDataMapper().toJson(input),
-        'choice': ChoiceQuestionDataMapper().toJson(choice),
+        'slider': InputQuestionDataMapperFactory.getMapper(
+          QuestionDataMapperVer1.jsonVersion,
+        ).toJson(slider),
+        'intro': IntroQuestionDataMapperFactory.getMapper(
+          QuestionDataMapperVer1.jsonVersion,
+        ).toJson(intro),
+        'input': InputQuestionDataMapperFactory.getMapper(
+          QuestionDataMapperVer1.jsonVersion,
+        ).toJson(input),
+        'choice': ChoiceQuestionDataMapperFactory.getMapper(
+          QuestionDataMapperVer1.jsonVersion,
+        ).toJson(choice),
       };
 
   @override

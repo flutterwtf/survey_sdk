@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:survey_sdk/src/data/mappers/question_types/choice_question_data_mapper.dart';
 import 'package:survey_sdk/src/data/mappers/question_types/input_question_data_mapper.dart';
 import 'package:survey_sdk/src/data/mappers/question_types/intro_question_data_mapper.dart';
+import 'package:survey_sdk/src/data/mappers/question_types/mapper_version/question_data_mapper_ver_1.dart';
 import 'package:survey_sdk/src/data/mappers/question_types/slider_question_data_mapper.dart';
 import 'package:survey_sdk/src/domain/entities/constants/question_types.dart';
 
@@ -71,13 +72,21 @@ abstract class QuestionData<T> extends Equatable {
   static QuestionData fromType(Map<String, dynamic> json) {
     switch (json['type']) {
       case QuestionTypes.slider:
-        return SliderQuestionDataMapper().fromJson(json);
+        return SliderQuestionDataMapperFactory.getMapper(
+          QuestionDataMapperVer1.jsonVersion,
+        ).fromJson(json);
       case QuestionTypes.intro:
-        return IntroQuestionDataMapper().fromJson(json);
+        return IntroQuestionDataMapperFactory.getMapper(
+          QuestionDataMapperVer1.jsonVersion,
+        ).fromJson(json);
       case QuestionTypes.input:
-        return InputQuestionDataMapper().fromJson(json);
+        return InputQuestionDataMapperFactory.getMapper(
+          QuestionDataMapperVer1.jsonVersion,
+        ).fromJson(json);
       case QuestionTypes.choice:
-        return ChoiceQuestionDataMapper().fromJson(json);
+        return ChoiceQuestionDataMapperFactory.getMapper(
+          QuestionDataMapperVer1.jsonVersion,
+        ).fromJson(json);
       default:
         throw UnimplementedError();
     }

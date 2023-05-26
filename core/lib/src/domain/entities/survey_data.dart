@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:survey_sdk/src/data/mappers/question_types/choice_question_data_mapper.dart';
 import 'package:survey_sdk/src/data/mappers/question_types/input_question_data_mapper.dart';
 import 'package:survey_sdk/src/data/mappers/question_types/intro_question_data_mapper.dart';
+import 'package:survey_sdk/src/data/mappers/question_types/mapper_version/question_data_mapper_ver_1.dart';
 import 'package:survey_sdk/src/data/mappers/question_types/slider_question_data_mapper.dart';
 import 'package:survey_sdk/src/domain/entities/api_object.dart';
 import 'package:survey_sdk/src/domain/entities/constants/scheme_info.dart';
@@ -86,22 +87,30 @@ class SurveyData with EquatableMixin, ApiObject {
   ) {
     switch (question.type) {
       case QuestionTypes.choice:
-        return ChoiceQuestionDataMapper().toJson(
+        return ChoiceQuestionDataMapperFactory.getMapper(
+          QuestionDataMapperVer1.jsonVersion,
+        ).toJson(
           question as ChoiceQuestionData,
           commonTheme: themeFromQuestionType,
         );
       case QuestionTypes.slider:
-        return SliderQuestionDataMapper().toJson(
+        return SliderQuestionDataMapperFactory.getMapper(
+          QuestionDataMapperVer1.jsonVersion,
+        ).toJson(
           question as SliderQuestionData,
           commonTheme: themeFromQuestionType,
         );
       case QuestionTypes.input:
-        return InputQuestionDataMapper().toJson(
+        return InputQuestionDataMapperFactory.getMapper(
+          QuestionDataMapperVer1.jsonVersion,
+        ).toJson(
           question as InputQuestionData,
           commonTheme: themeFromQuestionType,
         );
       case QuestionTypes.intro:
-        return IntroQuestionDataMapper().toJson(
+        return IntroQuestionDataMapperFactory.getMapper(
+          QuestionDataMapperVer1.jsonVersion,
+        ).toJson(
           question as IntroQuestionData,
           commonTheme: themeFromQuestionType,
         );

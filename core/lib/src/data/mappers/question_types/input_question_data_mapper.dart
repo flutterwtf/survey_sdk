@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:survey_sdk/src/data/mappers/question_types/mapper_version/question_data_mapper_ver_1.dart';
 import 'package:survey_sdk/src/data/mappers/question_types/question_data_mapper.dart';
 import 'package:survey_sdk/src/data/mappers/themes/input_question_theme_mapper.dart';
 import 'package:survey_sdk/survey_sdk.dart';
@@ -17,7 +18,19 @@ abstract class _Fields {
   static const String type = 'type';
 }
 
-class InputQuestionDataMapper extends QuestionDataMapper<InputQuestionData> {
+abstract class InputQuestionDataMapperFactory {
+  static QuestionDataMapper getMapper(int version) {
+    switch (version) {
+      case 1:
+        return InputQuestionDataMapperVer1();
+      default:
+        throw UnimplementedError();
+    }
+  }
+}
+
+class InputQuestionDataMapperVer1
+    extends QuestionDataMapperVer1<InputQuestionData> {
   @override
   InputQuestionData fromJson(Map<String, dynamic> json) {
     final Map<String, dynamic> payload = json[_Fields.payload];
