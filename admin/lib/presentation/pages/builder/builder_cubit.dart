@@ -43,22 +43,19 @@ class BuilderCubit extends Cubit<BuilderState> {
         surveyData = surveyData.copyWith(
           commonTheme: common.copyWith(choice: data as ChoiceQuestionData),
         );
-        break;
       case QuestionTypes.input:
         surveyData = surveyData.copyWith(
           commonTheme: common.copyWith(input: data as InputQuestionData),
         );
-        break;
+
       case QuestionTypes.intro:
         surveyData = surveyData.copyWith(
           commonTheme: common.copyWith(intro: data as IntroQuestionData),
         );
-        break;
       case QuestionTypes.slider:
         surveyData = surveyData.copyWith(
           commonTheme: common.copyWith(slider: data as SliderQuestionData),
         );
-        break;
     }
     _sessionStorageRepository.saveSurveyData(surveyData);
     emit(state.copyWith(surveyData: surveyData));

@@ -1,4 +1,3 @@
-// ignore: one_member_abstracts
-abstract class ApiObject {
+mixin ApiObject {
   Map<String, dynamic> toJson();
 }

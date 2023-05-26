@@ -10,7 +10,7 @@ import 'package:survey_sdk/survey_sdk.dart';
 
 /// Holds the core survey data used in the whole app, including the list of
 /// questions and the common theme.
-class SurveyData extends ApiObject with EquatableMixin {
+class SurveyData with EquatableMixin, ApiObject {
   /// List of questions used to build question pages of different types
   /// of questions.
   final List<QuestionData> questions;
