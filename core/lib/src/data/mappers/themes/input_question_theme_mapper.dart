@@ -38,30 +38,34 @@ class InputQuestionThemeMapper extends QuestionThemeMapper<InputQuestionTheme> {
     return InputQuestionTheme(
       inputFill: Color(json[_Fields.inputFill]),
       borderColor: Color(json[_Fields.borderColor]),
-      borderWidth: json[_Fields.borderWidth],
+      borderWidth: (json[_Fields.borderWidth] as num).toDouble(),
       hintColor: Color(json[_Fields.hintColor]),
-      hintSize: json[_Fields.hintSize],
+      hintSize: (json[_Fields.hintSize] as num).toDouble(),
       textColor: Color(json[_Fields.textColor]),
-      textSize: json[_Fields.textSize],
+      textSize: (json[_Fields.textSize] as num).toDouble(),
       lines: json[_Fields.lines],
-      verticalPadding: json[_Fields.verticalPadding],
+      verticalPadding: (json[_Fields.verticalPadding] as num).toDouble(),
       isMultiline: json[_Fields.isMultiLine] == 1,
       errorText: json[_Fields.errorText],
       inputType: InputType.fromJson(json[_Fields.inputType]),
-      horizontalPadding: json[_Fields.horizontalPadding],
+      horizontalPadding: (json[_Fields.horizontalPadding] as num).toDouble(),
       fill: Color(json[_Fields.fill]),
       titleColor: Color(json[_Fields.titleColor]),
-      titleSize: json[_Fields.titleSize],
+      titleSize: (json[_Fields.titleSize] as num).toDouble(),
       subtitleColor: Color(json[_Fields.subtitleColor]),
-      subtitleSize: json[_Fields.subtitleSize],
+      subtitleSize: (json[_Fields.subtitleSize] as num).toDouble(),
       primaryButtonFill: Color(json[_Fields.primaryButtonFill]),
       primaryButtonTextColor: Color(json[_Fields.primaryButtonTextColor]),
-      primaryButtonTextSize: json[_Fields.primaryButtonTextSize],
-      primaryButtonRadius: json[_Fields.primaryButtonRadius],
+      primaryButtonTextSize:
+          (json[_Fields.primaryButtonTextSize] as num).toDouble(),
+      primaryButtonRadius:
+          (json[_Fields.primaryButtonRadius] as num).toDouble(),
       secondaryButtonFill: Color(json[_Fields.secondaryButtonFill]),
       secondaryButtonTextColor: Color(json[_Fields.secondaryButtonTextColor]),
-      secondaryButtonTextSize: json[_Fields.secondaryButtonTextSize],
-      secondaryButtonRadius: json[_Fields.secondaryButtonRadius],
+      secondaryButtonTextSize:
+          (json[_Fields.secondaryButtonTextSize] as num).toDouble(),
+      secondaryButtonRadius:
+          (json[_Fields.secondaryButtonRadius] as num).toDouble(),
     );
   }
 
