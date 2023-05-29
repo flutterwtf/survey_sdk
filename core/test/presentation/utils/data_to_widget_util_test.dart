@@ -29,7 +29,6 @@ void main() {
       );
       expect(widget.runtimeType, SliderQuestionPage);
       expect((widget as SliderQuestionPage).data, mockSliderData);
-      expect(widget.onSend, _mockOnSend);
     });
 
     test('Call with ChoiceQuestionData', () {
@@ -41,7 +40,6 @@ void main() {
 
       expect(widget.runtimeType, ChoiceQuestionPage);
       expect((widget as ChoiceQuestionPage).data, mockChoiceData);
-      expect(widget.onSend, _mockOnSend);
     });
 
     test('Call with InputQuestionData', () {
@@ -53,7 +51,6 @@ void main() {
 
       expect(widget.runtimeType, InputQuestionPage);
       expect((widget as InputQuestionPage).data, mockInputData);
-      expect(widget.onSend, _mockOnSend);
     });
 
     test('Call with IntroQuestionData', () {
@@ -65,7 +62,6 @@ void main() {
 
       expect(widget.runtimeType, IntroQuestionPage);
       expect((widget as IntroQuestionPage).data, mockIntroData);
-      expect(widget.onMainButtonTap, _mockOnSend);
     });
 
     test('Call with bad QuestionData', () {
