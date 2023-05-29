@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:survey_sdk/src/data/mappers/themes/question_theme_mapper.dart';
+import 'package:survey_sdk/src/data/mappers/themes/json_version/question_theme_mapper_json_1.dart';
 import 'package:survey_sdk/survey_sdk.dart';
 
 abstract class _Fields {
@@ -20,8 +20,8 @@ abstract class _Fields {
   static const String secondaryButtonRadius = 'secondaryButtonRadius';
 }
 
-class ChoiceQuestionThemeMapper
-    extends QuestionThemeMapper<ChoiceQuestionTheme> {
+class ChoiceQuestionThemeMapperVer1
+    extends QuestionThemeMapperJson1<ChoiceQuestionTheme> {
   @override
   ChoiceQuestionTheme fromJson(Map<String, dynamic> json) {
     return ChoiceQuestionTheme(

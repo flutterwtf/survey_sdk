@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:survey_sdk/src/data/mappers/themes/question_theme_mapper.dart';
-import 'package:survey_sdk/survey_sdk.dart';
+import 'package:survey_sdk/src/data/mappers/themes/json_version/question_theme_mapper_json_1.dart';
+import 'package:survey_sdk/src/domain/entities/themes/input_question_theme.dart';
 
 abstract class _Fields {
   static const String inputFill = 'inputFill';
@@ -32,7 +32,8 @@ abstract class _Fields {
   static const String isMultiline = 'isMultiline';
 }
 
-class InputQuestionThemeMapper extends QuestionThemeMapper<InputQuestionTheme> {
+class InputQuestionThemeMapperVer1
+    extends QuestionThemeMapperJson1<InputQuestionTheme> {
   @override
   InputQuestionTheme fromJson(Map<String, dynamic> json) {
     return InputQuestionTheme(

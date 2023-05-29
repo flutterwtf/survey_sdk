@@ -1,9 +1,9 @@
 import 'package:equatable/equatable.dart';
-import 'package:survey_sdk/src/data/mappers/question_types/choice_question_data_mapper.dart';
-import 'package:survey_sdk/src/data/mappers/question_types/input_question_data_mapper.dart';
-import 'package:survey_sdk/src/data/mappers/question_types/intro_question_data_mapper.dart';
-import 'package:survey_sdk/src/data/mappers/question_types/mapper_version/question_data_mapper_ver_1.dart';
-import 'package:survey_sdk/src/data/mappers/question_types/slider_question_data_mapper.dart';
+import 'package:survey_sdk/src/data/mappers/question_types/choice_question_data/choice_question_data_mapper_factory.dart';
+import 'package:survey_sdk/src/data/mappers/question_types/input_question_data/input_question_data_mapper_factory.dart';
+import 'package:survey_sdk/src/data/mappers/question_types/intro_question_data/intro_question_data_mapper_factory.dart';
+import 'package:survey_sdk/src/data/mappers/question_types/slider_question_data/slider_question_data_mapper_factory.dart';
+import 'package:survey_sdk/src/domain/entities/constants/json_versions.dart';
 import 'package:survey_sdk/src/domain/entities/constants/question_types.dart';
 
 /// The base class for creating specific types of question data classes.
@@ -73,19 +73,19 @@ abstract class QuestionData<T> extends Equatable {
     switch (json['type']) {
       case QuestionTypes.slider:
         return SliderQuestionDataMapperFactory.getMapper(
-          QuestionDataMapperVer1.jsonVersion,
+          JsonVersions.jsonQuestionMapperVersion1,
         ).fromJson(json);
       case QuestionTypes.intro:
         return IntroQuestionDataMapperFactory.getMapper(
-          QuestionDataMapperVer1.jsonVersion,
+          JsonVersions.jsonQuestionMapperVersion1,
         ).fromJson(json);
       case QuestionTypes.input:
         return InputQuestionDataMapperFactory.getMapper(
-          QuestionDataMapperVer1.jsonVersion,
+          JsonVersions.jsonQuestionMapperVersion1,
         ).fromJson(json);
       case QuestionTypes.choice:
         return ChoiceQuestionDataMapperFactory.getMapper(
-          QuestionDataMapperVer1.jsonVersion,
+          JsonVersions.jsonQuestionMapperVersion1,
         ).fromJson(json);
       default:
         throw UnimplementedError();

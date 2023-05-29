@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:survey_sdk/src/data/mappers/themes/question_theme_mapper.dart';
-import 'package:survey_sdk/src/domain/entities/themes/slider_question_theme.dart';
+import 'package:survey_sdk/src/data/mappers/themes/json_version/question_theme_mapper_json_1.dart';
+import 'package:survey_sdk/src/domain/entities/themes/intro_question_theme.dart';
 
 abstract class _Fields {
-  static const String inactiveColor = 'inactiveColor';
-  static const String thumbColor = 'thumbColor';
-  static const String thumbRadius = 'thumbRadius';
-  static const String thickness = 'thickness';
   static const String fill = 'fill';
   static const String titleColor = 'titleColor';
   static const String titleSize = 'titleSize';
@@ -20,19 +16,13 @@ abstract class _Fields {
   static const String secondaryButtonTextColor = 'secondaryButtonTextColor';
   static const String secondaryButtonTextSize = 'secondaryButtonTextSize';
   static const String secondaryButtonRadius = 'secondaryButtonRadius';
-  static const String activeColor = 'activeColor';
 }
 
-class SliderQuestionThemeMapper
-    extends QuestionThemeMapper<SliderQuestionTheme> {
+class IntroQuestionThemeMapperVer1
+    extends QuestionThemeMapperJson1<IntroQuestionTheme> {
   @override
-  SliderQuestionTheme fromJson(Map<String, dynamic> json) {
-    return SliderQuestionTheme(
-      activeColor: Color(json[_Fields.activeColor]),
-      inactiveColor: Color(json[_Fields.inactiveColor]),
-      thumbColor: Color(json[_Fields.thumbColor]),
-      thumbRadius: json[_Fields.thumbRadius],
-      thickness: json[_Fields.thickness],
+  IntroQuestionTheme fromJson(Map<String, dynamic> json) {
+    return IntroQuestionTheme(
       fill: Color(json[_Fields.fill]),
       titleColor: Color(json[_Fields.titleColor]),
       titleSize: json[_Fields.titleSize],
@@ -50,13 +40,8 @@ class SliderQuestionThemeMapper
   }
 
   @override
-  Map<String, dynamic> toJson(SliderQuestionTheme theme) {
+  Map<String, dynamic> toJson(IntroQuestionTheme theme) {
     return {
-      _Fields.activeColor: theme.activeColor.value,
-      _Fields.inactiveColor: theme.inactiveColor.value,
-      _Fields.thumbColor: theme.thumbColor.value,
-      _Fields.thumbRadius: theme.thumbRadius,
-      _Fields.thickness: theme.thickness,
       _Fields.fill: theme.fill.value,
       _Fields.titleColor: theme.titleColor.value,
       _Fields.titleSize: theme.titleSize,

@@ -1,5 +1,5 @@
 abstract class QuestionThemeMapper<T> {
-  final int version = 1;
+  int get jsonVersion => 0;
   T fromJson(Map<String, dynamic> json);
   Map<String, dynamic> toJson(T theme);
 }

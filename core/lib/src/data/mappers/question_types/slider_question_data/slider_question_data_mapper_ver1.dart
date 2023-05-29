@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:survey_sdk/src/data/mappers/question_types/mapper_version/question_data_mapper_ver_1.dart';
-import 'package:survey_sdk/src/data/mappers/question_types/question_data_mapper.dart';
-import 'package:survey_sdk/src/data/mappers/themes/slider_question_theme_mapper.dart';
+import 'package:survey_sdk/src/data/mappers/question_types/json_version/question_data_mapper_json_1.dart';
+import 'package:survey_sdk/src/data/mappers/themes/slider_question_theme/slider_question_theme_mapper_ver_1.dart';
 import 'package:survey_sdk/survey_sdk.dart';
 
 abstract class _Fields {
@@ -20,19 +19,8 @@ abstract class _Fields {
   static const String type = 'type';
 }
 
-abstract class SliderQuestionDataMapperFactory {
-  static QuestionDataMapper getMapper(int version) {
-    switch (version) {
-      case 1:
-        return SliderQuestionDataMapperVer1();
-      default:
-        throw UnimplementedError();
-    }
-  }
-}
-
 class SliderQuestionDataMapperVer1
-    extends QuestionDataMapperVer1<SliderQuestionData> {
+    extends QuestionDataMapperJson1<SliderQuestionData> {
   @override
   SliderQuestionData fromJson(Map<String, dynamic> json) {
     final theme = json[_Fields.theme];
@@ -47,7 +35,7 @@ class SliderQuestionDataMapperVer1
       isSkip: json[_Fields.isSkip],
       content: json[_Fields.content],
       theme: theme != null
-          ? SliderQuestionThemeMapper().fromJson(theme)
+          ? SliderQuestionThemeMapperVer1().fromJson(theme)
           : const SliderQuestionTheme.common(),
       secondaryButtonText: json[_Fields.secondaryButtonText],
       primaryButtonText: json[_Fields.primaryButtonText],
@@ -69,8 +57,8 @@ class SliderQuestionDataMapperVer1
     return {
       _Fields.index: data.index,
       _Fields.theme: theme != null
-          ? SliderQuestionThemeMapper().toJson(theme)
-          : SliderQuestionThemeMapper()
+          ? SliderQuestionThemeMapperVer1().toJson(theme)
+          : SliderQuestionThemeMapperVer1()
               .toJson(const SliderQuestionTheme.common()),
       _Fields.minValue: data.minValue,
       _Fields.maxValue: data.maxValue,

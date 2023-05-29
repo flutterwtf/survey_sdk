@@ -1,11 +1,11 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:survey_sdk/src/data/mappers/question_types/choice_question_data_mapper.dart';
-import 'package:survey_sdk/src/data/mappers/question_types/input_question_data_mapper.dart';
-import 'package:survey_sdk/src/data/mappers/question_types/intro_question_data_mapper.dart';
-import 'package:survey_sdk/src/data/mappers/question_types/mapper_version/question_data_mapper_ver_1.dart';
-import 'package:survey_sdk/src/data/mappers/question_types/slider_question_data_mapper.dart';
+import 'package:survey_sdk/src/data/mappers/question_types/choice_question_data/choice_question_data_mapper_factory.dart';
+import 'package:survey_sdk/src/data/mappers/question_types/input_question_data/input_question_data_mapper_factory.dart';
+import 'package:survey_sdk/src/data/mappers/question_types/intro_question_data/intro_question_data_mapper_factory.dart';
+import 'package:survey_sdk/src/data/mappers/question_types/slider_question_data/slider_question_data_mapper_factory.dart';
 import 'package:survey_sdk/src/domain/entities/api_object.dart';
+import 'package:survey_sdk/src/domain/entities/constants/json_versions.dart';
 import 'package:survey_sdk/src/domain/entities/question_types/choice_question_data.dart';
 import 'package:survey_sdk/src/domain/entities/question_types/input_question_data.dart';
 import 'package:survey_sdk/src/domain/entities/question_types/intro_question_data.dart';
@@ -47,16 +47,16 @@ class CommonTheme extends ThemeExtension<CommonTheme>
   factory CommonTheme.fromJson(Map<String, dynamic> json) {
     return CommonTheme(
       slider: SliderQuestionDataMapperFactory.getMapper(
-        QuestionDataMapperVer1.jsonVersion,
+        JsonVersions.jsonQuestionMapperVersion1,
       ).fromJson(json['slider']),
       intro: IntroQuestionDataMapperFactory.getMapper(
-        QuestionDataMapperVer1.jsonVersion,
+        JsonVersions.jsonQuestionMapperVersion1,
       ).fromJson(json['intro']),
       input: InputQuestionDataMapperFactory.getMapper(
-        QuestionDataMapperVer1.jsonVersion,
+        JsonVersions.jsonQuestionMapperVersion1,
       ).fromJson(json['input']),
       choice: ChoiceQuestionDataMapperFactory.getMapper(
-        QuestionDataMapperVer1.jsonVersion,
+        JsonVersions.jsonQuestionMapperVersion1,
       ).fromJson(json['choice']),
     );
   }
@@ -64,16 +64,16 @@ class CommonTheme extends ThemeExtension<CommonTheme>
   @override
   Map<String, dynamic> toJson() => {
         'slider': SliderQuestionDataMapperFactory.getMapper(
-          QuestionDataMapperVer1.jsonVersion,
+          JsonVersions.jsonQuestionMapperVersion1,
         ).toJson(slider),
         'intro': IntroQuestionDataMapperFactory.getMapper(
-          QuestionDataMapperVer1.jsonVersion,
+          JsonVersions.jsonQuestionMapperVersion1,
         ).toJson(intro),
         'input': InputQuestionDataMapperFactory.getMapper(
-          QuestionDataMapperVer1.jsonVersion,
+          JsonVersions.jsonQuestionMapperVersion1,
         ).toJson(input),
         'choice': ChoiceQuestionDataMapperFactory.getMapper(
-          QuestionDataMapperVer1.jsonVersion,
+          JsonVersions.jsonQuestionMapperVersion1,
         ).toJson(choice),
       };
 
