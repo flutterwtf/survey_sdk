@@ -55,6 +55,18 @@ class _BuilderPageState extends State<BuilderPage> {
     );
   }
 
+  QuestionData? _editableQuestion(BuilderState state) {
+    if (state is EditQuestionBuilderState) {
+      return state.surveyData.questions.firstWhereOrNull(
+        (q) => q.index == state.selectedIndex,
+      );
+    } else if (state is PreviewQuestionBuilderState) {
+      return state.selectedQuestion;
+    } else {
+      return null;
+    }
+  }
+
   @override
   void dispose() {
     _surveyController.dispose();
@@ -118,11 +130,7 @@ class _BuilderPageState extends State<BuilderPage> {
               EditorBar(
                 isEditMode: state is EditQuestionBuilderState,
                 onChange: cubit.updateQuestionData,
-                editableQuestion: state is EditQuestionBuilderState
-                    ? state.surveyData.questions.firstWhereOrNull(
-                        (q) => q.index == state.selectedIndex,
-                      )
-                    : null,
+                editableQuestion: _editableQuestion(state),
               ),
             ],
           ),
