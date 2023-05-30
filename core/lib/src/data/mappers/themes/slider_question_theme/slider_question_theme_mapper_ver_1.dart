@@ -31,21 +31,25 @@ class SliderQuestionThemeMapperVer1
       activeColor: Color(json[_Fields.activeColor]),
       inactiveColor: Color(json[_Fields.inactiveColor]),
       thumbColor: Color(json[_Fields.thumbColor]),
-      thumbRadius: json[_Fields.thumbRadius],
-      thickness: json[_Fields.thickness],
+      thumbRadius: (json[_Fields.thumbRadius] as num).toDouble(),
+      thickness: (json[_Fields.thickness] as num).toDouble(),
       fill: Color(json[_Fields.fill]),
       titleColor: Color(json[_Fields.titleColor]),
-      titleSize: json[_Fields.titleSize],
+      titleSize: (json[_Fields.titleSize] as num).toDouble(),
       subtitleColor: Color(json[_Fields.subtitleColor]),
-      subtitleSize: json[_Fields.subtitleSize],
+      subtitleSize: (json[_Fields.subtitleSize] as num).toDouble(),
       primaryButtonFill: Color(json[_Fields.primaryButtonFill]),
       primaryButtonTextColor: Color(json[_Fields.primaryButtonTextColor]),
-      primaryButtonTextSize: json[_Fields.primaryButtonTextSize],
-      primaryButtonRadius: json[_Fields.primaryButtonRadius],
+      primaryButtonTextSize:
+          (json[_Fields.primaryButtonTextSize] as num).toDouble(),
+      primaryButtonRadius:
+          (json[_Fields.primaryButtonRadius] as num).toDouble(),
       secondaryButtonFill: Color(json[_Fields.secondaryButtonFill]),
       secondaryButtonTextColor: Color(json[_Fields.secondaryButtonTextColor]),
-      secondaryButtonTextSize: json[_Fields.secondaryButtonTextSize],
-      secondaryButtonRadius: json[_Fields.secondaryButtonRadius],
+      secondaryButtonTextSize:
+          (json[_Fields.secondaryButtonTextSize] as num).toDouble(),
+      secondaryButtonRadius:
+          (json[_Fields.secondaryButtonRadius] as num).toDouble(),
     );
   }
 
