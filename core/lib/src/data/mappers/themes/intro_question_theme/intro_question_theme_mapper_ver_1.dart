@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:survey_sdk/src/data/mappers/themes/question_theme_mapper.dart';
-import 'package:survey_sdk/survey_sdk.dart';
+import 'package:survey_sdk/src/data/mappers/themes/json_version/question_theme_mapper_json_1.dart';
+import 'package:survey_sdk/src/domain/entities/themes/intro_question_theme.dart';
 
 abstract class _Fields {
-  static const String activeColor = 'activeColor';
-  static const String inactiveColor = 'inactiveColor';
   static const String fill = 'fill';
   static const String titleColor = 'titleColor';
   static const String titleSize = 'titleSize';
@@ -20,13 +18,11 @@ abstract class _Fields {
   static const String secondaryButtonRadius = 'secondaryButtonRadius';
 }
 
-class ChoiceQuestionThemeMapper
-    extends QuestionThemeMapper<ChoiceQuestionTheme> {
+class IntroQuestionThemeMapperVer1
+    extends QuestionThemeMapperJson1<IntroQuestionTheme> {
   @override
-  ChoiceQuestionTheme fromJson(Map<String, dynamic> json) {
-    return ChoiceQuestionTheme(
-      activeColor: Color(json[_Fields.activeColor]),
-      inactiveColor: Color(json[_Fields.inactiveColor]),
+  IntroQuestionTheme fromJson(Map<String, dynamic> json) {
+    return IntroQuestionTheme(
       fill: Color(json[_Fields.fill]),
       titleColor: Color(json[_Fields.titleColor]),
       titleSize: (json[_Fields.titleSize] as num).toDouble(),
@@ -48,10 +44,8 @@ class ChoiceQuestionThemeMapper
   }
 
   @override
-  Map<String, dynamic> toJson(ChoiceQuestionTheme theme) {
+  Map<String, dynamic> toJson(IntroQuestionTheme theme) {
     return {
-      _Fields.activeColor: theme.activeColor.value,
-      _Fields.inactiveColor: theme.inactiveColor.value,
       _Fields.fill: theme.fill.value,
       _Fields.titleColor: theme.titleColor.value,
       _Fields.titleSize: theme.titleSize,

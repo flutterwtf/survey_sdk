@@ -1,12 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:survey_sdk/src/data/mappers/themes/question_theme_mapper.dart';
-import 'package:survey_sdk/src/domain/entities/themes/slider_question_theme.dart';
+import 'package:survey_sdk/src/data/mappers/themes/json_version/question_theme_mapper_json_1.dart';
+import 'package:survey_sdk/src/domain/entities/themes/input_question_theme.dart';
 
 abstract class _Fields {
-  static const String inactiveColor = 'inactiveColor';
-  static const String thumbColor = 'thumbColor';
-  static const String thumbRadius = 'thumbRadius';
-  static const String thickness = 'thickness';
+  static const String inputFill = 'inputFill';
+  static const String borderColor = 'borderColor';
+  static const String borderWidth = 'borderWidth';
+  static const String hintColor = 'hintColor';
+  static const String hintSize = 'hintSize';
+  static const String textColor = 'textColor';
+  static const String textSize = 'textSize';
+  static const String lines = 'lines';
+  static const String verticalPadding = 'verticalPadding';
+  static const String isMultiLine = 'isMultiLine';
+  static const String errorText = 'errorText';
+  static const String inputType = 'inputType';
+  static const String horizontalPadding = 'horizontalPadding';
   static const String fill = 'fill';
   static const String titleColor = 'titleColor';
   static const String titleSize = 'titleSize';
@@ -20,19 +29,27 @@ abstract class _Fields {
   static const String secondaryButtonTextColor = 'secondaryButtonTextColor';
   static const String secondaryButtonTextSize = 'secondaryButtonTextSize';
   static const String secondaryButtonRadius = 'secondaryButtonRadius';
-  static const String activeColor = 'activeColor';
+  static const String isMultiline = 'isMultiline';
 }
 
-class SliderQuestionThemeMapper
-    extends QuestionThemeMapper<SliderQuestionTheme> {
+class InputQuestionThemeMapperVer1
+    extends QuestionThemeMapperJson1<InputQuestionTheme> {
   @override
-  SliderQuestionTheme fromJson(Map<String, dynamic> json) {
-    return SliderQuestionTheme(
-      activeColor: Color(json[_Fields.activeColor]),
-      inactiveColor: Color(json[_Fields.inactiveColor]),
-      thumbColor: Color(json[_Fields.thumbColor]),
-      thumbRadius: (json[_Fields.thumbRadius] as num).toDouble(),
-      thickness: (json[_Fields.thickness] as num).toDouble(),
+  InputQuestionTheme fromJson(Map<String, dynamic> json) {
+    return InputQuestionTheme(
+      inputFill: Color(json[_Fields.inputFill]),
+      borderColor: Color(json[_Fields.borderColor]),
+      borderWidth: (json[_Fields.borderWidth] as num).toDouble(),
+      hintColor: Color(json[_Fields.hintColor]),
+      hintSize: (json[_Fields.hintSize] as num).toDouble(),
+      textColor: Color(json[_Fields.textColor]),
+      textSize: (json[_Fields.textSize] as num).toDouble(),
+      lines: json[_Fields.lines],
+      verticalPadding: (json[_Fields.verticalPadding] as num).toDouble(),
+      isMultiline: json[_Fields.isMultiLine] == 1,
+      errorText: json[_Fields.errorText],
+      inputType: InputType.fromJson(json[_Fields.inputType]),
+      horizontalPadding: (json[_Fields.horizontalPadding] as num).toDouble(),
       fill: Color(json[_Fields.fill]),
       titleColor: Color(json[_Fields.titleColor]),
       titleSize: (json[_Fields.titleSize] as num).toDouble(),
@@ -54,13 +71,21 @@ class SliderQuestionThemeMapper
   }
 
   @override
-  Map<String, dynamic> toJson(SliderQuestionTheme theme) {
+  Map<String, dynamic> toJson(InputQuestionTheme theme) {
     return {
-      _Fields.activeColor: theme.activeColor.value,
-      _Fields.inactiveColor: theme.inactiveColor.value,
-      _Fields.thumbColor: theme.thumbColor.value,
-      _Fields.thumbRadius: theme.thumbRadius,
-      _Fields.thickness: theme.thickness,
+      _Fields.inputFill: theme.inputFill.value,
+      _Fields.borderColor: theme.borderColor.value,
+      _Fields.borderWidth: theme.borderWidth,
+      _Fields.hintColor: theme.hintColor.value,
+      _Fields.hintSize: theme.hintSize,
+      _Fields.textColor: theme.textColor.value,
+      _Fields.textSize: theme.textSize,
+      _Fields.lines: theme.lines,
+      _Fields.isMultiline: theme.isMultiline ? 1 : 0,
+      _Fields.errorText: theme.errorText,
+      _Fields.inputType: theme.inputType.toJson(),
+      _Fields.verticalPadding: theme.verticalPadding,
+      _Fields.horizontalPadding: theme.horizontalPadding,
       _Fields.fill: theme.fill.value,
       _Fields.titleColor: theme.titleColor.value,
       _Fields.titleSize: theme.titleSize,

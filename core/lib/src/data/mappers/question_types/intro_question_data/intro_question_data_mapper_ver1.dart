@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:survey_sdk/src/data/mappers/question_types/question_data_mapper.dart';
-import 'package:survey_sdk/src/data/mappers/themes/input_question_theme_mapper.dart';
+import 'package:survey_sdk/src/data/mappers/question_types/json_version/question_data_mapper_json_1.dart';
+import 'package:survey_sdk/src/data/mappers/themes/intro_question_theme/intro_question_theme_mapper_ver_1.dart';
 import 'package:survey_sdk/survey_sdk.dart';
 
 abstract class _Fields {
@@ -9,41 +9,37 @@ abstract class _Fields {
   static const String subtitle = 'subtitle';
   static const String isSkip = 'isSkip';
   static const String content = 'content';
-  static const String hintText = 'isMultipleChoice';
   static const String primaryButtonText = 'primaryButtonText';
   static const String secondaryButtonText = 'secondaryButtonText';
-  static const String payload = 'payload';
   static const String theme = 'theme';
   static const String type = 'type';
 }
 
-class InputQuestionDataMapper extends QuestionDataMapper<InputQuestionData> {
+class IntroQuestionDataMapperVer1
+    extends QuestionDataMapperJson1<IntroQuestionData> {
   @override
-  InputQuestionData fromJson(Map<String, dynamic> json) {
-    final Map<String, dynamic> payload = json[_Fields.payload];
+  IntroQuestionData fromJson(Map<String, dynamic> json) {
     final theme = json[_Fields.theme];
-    return InputQuestionData(
+    return IntroQuestionData(
       index: json[_Fields.index],
       title: json[_Fields.title],
       subtitle: json[_Fields.subtitle],
       isSkip: json[_Fields.isSkip],
       content: json[_Fields.content],
-      validator: InputValidator.fromJson(payload),
-      hintText: payload[_Fields.hintText],
+      theme: theme != null
+          ? IntroQuestionThemeMapperVer1().fromJson(theme)
+          : const IntroQuestionTheme.common(),
       secondaryButtonText: json[_Fields.secondaryButtonText],
       primaryButtonText: json[_Fields.primaryButtonText],
-      theme: theme != null
-          ? InputQuestionThemeMapper().fromJson(theme)
-          : const InputQuestionTheme.common(),
     );
   }
 
   @override
   Map<String, dynamic> toJson(
-    InputQuestionData data, {
+    IntroQuestionData data, {
     ThemeExtension<dynamic>? commonTheme,
   }) {
-    late final InputQuestionTheme? theme;
+    late final IntroQuestionTheme? theme;
     //ignore: prefer-conditional-expressions
     if (commonTheme != null) {
       theme = commonTheme == data.theme ? null : data.theme;
@@ -58,13 +54,9 @@ class InputQuestionDataMapper extends QuestionDataMapper<InputQuestionData> {
       _Fields.isSkip: data.isSkip,
       _Fields.content: data.content,
       _Fields.theme: theme != null
-          ? InputQuestionThemeMapper().toJson(theme)
-          : InputQuestionThemeMapper()
-              .toJson(const InputQuestionTheme.common()),
-      _Fields.payload: {
-        ...data.validator.toJson(),
-        _Fields.hintText: data.hintText,
-      },
+          ? IntroQuestionThemeMapperVer1().toJson(theme)
+          : IntroQuestionThemeMapperVer1()
+              .toJson(const IntroQuestionTheme.common()),
       _Fields.secondaryButtonText: data.secondaryButtonText,
       _Fields.primaryButtonText: data.primaryButtonText,
     };

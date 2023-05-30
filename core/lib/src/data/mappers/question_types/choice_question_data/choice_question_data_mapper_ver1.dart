@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:survey_sdk/src/data/mappers/question_types/question_data_mapper.dart';
-import 'package:survey_sdk/src/data/mappers/themes/choice_question_theme_mapper.dart';
+import 'package:survey_sdk/src/data/mappers/question_types/json_version/question_data_mapper_json_1.dart';
+import 'package:survey_sdk/src/data/mappers/themes/choice_question_theme/choice_question_theme_mapper_ver_1.dart';
 import 'package:survey_sdk/survey_sdk.dart';
 
 abstract class _Fields {
@@ -21,7 +21,8 @@ abstract class _Fields {
   static const String type = 'type';
 }
 
-class ChoiceQuestionDataMapper extends QuestionDataMapper<ChoiceQuestionData> {
+class ChoiceQuestionDataMapperVer1
+    extends QuestionDataMapperJson1<ChoiceQuestionData> {
   @override
   ChoiceQuestionData fromJson(Map<String, dynamic> json) {
     final payload = json[_Fields.payload] as Map<String, dynamic>;
@@ -40,7 +41,7 @@ class ChoiceQuestionDataMapper extends QuestionDataMapper<ChoiceQuestionData> {
       ruleType: RuleType.values[payload[_Fields.ruleType]],
       ruleValue: payload[_Fields.ruleValue],
       theme: theme != null
-          ? ChoiceQuestionThemeMapper().fromJson(theme)
+          ? ChoiceQuestionThemeMapperVer1().fromJson(theme)
           : const ChoiceQuestionTheme.common(),
       primaryButtonText: json[_Fields.primaryButtonText],
       secondaryButtonText: json[_Fields.secondaryButtonText],
@@ -67,8 +68,8 @@ class ChoiceQuestionDataMapper extends QuestionDataMapper<ChoiceQuestionData> {
       _Fields.isSkip: data.isSkip,
       _Fields.content: data.content,
       _Fields.theme: theme != null
-          ? ChoiceQuestionThemeMapper().toJson(theme)
-          : ChoiceQuestionThemeMapper()
+          ? ChoiceQuestionThemeMapperVer1().toJson(theme)
+          : ChoiceQuestionThemeMapperVer1()
               .toJson(const ChoiceQuestionTheme.common()),
       _Fields.payload: {
         _Fields.isMultipleChoice: data.isMultipleChoice,
