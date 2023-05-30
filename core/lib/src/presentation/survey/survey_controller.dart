@@ -4,18 +4,12 @@ import 'package:flutter/material.dart';
 /// Function [onNext] navigate to next page and save answer on last page.
 /// Function [onBack] navigate to previous page.
 class SurveyController {
-  /// A map to store the answers provided during the survey.
-  final Map<String, dynamic> _answers = {};
-
   /// The controller responsible for managing the pages in the survey.
   final PageController _pageController = PageController();
 
   PageController get pageController => _pageController;
 
-  dynamic answer(String key) => _answers[key];
-
-  void onNext({required String key, required dynamic data}) {
-    _answers['$key + ${_pageController.page}'] = data;
+  void onNext() {
     _pageController.nextPage(
       duration: const Duration(seconds: 1),
       curve: Curves.linear,

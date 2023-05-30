@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:survey_sdk/src/domain/entities/question_answer.dart';
 import 'package:survey_sdk/src/domain/entities/question_types/intro_question_data.dart';
 import 'package:survey_sdk/src/presentation/intro_question/intro_question_page.dart';
 
@@ -22,7 +21,6 @@ void main() {
           data: const IntroQuestionData.common(),
           onMainButtonTap: completerOnMainButtonTap.complete,
           onSecondaryButtonTap: completerOnSecondButton.complete,
-          onSend: ({required int index, required QuestionAnswer answer}) {},
         ),
       );
 

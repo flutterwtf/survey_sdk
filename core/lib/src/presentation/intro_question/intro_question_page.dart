@@ -14,9 +14,6 @@ class IntroQuestionPage extends StatefulWidget {
   /// Contains the content for a page.
   final IntroQuestionData data;
 
-  /// Callback that is called after pressing bottom button.
-  final OnSendCallback onSend;
-
   /// Optional callback that is called after pressing main button.
   final VoidCallback? onMainButtonTap;
 
@@ -26,7 +23,6 @@ class IntroQuestionPage extends StatefulWidget {
 
   const IntroQuestionPage({
     required this.data,
-    required this.onSend,
     this.onMainButtonTap,
     this.onSecondaryButtonTap,
     super.key,
