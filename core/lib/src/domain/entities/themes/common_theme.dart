@@ -5,11 +5,18 @@ import 'package:survey_sdk/src/data/mappers/question_types/input_question_data/i
 import 'package:survey_sdk/src/data/mappers/question_types/intro_question_data/intro_question_data_mapper_factory.dart';
 import 'package:survey_sdk/src/data/mappers/question_types/slider_question_data/slider_question_data_mapper_factory.dart';
 import 'package:survey_sdk/src/domain/entities/api_object.dart';
-import 'package:survey_sdk/src/domain/entities/constants/json_versions.dart';
+import 'package:survey_sdk/src/domain/entities/constants/scheme_info.dart';
 import 'package:survey_sdk/src/domain/entities/question_types/choice_question_data.dart';
 import 'package:survey_sdk/src/domain/entities/question_types/input_question_data.dart';
 import 'package:survey_sdk/src/domain/entities/question_types/intro_question_data.dart';
 import 'package:survey_sdk/src/domain/entities/question_types/slider_question_data.dart';
+
+abstract class _Fields {
+  static const String slider = 'slider';
+  static const String intro = 'intro';
+  static const String input = 'input';
+  static const String choice = 'choice';
+}
 
 /// A theme class that extends the [ThemeExtension] and includes common
 /// properties for various question types. It represents the visual styling and
@@ -44,36 +51,36 @@ class CommonTheme extends ThemeExtension<CommonTheme>
   });
 
   @override
-  factory CommonTheme.fromJson(Map<String, dynamic> json) {
+  factory CommonTheme.fromJson(Map<String, dynamic> json, int schemeVersion) {
     return CommonTheme(
       slider: SliderQuestionDataMapperFactory.getMapper(
-        JsonVersions.jsonQuestionMapperVersion1,
-      ).fromJson(json['slider']),
+        schemeVersion,
+      ).fromJson(json[_Fields.slider]),
       intro: IntroQuestionDataMapperFactory.getMapper(
-        JsonVersions.jsonQuestionMapperVersion1,
-      ).fromJson(json['intro']),
+        schemeVersion,
+      ).fromJson(json[_Fields.intro]),
       input: InputQuestionDataMapperFactory.getMapper(
-        JsonVersions.jsonQuestionMapperVersion1,
-      ).fromJson(json['input']),
+        schemeVersion,
+      ).fromJson(json[_Fields.input]),
       choice: ChoiceQuestionDataMapperFactory.getMapper(
-        JsonVersions.jsonQuestionMapperVersion1,
-      ).fromJson(json['choice']),
+        schemeVersion,
+      ).fromJson(json[_Fields.choice]),
     );
   }
 
   @override
-  Map<String, dynamic> toJson() => {
-        'slider': SliderQuestionDataMapperFactory.getMapper(
-          JsonVersions.jsonQuestionMapperVersion1,
+  Map<String, dynamic> toJson({int? schemeVersion}) => {
+        _Fields.slider: SliderQuestionDataMapperFactory.getMapper(
+          schemeVersion ?? SchemeInfo.version,
         ).toJson(slider),
-        'intro': IntroQuestionDataMapperFactory.getMapper(
-          JsonVersions.jsonQuestionMapperVersion1,
+        _Fields.intro: IntroQuestionDataMapperFactory.getMapper(
+          schemeVersion ?? SchemeInfo.version,
         ).toJson(intro),
-        'input': InputQuestionDataMapperFactory.getMapper(
-          JsonVersions.jsonQuestionMapperVersion1,
+        _Fields.input: InputQuestionDataMapperFactory.getMapper(
+          schemeVersion ?? SchemeInfo.version,
         ).toJson(input),
-        'choice': ChoiceQuestionDataMapperFactory.getMapper(
-          JsonVersions.jsonQuestionMapperVersion1,
+        _Fields.choice: ChoiceQuestionDataMapperFactory.getMapper(
+          schemeVersion ?? SchemeInfo.version,
         ).toJson(choice),
       };
 

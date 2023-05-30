@@ -5,9 +5,14 @@ import 'package:survey_sdk/src/data/mappers/question_types/input_question_data/i
 import 'package:survey_sdk/src/data/mappers/question_types/intro_question_data/intro_question_data_mapper_factory.dart';
 import 'package:survey_sdk/src/data/mappers/question_types/slider_question_data/slider_question_data_mapper_factory.dart';
 import 'package:survey_sdk/src/domain/entities/api_object.dart';
-import 'package:survey_sdk/src/domain/entities/constants/json_versions.dart';
 import 'package:survey_sdk/src/domain/entities/constants/scheme_info.dart';
 import 'package:survey_sdk/survey_sdk.dart';
+
+abstract class _Fields {
+  static const String questions = 'questions';
+  static const String commonTheme = 'commonTheme';
+  static const String schemeVersion = 'schemeVersion';
+}
 
 /// Holds the core survey data used in the whole app, including the list of
 /// questions and the common theme.
@@ -32,12 +37,16 @@ class SurveyData with EquatableMixin, ApiObject {
 
   factory SurveyData.fromJson(Map<String, dynamic> json) {
     final questions = <QuestionData>[];
-    for (final questionJson in json['questions']) {
-      questions.add(QuestionData.fromType(questionJson));
+    final schemeVersion = json[_Fields.schemeVersion];
+    for (final questionJson in json[_Fields.questions]) {
+      questions.add(QuestionData.fromType(questionJson, schemeVersion));
     }
     return SurveyData(
       questions: questions,
-      commonTheme: CommonTheme.fromJson(json['commonTheme']),
+      commonTheme: CommonTheme.fromJson(
+        json[_Fields.commonTheme],
+        schemeVersion,
+      ),
     );
   }
 
@@ -53,14 +62,18 @@ class SurveyData with EquatableMixin, ApiObject {
 
   @override
   Map<String, dynamic> toJson() {
+    const schemeVersion = SchemeInfo.version;
     return {
-      'schemeVersion': SchemeInfo.version,
-      'commonTheme': commonTheme.toJson(),
-      'questions': questions
+      _Fields.schemeVersion: schemeVersion,
+      _Fields.commonTheme: commonTheme.toJson(
+        schemeVersion: schemeVersion,
+      ),
+      _Fields.questions: questions
           .map(
             (question) => _toJson(
               _themeFromQuestionType(question.type),
               question,
+              SchemeInfo.version,
             ),
           )
           .toList(),
@@ -84,32 +97,33 @@ class SurveyData with EquatableMixin, ApiObject {
   Map<String, dynamic>? _toJson(
     ThemeExtension? themeFromQuestionType,
     QuestionData question,
+    int schemeVersion,
   ) {
     switch (question.type) {
       case QuestionTypes.choice:
         return ChoiceQuestionDataMapperFactory.getMapper(
-          JsonVersions.jsonQuestionMapperVersion1,
+          schemeVersion,
         ).toJson(
           question as ChoiceQuestionData,
           commonTheme: themeFromQuestionType,
         );
       case QuestionTypes.slider:
         return SliderQuestionDataMapperFactory.getMapper(
-          JsonVersions.jsonQuestionMapperVersion1,
+          schemeVersion,
         ).toJson(
           question as SliderQuestionData,
           commonTheme: themeFromQuestionType,
         );
       case QuestionTypes.input:
         return InputQuestionDataMapperFactory.getMapper(
-          JsonVersions.jsonQuestionMapperVersion1,
+          schemeVersion,
         ).toJson(
           question as InputQuestionData,
           commonTheme: themeFromQuestionType,
         );
       case QuestionTypes.intro:
         return IntroQuestionDataMapperFactory.getMapper(
-          JsonVersions.jsonQuestionMapperVersion1,
+          schemeVersion,
         ).toJson(
           question as IntroQuestionData,
           commonTheme: themeFromQuestionType,

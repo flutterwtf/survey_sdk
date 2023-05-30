@@ -3,8 +3,11 @@ import 'package:survey_sdk/src/data/mappers/question_types/choice_question_data/
 import 'package:survey_sdk/src/data/mappers/question_types/input_question_data/input_question_data_mapper_factory.dart';
 import 'package:survey_sdk/src/data/mappers/question_types/intro_question_data/intro_question_data_mapper_factory.dart';
 import 'package:survey_sdk/src/data/mappers/question_types/slider_question_data/slider_question_data_mapper_factory.dart';
-import 'package:survey_sdk/src/domain/entities/constants/json_versions.dart';
 import 'package:survey_sdk/src/domain/entities/constants/question_types.dart';
+
+abstract class _Fields {
+  static const String type = 'type';
+}
 
 /// The base class for creating specific types of question data classes.
 ///
@@ -69,23 +72,23 @@ abstract class QuestionData<T> extends Equatable {
   ///
   /// If the "type" field does not match any predefined question types, an
   /// [UnimplementedError] is thrown.
-  static QuestionData fromType(Map<String, dynamic> json) {
-    switch (json['type']) {
+  static QuestionData fromType(Map<String, dynamic> json, int schemeVersion) {
+    switch (json[_Fields.type]) {
       case QuestionTypes.slider:
         return SliderQuestionDataMapperFactory.getMapper(
-          JsonVersions.jsonQuestionMapperVersion1,
+          schemeVersion,
         ).fromJson(json);
       case QuestionTypes.intro:
         return IntroQuestionDataMapperFactory.getMapper(
-          JsonVersions.jsonQuestionMapperVersion1,
+          schemeVersion,
         ).fromJson(json);
       case QuestionTypes.input:
         return InputQuestionDataMapperFactory.getMapper(
-          JsonVersions.jsonQuestionMapperVersion1,
+          schemeVersion,
         ).fromJson(json);
       case QuestionTypes.choice:
         return ChoiceQuestionDataMapperFactory.getMapper(
-          JsonVersions.jsonQuestionMapperVersion1,
+          schemeVersion,
         ).fromJson(json);
       default:
         throw UnimplementedError();
