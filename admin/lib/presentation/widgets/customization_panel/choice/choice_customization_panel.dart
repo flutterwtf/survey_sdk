@@ -20,9 +20,9 @@ class ChoiceCustomizationPanel extends StatelessWidget {
   Widget build(BuildContext context) {
     return QuestionSettingsTabBar(
       tabs: [
-        ChoiceCommonCustomizationTab(
+        ChoiceContentCustomizationTab(
           onChange: onChange,
-          title: context.localization.common,
+          title: context.localization.content,
           editable: editable,
         ),
         ChoiceButtonsCustomizationTab(
@@ -32,9 +32,9 @@ class ChoiceCustomizationPanel extends StatelessWidget {
               : context.localization.radioButton,
           editable: editable,
         ),
-        ChoiceContentCustomizationTab(
+        ChoiceCommonCustomizationTab(
           onChange: onChange,
-          title: context.localization.content,
+          title: context.localization.common,
           editable: editable,
         ),
       ],
