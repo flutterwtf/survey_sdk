@@ -14,6 +14,9 @@ class SliderQuestionPage extends StatefulWidget {
   /// slider, the initial value of the slider, and other properties.
   final SliderQuestionData data;
 
+  /// Contains the number that the user selected.
+  final QuestionAnswer<int>? answer;
+
   /// Callback that is called after pressing bottom button.
   final OnSendCallback onSend;
 
@@ -23,6 +26,7 @@ class SliderQuestionPage extends StatefulWidget {
   const SliderQuestionPage({
     required this.data,
     required this.onSend,
+    this.answer,
     this.onSecondaryButtonTap,
     super.key,
   });
@@ -32,12 +36,12 @@ class SliderQuestionPage extends StatefulWidget {
 }
 
 class _SliderQuestionPageState extends State<SliderQuestionPage> {
-  late double _answer;
+  late int _answer;
 
   @override
   void initState() {
     super.initState();
-    _answer = widget.data.initialValue.toDouble();
+    _answer = widget.answer?.answer ?? widget.data.initialValue;
   }
 
   @override
@@ -82,7 +86,7 @@ class _SliderQuestionPageState extends State<SliderQuestionPage> {
                     child: _QuestionSlider(
                       minValue: widget.data.minValue,
                       maxValue: widget.data.maxValue,
-                      initialValue: widget.data.initialValue,
+                      initialValue: _answer,
                       onChanged: (value) => setState(() => _answer = value),
                       theme: theme,
                       divisions: widget.data.divisions,
@@ -111,7 +115,7 @@ class _SliderQuestionPageState extends State<SliderQuestionPage> {
                           onPressed: () {
                             widget.onSend.call(
                               index: widget.data.index,
-                              answer: QuestionAnswer<double>(_answer),
+                              answer: QuestionAnswer<int>(_answer),
                             );
                           },
                           radius: theme.primaryButtonRadius,
@@ -146,7 +150,7 @@ class _QuestionSlider extends StatefulWidget {
   final int divisions;
 
   /// The callback function called when the value changes.
-  final ValueChanged<double> onChanged;
+  final ValueChanged<int> onChanged;
 
   /// The theme configuration for the slider question.
   final SliderQuestionTheme theme;
@@ -166,16 +170,11 @@ class _QuestionSlider extends StatefulWidget {
 
 class _QuestionSliderState extends State<_QuestionSlider> {
   /// The current value of the slider.
-  late double _value;
-
-  /// A flag indicating whether the slider only allows integer values.
-  late final bool _onlyInt;
+  late int _value;
 
   @override
   void initState() {
-    _value = widget.initialValue.toDouble();
-    _onlyInt = widget.initialValue.ceilToDouble() ==
-        widget.initialValue.floorToDouble();
+    _value = widget.initialValue;
     super.initState();
   }
 
@@ -184,10 +183,9 @@ class _QuestionSliderState extends State<_QuestionSlider> {
     final textStyle = context.theme.textTheme.bodyMedium?.copyWith(
       fontFamily: AppFonts.inter,
     );
-    _value = _value >= widget.minValue.toDouble() &&
-            _value <= widget.maxValue.toDouble()
+    _value = _value >= widget.minValue && _value <= widget.maxValue
         ? _value
-        : widget.initialValue.toDouble();
+        : widget.initialValue;
     return SliderTheme(
       data: SliderThemeData(
         activeTrackColor: widget.theme.activeColor,
@@ -202,10 +200,10 @@ class _QuestionSliderState extends State<_QuestionSlider> {
         children: [
           Slider(
             divisions: widget.divisions,
-            value: _value,
+            value: _value.toDouble(),
             onChanged: (newValue) => setState(() {
-              _value = _onlyInt ? newValue.roundToDouble() : newValue;
-              widget.onChanged(newValue);
+              _value = newValue.toInt();
+              widget.onChanged(_value);
             }),
             min: widget.minValue.toDouble(),
             max: widget.maxValue.toDouble(),

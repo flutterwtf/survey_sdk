@@ -20,6 +20,9 @@ class ChoiceQuestionPage extends StatefulWidget {
   /// This field contains the content for a page, including options.
   final ChoiceQuestionData data;
 
+  // Contains the options indices that the user selected.
+  final QuestionAnswer<List<int>>? answer;
+
   /// Callback that is called when [ChoiceQuestionData.isSkip] is true or at
   /// least one option has been selected.
   final OnSendCallback onSend;
@@ -30,6 +33,7 @@ class ChoiceQuestionPage extends StatefulWidget {
   const ChoiceQuestionPage({
     required this.data,
     required this.onSend,
+    this.answer,
     this.onSecondaryButtonTap,
     super.key,
   });
@@ -44,29 +48,30 @@ class _ChoiceQuestionPageState extends State<ChoiceQuestionPage>
   bool _canBeSend = false;
 
   /// Stores the indices of the selected options.
-  List<int> _selectedItems = List.empty();
+  List<int> _answer = List.empty();
 
   @override
   void initState() {
-    final selectedOptions = widget.data.selectedOptions;
+    final selectedOptions =
+        widget.answer?.answer ?? widget.data.selectedOptions;
     super.initState();
     if (selectedOptions != null) {
-      _selectedItems = selectedOptions;
+      _answer = selectedOptions;
       _canBeSend = true;
     }
   }
 
   void _onInputChanged(List<int>? selectedItems) {
     setState(() {
-      _selectedItems = selectedItems ?? List.empty();
+      _answer = selectedItems ?? List.empty();
     });
 
     if (!widget.data.isSkip) {
       final canBeSend = widget.data.ruleType.canBeSend(
             widget.data.ruleValue,
-            _selectedItems.length,
+            _answer.length,
           ) &&
-          _selectedItems.isNotEmpty;
+          _answer.isNotEmpty;
       setState(() => _canBeSend = canBeSend);
     }
   }
@@ -120,12 +125,11 @@ class _ChoiceQuestionPageState extends State<ChoiceQuestionPage>
                             onChanged: _onInputChanged,
                             activeColor: theme.activeColor,
                             inactiveColor: theme.inactiveColor,
-                            selectedOptions: List.of(_selectedItems),
+                            selectedOptions: List.of(_answer),
                           )
                         : _QuestionRadioButtons(
-                            selectedOption: _selectedItems.isEmpty
-                                ? null
-                                : _selectedItems.first,
+                            selectedOption:
+                                _answer.isEmpty ? null : _answer.first,
                             options: options,
                             onChanged: (selectedItem) => _onInputChanged(
                               selectedItem == null ? null : [selectedItem],
@@ -160,7 +164,7 @@ class _ChoiceQuestionPageState extends State<ChoiceQuestionPage>
                               widget.onSend.call(
                                 index: widget.data.index,
                                 answer: QuestionAnswer<List<int>>(
-                                  _selectedItems,
+                                  _answer,
                                 ),
                               );
                             },

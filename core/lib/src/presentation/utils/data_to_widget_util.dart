@@ -20,6 +20,7 @@ abstract class DataToWidgetUtil {
     required QuestionData data,
     required OnSendCallback onSend,
     required VoidCallback onGoNext,
+    QuestionAnswer? answer,
   }) {
     void sendAndGoNext({required int index, required QuestionAnswer answer}) {
       onSend(index: index, answer: answer);
@@ -30,16 +31,19 @@ abstract class DataToWidgetUtil {
       case SliderQuestionData:
         return SliderQuestionPage(
           data: data as SliderQuestionData,
+          answer: answer as QuestionAnswer<int>?,
           onSend: sendAndGoNext,
         );
       case ChoiceQuestionData:
         return ChoiceQuestionPage(
           data: data as ChoiceQuestionData,
+          answer: answer as QuestionAnswer<List<int>>?,
           onSend: sendAndGoNext,
         );
       case InputQuestionData:
         return InputQuestionPage(
           data: data as InputQuestionData,
+          answer: answer as QuestionAnswer<String>?,
           onSend: sendAndGoNext,
         );
       case IntroQuestionData:

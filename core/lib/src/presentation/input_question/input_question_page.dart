@@ -24,6 +24,9 @@ class InputQuestionPage extends StatefulWidget {
   /// Contains the content for a page.
   final InputQuestionData data;
 
+  // Contains string that the user enter.
+  final QuestionAnswer<String>? answer;
+
   /// Callback that is called after pressing bottom button if input data is
   /// valid or when the question can be skipped.
   final OnSendCallback onSend;
@@ -34,6 +37,7 @@ class InputQuestionPage extends StatefulWidget {
   const InputQuestionPage({
     required this.data,
     required this.onSend,
+    this.answer,
     this.onSecondaryButtonTap,
     super.key,
   });
@@ -44,14 +48,21 @@ class InputQuestionPage extends StatefulWidget {
 
 class _InputQuestionPageState extends State<InputQuestionPage> {
   DateTime _dateTime = DateTime.now();
-  String _input = '';
+
+  late String _answer;
 
   bool get _canBeSkippedDate =>
       widget.data.isSkip && _dateTime.toString().isEmpty;
 
-  bool get _canBeSkippedNumber => widget.data.isSkip && _input.isEmpty;
+  bool get _canBeSkippedNumber => widget.data.isSkip && _answer.isEmpty;
 
   bool get isDateType => widget.data.validator.type == InputType.date;
+
+  @override
+  void initState() {
+    super.initState();
+    _answer = widget.answer?.answer ?? '';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +81,7 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
     );
     final hintText = widget.data.hintText;
     final isValid = widget.data.validator.validate(
-      isDateType ? _dateTime.toString() : _input,
+      isDateType ? _dateTime.toString() : _answer,
     );
     return Scaffold(
       backgroundColor: theme.fill,
@@ -133,8 +144,9 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
                             border: border,
                             hintText: hintText ?? '',
                             onChanged: (input) =>
-                                setState(() => _input = input),
+                                setState(() => _answer = input),
                             theme: theme,
+                            initialValue: _answer,
                             validator: (text) => _canBeSkippedNumber
                                 ? null
                                 : widget.data.validator.validate(text),
@@ -172,7 +184,7 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
                                       )
                                     : widget.onSend.call(
                                         index: widget.data.index,
-                                        answer: QuestionAnswer<String>(_input),
+                                        answer: QuestionAnswer<String>(_answer),
                                       );
                               }
                             },
@@ -266,7 +278,7 @@ class _InputDate extends StatelessWidget {
 }
 
 /// Widget that represents an input field for entering a numeric value.
-class _InputNumber extends StatelessWidget {
+class _InputNumber extends StatefulWidget {
   /// The border for the input field.
   final OutlineInputBorder border;
 
@@ -282,41 +294,64 @@ class _InputNumber extends StatelessWidget {
   /// The validator function that validates the input value.
   final String? Function(String?) validator;
 
+  final String? initialValue;
+
   const _InputNumber({
     required this.border,
     required this.hintText,
     required this.onChanged,
     required this.theme,
     required this.validator,
+    required this.initialValue,
   });
+
+  @override
+  State<_InputNumber> createState() => _InputNumberState();
+}
+
+class _InputNumberState extends State<_InputNumber> {
+  late TextEditingController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = TextEditingController(text: widget.initialValue);
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return DecoratedBox(
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.all(Radius.circular(_radius)),
-        color: theme.inputFill,
+        color: widget.theme.inputFill,
       ),
       child: Form(
         child: TextFormField(
-          maxLines: theme.lines,
+          controller: _controller,
+          maxLines: widget.theme.lines,
           style: TextStyle(
-            color: theme.textColor,
-            fontSize: theme.textSize,
+            color: widget.theme.textColor,
+            fontSize: widget.theme.textSize,
           ),
           autovalidateMode: AutovalidateMode.onUserInteraction,
-          validator: validator,
-          onChanged: onChanged,
+          validator: widget.validator,
+          onChanged: widget.onChanged,
           decoration: InputDecoration(
-            fillColor: theme.inputFill,
-            hintText: hintText,
+            fillColor: widget.theme.inputFill,
+            hintText: widget.hintText,
             hintStyle: TextStyle(
-              color: theme.hintColor,
-              fontSize: theme.hintSize,
+              color: widget.theme.hintColor,
+              fontSize: widget.theme.hintSize,
             ),
-            enabledBorder: border,
-            focusedBorder: border,
-            border: border,
+            enabledBorder: widget.border,
+            focusedBorder: widget.border,
+            border: widget.border,
           ),
         ),
       ),
