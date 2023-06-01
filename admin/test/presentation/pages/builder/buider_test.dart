@@ -90,6 +90,33 @@ void main() {
       tester.binding.platformDispatcher.clearTextScaleFactorTestValue();
     });
 
+    testWidgets('Select `Choice` question', (tester) async {
+      tester.binding.platformDispatcher.textScaleFactorTestValue = 0.5;
+      await tester.pumpWidget(page);
+
+      await tester.tap(find.text('Choice'));
+      await tester.pumpAndSettle();
+      expect(find.text('Choice'), findsNWidgets(3));
+      expect(find.text('Common'), findsOneWidget);
+      expect(find.text('Content'), findsOneWidget);
+      expect(find.text('Radio button'), findsOneWidget);
+
+      tester.binding.platformDispatcher.clearTextScaleFactorTestValue();
+    });
+
+    testWidgets('Select `Slider` question', (tester) async {
+      tester.binding.platformDispatcher.textScaleFactorTestValue = 0.5;
+      await tester.pumpWidget(page);
+
+      await tester.tap(find.text('Slider'));
+      await tester.pumpAndSettle();
+      expect(find.text('Slider'), findsNWidgets(4));
+      expect(find.text('Common'), findsOneWidget);
+      expect(find.text('Content'), findsOneWidget);
+
+      tester.binding.platformDispatcher.clearTextScaleFactorTestValue();
+    });
+
     testWidgets('Switch tabs', (tester) async {
       tester.binding.platformDispatcher.textScaleFactorTestValue = 0.5;
 
