@@ -6,7 +6,6 @@ class QuestionAnswer<T> extends Equatable {
   final T answer;
 
   @override
-  // TODO(dev): implement props.
   List<Object?> get props => [answer];
 
   const QuestionAnswer(this.answer);

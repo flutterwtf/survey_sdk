@@ -14,6 +14,9 @@ class SliderQuestionPage extends StatefulWidget {
   /// slider, the initial value of the slider, and other properties.
   final SliderQuestionData data;
 
+  /// Contains the number that the user selected.
+  final QuestionAnswer<double>? answer;
+
   /// Callback that is called after pressing bottom button.
   final OnSendCallback onSend;
 
@@ -23,6 +26,7 @@ class SliderQuestionPage extends StatefulWidget {
   const SliderQuestionPage({
     required this.data,
     required this.onSend,
+    this.answer,
     this.onSecondaryButtonTap,
     super.key,
   });
@@ -37,7 +41,7 @@ class _SliderQuestionPageState extends State<SliderQuestionPage> {
   @override
   void initState() {
     super.initState();
-    _answer = widget.data.initialValue.toDouble();
+    _answer = widget.answer?.answer ?? widget.data.initialValue.toDouble();
   }
 
   @override
@@ -82,7 +86,7 @@ class _SliderQuestionPageState extends State<SliderQuestionPage> {
                     child: _QuestionSlider(
                       minValue: widget.data.minValue,
                       maxValue: widget.data.maxValue,
-                      initialValue: widget.data.initialValue,
+                      initialValue: _answer,
                       onChanged: (value) => setState(() => _answer = value),
                       theme: theme,
                       divisions: widget.data.divisions,
@@ -140,7 +144,7 @@ class _QuestionSlider extends StatefulWidget {
   final int maxValue;
 
   /// Initial value of the slider.
-  final int initialValue;
+  final double initialValue;
 
   /// Number of divisions for the slider.
   final int divisions;
@@ -173,7 +177,7 @@ class _QuestionSliderState extends State<_QuestionSlider> {
 
   @override
   void initState() {
-    _value = widget.initialValue.toDouble();
+    _value = widget.initialValue;
     _onlyInt = widget.initialValue.ceilToDouble() ==
         widget.initialValue.floorToDouble();
     super.initState();
@@ -187,7 +191,7 @@ class _QuestionSliderState extends State<_QuestionSlider> {
     _value = _value >= widget.minValue.toDouble() &&
             _value <= widget.maxValue.toDouble()
         ? _value
-        : widget.initialValue.toDouble();
+        : widget.initialValue;
     return SliderTheme(
       data: SliderThemeData(
         activeTrackColor: widget.theme.activeColor,
