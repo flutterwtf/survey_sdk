@@ -31,7 +31,7 @@ abstract class DataToWidgetUtil {
       case SliderQuestionData:
         return SliderQuestionPage(
           data: data as SliderQuestionData,
-          answer: answer as QuestionAnswer<int>?,
+          answer: answer as QuestionAnswer<double>?,
           onSend: sendAndGoNext,
         );
       case ChoiceQuestionData:
