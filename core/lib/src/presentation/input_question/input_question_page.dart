@@ -25,7 +25,7 @@ class InputQuestionPage extends StatefulWidget {
   final InputQuestionData data;
 
   // Contains string that the user enter.
-  final QuestionAnswer<String>? answer;
+  final QuestionAnswer? answer;
 
   /// Callback that is called after pressing bottom button if input data is
   /// valid or when the question can be skipped.
@@ -48,20 +48,26 @@ class InputQuestionPage extends StatefulWidget {
 
 class _InputQuestionPageState extends State<InputQuestionPage> {
   DateTime _dateTime = DateTime.now();
+  String _input = '';
 
-  late String _answer;
+  //DateTime? _dateAnswer; 
 
   bool get _canBeSkippedDate =>
       widget.data.isSkip && _dateTime.toString().isEmpty;
 
-  bool get _canBeSkippedNumber => widget.data.isSkip && _answer.isEmpty;
+  bool get _canBeSkippedNumber => widget.data.isSkip && _input.isEmpty;
 
   bool get isDateType => widget.data.validator.type == InputType.date;
 
   @override
   void initState() {
     super.initState();
-    _answer = widget.answer?.answer ?? '';
+
+    if (widget.answer is QuestionAnswer<String>) {
+      _input = widget.answer!.answer;
+    } else if (widget.answer is QuestionAnswer<DateTime>) {
+      _dateTime = widget.answer!.answer;
+    }
   }
 
   @override
@@ -81,7 +87,7 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
     );
     final hintText = widget.data.hintText;
     final isValid = widget.data.validator.validate(
-      isDateType ? _dateTime.toString() : _answer,
+      isDateType ? _dateTime.toString() : _input,
     );
     return Scaffold(
       backgroundColor: theme.fill,
@@ -95,7 +101,7 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
                 right: AppDimensions.margin2XL,
                 top: AppDimensions.margin3XL,
                 bottom: AppDimensions.marginXL,
-              ),
+              ),  
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -127,6 +133,7 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
                         ? _InputDate(
                             border: border,
                             dateTime: _dateTime,
+                            hasInitialValue: widget.answer != null,
                             hintText: hintText ?? '',
                             onChanged: (value) {
                               if (value != null) {
@@ -144,9 +151,9 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
                             border: border,
                             hintText: hintText ?? '',
                             onChanged: (input) =>
-                                setState(() => _answer = input),
+                                setState(() => _input = input),
                             theme: theme,
-                            initialValue: _answer,
+                            initialValue: _input,
                             validator: (text) => _canBeSkippedNumber
                                 ? null
                                 : widget.data.validator.validate(text),
@@ -184,7 +191,7 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
                                       )
                                     : widget.onSend.call(
                                         index: widget.data.index,
-                                        answer: QuestionAnswer<String>(_answer),
+                                        answer: QuestionAnswer<String>(_input),
                                       );
                               }
                             },
@@ -218,6 +225,9 @@ class _InputDate extends StatelessWidget {
   /// The selected date value.
   final DateTime dateTime;
 
+  /// Whether this Input Data has initial date.
+  final bool hasInitialValue;
+
   /// The hint text displayed in the input field.
   final String hintText;
 
@@ -233,6 +243,7 @@ class _InputDate extends StatelessWidget {
   const _InputDate({
     required this.border,
     required this.dateTime,
+    required this.hasInitialValue,
     required this.hintText,
     required this.onChanged,
     required this.theme,
@@ -258,6 +269,7 @@ class _InputDate extends StatelessWidget {
         border: border,
       ),
       format: DateFormat('dd.MM.yyyy'),
+      initialValue: hasInitialValue ? dateTime : null,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       validator: validator,
       onChanged: onChanged,

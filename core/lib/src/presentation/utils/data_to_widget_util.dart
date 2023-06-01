@@ -43,7 +43,7 @@ abstract class DataToWidgetUtil {
       case InputQuestionData:
         return InputQuestionPage(
           data: data as InputQuestionData,
-          answer: answer as QuestionAnswer<String>?,
+          answer: answer,
           onSend: sendAndGoNext,
         );
       case IntroQuestionData:
