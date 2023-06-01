@@ -191,7 +191,7 @@ class _QuestionSliderState extends State<_QuestionSlider> {
     _value = _value >= widget.minValue.toDouble() &&
             _value <= widget.maxValue.toDouble()
         ? _value
-        : widget.initialValue.toDouble();
+        : widget.initialValue;
     return Theme(
       data: ThemeData(useMaterial3: true),
       child: SliderTheme(
