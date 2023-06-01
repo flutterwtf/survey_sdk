@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:survey_admin/presentation/utils/utils.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
 
 class DivisionsCustomizationItem extends StatelessWidget {
@@ -16,13 +15,12 @@ class DivisionsCustomizationItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const lengthInputFormatter = 3;
-    return CustomizationTextField(
+    return CustomizationTextField.int(
       initialValue: initialValue.toString(),
       inputFormatters: [
-        FilteringTextInputFormatter.digitsOnly,
         LengthLimitingTextInputFormatter(lengthInputFormatter),
       ],
-      onChanged: (value) => SizeHandler.onNumberChanged(value, onChanged),
+      onChanged: (value) => onChanged(int.parse(value!)),
     );
   }
 }

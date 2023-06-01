@@ -122,15 +122,14 @@ class _MinMaxInputField extends StatelessWidget {
           ),
         ),
         Expanded(
-          child: CustomizationTextField(
+          child: CustomizationTextField.int(
             initialValue: initialValue.toString(),
-            inputFormatters: [
-              FilteringTextInputFormatter.digitsOnly,
-              LengthLimitingTextInputFormatter(lengthInputFormatter),
-            ],
             autovalidateMode: AutovalidateMode.onUserInteraction,
             validator: _validator,
-            onChanged: (value) => SizeHandler.onNumberChanged(value, onChanged),
+            inputFormatters: [
+              LengthLimitingTextInputFormatter(lengthInputFormatter),
+            ],
+            onChanged: (value) => onChanged(int.parse(value!)),
           ),
         ),
       ],

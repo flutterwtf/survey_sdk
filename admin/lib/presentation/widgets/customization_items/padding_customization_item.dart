@@ -27,30 +27,23 @@ class PaddingCustomizationItem extends StatelessWidget {
       children: [
         const _PaddingItem(isHorizontal: true),
         Flexible(
-          child: CustomizationTextField(
+          child: CustomizationTextField.int(
             initialValue: initialHorizontalPadding.toString(),
             inputFormatters: [
-              FilteringTextInputFormatter.digitsOnly,
               LengthLimitingTextInputFormatter(lengthInputFormatter),
             ],
-            onChanged: (value) => SizeHandler.onSizeChanged(
-              value,
-              onHorizontalPaddingChange,
-            ),
+            onChanged: (value) =>
+                onHorizontalPaddingChange(double.parse(value!)),
           ),
         ),
         const _PaddingItem(isHorizontal: false),
         Flexible(
-          child: CustomizationTextField(
+          child: CustomizationTextField.int(
             initialValue: initialVerticalPadding.toString(),
             inputFormatters: [
-              FilteringTextInputFormatter.digitsOnly,
               LengthLimitingTextInputFormatter(lengthInputFormatter),
             ],
-            onChanged: (value) => SizeHandler.onSizeChanged(
-              value,
-              onVerticalPaddingChange,
-            ),
+            onChanged: (value) => onVerticalPaddingChange(double.parse(value!)),
           ),
         ),
       ],

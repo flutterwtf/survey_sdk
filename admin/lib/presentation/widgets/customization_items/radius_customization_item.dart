@@ -22,16 +22,12 @@ class RadiusCustomizationItem extends StatelessWidget {
         SvgPicture.asset(AppAssets.arcIcon),
         const SizedBox(width: AppDimensions.margin2XS),
         Expanded(
-          child: CustomizationTextField(
+          child: CustomizationTextField.int(
             initialValue: initialValue.toString(),
             inputFormatters: [
-              FilteringTextInputFormatter.digitsOnly,
               LengthLimitingTextInputFormatter(lengthInputFormatter),
             ],
-            onChanged: (value) => SizeHandler.onSizeChanged(
-              value,
-              onRadiusChanged,
-            ),
+            onChanged: (value) => onRadiusChanged(double.parse(value!)),
           ),
         ),
       ],
