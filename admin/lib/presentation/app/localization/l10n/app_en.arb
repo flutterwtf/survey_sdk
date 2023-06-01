@@ -29,6 +29,7 @@
   "inactive": "Inactive",
   "input": "Input",
   "inputType": "Input type",
+  "inputHintText": "Enter answer here",
   "intro": "Intro",
   "lines": "Lines",
   "max": "max",
