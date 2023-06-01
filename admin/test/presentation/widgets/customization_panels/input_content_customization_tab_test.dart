@@ -34,6 +34,7 @@ void main() {
           expect(find.text('Subtitle'), findsOneWidget);
           expect(find.text('Hint'), findsOneWidget);
           expect(find.text('Primary button'), findsOneWidget);
+          expect(find.text('Secondary button'), findsOneWidget);
           expect(
             find.byType(CustomizationMultilineTextField),
             findsNWidgets(4),

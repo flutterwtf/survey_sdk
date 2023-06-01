@@ -107,7 +107,11 @@ void main() {
           findsOneWidget,
         );
         expect(
-          find.widgetWithText(CustomizationItemsContainer, 'Divisions'),
+          find.widgetWithText(CustomizationItemsContainer, 'Primary button'),
+          findsOneWidget,
+        );
+        expect(
+          find.widgetWithText(CustomizationItemsContainer, 'Secondary button'),
           findsOneWidget,
         );
       },

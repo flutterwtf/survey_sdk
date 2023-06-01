@@ -25,6 +25,8 @@ void main() {
       expect(find.text('Subtitle'), findsOneWidget);
       expect(find.text('Value'), findsOneWidget);
       expect(find.text('Divisions'), findsOneWidget);
+      expect(find.text('Primary button'), findsOneWidget);
+      expect(find.text('Secondary button'), findsOneWidget);
     });
 
     testWidgets('Input text for Title', (tester) async {

@@ -77,6 +77,20 @@ void main() {
       tester.binding.platformDispatcher.clearTextScaleFactorTestValue();
     });
 
+    testWidgets('Switch to Preview tab', (tester) async {
+      tester.binding.platformDispatcher.textScaleFactorTestValue = 0.5;
+      await tester.pumpWidget(page);
+
+      await tester.tap(find.text('Preview'));
+      await tester.pumpAndSettle();
+
+      expect(find.text('NEXT'), findsOneWidget);
+      expect(find.text('Content'), findsNothing);
+      expect(find.text('Common'), findsNothing);
+
+      tester.binding.platformDispatcher.clearTextScaleFactorTestValue();
+    });
+
     testWidgets('Select `Input` question', (tester) async {
       tester.binding.platformDispatcher.textScaleFactorTestValue = 0.5;
       await tester.pumpWidget(page);
