@@ -67,6 +67,17 @@ class _BuilderPageState extends State<BuilderPage> {
     }
   }
 
+  int? _selectedIndex(BuilderState state) {
+    if (state is EditQuestionBuilderState) {
+      return state.selectedIndex - 1;
+    } else if (state is PreviewQuestionBuilderState) {
+      final index = state.selectedQuestion?.index;
+      return index != null ? index - 1 : null;
+    } else {
+      return null;
+    }
+  }
+
   @override
   void dispose() {
     _surveyController.dispose();
@@ -115,9 +126,7 @@ class _BuilderPageState extends State<BuilderPage> {
                 onAdd: cubit.addQuestionData,
                 questions: cubit.state.surveyData.questions,
                 onUpdate: cubit.updateQuestions,
-                selectedIndex: state is EditQuestionBuilderState
-                    ? state.selectedIndex - 1
-                    : 1,
+                selectedIndex: _selectedIndex(state),
               ),
               Expanded(
                 child: PhoneView(
