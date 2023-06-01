@@ -6,9 +6,7 @@ import 'package:survey_admin/presentation/pages/builder/builder_cubit.dart';
 import 'package:survey_admin/presentation/pages/builder/builder_state.dart';
 import 'package:survey_admin/presentation/pages/new_question_page/new_question_tabs.dart';
 import 'package:survey_admin/presentation/utils/utils.dart';
-import 'package:survey_admin/presentation/widgets/builder_page/editor_bar.dart';
 import 'package:survey_admin/presentation/widgets/vector_image.dart';
-import 'package:survey_sdk/survey_sdk.dart';
 
 class NewQuestionPage extends StatefulWidget {
   const NewQuestionPage({super.key});
@@ -33,19 +31,6 @@ class _NewQuestionPageState extends State<NewQuestionPage> {
       },
       isSelected: _selectedTab == tab,
     );
-  }
-
-  QuestionData _selectCommon(CommonTheme theme, NewQuestionTabs tab) {
-    switch (tab) {
-      case NewQuestionTabs.intro:
-        return theme.intro;
-      case NewQuestionTabs.choice:
-        return theme.choice;
-      case NewQuestionTabs.slider:
-        return theme.slider;
-      case NewQuestionTabs.customInput:
-        return theme.input;
-    }
   }
 
   @override
@@ -82,13 +67,6 @@ class _NewQuestionPageState extends State<NewQuestionPage> {
                   _QuestionOptionsListView(
                     options: _selectedTab.options,
                     selectedOption: _selectedOption ?? '',
-                  ),
-                  EditorBar(
-                    onChange: _cubit.updateCommon,
-                    editableQuestion: _selectCommon(
-                      state.surveyData.commonTheme,
-                      _selectedTab,
-                    ),
                   ),
                 ],
               ),
