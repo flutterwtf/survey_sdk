@@ -94,6 +94,11 @@ class _NewQuestionPageState extends State<NewQuestionPage> {
               ),
             ),
             persistentFooterButtons: [
+              _CancelButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
               _AddButton(
                 onPressed: () {
                   Navigator.pop(context, _selectedTab.data);
@@ -255,10 +260,45 @@ class _AddButton extends StatelessWidget {
         ),
         child: Center(
           child: Text(
-            'ADD',
+            context.localization.add,
             style: context.theme.textTheme.labelLarge?.copyWith(
               fontFamily: AppFonts.karla,
               color: AppColors.white,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _CancelButton extends StatelessWidget {
+  final VoidCallback onPressed;
+
+  const _CancelButton({
+    required this.onPressed,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onPressed,
+      child: Container(
+        width: AppDimensions.addButtonWidth,
+        height: AppDimensions.addButtonHeight,
+        decoration: const BoxDecoration(
+          color: AppColors.white,
+          border: Border.fromBorderSide(BorderSide()),
+          borderRadius: BorderRadius.all(
+            Radius.circular(AppDimensions.circularRadiusXS),
+          ),
+        ),
+        child: Center(
+          child: Text(
+            context.localization.cancel,
+            style: context.theme.textTheme.labelLarge?.copyWith(
+              fontFamily: AppFonts.karla,
+              color: AppColors.black,
             ),
           ),
         ),

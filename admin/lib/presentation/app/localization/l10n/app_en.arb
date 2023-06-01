@@ -1,9 +1,11 @@
 {
   "active": "Active",
+  "add": "ADD",
   "border": "Border",
   "button": "Button",
   "checkBox":"Check box",
   "choice":"Choice",
+  "cancel": "Cancel",
   "common": "Common",
   "content": "Content",
   "copy": "COPY",
