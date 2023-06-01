@@ -1,9 +1,13 @@
 import 'package:equatable/equatable.dart';
-import 'package:survey_sdk/src/data/mappers/question_types/choice_question_data_mapper.dart';
-import 'package:survey_sdk/src/data/mappers/question_types/input_question_data_mapper.dart';
-import 'package:survey_sdk/src/data/mappers/question_types/intro_question_data_mapper.dart';
-import 'package:survey_sdk/src/data/mappers/question_types/slider_question_data_mapper.dart';
+import 'package:survey_sdk/src/data/mappers/question_types/choice_question_data/choice_question_data_mapper_factory.dart';
+import 'package:survey_sdk/src/data/mappers/question_types/input_question_data/input_question_data_mapper_factory.dart';
+import 'package:survey_sdk/src/data/mappers/question_types/intro_question_data/intro_question_data_mapper_factory.dart';
+import 'package:survey_sdk/src/data/mappers/question_types/slider_question_data/slider_question_data_mapper_factory.dart';
 import 'package:survey_sdk/src/domain/entities/constants/question_types.dart';
+
+abstract class _Fields {
+  static const String type = 'type';
+}
 
 /// The base class for creating specific types of question data classes.
 ///
@@ -68,16 +72,24 @@ abstract class QuestionData<T> extends Equatable {
   ///
   /// If the "type" field does not match any predefined question types, an
   /// [UnimplementedError] is thrown.
-  static QuestionData fromType(Map<String, dynamic> json) {
-    switch (json['type']) {
+  static QuestionData fromType(Map<String, dynamic> json, int schemeVersion) {
+    switch (json[_Fields.type]) {
       case QuestionTypes.slider:
-        return SliderQuestionDataMapper().fromJson(json);
+        return SliderQuestionDataMapperFactory.getMapper(
+          schemeVersion,
+        ).fromJson(json);
       case QuestionTypes.intro:
-        return IntroQuestionDataMapper().fromJson(json);
+        return IntroQuestionDataMapperFactory.getMapper(
+          schemeVersion,
+        ).fromJson(json);
       case QuestionTypes.input:
-        return InputQuestionDataMapper().fromJson(json);
+        return InputQuestionDataMapperFactory.getMapper(
+          schemeVersion,
+        ).fromJson(json);
       case QuestionTypes.choice:
-        return ChoiceQuestionDataMapper().fromJson(json);
+        return ChoiceQuestionDataMapperFactory.getMapper(
+          schemeVersion,
+        ).fromJson(json);
       default:
         throw UnimplementedError();
     }

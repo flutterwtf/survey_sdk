@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:survey_sdk/src/data/mappers/themes/question_theme_mapper.dart';
+import 'package:survey_sdk/src/data/mappers/themes/json_version/question_theme_mapper_json_1.dart';
 import 'package:survey_sdk/survey_sdk.dart';
 
 abstract class _Fields {
@@ -20,8 +20,8 @@ abstract class _Fields {
   static const String secondaryButtonRadius = 'secondaryButtonRadius';
 }
 
-class ChoiceQuestionThemeMapper
-    extends QuestionThemeMapper<ChoiceQuestionTheme> {
+class ChoiceQuestionThemeMapperVer1
+    extends QuestionThemeMapperJson1<ChoiceQuestionTheme> {
   @override
   ChoiceQuestionTheme fromJson(Map<String, dynamic> json) {
     return ChoiceQuestionTheme(
@@ -29,17 +29,21 @@ class ChoiceQuestionThemeMapper
       inactiveColor: Color(json[_Fields.inactiveColor]),
       fill: Color(json[_Fields.fill]),
       titleColor: Color(json[_Fields.titleColor]),
-      titleSize: json[_Fields.titleSize],
+      titleSize: (json[_Fields.titleSize] as num).toDouble(),
       subtitleColor: Color(json[_Fields.subtitleColor]),
-      subtitleSize: json[_Fields.subtitleSize],
+      subtitleSize: (json[_Fields.subtitleSize] as num).toDouble(),
       primaryButtonFill: Color(json[_Fields.primaryButtonFill]),
       primaryButtonTextColor: Color(json[_Fields.primaryButtonTextColor]),
-      primaryButtonTextSize: json[_Fields.primaryButtonTextSize],
-      primaryButtonRadius: json[_Fields.primaryButtonRadius],
+      primaryButtonTextSize:
+          (json[_Fields.primaryButtonTextSize] as num).toDouble(),
+      primaryButtonRadius:
+          (json[_Fields.primaryButtonRadius] as num).toDouble(),
       secondaryButtonFill: Color(json[_Fields.secondaryButtonFill]),
       secondaryButtonTextColor: Color(json[_Fields.secondaryButtonTextColor]),
-      secondaryButtonTextSize: json[_Fields.secondaryButtonTextSize],
-      secondaryButtonRadius: json[_Fields.secondaryButtonRadius],
+      secondaryButtonTextSize:
+          (json[_Fields.secondaryButtonTextSize] as num).toDouble(),
+      secondaryButtonRadius:
+          (json[_Fields.secondaryButtonRadius] as num).toDouble(),
     );
   }
 

@@ -16,27 +16,40 @@ typedef OnSendCallback = void Function({
 });
 
 abstract class DataToWidgetUtil {
-  static Widget createWidget(QuestionData data, OnSendCallback onSend) {
+  static Widget createWidget({
+    required QuestionData data,
+    required OnSendCallback onSend,
+    required VoidCallback onGoNext,
+    QuestionAnswer? answer,
+  }) {
+    void sendAndGoNext({required int index, required QuestionAnswer answer}) {
+      onSend(index: index, answer: answer);
+      onGoNext();
+    }
+
     switch (data.runtimeType) {
       case SliderQuestionData:
         return SliderQuestionPage(
           data: data as SliderQuestionData,
-          onSend: onSend,
+          answer: answer as QuestionAnswer<double>?,
+          onSend: sendAndGoNext,
         );
       case ChoiceQuestionData:
         return ChoiceQuestionPage(
           data: data as ChoiceQuestionData,
-          onSend: onSend,
+          answer: answer as QuestionAnswer<List<int>>?,
+          onSend: sendAndGoNext,
         );
       case InputQuestionData:
         return InputQuestionPage(
           data: data as InputQuestionData,
-          onSend: onSend,
+          answer: answer,
+          onSend: sendAndGoNext,
         );
       case IntroQuestionData:
         return IntroQuestionPage(
           data: data as IntroQuestionData,
-          onSend: onSend,
+          onMainButtonTap: onGoNext,
         );
       default:
         throw Exception('Unimplemented error');

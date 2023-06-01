@@ -22,41 +22,54 @@ void main() {
 
   group('createWidget method', () {
     test('Call with SliderQuestionData}', () {
-      final widget = DataToWidgetUtil.createWidget(mockSliderData, _mockOnSend);
+      final widget = DataToWidgetUtil.createWidget(
+        data: mockSliderData,
+        onSend: _mockOnSend,
+        onGoNext: () {},
+      );
       expect(widget.runtimeType, SliderQuestionPage);
       expect((widget as SliderQuestionPage).data, mockSliderData);
-      expect(widget.onSend, _mockOnSend);
     });
 
     test('Call with ChoiceQuestionData', () {
-      final widget = DataToWidgetUtil.createWidget(mockChoiceData, _mockOnSend);
+      final widget = DataToWidgetUtil.createWidget(
+        data: mockChoiceData,
+        onSend: _mockOnSend,
+        onGoNext: () {},
+      );
 
       expect(widget.runtimeType, ChoiceQuestionPage);
       expect((widget as ChoiceQuestionPage).data, mockChoiceData);
-      expect(widget.onSend, _mockOnSend);
     });
 
     test('Call with InputQuestionData', () {
-      final widget = DataToWidgetUtil.createWidget(mockInputData, _mockOnSend);
+      final widget = DataToWidgetUtil.createWidget(
+        data: mockInputData,
+        onSend: _mockOnSend,
+        onGoNext: () {},
+      );
 
       expect(widget.runtimeType, InputQuestionPage);
       expect((widget as InputQuestionPage).data, mockInputData);
-      expect(widget.onSend, _mockOnSend);
     });
 
     test('Call with IntroQuestionData', () {
-      final widget = DataToWidgetUtil.createWidget(mockIntroData, _mockOnSend);
+      final widget = DataToWidgetUtil.createWidget(
+        data: mockIntroData,
+        onSend: _mockOnSend,
+        onGoNext: () {},
+      );
 
       expect(widget.runtimeType, IntroQuestionPage);
       expect((widget as IntroQuestionPage).data, mockIntroData);
-      expect(widget.onSend, _mockOnSend);
     });
 
     test('Call with bad QuestionData', () {
       expect(
         () => DataToWidgetUtil.createWidget(
-          const _BadQuestionData(),
-          _mockOnSend,
+          data: const _BadQuestionData(),
+          onSend: _mockOnSend,
+          onGoNext: () {},
         ),
         throwsException,
       );

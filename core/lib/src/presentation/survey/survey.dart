@@ -130,8 +130,10 @@ class _SurveyState extends State<Survey> {
                 children: data.questions
                     .map<Widget>(
                       (question) => DataToWidgetUtil.createWidget(
-                        question,
-                        _cubit.saveAnswer,
+                        data: question,
+                        answer: state.answers[question.index],
+                        onSend: _cubit.saveAnswer,
+                        onGoNext: _surveyController.onNext,
                       ),
                     )
                     .toList(),
