@@ -50,16 +50,16 @@ void main() {
       expect(find.text('Survey'), findsOneWidget);
       expect(find.text('Common'), findsOneWidget);
       expect(find.text('Content'), findsOneWidget);
-      expect(find.text('Intro'), findsNWidgets(2));
+      expect(find.text('Intro'), findsNWidgets(3));
       expect(find.text('Input'), findsOneWidget);
       expect(find.text('Choice'), findsOneWidget);
-      expect(find.text('NEXT'), findsOneWidget);
+      expect(find.text('NEXT'), findsNWidgets(2));
       expect(find.text('Common'), findsOneWidget);
       expect(find.text('Content'), findsOneWidget);
-      expect(find.text('Fill'), findsOneWidget);
       expect(find.text('Title'), findsOneWidget);
       expect(find.text('Subtitle'), findsOneWidget);
       expect(find.text('Primary button'), findsOneWidget);
+      expect(find.text('Secondary button'), findsOneWidget);
       tester.binding.platformDispatcher.clearTextScaleFactorTestValue();
     });
 
@@ -85,7 +85,7 @@ void main() {
       await tester.pumpAndSettle();
       expect(find.text('Common'), findsOneWidget);
       expect(find.text('Content'), findsOneWidget);
-      expect(find.text('Input'), findsNWidgets(3));
+      expect(find.text('Input'), findsNWidgets(4));
 
       tester.binding.platformDispatcher.clearTextScaleFactorTestValue();
     });
