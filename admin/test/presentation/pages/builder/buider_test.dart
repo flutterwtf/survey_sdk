@@ -132,6 +132,20 @@ void main() {
 
       tester.binding.platformDispatcher.clearTextScaleFactorTestValue();
     });
+
+    testWidgets('Delete survey', (tester) async {
+      tester.binding.platformDispatcher.textScaleFactorTestValue = 0.5;
+
+      await tester.pumpWidget(page);
+
+      await tester.longPress(find.text('Intro').first);
+      await tester.tap(find.text('Delete'));
+      await tester.pumpAndSettle();
+
+      expect(find.text('Intro'), findsNothing);
+
+      tester.binding.platformDispatcher.clearTextScaleFactorTestValue();
+    });
   });
 }
 
@@ -140,20 +154,21 @@ void _inject(GetIt getIt) {
     ..reset()
     ..registerFactory<FilesystemDataSource>(
       WebFilesystemDataSourceImpl.new,
-    )..registerFactory<SessionStorageDataSource>(
-    WebSessionStorageDataSource.new,
-  )
+    )
+    ..registerFactory<SessionStorageDataSource>(
+      WebSessionStorageDataSource.new,
+    )
     ..registerSingleton<FileSystemRepository>(
       FileSystemRepositoryImpl(getIt.get()),
-    )..registerSingleton<SessionStorageRepository>(
-    SessionStorageRepositoryImpl(getIt.get()),
-  )
-    ..registerFactory<NewQuestionCubit>(NewQuestionCubit.new)..registerFactory<
-      BuilderCubit>(
-        () =>
-        BuilderCubit(
-          getIt.get(),
-          getIt.get(),
-        ),
-  );
+    )
+    ..registerSingleton<SessionStorageRepository>(
+      SessionStorageRepositoryImpl(getIt.get()),
+    )
+    ..registerFactory<NewQuestionCubit>(NewQuestionCubit.new)
+    ..registerFactory<BuilderCubit>(
+      () => BuilderCubit(
+        getIt.get(),
+        getIt.get(),
+      ),
+    );
 }
