@@ -61,10 +61,12 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
   void initState() {
     super.initState();
 
-    if (widget.answer is QuestionAnswer<String>) {
-      _input = widget.answer!.answer;
-    } else if (widget.answer is QuestionAnswer<DateTime>) {
-      _dateTime = widget.answer!.answer;
+    final questionAnswer = widget.answer;
+
+    if (questionAnswer is QuestionAnswer<String>) {
+      _input = questionAnswer.answer;
+    } else if (questionAnswer is QuestionAnswer<DateTime>) {
+      _dateTime = questionAnswer.answer;
     }
   }
 
@@ -99,7 +101,7 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
                 right: AppDimensions.margin2XL,
                 top: AppDimensions.margin3XL,
                 bottom: AppDimensions.marginXL,
-              ),  
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

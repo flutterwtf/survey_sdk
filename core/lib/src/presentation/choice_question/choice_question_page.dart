@@ -163,9 +163,7 @@ class _ChoiceQuestionPageState extends State<ChoiceQuestionPage>
                             onPressed: () {
                               widget.onSend.call(
                                 index: widget.data.index,
-                                answer: QuestionAnswer<List<int>>(
-                                  _answer,
-                                ),
+                                answer: QuestionAnswer<List<int>>(_answer),
                               );
                             },
                             isEnabled: widget.data.isSkip || _canBeSend,
