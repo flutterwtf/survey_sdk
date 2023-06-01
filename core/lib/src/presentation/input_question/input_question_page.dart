@@ -50,8 +50,6 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
   DateTime _dateTime = DateTime.now();
   String _input = '';
 
-  //DateTime? _dateAnswer; 
-
   bool get _canBeSkippedDate =>
       widget.data.isSkip && _dateTime.toString().isEmpty;
 
