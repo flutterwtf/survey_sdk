@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
@@ -135,6 +136,13 @@ void main() {
 
       await tester.enterText(find.byType(CustomizationTextField).at(2), '99');
       expect(data.minValue, 99);
+    });
+
+    testWidgets('Unlock Secondary button', (tester) async {
+      await tester.pumpWidget(page);
+      await tester.tap(find.byType(InkWell));
+      await tester.pump();
+      expect(data.isSkip, isTrue);
     });
   });
 }
