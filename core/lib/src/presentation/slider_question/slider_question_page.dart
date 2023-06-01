@@ -188,49 +188,54 @@ class _QuestionSliderState extends State<_QuestionSlider> {
             _value <= widget.maxValue.toDouble()
         ? _value
         : widget.initialValue.toDouble();
-    return SliderTheme(
-      data: SliderThemeData(
-        activeTrackColor: widget.theme.activeColor,
-        inactiveTrackColor: widget.theme.inactiveColor,
-        thumbColor: widget.theme.thumbColor,
-        trackHeight: widget.theme.thickness,
-        thumbShape: RoundSliderThumbShape(
-          enabledThumbRadius: widget.theme.thumbRadius,
+    return Theme(
+      data: ThemeData(useMaterial3: true),
+      child: SliderTheme(
+        data: SliderThemeData(
+          activeTrackColor: widget.theme.activeColor,
+          inactiveTrackColor: widget.theme.inactiveColor,
+          thumbColor: widget.theme.thumbColor,
+          trackHeight: widget.theme.thickness,
+          thumbShape: RoundSliderThumbShape(
+            enabledThumbRadius: widget.theme.thumbRadius,
+          ),
+          valueIndicatorColor: widget.theme.activeColor,
         ),
-      ),
-      child: Column(
-        children: [
-          Slider(
-            divisions: widget.divisions,
-            value: _value,
-            onChanged: (newValue) => setState(() {
-              _value = _onlyInt ? newValue.roundToDouble() : newValue;
-              widget.onChanged(newValue);
-            }),
-            min: widget.minValue.toDouble(),
-            max: widget.maxValue.toDouble(),
-          ),
-          const SizedBox(height: AppDimensions.margin2XS),
-          Row(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: AppDimensions.sizeM),
-                child: Text(
-                  widget.minValue.toString(),
-                  style: textStyle,
+        child: Column(
+          children: [
+            Slider(
+              divisions: widget.divisions,
+              value: _value,
+              onChanged: (newValue) => setState(() {
+                _value = _onlyInt ? newValue.roundToDouble() : newValue;
+                widget.onChanged(newValue);
+              }),
+              label: _value.round().toString(),
+              min: widget.minValue.toDouble(),
+              max: widget.maxValue.toDouble(),
+            ),
+            const SizedBox(height: AppDimensions.margin2XS),
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: AppDimensions.sizeM),
+                  child: Text(
+                    widget.minValue.toString(),
+                    style: textStyle,
+                  ),
                 ),
-              ),
-              const Spacer(),
-              Padding(
-                padding: const EdgeInsets.only(right: AppDimensions.sizeM),
-                child: Text(
-                  widget.maxValue.toString(),
-                  style: textStyle,
+                const Spacer(),
+                Padding(
+                  padding: const EdgeInsets.only(right: AppDimensions.sizeM),
+                  child: Text(
+                    widget.maxValue.toString(),
+                    style: textStyle,
+                  ),
                 ),
-              ),
-            ],
-          ),
-        ],
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
