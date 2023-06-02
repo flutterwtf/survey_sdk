@@ -41,7 +41,6 @@ class _MultilineSwitchState extends State<MultilineSwitch> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO(dev): It is not smooth enough.
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

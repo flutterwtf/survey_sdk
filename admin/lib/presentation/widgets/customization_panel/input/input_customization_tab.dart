@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:survey_admin/presentation/app/localization/app_localizations_ext.dart';
+import 'package:survey_admin/presentation/widgets/base/customization_tab.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/color_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/color_thickness_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
@@ -9,7 +10,6 @@ import 'package:survey_admin/presentation/widgets/customization_items/multiline_
 import 'package:survey_admin/presentation/widgets/customization_items/padding_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/text_style_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/constants/customization_panel_dimensions.dart';
-import 'package:survey_admin/presentation/widgets/customization_panel/customization_tab.dart';
 import 'package:survey_sdk/survey_sdk.dart';
 
 class InputCustomizationTab extends CustomizationTab {

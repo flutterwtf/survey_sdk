@@ -172,7 +172,6 @@ class _ColorCustomizationItemState extends State<ColorCustomizationItem> {
                   focusNode: _focusNode,
                   controller: _controller,
                   inputFormatters: [
-                    // TODO(dev): move input formatters?
                     FilteringTextInputFormatter.allow(
                       RegExp('[0-9a-fA-F]'),
                     ),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:survey_admin/presentation/widgets/customization_panel/customization_tab.dart';
+import 'package:survey_admin/presentation/widgets/base/customization_tab.dart';
 import 'package:survey_sdk/survey_sdk.dart';
 
 class QuestionSettingsTabBar extends StatefulWidget {

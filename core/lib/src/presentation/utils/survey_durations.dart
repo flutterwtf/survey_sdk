@@ -1,6 +1,7 @@
 class SurveyDurations {
-  /// Animation duration.
   static const Duration questionBottomButton = Duration(milliseconds: 200);
-  static const Duration customizationItemDuration = Duration(milliseconds: 100);
-  static const Duration panelSwitchingDuration = Duration(milliseconds: 1000);
+  static const Duration customizationItemDuration = _iosAnimationDuration;
+  static const Duration panelSwitchingDuration = _iosAnimationDuration;
+
+  static const Duration _iosAnimationDuration = Duration(milliseconds: 350);
 }

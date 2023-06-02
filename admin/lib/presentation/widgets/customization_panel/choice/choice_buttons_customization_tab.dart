@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:survey_admin/presentation/app/localization/app_localizations_ext.dart';
+import 'package:survey_admin/presentation/widgets/base/customization_tab.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/color_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/multiple_choice_customization_item.dart';
-import 'package:survey_admin/presentation/widgets/customization_panel/customization_tab.dart';
 import 'package:survey_sdk/survey_sdk.dart';
 
 class ChoiceButtonsCustomizationTab extends CustomizationTab {
