@@ -28,15 +28,38 @@ void main() {
           await widgetTester.pumpWidget(page);
           await widgetTester.pumpAndSettle();
           expect(
-            find.widgetWithText(CustomizationItemsContainer, 'Title'),
+            find.widgetWithText(
+              CustomizationItemsContainer,
+              'Title',
+            ),
             findsWidgets,
           );
           expect(
-            find.widgetWithText(CustomizationItemsContainer, 'Subtitle'),
+            find.widgetWithText(
+              CustomizationItemsContainer,
+              'Subtitle',
+            ),
             findsOneWidget,
           );
           expect(
-            find.widgetWithText(CustomizationItemsContainer, 'Options'),
+            find.widgetWithText(
+              CustomizationItemsContainer,
+              'Options',
+            ),
+            findsOneWidget,
+          );
+          expect(
+            find.widgetWithText(
+              CustomizationItemsContainer,
+              'Primary button',
+            ),
+            findsOneWidget,
+          );
+          expect(
+            find.widgetWithText(
+              CustomizationItemsContainer,
+              'Secondary button',
+            ),
             findsOneWidget,
           );
         },

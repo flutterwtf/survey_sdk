@@ -49,16 +49,16 @@ void main() {
       expect(find.text('Survey'), findsOneWidget);
       expect(find.text('Common'), findsOneWidget);
       expect(find.text('Content'), findsOneWidget);
-      expect(find.text('Intro'), findsNWidgets(2));
+      expect(find.text('Intro'), findsNWidgets(3));
       expect(find.text('Input'), findsOneWidget);
       expect(find.text('Choice'), findsOneWidget);
-      expect(find.text('NEXT'), findsOneWidget);
+      expect(find.text('NEXT'), findsNWidgets(2));
       expect(find.text('Common'), findsOneWidget);
       expect(find.text('Content'), findsOneWidget);
-      expect(find.text('Fill'), findsOneWidget);
       expect(find.text('Title'), findsOneWidget);
       expect(find.text('Subtitle'), findsOneWidget);
       expect(find.text('Primary button'), findsOneWidget);
+      expect(find.text('Secondary button'), findsOneWidget);
       tester.binding.platformDispatcher.clearTextScaleFactorTestValue();
     });
 
@@ -84,7 +84,34 @@ void main() {
       await tester.pumpAndSettle();
       expect(find.text('Common'), findsOneWidget);
       expect(find.text('Content'), findsOneWidget);
-      expect(find.text('Input'), findsNWidgets(3));
+      expect(find.text('Input'), findsNWidgets(4));
+
+      tester.binding.platformDispatcher.clearTextScaleFactorTestValue();
+    });
+
+    testWidgets('Select `Choice` question', (tester) async {
+      tester.binding.platformDispatcher.textScaleFactorTestValue = 0.5;
+      await tester.pumpWidget(page);
+
+      await tester.tap(find.text('Choice'));
+      await tester.pumpAndSettle();
+      expect(find.text('Choice'), findsNWidgets(3));
+      expect(find.text('Common'), findsOneWidget);
+      expect(find.text('Content'), findsOneWidget);
+      expect(find.text('Radio button'), findsOneWidget);
+
+      tester.binding.platformDispatcher.clearTextScaleFactorTestValue();
+    });
+
+    testWidgets('Select `Slider` question', (tester) async {
+      tester.binding.platformDispatcher.textScaleFactorTestValue = 0.5;
+      await tester.pumpWidget(page);
+
+      await tester.tap(find.text('Slider'));
+      await tester.pumpAndSettle();
+      expect(find.text('Slider'), findsNWidgets(4));
+      expect(find.text('Common'), findsOneWidget);
+      expect(find.text('Content'), findsOneWidget);
 
       tester.binding.platformDispatcher.clearTextScaleFactorTestValue();
     });
@@ -101,6 +128,20 @@ void main() {
       expect(find.text('Subtitle'), findsOneWidget);
       expect(find.text('Primary button'), findsOneWidget);
       expect(find.text('Secondary button'), findsOneWidget);
+
+      tester.binding.platformDispatcher.clearTextScaleFactorTestValue();
+    });
+
+    testWidgets('Delete survey', (tester) async {
+      tester.binding.platformDispatcher.textScaleFactorTestValue = 0.5;
+
+      await tester.pumpWidget(page);
+
+      await tester.longPress(find.text('Intro').first);
+      await tester.tap(find.text('Delete'));
+      await tester.pumpAndSettle();
+
+      expect(find.text('Intro'), findsNothing);
 
       tester.binding.platformDispatcher.clearTextScaleFactorTestValue();
     });

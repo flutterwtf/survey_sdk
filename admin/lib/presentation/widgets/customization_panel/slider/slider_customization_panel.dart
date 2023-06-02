@@ -20,9 +20,9 @@ class SliderCustomizationPanel extends StatelessWidget {
   Widget build(BuildContext context) {
     return QuestionSettingsTabBar(
       tabs: [
-        SliderCommonCustomizationTab(
+        SliderContentCustomizationTab(
           onChange: onChange,
-          title: context.localization.common,
+          title: context.localization.content,
           editable: editable,
         ),
         SliderCustomizationTab(
@@ -30,9 +30,9 @@ class SliderCustomizationPanel extends StatelessWidget {
           title: context.localization.slider,
           editable: editable,
         ),
-        SliderContentCustomizationTab(
+        SliderCommonCustomizationTab(
           onChange: onChange,
-          title: context.localization.content,
+          title: context.localization.common,
           editable: editable,
         ),
       ],

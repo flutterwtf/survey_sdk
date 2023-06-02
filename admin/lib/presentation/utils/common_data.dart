@@ -57,6 +57,7 @@ class CommonData {
       subtitle: context.localization.emptySubtitle,
       isSkip: false,
       content: context.localization.questionContent,
+      hintText: context.localization.inputHintText,
       theme: const InputQuestionTheme.common(),
       primaryButtonText: context.localization.next,
       secondaryButtonText: context.localization.skip,

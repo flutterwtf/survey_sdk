@@ -22,7 +22,7 @@ void main() {
       await tester.pumpWidget(page);
 
       expect(find.text('Common'), findsOneWidget);
-      expect(find.text('Slider'), findsOneWidget);
+      expect(find.text('Slider'), findsNWidgets(2));
       expect(find.text('Content'), findsOneWidget);
     });
 
@@ -61,7 +61,7 @@ void main() {
         await tester.pumpWidget(page);
 
         // switch to Slider panel
-        await tester.tap(find.text('Slider'));
+        await tester.tap(find.text('Slider').first);
         await tester.pump();
         await tester.pump(const Duration(seconds: 1));
 
@@ -107,7 +107,11 @@ void main() {
           findsOneWidget,
         );
         expect(
-          find.widgetWithText(CustomizationItemsContainer, 'Divisions'),
+          find.widgetWithText(CustomizationItemsContainer, 'Primary button'),
+          findsOneWidget,
+        );
+        expect(
+          find.widgetWithText(CustomizationItemsContainer, 'Secondary button'),
           findsOneWidget,
         );
       },

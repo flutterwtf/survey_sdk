@@ -6,9 +6,7 @@ import 'package:survey_admin/presentation/pages/builder/builder_cubit.dart';
 import 'package:survey_admin/presentation/pages/builder/builder_state.dart';
 import 'package:survey_admin/presentation/pages/new_question_page/new_question_tabs.dart';
 import 'package:survey_admin/presentation/utils/utils.dart';
-import 'package:survey_admin/presentation/widgets/builder_page/editor_bar.dart';
 import 'package:survey_admin/presentation/widgets/vector_image.dart';
-import 'package:survey_sdk/survey_sdk.dart';
 
 class NewQuestionPage extends StatefulWidget {
   const NewQuestionPage({super.key});
@@ -33,19 +31,6 @@ class _NewQuestionPageState extends State<NewQuestionPage> {
       },
       isSelected: _selectedTab == tab,
     );
-  }
-
-  QuestionData _selectCommon(CommonTheme theme, NewQuestionTabs tab) {
-    switch (tab) {
-      case NewQuestionTabs.intro:
-        return theme.intro;
-      case NewQuestionTabs.choice:
-        return theme.choice;
-      case NewQuestionTabs.slider:
-        return theme.slider;
-      case NewQuestionTabs.customInput:
-        return theme.input;
-    }
   }
 
   @override
@@ -84,17 +69,15 @@ class _NewQuestionPageState extends State<NewQuestionPage> {
                     options: _selectedTab.options,
                     selectedOption: _selectedOption ?? '',
                   ),
-                  EditorBar(
-                    onChange: _cubit.updateCommon,
-                    editableQuestion: _selectCommon(
-                      state.surveyData.commonTheme,
-                      _selectedTab,
-                    ),
-                  ),
                 ],
               ),
             ),
             persistentFooterButtons: [
+              _CancelButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
               _AddButton(
                 onPressed: () {
                   Navigator.pop(context, _selectedTab.data);
@@ -258,10 +241,45 @@ class _AddButton extends StatelessWidget {
         ),
         child: Center(
           child: Text(
-            'ADD',
+            context.localization.add,
             style: context.theme.textTheme.labelLarge?.copyWith(
               fontFamily: SurveyFonts.karla,
               color: SurveyColors.white,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _CancelButton extends StatelessWidget {
+  final VoidCallback onPressed;
+
+  const _CancelButton({
+    required this.onPressed,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onPressed,
+      child: Container(
+        width: AppDimensions.addButtonWidth,
+        height: AppDimensions.addButtonHeight,
+        decoration: const BoxDecoration(
+          color: AppColors.white,
+          border: Border.fromBorderSide(BorderSide()),
+          borderRadius: BorderRadius.all(
+            Radius.circular(AppDimensions.circularRadiusXS),
+          ),
+        ),
+        child: Center(
+          child: Text(
+            context.localization.cancel,
+            style: context.theme.textTheme.labelLarge?.copyWith(
+              fontFamily: AppFonts.karla,
+              color: AppColors.black,
             ),
           ),
         ),

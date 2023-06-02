@@ -41,13 +41,12 @@ void main() {
       await tester.pumpAndSettle();
       expect(find.text('New screen'), findsOneWidget);
       expect(find.text('ADD'), findsOneWidget);
+      expect(find.text('Cancel'), findsOneWidget);
       expect(find.text('Intro'), findsOneWidget);
       expect(find.text('Choice'), findsOneWidget);
       expect(find.text('Slider'), findsOneWidget);
       expect(find.text('Custom input'), findsOneWidget);
-      expect(find.text('Title'), findsNWidgets(2));
-      expect(find.text('Common'), findsOneWidget);
-      expect(find.text('Content'), findsOneWidget);
+      expect(find.text('Title'), findsOneWidget);
       tester.binding.platformDispatcher.clearTextScaleFactorTestValue();
     });
 
@@ -60,16 +59,16 @@ void main() {
 
     testWidgets('Move on tab', (tester) async {
       await tester.pumpWidget(page);
-      expect(find.text('Title'), findsNWidgets(2));
+      expect(find.text('Title'), findsOneWidget);
 
       await tester.tap(find.text('Choice'));
       await tester.pump();
-      expect(find.text('Radio button'), findsNWidgets(2));
+      expect(find.text('Radio button'), findsOneWidget);
       expect(find.text('Check box'), findsOneWidget);
 
       await tester.tap(find.text('Slider'));
       await tester.pump();
-      expect(find.text('Slider'), findsNWidgets(3));
+      expect(find.text('Slider'), findsNWidgets(2));
 
       await tester.tap(find.text('Custom input'));
       await tester.pump();
@@ -78,7 +77,7 @@ void main() {
 
       await tester.tap(find.text('Intro'));
       await tester.pump();
-      expect(find.text('Title'), findsNWidgets(2));
+      expect(find.text('Title'), findsOneWidget);
     });
 
     testWidgets('Click ADD', (tester) async {
@@ -87,6 +86,14 @@ void main() {
       await tester.tap(find.widgetWithText(GestureDetector, 'ADD'));
       await tester.pumpAndSettle();
       expect(find.text('ADD'), findsNothing);
+    });
+
+    testWidgets('Click Cancel', (tester) async {
+      await tester.pumpWidget(page);
+      await tester.pumpAndSettle();
+      await tester.tap(find.widgetWithText(GestureDetector, 'Cancel'));
+      await tester.pumpAndSettle();
+      expect(find.text('New screen'), findsNothing);
     });
   });
 }

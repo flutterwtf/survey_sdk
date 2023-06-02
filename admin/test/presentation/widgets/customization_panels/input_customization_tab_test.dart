@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/color_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
@@ -123,6 +124,44 @@ void main() {
           expect(find.byType(CustomizationTextField), findsNWidgets(9));
         },
       );
+
+      testWidgets('Input color for Fill', (tester) async {
+        await tester.pumpWidget(page);
+        await tester.enterText(
+          find.widgetWithText(CustomizationItemsContainer, 'Fill'),
+          'FFF44336',
+        );
+        await tester.testTextInput.receiveAction(TextInputAction.done);
+        await tester.pump();
+        expect(find.text('FFF44336'), findsOneWidget);
+        expect(data.theme?.inputFill, const Color(0xFFF44336));
+
+        await tester.enterText(
+          find.widgetWithText(CustomizationItemsContainer, 'Fill'),
+          'F',
+        );
+        await tester.testTextInput.receiveAction(TextInputAction.done);
+        await tester.pump();
+        expect(find.text('F0000000'), findsOneWidget);
+        expect(data.theme?.inputFill, const Color(0xF0000000));
+
+        await tester.enterText(
+          find.widgetWithText(CustomizationItemsContainer, 'Fill'),
+          '',
+        );
+        await tester.testTextInput.receiveAction(TextInputAction.done);
+        await tester.pump();
+        expect(find.text('00000000'), findsOneWidget);
+        expect(data.theme?.inputFill, const Color(0x00000000));
+      });
+
+      testWidgets('Unlock multiline', (tester) async {
+        await tester.pumpWidget(page);
+        await tester.tap(find.byType(InkWell).first);
+        await tester.pump();
+
+        expect(data.theme?.isMultiline, isTrue);
+      });
     },
   );
 }
