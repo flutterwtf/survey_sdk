@@ -7,6 +7,7 @@ import 'package:survey_admin/presentation/pages/builder/builder_state.dart';
 import 'package:survey_admin/presentation/pages/new_question_page/new_question_tabs.dart';
 import 'package:survey_admin/presentation/utils/utils.dart';
 import 'package:survey_admin/presentation/widgets/vector_image.dart';
+import 'package:survey_sdk/survey_sdk.dart';
 
 class NewQuestionPage extends StatefulWidget {
   const NewQuestionPage({super.key});
@@ -265,21 +266,21 @@ class _CancelButton extends StatelessWidget {
     return GestureDetector(
       onTap: onPressed,
       child: Container(
-        width: AppDimensions.addButtonWidth,
-        height: AppDimensions.addButtonHeight,
+        width: SurveyDimensions.addButtonWidth,
+        height: SurveyDimensions.addButtonHeight,
         decoration: const BoxDecoration(
-          color: AppColors.white,
+          color: SurveyColors.white,
           border: Border.fromBorderSide(BorderSide()),
           borderRadius: BorderRadius.all(
-            Radius.circular(AppDimensions.circularRadiusXS),
+            Radius.circular(SurveyDimensions.circularRadiusXS),
           ),
         ),
         child: Center(
           child: Text(
             context.localization.cancel,
             style: context.theme.textTheme.labelLarge?.copyWith(
-              fontFamily: AppFonts.karla,
-              color: AppColors.black,
+              fontFamily: SurveyFonts.karla,
+              color: SurveyColors.black,
             ),
           ),
         ),

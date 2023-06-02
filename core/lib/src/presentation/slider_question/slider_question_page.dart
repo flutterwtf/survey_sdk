@@ -219,11 +219,11 @@ class _QuestionSliderState extends State<_QuestionSlider> {
               min: widget.minValue.toDouble(),
               max: widget.maxValue.toDouble(),
             ),
-            const SizedBox(height: AppDimensions.margin2XS),
+            const SizedBox(height: SurveyDimensions.margin2XS),
             Row(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(left: AppDimensions.sizeM),
+                  padding: const EdgeInsets.only(left: SurveyDimensions.sizeM),
                   child: Text(
                     widget.minValue.toString(),
                     style: textStyle,
@@ -231,7 +231,7 @@ class _QuestionSliderState extends State<_QuestionSlider> {
                 ),
                 const Spacer(),
                 Padding(
-                  padding: const EdgeInsets.only(right: AppDimensions.sizeM),
+                  padding: const EdgeInsets.only(right: SurveyDimensions.sizeM),
                   child: Text(
                     widget.maxValue.toString(),
                     style: textStyle,
