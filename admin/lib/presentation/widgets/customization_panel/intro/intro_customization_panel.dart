@@ -19,15 +19,15 @@ class IntroCustomizationPanel extends StatelessWidget {
   Widget build(BuildContext context) {
     return QuestionSettingsTabBar(
       tabs: [
+        IntroContentCustomizationTab(
+          onChange: onChange,
+          title: context.localization.content,
+          editable: editable,
+        ),
         IntroCommonCustomizationTab(
           onChange: onChange,
           // TODO(dev): We can remove title property probably.
           title: context.localization.common,
-          editable: editable,
-        ),
-        IntroContentCustomizationTab(
-          onChange: onChange,
-          title: context.localization.content,
           editable: editable,
         ),
       ],

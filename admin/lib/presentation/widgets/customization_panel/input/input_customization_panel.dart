@@ -20,9 +20,9 @@ class InputCustomizationPanel extends StatelessWidget {
   Widget build(BuildContext context) {
     return QuestionSettingsTabBar(
       tabs: [
-        InputCommonCustomizationTab(
+        InputContentCustomizationTab(
           onChange: onChange,
-          title: context.localization.common,
+          title: context.localization.content,
           editable: editable,
         ),
         InputCustomizationTab(
@@ -30,9 +30,9 @@ class InputCustomizationPanel extends StatelessWidget {
           title: context.localization.input,
           editable: editable,
         ),
-        InputContentCustomizationTab(
+        InputCommonCustomizationTab(
           onChange: onChange,
-          title: context.localization.content,
+          title: context.localization.common,
           editable: editable,
         ),
       ],
