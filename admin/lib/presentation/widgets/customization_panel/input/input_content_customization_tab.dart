@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:survey_admin/presentation/app/localization/app_localizations_ext.dart';
-import 'package:survey_admin/presentation/utils/utils.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_multiline_text_field.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/secondary_button_customization_item.dart';
@@ -28,7 +27,7 @@ class InputContentCustomizationTab extends CustomizationTab {
           children: [
             CustomizationMultilineTextField(
               value: editable.title,
-              maxHeight: AppDimensions.maxTextFieldHeight,
+              maxHeight: SurveyDimensions.maxTextFieldHeight,
               onChanged: (title) => onChange(
                 editable.copyWith(title: title),
               ),
@@ -40,7 +39,7 @@ class InputContentCustomizationTab extends CustomizationTab {
           children: [
             CustomizationMultilineTextField(
               value: editable.subtitle,
-              maxHeight: AppDimensions.maxTextFieldHeight,
+              maxHeight: SurveyDimensions.maxTextFieldHeight,
               onChanged: (subtitle) => onChange(
                 editable.copyWith(subtitle: subtitle),
               ),
@@ -52,7 +51,7 @@ class InputContentCustomizationTab extends CustomizationTab {
           children: [
             CustomizationMultilineTextField(
               value: editable.hintText ?? '',
-              maxHeight: AppDimensions.maxTextFieldHeight,
+              maxHeight: SurveyDimensions.maxTextFieldHeight,
               onChanged: (hint) => onChange(
                 editable.copyWith(hintText: hint),
               ),
@@ -64,7 +63,7 @@ class InputContentCustomizationTab extends CustomizationTab {
           children: [
             CustomizationMultilineTextField(
               value: editable.primaryButtonText,
-              maxHeight: AppDimensions.maxTextFieldHeight,
+              maxHeight: SurveyDimensions.maxTextFieldHeight,
               onChanged: (text) => onChange(
                 editable.copyWith(primaryButtonText: text),
               ),
@@ -73,7 +72,7 @@ class InputContentCustomizationTab extends CustomizationTab {
         ),
         CustomizationItemsContainer(
           itemsPadding: const EdgeInsets.all(
-            AppDimensions.marginM,
+            SurveyDimensions.marginM,
           ),
           children: [
             SecondaryButtonCustomizationItem(

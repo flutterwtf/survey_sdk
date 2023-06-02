@@ -103,19 +103,19 @@ class IntroQuestionTheme extends ThemeExtension<IntroQuestionTheme>
   /// values.
   const IntroQuestionTheme.common()
       : this(
-          fill: AppColors.white,
-          titleColor: AppColors.black,
-          titleSize: AppFonts.sizeL,
-          subtitleColor: AppColors.black,
-          subtitleSize: AppFonts.sizeS,
-          primaryButtonFill: AppColors.black,
-          primaryButtonTextColor: AppColors.white,
-          primaryButtonTextSize: AppFonts.sizeS,
-          primaryButtonRadius: AppDimensions.circularRadiusS,
-          secondaryButtonFill: AppColors.black,
-          secondaryButtonTextColor: AppColors.white,
-          secondaryButtonTextSize: AppFonts.sizeS,
-          secondaryButtonRadius: AppDimensions.circularRadiusS,
+          fill: SurveyColors.white,
+          titleColor: SurveyColors.black,
+          titleSize: SurveyFonts.sizeL,
+          subtitleColor: SurveyColors.black,
+          subtitleSize: SurveyFonts.sizeS,
+          primaryButtonFill: SurveyColors.black,
+          primaryButtonTextColor: SurveyColors.white,
+          primaryButtonTextSize: SurveyFonts.sizeS,
+          primaryButtonRadius: SurveyDimensions.circularRadiusS,
+          secondaryButtonFill: SurveyColors.black,
+          secondaryButtonTextColor: SurveyColors.white,
+          secondaryButtonTextSize: SurveyFonts.sizeS,
+          secondaryButtonRadius: SurveyDimensions.circularRadiusS,
         );
 
   @override

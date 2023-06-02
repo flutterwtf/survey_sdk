@@ -55,9 +55,10 @@ class _NewQuestionPageState extends State<NewQuestionPage> {
       child: BlocBuilder<BuilderCubit, BuilderState>(
         builder: (context, state) {
           return Scaffold(
-            backgroundColor: AppColors.white,
+            backgroundColor: SurveyColors.white,
             appBar: PreferredSize(
-              preferredSize: const Size.fromHeight(AppDimensions.appbarHeight),
+              preferredSize:
+                  const Size.fromHeight(SurveyDimensions.appbarHeight),
               child: AppBar(
                 automaticallyImplyLeading: false,
                 title: const _AppBarTitle(),
@@ -68,8 +69,8 @@ class _NewQuestionPageState extends State<NewQuestionPage> {
             ),
             body: Padding(
               padding: const EdgeInsets.symmetric(
-                vertical: AppDimensions.margin2XS,
-                horizontal: AppDimensions.marginM,
+                vertical: SurveyDimensions.margin2XS,
+                horizontal: SurveyDimensions.marginM,
               ),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
@@ -116,7 +117,7 @@ class _BackButton extends StatelessWidget {
       behavior: HitTestBehavior.opaque,
       onTap: () => Navigator.pop(context),
       child: const Padding(
-        padding: EdgeInsets.only(right: AppDimensions.marginL),
+        padding: EdgeInsets.only(right: SurveyDimensions.marginL),
         child: VectorImage(assetName: AppAssets.closeIcon),
       ),
     );
@@ -133,7 +134,7 @@ class _AppBarTitle extends StatelessWidget {
       child: Text(
         context.localization.newScreen,
         style: context.theme.textTheme.labelLarge?.copyWith(
-          fontWeight: AppFonts.weightRegular,
+          fontWeight: SurveyFonts.weightRegular,
         ),
       ),
     );
@@ -158,16 +159,16 @@ class _TabButton extends StatelessWidget {
       onTap: onTap,
       borderRadius: const BorderRadius.all(Radius.circular(5)),
       child: SizedBox(
-        width: AppDimensions.surveyContentBarWidth,
+        width: SurveyDimensions.surveyContentBarWidth,
         child: ListTile(
           title: Text(
             title,
             style: isSelected
                 ? titleMedium?.copyWith(
-                    fontWeight: AppFonts.weightSemiBold,
+                    fontWeight: SurveyFonts.weightSemiBold,
                   )
                 : titleMedium?.copyWith(
-                    fontWeight: AppFonts.weightRegular,
+                    fontWeight: SurveyFonts.weightRegular,
                   ),
           ),
         ),
@@ -216,13 +217,15 @@ class _AssetTextOption extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: AppDimensions.margin4XL),
-      padding: const EdgeInsets.all(AppDimensions.marginXS),
+      margin: const EdgeInsets.symmetric(
+        horizontal: SurveyDimensions.margin4XL,
+      ),
+      padding: const EdgeInsets.all(SurveyDimensions.marginXS),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           VectorImage(assetName: assetName),
-          const SizedBox(height: AppDimensions.marginXL),
+          const SizedBox(height: SurveyDimensions.marginXL),
           Text(
             titleText,
             style: context.theme.textTheme.titleMedium,
@@ -245,20 +248,20 @@ class _AddButton extends StatelessWidget {
     return GestureDetector(
       onTap: onPressed,
       child: Container(
-        width: AppDimensions.addButtonWidth,
-        height: AppDimensions.addButtonHeight,
+        width: SurveyDimensions.addButtonWidth,
+        height: SurveyDimensions.addButtonHeight,
         decoration: const BoxDecoration(
-          color: AppColors.black,
+          color: SurveyColors.black,
           borderRadius: BorderRadius.all(
-            Radius.circular(AppDimensions.circularRadiusXS),
+            Radius.circular(SurveyDimensions.circularRadiusXS),
           ),
         ),
         child: Center(
           child: Text(
             'ADD',
             style: context.theme.textTheme.labelLarge?.copyWith(
-              fontFamily: AppFonts.karla,
-              color: AppColors.white,
+              fontFamily: SurveyFonts.karla,
+              color: SurveyColors.white,
             ),
           ),
         ),

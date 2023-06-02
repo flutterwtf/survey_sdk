@@ -14,7 +14,6 @@ import 'package:survey_admin/domain/repository_interfaces/session_storage_reposi
 import 'package:survey_admin/presentation/app/di/injector.dart';
 import 'package:survey_admin/presentation/pages/builder/builder_cubit.dart';
 import 'package:survey_admin/presentation/pages/builder/builder_page.dart';
-import 'package:survey_admin/presentation/pages/new_question_page/new_question_cubit.dart';
 
 import '../../widgets/app_tester.dart';
 
@@ -113,20 +112,20 @@ void _inject(GetIt getIt) {
     ..reset()
     ..registerFactory<FilesystemDataSource>(
       WebFilesystemDataSourceImpl.new,
-    )..registerFactory<SessionStorageDataSource>(
-    WebSessionStorageDataSource.new,
-  )
+    )
+    ..registerFactory<SessionStorageDataSource>(
+      WebSessionStorageDataSource.new,
+    )
     ..registerSingleton<FileSystemRepository>(
       FileSystemRepositoryImpl(getIt.get()),
-    )..registerSingleton<SessionStorageRepository>(
-    SessionStorageRepositoryImpl(getIt.get()),
-  )
-    ..registerFactory<NewQuestionCubit>(NewQuestionCubit.new)..registerFactory<
-      BuilderCubit>(
-        () =>
-        BuilderCubit(
-          getIt.get(),
-          getIt.get(),
-        ),
-  );
+    )
+    ..registerSingleton<SessionStorageRepository>(
+      SessionStorageRepositoryImpl(getIt.get()),
+    )
+    ..registerFactory<BuilderCubit>(
+      () => BuilderCubit(
+        getIt.get(),
+        getIt.get(),
+      ),
+    );
 }

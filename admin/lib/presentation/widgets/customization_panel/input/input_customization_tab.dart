@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:survey_admin/presentation/app/localization/app_localizations_ext.dart';
-import 'package:survey_admin/presentation/utils/utils.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/color_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/color_thickness_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
@@ -162,7 +161,7 @@ class InputCustomizationTab extends CustomizationTab {
           // key: UniqueKey(),
           title: context.localization.inputType,
           itemsPadding: const EdgeInsets.only(
-            bottom: AppDimensions.marginM,
+            bottom: SurveyDimensions.marginM,
           ),
           children: [
             DropdownCustomizationButton<InputType>(
@@ -195,7 +194,7 @@ class InputCustomizationTab extends CustomizationTab {
           children: [
             CustomizationMultilineTextField(
               value: theme.errorText,
-              maxHeight: AppDimensions.sizeXL,
+              maxHeight: SurveyDimensions.sizeXL,
               onChanged: (text) => onChange(
                 editable.copyWith(
                   theme: theme.copyWith(
