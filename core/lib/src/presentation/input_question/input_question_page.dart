@@ -50,12 +50,18 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
   DateTime _dateTime = DateTime.now();
   String _input = '';
 
-  bool get _canBeSkippedDate =>
-      widget.data.isSkip && _dateTime.toString().isEmpty;
+  bool get _isDateType => widget.data.validator.type == InputType.date;
 
-  bool get _canBeSkippedNumber => widget.data.isSkip && _input.isEmpty;
+  bool get _isNotEmpty =>
+      _isDateType ? _dateTime.toString().isNotEmpty : _input.trim().isNotEmpty;
 
-  bool get isDateType => widget.data.validator.type == InputType.date;
+  bool get _isValid =>
+      widget.data.validator.validate(
+        _isDateType ? _dateTime.toString() : _input,
+      ) ==
+      null;
+
+  bool get _canBeSkipped => widget.data.isSkip && _isNotEmpty;
 
   @override
   void initState() {
@@ -86,9 +92,7 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
       ),
     );
     final hintText = widget.data.hintText;
-    final isValid = widget.data.validator.validate(
-      isDateType ? _dateTime.toString() : _input,
-    );
+
     return Scaffold(
       backgroundColor: theme.fill,
       body: CustomScrollView(
@@ -129,7 +133,7 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
                       top: AppDimensions.marginM + theme.verticalPadding,
                       bottom: theme.verticalPadding,
                     ),
-                    child: isDateType
+                    child: _isDateType
                         ? _InputDate(
                             border: border,
                             dateTime: _dateTime,
@@ -142,7 +146,7 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
                             },
                             // TODO(dev): pass args instead of theme.
                             theme: theme,
-                            validator: (text) => _canBeSkippedNumber
+                            validator: (text) => _canBeSkipped
                                 ? null
                                 : widget.data.validator
                                     .validate(_dateTime.toString()),
@@ -154,7 +158,7 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
                                 setState(() => _input = input),
                             theme: theme,
                             initialValue: _input,
-                            validator: (text) => _canBeSkippedNumber
+                            validator: (text) => _canBeSkipped
                                 ? null
                                 : widget.data.validator.validate(text),
                           ),
@@ -182,8 +186,8 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
                           child: QuestionBottomButton(
                             text: widget.data.primaryButtonText,
                             onPressed: () {
-                              if ((isValid == null) || widget.data.isSkip) {
-                                isDateType
+                              if (_isValid || widget.data.isSkip) {
+                                _isDateType
                                     ? widget.onSend.call(
                                         index: widget.data.index,
                                         answer:
@@ -195,9 +199,8 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
                                       );
                               }
                             },
-                            isEnabled: isDateType
-                                ? _canBeSkippedDate || (isValid == null)
-                                : _canBeSkippedNumber || (isValid == null),
+                            isEnabled:
+                                _canBeSkipped || (_isNotEmpty && _isValid),
                             color: theme.primaryButtonFill,
                             textSize: theme.primaryButtonTextSize,
                             textColor: theme.primaryButtonTextColor,
