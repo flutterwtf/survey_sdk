@@ -93,7 +93,6 @@ class InputCustomizationTab extends CustomizationTab {
             PaddingCustomizationItem(
               initialHorizontalPadding: theme.horizontalPadding,
               initialVerticalPadding: theme.verticalPadding,
-              // TODO(dev): Move theme change to a method.
               onHorizontalPaddingChange: (padding) => onChange(
                 editable.copyWith(
                   theme: theme.copyWith(

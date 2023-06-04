@@ -51,7 +51,6 @@ class ChoiceContentCustomizationTab extends CustomizationTab {
         CustomizationItemsContainer(
           title: context.localization.options,
           children: [
-            // TODO(dev): Split to items.
             OptionCustomizationItem(
               options: editable.options,
               ruleValue: editable.ruleValue,
