@@ -197,7 +197,9 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
                             },
                             isEnabled: isDateType
                                 ? _canBeSkippedDate || (isValid == null)
-                                : _canBeSkippedNumber || (_input.trim().isNotEmpty && isValid == null),
+                                : _canBeSkippedNumber ||
+                                    (_input.trim().isNotEmpty &&
+                                        isValid == null),
                             color: theme.primaryButtonFill,
                             textSize: theme.primaryButtonTextSize,
                             textColor: theme.primaryButtonTextColor,
