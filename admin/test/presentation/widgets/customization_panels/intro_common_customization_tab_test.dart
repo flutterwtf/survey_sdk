@@ -160,7 +160,7 @@ void main() {
           }
           await tester.testTextInput.receiveAction(TextInputAction.done);
           await tester.pump();
-          expect(data.value.theme?.primaryButtonRadius, textSizeWithLetters);
+          expect(data.value.theme?.primaryButtonRadius, 0);
 
           expect(find.text(textSizeStringWithLetters), findsNothing);
         },
