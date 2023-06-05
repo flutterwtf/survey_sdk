@@ -33,7 +33,7 @@ class _OptionCustomizationItemState extends State<OptionCustomizationItem> {
   }
 
   void _onEditingComplete() {
-    if (_controller.text.isNotEmpty) {
+    if (_controller.text.isNotEmpty && !_options.contains(_controller.text)) {
       setState(() => _options = [..._options, _controller.text]);
     }
 

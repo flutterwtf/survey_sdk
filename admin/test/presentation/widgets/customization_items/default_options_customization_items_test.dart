@@ -12,7 +12,7 @@ void main() {
     testWidgets(
       'Add default options for single choice question',
       (WidgetTester tester) async {
-        List<int>? defaultOptions = [0];
+        List<String>? defaultOptions = ['Option 1'];
         await tester.pumpWidget(
           AppTester(
             child: DefaultOptionsCustomizationItem(
@@ -36,7 +36,7 @@ void main() {
     testWidgets(
       'Add default options for multiple choice question',
       (WidgetTester tester) async {
-        List<int>? defaultOptions = [0];
+        List<String>? defaultOptions = ['Option 1'];
         await tester.pumpWidget(
           AppTester(
             child: DefaultOptionsCustomizationItem(
@@ -60,7 +60,7 @@ void main() {
     testWidgets(
       'Delete default options for multiple choice question',
       (WidgetTester tester) async {
-        List<int>? defaultOptions = [0];
+        List<String>? defaultOptions = ['Option 1'];
         await tester.pumpWidget(
           AppTester(
             child: DefaultOptionsCustomizationItem(
@@ -71,7 +71,6 @@ void main() {
             ),
           ),
         );
-
 
         await tester.tap(find.byType(IconButton));
         await tester.pumpAndSettle();

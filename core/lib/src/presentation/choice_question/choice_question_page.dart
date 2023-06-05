@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:survey_sdk/src/domain/entities/question_answer.dart';
 import 'package:survey_sdk/src/domain/entities/question_types/choice_question_data.dart';
@@ -21,7 +23,7 @@ class ChoiceQuestionPage extends StatefulWidget {
   final ChoiceQuestionData data;
 
   // Contains the options indices that the user selected.
-  final QuestionAnswer<List<int>>? answer;
+  final QuestionAnswer<List<String>>? answer;
 
   /// Callback that is called when [ChoiceQuestionData.isSkip] is true or at
   /// least one option has been selected.
@@ -48,7 +50,7 @@ class _ChoiceQuestionPageState extends State<ChoiceQuestionPage>
   bool _canBeSend = false;
 
   /// Stores the indices of the selected options.
-  List<int> _answer = List.empty();
+  List<String> _answer = List.empty();
 
   /// Stores the last question data for correct work in admin.
   ChoiceQuestionData? _oldQuestionData;
@@ -62,7 +64,7 @@ class _ChoiceQuestionPageState extends State<ChoiceQuestionPage>
   void _initVariables() {
     _oldQuestionData = widget.data;
     final selectedOptions =
-        widget.answer?.answer ?? widget.data.selectedOptions;
+        widget.answer?.answer ?? widget.data.selectedByDefault;
     if (selectedOptions != null) {
       _answer = selectedOptions;
       _canBeSend = true;
@@ -72,7 +74,7 @@ class _ChoiceQuestionPageState extends State<ChoiceQuestionPage>
     }
   }
 
-  void _onInputChanged(List<int>? selectedItems) {
+  void _onInputChanged(List<String>? selectedItems) {
     setState(() {
       _answer = selectedItems ?? List.empty();
     });
@@ -179,7 +181,7 @@ class _ChoiceQuestionPageState extends State<ChoiceQuestionPage>
                             onPressed: () {
                               widget.onSend.call(
                                 index: widget.data.index,
-                                answer: QuestionAnswer<List<int>>(_answer),
+                                answer: QuestionAnswer<List<String>>(_answer),
                               );
                             },
                             isEnabled: widget.data.isSkip || _canBeSend,
@@ -215,10 +217,10 @@ class _QuestionCheckboxes extends StatelessWidget {
   final List<String> options;
 
   /// Indices of the selected options.
-  final List<int> selectedOptions;
+  final List<String> selectedOptions;
 
   /// Callback function called when the selection of checkboxes changes.
-  final void Function(List<int>? selectedItems) onChanged;
+  final void Function(List<String>? selectedItems) onChanged;
 
   /// Color of the radio button when it is selected.
   final Color activeColor;
@@ -229,39 +231,42 @@ class _QuestionCheckboxes extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: [
-        for (int i = 0; i < options.length; i++)
-          CheckboxListTile(
-            contentPadding: EdgeInsets.zero,
-            controlAffinity: ListTileControlAffinity.leading,
-            title: Text(
-              options[i],
-              style: context.theme.textTheme.bodyMedium,
-            ),
-            value: selectedOptions.contains(i),
-            activeColor: Colors.transparent,
-            checkColor: AppColors.black,
-            side: MaterialStateBorderSide.resolveWith((states) {
-              return states.contains(MaterialState.selected)
-                  ? BorderSide(color: activeColor)
-                  : BorderSide(color: inactiveColor);
-            }),
-            checkboxShape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(5)),
-            ),
-            onChanged: (shouldAdd) {
-              if (shouldAdd != null) {
-                final options = selectedOptions;
-                if (shouldAdd) {
-                  options.add(i);
-                } else {
-                  options.remove(i);
+      children: options
+          .map(
+            (option) => CheckboxListTile(
+              contentPadding: EdgeInsets.zero,
+              controlAffinity: ListTileControlAffinity.leading,
+              title: Text(
+                option,
+                style: context.theme.textTheme.bodyMedium,
+              ),
+              value: selectedOptions.contains(option),
+              activeColor: Colors.transparent,
+              checkColor: AppColors.black,
+              side: MaterialStateBorderSide.resolveWith((states) {
+                return states.contains(MaterialState.selected)
+                    ? BorderSide(color: activeColor)
+                    : BorderSide(color: inactiveColor);
+              }),
+              checkboxShape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(5)),
+              ),
+              onChanged: (shouldAdd) {
+                if (shouldAdd != null) {
+                  final options = shouldAdd
+                      ? List.of(selectedOptions)
+                      : selectedOptions.where((e) => e != option).toList();
+
+                  if (shouldAdd) {
+                    options.add(option);
+                  }
+
+                  onChanged(options);
                 }
-                onChanged(options);
-              }
-            },
-          ),
-      ],
+              },
+            ),
+          )
+          .toList(),
     );
   }
 }
@@ -279,10 +284,10 @@ class _QuestionRadioButtons extends StatelessWidget {
   final List<String> options;
 
   /// Index of the selected option.
-  final int? selectedOption;
+  final String? selectedOption;
 
   /// Callback function called when the selection of radio buttons changes.
-  final ValueChanged<int?> onChanged;
+  final ValueChanged<String?> onChanged;
 
   /// Color of the radio button when it is selected.
   final Color activeColor;
@@ -297,21 +302,22 @@ class _QuestionRadioButtons extends StatelessWidget {
         unselectedWidgetColor: inactiveColor,
       ),
       child: Column(
-        children: [
-          for (int i = 0; i < options.length; i++)
-            RadioListTile<int?>(
-              contentPadding: EdgeInsets.zero,
-              groupValue: selectedOption,
-              controlAffinity: ListTileControlAffinity.leading,
-              title: Text(
-                options[i],
-                style: context.theme.textTheme.bodyMedium,
+        children: options
+            .map(
+              (option) => RadioListTile<String?>(
+                contentPadding: EdgeInsets.zero,
+                groupValue: selectedOption,
+                controlAffinity: ListTileControlAffinity.leading,
+                title: Text(
+                  option,
+                  style: context.theme.textTheme.bodyMedium,
+                ),
+                value: option,
+                activeColor: activeColor,
+                onChanged: onChanged,
               ),
-              value: i,
-              activeColor: activeColor,
-              onChanged: onChanged,
-            ),
-        ],
+            )
+            .toList(),
       ),
     );
   }

@@ -56,9 +56,20 @@ class ChoiceContentCustomizationTab extends CustomizationTab {
             OptionCustomizationItem(
               options: editable.options,
               ruleValue: editable.ruleValue,
-              onChanged: (options, ruleValue) => onChange(
-                editable.copyWith(options: options, ruleValue: ruleValue),
-              ),
+              onChanged: (options, ruleValue) {
+                final selectedByDefault = editable.selectedByDefault
+                    ?.where((option) => options.contains(option))
+                    .toList();
+                onChange(
+                  editable.copyWith(
+                    options: options,
+                    ruleValue: ruleValue,
+                    selectedByDefault: selectedByDefault,
+                    clearSelectedByDefault:
+                        selectedByDefault == null || selectedByDefault.isEmpty,
+                  ),
+                );
+              },
             ),
           ],
         ),

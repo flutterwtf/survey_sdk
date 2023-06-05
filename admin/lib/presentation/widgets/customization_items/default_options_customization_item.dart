@@ -1,4 +1,3 @@
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:survey_admin/presentation/app/localization/app_localizations_ext.dart';
 import 'package:survey_admin/presentation/utils/utils.dart';
@@ -8,9 +7,9 @@ import 'package:survey_admin/presentation/widgets/customization_items/switch_cus
 
 class DefaultOptionsCustomizationItem extends StatelessWidget {
   final List<String> options;
-  final List<int>? defaultOptions;
+  final List<String>? defaultOptions;
   final bool isMultipleChoice;
-  final ValueChanged<List<int>?> onChanged;
+  final ValueChanged<List<String>?> onChanged;
 
   const DefaultOptionsCustomizationItem({
     required this.options,
@@ -20,54 +19,58 @@ class DefaultOptionsCustomizationItem extends StatelessWidget {
     super.key,
   });
 
-  bool get _hasDefaultOptions => defaultOptions != null;
-
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SwitchCustomizationItem(
-          initialValue: _hasDefaultOptions,
+          initialValue: defaultOptions != null,
           title: context.localization.defaultOptions,
-          onChanged: (isToggled) => onChanged(isToggled ? [0] : null),
+          onChanged: (isToggled) => onChanged(
+            isToggled ? [options.first] : null,
+          ),
         ),
-        if (_hasDefaultOptions && options.isNotEmpty)
-          isMultipleChoice
-              ? _DefaultOptionsForMultipleChoice(
-                  initialOptions: defaultOptions!,
-                  options: options,
-                  onChanged: onChanged,
-                )
-              : _DefaultOptionsForSingleChoice(
-                  initialOption: defaultOptions!.first,
-                  options: options,
-                  onChanged: (selectedOption) => onChanged([selectedOption]),
-                ),
+        if (defaultOptions != null && options.isNotEmpty) ...[
+          const SizedBox(height: AppDimensions.sizeS),
+          if (isMultipleChoice)
+            _DefaultOptionsForMultipleChoice(
+              defaultOptions: defaultOptions!,
+              options: options,
+              onChanged: onChanged,
+            )
+          else
+            _DefaultOptionsForSingleChoice(
+              defaultOption: defaultOptions!.first,
+              options: options,
+              onChanged: (selectedOption) => onChanged([selectedOption]),
+            ),
+        ],
       ],
     );
   }
 }
 
 class _DefaultOptionsForSingleChoice extends StatelessWidget {
-  final int initialOption;
+  final String defaultOption;
   final List<String> options;
-  final ValueChanged<int> onChanged;
+  final ValueChanged<String> onChanged;
 
   const _DefaultOptionsForSingleChoice({
-    required this.initialOption,
+    required this.defaultOption,
     required this.options,
     required this.onChanged,
   });
 
   @override
   Widget build(BuildContext context) {
-    return DropdownCustomizationButton<int>(
-      value: initialOption,
+    return DropdownCustomizationButton<String>(
+      value: defaultOption,
+      withColor: true,
       items: options
-          .mapIndexed(
-            (index, option) => DropdownCustomizationItem(
-              value: index,
+          .map(
+            (option) => DropdownCustomizationItem(
+              value: option,
               onChange: onChanged,
               child: Text(
                 option,
@@ -76,18 +79,17 @@ class _DefaultOptionsForSingleChoice extends StatelessWidget {
             ),
           )
           .toList(),
-      withColor: true,
     );
   }
 }
 
 class _DefaultOptionsForMultipleChoice extends StatelessWidget {
-  final List<int> initialOptions;
+  final List<String> defaultOptions;
   final List<String> options;
-  final ValueChanged<List<int>?> onChanged;
+  final ValueChanged<List<String>?> onChanged;
 
   const _DefaultOptionsForMultipleChoice({
-    required this.initialOptions,
+    required this.defaultOptions,
     required this.options,
     required this.onChanged,
   });
@@ -96,23 +98,24 @@ class _DefaultOptionsForMultipleChoice extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        ...initialOptions.map(
-          (optionIndex) => Option(
-            option: options[optionIndex],
+        ...defaultOptions.map(
+          (option) => Option(
+            option: option,
             onDelete: () {
-              final newOptions = initialOptions
-                  .where((e) => e != optionIndex)
-                  .toList()
-                ..sort();
-              onChanged(newOptions);
+              final newOptions =
+                  defaultOptions.where((e) => e != option).toList()..sort();
+
+              if (newOptions.isNotEmpty) {
+                onChanged(newOptions);
+              }
             },
           ),
         ),
-        DropdownCustomizationButton(
-          value: -1,
+        DropdownCustomizationButton<String?>(
+          value: null,
           items: [
             DropdownCustomizationItem(
-              value: -1,
+              value: null,
               child: Text(
                 context.localization.clickToSelectTheOption,
                 style: const TextStyle(
@@ -120,21 +123,21 @@ class _DefaultOptionsForMultipleChoice extends StatelessWidget {
                 ),
               ),
             ),
-            ...options.mapIndexed(
-              (index, option) => DropdownCustomizationItem(
-                value: index,
-                onChange: (selectedOption) {
-                  final newOptions = List.of(initialOptions)
-                    ..add(selectedOption)
-                    ..sort();
-                  onChanged(newOptions);
-                },
-                child: Text(
-                  option,
-                  style: context.theme.textTheme.bodyLarge,
+            ...options.where((option) => !defaultOptions.contains(option)).map(
+                  (option) => DropdownCustomizationItem(
+                    value: option,
+                    onChange: (selectedOption) {
+                      final newOptions = List.of(defaultOptions)
+                        ..add(selectedOption!)
+                        ..sort();
+                      onChanged(newOptions);
+                    },
+                    child: Text(
+                      option,
+                      style: context.theme.textTheme.bodyLarge,
+                    ),
+                  ),
                 ),
-              ),
-            ).where((element) => !initialOptions.contains(element.value)),
           ],
           withColor: true,
         ),

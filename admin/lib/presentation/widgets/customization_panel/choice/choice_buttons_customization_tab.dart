@@ -37,10 +37,9 @@ class ChoiceButtonsCustomizationTab extends CustomizationTab {
               onChanged: (isMultipleChoice) => onChange(
                 editable.copyWith(
                   isMultipleChoice: isMultipleChoice,
-                  selectedOptions: NullWrapper(editable.selectedOptions != null
-                      ? [editable.selectedOptions!.first]
+                  selectedByDefault: editable.selectedByDefault != null
+                      ? [editable.selectedByDefault!.first]
                       : null,
-                    ),
                 ),
               ),
             ),
@@ -80,11 +79,15 @@ class ChoiceButtonsCustomizationTab extends CustomizationTab {
           children: [
             DefaultOptionsCustomizationItem(
               options: editable.options,
-              defaultOptions: editable.selectedOptions,
+              defaultOptions: editable.selectedByDefault,
               isMultipleChoice: editable.isMultipleChoice,
-              onChanged: (defaultOptions) => onChange(
-                editable.copyWith(selectedOptions: NullWrapper(defaultOptions)),
-              ),
+              onChanged: (selectedByDefault) => selectedByDefault == null
+                  ? onChange(
+                      editable.copyWith(clearSelectedByDefault: true),
+                    )
+                  : onChange(
+                      editable.copyWith(selectedByDefault: selectedByDefault),
+                    ),
             ),
           ],
         ),
