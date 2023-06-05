@@ -24,12 +24,12 @@ void main() {
           ),
         );
 
-        await tester.tap(find.byType(DropdownCustomizationButton<int>));
+        await tester.tap(find.byType(DropdownCustomizationButton<String>));
         await tester.pumpAndSettle();
         await tester.tap(find.text(options[2]));
         await tester.pumpAndSettle();
 
-        expect(defaultOptions, [2]);
+        expect(defaultOptions, [options[2]]);
       },
     );
 
@@ -48,19 +48,19 @@ void main() {
           ),
         );
 
-        await tester.tap(find.byType(DropdownCustomizationButton<int>));
+        await tester.tap(find.byType(DropdownCustomizationButton<String?>));
         await tester.pumpAndSettle();
         await tester.tap(find.text(options[2]));
         await tester.pumpAndSettle();
 
-        expect(defaultOptions, [0, 2]);
+        expect(defaultOptions, [options.first, options[2]]);
       },
     );
 
     testWidgets(
       'Delete default options for multiple choice question',
       (WidgetTester tester) async {
-        List<String>? defaultOptions = ['Option 1'];
+        List<String>? defaultOptions = ['Option 1', 'Option 2'];
         await tester.pumpWidget(
           AppTester(
             child: DefaultOptionsCustomizationItem(
@@ -72,10 +72,10 @@ void main() {
           ),
         );
 
-        await tester.tap(find.byType(IconButton));
+        await tester.tap(find.byType(IconButton).last);
         await tester.pumpAndSettle();
 
-        expect(defaultOptions, []);
+        expect(defaultOptions, ['Option 1']);
       },
     );
   });

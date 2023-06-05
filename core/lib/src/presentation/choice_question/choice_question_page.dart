@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:survey_sdk/src/domain/entities/question_answer.dart';
 import 'package:survey_sdk/src/domain/entities/question_types/choice_question_data.dart';
@@ -70,7 +68,7 @@ class _ChoiceQuestionPageState extends State<ChoiceQuestionPage>
       _canBeSend = true;
     } else {
       _answer = List.empty();
-      _canBeSend = false;
+      _canBeSend = widget.data.isSkip;
     }
   }
 
