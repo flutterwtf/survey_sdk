@@ -4,6 +4,7 @@ library survey_sdk;
 
 export 'package:survey_sdk/src/domain/entities/constants/question_types.dart';
 export 'package:survey_sdk/src/domain/entities/input_validator.dart';
+export 'package:survey_sdk/src/domain/entities/null_wrapper.dart';
 export 'package:survey_sdk/src/domain/entities/question_types/choice_question_data.dart';
 export 'package:survey_sdk/src/domain/entities/question_types/input_question_data.dart';
 export 'package:survey_sdk/src/domain/entities/question_types/intro_question_data.dart';

@@ -50,14 +50,25 @@ class _ChoiceQuestionPageState extends State<ChoiceQuestionPage>
   /// Stores the indices of the selected options.
   List<int> _answer = List.empty();
 
+  /// Stores the last question data for correct work in admin.
+  ChoiceQuestionData? _oldQuestionData;
+
   @override
   void initState() {
+    super.initState();
+    _initVariables();
+  }
+
+  void _initVariables() {
+    _oldQuestionData = widget.data;
     final selectedOptions =
         widget.answer?.answer ?? widget.data.selectedOptions;
-    super.initState();
     if (selectedOptions != null) {
       _answer = selectedOptions;
       _canBeSend = true;
+    } else {
+      _answer = List.empty();
+      _canBeSend = false;
     }
   }
 
@@ -81,6 +92,11 @@ class _ChoiceQuestionPageState extends State<ChoiceQuestionPage>
     final theme = widget.data.theme ??
         Theme.of(context).extension<ChoiceQuestionTheme>()!;
     final options = widget.data.options;
+
+    if (_oldQuestionData != widget.data) {
+      _initVariables();
+    }
+
     return Scaffold(
       backgroundColor: theme.fill,
       body: CustomScrollView(

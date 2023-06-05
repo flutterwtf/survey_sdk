@@ -3,6 +3,7 @@ import 'package:survey_admin/presentation/app/localization/app_localizations_ext
 import 'package:survey_admin/presentation/utils/utils.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/color_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
+import 'package:survey_admin/presentation/widgets/customization_items/default_options_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/multiple_choice_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/customization_tab.dart';
 import 'package:survey_sdk/survey_sdk.dart';
@@ -34,7 +35,13 @@ class ChoiceButtonsCustomizationTab extends CustomizationTab {
             MultipleChoiceCustomizationItem(
               value: editable.isMultipleChoice,
               onChanged: (isMultipleChoice) => onChange(
-                editable.copyWith(isMultipleChoice: isMultipleChoice),
+                editable.copyWith(
+                  isMultipleChoice: isMultipleChoice,
+                  selectedOptions: NullWrapper(editable.selectedOptions != null
+                      ? [editable.selectedOptions!.first]
+                      : null,
+                    ),
+                ),
               ),
             ),
           ],
@@ -62,6 +69,21 @@ class ChoiceButtonsCustomizationTab extends CustomizationTab {
                 editable.copyWith(
                   theme: theme.copyWith(inactiveColor: color),
                 ),
+              ),
+            ),
+          ],
+        ),
+        CustomizationItemsContainer(
+          itemsPadding: const EdgeInsets.all(
+            AppDimensions.marginM,
+          ),
+          children: [
+            DefaultOptionsCustomizationItem(
+              options: editable.options,
+              defaultOptions: editable.selectedOptions,
+              isMultipleChoice: editable.isMultipleChoice,
+              onChanged: (defaultOptions) => onChange(
+                editable.copyWith(selectedOptions: NullWrapper(defaultOptions)),
               ),
             ),
           ],

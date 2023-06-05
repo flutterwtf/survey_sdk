@@ -1,4 +1,5 @@
 import 'package:survey_sdk/src/domain/entities/constants/question_types.dart';
+import 'package:survey_sdk/src/domain/entities/null_wrapper.dart';
 import 'package:survey_sdk/src/domain/entities/question_types/question_data.dart';
 import 'package:survey_sdk/src/domain/entities/themes/choice_question_theme.dart';
 
@@ -120,7 +121,7 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
     String? subtitle,
     String? content,
     bool? isSkip,
-    List<int>? selectedOptions,
+    NullWrapper<List<int>?>? selectedOptions,
     RuleType? ruleType,
     int? ruleValue,
     ChoiceQuestionTheme? theme,
@@ -138,7 +139,9 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
       subtitle: subtitle ?? this.subtitle,
       content: content ?? this.content,
       isSkip: isSkip ?? this.isSkip,
-      selectedOptions: selectedOptions ?? this.selectedOptions,
+      selectedOptions: selectedOptions != null
+          ? selectedOptions.value
+          : this.selectedOptions,
       secondaryButtonText: secondaryButtonText ?? this.secondaryButtonText,
       primaryButtonText: primaryButtonText ?? this.primaryButtonText,
     );
