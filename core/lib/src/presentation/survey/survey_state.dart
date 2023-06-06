@@ -28,6 +28,31 @@ class SurveyLoadedState extends SurveyState {
   }
 }
 
+class SurveyErrorLoadState extends SurveyState {
+  final List<String> providedErrors;
+  final bool detailed;
+
+  List<Object?> get props => [
+        providedErrors,
+        detailed,
+      ];
+
+  const SurveyErrorLoadState({
+    required this.providedErrors,
+    required this.detailed,
+  });
+
+  SurveyErrorLoadState copyWith({
+    List<String>? providedErrors,
+    bool? detailed,
+  }) {
+    return SurveyErrorLoadState(
+      providedErrors: providedErrors ?? this.providedErrors,
+      detailed: detailed ?? this.detailed,
+    );
+  }
+}
+
 /// Represents the initial empty state of the survey.
 class SurveyEmptyState extends SurveyState {
   const SurveyEmptyState();

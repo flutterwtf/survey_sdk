@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:survey_sdk/src/presentation/localization/flutter_gen/app_localizations.dart';
+import 'package:survey_sdk/src/presentation/localization/flutter_gen/survey_localizations.dart';
 
 class AppTester extends StatelessWidget {
   final Widget child;
@@ -14,7 +14,7 @@ class AppTester extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       localizationsDelegates: const [
-        AppLocalizations.delegate,
+        SurveyLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
       ],
       home: Scaffold(

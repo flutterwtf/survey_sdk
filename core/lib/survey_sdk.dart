@@ -15,5 +15,6 @@ export 'package:survey_sdk/src/domain/entities/themes/common_theme.dart';
 export 'package:survey_sdk/src/domain/entities/themes/input_question_theme.dart';
 export 'package:survey_sdk/src/domain/entities/themes/intro_question_theme.dart';
 export 'package:survey_sdk/src/domain/entities/themes/slider_question_theme.dart';
+export 'package:survey_sdk/src/presentation/localization/flutter_gen/survey_localizations.dart';
 export 'package:survey_sdk/src/presentation/survey/survey.dart';
 export 'package:survey_sdk/src/presentation/survey/survey_controller.dart';

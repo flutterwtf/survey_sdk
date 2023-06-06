@@ -1,5 +1,8 @@
 {
   "next": "NEXT",
   "skip": "SKIP",
-  "textField": "Text field"
+  "textField": "Text field",
+  "surveyLoadError": "Survey has not been loaded",
+  "showErrorDetails": "Show details",
+  "hideErrorDetails": "Hide details"
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:survey_sdk/survey_sdk.dart'; //import the library
+import 'package:survey_sdk/survey_sdk.dart';
+//import the library
 
 void main() {
   runApp(const MyApp());
@@ -16,6 +17,9 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: const MyHomePage(),
+      localizationsDelegates: const [
+        SurveyLocalizations.delegate,
+      ],
     );
   }
 }
