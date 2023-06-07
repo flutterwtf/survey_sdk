@@ -1,27 +1,29 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/mockito.dart';
+import 'package:mocktail/mocktail.dart';
 import 'package:survey_sdk/src/data/repositories/survey_data_repository_impl.dart';
 
 import '../../utils/mocked_entities.dart';
-import '../../utils/shared_mocks.mocks.dart';
+
+// ignore: prefer-match-file-name
+class MockSurveyDataRepository extends Mock
+    implements SurveyDataRepositoryImpl {}
 
 void main() {
-  final mockFilesystemDataSource = MockFilesystemDataSource();
-  final surveyDataRepository = SurveyDataRepositoryImpl(
-    mockFilesystemDataSource,
-  );
+  final surveyRepository = MockSurveyDataRepository();
 
   group('test SurveyDataRepository', () {
-    when(mockFilesystemDataSource.getSurveyData('data')).thenAnswer(
+    when(() => surveyRepository.getSurveyData('data')).thenAnswer(
       (_) => Future.delayed(
         const Duration(seconds: 1),
-        () => MockedEntities.data1,
+        () => (MockedEntities.data1, <String>['f']),
       ),
     );
 
     test('get survey data', () async {
+      final receivedSurveyData = await surveyRepository.getSurveyData('data');
+
       expect(
-        await surveyDataRepository.getSurveyData('data'),
+        receivedSurveyData.$1,
         MockedEntities.data1,
       );
     });

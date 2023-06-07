@@ -30,9 +30,10 @@ void main() {
       const path = 'test/assets/test_survey_data.json';
       final mockedSurveyData = jsonEncode(MockedEntities.data1.toJson());
       await File(path).writeAsString(mockedSurveyData);
+      final receivedSurveyData = await dataSource.getSurveyData(path);
 
       expect(
-        await dataSource.getSurveyData(path),
+        receivedSurveyData.$1,
         MockedEntities.data1,
       );
     });

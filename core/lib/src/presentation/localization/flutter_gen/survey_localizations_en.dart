@@ -3,22 +3,25 @@ import 'package:survey_sdk/src/presentation/localization/flutter_gen/survey_loca
 /// The translations for English (`en`).
 class SurveyLocalizationsEn extends SurveyLocalizations {
   @override
+  String get hideErrorDetails => 'Hide details';
+
+  @override
   String get next => 'NEXT';
-
-  @override
-  String get skip => 'SKIP';
-
-  @override
-  String get textField => 'Text field';
-
-  @override
-  String get surveyLoadError => 'Survey has not been loaded';
 
   @override
   String get showErrorDetails => 'Show details';
 
   @override
-  String get hideErrorDetails => 'Hide details';
+  String get showMoreErrorDetails => 'Show more details';
+
+  @override
+  String get skip => 'SKIP';
+
+  @override
+  String get surveyLoadError => 'Data is corrupted, survey has not been';
+
+  @override
+  String get textField => 'Text field';
 
   SurveyLocalizationsEn([super.locale = 'en']);
 }

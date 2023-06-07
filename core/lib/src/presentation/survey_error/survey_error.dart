@@ -53,7 +53,7 @@ class SurveyError extends StatelessWidget {
 class _SurveyErrorTitle extends StatelessWidget {
   final String errorTitle;
 
-  const _SurveyErrorTitle({required this.errorTitle, super.key});
+  const _SurveyErrorTitle({required this.errorTitle});
 
   @override
   Widget build(BuildContext context) {

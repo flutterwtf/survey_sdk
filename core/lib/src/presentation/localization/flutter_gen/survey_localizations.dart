@@ -7,7 +7,7 @@ import 'package:intl/intl.dart' as intl;
 
 import 'package:survey_sdk/src/presentation/localization/flutter_gen/survey_localizations_en.dart';
 
-//ignore_for_file: lines_longer_than_80_chars
+// ignore_for_file: lines_longer_than_80_chars
 
 /// Callers can lookup localized strings with an instance of SurveyLocalizations
 /// returned by `SurveyLocalizations.of(context)`.
@@ -87,29 +87,17 @@ abstract class SurveyLocalizations {
   /// A list of this localizations delegate's supported locales.
   static const List<Locale> supportedLocales = <Locale>[Locale('en')];
 
+  /// No description provided for @hideErrorDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Hide details'**
+  String get hideErrorDetails;
+
   /// No description provided for @next.
   ///
   /// In en, this message translates to:
   /// **'NEXT'**
   String get next;
-
-  /// No description provided for @skip.
-  ///
-  /// In en, this message translates to:
-  /// **'SKIP'**
-  String get skip;
-
-  /// No description provided for @textField.
-  ///
-  /// In en, this message translates to:
-  /// **'Text field'**
-  String get textField;
-
-  /// No description provided for @surveyLoadError.
-  ///
-  /// In en, this message translates to:
-  /// **'Survey has not been loaded'**
-  String get surveyLoadError;
 
   /// No description provided for @showErrorDetails.
   ///
@@ -117,11 +105,29 @@ abstract class SurveyLocalizations {
   /// **'Show details'**
   String get showErrorDetails;
 
-  /// No description provided for @hideErrorDetails.
+  /// No description provided for @showMoreErrorDetails.
   ///
   /// In en, this message translates to:
-  /// **'Hide details'**
-  String get hideErrorDetails;
+  /// **'Show more details'**
+  String get showMoreErrorDetails;
+
+  /// No description provided for @skip.
+  ///
+  /// In en, this message translates to:
+  /// **'SKIP'**
+  String get skip;
+
+  /// No description provided for @surveyLoadError.
+  ///
+  /// In en, this message translates to:
+  /// **'Data is corrupted, survey has not been'**
+  String get surveyLoadError;
+
+  /// No description provided for @textField.
+  ///
+  /// In en, this message translates to:
+  /// **'Text field'**
+  String get textField;
 
   SurveyLocalizations(String locale)
       : localeName = intl.Intl.canonicalizedLocale(locale);
@@ -143,8 +149,7 @@ class _SurveyLocalizationsDelegate
   }
 
   @override
-  bool isSupported(Locale locale) =>
-      <String>['en'].contains(locale.languageCode);
+  bool isSupported(Locale locale) => true;
 
   @override
   bool shouldReload(_SurveyLocalizationsDelegate old) => false;
