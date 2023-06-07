@@ -17,3 +17,4 @@ export 'package:survey_sdk/src/domain/entities/themes/input_question_theme.dart'
 export 'package:survey_sdk/src/domain/entities/themes/slider_question_theme.dart';
 export 'package:survey_sdk/src/presentation/survey/survey.dart';
 export 'package:survey_sdk/src/presentation/survey/survey_controller.dart';
+export 'package:survey_sdk/src/presentation/utils/utils.dart';

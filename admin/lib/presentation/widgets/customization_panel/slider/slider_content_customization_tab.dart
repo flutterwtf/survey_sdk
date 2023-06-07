@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:survey_admin/presentation/app/localization/app_localizations_ext.dart';
-import 'package:survey_admin/presentation/utils/utils.dart';
+import 'package:survey_admin/presentation/widgets/base/customization_tab.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_multiline_text_field.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/divisions_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/min_max_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/secondary_button_customization_item.dart';
-import 'package:survey_admin/presentation/widgets/customization_panel/customization_tab.dart';
 import 'package:survey_sdk/survey_sdk.dart';
 
 class SliderContentCustomizationTab extends CustomizationTab {
@@ -30,7 +29,7 @@ class SliderContentCustomizationTab extends CustomizationTab {
           children: [
             CustomizationMultilineTextField(
               value: editable.title,
-              maxHeight: AppDimensions.sizeXL,
+              maxHeight: SurveyDimensions.sizeXL,
               onChanged: (title) => onChange(
                 editable.copyWith(title: title),
               ),
@@ -42,7 +41,7 @@ class SliderContentCustomizationTab extends CustomizationTab {
           children: [
             CustomizationMultilineTextField(
               value: editable.subtitle,
-              maxHeight: AppDimensions.sizeXL,
+              maxHeight: SurveyDimensions.sizeXL,
               onChanged: (subtitle) => onChange(
                 editable.copyWith(subtitle: subtitle),
               ),
@@ -81,7 +80,7 @@ class SliderContentCustomizationTab extends CustomizationTab {
           children: [
             CustomizationMultilineTextField(
               value: editable.primaryButtonText,
-              maxHeight: AppDimensions.maxTextFieldHeight,
+              maxHeight: SurveyDimensions.maxTextFieldHeight,
               onChanged: (text) => onChange(
                 editable.copyWith(primaryButtonText: text),
               ),
@@ -90,7 +89,7 @@ class SliderContentCustomizationTab extends CustomizationTab {
         ),
         CustomizationItemsContainer(
           itemsPadding: const EdgeInsets.all(
-            AppDimensions.marginM,
+            SurveyDimensions.marginM,
           ),
           children: [
             SecondaryButtonCustomizationItem(

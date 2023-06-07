@@ -1,7 +1,6 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:survey_admin/presentation/utils/utils.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/choice/choice_customization_panel.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/info/info_customization_panel.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/input/input_customization_panel.dart';
@@ -23,21 +22,21 @@ class EditorBar extends StatelessWidget {
   double _calculateWidth(BuildContext context) {
     if (!isEditMode) return 0;
 
-    final freeSpaceWidth =
-        MediaQuery.of(context).size.width - AppDimensions.surveyContentBarWidth;
+    final freeSpaceWidth = MediaQuery.of(context).size.width -
+        SurveyDimensions.surveyContentBarWidth;
 
-    return min(AppDimensions.surveyEditorBarWidth, freeSpaceWidth);
+    return min(SurveyDimensions.surveyEditorBarWidth, freeSpaceWidth);
   }
 
   @override
   Widget build(BuildContext context) {
     return AnimatedContainer(
-      duration: AppDurations.panelSwitchingDuration,
-      color: AppColors.whitePrimaryBackground,
+      duration: SurveyDurations.panelSwitchingDuration,
+      color: SurveyColors.whitePrimaryBackground,
       width: _calculateWidth(context),
       child: OverflowBox(
         alignment: Alignment.topLeft,
-        maxWidth: AppDimensions.surveyEditorBarWidth,
+        maxWidth: SurveyDimensions.surveyEditorBarWidth,
         child: Builder(
           builder: (context) {
             final questionData = editableQuestion;

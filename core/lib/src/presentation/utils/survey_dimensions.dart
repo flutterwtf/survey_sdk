@@ -1,4 +1,4 @@
-abstract class AppDimensions {
+abstract class SurveyDimensions {
   static const double margin3XS = 2;
   static const double margin2XS = 6;
   static const double marginXS = 12;

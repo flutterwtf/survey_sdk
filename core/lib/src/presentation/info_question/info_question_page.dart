@@ -45,10 +45,10 @@ class _InfoQuestionPageState extends State<InfoQuestionPage> {
             hasScrollBody: false,
             child: Padding(
               padding: const EdgeInsets.only(
-                left: AppDimensions.margin2XL,
-                right: AppDimensions.margin2XL,
-                top: AppDimensions.margin3XL,
-                bottom: AppDimensions.marginXL,
+                left: SurveyDimensions.margin2XL,
+                right: SurveyDimensions.margin2XL,
+                top: SurveyDimensions.margin3XL,
+                bottom: SurveyDimensions.marginXL,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -63,7 +63,7 @@ class _InfoQuestionPageState extends State<InfoQuestionPage> {
                   if (widget.data.subtitle.isNotEmpty)
                     Padding(
                       padding: const EdgeInsets.only(
-                        top: AppDimensions.marginS,
+                        top: SurveyDimensions.marginS,
                       ),
                       child: QuestionContent(
                         content: widget.data.subtitle,
@@ -73,7 +73,8 @@ class _InfoQuestionPageState extends State<InfoQuestionPage> {
                     ),
                   const Spacer(),
                   Padding(
-                    padding: const EdgeInsets.only(top: AppDimensions.marginS),
+                    padding:
+                        const EdgeInsets.only(top: SurveyDimensions.marginS),
                     child: Row(
                       children: [
                         if (widget.data.isSkip)

@@ -40,45 +40,46 @@ class QuestionListItem extends StatelessWidget {
       child: ListTile(
         onTap: () => onTap(questionData),
         selected: isSelected,
-        tileColor: isSelected ? AppColors.greyBackground : AppColors.white,
+        tileColor:
+            isSelected ? SurveyColors.greyBackground : SurveyColors.white,
         title: Padding(
-          padding: const EdgeInsets.all(AppDimensions.margin2XS),
+          padding: const EdgeInsets.all(SurveyDimensions.margin2XS),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.only(top: AppDimensions.marginXS),
+                padding: const EdgeInsets.only(top: SurveyDimensions.marginXS),
                 child: SizedBox(
-                  width: AppDimensions.marginXS + AppDimensions.margin3XS,
+                  width: SurveyDimensions.marginXS + SurveyDimensions.margin3XS,
                   child: Text(
                     questionData.index.toString(),
                     style: textTheme.bodySmall?.copyWith(
-                      color: AppColors.textGrey,
+                      color: SurveyColors.textGrey,
                     ),
                   ),
                 ),
               ),
-              const SizedBox(width: AppDimensions.marginXS),
+              const SizedBox(width: SurveyDimensions.marginXS),
               Container(
                 decoration: const BoxDecoration(
-                  color: AppColors.white,
+                  color: SurveyColors.white,
                   borderRadius: BorderRadius.all(
-                    Radius.circular(AppDimensions.circularRadiusS),
+                    Radius.circular(SurveyDimensions.circularRadiusS),
                   ),
                   border: Border.fromBorderSide(
                     BorderSide(
-                      width: AppDimensions.thinBorderWidth,
+                      width: SurveyDimensions.thinBorderWidth,
                     ),
                   ),
                 ),
-                height: AppDimensions.imageSizeS,
-                width: AppDimensions.imageSizeS,
+                height: SurveyDimensions.imageSizeS,
+                width: SurveyDimensions.imageSizeS,
                 child: Center(
                   //ignore: avoid-returning-widgets
                   child: _questionImage(questionData),
                 ),
               ),
-              const SizedBox(width: AppDimensions.marginXS),
+              const SizedBox(width: SurveyDimensions.marginXS),
               Expanded(
                 child: Text(
                   questionData.title,

@@ -26,7 +26,6 @@ class InfoCustomizationPanel extends StatelessWidget {
         ),
         InfoCommonCustomizationTab(
           onChange: onChange,
-          // TODO(dev): We can remove title property probably.
           title: context.localization.common,
           editable: editable,
         ),

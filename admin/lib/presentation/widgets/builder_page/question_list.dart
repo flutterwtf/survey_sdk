@@ -61,11 +61,11 @@ class _QuestionListState extends State<QuestionList> {
   @override
   Widget build(BuildContext context) {
     return AnimatedContainer(
-      duration: AppDurations.panelSwitchingDuration,
-      color: AppColors.white,
-      width: widget.isEditMode ? AppDimensions.surveyContentBarWidth : 0,
+      duration: SurveyDurations.panelSwitchingDuration,
+      color: SurveyColors.white,
+      width: widget.isEditMode ? SurveyDimensions.surveyContentBarWidth : 0,
       child: OverflowBox(
-        maxWidth: AppDimensions.surveyContentBarWidth,
+        maxWidth: SurveyDimensions.surveyContentBarWidth,
         child: Column(
           children: [
             const Divider(),
@@ -123,10 +123,10 @@ class _QuestionListState extends State<QuestionList> {
                 cardBuilder: (_, children) {
                   return DecoratedBox(
                     decoration: const BoxDecoration(
-                      color: AppColors.white,
+                      color: SurveyColors.white,
                       border: Border.fromBorderSide(BorderSide(width: 0.5)),
                       borderRadius: BorderRadius.all(
-                        Radius.circular(AppDimensions.circularRadiusXS),
+                        Radius.circular(SurveyDimensions.circularRadiusXS),
                       ),
                     ),
                     child: Column(children: children),
@@ -156,25 +156,25 @@ class _ListHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(
-        vertical: AppDimensions.margin2XS,
-        horizontal: AppDimensions.marginXL,
+        vertical: SurveyDimensions.margin2XS,
+        horizontal: SurveyDimensions.marginXL,
       ),
       child: Row(
         children: [
           Text(
             context.localization.survey,
             style: context.theme.textTheme.titleMedium?.copyWith(
-              fontWeight: AppFonts.weightBold,
+              fontWeight: SurveyFonts.weightBold,
             ),
           ),
           const SizedBox(
-            width: AppDimensions.margin4XL,
+            width: SurveyDimensions.margin4XL,
           ),
           GestureDetector(
             onTap: onAddButtonTap,
             child: SizedBox(
-              height: AppDimensions.sizeL,
-              width: AppDimensions.sizeL,
+              height: SurveyDimensions.sizeL,
+              width: SurveyDimensions.sizeL,
               child: SvgPicture.asset(AppAssets.addCircleIcon),
             ),
           ),

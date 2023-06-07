@@ -32,8 +32,8 @@ void main() {
       await File(path).writeAsString(mockedSurveyData);
 
       expect(
-        await dataSource.getSurveyData(path),
-        MockedEntities.data1,
+        (await dataSource.getSurveyData(path)).toJson(),
+        MockedEntities.data1.toJson(),
       );
     });
   });
