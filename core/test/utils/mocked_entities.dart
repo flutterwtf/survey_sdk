@@ -169,6 +169,17 @@ abstract class MockedEntities {
     secondaryButtonText: 'EXIT',
   );
 
+  static const finalPage = IntroQuestionData(
+      primaryButtonText: 'NEXT',
+      title: 'Final Page',
+      index: 0,
+      subtitle: '',
+      isSkip: false,
+      content: '',
+      theme: IntroQuestionTheme.common(),
+      secondaryButtonText: 'Skip',
+    );
+
   static final data1 = SurveyData(
     questions: [
       intro1.copyWith(index: 1),
@@ -176,6 +187,7 @@ abstract class MockedEntities {
       choice2.copyWith(index: 3),
       slider1.copyWith(index: 4),
     ],
+    finalPage: intro1.copyWith(index: 5),
     commonTheme: _commonTheme,
   );
 

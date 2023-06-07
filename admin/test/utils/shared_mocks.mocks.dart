@@ -27,8 +27,9 @@ import 'package:survey_sdk/survey_sdk.dart' as _i2;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-class _FakeCommonTheme_0 extends _i1.SmartFake implements _i2.CommonTheme {
-  _FakeCommonTheme_0(
+class _FakeIntroQuestionData_0 extends _i1.SmartFake
+    implements _i2.IntroQuestionData {
+  _FakeIntroQuestionData_0(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -37,8 +38,18 @@ class _FakeCommonTheme_0 extends _i1.SmartFake implements _i2.CommonTheme {
         );
 }
 
-class _FakeSurveyData_1 extends _i1.SmartFake implements _i2.SurveyData {
-  _FakeSurveyData_1(
+class _FakeCommonTheme_1 extends _i1.SmartFake implements _i2.CommonTheme {
+  _FakeCommonTheme_1(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeSurveyData_2 extends _i1.SmartFake implements _i2.SurveyData {
+  _FakeSurveyData_2(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -155,9 +166,17 @@ class MockSurveyData extends _i1.Mock implements _i2.SurveyData {
         returnValue: <_i2.QuestionData<dynamic>>[],
       ) as List<_i2.QuestionData<dynamic>>);
   @override
+  _i2.IntroQuestionData get finalPage => (super.noSuchMethod(
+        Invocation.getter(#finalPage),
+        returnValue: _FakeIntroQuestionData_0(
+          this,
+          Invocation.getter(#finalPage),
+        ),
+      ) as _i2.IntroQuestionData);
+  @override
   _i2.CommonTheme get commonTheme => (super.noSuchMethod(
         Invocation.getter(#commonTheme),
-        returnValue: _FakeCommonTheme_0(
+        returnValue: _FakeCommonTheme_1(
           this,
           Invocation.getter(#commonTheme),
         ),
@@ -170,6 +189,7 @@ class MockSurveyData extends _i1.Mock implements _i2.SurveyData {
   @override
   _i2.SurveyData copyWith({
     List<_i2.QuestionData<dynamic>>? questions,
+    _i2.IntroQuestionData? finalPage,
     _i2.CommonTheme? commonTheme,
   }) =>
       (super.noSuchMethod(
@@ -178,16 +198,18 @@ class MockSurveyData extends _i1.Mock implements _i2.SurveyData {
           [],
           {
             #questions: questions,
+            #finalPage: finalPage,
             #commonTheme: commonTheme,
           },
         ),
-        returnValue: _FakeSurveyData_1(
+        returnValue: _FakeSurveyData_2(
           this,
           Invocation.method(
             #copyWith,
             [],
             {
               #questions: questions,
+              #finalPage: finalPage,
               #commonTheme: commonTheme,
             },
           ),

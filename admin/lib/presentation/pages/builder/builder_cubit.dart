@@ -74,7 +74,13 @@ class BuilderCubit extends Cubit<BuilderState> {
 
     _updateIndex(questionList);
 
-    final surveyData = state.surveyData.copyWith(questions: questionList);
+    final finalPage = state.surveyData.finalPage
+        .copyWith(index: state.surveyData.finalPage.index - 1);
+
+    final surveyData = state.surveyData.copyWith(
+      questions: questionList,
+      finalPage: finalPage,
+    );
     _sessionStorageRepository.saveSurveyData(surveyData);
     emit(state.copyWith(surveyData: surveyData));
     if (state.surveyData.questions.isEmpty) {
@@ -93,7 +99,13 @@ class BuilderCubit extends Cubit<BuilderState> {
     final questionList = List<QuestionData>.of(state.surveyData.questions)
       ..add(data);
 
-    final surveyData = state.surveyData.copyWith(questions: questionList);
+    final finalPage = state.surveyData.finalPage
+        .copyWith(index: state.surveyData.finalPage.index + 1);
+
+    final surveyData = state.surveyData.copyWith(
+      questions: questionList,
+      finalPage: finalPage,
+    );
     _sessionStorageRepository.saveSurveyData(surveyData);
     emit(state.copyWith(surveyData: surveyData));
     select(state.surveyData.questions.last);

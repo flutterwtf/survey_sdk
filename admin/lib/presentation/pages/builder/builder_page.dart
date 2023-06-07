@@ -57,9 +57,10 @@ class _BuilderPageState extends State<BuilderPage> {
 
   QuestionData? _editableQuestion(BuilderState state) {
     if (state is EditQuestionBuilderState) {
-      return state.surveyData.questions.firstWhereOrNull(
-        (q) => q.index == state.selectedIndex,
-      );
+      return state.selectedIndex == state.surveyData.finalPage.index
+          ? state.surveyData.finalPage
+          : state.surveyData.questions
+              .firstWhereOrNull((q) => q.index == state.selectedIndex);
     } else if (state is PreviewQuestionBuilderState) {
       return state.selectedQuestion;
     } else {
@@ -124,7 +125,8 @@ class _BuilderPageState extends State<BuilderPage> {
                 onDelete: cubit.deleteQuestionData,
                 onSelect: cubit.select,
                 onAdd: cubit.addQuestionData,
-                questions: cubit.state.surveyData.questions,
+                questions: state.surveyData.questions,
+                finalPage: state.surveyData.finalPage,
                 onUpdate: cubit.updateQuestions,
                 selectedIndex: _selectedIndex(state),
               ),

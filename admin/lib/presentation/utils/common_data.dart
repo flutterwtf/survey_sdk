@@ -11,6 +11,7 @@ class CommonData {
   static const _secondIndex = 2;
   static const _thirdIndex = 3;
   static const _fourthIndex = 4;
+  static const _fivethIndex = 5;
   static const _dividers = 10;
 
   CommonTheme get commonTheme {
@@ -30,6 +31,7 @@ class CommonData {
         choice(index: _thirdIndex),
         slider(index: _fourthIndex),
       ],
+      finalPage: finalPage(index: _fivethIndex),
       commonTheme: commonTheme,
     );
   }
@@ -99,6 +101,19 @@ class CommonData {
       theme: const SliderQuestionTheme.common(),
       secondaryButtonText: context.localization.skip,
       primaryButtonText: context.localization.next,
+    );
+  }
+
+  IntroQuestionData finalPage({int index = 0}) {
+    return IntroQuestionData(
+      primaryButtonText: context.localization.next,
+      title: context.localization.finalPage,
+      index: index,
+      subtitle: context.localization.emptySubtitle,
+      isSkip: false,
+      content: context.localization.emptyContent,
+      theme: const IntroQuestionTheme.common(),
+      secondaryButtonText: context.localization.skip,
     );
   }
 }

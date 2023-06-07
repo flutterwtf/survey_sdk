@@ -20,6 +20,7 @@ void main() {
           final currentState = surveyCubit.state;
           final surveyData = SurveyData(
             questions: [],
+            finalPage: const IntroQuestionData.common(),
             commonTheme: CommonTheme(
               slider: const SliderQuestionData.common(),
               choice: const ChoiceQuestionData.common(),

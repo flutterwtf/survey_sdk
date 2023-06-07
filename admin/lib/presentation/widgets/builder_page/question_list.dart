@@ -14,12 +14,14 @@ class QuestionList extends StatefulWidget {
   final ValueChanged<List<QuestionData>> onUpdate;
   final int? selectedIndex;
   final List<QuestionData> questions;
+  final IntroQuestionData finalPage;
   final bool isEditMode;
 
   const QuestionList({
     required this.onSelect,
     required this.onAdd,
     required this.questions,
+    required this.finalPage,
     required this.onUpdate,
     required this.onDelete,
     required this.selectedIndex,
@@ -38,10 +40,14 @@ class _QuestionListState extends State<QuestionList> {
   }
 
   void _updateQuestion(int oldIndex, int newIndex) {
+    final updatedIndex = newIndex >= widget.questions.length
+        ? widget.questions.length - 1
+        : newIndex;
+
     final itemOld = widget.questions.removeAt(oldIndex);
 
     widget.questions.insert(
-      newIndex,
+      updatedIndex,
       itemOld,
     );
 
@@ -105,6 +111,13 @@ class _QuestionListState extends State<QuestionList> {
                         question: widget.questions[index],
                         onQuestionTap: widget.onSelect,
                       ),
+                    _FinalPage(
+                      key: ValueKey(widget.questions.length),
+                      isSelected:
+                          widget.questions.length == widget.selectedIndex,
+                      finalPage: widget.finalPage,
+                      onTap: widget.onSelect,
+                    ),
                   ],
                 ),
                 cardBuilder: (_, children) {
@@ -174,16 +187,18 @@ class _ListHeader extends StatelessWidget {
 class _Question extends StatelessWidget {
   final int index;
   final bool isSelected;
-  final VoidCallback onDeleteButtonPressed;
+  final bool isDragable;
+  final VoidCallback? onDeleteButtonPressed;
   final ValueChanged<QuestionData> onQuestionTap;
   final QuestionData question;
 
   const _Question({
     required this.index,
     required this.isSelected,
-    required this.onDeleteButtonPressed,
     required this.question,
     required this.onQuestionTap,
+    this.onDeleteButtonPressed,
+    this.isDragable = true,
     super.key,
   });
 
@@ -191,6 +206,7 @@ class _Question extends StatelessWidget {
   Widget build(BuildContext context) {
     return ReorderableDragStartListener(
       index: index,
+      enabled: isDragable,
       child: ContextMenuRegion(
         contextMenu: GenericContextMenu(
           buttonConfigs: [
@@ -206,6 +222,28 @@ class _Question extends StatelessWidget {
           onTap: onQuestionTap,
         ),
       ),
+    );
+  }
+}
+
+class _FinalPage extends StatelessWidget {
+  final bool isSelected;
+  final ValueChanged<QuestionData> onTap;
+  final IntroQuestionData finalPage;
+
+  const _FinalPage({
+    required this.isSelected,
+    required this.finalPage,
+    required this.onTap,
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return QuestionListItem(
+      isSelected: isSelected,
+      questionData: finalPage,
+      onTap: onTap,
     );
   }
 }

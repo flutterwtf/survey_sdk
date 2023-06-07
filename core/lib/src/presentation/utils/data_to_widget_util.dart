@@ -6,6 +6,7 @@ import 'package:survey_sdk/src/domain/entities/question_types/intro_question_dat
 import 'package:survey_sdk/src/domain/entities/question_types/question_data.dart';
 import 'package:survey_sdk/src/domain/entities/question_types/slider_question_data.dart';
 import 'package:survey_sdk/src/presentation/choice_question/choice_question_page.dart';
+import 'package:survey_sdk/src/presentation/final_page/final_page.dart';
 import 'package:survey_sdk/src/presentation/input_question/input_question_page.dart';
 import 'package:survey_sdk/src/presentation/intro_question/intro_question_page.dart';
 import 'package:survey_sdk/src/presentation/slider_question/slider_question_page.dart';
@@ -55,4 +56,9 @@ abstract class DataToWidgetUtil {
         throw Exception('Unimplemented error');
     }
   }
+
+  static Widget createFinalPage({
+    required IntroQuestionData data,
+  }) =>
+      FinalPage(data: data);
 }
