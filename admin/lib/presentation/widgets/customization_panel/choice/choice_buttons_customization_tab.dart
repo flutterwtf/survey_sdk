@@ -81,13 +81,12 @@ class ChoiceButtonsCustomizationTab extends CustomizationTab {
               options: editable.options,
               defaultOptions: editable.selectedByDefault,
               isMultipleChoice: editable.isMultipleChoice,
-              onChanged: (selectedByDefault) => selectedByDefault == null
-                  ? onChange(
-                      editable.copyWith(clearSelectedByDefault: true),
-                    )
-                  : onChange(
-                      editable.copyWith(selectedByDefault: selectedByDefault),
-                    ),
+              onChanged: (selectedByDefault) => onChange(
+                editable.copyWith(
+                  clearSelectedByDefault: selectedByDefault == null,
+                  selectedByDefault: selectedByDefault ?? [],
+                ),
+              ),
             ),
           ],
         ),

@@ -16,7 +16,7 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
   /// Default value is [['First option', 'Second option', 'Third option']].
   final List<String> options;
 
-  /// Options that have been selected.
+  /// Options that were set as default ones.
   /// Default value is [```null```].
   final List<String>? selectedByDefault;
 
