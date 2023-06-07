@@ -2,8 +2,8 @@ import 'dart:ui';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:survey_sdk/src/presentation/utils/app_colors.dart';
-import 'package:survey_sdk/src/presentation/utils/app_fonts.dart';
+import 'package:survey_sdk/src/presentation/utils/survey_colors.dart';
+import 'package:survey_sdk/src/presentation/utils/survey_fonts.dart';
 
 const _titleSize = 16.0;
 const _subtitleSize = 12.0;
@@ -194,10 +194,10 @@ class InputQuestionTheme extends ThemeExtension<InputQuestionTheme>
           borderColor: Colors.black,
           borderWidth: 1,
           lines: 1,
-          hintColor: AppColors.textLightGrey,
-          hintSize: AppFonts.sizeL,
-          textColor: AppColors.black,
-          textSize: AppFonts.sizeL,
+          hintColor: SurveyColors.textLightGrey,
+          hintSize: SurveyFonts.sizeL,
+          textColor: SurveyColors.black,
+          textSize: SurveyFonts.sizeL,
           inputType: InputType.text,
           // TODO(dev): Replace with the text.
           errorText: 'Error',

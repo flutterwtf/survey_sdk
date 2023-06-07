@@ -26,7 +26,6 @@ class IntroCustomizationPanel extends StatelessWidget {
         ),
         IntroCommonCustomizationTab(
           onChange: onChange,
-          // TODO(dev): We can remove title property probably.
           title: context.localization.common,
           editable: editable,
         ),

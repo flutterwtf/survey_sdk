@@ -56,10 +56,10 @@ class _SliderQuestionPageState extends State<SliderQuestionPage> {
             hasScrollBody: false,
             child: Padding(
               padding: const EdgeInsets.only(
-                left: AppDimensions.margin2XL,
-                right: AppDimensions.margin2XL,
-                top: AppDimensions.margin3XL,
-                bottom: AppDimensions.marginXL,
+                left: SurveyDimensions.margin2XL,
+                right: SurveyDimensions.margin2XL,
+                top: SurveyDimensions.margin3XL,
+                bottom: SurveyDimensions.marginXL,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -73,7 +73,7 @@ class _SliderQuestionPageState extends State<SliderQuestionPage> {
                   if (widget.data.subtitle.isNotEmpty)
                     Padding(
                       padding: const EdgeInsets.only(
-                        top: AppDimensions.marginS,
+                        top: SurveyDimensions.marginS,
                       ),
                       child: QuestionContent(
                         content: widget.data.subtitle,
@@ -82,7 +82,8 @@ class _SliderQuestionPageState extends State<SliderQuestionPage> {
                       ),
                     ),
                   Padding(
-                    padding: const EdgeInsets.only(top: AppDimensions.marginM),
+                    padding:
+                        const EdgeInsets.only(top: SurveyDimensions.marginM),
                     child: _QuestionSlider(
                       minValue: widget.data.minValue,
                       maxValue: widget.data.maxValue,
@@ -186,7 +187,7 @@ class _QuestionSliderState extends State<_QuestionSlider> {
   @override
   Widget build(BuildContext context) {
     final textStyle = context.theme.textTheme.bodyMedium?.copyWith(
-      fontFamily: AppFonts.inter,
+      fontFamily: SurveyFonts.inter,
     );
     _value = _value >= widget.minValue.toDouble() &&
             _value <= widget.maxValue.toDouble()
@@ -218,11 +219,11 @@ class _QuestionSliderState extends State<_QuestionSlider> {
               min: widget.minValue.toDouble(),
               max: widget.maxValue.toDouble(),
             ),
-            const SizedBox(height: AppDimensions.margin2XS),
+            const SizedBox(height: SurveyDimensions.margin2XS),
             Row(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(left: AppDimensions.sizeM),
+                  padding: const EdgeInsets.only(left: SurveyDimensions.sizeM),
                   child: Text(
                     widget.minValue.toString(),
                     style: textStyle,
@@ -230,7 +231,7 @@ class _QuestionSliderState extends State<_QuestionSlider> {
                 ),
                 const Spacer(),
                 Padding(
-                  padding: const EdgeInsets.only(right: AppDimensions.sizeM),
+                  padding: const EdgeInsets.only(right: SurveyDimensions.sizeM),
                   child: Text(
                     widget.maxValue.toString(),
                     style: textStyle,

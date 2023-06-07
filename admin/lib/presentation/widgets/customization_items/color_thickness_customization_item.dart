@@ -2,11 +2,10 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:survey_admin/presentation/app/localization/app_localizations_ext.dart';
-import 'package:survey_admin/presentation/utils/constants/app_dimensions.dart';
 import 'package:survey_admin/presentation/utils/double_input_formatter.dart';
-import 'package:survey_admin/presentation/utils/theme_extension.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/color_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
+import 'package:survey_sdk/survey_sdk.dart';
 
 class ColorThicknessCustomizationItem extends StatefulWidget {
   final Color initialColor;
@@ -55,8 +54,9 @@ class _ColorThicknessCustomizationItemState
       widget.onThicknessChanged(validThickness);
       _textEditingController.value = _textEditingController.value.copyWith(
         text: validThickness.toString(),
-        selection:
-            TextSelection.collapsed(offset: _textEditingController.text.length),
+        selection: TextSelection.collapsed(
+          offset: _textEditingController.text.length,
+        ),
       );
     } else {
       widget.onThicknessChanged(thickness);
@@ -81,7 +81,7 @@ class _ColorThicknessCustomizationItemState
         ),
         Expanded(
           child: Padding(
-            padding: const EdgeInsets.only(right: AppDimensions.margin5XL),
+            padding: const EdgeInsets.only(right: SurveyDimensions.margin5XL),
             child: CustomizationTextField(
               controller: _textEditingController,
               inputFormatters: [
@@ -92,7 +92,9 @@ class _ColorThicknessCustomizationItemState
                 isCollapsed: true,
                 border: InputBorder.none,
                 suffix: Padding(
-                  padding: const EdgeInsets.only(left: AppDimensions.margin2XS),
+                  padding: const EdgeInsets.only(
+                    left: SurveyDimensions.margin2XS,
+                  ),
                   child: Text(
                     context.localization.px,
                     style: context.theme.textTheme.bodyLarge,

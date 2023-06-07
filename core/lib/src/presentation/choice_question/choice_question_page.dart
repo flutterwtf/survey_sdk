@@ -89,10 +89,10 @@ class _ChoiceQuestionPageState extends State<ChoiceQuestionPage>
             hasScrollBody: false,
             child: Padding(
               padding: const EdgeInsets.only(
-                left: AppDimensions.margin2XL,
-                right: AppDimensions.margin2XL,
-                top: AppDimensions.margin3XL,
-                bottom: AppDimensions.marginXL,
+                left: SurveyDimensions.margin2XL,
+                right: SurveyDimensions.margin2XL,
+                top: SurveyDimensions.margin3XL,
+                bottom: SurveyDimensions.marginXL,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -106,7 +106,7 @@ class _ChoiceQuestionPageState extends State<ChoiceQuestionPage>
                   if (widget.data.subtitle.isNotEmpty)
                     Padding(
                       padding: const EdgeInsets.only(
-                        top: AppDimensions.marginS,
+                        top: SurveyDimensions.marginS,
                       ),
                       // TODO(dev): We passed a subtitle to widget for content?
                       child: QuestionContent(
@@ -117,7 +117,7 @@ class _ChoiceQuestionPageState extends State<ChoiceQuestionPage>
                     ),
                   Padding(
                     padding: const EdgeInsets.only(
-                      top: AppDimensions.marginM,
+                      top: SurveyDimensions.marginM,
                     ),
                     child: widget.data.isMultipleChoice
                         ? _QuestionCheckboxes(
@@ -140,7 +140,8 @@ class _ChoiceQuestionPageState extends State<ChoiceQuestionPage>
                   ),
                   const Spacer(),
                   Padding(
-                    padding: const EdgeInsets.only(top: AppDimensions.marginS),
+                    padding:
+                        const EdgeInsets.only(top: SurveyDimensions.marginS),
                     child: Row(
                       children: [
                         if (widget.data.isSkip)
@@ -224,7 +225,7 @@ class _QuestionCheckboxes extends StatelessWidget {
             ),
             value: selectedOptions.contains(i),
             activeColor: Colors.transparent,
-            checkColor: AppColors.black,
+            checkColor: SurveyColors.black,
             side: MaterialStateBorderSide.resolveWith((states) {
               return states.contains(MaterialState.selected)
                   ? BorderSide(color: activeColor)

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:survey_sdk/src/presentation/localization/survey_localizations_ext.dart';
-import 'package:survey_sdk/src/presentation/utils/survey_error_state.dart';
 import 'package:survey_sdk/src/presentation/utils/utils.dart';
 
 class SurveyError extends StatelessWidget {
@@ -67,7 +66,7 @@ class _StacktraceBody extends StatelessWidget {
       child: Expanded(
         child: ListView(
           padding: const EdgeInsets.symmetric(
-            horizontal: AppDimensions.marginS,
+            horizontal: SurveyDimensions.marginS,
           ),
           children: [
             _SurveyErrorTitle(
@@ -96,13 +95,15 @@ class _SurveyErrorTitle extends StatelessWidget {
     // TODO(dev): May be we should to have text themes (h1, h2, etc.)
     return Align(
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: AppDimensions.margin2XS),
+        padding: const EdgeInsets.symmetric(
+          vertical: SurveyDimensions.margin2XS,
+        ),
         child: Text(
           errorTitle,
           style: const TextStyle(
-            color: AppColors.black,
-            fontWeight: AppFonts.weightBold,
-            fontSize: AppFonts.sizeXL,
+            color: SurveyColors.black,
+            fontWeight: SurveyFonts.weightBold,
+            fontSize: SurveyFonts.sizeXL,
           ),
         ),
       ),

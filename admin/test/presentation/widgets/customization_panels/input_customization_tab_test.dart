@@ -85,7 +85,7 @@ void main() {
             findsNWidgets(2),
           );
           expect(
-            find.widgetWithText(CustomizationItemsContainer, 'FF727272'),
+            find.widgetWithText(CustomizationItemsContainer, 'FF929292'),
             findsOneWidget,
           );
           expect(

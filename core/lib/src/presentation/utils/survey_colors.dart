@@ -1,9 +1,10 @@
 import 'dart:ui';
 
-abstract class AppColors {
+abstract class SurveyColors {
   static const transparentW = Color(0x00FFFFFF);
   static const white = Color(0xFFFFFFFF);
   static const black = Color(0xFF000000);
+  static const grey = Color(0xFF9E9E9E);
 
   static const whitePrimaryBackground = Color(0xFFFCFCFC);
 

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
-import 'package:survey_admin/presentation/utils/app_fonts.dart';
-import 'package:survey_admin/presentation/utils/constants/app_dimensions.dart';
+import 'package:survey_sdk/survey_sdk.dart';
 
 class TextWidthField extends StatelessWidget {
   final TextEditingController textWidthTextController;
@@ -18,10 +16,10 @@ class TextWidthField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: Container(
-        margin: const EdgeInsets.all(AppDimensions.margin2XS),
+        margin: const EdgeInsets.all(SurveyDimensions.margin2XS),
         child: TextField(
           controller: textWidthTextController,
-          style: const TextStyle(fontSize: AppFonts.sizeL),
+          style: const TextStyle(fontSize: SurveyFonts.sizeL),
           decoration: const InputDecoration(
             border: InputBorder.none,
           ),

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:survey_admin/presentation/app/localization/app_localizations_ext.dart';
-import 'package:survey_admin/presentation/utils/utils.dart';
+import 'package:survey_admin/presentation/widgets/base/customization_tab.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_multiline_text_field.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/secondary_button_customization_item.dart';
-import 'package:survey_admin/presentation/widgets/customization_panel/customization_tab.dart';
 import 'package:survey_sdk/survey_sdk.dart';
 
 class IntroContentCustomizationTab extends CustomizationTab {
@@ -28,7 +27,7 @@ class IntroContentCustomizationTab extends CustomizationTab {
           children: [
             CustomizationMultilineTextField(
               value: editable.title,
-              maxHeight: AppDimensions.sizeL,
+              maxHeight: SurveyDimensions.sizeL,
               onChanged: (title) => onChange(
                 editable.copyWith(title: title),
               ),
@@ -40,7 +39,7 @@ class IntroContentCustomizationTab extends CustomizationTab {
           children: [
             CustomizationMultilineTextField(
               value: editable.subtitle,
-              maxHeight: AppDimensions.sizeL,
+              maxHeight: SurveyDimensions.sizeL,
               onChanged: (subtitle) => onChange(
                 editable.copyWith(subtitle: subtitle),
               ),
@@ -52,7 +51,7 @@ class IntroContentCustomizationTab extends CustomizationTab {
           children: [
             CustomizationMultilineTextField(
               value: editable.primaryButtonText,
-              maxHeight: AppDimensions.sizeL,
+              maxHeight: SurveyDimensions.sizeL,
               onChanged: (text) => onChange(
                 editable.copyWith(primaryButtonText: text),
               ),
@@ -61,7 +60,7 @@ class IntroContentCustomizationTab extends CustomizationTab {
         ),
         CustomizationItemsContainer(
           itemsPadding: const EdgeInsets.all(
-            AppDimensions.marginM,
+            SurveyDimensions.marginM,
           ),
           children: [
             SecondaryButtonCustomizationItem(

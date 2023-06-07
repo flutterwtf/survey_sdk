@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:survey_admin/presentation/app/localization/app_localizations_ext.dart';
-import 'package:survey_admin/presentation/utils/utils.dart';
+import 'package:survey_admin/presentation/widgets/base/customization_tab.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/color_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/color_thickness_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
@@ -10,7 +10,6 @@ import 'package:survey_admin/presentation/widgets/customization_items/multiline_
 import 'package:survey_admin/presentation/widgets/customization_items/padding_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/text_style_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/constants/customization_panel_dimensions.dart';
-import 'package:survey_admin/presentation/widgets/customization_panel/customization_tab.dart';
 import 'package:survey_sdk/survey_sdk.dart';
 
 class InputCustomizationTab extends CustomizationTab {
@@ -94,7 +93,6 @@ class InputCustomizationTab extends CustomizationTab {
             PaddingCustomizationItem(
               initialHorizontalPadding: theme.horizontalPadding,
               initialVerticalPadding: theme.verticalPadding,
-              // TODO(dev): Move theme change to a method.
               onHorizontalPaddingChange: (padding) => onChange(
                 editable.copyWith(
                   theme: theme.copyWith(
@@ -162,7 +160,7 @@ class InputCustomizationTab extends CustomizationTab {
           // key: UniqueKey(),
           title: context.localization.inputType,
           itemsPadding: const EdgeInsets.only(
-            bottom: AppDimensions.marginM,
+            bottom: SurveyDimensions.marginM,
           ),
           children: [
             DropdownCustomizationButton<InputType>(
@@ -195,7 +193,7 @@ class InputCustomizationTab extends CustomizationTab {
           children: [
             CustomizationMultilineTextField(
               value: theme.errorText,
-              maxHeight: AppDimensions.sizeXL,
+              maxHeight: SurveyDimensions.sizeXL,
               onChanged: (text) => onChange(
                 editable.copyWith(
                   theme: theme.copyWith(

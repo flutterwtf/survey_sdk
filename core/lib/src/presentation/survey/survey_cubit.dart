@@ -1,9 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:survey_sdk/src/domain/entities/question_answer.dart';
-import 'package:survey_sdk/src/domain/entities/survey_data.dart';
 import 'package:survey_sdk/src/domain/repository_interfaces/survey_data_repository.dart';
 import 'package:survey_sdk/src/presentation/survey/survey_state.dart';
-import 'package:survey_sdk/src/presentation/utils/survey_error_state.dart';
+
 import 'package:survey_sdk/survey_sdk.dart';
 
 /// A Cubit that manages the state and logic for the survey.
