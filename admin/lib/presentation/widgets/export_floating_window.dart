@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:survey_admin/presentation/app/localization/app_localizations_ext.dart';
-import 'package:survey_admin/presentation/utils/utils.dart';
+import 'package:survey_sdk/survey_sdk.dart';
 
 //ignore_for_file: prefer-static-class
 void showExportFloatingWindow(
@@ -42,16 +42,16 @@ class ExportFloatingWindow extends StatelessWidget {
     const opacity = 0.2;
     final labelLarge = context.theme.textTheme.labelLarge;
     return Material(
-      color: AppColors.black.withOpacity(opacity),
+      color: SurveyColors.black.withOpacity(opacity),
       child: Center(
         child: Container(
           decoration: const BoxDecoration(
-            color: AppColors.whitePrimaryBackground,
+            color: SurveyColors.whitePrimaryBackground,
             borderRadius: BorderRadius.all(
-              Radius.circular(AppDimensions.circularRadiusS),
+              Radius.circular(SurveyDimensions.circularRadiusS),
             ),
           ),
-          width: AppDimensions.exportWindowWidth,
+          width: SurveyDimensions.exportWindowWidth,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -60,16 +60,16 @@ class ExportFloatingWindow extends StatelessWidget {
                 child: IconButton(
                   onPressed: onClose,
                   icon: const Icon(Icons.close),
-                  splashRadius: AppDimensions.sizeS,
-                  iconSize: AppDimensions.sizeS,
-                  color: AppColors.black,
+                  splashRadius: SurveyDimensions.sizeS,
+                  iconSize: SurveyDimensions.sizeS,
+                  color: SurveyColors.black,
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.only(
-                  top: AppDimensions.marginXS,
-                  left: AppDimensions.margin2XL,
-                  right: AppDimensions.margin2XL,
+                  top: SurveyDimensions.marginXS,
+                  left: SurveyDimensions.margin2XL,
+                  right: SurveyDimensions.margin2XL,
                 ),
                 child: Text(
                   context.localization.exportFloatingWindowTitle,
@@ -79,11 +79,11 @@ class ExportFloatingWindow extends StatelessWidget {
               ),
               const Image(
                 image: AssetImage('assets/images/task_completed.png'),
-                width: AppDimensions.imageSizeM,
-                height: AppDimensions.imageSizeM,
+                width: SurveyDimensions.imageSizeM,
+                height: SurveyDimensions.imageSizeM,
               ),
               Padding(
-                padding: const EdgeInsets.all(AppDimensions.marginL),
+                padding: const EdgeInsets.all(SurveyDimensions.marginL),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -91,7 +91,7 @@ class ExportFloatingWindow extends StatelessWidget {
                       onPressed: onCopyPressed,
                       style: const ButtonStyle(
                         backgroundColor: MaterialStatePropertyAll(
-                          AppColors.white,
+                          SurveyColors.white,
                         ),
                         side: MaterialStatePropertyAll(
                           BorderSide(),
@@ -99,19 +99,21 @@ class ExportFloatingWindow extends StatelessWidget {
                         shape: MaterialStatePropertyAll(
                           RoundedRectangleBorder(
                             borderRadius: BorderRadius.all(
-                              Radius.circular(AppDimensions.circularRadiusXS),
+                              Radius.circular(
+                                SurveyDimensions.circularRadiusXS,
+                              ),
                             ),
                           ),
                         ),
                       ),
                       child: Padding(
                         padding: const EdgeInsets.symmetric(
-                          horizontal: AppDimensions.sizeL,
+                          horizontal: SurveyDimensions.sizeL,
                         ),
                         child: Text(
                           context.localization.copy,
                           style: labelLarge?.copyWith(
-                            fontFamily: AppFonts.karla,
+                            fontFamily: SurveyFonts.karla,
                           ),
                         ),
                       ),
@@ -120,25 +122,27 @@ class ExportFloatingWindow extends StatelessWidget {
                       onPressed: onDownload,
                       style: const ButtonStyle(
                         backgroundColor: MaterialStatePropertyAll(
-                          AppColors.black,
+                          SurveyColors.black,
                         ),
                         shape: MaterialStatePropertyAll(
                           RoundedRectangleBorder(
                             borderRadius: BorderRadius.all(
-                              Radius.circular(AppDimensions.circularRadiusXS),
+                              Radius.circular(
+                                SurveyDimensions.circularRadiusXS,
+                              ),
                             ),
                           ),
                         ),
                       ),
                       child: Padding(
                         padding: const EdgeInsets.symmetric(
-                          horizontal: AppDimensions.margin5XL,
+                          horizontal: SurveyDimensions.margin5XL,
                         ),
                         child: Text(
                           context.localization.download,
                           style: labelLarge?.copyWith(
-                            fontFamily: AppFonts.karla,
-                            color: AppColors.white,
+                            fontFamily: SurveyFonts.karla,
+                            color: SurveyColors.white,
                           ),
                         ),
                       ),

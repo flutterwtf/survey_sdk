@@ -95,10 +95,9 @@ void main() {
     testWidgets('Input min,max for Value(string)', (tester) async {
       await tester.pumpWidget(page);
 
-      final minBeforeEnter = data.minValue;
       await tester.enterText(find.byType(CustomizationTextField).at(2), 'qw');
       expect(find.text('qw'), findsNothing);
-      expect(data.minValue, minBeforeEnter);
+      expect(data.minValue, 0);
 
       await tester.enterText(find.byType(CustomizationTextField).at(3), 'qw');
       final maxBeforeEnter = data.maxValue;

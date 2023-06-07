@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:survey_admin/presentation/utils/utils.dart';
+import 'package:survey_sdk/survey_sdk.dart';
 
 class SwitchCustomizationItem extends StatelessWidget {
   final String title;
@@ -62,27 +62,27 @@ class _CustomSwitchState extends State<_CustomSwitch> {
         widget.onChanged?.call(_isToggled);
       },
       child: AnimatedContainer(
-        height: AppDimensions.switchHeight,
-        width: AppDimensions.switchWidth,
+        height: SurveyDimensions.switchHeight,
+        width: SurveyDimensions.switchWidth,
         decoration: BoxDecoration(
           color: _isToggled
-              ? AppColors.switchBackgroundActive
-              : AppColors.switchBackgroundInactive,
+              ? SurveyColors.switchBackgroundActive
+              : SurveyColors.switchBackgroundInactive,
           borderRadius: const BorderRadius.all(
-            Radius.circular(AppDimensions.circularRadiusS),
+            Radius.circular(SurveyDimensions.circularRadiusS),
           ),
         ),
-        duration: AppDurations.customizationItemDuration,
+        duration: SurveyDurations.customizationItemDuration,
         child: AnimatedAlign(
           alignment: _isToggled ? Alignment.centerRight : Alignment.centerLeft,
-          duration: AppDurations.customizationItemDuration,
+          duration: SurveyDurations.customizationItemDuration,
           child: Container(
-            margin: const EdgeInsets.all(AppDimensions.margin3XS),
-            width: AppDimensions.switchIndicatorWidth,
+            margin: const EdgeInsets.all(SurveyDimensions.margin3XS),
+            width: SurveyDimensions.switchIndicatorWidth,
             decoration: const BoxDecoration(
-              color: AppColors.black,
+              color: SurveyColors.black,
               borderRadius: BorderRadius.all(
-                Radius.circular(AppDimensions.circularRadiusM),
+                Radius.circular(SurveyDimensions.circularRadiusM),
               ),
             ),
           ),

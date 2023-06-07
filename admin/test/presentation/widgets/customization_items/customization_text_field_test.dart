@@ -8,7 +8,7 @@ import '../app_tester.dart';
 void main() {
   testWidgets('initialValue property', (tester) async {
     await tester.pumpWidget(
-      const AppTester(
+      AppTester(
         child: CustomizationTextField(
           initialValue: 'initialValue',
         ),
@@ -39,7 +39,7 @@ void main() {
 
   testWidgets('fontSize property', (tester) async {
     await tester.pumpWidget(
-      const AppTester(
+      AppTester(
         child: CustomizationTextField(
           fontSize: 14,
         ),
@@ -135,7 +135,7 @@ void main() {
       fillColor: Colors.black,
     );
     await tester.pumpWidget(
-      const AppTester(
+      AppTester(
         child: CustomizationTextField(
           decoration: decoration,
         ),

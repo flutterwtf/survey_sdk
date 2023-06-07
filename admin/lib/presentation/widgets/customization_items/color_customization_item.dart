@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
-import 'package:survey_admin/presentation/utils/utils.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
+import 'package:survey_sdk/survey_sdk.dart';
 
 class ColorCustomizationItem extends StatefulWidget {
   final Color initialColor;
@@ -74,27 +74,27 @@ class _ColorCustomizationItemState extends State<ColorCustomizationItem> {
   OverlayEntry _colorPickerEntry(Offset pos) {
     final height = MediaQuery.of(context).size.height;
     const colorPickerHeight =
-        AppDimensions.surveyEditorBarWidth - AppDimensions.marginL;
-    final top = pos.dy + colorPickerHeight + AppDimensions.marginXS > height
-        ? pos.dy - colorPickerHeight + AppDimensions.marginXS
-        : pos.dy + AppDimensions.marginXS;
+        SurveyDimensions.surveyEditorBarWidth - SurveyDimensions.marginL;
+    final top = pos.dy + colorPickerHeight + SurveyDimensions.marginXS > height
+        ? pos.dy - colorPickerHeight + SurveyDimensions.marginXS
+        : pos.dy + SurveyDimensions.marginXS;
     return OverlayEntry(
       builder: (context) {
         return Stack(
           children: [
             Positioned(
               top: top,
-              left: pos.dx + AppDimensions.marginXS,
-              width:
-                  AppDimensions.surveyEditorBarWidth - AppDimensions.margin4XL,
+              left: pos.dx + SurveyDimensions.marginXS,
+              width: SurveyDimensions.surveyEditorBarWidth -
+                  SurveyDimensions.margin4XL,
               height: colorPickerHeight,
               child: Material(
                 child: DecoratedBox(
                   decoration: const BoxDecoration(
-                    color: AppColors.whitePrimaryBackground,
+                    color: SurveyColors.whitePrimaryBackground,
                     boxShadow: [
                       BoxShadow(
-                        color: AppColors.greyBackground,
+                        color: SurveyColors.greyBackground,
                         spreadRadius: 5,
                         blurRadius: 7,
                         offset: Offset(0, 3),
@@ -158,21 +158,20 @@ class _ColorCustomizationItemState extends State<ColorCustomizationItem> {
                 decoration: BoxDecoration(
                   color: _pickedColor,
                   border: const Border.fromBorderSide(
-                    BorderSide(color: AppColors.greyBackground),
+                    BorderSide(color: SurveyColors.greyBackground),
                   ),
                 ),
-                width: AppDimensions.sizeM,
-                height: AppDimensions.sizeM,
+                width: SurveyDimensions.sizeM,
+                height: SurveyDimensions.sizeM,
               ),
             ),
             Expanded(
               child: Container(
-                margin: const EdgeInsets.all(AppDimensions.margin2XS),
+                margin: const EdgeInsets.all(SurveyDimensions.margin2XS),
                 child: CustomizationTextField(
                   focusNode: _focusNode,
                   controller: _controller,
                   inputFormatters: [
-                    // TODO(dev): move input formatters?
                     FilteringTextInputFormatter.allow(
                       RegExp('[0-9a-fA-F]'),
                     ),

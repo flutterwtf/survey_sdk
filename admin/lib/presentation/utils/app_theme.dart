@@ -1,28 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:survey_admin/presentation/utils/utils.dart';
+import 'package:survey_sdk/survey_sdk.dart';
 
 abstract class AppTheme {
   static final theme = ThemeData(
     appBarTheme: const AppBarTheme(
-      toolbarHeight: AppDimensions.appbarHeight,
-      shadowColor: AppColors.transparentW,
-      backgroundColor: AppColors.white,
+      toolbarHeight: SurveyDimensions.appbarHeight,
+      shadowColor: SurveyColors.transparentW,
+      backgroundColor: SurveyColors.white,
     ),
     listTileTheme: const ListTileThemeData(
-      selectedColor: AppColors.black,
-      selectedTileColor: AppColors.greyBackground,
+      selectedColor: SurveyColors.black,
+      selectedTileColor: SurveyColors.greyBackground,
     ),
     dividerTheme: const DividerThemeData(
-      space: AppDimensions.thinBorderWidth,
-      color: AppColors.greyBackground,
-      thickness: AppDimensions.thinBorderWidth,
+      space: SurveyDimensions.thinBorderWidth,
+      color: SurveyColors.greyBackground,
+      thickness: SurveyDimensions.thinBorderWidth,
     ),
     iconTheme: const IconThemeData(
-      color: AppColors.black,
+      color: SurveyColors.black,
     ),
     tabBarTheme: const TabBarTheme(
-      labelColor: AppColors.black,
-      unselectedLabelColor: AppColors.tabBarInactiveText,
+      labelColor: SurveyColors.black,
+      unselectedLabelColor: SurveyColors.tabBarInactiveText,
       indicator: UnderlineTabIndicator(
         borderSide: BorderSide(),
       ),
@@ -30,29 +30,29 @@ abstract class AppTheme {
     ),
     textButtonTheme: TextButtonThemeData(
       style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all(AppColors.black),
+        backgroundColor: MaterialStateProperty.all(SurveyColors.black),
       ),
     ),
-    fontFamily: AppFonts.inter,
+    fontFamily: SurveyFonts.inter,
     textTheme: const TextTheme(
-      titleMedium: TextStyle(color: AppColors.black),
+      titleMedium: TextStyle(color: SurveyColors.black),
       titleSmall: TextStyle(
-        color: AppColors.black,
-        fontWeight: AppFonts.weightSemiBold,
+        color: SurveyColors.black,
+        fontWeight: SurveyFonts.weightSemiBold,
       ),
-      bodyLarge: TextStyle(color: AppColors.black),
-      bodyMedium: TextStyle(color: AppColors.black),
-      bodySmall: TextStyle(color: AppColors.black),
+      bodyLarge: TextStyle(color: SurveyColors.black),
+      bodyMedium: TextStyle(color: SurveyColors.black),
+      bodySmall: TextStyle(color: SurveyColors.black),
       labelLarge: TextStyle(
-        color: AppColors.black,
-        fontWeight: AppFonts.weightBold,
+        color: SurveyColors.black,
+        fontWeight: SurveyFonts.weightBold,
       ),
     ),
     outlinedButtonTheme: OutlinedButtonThemeData(
-      style: OutlinedButton.styleFrom(foregroundColor: AppColors.black),
+      style: OutlinedButton.styleFrom(foregroundColor: SurveyColors.black),
     ),
     textSelectionTheme: const TextSelectionThemeData(
-      cursorColor: AppColors.black,
+      cursorColor: SurveyColors.black,
     ),
   );
 }

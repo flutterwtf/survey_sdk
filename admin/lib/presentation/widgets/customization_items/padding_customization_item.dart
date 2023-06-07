@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:survey_admin/presentation/utils/utils.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
 import 'package:survey_admin/presentation/widgets/vector_image.dart';
+import 'package:survey_sdk/survey_sdk.dart';
 
 class PaddingCustomizationItem extends StatelessWidget {
   final double initialHorizontalPadding;
@@ -27,30 +28,23 @@ class PaddingCustomizationItem extends StatelessWidget {
       children: [
         const _PaddingItem(isHorizontal: true),
         Flexible(
-          child: CustomizationTextField(
+          child: CustomizationTextField.int(
             initialValue: initialHorizontalPadding.toString(),
             inputFormatters: [
-              FilteringTextInputFormatter.digitsOnly,
               LengthLimitingTextInputFormatter(lengthInputFormatter),
             ],
-            onChanged: (value) => SizeHandler.onSizeChanged(
-              value,
-              onHorizontalPaddingChange,
-            ),
+            onChanged: (value) =>
+                onHorizontalPaddingChange(double.parse(value!)),
           ),
         ),
         const _PaddingItem(isHorizontal: false),
         Flexible(
-          child: CustomizationTextField(
+          child: CustomizationTextField.int(
             initialValue: initialVerticalPadding.toString(),
             inputFormatters: [
-              FilteringTextInputFormatter.digitsOnly,
               LengthLimitingTextInputFormatter(lengthInputFormatter),
             ],
-            onChanged: (value) => SizeHandler.onSizeChanged(
-              value,
-              onVerticalPaddingChange,
-            ),
+            onChanged: (value) => onVerticalPaddingChange(double.parse(value!)),
           ),
         ),
       ],
@@ -66,7 +60,7 @@ class _PaddingItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(right: AppDimensions.sizeS),
+      padding: const EdgeInsets.only(right: SurveyDimensions.sizeS),
       child: VectorImage(
         assetName: isHorizontal
             ? AppAssets.paddingHorizontalIcon

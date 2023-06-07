@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:survey_admin/presentation/utils/utils.dart';
+import 'package:survey_sdk/survey_sdk.dart';
 
 class CustomizationItemsContainer extends StatelessWidget {
   final String? title;
@@ -17,7 +17,7 @@ class CustomizationItemsContainer extends StatelessWidget {
     this.titlePadding,
     this.itemsPadding,
     this.isFontBold = false,
-    this.itemsSeparatorHeight = AppDimensions.marginS,
+    this.itemsSeparatorHeight = SurveyDimensions.marginS,
     this.shouldShowTopDivider = false,
     this.isBottomDividerShown = true,
     super.key,
@@ -33,10 +33,10 @@ class CustomizationItemsContainer extends StatelessWidget {
           Padding(
             padding: titlePadding ??
                 const EdgeInsets.only(
-                  left: AppDimensions.marginM,
-                  top: AppDimensions.marginM,
-                  right: AppDimensions.marginM,
-                  bottom: AppDimensions.marginS,
+                  left: SurveyDimensions.marginM,
+                  top: SurveyDimensions.marginM,
+                  right: SurveyDimensions.marginM,
+                  bottom: SurveyDimensions.marginS,
                 ),
             child: Text(
               title!,
@@ -46,9 +46,9 @@ class CustomizationItemsContainer extends StatelessWidget {
         Padding(
           padding: itemsPadding ??
               const EdgeInsets.only(
-                left: AppDimensions.marginM,
-                right: AppDimensions.marginM,
-                bottom: AppDimensions.marginM,
+                left: SurveyDimensions.marginM,
+                right: SurveyDimensions.marginM,
+                bottom: SurveyDimensions.marginM,
               ),
           child: Wrap(
             runSpacing: itemsSeparatorHeight,

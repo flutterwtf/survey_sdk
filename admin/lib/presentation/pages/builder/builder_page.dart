@@ -5,7 +5,6 @@ import 'package:survey_admin/presentation/app/di/injector.dart';
 import 'package:survey_admin/presentation/app/localization/app_localizations_ext.dart';
 import 'package:survey_admin/presentation/pages/builder/builder_cubit.dart';
 import 'package:survey_admin/presentation/pages/builder/builder_state.dart';
-import 'package:survey_admin/presentation/utils/utils.dart';
 import 'package:survey_admin/presentation/widgets/builder_page/editor_bar.dart';
 import 'package:survey_admin/presentation/widgets/builder_page/phone_view.dart';
 import 'package:survey_admin/presentation/widgets/builder_page/question_list.dart';
@@ -42,7 +41,7 @@ class _BuilderPageState extends State<BuilderPage> {
               child: Text(
                 context.localization.ok,
                 style: const TextStyle(
-                  color: AppColors.white,
+                  color: SurveyColors.white,
                 ),
               ),
               onPressed: () {
@@ -167,21 +166,21 @@ class _BuilderPageTabBar extends StatelessWidget {
     return DefaultTabController(
       length: tabLength,
       child: SizedBox(
-        width: AppDimensions.tabBarWidth,
+        width: SurveyDimensions.tabBarWidth,
         child: TabBar(
           tabs: [
             Tab(text: context.localization.create),
             Tab(text: context.localization.preview),
           ],
-          padding: const EdgeInsets.only(right: AppDimensions.tabBarPadding),
+          padding: const EdgeInsets.only(right: SurveyDimensions.tabBarPadding),
           indicator: const UnderlineTabIndicator(
             borderSide: BorderSide(),
             insets: EdgeInsets.symmetric(
-              horizontal: AppDimensions.margin4XL + AppDimensions.sizeM,
+              horizontal: SurveyDimensions.margin4XL + SurveyDimensions.sizeM,
             ),
           ),
           labelStyle: context.theme.textTheme.titleMedium
-              ?.copyWith(fontWeight: AppFonts.weightBold),
+              ?.copyWith(fontWeight: SurveyFonts.weightBold),
           onTap: (tabIndex) => tabIndex == previewTabIndex
               ? onTapPreviewMode()
               : onTapEditMode(),
@@ -200,9 +199,9 @@ class _ImportButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(
-        top: AppDimensions.margin2XS,
-        right: AppDimensions.margin2XL,
-        bottom: AppDimensions.margin2XS,
+        top: SurveyDimensions.margin2XS,
+        right: SurveyDimensions.margin2XL,
+        bottom: SurveyDimensions.margin2XS,
       ),
       child: OutlinedButton(
         onPressed: onImportPressed,
@@ -211,13 +210,13 @@ class _ImportButton extends StatelessWidget {
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(
-            horizontal: AppDimensions.margin3XL,
+            horizontal: SurveyDimensions.margin3XL,
           ),
           child: Text(
             context.localization.import,
             style: context.theme.textTheme.labelLarge?.copyWith(
-              fontFamily: AppFonts.karla,
-              color: AppColors.text,
+              fontFamily: SurveyFonts.karla,
+              color: SurveyColors.text,
             ),
           ),
         ),
@@ -248,7 +247,7 @@ class _ExportButton extends StatelessWidget {
               child: Text(
                 context.localization.ok,
                 style: const TextStyle(
-                  color: AppColors.white,
+                  color: SurveyColors.white,
                 ),
               ),
               onPressed: () {
@@ -265,9 +264,9 @@ class _ExportButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(
-        top: AppDimensions.margin2XS,
-        right: AppDimensions.margin3XL,
-        bottom: AppDimensions.margin2XS,
+        top: SurveyDimensions.margin2XS,
+        right: SurveyDimensions.margin3XL,
+        bottom: SurveyDimensions.margin2XS,
       ),
       child: TextButton(
         onPressed: isButtonActive
@@ -281,13 +280,13 @@ class _ExportButton extends StatelessWidget {
               },
         child: Padding(
           padding: const EdgeInsets.symmetric(
-            horizontal: AppDimensions.margin3XL,
+            horizontal: SurveyDimensions.margin3XL,
           ),
           child: Text(
             context.localization.export,
             style: context.theme.textTheme.labelLarge?.copyWith(
-              fontFamily: AppFonts.karla,
-              color: AppColors.white,
+              fontFamily: SurveyFonts.karla,
+              color: SurveyColors.white,
             ),
           ),
         ),

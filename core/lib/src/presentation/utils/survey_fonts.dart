@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:survey_admin/presentation/utils/app_colors.dart';
+import 'package:survey_sdk/src/presentation/utils/survey_colors.dart';
 
-// TODO(dev): it looks like core class.
-// TODO(dev): folder structure is weird. We need better constants
-//  folder organization. Maybe it's better to move something to the core module.
-class AppFonts {
+class SurveyFonts {
   static const FontWeight weightBold = FontWeight.w700;
   static const FontWeight weightSemiBold = FontWeight.w600;
   static const FontWeight weightMedium = FontWeight.w500;
@@ -28,20 +25,21 @@ extension AppTextThemeExt on BuildContext {
 
 extension CustomStyles on TextTheme {
   TextStyle get headLineMediumBold => const TextStyle(
-        fontSize: AppFonts.sizeL,
-        fontWeight: AppFonts.weightBold,
-        color: AppColors.black,
+        fontSize: SurveyFonts.sizeL,
+        fontWeight: SurveyFonts.weightBold,
+        color: SurveyColors.black,
       );
 
   TextStyle get buttonNameDark => const TextStyle(
-        fontSize: AppFonts.sizeM,
-        fontWeight: AppFonts.weightMedium,
-        color: AppColors.white,
+        fontSize: SurveyFonts.sizeM,
+        fontWeight: SurveyFonts.weightMedium,
+        color: SurveyColors.white,
         letterSpacing: 0.1,
       );
+
   TextStyle get buttonNameLight => const TextStyle(
-        fontSize: AppFonts.sizeM,
-        fontWeight: AppFonts.weightBold,
-        color: AppColors.black,
+        fontSize: SurveyFonts.sizeM,
+        fontWeight: SurveyFonts.weightBold,
+        color: SurveyColors.black,
       );
 }

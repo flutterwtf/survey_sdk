@@ -9,7 +9,7 @@ import 'package:survey_sdk/src/presentation/widgets/question_bottom_button.dart'
 import 'package:survey_sdk/src/presentation/widgets/question_content.dart';
 import 'package:survey_sdk/src/presentation/widgets/question_title.dart';
 
-const _radius = AppDimensions.circularRadiusXS;
+const _radius = SurveyDimensions.circularRadiusXS;
 
 /// The question page with an input field for the
 /// user to enter a response. It includes a question, question description,
@@ -97,10 +97,10 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
             hasScrollBody: false,
             child: Padding(
               padding: const EdgeInsets.only(
-                left: AppDimensions.margin2XL,
-                right: AppDimensions.margin2XL,
-                top: AppDimensions.margin3XL,
-                bottom: AppDimensions.marginXL,
+                left: SurveyDimensions.margin2XL,
+                right: SurveyDimensions.margin2XL,
+                top: SurveyDimensions.margin3XL,
+                bottom: SurveyDimensions.marginXL,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -114,7 +114,7 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
                   if (widget.data.subtitle.isNotEmpty)
                     Padding(
                       padding: const EdgeInsets.only(
-                        top: AppDimensions.marginS,
+                        top: SurveyDimensions.marginS,
                       ),
                       child: QuestionContent(
                         content: widget.data.subtitle,
@@ -126,7 +126,7 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
                   //  (date,number,string and etc).
                   Padding(
                     padding: EdgeInsets.only(
-                      top: AppDimensions.marginM + theme.verticalPadding,
+                      top: SurveyDimensions.marginM + theme.verticalPadding,
                       bottom: theme.verticalPadding,
                     ),
                     child: isDateType
@@ -161,7 +161,8 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
                   ),
                   const Spacer(),
                   Padding(
-                    padding: const EdgeInsets.only(top: AppDimensions.marginS),
+                    padding:
+                        const EdgeInsets.only(top: SurveyDimensions.marginS),
                     child: Row(
                       children: [
                         if (widget.data.isSkip)
