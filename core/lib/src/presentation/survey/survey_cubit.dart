@@ -3,6 +3,7 @@ import 'package:survey_sdk/src/domain/entities/question_answer.dart';
 import 'package:survey_sdk/src/domain/entities/survey_data.dart';
 import 'package:survey_sdk/src/domain/repository_interfaces/survey_data_repository.dart';
 import 'package:survey_sdk/src/presentation/survey/survey_state.dart';
+import 'package:survey_sdk/src/presentation/utils/survey_error_state.dart';
 import 'package:survey_sdk/survey_sdk.dart';
 
 /// A Cubit that manages the state and logic for the survey.
@@ -39,19 +40,17 @@ class SurveyCubit extends Cubit<SurveyState> {
           ? SurveyLoadedState(surveyData: surveyData)
           : SurveyErrorLoadState(
               providedErrors: providedErrors,
-              detailed: false,
+              errorState: SurveyErrorState.collapsed,
             ),
     );
   }
 
-  void detailedError() {
+  void detailedError(SurveyErrorState errorState) {
     if (state is! SurveyErrorLoadState) return;
 
-    final surveyErrorLoadState = state as SurveyErrorLoadState;
-
     emit(
-      surveyErrorLoadState.copyWith(
-        detailed: !surveyErrorLoadState.detailed,
+      (state as SurveyErrorLoadState).copyWith(
+        errorState: errorState,
       ),
     );
   }

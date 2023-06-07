@@ -87,6 +87,12 @@ abstract class SurveyLocalizations {
   /// A list of this localizations delegate's supported locales.
   static const List<Locale> supportedLocales = <Locale>[Locale('en')];
 
+  /// No description provided for @showMoreErrorDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Damaged JSON'**
+  String get damagedJson;
+
   /// No description provided for @hideErrorDetails.
   ///
   /// In en, this message translates to:
@@ -105,12 +111,6 @@ abstract class SurveyLocalizations {
   /// **'Show details'**
   String get showErrorDetails;
 
-  /// No description provided for @showMoreErrorDetails.
-  ///
-  /// In en, this message translates to:
-  /// **'Show more details'**
-  String get showMoreErrorDetails;
-
   /// No description provided for @skip.
   ///
   /// In en, this message translates to:
@@ -120,7 +120,7 @@ abstract class SurveyLocalizations {
   /// No description provided for @surveyLoadError.
   ///
   /// In en, this message translates to:
-  /// **'Data is corrupted, survey has not been'**
+  /// **'Data is corrupted, survey has not been loaded'**
   String get surveyLoadError;
 
   /// No description provided for @textField.

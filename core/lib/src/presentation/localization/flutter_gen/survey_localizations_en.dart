@@ -3,7 +3,10 @@ import 'package:survey_sdk/src/presentation/localization/flutter_gen/survey_loca
 /// The translations for English (`en`).
 class SurveyLocalizationsEn extends SurveyLocalizations {
   @override
-  String get hideErrorDetails => 'Hide details';
+  String get damagedJson => 'Damaged JSON';
+
+  @override
+  String get hideErrorDetails => 'Close details';
 
   @override
   String get next => 'NEXT';
@@ -12,13 +15,10 @@ class SurveyLocalizationsEn extends SurveyLocalizations {
   String get showErrorDetails => 'Show details';
 
   @override
-  String get showMoreErrorDetails => 'Show more details';
-
-  @override
   String get skip => 'SKIP';
 
   @override
-  String get surveyLoadError => 'Data is corrupted, survey has not been';
+  String get surveyLoadError => 'Data is corrupted, survey has not been loaded';
 
   @override
   String get textField => 'Text field';

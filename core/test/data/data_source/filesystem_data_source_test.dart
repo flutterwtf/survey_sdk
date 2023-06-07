@@ -19,10 +19,12 @@ void main() {
       );
     });
 
-    test('Call with bad parameter', () {
+    test('Call with bad parameter', () async {
+      final receivedSurveyData = await dataSource.getSurveyData('bad asset');
+
       expect(
-        () => dataSource.getSurveyData('bad asset'),
-        throwsFlutterError,
+        receivedSurveyData.$1,
+        isNull,
       );
     });
 

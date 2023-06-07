@@ -136,7 +136,7 @@ class _SurveyState extends State<Survey> {
           return SurveyError(
             providedErrors: state.providedErrors,
             onDetailsTap: _cubit.detailedError,
-            detailed: state.detailed,
+            errorState: state.errorState,
           );
         }
         return const Center(

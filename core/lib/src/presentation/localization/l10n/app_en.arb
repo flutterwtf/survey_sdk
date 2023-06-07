@@ -1,9 +1,9 @@
 {
-  "hideErrorDetails": "Hide details",
+  "damagedJson": "Damaged JSON",
+  "hideErrorDetails": "Close details",
   "next": "NEXT",
   "showErrorDetails": "Show details",
-  "showMoreErrorDetails": "Show more details",
   "skip": "SKIP",
-  "surveyLoadError": "Data is corrupted, survey has not been",
+  "surveyLoadError": "Data is corrupted, survey has not been loaded",
   "textField": "Text field"
 }
