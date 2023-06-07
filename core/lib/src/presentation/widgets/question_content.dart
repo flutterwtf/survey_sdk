@@ -24,8 +24,8 @@ class QuestionContent extends StatelessWidget {
     return Text(
       content,
       style: TextStyle(
-        color: textColor ?? AppColors.black,
-        fontSize: textSize ?? AppFonts.sizeS,
+        color: textColor ?? SurveyColors.black,
+        fontSize: textSize ?? SurveyFonts.sizeS,
       ),
     );
   }

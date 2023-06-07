@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:survey_admin/presentation/utils/utils.dart';
+import 'package:survey_sdk/survey_sdk.dart';
 
 const _marginHorizontal = 24.0;
 const _marginVertical = 21.0;
@@ -16,12 +17,12 @@ class PhoneView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ColoredBox(
-      color: AppColors.greyBackground,
+      color: SurveyColors.greyBackground,
       child: Center(
         child: FittedBox(
           fit: BoxFit.fitWidth,
           child: Padding(
-            padding: const EdgeInsets.all(AppDimensions.sizeL),
+            padding: const EdgeInsets.all(SurveyDimensions.sizeL),
             child: Stack(
               children: [
                 SvgPicture.asset(AppAssets.iphoneImage),
@@ -33,7 +34,7 @@ class PhoneView extends StatelessWidget {
                     ),
                     child: ClipRRect(
                       borderRadius: const BorderRadius.all(
-                        Radius.circular(AppDimensions.circularRadiusXL),
+                        Radius.circular(SurveyDimensions.circularRadiusXL),
                       ),
                       child: child,
                     ),

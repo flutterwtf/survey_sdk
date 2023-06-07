@@ -10,7 +10,6 @@ import 'package:survey_admin/data/repositories/session_storage_repository_impl.d
 import 'package:survey_admin/domain/repository_interfaces/file_system_repository.dart.dart';
 import 'package:survey_admin/domain/repository_interfaces/session_storage_repository.dart';
 import 'package:survey_admin/presentation/pages/builder/builder_cubit.dart';
-import 'package:survey_admin/presentation/pages/new_question_page/new_question_cubit.dart';
 import 'package:survey_admin/presentation/utils/common_data.dart';
 
 //ignore_for_file: prefer-static-class
@@ -47,9 +46,7 @@ void _initRepositories() {
 }
 
 void _initCubits() {
-  i
-    ..registerFactory<NewQuestionCubit>(NewQuestionCubit.new)
-    ..registerFactory<BuilderCubit>(() => BuilderCubit(i.get(), i.get()));
+  i.registerFactory<BuilderCubit>(() => BuilderCubit(i.get(), i.get()));
 }
 
 void initCommonData(BuildContext context) {

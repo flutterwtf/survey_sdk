@@ -24,9 +24,9 @@ class QuestionTitle extends StatelessWidget {
     return Text(
       title,
       style: TextStyle(
-        color: textColor ?? AppColors.black,
-        fontSize: textSize ?? AppFonts.sizeL,
-        fontWeight: AppFonts.weightBold,
+        color: textColor ?? SurveyColors.black,
+        fontSize: textSize ?? SurveyFonts.sizeL,
+        fontWeight: SurveyFonts.weightBold,
       ),
     );
   }

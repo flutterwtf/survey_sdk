@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:survey_admin/presentation/app/localization/app_localizations_ext.dart';
-import 'package:survey_admin/presentation/utils/utils.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
+import 'package:survey_sdk/survey_sdk.dart';
 
 class OptionCustomizationItem extends StatefulWidget {
   final List<String> options;
@@ -67,15 +67,15 @@ class _OptionCustomizationItemState extends State<OptionCustomizationItem> {
             delete: () => _delete(option),
           ),
         ),
-        const SizedBox(height: AppDimensions.sizeS),
+        const SizedBox(height: SurveyDimensions.sizeS),
         Row(
           children: [
             const Icon(
               Icons.fiber_manual_record,
-              size: AppDimensions.sizeS,
-              color: AppColors.textLightGrey,
+              size: SurveyDimensions.sizeS,
+              color: SurveyColors.textLightGrey,
             ),
-            const SizedBox(width: AppDimensions.margin2XS),
+            const SizedBox(width: SurveyDimensions.margin2XS),
             Expanded(
               child: CustomizationTextField(
                 controller: _controller,
@@ -83,7 +83,7 @@ class _OptionCustomizationItemState extends State<OptionCustomizationItem> {
                 decoration: InputDecoration.collapsed(
                   hintText: context.localization.typeNewOptionHere,
                   hintStyle: const TextStyle(
-                    color: AppColors.textHintGrey,
+                    color: SurveyColors.textHintGrey,
                   ),
                 ),
               ),
@@ -110,9 +110,9 @@ class _Option extends StatelessWidget {
       children: [
         const Icon(
           Icons.fiber_manual_record,
-          size: AppDimensions.sizeS,
+          size: SurveyDimensions.sizeS,
         ),
-        const SizedBox(width: AppDimensions.margin2XS),
+        const SizedBox(width: SurveyDimensions.margin2XS),
         Expanded(
           child: Text(
             option,
@@ -123,7 +123,7 @@ class _Option extends StatelessWidget {
           padding: EdgeInsets.zero,
           icon: const Icon(
             Icons.close,
-            size: AppDimensions.sizeM,
+            size: SurveyDimensions.sizeM,
           ),
           onPressed: delete,
         ),

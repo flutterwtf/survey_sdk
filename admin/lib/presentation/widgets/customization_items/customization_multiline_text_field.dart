@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:survey_admin/presentation/app/localization/app_localizations_ext.dart';
-import 'package:survey_admin/presentation/utils/utils.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
+import 'package:survey_sdk/survey_sdk.dart';
 
 class CustomizationMultilineTextField extends StatefulWidget {
   final double maxHeight;

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:survey_admin/presentation/app/localization/app_localizations_ext.dart';
-import 'package:survey_admin/presentation/utils/utils.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/switch_customization_item.dart';
+import 'package:survey_sdk/survey_sdk.dart';
 
 class SecondaryButtonCustomizationItem extends StatefulWidget {
   final void Function({required bool isShown, required String text}) onChanged;
@@ -48,11 +48,11 @@ class _SecondaryButtonCustomizationItemState
           },
         ),
         AnimatedSize(
-          duration: AppDurations.customizationItemDuration,
+          duration: SurveyDurations.customizationItemDuration,
           child: _isShown
               ? Padding(
                   padding: const EdgeInsets.only(
-                    top: AppDimensions.marginM,
+                    top: SurveyDimensions.marginM,
                   ),
                   child: CustomizationTextField(
                     initialValue: widget.initialText,

@@ -1,5 +1,3 @@
-// TODO(dev): Use export for constants.
-
 abstract class AppAssets {
   /// Icons.
   static const String closeIcon = '${_iconsFolder}close_icon.svg';

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:survey_admin/presentation/utils/utils.dart';
+import 'package:survey_sdk/survey_sdk.dart';
 
 class DropdownCustomizationButton<T> extends StatefulWidget {
   final T value;
@@ -35,7 +36,7 @@ class _DropdownCustomizationButtonState<T>
     _isExpanded = false;
     _iconAnimationController = AnimationController(
       vsync: this,
-      duration: AppDurations.customizationItemDuration,
+      duration: SurveyDurations.customizationItemDuration,
     );
     // ignore: prefer_int_literals
     _animation = Tween(begin: tweenBegin, end: tweenEnd).animate(
@@ -67,10 +68,10 @@ class _DropdownCustomizationButtonState<T>
       decoration: widget.withColor
           ? BoxDecoration(
               color: _isExpanded
-                  ? AppColors.dropdownMenuBackground
-                  : AppColors.whitePrimaryBackground,
+                  ? SurveyColors.dropdownMenuBackground
+                  : SurveyColors.whitePrimaryBackground,
               borderRadius: const BorderRadius.all(
-                Radius.circular(AppDimensions.circularRadiusS),
+                Radius.circular(SurveyDimensions.circularRadiusS),
               ),
             )
           : const BoxDecoration(),
@@ -79,8 +80,8 @@ class _DropdownCustomizationButtonState<T>
         children: [
           Padding(
             padding: const EdgeInsets.symmetric(
-              vertical: AppDimensions.margin2XS,
-              horizontal: AppDimensions.marginM,
+              vertical: SurveyDimensions.margin2XS,
+              horizontal: SurveyDimensions.marginM,
             ),
             child: InkWell(
               child: Row(
@@ -105,7 +106,7 @@ class _DropdownCustomizationButtonState<T>
             ),
           ),
           AnimatedSize(
-            duration: AppDurations.customizationItemDuration,
+            duration: SurveyDurations.customizationItemDuration,
             child: _isExpanded
                 ? Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -145,8 +146,8 @@ class DropdownCustomizationItem<T> extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.symmetric(
-                  vertical: AppDimensions.margin2XS,
-                  horizontal: AppDimensions.marginM,
+                  vertical: SurveyDimensions.margin2XS,
+                  horizontal: SurveyDimensions.marginM,
                 ),
                 child: child,
               ),

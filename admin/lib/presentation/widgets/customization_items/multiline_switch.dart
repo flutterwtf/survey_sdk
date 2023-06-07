@@ -3,9 +3,9 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:survey_admin/presentation/app/localization/app_localizations_ext.dart';
-import 'package:survey_admin/presentation/utils/utils.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/switch_customization_item.dart';
+import 'package:survey_sdk/survey_sdk.dart';
 
 class MultilineSwitch extends StatefulWidget {
   const MultilineSwitch({
@@ -41,12 +41,11 @@ class _MultilineSwitchState extends State<MultilineSwitch> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO(dev): It is not smooth enough.
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.only(top: AppDimensions.marginS),
+          padding: const EdgeInsets.only(top: SurveyDimensions.marginS),
           child: SwitchCustomizationItem(
             initialValue: _isMultiline,
             title: context.localization.multiline,
@@ -60,7 +59,7 @@ class _MultilineSwitchState extends State<MultilineSwitch> {
           ),
         ),
         AnimatedSize(
-          duration: AppDurations.customizationItemDuration,
+          duration: SurveyDurations.customizationItemDuration,
           child: _isMultiline
               ? _LineAmountInputField(
                   defaultLineAmount: widget.lines,
@@ -93,7 +92,7 @@ class _LineAmountInputField extends StatelessWidget {
     const lengthInputFormatter = 3;
     return Padding(
       padding: const EdgeInsets.only(
-        top: AppDimensions.marginM,
+        top: SurveyDimensions.marginM,
       ),
       child: Row(
         children: [
@@ -101,7 +100,7 @@ class _LineAmountInputField extends StatelessWidget {
             '${context.localization.lines}:',
             style: context.theme.textTheme.bodyMedium,
           ),
-          const SizedBox(width: AppDimensions.margin2XS),
+          const SizedBox(width: SurveyDimensions.margin2XS),
           Expanded(
             child: CustomizationTextField(
               inputFormatters: [
@@ -109,7 +108,7 @@ class _LineAmountInputField extends StatelessWidget {
                 LengthLimitingTextInputFormatter(lengthInputFormatter),
               ],
               initialValue: defaultLineAmount.toString(),
-              fontSize: AppFonts.sizeM,
+              fontSize: SurveyFonts.sizeM,
               onChanged: (value) => value == null
                   ? onChanged(1)
                   : onChanged(int.tryParse(value) ?? 1),

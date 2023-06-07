@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:survey_admin/presentation/utils/utils.dart';
-import 'package:survey_admin/presentation/widgets/customization_panel/customization_tab.dart';
+import 'package:survey_admin/presentation/widgets/base/customization_tab.dart';
+import 'package:survey_sdk/survey_sdk.dart';
 
 class QuestionSettingsTabBar extends StatefulWidget {
   final List<CustomizationTab> tabs;
@@ -43,7 +43,7 @@ class _QuestionSettingsTabBarState extends State<QuestionSettingsTabBar>
         TabBar(
           controller: _tabController,
           labelStyle: context.theme.textTheme.bodyMedium?.copyWith(
-            fontWeight: AppFonts.weightMedium,
+            fontWeight: SurveyFonts.weightMedium,
           ),
           tabs: [
             for (final tab in widget.tabs) Tab(text: tab.title),

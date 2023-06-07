@@ -143,7 +143,7 @@ class _SurveyState extends State<Survey> {
         }
         return const Center(
           child: CircularProgressIndicator(
-            color: AppColors.black,
+            color: SurveyColors.black,
           ),
         );
       },
