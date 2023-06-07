@@ -7,11 +7,11 @@ import 'package:survey_admin/presentation/widgets/customization_items/secondary_
 import 'package:survey_admin/presentation/widgets/customization_panel/customization_tab.dart';
 import 'package:survey_sdk/survey_sdk.dart';
 
-class IntroContentCustomizationTab extends CustomizationTab {
+class InfoContentCustomizationTab extends CustomizationTab {
   final ValueChanged<QuestionData> onChange;
-  final IntroQuestionData editable;
+  final InfoQuestionData editable;
 
-  const IntroContentCustomizationTab({
+  const InfoContentCustomizationTab({
     required this.onChange,
     required super.title,
     required this.editable,

@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:survey_admin/presentation/app/localization/app_localizations_ext.dart';
-import 'package:survey_admin/presentation/widgets/customization_panel/intro/intro_common_customization_tab.dart';
-import 'package:survey_admin/presentation/widgets/customization_panel/intro/intro_content_customization_tab.dart';
+import 'package:survey_admin/presentation/widgets/customization_panel/info/info_common_customization_tab.dart';
+import 'package:survey_admin/presentation/widgets/customization_panel/info/info_content_customization_tab.dart';
 import 'package:survey_admin/presentation/widgets/question_settings_tab_bar.dart';
 import 'package:survey_sdk/survey_sdk.dart';
 
-class IntroCustomizationPanel extends StatelessWidget {
+class InfoCustomizationPanel extends StatelessWidget {
   final ValueChanged<QuestionData> onChange;
-  final IntroQuestionData editable;
+  final InfoQuestionData editable;
 
-  const IntroCustomizationPanel({
+  const InfoCustomizationPanel({
     required this.onChange,
     required this.editable,
     super.key,
@@ -19,12 +19,12 @@ class IntroCustomizationPanel extends StatelessWidget {
   Widget build(BuildContext context) {
     return QuestionSettingsTabBar(
       tabs: [
-        IntroContentCustomizationTab(
+        InfoContentCustomizationTab(
           onChange: onChange,
           title: context.localization.content,
           editable: editable,
         ),
-        IntroCommonCustomizationTab(
+        InfoCommonCustomizationTab(
           onChange: onChange,
           // TODO(dev): We can remove title property probably.
           title: context.localization.common,

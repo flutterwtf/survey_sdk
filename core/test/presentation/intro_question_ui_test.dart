@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:survey_sdk/src/domain/entities/question_types/intro_question_data.dart';
-import 'package:survey_sdk/src/presentation/intro_question/intro_question_page.dart';
+import 'package:survey_sdk/src/domain/entities/question_types/info_question_data.dart';
+import 'package:survey_sdk/src/presentation/info_question/info_question_page.dart';
 
 import 'widget/app_tester.dart';
 
@@ -17,8 +17,8 @@ void main() {
       const subtitleInCommonData = '';
 
       final introQuestionPage = AppTester(
-        child: IntroQuestionPage(
-          data: const IntroQuestionData.common(),
+        child: InfoQuestionPage(
+          data: const InfoQuestionData.common(),
           onMainButtonTap: completerOnMainButtonTap.complete,
           onSecondaryButtonTap: completerOnSecondButton.complete,
         ),

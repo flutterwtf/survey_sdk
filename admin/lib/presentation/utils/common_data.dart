@@ -38,15 +38,15 @@ class CommonData {
 
   const CommonData(this.context);
 
-  IntroQuestionData intro({int index = 0}) {
-    return IntroQuestionData(
+  InfoQuestionData intro({int index = 0}) {
+    return InfoQuestionData(
       primaryButtonText: context.localization.next,
       title: context.localization.intro,
       index: index,
       subtitle: context.localization.emptySubtitle,
       isSkip: false,
       content: context.localization.questionContent,
-      theme: const IntroQuestionTheme.common(),
+      theme: const InfoQuestionTheme.common(),
       secondaryButtonText: context.localization.skip,
     );
   }
@@ -104,15 +104,15 @@ class CommonData {
     );
   }
 
-  IntroQuestionData finalPage({int index = 0}) {
-    return IntroQuestionData(
+  InfoQuestionData finalPage({int index = 0}) {
+    return InfoQuestionData(
       primaryButtonText: context.localization.next,
       title: context.localization.finalPage,
       index: index,
       subtitle: context.localization.emptySubtitle,
       isSkip: false,
       content: context.localization.emptyContent,
-      theme: const IntroQuestionTheme.common(),
+      theme: const InfoQuestionTheme.common(),
       secondaryButtonText: context.localization.skip,
     );
   }

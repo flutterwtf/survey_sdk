@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:survey_sdk/src/domain/entities/question_types/intro_question_data.dart';
-import 'package:survey_sdk/src/domain/entities/themes/intro_question_theme.dart';
+import 'package:survey_sdk/src/domain/entities/question_types/info_question_data.dart';
+import 'package:survey_sdk/src/domain/entities/themes/info_question_theme.dart';
 import 'package:survey_sdk/src/presentation/utils/utils.dart';
 import 'package:survey_sdk/src/presentation/widgets/question_content.dart';
 import 'package:survey_sdk/src/presentation/widgets/question_title.dart';
@@ -11,7 +11,7 @@ import 'package:survey_sdk/src/presentation/widgets/question_title.dart';
 /// the user. It can contain a title, subtitle, and buttons for navigation.
 class FinalPage extends StatefulWidget {
   /// Contains the content for a page.
-  final IntroQuestionData data;
+  final InfoQuestionData data;
 
   const FinalPage({
     required this.data,
@@ -26,7 +26,7 @@ class _FinalPageState extends State<FinalPage> {
   @override
   Widget build(BuildContext context) {
     final theme =
-        widget.data.theme ?? Theme.of(context).extension<IntroQuestionTheme>()!;
+        widget.data.theme ?? Theme.of(context).extension<InfoQuestionTheme>()!;
     return Scaffold(
       backgroundColor: theme.fill,
       body: CustomScrollView(

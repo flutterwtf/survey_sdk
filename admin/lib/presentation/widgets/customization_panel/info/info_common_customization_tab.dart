@@ -7,19 +7,19 @@ import 'package:survey_admin/presentation/widgets/customization_items/text_style
 import 'package:survey_admin/presentation/widgets/customization_panel/customization_tab.dart';
 import 'package:survey_sdk/survey_sdk.dart';
 
-class IntroCommonCustomizationTab extends CustomizationTab {
+class InfoCommonCustomizationTab extends CustomizationTab {
   final ValueChanged<QuestionData> onChange;
-  final IntroQuestionData editable;
+  final InfoQuestionData editable;
 
-  const IntroCommonCustomizationTab({
+  const InfoCommonCustomizationTab({
     required this.onChange,
     required super.title,
     required this.editable,
     super.key,
   });
 
-  IntroQuestionTheme get theme =>
-      editable.theme ?? const IntroQuestionTheme.common();
+  InfoQuestionTheme get theme =>
+      editable.theme ?? const InfoQuestionTheme.common();
 
   @override
   Widget build(BuildContext context) {

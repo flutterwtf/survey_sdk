@@ -1,14 +1,14 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:survey_sdk/src/data/mappers/question_types/choice_question_data/choice_question_data_mapper_factory.dart';
+import 'package:survey_sdk/src/data/mappers/question_types/info_question_data/info_question_data_mapper_factory.dart';
 import 'package:survey_sdk/src/data/mappers/question_types/input_question_data/input_question_data_mapper_factory.dart';
-import 'package:survey_sdk/src/data/mappers/question_types/intro_question_data/intro_question_data_mapper_factory.dart';
 import 'package:survey_sdk/src/data/mappers/question_types/slider_question_data/slider_question_data_mapper_factory.dart';
 import 'package:survey_sdk/src/domain/entities/api_object.dart';
 import 'package:survey_sdk/src/domain/entities/constants/scheme_info.dart';
 import 'package:survey_sdk/src/domain/entities/question_types/choice_question_data.dart';
+import 'package:survey_sdk/src/domain/entities/question_types/info_question_data.dart';
 import 'package:survey_sdk/src/domain/entities/question_types/input_question_data.dart';
-import 'package:survey_sdk/src/domain/entities/question_types/intro_question_data.dart';
 import 'package:survey_sdk/src/domain/entities/question_types/slider_question_data.dart';
 
 abstract class _Fields {
@@ -27,7 +27,7 @@ class CommonTheme extends ThemeExtension<CommonTheme>
   final SliderQuestionData slider;
 
   /// The theme configuration for intro questions.
-  final IntroQuestionData intro;
+  final InfoQuestionData intro;
 
   /// The theme configuration for input questions.
   final InputQuestionData input;
@@ -56,7 +56,7 @@ class CommonTheme extends ThemeExtension<CommonTheme>
       slider: SliderQuestionDataMapperFactory.getMapper(
         schemeVersion,
       ).fromJson(json[_Fields.slider]),
-      intro: IntroQuestionDataMapperFactory.getMapper(
+      intro: InfoQuestionDataMapperFactory.getMapper(
         schemeVersion,
       ).fromJson(json[_Fields.intro]),
       input: InputQuestionDataMapperFactory.getMapper(
@@ -73,7 +73,7 @@ class CommonTheme extends ThemeExtension<CommonTheme>
         _Fields.slider: SliderQuestionDataMapperFactory.getMapper(
           schemeVersion ?? SchemeInfo.version,
         ).toJson(slider),
-        _Fields.intro: IntroQuestionDataMapperFactory.getMapper(
+        _Fields.intro: InfoQuestionDataMapperFactory.getMapper(
           schemeVersion ?? SchemeInfo.version,
         ).toJson(intro),
         _Fields.input: InputQuestionDataMapperFactory.getMapper(
@@ -87,7 +87,7 @@ class CommonTheme extends ThemeExtension<CommonTheme>
   @override
   CommonTheme copyWith({
     SliderQuestionData? slider,
-    IntroQuestionData? intro,
+    InfoQuestionData? intro,
     InputQuestionData? input,
     ChoiceQuestionData? choice,
   }) {

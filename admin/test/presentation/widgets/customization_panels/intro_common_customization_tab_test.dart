@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/color_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/radius_customization_item.dart';
-import 'package:survey_admin/presentation/widgets/customization_panel/intro/intro_common_customization_tab.dart';
+import 'package:survey_admin/presentation/widgets/customization_panel/info/info_common_customization_tab.dart';
 import 'package:survey_sdk/survey_sdk.dart';
 
 import '../app_tester.dart';
@@ -21,14 +21,14 @@ void main() {
       const redColor = Color(0xfff44336);
 
       final data =
-          ValueNotifier<IntroQuestionData>(const IntroQuestionData.common());
+          ValueNotifier<InfoQuestionData>(const InfoQuestionData.common());
       final introCommonCustomPanel = AppTester(
-        child: ValueListenableBuilder<IntroQuestionData>(
+        child: ValueListenableBuilder<InfoQuestionData>(
           valueListenable: data,
-          builder: (_, value, child) => IntroCommonCustomizationTab(
+          builder: (_, value, child) => InfoCommonCustomizationTab(
             title: 'title',
             onChange: (QuestionData<dynamic> newData) {
-              data.value = newData as IntroQuestionData;
+              data.value = newData as InfoQuestionData;
             },
             editable: value,
           ),

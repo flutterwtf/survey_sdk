@@ -1,8 +1,8 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:survey_sdk/src/data/mappers/question_types/choice_question_data/choice_question_data_mapper_factory.dart';
+import 'package:survey_sdk/src/data/mappers/question_types/info_question_data/info_question_data_mapper_factory.dart';
 import 'package:survey_sdk/src/data/mappers/question_types/input_question_data/input_question_data_mapper_factory.dart';
-import 'package:survey_sdk/src/data/mappers/question_types/intro_question_data/intro_question_data_mapper_factory.dart';
 import 'package:survey_sdk/src/data/mappers/question_types/slider_question_data/slider_question_data_mapper_factory.dart';
 import 'package:survey_sdk/src/domain/entities/api_object.dart';
 import 'package:survey_sdk/src/domain/entities/constants/scheme_info.dart';
@@ -23,7 +23,7 @@ class SurveyData with EquatableMixin, ApiObject {
   final List<QuestionData> questions;
 
   /// Contains last page in the survey.
-  final IntroQuestionData finalPage;
+  final InfoQuestionData finalPage;
 
   /// Defines the visual properties used throughout the app.
   final CommonTheme commonTheme;
@@ -45,7 +45,7 @@ class SurveyData with EquatableMixin, ApiObject {
     final schemeVersion = json[_Fields.schemeVersion];
     final finalPage =
         QuestionData.fromType(json[_Fields.finalPage], schemeVersion)
-            as IntroQuestionData;
+            as InfoQuestionData;
     for (final questionJson in json[_Fields.questions]) {
       questions.add(QuestionData.fromType(questionJson, schemeVersion));
     }
@@ -61,7 +61,7 @@ class SurveyData with EquatableMixin, ApiObject {
 
   SurveyData copyWith({
     List<QuestionData>? questions,
-    IntroQuestionData? finalPage,
+    InfoQuestionData? finalPage,
     CommonTheme? commonTheme,
   }) {
     return SurveyData(
@@ -138,10 +138,10 @@ class SurveyData with EquatableMixin, ApiObject {
           commonTheme: themeFromQuestionType,
         );
       case QuestionTypes.intro:
-        return IntroQuestionDataMapperFactory.getMapper(
+        return InfoQuestionDataMapperFactory.getMapper(
           schemeVersion,
         ).toJson(
-          question as IntroQuestionData,
+          question as InfoQuestionData,
           commonTheme: themeFromQuestionType,
         );
     }

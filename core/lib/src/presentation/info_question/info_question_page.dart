@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:survey_sdk/src/domain/entities/question_types/intro_question_data.dart';
-import 'package:survey_sdk/src/domain/entities/themes/intro_question_theme.dart';
+import 'package:survey_sdk/src/domain/entities/question_types/info_question_data.dart';
+import 'package:survey_sdk/src/domain/entities/themes/info_question_theme.dart';
 import 'package:survey_sdk/src/presentation/utils/utils.dart';
 import 'package:survey_sdk/src/presentation/widgets/question_bottom_button.dart';
 import 'package:survey_sdk/src/presentation/widgets/question_content.dart';
@@ -8,11 +8,11 @@ import 'package:survey_sdk/src/presentation/widgets/question_title.dart';
 
 /// The question page for displaying intro content.
 ///
-/// The [IntroQuestionPage] widget is used to display introductory content to
+/// The [InfoQuestionPage] widget is used to display introductory content to
 /// the user. It can contain a title, subtitle, and buttons for navigation.
-class IntroQuestionPage extends StatefulWidget {
+class InfoQuestionPage extends StatefulWidget {
   /// Contains the content for a page.
-  final IntroQuestionData data;
+  final InfoQuestionData data;
 
   /// Optional callback that is called after pressing main button.
   final VoidCallback? onMainButtonTap;
@@ -21,7 +21,7 @@ class IntroQuestionPage extends StatefulWidget {
   /// Optional callback that is called when the secondary button is tapped.
   final VoidCallback? onSecondaryButtonTap;
 
-  const IntroQuestionPage({
+  const InfoQuestionPage({
     required this.data,
     this.onMainButtonTap,
     this.onSecondaryButtonTap,
@@ -29,14 +29,14 @@ class IntroQuestionPage extends StatefulWidget {
   });
 
   @override
-  State<IntroQuestionPage> createState() => _IntroQuestionPageState();
+  State<InfoQuestionPage> createState() => _InfoQuestionPageState();
 }
 
-class _IntroQuestionPageState extends State<IntroQuestionPage> {
+class _InfoQuestionPageState extends State<InfoQuestionPage> {
   @override
   Widget build(BuildContext context) {
     final theme =
-        widget.data.theme ?? Theme.of(context).extension<IntroQuestionTheme>()!;
+        widget.data.theme ?? Theme.of(context).extension<InfoQuestionTheme>()!;
     return Scaffold(
       backgroundColor: theme.fill,
       body: CustomScrollView(

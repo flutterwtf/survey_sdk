@@ -1,13 +1,13 @@
 import 'package:survey_sdk/src/domain/entities/input_validator.dart';
 import 'package:survey_sdk/src/domain/entities/question_types/choice_question_data.dart';
+import 'package:survey_sdk/src/domain/entities/question_types/info_question_data.dart';
 import 'package:survey_sdk/src/domain/entities/question_types/input_question_data.dart';
-import 'package:survey_sdk/src/domain/entities/question_types/intro_question_data.dart';
 import 'package:survey_sdk/src/domain/entities/question_types/slider_question_data.dart';
 import 'package:survey_sdk/src/domain/entities/survey_data.dart';
 import 'package:survey_sdk/src/domain/entities/themes/choice_question_theme.dart';
 import 'package:survey_sdk/src/domain/entities/themes/common_theme.dart';
+import 'package:survey_sdk/src/domain/entities/themes/info_question_theme.dart';
 import 'package:survey_sdk/src/domain/entities/themes/input_question_theme.dart';
-import 'package:survey_sdk/src/domain/entities/themes/intro_question_theme.dart';
 import 'package:survey_sdk/src/domain/entities/themes/slider_question_theme.dart';
 
 abstract class MockedEntities {
@@ -106,23 +106,23 @@ abstract class MockedEntities {
     ),
   );
 
-  static const intro1 = IntroQuestionData(
+  static const intro1 = InfoQuestionData(
     primaryButtonText: 'Next',
     index: 0,
     title: 'title',
     subtitle: 'subtitle',
     isSkip: false,
-    theme: IntroQuestionTheme.common(),
+    theme: InfoQuestionTheme.common(),
     secondaryButtonText: 'SKIP',
   );
 
-  static const intro2 = IntroQuestionData(
+  static const intro2 = InfoQuestionData(
     index: 1,
     title: 'Another title',
     subtitle: 'Another subtitle',
     isSkip: true,
     content: 'content',
-    theme: IntroQuestionTheme.common(),
+    theme: InfoQuestionTheme.common(),
     secondaryButtonText: 'SKIP',
     primaryButtonText: 'Next',
   );
@@ -169,14 +169,14 @@ abstract class MockedEntities {
     secondaryButtonText: 'EXIT',
   );
 
-  static const finalPage = IntroQuestionData(
+  static const finalPage = InfoQuestionData(
       primaryButtonText: 'NEXT',
       title: 'Final Page',
       index: 0,
       subtitle: '',
       isSkip: false,
       content: '',
-      theme: IntroQuestionTheme.common(),
+      theme: InfoQuestionTheme.common(),
       secondaryButtonText: 'Skip',
     );
 
@@ -202,8 +202,8 @@ abstract class MockedEntities {
       input: InputQuestionData.common().copyWith(
         theme: const InputQuestionTheme.common(),
       ),
-      intro: const IntroQuestionData.common()
-          .copyWith(theme: const IntroQuestionTheme.common()),
+      intro: const InfoQuestionData.common()
+          .copyWith(theme: const InfoQuestionTheme.common()),
     ),
   );
 
@@ -211,6 +211,6 @@ abstract class MockedEntities {
     slider: const SliderQuestionData.common(),
     choice: const ChoiceQuestionData.common(),
     input: InputQuestionData.common(),
-    intro: const IntroQuestionData.common(),
+    intro: const InfoQuestionData.common(),
   );
 }

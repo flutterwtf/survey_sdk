@@ -28,7 +28,7 @@ import 'package:survey_sdk/survey_sdk.dart' as _i2;
 // ignore_for_file: subtype_of_sealed_class
 
 class _FakeIntroQuestionData_0 extends _i1.SmartFake
-    implements _i2.IntroQuestionData {
+    implements _i2.InfoQuestionData {
   _FakeIntroQuestionData_0(
     Object parent,
     Invocation parentInvocation,
@@ -166,13 +166,13 @@ class MockSurveyData extends _i1.Mock implements _i2.SurveyData {
         returnValue: <_i2.QuestionData<dynamic>>[],
       ) as List<_i2.QuestionData<dynamic>>);
   @override
-  _i2.IntroQuestionData get finalPage => (super.noSuchMethod(
+  _i2.InfoQuestionData get finalPage => (super.noSuchMethod(
         Invocation.getter(#finalPage),
         returnValue: _FakeIntroQuestionData_0(
           this,
           Invocation.getter(#finalPage),
         ),
-      ) as _i2.IntroQuestionData);
+      ) as _i2.InfoQuestionData);
   @override
   _i2.CommonTheme get commonTheme => (super.noSuchMethod(
         Invocation.getter(#commonTheme),
@@ -189,7 +189,7 @@ class MockSurveyData extends _i1.Mock implements _i2.SurveyData {
   @override
   _i2.SurveyData copyWith({
     List<_i2.QuestionData<dynamic>>? questions,
-    _i2.IntroQuestionData? finalPage,
+    _i2.InfoQuestionData? finalPage,
     _i2.CommonTheme? commonTheme,
   }) =>
       (super.noSuchMethod(

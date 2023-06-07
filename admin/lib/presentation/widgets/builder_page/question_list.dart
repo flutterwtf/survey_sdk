@@ -14,7 +14,7 @@ class QuestionList extends StatefulWidget {
   final ValueChanged<List<QuestionData>> onUpdate;
   final int? selectedIndex;
   final List<QuestionData> questions;
-  final IntroQuestionData finalPage;
+  final InfoQuestionData finalPage;
   final bool isEditMode;
 
   const QuestionList({
@@ -187,7 +187,6 @@ class _ListHeader extends StatelessWidget {
 class _Question extends StatelessWidget {
   final int index;
   final bool isSelected;
-  final bool isDragable;
   final VoidCallback? onDeleteButtonPressed;
   final ValueChanged<QuestionData> onQuestionTap;
   final QuestionData question;
@@ -198,7 +197,6 @@ class _Question extends StatelessWidget {
     required this.question,
     required this.onQuestionTap,
     this.onDeleteButtonPressed,
-    this.isDragable = true,
     super.key,
   });
 
@@ -206,7 +204,6 @@ class _Question extends StatelessWidget {
   Widget build(BuildContext context) {
     return ReorderableDragStartListener(
       index: index,
-      enabled: isDragable,
       child: ContextMenuRegion(
         contextMenu: GenericContextMenu(
           buttonConfigs: [
@@ -229,7 +226,7 @@ class _Question extends StatelessWidget {
 class _FinalPage extends StatelessWidget {
   final bool isSelected;
   final ValueChanged<QuestionData> onTap;
-  final IntroQuestionData finalPage;
+  final InfoQuestionData finalPage;
 
   const _FinalPage({
     required this.isSelected,

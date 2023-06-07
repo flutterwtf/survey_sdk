@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
-import 'package:survey_admin/presentation/widgets/customization_panel/intro/intro_content_customization_tab.dart';
+import 'package:survey_admin/presentation/widgets/customization_panel/info/info_content_customization_tab.dart';
 import 'package:survey_sdk/survey_sdk.dart';
 
 import '../app_tester.dart';
 
 void main() {
   group('Tests for IntroContentCustomizationTab', () {
-    var data = const IntroQuestionData.common();
+    var data = const InfoQuestionData.common();
 
     final page = AppTester(
-      child: IntroContentCustomizationTab(
+      child: InfoContentCustomizationTab(
         title: 'Content',
         onChange: (QuestionData<dynamic> newData) {
-          data = newData as IntroQuestionData;
+          data = newData as InfoQuestionData;
         },
         editable: data,
       ),
