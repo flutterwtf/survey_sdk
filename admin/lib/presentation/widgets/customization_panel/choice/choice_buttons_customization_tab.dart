@@ -73,7 +73,7 @@ class ChoiceButtonsCustomizationTab extends CustomizationTab {
         ),
         CustomizationItemsContainer(
           itemsPadding: const EdgeInsets.all(
-            AppDimensions.marginM,
+            SurveyDimensions.marginM,
           ),
           children: [
             DefaultOptionsCustomizationItem(

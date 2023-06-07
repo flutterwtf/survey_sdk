@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:survey_admin/presentation/utils/constants/app_dimensions.dart';
-import 'package:survey_admin/presentation/utils/theme_extension.dart';
+import 'package:survey_sdk/survey_sdk.dart';
 
 class Option extends StatelessWidget {
   final String option;
@@ -18,9 +17,9 @@ class Option extends StatelessWidget {
       children: [
         const Icon(
           Icons.fiber_manual_record,
-          size: AppDimensions.sizeS,
+          size: SurveyDimensions.sizeS,
         ),
-        const SizedBox(width: AppDimensions.margin2XS),
+        const SizedBox(width: SurveyDimensions.margin2XS),
         Expanded(
           child: Text(
             option,
@@ -31,7 +30,7 @@ class Option extends StatelessWidget {
           padding: EdgeInsets.zero,
           icon: const Icon(
             Icons.close,
-            size: AppDimensions.sizeM,
+            size: SurveyDimensions.sizeM,
           ),
           onPressed: onDelete,
         ),
