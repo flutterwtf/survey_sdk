@@ -171,11 +171,10 @@ abstract class MockedEntities {
 
   static const finalPage = InfoQuestionData(
       primaryButtonText: 'NEXT',
-      title: 'Final Page',
+      title: 'title',
       index: 0,
-      subtitle: '',
+      subtitle: 'subtitle',
       isSkip: false,
-      content: '',
       theme: InfoQuestionTheme.common(),
       secondaryButtonText: 'Skip',
     );
@@ -187,7 +186,7 @@ abstract class MockedEntities {
       choice2.copyWith(index: 3),
       slider1.copyWith(index: 4),
     ],
-    finalPage: intro1.copyWith(index: 5),
+    finalPage: finalPage.copyWith(index: 5),
     commonTheme: _commonTheme,
   );
 
