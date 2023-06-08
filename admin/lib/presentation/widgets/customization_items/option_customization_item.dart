@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:survey_admin/presentation/app/localization/app_localizations_ext.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
+import 'package:survey_admin/presentation/widgets/customization_items/option.dart';
 import 'package:survey_sdk/survey_sdk.dart';
 
 class OptionCustomizationItem extends StatefulWidget {
@@ -32,7 +33,7 @@ class _OptionCustomizationItemState extends State<OptionCustomizationItem> {
   }
 
   void _onEditingComplete() {
-    if (_controller.text.isNotEmpty) {
+    if (_controller.text.isNotEmpty && !_options.contains(_controller.text)) {
       setState(() => _options = [..._options, _controller.text]);
     }
 
@@ -62,9 +63,9 @@ class _OptionCustomizationItemState extends State<OptionCustomizationItem> {
     return Column(
       children: [
         ..._options.map(
-          (option) => _Option(
+          (option) => Option(
             option: option,
-            delete: () => _delete(option),
+            onDelete: () => _delete(option),
           ),
         ),
         const SizedBox(height: SurveyDimensions.sizeS),
@@ -89,43 +90,6 @@ class _OptionCustomizationItemState extends State<OptionCustomizationItem> {
               ),
             ),
           ],
-        ),
-      ],
-    );
-  }
-}
-
-class _Option extends StatelessWidget {
-  final String option;
-  final VoidCallback delete;
-
-  const _Option({
-    required this.option,
-    required this.delete,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        const Icon(
-          Icons.fiber_manual_record,
-          size: SurveyDimensions.sizeS,
-        ),
-        const SizedBox(width: SurveyDimensions.margin2XS),
-        Expanded(
-          child: Text(
-            option,
-            style: context.theme.textTheme.bodyLarge,
-          ),
-        ),
-        IconButton(
-          padding: EdgeInsets.zero,
-          icon: const Icon(
-            Icons.close,
-            size: SurveyDimensions.sizeM,
-          ),
-          onPressed: delete,
         ),
       ],
     );

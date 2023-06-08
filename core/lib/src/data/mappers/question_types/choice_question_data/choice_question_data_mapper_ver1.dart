@@ -11,7 +11,7 @@ abstract class _Fields {
   static const String content = 'content';
   static const String isMultipleChoice = 'isMultipleChoice';
   static const String options = 'options';
-  static const String selectedOptions = 'selectedOptions';
+  static const String selectedByDefault = 'selectedByDefault';
   static const String ruleType = 'ruleType';
   static const String ruleValue = 'ruleValue';
   static const String primaryButtonText = 'primaryButtonText';
@@ -35,8 +35,8 @@ class ChoiceQuestionDataMapperVer1
       content: json[_Fields.content],
       isMultipleChoice: payload[_Fields.isMultipleChoice],
       options: (payload[_Fields.options] as List<dynamic>).cast<String>(),
-      selectedOptions: payload[_Fields.selectedOptions] != null
-          ? (payload[_Fields.selectedOptions] as List<dynamic>).cast<int>()
+      selectedByDefault: payload[_Fields.selectedByDefault] != null
+          ? (payload[_Fields.selectedByDefault] as List<dynamic>).cast<String>()
           : null,
       ruleType: RuleType.values[payload[_Fields.ruleType]],
       ruleValue: payload[_Fields.ruleValue],
@@ -74,7 +74,7 @@ class ChoiceQuestionDataMapperVer1
       _Fields.payload: {
         _Fields.isMultipleChoice: data.isMultipleChoice,
         _Fields.options: data.options,
-        _Fields.selectedOptions: data.selectedOptions,
+        _Fields.selectedByDefault: data.selectedByDefault,
         _Fields.ruleType: data.ruleType.index,
         _Fields.ruleValue: data.ruleValue,
       },

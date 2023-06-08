@@ -53,7 +53,7 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
   bool get _canBeSkippedDate =>
       widget.data.isSkip && _dateTime.toString().isEmpty;
 
-  bool get _canBeSkippedNumber => widget.data.isSkip && _input.isEmpty;
+  bool get _canBeSkippedNumber => widget.data.isSkip && _input.trim().isEmpty;
 
   bool get isDateType => widget.data.validator.type == InputType.date;
 
@@ -198,7 +198,9 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
                             },
                             isEnabled: isDateType
                                 ? _canBeSkippedDate || (isValid == null)
-                                : _canBeSkippedNumber || (isValid == null),
+                                : _canBeSkippedNumber ||
+                                    (_input.trim().isNotEmpty &&
+                                        isValid == null),
                             color: theme.primaryButtonFill,
                             textSize: theme.primaryButtonTextSize,
                             textColor: theme.primaryButtonTextColor,

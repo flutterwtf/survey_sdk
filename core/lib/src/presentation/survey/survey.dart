@@ -39,6 +39,9 @@ class Survey extends StatefulWidget {
   /// The controller for navigating the survey and saving answers.
   final SurveyController? controller;
 
+  /// Whether the survey should save user selected answers.
+  final bool saveAnswer;
+
   /// Either [filePath] or [surveyData] must pe provided. The [controller]
   /// parameter is optional and can be used to provide a custom survey
   /// controller.
@@ -46,6 +49,7 @@ class Survey extends StatefulWidget {
     this.filePath,
     this.surveyData,
     this.controller,
+    this.saveAnswer = true,
     super.key,
   }) : assert(
           (filePath != null || surveyData != null) &&
@@ -123,7 +127,11 @@ class _SurveyState extends State<Survey> {
                       (question) => DataToWidgetUtil.createWidget(
                         data: question,
                         answer: state.answers[question.index],
-                        onSend: _cubit.saveAnswer,
+                        onSend: ({required index, required answer}) {
+                          if (widget.saveAnswer) {
+                            _cubit.saveAnswer(index: index, answer: answer);
+                          }
+                        },
                         onGoNext: _surveyController.onNext,
                       ),
                     )
