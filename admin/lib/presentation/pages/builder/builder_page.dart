@@ -132,6 +132,7 @@ class _BuilderPageState extends State<BuilderPage> {
                   child: Survey(
                     surveyData: state.surveyData,
                     controller: _surveyController,
+                    saveAnswer: false,
                   ),
                 ),
               ),
