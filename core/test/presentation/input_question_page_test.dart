@@ -65,8 +65,8 @@ void main() {
           );
           final inputField = find.byType(TextFormField);
           await tester.enterText(inputField, testValidTextString);
-          await tester.tap(find.byType(QuestionBottomButton));
           await tester.pumpAndSettle();
+          await tester.tap(find.byType(QuestionBottomButton));
 
           expect(sendData, equals(testValidTextString));
           expect(find.text('This field cannot be empty'), findsNothing);
@@ -120,8 +120,11 @@ void main() {
               ),
             ),
           );
+
+          const userInput = 'inputText';
+          await tester.enterText(find.byType(TextFormField), userInput);
+          await tester.pumpAndSettle();
           await tester.tap(find.byType(QuestionBottomButton));
-          await tester.pump();
           expect(isPressed, true);
           expect(find.byType(QuestionBottomButton), findsOneWidget);
         },
@@ -146,6 +149,7 @@ void main() {
 
           const userInput = 'inputText';
           await tester.enterText(find.byType(TextFormField), userInput);
+          await tester.pumpAndSettle();
           await tester.tap(find.byType(QuestionBottomButton));
           expect(sentData, equals(userInput));
         },

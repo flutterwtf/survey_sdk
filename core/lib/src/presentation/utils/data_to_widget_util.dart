@@ -38,7 +38,7 @@ abstract class DataToWidgetUtil {
       case ChoiceQuestionData:
         return ChoiceQuestionPage(
           data: data as ChoiceQuestionData,
-          answer: answer as QuestionAnswer<List<int>>?,
+          answer: answer as QuestionAnswer<List<String>>?,
           onSend: sendAndGoNext,
         );
       case InputQuestionData:

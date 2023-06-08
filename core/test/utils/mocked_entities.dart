@@ -40,21 +40,6 @@ abstract class MockedEntities {
     primaryButtonText: 'Next',
   );
 
-  static const choice3 = ChoiceQuestionData(
-    title: 'title',
-    content: 'content',
-    options: ['option', 'option', 'option'],
-    isMultipleChoice: false,
-    isSkip: false,
-    index: 0,
-    subtitle: 'subtitle',
-    ruleType: RuleType.none,
-    ruleValue: 0,
-    theme: ChoiceQuestionTheme.common(),
-    primaryButtonText: 'NEXT',
-    secondaryButtonText: 'EXIT',
-  );
-
   static const choice4 = ChoiceQuestionData(
     isMultipleChoice: true,
     options: ['option 1', 'option 2', 'option 3'],
