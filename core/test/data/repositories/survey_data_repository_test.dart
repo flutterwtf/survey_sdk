@@ -1,31 +1,54 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mocktail/mocktail.dart';
+import 'package:survey_sdk/src/data/data_sources/filesystem_data_source_impl.dart';
 import 'package:survey_sdk/src/data/repositories/survey_data_repository_impl.dart';
-
-import '../../utils/mocked_entities.dart';
-
-// ignore: prefer-match-file-name
-class MockSurveyDataRepository extends Mock
-    implements SurveyDataRepositoryImpl {}
+import 'package:survey_sdk/src/domain/entities/survey_data.dart';
 
 void main() {
-  final surveyRepository = MockSurveyDataRepository();
+  TestWidgetsFlutterBinding.ensureInitialized();
+  final surveyDataSource = FilesystemDataSourceImpl();
+  final surveyRepository = SurveyDataRepositoryImpl(surveyDataSource);
+
+  const pathWithCorrectJson = 'test/assets/test_survey_data.json';
+  const pathWithIncorrectJson = 'test/assets/test_survey_incorrect_data.json';
 
   group('test SurveyDataRepository', () {
-    when(() => surveyRepository.getSurveyData('data')).thenAnswer(
-      (_) => Future.delayed(
-        const Duration(seconds: 1),
-        () => (MockedEntities.data1, <String>['f']),
-      ),
+    test(
+      'getSurveyData should receive correct data when json is correct',
+      () async {
+        final receivedSurveyData = await surveyRepository.getSurveyData(
+          pathWithCorrectJson,
+        );
+
+        expect(receivedSurveyData.$1 is SurveyData, isTrue);
+        expect(receivedSurveyData.$2.isEmpty, isTrue);
+      },
     );
 
-    test('get survey data', () async {
-      final receivedSurveyData = await surveyRepository.getSurveyData('data');
+    test(
+      'getSurveyData should receive correct data when json is incorrect',
+      () async {
+        final receivedSurveyData = await surveyRepository.getSurveyData(
+          pathWithIncorrectJson,
+        );
 
-      expect(
-        receivedSurveyData.$1,
-        MockedEntities.data1,
-      );
-    });
+        expect(receivedSurveyData.$1, isNull);
+        expect(receivedSurveyData.$2.length, equals(2));
+      },
+    );
+
+    test(
+      'getSurveyData should receive correct data when path is incorrect',
+      () async {
+        final receivedSurveyData = await surveyRepository.getSurveyData(
+          'incorrect_path',
+        );
+
+        expect(receivedSurveyData.$1, isNull);
+        expect(
+          receivedSurveyData.$2.length,
+          equals(2),
+        );
+      },
+    );
   });
 }

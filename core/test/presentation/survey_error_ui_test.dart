@@ -12,6 +12,8 @@ import 'package:survey_sdk/src/presentation/utils/survey_error_state.dart';
 
 import 'widget/app_tester.dart';
 
+// ignore_for_file: unused_element
+
 // ignore: prefer-match-file-name
 class MockSurveyDataRepository extends Mock
     implements SurveyDataRepositoryImpl {}
@@ -20,12 +22,18 @@ late String _surveyLoadError;
 late String _showDetails;
 late String _closeDetails;
 late String _damagedJson;
+late String _next;
+late String _textField;
+late String _skip;
 
 void _initializeLocalizations(BuildContext context) {
   _surveyLoadError = context.localization.surveyLoadError;
   _showDetails = context.localization.showErrorDetails;
   _closeDetails = context.localization.hideErrorDetails;
   _damagedJson = context.localization.damagedJson;
+  _next = context.localization.next;
+  _textField = context.localization.textField;
+  _skip = context.localization.skip;
 }
 
 void main() async {
