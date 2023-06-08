@@ -34,5 +34,19 @@ void main() {
         MockedEntities.data1,
       );
     });
+
+    test('Call with damaged JSON', () async {
+      const path = 'test/assets/test_survey_incorrect_data.json';
+      final receivedSurveyData = await dataSource.getSurveyData(path);
+
+      expect(
+        receivedSurveyData.$1,
+        isNull,
+      );
+      expect(
+        receivedSurveyData.$2.length,
+        equals(2),
+      );
+    });
   });
 }
