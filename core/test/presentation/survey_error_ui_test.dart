@@ -252,6 +252,37 @@ void main() async {
           tester.binding.platformDispatcher.clearTextScaleFactorTestValue();
         },
       );
+      testWidgets(
+        'should pop scope from details page correctly',
+            (tester) async {
+          emitForIncorrectPath();
+
+          await tester.pumpWidget(widgetWithIncorrectPath);
+
+          expect(
+            (cubitWithIncorrectPath.state as SurveyErrorLoadState).errorState,
+            SurveyErrorState.collapsed,
+          );
+
+          await tester.tap(find.text(_showDetails));
+          await tester.pumpAndSettle();
+
+          expect(
+            (cubitWithIncorrectPath.state as SurveyErrorLoadState).errorState,
+            SurveyErrorState.stacktrace,
+          );
+
+          final popScopeFinder = find.byType(WillPopScope);
+          expect(popScopeFinder, findsOneWidget);
+          final popScopeWidget = tester.widget<WillPopScope>(popScopeFinder);
+
+          await popScopeWidget.onWillPop?.call();
+          expect(
+            (cubitWithIncorrectPath.state as SurveyErrorLoadState).errorState,
+            SurveyErrorState.collapsed,
+          );
+        },
+      );
     },
   );
 }
