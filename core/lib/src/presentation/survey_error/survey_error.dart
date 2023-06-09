@@ -22,6 +22,7 @@ class SurveyError extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Builder(
           builder: (_) => switch (errorState) {
