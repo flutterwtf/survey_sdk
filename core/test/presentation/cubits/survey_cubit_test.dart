@@ -1,17 +1,20 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/mockito.dart';
+import 'package:mocktail/mocktail.dart';
+import 'package:survey_sdk/src/data/repositories/survey_data_repository_impl.dart';
 import 'package:survey_sdk/src/presentation/survey/survey_cubit.dart';
 import 'package:survey_sdk/src/presentation/survey/survey_state.dart';
 import 'package:survey_sdk/survey_sdk.dart';
 
-import '../../utils/shared_mocks.mocks.dart';
+// ignore: prefer-match-file-name
+class MockSurveyDataRepository extends Mock
+    implements SurveyDataRepositoryImpl {}
 
 // TODO(dev): add test save answer
 void main() {
   group(
     'Survey cubit tests',
     () {
-      final mockedSurveyRepo = MockSurveyDataRepositoryImpl();
+      final mockedSurveyRepo = MockSurveyDataRepository();
       final surveyCubit = SurveyCubit(mockedSurveyRepo);
 
       test(
@@ -27,8 +30,8 @@ void main() {
               intro: const IntroQuestionData.common(),
             ),
           );
-          when(mockedSurveyRepo.getSurveyData(''))
-              .thenAnswer((_) => Future.value(surveyData));
+          when(() => mockedSurveyRepo.getSurveyData(''))
+              .thenAnswer((_) async => (surveyData, <String>[]));
           surveyCubit.initData('');
           if (currentState is SurveyLoadedState) {
             expect(currentState.surveyData, surveyData);

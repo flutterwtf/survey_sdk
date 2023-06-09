@@ -1,0 +1,4 @@
+enum SurveyErrorState {
+  collapsed,
+  stacktrace,
+}

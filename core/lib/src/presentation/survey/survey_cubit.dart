@@ -1,8 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:survey_sdk/src/domain/entities/question_answer.dart';
-import 'package:survey_sdk/src/domain/entities/survey_data.dart';
 import 'package:survey_sdk/src/domain/repository_interfaces/survey_data_repository.dart';
 import 'package:survey_sdk/src/presentation/survey/survey_state.dart';
+
 import 'package:survey_sdk/survey_sdk.dart';
 
 /// A Cubit that manages the state and logic for the survey.
@@ -18,7 +18,7 @@ class SurveyCubit extends Cubit<SurveyState> {
   Future<void> initData(String? filePath) async {
     if (filePath != null) {
       final data = await _surveyDataRepository.getSurveyData(filePath);
-      setSurveyData(data);
+      setSurveyData(data.$1, data.$2);
     }
   }
 
@@ -33,7 +33,24 @@ class SurveyCubit extends Cubit<SurveyState> {
   }
 
   /// Sets the survey data of the cubit to the provided [surveyData].
-  void setSurveyData(SurveyData surveyData) {
-    emit(SurveyLoadedState(surveyData: surveyData));
+  void setSurveyData(SurveyData? surveyData, List<String> providedErrors) {
+    emit(
+      surveyData != null
+          ? SurveyLoadedState(surveyData: surveyData)
+          : SurveyErrorLoadState(
+              providedErrors: providedErrors,
+              errorState: SurveyErrorState.collapsed,
+            ),
+    );
+  }
+
+  void detailedError(SurveyErrorState errorState) {
+    if (state is! SurveyErrorLoadState) return;
+
+    emit(
+      (state as SurveyErrorLoadState).copyWith(
+        errorState: errorState,
+      ),
+    );
   }
 }

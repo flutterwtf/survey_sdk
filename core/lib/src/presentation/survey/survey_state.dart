@@ -1,5 +1,6 @@
 import 'package:survey_sdk/src/domain/entities/question_answer.dart';
 import 'package:survey_sdk/src/domain/entities/survey_data.dart';
+import 'package:survey_sdk/src/presentation/utils/survey_error_state.dart';
 
 abstract class SurveyState {
   const SurveyState();
@@ -24,6 +25,31 @@ class SurveyLoadedState extends SurveyState {
     return SurveyLoadedState(
       surveyData: surveyData ?? this.surveyData,
       answers: answers ?? this.answers,
+    );
+  }
+}
+
+class SurveyErrorLoadState extends SurveyState {
+  final List<String> providedErrors;
+  final SurveyErrorState errorState;
+
+  List<Object?> get props => [
+        providedErrors,
+        errorState,
+      ];
+
+  const SurveyErrorLoadState({
+    required this.providedErrors,
+    required this.errorState,
+  });
+
+  SurveyErrorLoadState copyWith({
+    List<String>? providedErrors,
+    SurveyErrorState? errorState,
+  }) {
+    return SurveyErrorLoadState(
+      providedErrors: providedErrors ?? this.providedErrors,
+      errorState: errorState ?? this.errorState,
     );
   }
 }
