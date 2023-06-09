@@ -16,9 +16,9 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
   /// Default value is [['First option', 'Second option', 'Third option']].
   final List<String> options;
 
-  /// Options that have been selected.
+  /// Options that were set as default ones.
   /// Default value is [```null```].
-  final List<int>? selectedOptions;
+  final List<String>? selectedByDefault;
 
   /// The type of rule associated with the question.
   ///
@@ -52,7 +52,7 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
         subtitle,
         isSkip,
         content,
-        selectedOptions,
+        selectedByDefault,
         theme,
         ruleType,
         ruleValue,
@@ -73,11 +73,11 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
     required super.secondaryButtonText,
     required super.primaryButtonText,
     super.content,
-    this.selectedOptions,
+    this.selectedByDefault,
   }) : assert(
-          selectedOptions == null ||
-              (!isMultipleChoice && selectedOptions.length == 1) ||
-              (isMultipleChoice && selectedOptions.length > 0),
+          selectedByDefault == null ||
+              (!isMultipleChoice && selectedByDefault.length == 1) ||
+              (isMultipleChoice && selectedByDefault.length > 0),
           'Selected options should be null, or in case of single '
           'choice buttons have the length of 1, and in '
           'case of multiple choice higher than zero',
@@ -120,12 +120,13 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
     String? subtitle,
     String? content,
     bool? isSkip,
-    List<int>? selectedOptions,
+    List<String>? selectedByDefault,
     RuleType? ruleType,
     int? ruleValue,
     ChoiceQuestionTheme? theme,
     String? secondaryButtonText,
     String? primaryButtonText,
+    bool clearSelectedByDefault = false,
   }) {
     return ChoiceQuestionData(
       isMultipleChoice: isMultipleChoice ?? this.isMultipleChoice,
@@ -138,7 +139,9 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
       subtitle: subtitle ?? this.subtitle,
       content: content ?? this.content,
       isSkip: isSkip ?? this.isSkip,
-      selectedOptions: selectedOptions ?? this.selectedOptions,
+      selectedByDefault: clearSelectedByDefault
+          ? null
+          : selectedByDefault ?? this.selectedByDefault,
       secondaryButtonText: secondaryButtonText ?? this.secondaryButtonText,
       primaryButtonText: primaryButtonText ?? this.primaryButtonText,
     );

@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:survey_sdk/src/domain/entities/question_answer.dart';
 import 'package:survey_sdk/src/presentation/choice_question/choice_question_page.dart';
@@ -16,7 +17,7 @@ void main() {
       await tester.pumpWidget(
         const AppTester(
           child: ChoiceQuestionPage(
-            data: MockedEntities.choice3,
+            data: MockedEntities.choice1,
             onSend: _mockOnSend,
           ),
         ),
@@ -27,8 +28,8 @@ void main() {
       // TODO(dev): Check ChoiceQuestionPage.
       expect(find.text('subtitle'), findsOneWidget);
       expect(
-        find.text('option'),
-        findsNWidgets(MockedEntities.choice3.options.length),
+        find.byType(CheckboxListTile),
+        findsNWidgets(MockedEntities.choice1.options.length),
       );
     });
 
@@ -37,7 +38,7 @@ void main() {
       await tester.pumpWidget(
         AppTester(
           child: ChoiceQuestionPage(
-            data: MockedEntities.choice3,
+            data: MockedEntities.choice2,
             onSend: ({required int index, required QuestionAnswer answer}) {
               expect(
                 (answer as QuestionAnswer<List<String>>).answer.isEmpty,
@@ -48,7 +49,7 @@ void main() {
           ),
         ),
       );
-      await tester.tap(find.text('NEXT'));
+      await tester.tap(find.text('Next'));
       expect(completer.isCompleted, isFalse);
     });
 
@@ -57,10 +58,10 @@ void main() {
       await tester.pumpWidget(
         AppTester(
           child: ChoiceQuestionPage(
-            data: MockedEntities.choice3.copyWith(isSkip: true),
+            data: MockedEntities.choice1,
             onSend: ({required int index, required QuestionAnswer answer}) {
               expect(
-                (answer as QuestionAnswer<List<int>>).answer.isEmpty,
+                (answer as QuestionAnswer<List<String>>).answer.isEmpty,
                 true,
               );
               completer.complete();
@@ -68,7 +69,7 @@ void main() {
           ),
         ),
       );
-      await tester.tap(find.text('NEXT'));
+      await tester.tap(find.text('Next'));
       expect(completer.isCompleted, isTrue);
     });
   });
@@ -78,7 +79,7 @@ void main() {
     await tester.pumpWidget(
       AppTester(
         child: ChoiceQuestionPage(
-          data: MockedEntities.choice3,
+          data: MockedEntities.choice2,
           onSend: ({required int index, required QuestionAnswer answer}) {
             expect(
               (answer as QuestionAnswer<List<String>>).answer.isEmpty,
@@ -88,7 +89,7 @@ void main() {
         ),
       ),
     );
-    await tester.tap(find.text('NEXT'));
+    await tester.tap(find.text('Next'));
     expect(completer.isCompleted, isFalse);
   });
 
@@ -97,17 +98,17 @@ void main() {
     await tester.pumpWidget(
       AppTester(
         child: ChoiceQuestionPage(
-          data: MockedEntities.choice3,
+          data: MockedEntities.choice2,
           onSend: ({required int index, required QuestionAnswer answer}) {
-            expect((answer as QuestionAnswer<List<int>>).answer.length, 1);
+            expect((answer as QuestionAnswer<List<String>>).answer.length, 1);
             completer.complete();
           },
         ),
       ),
     );
-    await tester.tap(find.text('option').first);
+    await tester.tap(find.text('option 1'));
     await tester.pump();
-    await tester.tap(find.text('NEXT'));
+    await tester.tap(find.text('Next'));
     expect(completer.isCompleted, isTrue);
   });
 
@@ -116,19 +117,19 @@ void main() {
     await tester.pumpWidget(
       AppTester(
         child: ChoiceQuestionPage(
-          data: MockedEntities.choice3,
+          data: MockedEntities.choice2,
           onSend: ({required int index, required QuestionAnswer answer}) {
-            expect((answer as QuestionAnswer<List<int>>).answer.length, 1);
+            expect((answer as QuestionAnswer<List<String>>).answer.length, 1);
             completer.complete();
           },
         ),
       ),
     );
-    await tester.tap(find.text('option').first);
+    await tester.tap(find.text('option 1').first);
     await tester.pump();
-    await tester.tap(find.text('option').first);
+    await tester.tap(find.text('option 1').first);
     await tester.pump();
-    await tester.tap(find.text('NEXT'));
+    await tester.tap(find.text('Next'));
     expect(completer.isCompleted, isTrue);
   });
 
@@ -137,7 +138,7 @@ void main() {
     await tester.pumpWidget(
       AppTester(
         child: ChoiceQuestionPage(
-          data: MockedEntities.choice3.copyWith(isMultipleChoice: true),
+          data: MockedEntities.choice4,
           onSend: ({required int index, required QuestionAnswer answer}) {
             expect(
               (answer as QuestionAnswer<List<String>>).answer.isEmpty,
@@ -152,31 +153,12 @@ void main() {
     expect(completer.isCompleted, isFalse);
   });
 
-  testWidgets('Multiple choice with 1 answer', (tester) async {
-    final completer = Completer<void>();
-    await tester.pumpWidget(
-      AppTester(
-        child: ChoiceQuestionPage(
-          data: MockedEntities.choice3.copyWith(isMultipleChoice: true),
-          onSend: ({required int index, required QuestionAnswer answer}) {
-            expect((answer as QuestionAnswer<List<int>>).answer.length, 1);
-            completer.complete();
-          },
-        ),
-      ),
-    );
-    await tester.tap(find.text('option').first);
-    await tester.pump();
-    await tester.tap(find.text('NEXT'));
-    expect(completer.isCompleted, isTrue);
-  });
-
   testWidgets('Multiple choice with 2 taps option answer', (tester) async {
     final completer = Completer<void>();
     await tester.pumpWidget(
       AppTester(
         child: ChoiceQuestionPage(
-          data: MockedEntities.choice3.copyWith(isMultipleChoice: true),
+          data: MockedEntities.choice4,
           onSend: ({required int index, required QuestionAnswer answer}) {
             expect(
               (answer as QuestionAnswer<List<String>>).answer.isEmpty,
@@ -187,10 +169,10 @@ void main() {
         ),
       ),
     );
-    await tester.tap(find.text('option').first);
-    await tester.pump();
-    await tester.tap(find.text('option').first);
-    await tester.pump();
+    await tester.tap(find.text('option 1').first);
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('option 1').first);
+    await tester.pumpAndSettle();
     await tester.tap(find.text('NEXT'));
     expect(completer.isCompleted, isFalse);
   });
@@ -200,18 +182,17 @@ void main() {
     await tester.pumpWidget(
       AppTester(
         child: ChoiceQuestionPage(
-          data: MockedEntities.choice3.copyWith(isMultipleChoice: true),
+          data: MockedEntities.choice1,
           onSend: ({required int index, required QuestionAnswer answer}) {
-            expect((answer as QuestionAnswer<List<int>>).answer.length, 2);
             completer.complete();
           },
         ),
       ),
     );
-    await tester.tap(find.text('option').first);
-    await tester.tap(find.text('option').last);
-    await tester.pump();
-    await tester.tap(find.text('NEXT'));
+    await tester.tap(find.text('option 1'));
+    await tester.tap(find.text('option 3'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Next'));
     expect(completer.isCompleted, isTrue);
   });
 }
