@@ -6,9 +6,9 @@ import 'package:survey_sdk/src/presentation/widgets/question_bottom_button.dart'
 import 'package:survey_sdk/src/presentation/widgets/question_content.dart';
 import 'package:survey_sdk/src/presentation/widgets/question_title.dart';
 
-/// The question page for displaying intro content.
+/// The question page for displaying info content.
 ///
-/// The [InfoQuestionPage] widget is used to display introductory content to
+/// The [InfoQuestionPage] widget is used to display information content to
 /// the user. It can contain a title, subtitle, and buttons for navigation.
 class InfoQuestionPage extends StatefulWidget {
   /// Contains the content for a page.

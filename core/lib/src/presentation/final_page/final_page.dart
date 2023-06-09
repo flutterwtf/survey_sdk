@@ -5,9 +5,9 @@ import 'package:survey_sdk/src/presentation/utils/utils.dart';
 import 'package:survey_sdk/src/presentation/widgets/question_content.dart';
 import 'package:survey_sdk/src/presentation/widgets/question_title.dart';
 
-/// The question page for displaying intro content.
+/// The question page for displaying info content.
 ///
-/// The [FinalPage] widget is used to display introductory content to
+/// The [FinalPage] widget is used to display information content to
 /// the user. It can contain a title, subtitle, and buttons for navigation.
 class FinalPage extends StatefulWidget {
   /// Contains the content for a page.

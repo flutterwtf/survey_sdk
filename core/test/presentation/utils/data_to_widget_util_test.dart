@@ -18,7 +18,7 @@ void main() {
   const mockSliderData = SliderQuestionData.common();
   const mockChoiceData = ChoiceQuestionData.common();
   final mockInputData = InputQuestionData.common();
-  const mockIntroData = InfoQuestionData.common();
+  const mockInfoData = InfoQuestionData.common();
 
   group('createWidget method', () {
     test('Call with SliderQuestionData}', () {
@@ -53,15 +53,15 @@ void main() {
       expect((widget as InputQuestionPage).data, mockInputData);
     });
 
-    test('Call with IntroQuestionData', () {
+    test('Call with InfoQuestionData', () {
       final widget = DataToWidgetUtil.createWidget(
-        data: mockIntroData,
+        data: mockInfoData,
         onSend: _mockOnSend,
         onGoNext: () {},
       );
 
       expect(widget.runtimeType, InfoQuestionPage);
-      expect((widget as InfoQuestionPage).data, mockIntroData);
+      expect((widget as InfoQuestionPage).data, mockInfoData);
     });
 
     test('Call with bad QuestionData', () {

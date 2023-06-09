@@ -78,7 +78,7 @@ abstract class QuestionData<T> extends Equatable {
         return SliderQuestionDataMapperFactory.getMapper(
           schemeVersion,
         ).fromJson(json);
-      case QuestionTypes.intro:
+      case QuestionTypes.info:
         return InfoQuestionDataMapperFactory.getMapper(
           schemeVersion,
         ).fromJson(json);

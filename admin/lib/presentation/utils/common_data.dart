@@ -17,7 +17,7 @@ class CommonData {
   CommonTheme get commonTheme {
     return CommonTheme(
       slider: slider(),
-      intro: intro(),
+      info: intro(),
       input: input(),
       choice: choice(),
     );

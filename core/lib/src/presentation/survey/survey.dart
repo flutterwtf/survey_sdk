@@ -120,7 +120,7 @@ class _SurveyState extends State<Survey> {
                 commonTheme.choice.theme!,
                 commonTheme.slider.theme!,
                 commonTheme.input.theme!,
-                commonTheme.intro.theme!,
+                commonTheme.info.theme!,
               ],
             ),
             child: WillPopScope(

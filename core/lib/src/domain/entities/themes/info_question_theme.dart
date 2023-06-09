@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:survey_sdk/src/presentation/utils/utils.dart';
 
 /// The [InfoQuestionTheme] class represents the visual styling and appearance
-/// for an intro question options.
+/// for an info question options.
 ///
 /// This class extends the [ThemeExtension] class and implements the
 /// [EquatableMixin] to provide equality checks and comparison methods.

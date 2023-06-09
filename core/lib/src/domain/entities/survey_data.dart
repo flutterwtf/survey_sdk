@@ -104,8 +104,8 @@ class SurveyData with EquatableMixin, ApiObject {
         return commonTheme.slider.theme;
       case QuestionTypes.input:
         return commonTheme.input.theme;
-      case QuestionTypes.intro:
-        return commonTheme.intro.theme;
+      case QuestionTypes.info:
+        return commonTheme.info.theme;
     }
     return null;
   }
@@ -137,7 +137,7 @@ class SurveyData with EquatableMixin, ApiObject {
           question as InputQuestionData,
           commonTheme: themeFromQuestionType,
         );
-      case QuestionTypes.intro:
+      case QuestionTypes.info:
         return InfoQuestionDataMapperFactory.getMapper(
           schemeVersion,
         ).toJson(

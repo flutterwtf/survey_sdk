@@ -51,11 +51,11 @@ In addition to the extensive customization options for each question, the Admin 
 
 ***
 
-### Intro
+### Infos
 
-![intro_common](https://github.com/What-the-Flutter/survey_sdk/assets/94079414/74f41791-2e8f-4919-89f5-5df952353d9b)
+![info_common](https://github.com/What-the-Flutter/survey_sdk/assets/94079414/74f41791-2e8f-4919-89f5-5df952353d9b)
 
-![intro_content](https://github.com/What-the-Flutter/survey_sdk/assets/94079414/12ccf3ec-e59d-4af1-be25-f8e2c4646a22)
+![info_content](https://github.com/What-the-Flutter/survey_sdk/assets/94079414/12ccf3ec-e59d-4af1-be25-f8e2c4646a22)
 
 
 This question contains only basic settings.

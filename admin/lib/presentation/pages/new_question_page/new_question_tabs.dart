@@ -85,7 +85,7 @@ extension NewQuestionOptionsExt on NewQuestionOptions {
   String get asset {
     switch (this) {
       case NewQuestionOptions.title:
-        return AppAssets.introImage;
+        return AppAssets.infoImage;
       case NewQuestionOptions.radioButton:
         return AppAssets.radioButtonImage;
       case NewQuestionOptions.slider:

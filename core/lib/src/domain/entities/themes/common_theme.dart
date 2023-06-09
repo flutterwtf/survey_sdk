@@ -13,7 +13,7 @@ import 'package:survey_sdk/src/domain/entities/question_types/slider_question_da
 
 abstract class _Fields {
   static const String slider = 'slider';
-  static const String intro = 'intro';
+  static const String info = 'info';
   static const String input = 'input';
   static const String choice = 'choice';
 }
@@ -26,8 +26,8 @@ class CommonTheme extends ThemeExtension<CommonTheme>
   /// The theme configuration for slider questions.
   final SliderQuestionData slider;
 
-  /// The theme configuration for intro questions.
-  final InfoQuestionData intro;
+  /// The theme configuration for info questions.
+  final InfoQuestionData info;
 
   /// The theme configuration for input questions.
   final InputQuestionData input;
@@ -38,7 +38,7 @@ class CommonTheme extends ThemeExtension<CommonTheme>
   @override
   List<Object?> get props => [
         slider,
-        intro,
+        info,
         input,
         choice,
       ];
@@ -46,7 +46,7 @@ class CommonTheme extends ThemeExtension<CommonTheme>
   CommonTheme({
     required this.choice,
     required this.slider,
-    required this.intro,
+    required this.info,
     required this.input,
   });
 
@@ -56,9 +56,9 @@ class CommonTheme extends ThemeExtension<CommonTheme>
       slider: SliderQuestionDataMapperFactory.getMapper(
         schemeVersion,
       ).fromJson(json[_Fields.slider]),
-      intro: InfoQuestionDataMapperFactory.getMapper(
+      info: InfoQuestionDataMapperFactory.getMapper(
         schemeVersion,
-      ).fromJson(json[_Fields.intro]),
+      ).fromJson(json[_Fields.info]),
       input: InputQuestionDataMapperFactory.getMapper(
         schemeVersion,
       ).fromJson(json[_Fields.input]),
@@ -73,9 +73,9 @@ class CommonTheme extends ThemeExtension<CommonTheme>
         _Fields.slider: SliderQuestionDataMapperFactory.getMapper(
           schemeVersion ?? SchemeInfo.version,
         ).toJson(slider),
-        _Fields.intro: InfoQuestionDataMapperFactory.getMapper(
+        _Fields.info: InfoQuestionDataMapperFactory.getMapper(
           schemeVersion ?? SchemeInfo.version,
-        ).toJson(intro),
+        ).toJson(info),
         _Fields.input: InputQuestionDataMapperFactory.getMapper(
           schemeVersion ?? SchemeInfo.version,
         ).toJson(input),
@@ -87,13 +87,13 @@ class CommonTheme extends ThemeExtension<CommonTheme>
   @override
   CommonTheme copyWith({
     SliderQuestionData? slider,
-    InfoQuestionData? intro,
+    InfoQuestionData? info,
     InputQuestionData? input,
     ChoiceQuestionData? choice,
   }) {
     return CommonTheme(
       slider: slider ?? this.slider,
-      intro: intro ?? this.intro,
+      info: info ?? this.info,
       input: input ?? this.input,
       choice: choice ?? this.choice,
     );
@@ -108,7 +108,7 @@ class CommonTheme extends ThemeExtension<CommonTheme>
     return CommonTheme(
       // TODO(dev): should we lerp it?
       slider: slider,
-      intro: intro,
+      info: info,
       input: input,
       choice: choice,
     );

@@ -8,15 +8,15 @@ import 'widget/app_tester.dart';
 
 void main() {
   group(
-    'Intro question widget test',
+    'Info question widget test',
     () {
       final completerOnMainButtonTap = Completer<void>();
       final completerOnSecondButton = Completer<void>();
-      const title = 'Intro';
+      const title = 'Info';
       const mainButtonTitle = 'NEXT';
       const subtitleInCommonData = '';
 
-      final introQuestionPage = AppTester(
+      final infoQuestionPage = AppTester(
         child: InfoQuestionPage(
           data: const InfoQuestionData.common(),
           onMainButtonTap: completerOnMainButtonTap.complete,
@@ -27,11 +27,11 @@ void main() {
       testWidgets(
         'All content widget test',
         (widgetTester) async {
-          await widgetTester.pumpWidget(introQuestionPage);
+          await widgetTester.pumpWidget(infoQuestionPage);
           expect(find.text(mainButtonTitle), findsOneWidget);
           // TODO(dev): The content of data should located here, but in widget
           // TODO(dev): we passed the subtitle to this place.
-          // TODO(dev): Check IntroQuestionPage widget.
+          // TODO(dev): Check InfoQuestionPage widget.
           expect(find.text(subtitleInCommonData), findsNothing);
           expect(find.text(title), findsOneWidget);
         },
@@ -39,7 +39,7 @@ void main() {
       testWidgets(
         'Buttons test',
         (widgetTester) async {
-          await widgetTester.pumpWidget(introQuestionPage);
+          await widgetTester.pumpWidget(infoQuestionPage);
           await widgetTester.tap(find.text(mainButtonTitle));
           expect(completerOnMainButtonTap.isCompleted, isTrue);
         },

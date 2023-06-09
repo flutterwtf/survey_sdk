@@ -25,7 +25,7 @@ void main() {
               slider: const SliderQuestionData.common(),
               choice: const ChoiceQuestionData.common(),
               input: InputQuestionData.common(),
-              intro: const InfoQuestionData.common(),
+              info: const InfoQuestionData.common(),
             ),
           );
           when(mockedSurveyRepo.getSurveyData(''))

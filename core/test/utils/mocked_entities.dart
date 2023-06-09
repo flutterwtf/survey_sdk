@@ -91,7 +91,7 @@ abstract class MockedEntities {
     ),
   );
 
-  static const intro1 = InfoQuestionData(
+  static const info1 = InfoQuestionData(
     primaryButtonText: 'Next',
     index: 0,
     title: 'title',
@@ -101,7 +101,7 @@ abstract class MockedEntities {
     secondaryButtonText: 'SKIP',
   );
 
-  static const intro2 = InfoQuestionData(
+  static const info2 = InfoQuestionData(
     index: 1,
     title: 'Another title',
     subtitle: 'Another subtitle',
@@ -166,7 +166,7 @@ abstract class MockedEntities {
 
   static final data1 = SurveyData(
     questions: [
-      intro1.copyWith(index: 1),
+      info1.copyWith(index: 1),
       choice1.copyWith(index: 2),
       choice2.copyWith(index: 3),
       slider1.copyWith(index: 4),
@@ -176,7 +176,7 @@ abstract class MockedEntities {
   );
 
   static final data2 = data1.copyWith(
-    questions: [intro1, input1, choice1, slider1],
+    questions: [info1, input1, choice1, slider1],
     commonTheme: _commonTheme.copyWith(
       slider: const SliderQuestionData.common().copyWith(
         theme: const SliderQuestionTheme.common(),
@@ -186,7 +186,7 @@ abstract class MockedEntities {
       input: InputQuestionData.common().copyWith(
         theme: const InputQuestionTheme.common(),
       ),
-      intro: const InfoQuestionData.common()
+      info: const InfoQuestionData.common()
           .copyWith(theme: const InfoQuestionTheme.common()),
     ),
   );
@@ -195,6 +195,6 @@ abstract class MockedEntities {
     slider: const SliderQuestionData.common(),
     choice: const ChoiceQuestionData.common(),
     input: InputQuestionData.common(),
-    intro: const InfoQuestionData.common(),
+    info: const InfoQuestionData.common(),
   );
 }

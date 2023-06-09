@@ -52,7 +52,7 @@ class EditorBar extends StatelessWidget {
                     onChange: onChange,
                     editable: questionData as InputQuestionData,
                   );
-                case QuestionTypes.intro:
+                case QuestionTypes.info:
                   return InfoCustomizationPanel(
                     onChange: onChange,
                     editable: questionData as InfoQuestionData,

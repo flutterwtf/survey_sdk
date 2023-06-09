@@ -10,7 +10,7 @@ import '../app_tester.dart';
 
 void main() {
   group(
-    'Intro common customization panel',
+    'Info common customization panel',
     () {
       const redColorCode = 'FFF44336';
       const textSizeString = '20';
@@ -22,7 +22,7 @@ void main() {
 
       final data =
           ValueNotifier<InfoQuestionData>(const InfoQuestionData.common());
-      final introCommonCustomPanel = AppTester(
+      final infoCommonCustomPanel = AppTester(
         child: ValueListenableBuilder<InfoQuestionData>(
           valueListenable: data,
           builder: (_, value, child) => InfoCommonCustomizationTab(
@@ -38,7 +38,7 @@ void main() {
       testWidgets(
         'load widget',
         (tester) async {
-          await tester.pumpWidget(introCommonCustomPanel);
+          await tester.pumpWidget(infoCommonCustomPanel);
           expect(find.byType(ColorCustomizationItem), findsNWidgets(5));
           expect(find.byType(RadiusCustomizationItem), findsNWidgets(1));
         },
@@ -46,7 +46,7 @@ void main() {
       testWidgets(
         'pick colors test',
         (tester) async {
-          await tester.pumpWidget(introCommonCustomPanel);
+          await tester.pumpWidget(infoCommonCustomPanel);
           await tester.pumpAndSettle();
           final colorTextFields = find.byType(ColorCustomizationItem);
           for (var i = 0; i < colorTextFields.evaluate().length; i++) {
@@ -68,7 +68,7 @@ void main() {
       testWidgets(
         'pick text width and radius test',
         (tester) async {
-          await tester.pumpWidget(introCommonCustomPanel);
+          await tester.pumpWidget(infoCommonCustomPanel);
 
           await tester.enterText(
             find.byType(CustomizationTextField).at(2),
@@ -108,7 +108,7 @@ void main() {
       testWidgets(
         'pick text width and radius with letters',
         (tester) async {
-          await tester.pumpWidget(introCommonCustomPanel);
+          await tester.pumpWidget(infoCommonCustomPanel);
 
           await tester.enterText(
             find.byType(CustomizationTextField).at(2),
@@ -168,7 +168,7 @@ void main() {
       testWidgets(
         'pick text width and radius with more than 2 digits',
         (tester) async {
-          await tester.pumpWidget(introCommonCustomPanel);
+          await tester.pumpWidget(infoCommonCustomPanel);
 
           await tester.enterText(
             find.byType(CustomizationTextField).at(2),

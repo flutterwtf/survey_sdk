@@ -2,17 +2,17 @@ import 'package:survey_sdk/src/domain/entities/constants/question_types.dart';
 import 'package:survey_sdk/src/domain/entities/question_types/question_data.dart';
 import 'package:survey_sdk/src/domain/entities/themes/info_question_theme.dart';
 
-/// Data class representing an introduction question.
+/// Data class representing an information question.
 ///
 /// The [InfoQuestionData] class extends the [QuestionData] class and provides
-/// additional property specific to introduction questions.
+/// additional property specific to information questions.
 class InfoQuestionData extends QuestionData {
-  /// The theme applied to the introduction question.
+  /// The theme applied to the information question.
   /// Default value is [InfoQuestionTheme.common()].
   final InfoQuestionTheme? theme;
 
   @override
-  String get type => QuestionTypes.intro;
+  String get type => QuestionTypes.info;
 
   @override
   List<Object?> get props => [
@@ -45,7 +45,7 @@ class InfoQuestionData extends QuestionData {
   const InfoQuestionData.common({int index = 0})
       : this(
           // TODO(dev): to localization somehow
-          title: 'Intro',
+          title: 'Info',
           index: index,
           subtitle: '',
           isSkip: false,

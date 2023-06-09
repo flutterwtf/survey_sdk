@@ -7,7 +7,7 @@ import 'package:survey_sdk/survey_sdk.dart';
 import '../app_tester.dart';
 
 void main() {
-  group('Tests for IntroContentCustomizationTab', () {
+  group('Tests for InfoContentCustomizationTab', () {
     var data = const InfoQuestionData.common();
 
     final page = AppTester(

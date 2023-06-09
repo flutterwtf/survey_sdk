@@ -2,7 +2,7 @@ import 'package:survey_sdk/src/data/mappers/themes/info_question_theme/info_ques
 import 'package:survey_sdk/src/data/mappers/themes/question_theme_mapper.dart';
 
 abstract class InfoQuestionThemeMapperFactory {
-  /// _implementations contains all versions IntroQuestionThemeMapper
+  /// _implementations contains all versions InfoQuestionThemeMapper
   static final List<QuestionThemeMapper> _implementations = [
     InfoQuestionThemeMapperVer1(),
   ];

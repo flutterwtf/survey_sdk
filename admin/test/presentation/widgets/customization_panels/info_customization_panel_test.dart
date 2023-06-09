@@ -8,7 +8,7 @@ import '../app_tester.dart';
 
 void main() {
   group(
-    'Intro customization panel',
+    'Info customization panel',
     () {
       final page = AppTester(
         child: InfoCustomizationPanel(

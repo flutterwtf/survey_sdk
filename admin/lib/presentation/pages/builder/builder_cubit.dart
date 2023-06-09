@@ -48,9 +48,9 @@ class BuilderCubit extends Cubit<BuilderState> {
           commonTheme: common.copyWith(input: data as InputQuestionData),
         );
 
-      case QuestionTypes.intro:
+      case QuestionTypes.info:
         surveyData = surveyData.copyWith(
-          commonTheme: common.copyWith(intro: data as InfoQuestionData),
+          commonTheme: common.copyWith(info: data as InfoQuestionData),
         );
       case QuestionTypes.slider:
         surveyData = surveyData.copyWith(
