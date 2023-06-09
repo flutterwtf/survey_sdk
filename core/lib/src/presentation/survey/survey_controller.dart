@@ -9,6 +9,10 @@ class SurveyController {
 
   PageController get pageController => _pageController;
 
+  void addListener(VoidCallback listener) {
+    _pageController.addListener(listener);
+  }
+
   void onNext() {
     _pageController.nextPage(
       duration: const Duration(seconds: 1),
