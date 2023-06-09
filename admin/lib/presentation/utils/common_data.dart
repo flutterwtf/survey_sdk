@@ -31,7 +31,7 @@ class CommonData {
         choice(index: _thirdIndex),
         slider(index: _fourthIndex),
       ],
-      finalPage: finalPage(index: _fivethIndex),
+      endPage: endPage(index: _fivethIndex),
       commonTheme: commonTheme,
     );
   }
@@ -104,12 +104,12 @@ class CommonData {
     );
   }
 
-  InfoQuestionData finalPage({int index = 0}) {
+  InfoQuestionData endPage({int index = 0}) {
     return InfoQuestionData(
       primaryButtonText: context.localization.next,
-      title: context.localization.finalPage,
+      title: context.localization.end,
       index: index,
-      subtitle: context.localization.emptySubtitle,
+      subtitle: context.localization.surveyCompleted,
       isSkip: false,
       content: context.localization.emptyContent,
       theme: const InfoQuestionTheme.common(),

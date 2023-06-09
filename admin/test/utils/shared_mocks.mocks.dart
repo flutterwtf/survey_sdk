@@ -166,7 +166,7 @@ class MockSurveyData extends _i1.Mock implements _i2.SurveyData {
         returnValue: <_i2.QuestionData<dynamic>>[],
       ) as List<_i2.QuestionData<dynamic>>);
   @override
-  _i2.InfoQuestionData get finalPage => (super.noSuchMethod(
+  _i2.InfoQuestionData get endPage => (super.noSuchMethod(
         Invocation.getter(#finalPage),
         returnValue: _FakeIntroQuestionData_0(
           this,
@@ -189,7 +189,7 @@ class MockSurveyData extends _i1.Mock implements _i2.SurveyData {
   @override
   _i2.SurveyData copyWith({
     List<_i2.QuestionData<dynamic>>? questions,
-    _i2.InfoQuestionData? finalPage,
+    _i2.InfoQuestionData? endPage,
     _i2.CommonTheme? commonTheme,
   }) =>
       (super.noSuchMethod(
@@ -198,7 +198,7 @@ class MockSurveyData extends _i1.Mock implements _i2.SurveyData {
           [],
           {
             #questions: questions,
-            #finalPage: finalPage,
+            #finalPage: endPage,
             #commonTheme: commonTheme,
           },
         ),
@@ -209,7 +209,7 @@ class MockSurveyData extends _i1.Mock implements _i2.SurveyData {
             [],
             {
               #questions: questions,
-              #finalPage: finalPage,
+              #finalPage: endPage,
               #commonTheme: commonTheme,
             },
           ),

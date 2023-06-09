@@ -186,7 +186,7 @@ abstract class MockedEntities {
       choice2.copyWith(index: 3),
       slider1.copyWith(index: 4),
     ],
-    finalPage: finalPage.copyWith(index: 5),
+    endPage: finalPage.copyWith(index: 5),
     commonTheme: _commonTheme,
   );
 

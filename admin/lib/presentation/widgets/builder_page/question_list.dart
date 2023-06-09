@@ -14,14 +14,14 @@ class QuestionList extends StatefulWidget {
   final ValueChanged<List<QuestionData>> onUpdate;
   final int? selectedIndex;
   final List<QuestionData> questions;
-  final InfoQuestionData finalPage;
+  final InfoQuestionData endPage;
   final bool isEditMode;
 
   const QuestionList({
     required this.onSelect,
     required this.onAdd,
     required this.questions,
-    required this.finalPage,
+    required this.endPage,
     required this.onUpdate,
     required this.onDelete,
     required this.selectedIndex,
@@ -111,11 +111,11 @@ class _QuestionListState extends State<QuestionList> {
                         question: widget.questions[index],
                         onQuestionTap: widget.onSelect,
                       ),
-                    _FinalPage(
+                    _EndPage(
                       key: ValueKey(widget.questions.length),
                       isSelected:
                           widget.questions.length == widget.selectedIndex,
-                      finalPage: widget.finalPage,
+                      endPage: widget.endPage,
                       onTap: widget.onSelect,
                     ),
                   ],
@@ -223,14 +223,14 @@ class _Question extends StatelessWidget {
   }
 }
 
-class _FinalPage extends StatelessWidget {
+class _EndPage extends StatelessWidget {
   final bool isSelected;
   final ValueChanged<QuestionData> onTap;
-  final InfoQuestionData finalPage;
+  final InfoQuestionData endPage;
 
-  const _FinalPage({
+  const _EndPage({
     required this.isSelected,
-    required this.finalPage,
+    required this.endPage,
     required this.onTap,
     super.key,
   });
@@ -239,7 +239,7 @@ class _FinalPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return QuestionListItem(
       isSelected: isSelected,
-      questionData: finalPage,
+      questionData: endPage,
       onTap: onTap,
     );
   }
