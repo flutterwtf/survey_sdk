@@ -43,7 +43,7 @@ class SurveyData with EquatableMixin, ApiObject {
   factory SurveyData.fromJson(Map<String, dynamic> json) {
     final questions = <QuestionData>[];
     final schemeVersion = json[_Fields.schemeVersion];
-    final finalPage =
+    final endPage =
         QuestionData.fromType(json[_Fields.endPage], schemeVersion)
             as InfoQuestionData;
     for (final questionJson in json[_Fields.questions]) {
@@ -51,7 +51,7 @@ class SurveyData with EquatableMixin, ApiObject {
     }
     return SurveyData(
       questions: questions,
-      endPage: finalPage,
+      endPage: endPage,
       commonTheme: CommonTheme.fromJson(
         json[_Fields.commonTheme],
         schemeVersion,

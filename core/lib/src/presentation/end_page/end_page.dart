@@ -7,22 +7,22 @@ import 'package:survey_sdk/src/presentation/widgets/question_title.dart';
 
 /// The question page for displaying info content.
 ///
-/// The [FinalPage] widget is used to display information content to
+/// The [EndPage] widget is used to display information content to
 /// the user. It can contain a title, subtitle, and buttons for navigation.
-class FinalPage extends StatefulWidget {
+class EndPage extends StatefulWidget {
   /// Contains the content for a page.
   final InfoQuestionData data;
 
-  const FinalPage({
+  const EndPage({
     required this.data,
     super.key,
   });
 
   @override
-  State<FinalPage> createState() => _FinalPageState();
+  State<EndPage> createState() => _EndPageState();
 }
 
-class _FinalPageState extends State<FinalPage> {
+class _EndPageState extends State<EndPage> {
   @override
   Widget build(BuildContext context) {
     final theme =

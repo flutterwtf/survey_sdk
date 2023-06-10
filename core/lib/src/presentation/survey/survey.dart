@@ -140,7 +140,7 @@ class _SurveyState extends State<Survey> {
                       onGoNext: _surveyController.onNext,
                     ),
                   ),
-                  DataToWidgetUtil.createFinalPage(
+                  DataToWidgetUtil.createEndPage(
                     data: data.endPage,
                   ),
                 ],
