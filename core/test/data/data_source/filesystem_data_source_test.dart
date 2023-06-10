@@ -1,6 +1,3 @@
-import 'dart:convert';
-import 'dart:io';
-
 import 'package:flutter_test/flutter_test.dart';
 import 'package:survey_sdk/src/data/data_sources/filesystem_data_source_impl.dart';
 import 'package:survey_sdk/src/data/data_sources/interfaces/filesystem_data_source.dart';
@@ -19,21 +16,36 @@ void main() {
       );
     });
 
-    test('Call with bad parameter', () {
+    test('Call with bad parameter', () async {
+      final receivedSurveyData = await dataSource.getSurveyData('bad asset');
+
       expect(
-        () => dataSource.getSurveyData('bad asset'),
-        throwsFlutterError,
+        receivedSurveyData.$1,
+        isNull,
       );
     });
 
     test('Call with good parameter', () async {
       const path = 'test/assets/test_survey_data.json';
-      final mockedSurveyData = jsonEncode(MockedEntities.data1.toJson());
-      await File(path).writeAsString(mockedSurveyData);
+      final receivedSurveyData = await dataSource.getSurveyData(path);
 
       expect(
-        (await dataSource.getSurveyData(path)).toJson(),
-        MockedEntities.data1.toJson(),
+        receivedSurveyData.$1,
+        MockedEntities.data1,
+      );
+    });
+
+    test('Call with damaged JSON', () async {
+      const path = 'test/assets/test_survey_incorrect_data.json';
+      final receivedSurveyData = await dataSource.getSurveyData(path);
+
+      expect(
+        receivedSurveyData.$1,
+        isNull,
+      );
+      expect(
+        receivedSurveyData.$2.length,
+        equals(2),
       );
     });
   });
