@@ -69,8 +69,7 @@ class SliderContentCustomizationTab extends CustomizationTab {
           title: context.localization.divisions,
           children: [
             DivisionsCustomizationItem(
-              minValue: editable.minValue,
-              maxValue: editable.maxValue,
+              maxValue: editable.maxValue - editable.minValue,
               initialValue: editable.divisions,
               onChanged: (divisions) => onChange(
                 editable.copyWith(divisions: divisions),

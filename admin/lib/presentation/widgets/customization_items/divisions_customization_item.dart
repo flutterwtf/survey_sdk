@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_widgets/customization_text_field.dart';
 
 class DivisionsCustomizationItem extends StatefulWidget {
-  final int minValue;
   final int maxValue;
   final int initialValue;
   final void Function(int divisions) onChanged;
@@ -11,7 +10,6 @@ class DivisionsCustomizationItem extends StatefulWidget {
   const DivisionsCustomizationItem({
     required this.onChanged,
     required this.initialValue,
-    required this.minValue,
     required this.maxValue,
     super.key,
   });
@@ -35,8 +33,8 @@ class _DivisionsCustomizationItemState
     final divisions = int.tryParse(value ?? '');
 
     if (divisions != null) {
-      if (divisions > widget.maxValue - widget.minValue) {
-        return '$divisions <= ${widget.maxValue - widget.minValue}';
+      if (divisions > widget.maxValue) {
+        return '$divisions <= ${widget.maxValue}';
       } else if (divisions == 0) {
         return 'divisions != 0';
       }
@@ -46,7 +44,7 @@ class _DivisionsCustomizationItemState
   }
 
   bool _canCallParentOnChanged(int value) =>
-      value <= widget.maxValue - widget.minValue && value != 0;
+      value <= widget.maxValue && value != 0;
 
   @override
   void dispose() {

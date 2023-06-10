@@ -38,14 +38,26 @@ class SliderQuestionPage extends StatefulWidget {
 class _SliderQuestionPageState extends State<SliderQuestionPage> {
   late double _answer;
 
+  /// Stores the last question data for correct work in admin.
+  SliderQuestionData? _oldQuestionData;
+
   @override
   void initState() {
     super.initState();
+    _initVariables();
+  }
+
+  void _initVariables() {
+    _oldQuestionData = widget.data;
     _answer = widget.answer?.answer ?? widget.data.initialValue.toDouble();
   }
 
   @override
   Widget build(BuildContext context) {
+    if (_oldQuestionData != widget.data) {
+      _initVariables();
+    }
+  
     final theme = widget.data.theme ??
         Theme.of(context).extension<SliderQuestionTheme>()!;
     return Scaffold(
