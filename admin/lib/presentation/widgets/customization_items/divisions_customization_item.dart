@@ -22,25 +22,29 @@ class DivisionsCustomizationItem extends StatefulWidget {
 class _DivisionsCustomizationItemState
     extends State<DivisionsCustomizationItem> {
   late TextEditingController _controller;
+  late FocusNode _focusNode;
 
   @override
   void initState() {
     super.initState();
     _controller = TextEditingController(text: widget.initialValue.toString());
+    _focusNode = FocusNode()..addListener(_onFocusChange);
+  }
+
+  void _onFocusChange() {
+    if (!_focusNode.hasFocus) {
+      _controller
+        ..text = widget.initialValue.toString()
+        ..selection = TextSelection.collapsed(offset: _controller.text.length);
+    }
   }
 
   String? _validator(String? value) {
     final divisions = int.tryParse(value ?? '');
 
-    if (divisions != null) {
-      if (divisions > widget.maxValue) {
-        return '$divisions <= ${widget.maxValue}';
-      } else if (divisions == 0) {
-        return 'divisions != 0';
-      }
-    }
-
-    return null;
+    return divisions != null && (divisions > widget.maxValue || divisions == 0)
+        ? 'Divisions count should be between 0 and ${widget.maxValue}'
+        : null;
   }
 
   bool _canCallParentOnChanged(int value) =>
@@ -48,6 +52,7 @@ class _DivisionsCustomizationItemState
 
   @override
   void dispose() {
+    _focusNode.dispose();
     _controller.dispose();
     super.dispose();
   }
@@ -61,6 +66,7 @@ class _DivisionsCustomizationItemState
 
     return CustomizationTextField.int(
       controller: _controller,
+      focusNode: _focusNode,
       validator: _validator,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       inputFormatters: [
