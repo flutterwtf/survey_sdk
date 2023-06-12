@@ -7,9 +7,9 @@ import '../presentation/widget/app_tester.dart';
 import '../utils/mocked_entities.dart';
 
 void main() {
-  group('Intro question page integration test', () {
+  group('Info question page integration test', () {
     final app = AppTester(child: Survey(surveyData: MockedEntities.data2));
-    testWidgets('next button intro click', (tester) async {
+    testWidgets('next button info click', (tester) async {
       await tester.pumpWidget(app);
       await tester.tap(find.text('Next'));
       final cubit = Injector().surveyCubit;

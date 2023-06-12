@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:survey_admin/presentation/widgets/customization_panel/intro/intro_customization_panel.dart';
+import 'package:survey_admin/presentation/widgets/customization_panel/info/info_customization_panel.dart';
 import 'package:survey_admin/presentation/widgets/question_settings_tab_bar.dart';
 import 'package:survey_sdk/survey_sdk.dart';
 
@@ -8,12 +8,12 @@ import '../app_tester.dart';
 
 void main() {
   group(
-    'Intro customization panel',
+    'Info customization panel',
     () {
       final page = AppTester(
-        child: IntroCustomizationPanel(
+        child: InfoCustomizationPanel(
           onChange: (QuestionData<dynamic> data) {},
-          editable: const IntroQuestionData.common(),
+          editable: const InfoQuestionData.common(),
         ),
       );
 

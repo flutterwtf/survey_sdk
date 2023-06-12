@@ -17,7 +17,7 @@ class NewQuestionPage extends StatefulWidget {
 }
 
 class _NewQuestionPageState extends State<NewQuestionPage> {
-  NewQuestionTabs _selectedTab = NewQuestionTabs.intro;
+  NewQuestionTabs _selectedTab = NewQuestionTabs.info;
   String? _selectedOption;
 
   final BuilderCubit _cubit = i.get<BuilderCubit>();

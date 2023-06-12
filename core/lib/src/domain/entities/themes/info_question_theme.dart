@@ -4,12 +4,12 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:survey_sdk/src/presentation/utils/utils.dart';
 
-/// The [IntroQuestionTheme] class represents the visual styling and appearance
-/// for an intro question options.
+/// The [InfoQuestionTheme] class represents the visual styling and appearance
+/// for an info question options.
 ///
 /// This class extends the [ThemeExtension] class and implements the
 /// [EquatableMixin] to provide equality checks and comparison methods.
-class IntroQuestionTheme extends ThemeExtension<IntroQuestionTheme>
+class InfoQuestionTheme extends ThemeExtension<InfoQuestionTheme>
     with EquatableMixin {
   /// Background color of the choice page.
   /// Default value is [Colors.white].
@@ -80,7 +80,7 @@ class IntroQuestionTheme extends ThemeExtension<IntroQuestionTheme>
         secondaryButtonRadius,
       ];
 
-  const IntroQuestionTheme({
+  const InfoQuestionTheme({
     required this.fill,
     required this.titleColor,
     required this.titleSize,
@@ -96,12 +96,12 @@ class IntroQuestionTheme extends ThemeExtension<IntroQuestionTheme>
     required this.secondaryButtonRadius,
   });
 
-  /// Creates a common instance of [IntroQuestionTheme].
+  /// Creates a common instance of [InfoQuestionTheme].
   ///
-  /// The [IntroQuestionTheme.common] constructor is a convenience constructor
-  /// that creates a common instance of [IntroQuestionTheme] with predefined
+  /// The [InfoQuestionTheme.common] constructor is a convenience constructor
+  /// that creates a common instance of [InfoQuestionTheme] with predefined
   /// values.
-  const IntroQuestionTheme.common()
+  const InfoQuestionTheme.common()
       : this(
           fill: SurveyColors.white,
           titleColor: SurveyColors.black,
@@ -119,7 +119,7 @@ class IntroQuestionTheme extends ThemeExtension<IntroQuestionTheme>
         );
 
   @override
-  IntroQuestionTheme copyWith({
+  InfoQuestionTheme copyWith({
     Color? fill,
     Color? titleColor,
     double? titleSize,
@@ -134,7 +134,7 @@ class IntroQuestionTheme extends ThemeExtension<IntroQuestionTheme>
     double? secondaryButtonTextSize,
     double? secondaryButtonRadius,
   }) {
-    return IntroQuestionTheme(
+    return InfoQuestionTheme(
       fill: fill ?? this.fill,
       titleColor: titleColor ?? this.titleColor,
       titleSize: titleSize ?? this.titleSize,
@@ -156,22 +156,22 @@ class IntroQuestionTheme extends ThemeExtension<IntroQuestionTheme>
     );
   }
 
-  /// Linearly interpolates between two instances of [IntroQuestionTheme].
+  /// Linearly interpolates between two instances of [InfoQuestionTheme].
   ///
   /// The [lerp] method calculates the intermediate state between two instances
-  /// of [IntroQuestionTheme] based on a given interpolation factor [t].
+  /// of [InfoQuestionTheme] based on a given interpolation factor [t].
   ///
-  /// If the `other` instance is not of type [IntroQuestionTheme], the method
+  /// If the `other` instance is not of type [InfoQuestionTheme], the method
   /// returns the current instance without any interpolation.
   @override
-  IntroQuestionTheme lerp(
-    covariant IntroQuestionTheme? other,
+  InfoQuestionTheme lerp(
+    covariant InfoQuestionTheme? other,
     double t,
   ) {
-    if (other is! IntroQuestionTheme) {
+    if (other is! InfoQuestionTheme) {
       return this;
     }
-    return IntroQuestionTheme(
+    return InfoQuestionTheme(
       fill: Color.lerp(fill, other.fill, t)!,
       titleColor: Color.lerp(titleColor, other.titleColor, t)!,
       titleSize: lerpDouble(titleSize, other.titleSize, t)!,

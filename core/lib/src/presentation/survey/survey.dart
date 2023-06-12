@@ -111,7 +111,7 @@ class _SurveyState extends State<Survey> {
                 commonTheme.choice.theme!,
                 commonTheme.slider.theme!,
                 commonTheme.input.theme!,
-                commonTheme.intro.theme!,
+                commonTheme.info.theme!,
               ],
             ),
             child: WillPopScope(
@@ -122,20 +122,19 @@ class _SurveyState extends State<Survey> {
               child: PageView(
                 controller: _surveyController.pageController,
                 physics: const NeverScrollableScrollPhysics(),
-                children: data.questions
-                    .map<Widget>(
-                      (question) => DataToWidgetUtil.createWidget(
-                        data: question,
-                        answer: state.answers[question.index],
-                        onSend: ({required index, required answer}) {
-                          if (widget.saveAnswer) {
-                            _cubit.saveAnswer(index: index, answer: answer);
-                          }
-                        },
-                        onGoNext: _surveyController.onNext,
-                      ),
-                    )
-                    .toList(),
+                children: [
+                  ...data.questions.map<Widget>(
+                    (question) => DataToWidgetUtil.createWidget(
+                      data: question,
+                      answer: state.answers[question.index],
+                      onSend: _cubit.saveAnswer,
+                      onGoNext: _surveyController.onNext,
+                    ),
+                  ),
+                  DataToWidgetUtil.createEndPage(
+                    data: data.endPage,
+                  ),
+                ],
               ),
             ),
           );

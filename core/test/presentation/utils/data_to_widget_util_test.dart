@@ -1,13 +1,13 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:survey_sdk/src/domain/entities/question_answer.dart';
 import 'package:survey_sdk/src/domain/entities/question_types/choice_question_data.dart';
+import 'package:survey_sdk/src/domain/entities/question_types/info_question_data.dart';
 import 'package:survey_sdk/src/domain/entities/question_types/input_question_data.dart';
-import 'package:survey_sdk/src/domain/entities/question_types/intro_question_data.dart';
 import 'package:survey_sdk/src/domain/entities/question_types/question_data.dart';
 import 'package:survey_sdk/src/domain/entities/question_types/slider_question_data.dart';
 import 'package:survey_sdk/src/presentation/choice_question/choice_question_page.dart';
+import 'package:survey_sdk/src/presentation/info_question/info_question_page.dart';
 import 'package:survey_sdk/src/presentation/input_question/input_question_page.dart';
-import 'package:survey_sdk/src/presentation/intro_question/intro_question_page.dart';
 import 'package:survey_sdk/src/presentation/slider_question/slider_question_page.dart';
 import 'package:survey_sdk/src/presentation/utils/data_to_widget_util.dart';
 
@@ -18,7 +18,7 @@ void main() {
   const mockSliderData = SliderQuestionData.common();
   const mockChoiceData = ChoiceQuestionData.common();
   final mockInputData = InputQuestionData.common();
-  const mockIntroData = IntroQuestionData.common();
+  const mockInfoData = InfoQuestionData.common();
 
   group('createWidget method', () {
     test('Call with SliderQuestionData}', () {
@@ -53,15 +53,15 @@ void main() {
       expect((widget as InputQuestionPage).data, mockInputData);
     });
 
-    test('Call with IntroQuestionData', () {
+    test('Call with InfoQuestionData', () {
       final widget = DataToWidgetUtil.createWidget(
-        data: mockIntroData,
+        data: mockInfoData,
         onSend: _mockOnSend,
         onGoNext: () {},
       );
 
-      expect(widget.runtimeType, IntroQuestionPage);
-      expect((widget as IntroQuestionPage).data, mockIntroData);
+      expect(widget.runtimeType, InfoQuestionPage);
+      expect((widget as InfoQuestionPage).data, mockInfoData);
     });
 
     test('Call with bad QuestionData', () {

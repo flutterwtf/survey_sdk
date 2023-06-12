@@ -5,7 +5,7 @@ import 'package:survey_admin/presentation/utils/utils.dart';
 import 'package:survey_sdk/survey_sdk.dart';
 
 enum NewQuestionTabs {
-  intro,
+  info,
   choice,
   slider,
   customInput,
@@ -14,8 +14,8 @@ enum NewQuestionTabs {
 extension NewQuestionTabsExt on NewQuestionTabs {
   String name(BuildContext context) {
     switch (this) {
-      case NewQuestionTabs.intro:
-        return context.localization.intro;
+      case NewQuestionTabs.info:
+        return context.localization.info;
       case NewQuestionTabs.choice:
         return context.localization.choice;
       case NewQuestionTabs.slider:
@@ -27,8 +27,8 @@ extension NewQuestionTabsExt on NewQuestionTabs {
 
   QuestionData get data {
     switch (this) {
-      case NewQuestionTabs.intro:
-        return i.get<CommonData>().intro();
+      case NewQuestionTabs.info:
+        return i.get<CommonData>().info();
       case NewQuestionTabs.choice:
         return i.get<CommonData>().choice();
       case NewQuestionTabs.slider:
@@ -40,7 +40,7 @@ extension NewQuestionTabsExt on NewQuestionTabs {
 
   List<NewQuestionOptions> get options {
     switch (this) {
-      case NewQuestionTabs.intro:
+      case NewQuestionTabs.info:
         return [NewQuestionOptions.title];
       case NewQuestionTabs.choice:
         return [NewQuestionOptions.radioButton, NewQuestionOptions.checkBox];
@@ -85,7 +85,7 @@ extension NewQuestionOptionsExt on NewQuestionOptions {
   String get asset {
     switch (this) {
       case NewQuestionOptions.title:
-        return AppAssets.introImage;
+        return AppAssets.infoImage;
       case NewQuestionOptions.radioButton:
         return AppAssets.radioButtonImage;
       case NewQuestionOptions.slider:

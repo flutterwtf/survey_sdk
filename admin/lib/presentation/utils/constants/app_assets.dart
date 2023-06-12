@@ -6,7 +6,7 @@ abstract class AppAssets {
   static const String arrowIcon = '${_iconsFolder}arrow_icon.svg';
   static const String sliderIcon = '${_iconsFolder}slider_icon.svg';
   static const String inputIcon = '${_iconsFolder}input_icon.svg';
-  static const String introIcon = '${_iconsFolder}intro_icon.svg';
+  static const String infoIcon = '${_iconsFolder}info_icon.svg';
   static const String paddingVerticalIcon =
       '${_iconsFolder}padding_vertical_icon.svg';
   static const String paddingHorizontalIcon =
@@ -18,7 +18,7 @@ abstract class AppAssets {
 
   /// Images.
   static const String checkBoxImage = '${_imagesFolder}check_box_image.svg';
-  static const String introImage = '${_imagesFolder}intro_image.svg';
+  static const String infoImage = '${_imagesFolder}info_image.svg';
   static const String multiLineInputImage =
       '${_imagesFolder}multi_line_input_image.svg';
   static const String radioButtonImage =
