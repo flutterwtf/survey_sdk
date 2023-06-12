@@ -57,8 +57,6 @@ abstract class DataToWidgetUtil {
     }
   }
 
-  static Widget createEndPage({
-    required InfoQuestionData data,
-  }) =>
+  static Widget createEndPage({required InfoQuestionData data}) =>
       EndPage(data: data);
 }

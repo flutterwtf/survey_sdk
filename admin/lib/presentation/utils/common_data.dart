@@ -17,7 +17,7 @@ class CommonData {
   CommonTheme get commonTheme {
     return CommonTheme(
       slider: slider(),
-      info: intro(),
+      info: info(),
       input: input(),
       choice: choice(),
     );
@@ -26,7 +26,7 @@ class CommonData {
   SurveyData get surveyData {
     return SurveyData(
       questions: [
-        intro(index: _firstIndex),
+        info(index: _firstIndex, title: context.localization.intro),
         input(index: _secondIndex),
         choice(index: _thirdIndex),
         slider(index: _fourthIndex),
@@ -38,10 +38,10 @@ class CommonData {
 
   const CommonData(this.context);
 
-  InfoQuestionData intro({int index = 0}) {
+  InfoQuestionData info({int index = 0, String? title}) {
     return InfoQuestionData(
       primaryButtonText: context.localization.next,
-      title: context.localization.intro,
+      title: title ?? context.localization.info,
       index: index,
       subtitle: context.localization.emptySubtitle,
       isSkip: false,

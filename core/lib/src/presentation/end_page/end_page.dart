@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:survey_sdk/src/domain/entities/question_types/info_question_data.dart';
 import 'package:survey_sdk/src/domain/entities/themes/info_question_theme.dart';
 import 'package:survey_sdk/src/presentation/utils/utils.dart';
-import 'package:survey_sdk/src/presentation/widgets/question_content.dart';
-import 'package:survey_sdk/src/presentation/widgets/question_title.dart';
+import 'package:survey_sdk/src/presentation/widgets/info_data_view.dart';
 
 /// The question page for displaying info content.
 ///
@@ -40,29 +39,7 @@ class _EndPageState extends State<EndPage> {
                 top: SurveyDimensions.margin3XL,
                 bottom: SurveyDimensions.marginXL,
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  if (widget.data.title.isNotEmpty)
-                    QuestionTitle(
-                      title: widget.data.title,
-                      textColor: theme.titleColor,
-                      textSize: theme.titleSize,
-                    ),
-                  if (widget.data.subtitle.isNotEmpty)
-                    Padding(
-                      padding: const EdgeInsets.only(
-                        top: SurveyDimensions.marginS,
-                      ),
-                      child: QuestionContent(
-                        content: widget.data.subtitle,
-                        textColor: theme.subtitleColor,
-                        textSize: theme.subtitleSize,
-                      ),
-                    ),
-                ],
-              ),
+              child: InfoDataView(data: widget.data),
             ),
           ),
         ],

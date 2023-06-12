@@ -33,6 +33,7 @@
   "hint": "Hint",
   "import": "IMPORT",
   "inactive": "Inactive",
+  "info": "Info",
   "input": "Input",
   "inputHintText": "Enter answer here",
   "inputType": "Input type",
