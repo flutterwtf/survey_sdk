@@ -20,7 +20,7 @@ class BuilderPage extends StatefulWidget {
 
 class _BuilderPageState extends State<BuilderPage> {
   late final SurveyController _surveyController;
-  late final BuilderCubit _cubit;
+  late final BuilderCubit _cubit = context.read<BuilderCubit>();
 
   @override
   void initState() {
@@ -86,12 +86,6 @@ class _BuilderPageState extends State<BuilderPage> {
   }
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    _cubit = context.read<BuilderCubit>();
-  }
-
-  @override
   void dispose() {
     _surveyController.dispose();
     super.dispose();
@@ -137,6 +131,7 @@ class _BuilderPageState extends State<BuilderPage> {
                 questions: _cubit.state.surveyData.questions,
                 onUpdate: _cubit.updateQuestions,
                 selectedIndex: _selectedIndex(state),
+                endPage: state.surveyData.endPage,
               ),
               Expanded(
                 child: PhoneView(
