@@ -61,12 +61,23 @@ class BuilderCubit extends Cubit<BuilderState> {
     emit(state.copyWith(surveyData: surveyData));
   }
 
-  void select(QuestionData data) => emit(
+  void select(QuestionData data) {
+    if (state is EditQuestionBuilderState) {
+      emit(
         EditQuestionBuilderState(
           selectedIndex: data.index,
           surveyData: state.surveyData,
         ),
       );
+    } else if (state is PreviewQuestionBuilderState) {
+      emit(
+        PreviewQuestionBuilderState(
+          surveyData: state.surveyData,
+          selectedQuestion: data,
+        ),
+      );
+    }
+  }
 
   void deleteQuestionData(QuestionData data) {
     final questionList = List<QuestionData>.of(state.surveyData.questions)

@@ -20,14 +20,21 @@ class BuilderPage extends StatefulWidget {
 
 class _BuilderPageState extends State<BuilderPage> {
   late final SurveyController _surveyController;
+  late final BuilderCubit _cubit = context.read<BuilderCubit>();
 
   @override
   void initState() {
     super.initState();
-
-    _surveyController = SurveyController();
-
+    _surveyController = SurveyController()..addListener(_onChangePage);
     initCommonData(context);
+  }
+
+  void _onChangePage() {
+    final index = _surveyController.pageController.page;
+
+    if (index != null && index % 1 == 0) {
+      _cubit.select(_cubit.state.surveyData.questions[index.toInt()]);
+    }
   }
 
   Future<void> _showImportDialog() {
@@ -81,7 +88,6 @@ class _BuilderPageState extends State<BuilderPage> {
   @override
   void dispose() {
     _surveyController.dispose();
-
     super.dispose();
   }
 
@@ -98,21 +104,19 @@ class _BuilderPageState extends State<BuilderPage> {
         }
       },
       builder: (_, state) {
-        final cubit = context.read<BuilderCubit>();
-
         return Scaffold(
           appBar: AppBar(
             title: _BuilderPageTabBar(
-              onTapEditMode: cubit.openEditMode,
-              onTapPreviewMode: cubit.openPreviewMode,
+              onTapEditMode: _cubit.openEditMode,
+              onTapPreviewMode: _cubit.openPreviewMode,
             ),
             actions: [
               // ignore: avoid-passing-async-when-sync-expected
-              _ImportButton(onImportPressed: cubit.importData),
+              _ImportButton(onImportPressed: _cubit.importData),
               _ExportButton(
-                isButtonActive: cubit.state.surveyData.questions.isEmpty,
-                downloadSurveyData: cubit.downloadSurveyData,
-                copySurveyData: cubit.copySurveyData,
+                isButtonActive: _cubit.state.surveyData.questions.isEmpty,
+                downloadSurveyData: _cubit.downloadSurveyData,
+                copySurveyData: _cubit.copySurveyData,
               ),
             ],
             centerTitle: true,
@@ -121,13 +125,13 @@ class _BuilderPageState extends State<BuilderPage> {
             children: [
               QuestionList(
                 isEditMode: state is EditQuestionBuilderState,
-                onDelete: cubit.deleteQuestionData,
-                onSelect: cubit.select,
-                onAdd: cubit.addQuestionData,
-                questions: state.surveyData.questions,
-                endPage: state.surveyData.endPage,
-                onUpdate: cubit.updateQuestions,
+                onDelete: _cubit.deleteQuestionData,
+                onSelect: _cubit.select,
+                onAdd: _cubit.addQuestionData,
+                questions: _cubit.state.surveyData.questions,
+                onUpdate: _cubit.updateQuestions,
                 selectedIndex: _selectedIndex(state),
+                endPage: state.surveyData.endPage,
               ),
               Expanded(
                 child: PhoneView(
@@ -140,7 +144,7 @@ class _BuilderPageState extends State<BuilderPage> {
               ),
               EditorBar(
                 isEditMode: state is EditQuestionBuilderState,
-                onChange: cubit.updateQuestionData,
+                onChange: _cubit.updateQuestionData,
                 editableQuestion: _editableQuestion(state),
               ),
             ],
