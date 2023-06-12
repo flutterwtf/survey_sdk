@@ -35,11 +35,11 @@
       "secondaryButtonText": "Skip",
       "primaryButtonText": "NEXT"
     },
-    "intro": {
+    "info": {
       "index": 0,
-      "title": "Intro",
+      "title": "Info",
       "subtitle": "",
-      "type": "Intro",
+      "type": "Info",
       "isSkip": false,
       "content": "You may simply need a single, brief answer without discussion. Other times, you may want to talk through a scenario, evaluate how well a group is learning new material or solicit feedback. The types of questions you ask directly impact the type of answer you receive.",
       "theme": {
@@ -148,7 +148,7 @@
       "index": 1,
       "title": "Intro",
       "subtitle": "",
-      "type": "Intro",
+      "type": "Info",
       "isSkip": false,
       "content": "You may simply need a single, brief answer without discussion. Other times, you may want to talk through a scenario, evaluate how well a group is learning new material or solicit feedback. The types of questions you ask directly impact the type of answer you receive.",
       "theme": {

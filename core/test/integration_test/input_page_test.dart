@@ -20,7 +20,7 @@ void main() {
       );
     }
 
-    testWidgets('input page', (tester) async {
+    testWidgets('input page with valid data', (tester) async {
       await tester.pumpWidget(app([MockedEntities.input3]));
       final cubit = Injector().surveyCubit;
 
@@ -28,20 +28,19 @@ void main() {
       await tester.enterText(find.byType(TextFormField), '1234');
       await tester.tap(find.text('NEXT'));
       await tester.pumpAndSettle();
-      expect(
-        (cubit.state as SurveyLoadedState).answers.length,
-        1,
-      );
+      expect((cubit.state as SurveyLoadedState).answers.length, 1);
+    });
+
+    testWidgets('input page with invalid data', (tester) async {
+      await tester.pumpWidget(app([MockedEntities.input3]));
+      final cubit = Injector().surveyCubit;
+
       // click NEXT with invalid data
       await tester.enterText(find.byType(TextFormField), 'invalid');
       await tester.tap(find.text('NEXT'));
       await tester.pumpAndSettle();
-      expect(
-        (cubit.state as SurveyLoadedState).answers.length,
-        1,
-      );
+      expect((cubit.state as SurveyLoadedState).answers.length, 1);
     });
-
     testWidgets(
       'Test input page with email validator',
       (tester) async {
@@ -104,14 +103,14 @@ void main() {
       await tester.tap(nextButton);
       expect((cubit.state as SurveyLoadedState).answers.length, 0);
 
-      // press NEXT with valid data
-      await tester.enterText(inputField, '+3751111111');
-      await tester.pumpAndSettle();
-      await tester.tap(nextButton);
-      expect((cubit.state as SurveyLoadedState).answers.length, 1);
-
       //press NEXT with invalid data
       await tester.enterText(inputField, '+375111');
+      await tester.pumpAndSettle();
+      await tester.tap(nextButton);
+      expect((cubit.state as SurveyLoadedState).answers.length, 0);
+
+      // press NEXT with valid data
+      await tester.enterText(inputField, '+3751111111');
       await tester.pumpAndSettle();
       await tester.tap(nextButton);
       expect((cubit.state as SurveyLoadedState).answers.length, 1);

@@ -2,8 +2,8 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/choice/choice_customization_panel.dart';
+import 'package:survey_admin/presentation/widgets/customization_panel/info/info_customization_panel.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/input/input_customization_panel.dart';
-import 'package:survey_admin/presentation/widgets/customization_panel/intro/intro_customization_panel.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/slider/slider_customization_panel.dart';
 import 'package:survey_sdk/survey_sdk.dart';
 
@@ -52,10 +52,10 @@ class EditorBar extends StatelessWidget {
                     onChange: onChange,
                     editable: questionData as InputQuestionData,
                   );
-                case QuestionTypes.intro:
-                  return IntroCustomizationPanel(
+                case QuestionTypes.info:
+                  return InfoCustomizationPanel(
                     onChange: onChange,
-                    editable: questionData as IntroQuestionData,
+                    editable: questionData as InfoQuestionData,
                   );
                 case QuestionTypes.slider:
                   return SliderCustomizationPanel(

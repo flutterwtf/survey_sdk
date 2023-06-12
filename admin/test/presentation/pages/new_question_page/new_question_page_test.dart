@@ -42,7 +42,7 @@ void main() {
       expect(find.text('New screen'), findsOneWidget);
       expect(find.text('ADD'), findsOneWidget);
       expect(find.text('Cancel'), findsOneWidget);
-      expect(find.text('Intro'), findsOneWidget);
+      expect(find.text('Info'), findsOneWidget);
       expect(find.text('Choice'), findsOneWidget);
       expect(find.text('Slider'), findsOneWidget);
       expect(find.text('Custom input'), findsOneWidget);
@@ -75,7 +75,7 @@ void main() {
       expect(find.text('Single-line input'), findsOneWidget);
       expect(find.text('Multi-line input'), findsOneWidget);
 
-      await tester.tap(find.text('Intro'));
+      await tester.tap(find.text('Info'));
       await tester.pump();
       expect(find.text('Title'), findsOneWidget);
     });

@@ -5,21 +5,23 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart' as intl;
 
-import 'package:survey_sdk/src/presentation/localization/flutter_gen/app_localizations_en.dart';
+import 'package:survey_sdk/src/presentation/localization/flutter_gen/survey_localizations_en.dart';
 
-/// Callers can lookup localized strings with an instance of AppLocalizations
-/// returned by `AppLocalizations.of(context)`.
+// ignore_for_file: lines_longer_than_80_chars
+
+/// Callers can lookup localized strings with an instance of SurveyLocalizations
+/// returned by `SurveyLocalizations.of(context)`.
 ///
-/// Applications need to include `AppLocalizations.delegate()` in their app's
+/// Applications need to include `SurveyLocalizations.delegate()` in their app's
 /// `localizationDelegates` list, and the locales they support in the app's
 /// `supportedLocales` list. For example:
 ///
 /// ```dart
-/// import 'flutter_gen/app_localizations.dart';
+/// import 'flutter_gen/survey_localizations.dart';
 ///
 /// return MaterialApp(
-///   localizationsDelegates: AppLocalizations.localizationsDelegates,
-///   supportedLocales: AppLocalizations.supportedLocales,
+///   localizationsDelegates: SurveyLocalizations.localizationsDelegates,
+///   supportedLocales: SurveyLocalizations.supportedLocales,
 ///   home: MyApplicationHome(),
 /// );
 /// ```
@@ -56,21 +58,20 @@ import 'package:survey_sdk/src/presentation/localization/flutter_gen/app_localiz
 /// Select and expand the newly-created Localizations item then, for each
 /// locale your application supports, add a new item and select the locale
 /// you wish to add from the pop-up menu in the Value field. This list should
-/// be consistent with the languages listed in the
-/// AppLocalizations.supportedLocales property.
-abstract class AppLocalizations {
+/// be consistent with the languages listed in the SurveyLocalizations.supportedLocales
+/// property.
+abstract class SurveyLocalizations {
   final String localeName;
 
-  static const LocalizationsDelegate<AppLocalizations> delegate =
-      _AppLocalizationsDelegate();
+  static const LocalizationsDelegate<SurveyLocalizations> delegate =
+      _SurveyLocalizationsDelegate();
 
   /// A list of this localizations delegate along with the default localizations
   /// delegates.
   ///
-  /// Returns a list of localizations delegates containing this delegate along
-  /// with GlobalMaterialLocalizations.delegate,
-  /// GlobalCupertinoLocalizations.delegate, and
-  /// GlobalWidgetsLocalizations.delegate.
+  /// Returns a list of localizations delegates containing this delegate along with
+  /// GlobalMaterialLocalizations.delegate, GlobalCupertinoLocalizations.delegate,
+  /// and GlobalWidgetsLocalizations.delegate.
   ///
   /// Additional delegates can be added by appending to this list in
   /// MaterialApp. This list does not have to be used at all if a custom list
@@ -84,9 +85,19 @@ abstract class AppLocalizations {
   ];
 
   /// A list of this localizations delegate's supported locales.
-  static const List<Locale> supportedLocales = <Locale>[
-    Locale('en'),
-  ];
+  static const List<Locale> supportedLocales = <Locale>[Locale('en')];
+
+  /// No description provided for @showMoreErrorDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Damaged JSON'**
+  String get damagedJson;
+
+  /// No description provided for @hideErrorDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Hide details'**
+  String get hideErrorDetails;
 
   /// No description provided for @next.
   ///
@@ -94,11 +105,23 @@ abstract class AppLocalizations {
   /// **'NEXT'**
   String get next;
 
+  /// No description provided for @showErrorDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Show details'**
+  String get showErrorDetails;
+
   /// No description provided for @skip.
   ///
   /// In en, this message translates to:
   /// **'SKIP'**
   String get skip;
+
+  /// No description provided for @surveyLoadError.
+  ///
+  /// In en, this message translates to:
+  /// **'Data is corrupted, survey has not been loaded'**
+  String get surveyLoadError;
 
   /// No description provided for @textField.
   ///
@@ -106,41 +129,35 @@ abstract class AppLocalizations {
   /// **'Text field'**
   String get textField;
 
-  AppLocalizations(String locale)
+  SurveyLocalizations(String locale)
       : localeName = intl.Intl.canonicalizedLocale(locale);
 
-  static AppLocalizations of(BuildContext context) {
-    return Localizations.of<AppLocalizations>(context, AppLocalizations)!;
+  static SurveyLocalizations of(BuildContext context) {
+    return Localizations.of<SurveyLocalizations>(context, SurveyLocalizations)!;
   }
 }
 
-class _AppLocalizationsDelegate
-    extends LocalizationsDelegate<AppLocalizations> {
-  const _AppLocalizationsDelegate();
+class _SurveyLocalizationsDelegate
+    extends LocalizationsDelegate<SurveyLocalizations> {
+  const _SurveyLocalizationsDelegate();
 
   @override
-  Future<AppLocalizations> load(Locale locale) {
-    return SynchronousFuture<AppLocalizations>(lookupAppLocalizations(locale));
+  Future<SurveyLocalizations> load(Locale locale) {
+    return SynchronousFuture<SurveyLocalizations>(
+      lookupSurveyLocalizations(locale),
+    );
   }
 
   @override
-  bool isSupported(Locale locale) =>
-      <String>['en'].contains(locale.languageCode);
+  bool isSupported(Locale locale) => true;
 
   @override
-  bool shouldReload(_AppLocalizationsDelegate old) => false;
+  bool shouldReload(_SurveyLocalizationsDelegate old) => false;
 }
 
-AppLocalizations lookupAppLocalizations(Locale locale) {
-  // Lookup logic when only language code is specified.
-  switch (locale.languageCode) {
-    case 'en':
-      return AppLocalizationsEn();
-  }
-
-  throw FlutterError(
-      'AppLocalizations.delegate failed to load unsupported locale "$locale". '
-      'This is likely an issue with the localizations generation tool. Please '
-      'file an issue on GitHub with a reproducible sample app and the gen-l10n '
-      'configuration that was used.',);
-}
+SurveyLocalizations lookupSurveyLocalizations(Locale locale) =>
+    // Lookup logic when only language code is specified.
+    switch (locale.languageCode) {
+      'en' => SurveyLocalizationsEn(),
+      _ => SurveyLocalizationsEn(),
+    };

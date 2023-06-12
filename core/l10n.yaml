@@ -1,6 +1,7 @@
 arb-dir: lib/src/presentation/localization/l10n
 template-arb-file: app_en.arb
-output-localization-file: app_localizations.dart
+output-localization-file: survey_localizations.dart
+output-class: SurveyLocalizations
 untranslated-messages-file: untranslatedMessages.txt
 nullable-getter: false
 synthetic-package: false

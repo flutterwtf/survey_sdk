@@ -69,7 +69,7 @@ Besides that, there is method `toJson` and factory `.fromJson` to import and exp
 
 ## Questions
 
-### Types: *Choice*, *Input*, *Intro*, *Slider*.
+### Types: *Choice*, *Input*, *Info*, *Slider*.
 
 ***
 ## QuestionData class
@@ -115,11 +115,11 @@ Data class representing an input question.
 * `theme` Default value is *[InputQuestionTheme](README.md#inputquestiontheme).common()*.
 
 ***
-## IntroQuestionData
-Data class representing an introduction question.
+## InfoQuestionData
+Data class representing an information question.
 
 ### Unique field:
-* `theme` Default value is *[IntroQuestionTheme](README.md#introquestiontheme).common()*.
+* `theme` Default value is *[InfoQuestionTheme](README.md#infoquestiontheme).common()*.
 
 ***
 ## SliderQuestionData
@@ -139,7 +139,7 @@ A theme class that extends the `ThemeExtension` and includes common properties f
 Contains:
 * [`choice`](README.md#choicequestiondata)
 * [`input`](README.md#inputquestiondata)
-* [`intro`](README.md#introquestiondata)
+* [`info`](README.md#infoquestiondata)
 * [`slider`](README.md#sliderquestiondata)
 
 ## Subclasses
@@ -190,8 +190,8 @@ Unique fields:
 * `inputType` Default value is *InputType.text*.
 
 ***
-## IntroQuestionTheme
-Represents the visual styling and appearance for an intro question options.
+## InfoQuestionTheme
+Represents the visual styling and appearance for an info question options.
 
 This class doesn't contains any unique fields.
 
@@ -218,9 +218,9 @@ Unique fields:
 ![input_question_page](https://github.com/What-the-Flutter/survey_sdk/assets/94079414/e0cd9e59-f996-45d0-adb8-516a8f86a0f8)
 
 ***
-### Intro question
+### Info question
 
-![intro_question_page](https://github.com/What-the-Flutter/survey_sdk/assets/94079414/9820aced-1bad-49bd-8d0b-8b4acab8d90c)
+![info_question_page](https://github.com/What-the-Flutter/survey_sdk/assets/94079414/9820aced-1bad-49bd-8d0b-8b4acab8d90c)
 
 ***
 ### Slider question

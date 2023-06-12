@@ -48,9 +48,9 @@ class BuilderCubit extends Cubit<BuilderState> {
           commonTheme: common.copyWith(input: data as InputQuestionData),
         );
 
-      case QuestionTypes.intro:
+      case QuestionTypes.info:
         surveyData = surveyData.copyWith(
-          commonTheme: common.copyWith(intro: data as IntroQuestionData),
+          commonTheme: common.copyWith(info: data as InfoQuestionData),
         );
       case QuestionTypes.slider:
         surveyData = surveyData.copyWith(
@@ -85,7 +85,13 @@ class BuilderCubit extends Cubit<BuilderState> {
 
     _updateIndex(questionList);
 
-    final surveyData = state.surveyData.copyWith(questions: questionList);
+    final endPage = state.surveyData.endPage
+        .copyWith(index: state.surveyData.endPage.index - 1);
+
+    final surveyData = state.surveyData.copyWith(
+      questions: questionList,
+      endPage: endPage,
+    );
     _sessionStorageRepository.saveSurveyData(surveyData);
     emit(state.copyWith(surveyData: surveyData));
     if (state.surveyData.questions.isEmpty) {
@@ -104,7 +110,13 @@ class BuilderCubit extends Cubit<BuilderState> {
     final questionList = List<QuestionData>.of(state.surveyData.questions)
       ..add(data);
 
-    final surveyData = state.surveyData.copyWith(questions: questionList);
+    final endPage = state.surveyData.endPage
+        .copyWith(index: state.surveyData.endPage.index + 1);
+
+    final surveyData = state.surveyData.copyWith(
+      questions: questionList,
+      endPage: endPage,
+    );
     _sessionStorageRepository.saveSurveyData(surveyData);
     emit(state.copyWith(surveyData: surveyData));
     select(state.surveyData.questions.last);

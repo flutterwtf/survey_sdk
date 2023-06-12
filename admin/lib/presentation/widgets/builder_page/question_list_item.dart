@@ -17,8 +17,8 @@ class QuestionListItem extends StatelessWidget {
 
   Widget _questionImage(QuestionData questionData) {
     switch (questionData.type) {
-      case QuestionTypes.intro:
-        return const VectorImage(assetName: AppAssets.introIcon);
+      case QuestionTypes.info:
+        return const VectorImage(assetName: AppAssets.infoIcon);
       case QuestionTypes.input:
         return const VectorImage(assetName: AppAssets.inputIcon);
       case QuestionTypes.slider:

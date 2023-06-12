@@ -11,12 +11,13 @@ class CommonData {
   static const _secondIndex = 2;
   static const _thirdIndex = 3;
   static const _fourthIndex = 4;
+  static const _fivethIndex = 5;
   static const _dividers = 10;
 
   CommonTheme get commonTheme {
     return CommonTheme(
       slider: slider(),
-      intro: intro(),
+      info: info(),
       input: input(),
       choice: choice(),
     );
@@ -25,26 +26,27 @@ class CommonData {
   SurveyData get surveyData {
     return SurveyData(
       questions: [
-        intro(index: _firstIndex),
+        info(index: _firstIndex, title: context.localization.intro),
         input(index: _secondIndex),
         choice(index: _thirdIndex),
         slider(index: _fourthIndex),
       ],
+      endPage: endPage(index: _fivethIndex),
       commonTheme: commonTheme,
     );
   }
 
   const CommonData(this.context);
 
-  IntroQuestionData intro({int index = 0}) {
-    return IntroQuestionData(
+  InfoQuestionData info({int index = 0, String? title}) {
+    return InfoQuestionData(
       primaryButtonText: context.localization.next,
-      title: context.localization.intro,
+      title: title ?? context.localization.info,
       index: index,
       subtitle: context.localization.emptySubtitle,
       isSkip: false,
       content: context.localization.questionContent,
-      theme: const IntroQuestionTheme.common(),
+      theme: const InfoQuestionTheme.common(),
       secondaryButtonText: context.localization.skip,
     );
   }
@@ -99,6 +101,19 @@ class CommonData {
       theme: const SliderQuestionTheme.common(),
       secondaryButtonText: context.localization.skip,
       primaryButtonText: context.localization.next,
+    );
+  }
+
+  InfoQuestionData endPage({int index = 0}) {
+    return InfoQuestionData(
+      primaryButtonText: context.localization.next,
+      title: context.localization.end,
+      index: index,
+      subtitle: context.localization.surveyCompleted,
+      isSkip: false,
+      content: context.localization.emptyContent,
+      theme: const InfoQuestionTheme.common(),
+      secondaryButtonText: context.localization.skip,
     );
   }
 }

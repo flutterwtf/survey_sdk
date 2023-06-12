@@ -1,5 +1,9 @@
 {
+  "damagedJson": "Damaged JSON",
+  "hideErrorDetails": "Close details",
   "next": "NEXT",
+  "showErrorDetails": "Show details",
   "skip": "SKIP",
+  "surveyLoadError": "Data is corrupted, survey has not been loaded",
   "textField": "Text field"
 }

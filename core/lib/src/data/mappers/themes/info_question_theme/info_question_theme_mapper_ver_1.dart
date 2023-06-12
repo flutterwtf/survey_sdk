@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:survey_sdk/src/data/mappers/themes/json_version/question_theme_mapper_json_1.dart';
-import 'package:survey_sdk/src/domain/entities/themes/intro_question_theme.dart';
+import 'package:survey_sdk/src/domain/entities/themes/info_question_theme.dart';
 
 abstract class _Fields {
   static const String fill = 'fill';
@@ -18,11 +18,11 @@ abstract class _Fields {
   static const String secondaryButtonRadius = 'secondaryButtonRadius';
 }
 
-class IntroQuestionThemeMapperVer1
-    extends QuestionThemeMapperJson1<IntroQuestionTheme> {
+class InfoQuestionThemeMapperVer1
+    extends QuestionThemeMapperJson1<InfoQuestionTheme> {
   @override
-  IntroQuestionTheme fromJson(Map<String, dynamic> json) {
-    return IntroQuestionTheme(
+  InfoQuestionTheme fromJson(Map<String, dynamic> json) {
+    return InfoQuestionTheme(
       fill: Color(json[_Fields.fill]),
       titleColor: Color(json[_Fields.titleColor]),
       titleSize: (json[_Fields.titleSize] as num).toDouble(),
@@ -44,7 +44,7 @@ class IntroQuestionThemeMapperVer1
   }
 
   @override
-  Map<String, dynamic> toJson(IntroQuestionTheme theme) {
+  Map<String, dynamic> toJson(InfoQuestionTheme theme) {
     return {
       _Fields.fill: theme.fill.value,
       _Fields.titleColor: theme.titleColor.value,

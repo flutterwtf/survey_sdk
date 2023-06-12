@@ -9,6 +9,7 @@ import 'package:survey_sdk/src/presentation/di/injector.dart';
 import 'package:survey_sdk/src/presentation/survey/survey_controller.dart';
 import 'package:survey_sdk/src/presentation/survey/survey_cubit.dart';
 import 'package:survey_sdk/src/presentation/survey/survey_state.dart';
+import 'package:survey_sdk/src/presentation/survey_error/survey_error.dart';
 import 'package:survey_sdk/src/presentation/utils/utils.dart';
 
 // TODO(dev): Maybe create two classes, where one is for filePath and the other
@@ -79,20 +80,10 @@ class _SurveyState extends State<Survey> {
     Injector().init();
     _cubit = Injector().surveyCubit;
     _surveyController = widget.controller ?? SurveyController();
-  }
 
-  /// Called when a dependency of this [State] object changes.
-  ///
-  /// The method initializes the survey data for [SurveyCubit] using the
-  /// data provided to the widget.
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    if (widget.surveyData == null) {
-      _cubit.initData(widget.filePath);
-    } else {
-      _cubit.setSurveyData(widget.surveyData!);
-    }
+    widget.surveyData == null
+        ? _cubit.initData(widget.filePath)
+        : _cubit.setSurveyData(widget.surveyData, []);
   }
 
   /// Builds the survey form using a PageView widget.
@@ -120,7 +111,7 @@ class _SurveyState extends State<Survey> {
                 commonTheme.choice.theme!,
                 commonTheme.slider.theme!,
                 commonTheme.input.theme!,
-                commonTheme.intro.theme!,
+                commonTheme.info.theme!,
               ],
             ),
             child: WillPopScope(
@@ -131,22 +122,28 @@ class _SurveyState extends State<Survey> {
               child: PageView(
                 controller: _surveyController.pageController,
                 physics: const NeverScrollableScrollPhysics(),
-                children: data.questions
-                    .map<Widget>(
-                      (question) => DataToWidgetUtil.createWidget(
-                        data: question,
-                        answer: state.answers[question.index],
-                        onSend: ({required index, required answer}) {
-                          if (widget.saveAnswer) {
-                            _cubit.saveAnswer(index: index, answer: answer);
-                          }
-                        },
-                        onGoNext: _surveyController.onNext,
-                      ),
-                    )
-                    .toList(),
+                children: [
+                  ...data.questions.map<Widget>(
+                    (question) => DataToWidgetUtil.createWidget(
+                      data: question,
+                      answer: state.answers[question.index],
+                      onSend: _cubit.saveAnswer,
+                      onGoNext: _surveyController.onNext,
+                    ),
+                  ),
+                  DataToWidgetUtil.createEndPage(
+                    data: data.endPage,
+                  ),
+                ],
               ),
             ),
+          );
+        }
+        if (state is SurveyErrorLoadState) {
+          return SurveyError(
+            providedErrors: state.providedErrors,
+            onDetailsTap: _cubit.detailedError,
+            errorState: state.errorState,
           );
         }
         return const Center(
