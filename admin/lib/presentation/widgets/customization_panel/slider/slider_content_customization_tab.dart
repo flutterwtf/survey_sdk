@@ -59,6 +59,7 @@ class SliderContentCustomizationTab extends CustomizationTab {
                   minValue: min,
                   maxValue: max,
                   initialValue: min,
+                  divisions: max - min,
                 ),
               ),
             ),
@@ -68,7 +69,8 @@ class SliderContentCustomizationTab extends CustomizationTab {
           title: context.localization.divisions,
           children: [
             DivisionsCustomizationItem(
-              initialValue: editable.initialValue,
+              maxValue: editable.maxValue - editable.minValue,
+              initialValue: editable.divisions,
               onChanged: (divisions) => onChange(
                 editable.copyWith(divisions: divisions),
               ),

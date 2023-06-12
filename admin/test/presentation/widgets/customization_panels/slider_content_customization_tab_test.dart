@@ -75,10 +75,10 @@ void main() {
       await tester.pumpWidget(page);
       await tester.enterText(
         find.widgetWithText(CustomizationItemsContainer, 'Divisions'),
-        '1234',
+        '0010',
       );
-      expect(find.text('1234'), findsNothing);
-      expect(data.divisions, 123);
+      expect(find.text('0010'), findsNothing);
+      expect(data.divisions, 1);
     });
 
     testWidgets('Input min,max for Value(num)', (tester) async {

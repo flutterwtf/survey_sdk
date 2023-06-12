@@ -11,7 +11,9 @@ void main() {
       await tester.pumpWidget(
         AppTester(
           child: DivisionsCustomizationItem(
-            onChanged: (int? divisions) {}, initialValue: 10,
+            maxValue: 20,
+            initialValue: 10,
+            onChanged: (int? divisions) {},
           ),
         ),
       );
@@ -23,6 +25,7 @@ void main() {
       await tester.pumpWidget(
         AppTester(
           child: DivisionsCustomizationItem(
+            maxValue: 20,
             initialValue: 11,
             onChanged: (int? divisions) => divisions,
           ),
@@ -45,6 +48,7 @@ void main() {
       await tester.pumpWidget(
         AppTester(
           child: DivisionsCustomizationItem(
+            maxValue: 20,
             initialValue: 2,
             onChanged: (int? divisions) => divisions,
           ),
@@ -61,6 +65,7 @@ void main() {
       await tester.pumpWidget(
         AppTester(
           child: DivisionsCustomizationItem(
+            maxValue: 20,
             initialValue: 2,
             onChanged: (int? divisions) => divisions,
           ),
@@ -79,6 +84,7 @@ void main() {
       await tester.pumpWidget(
         AppTester(
           child: DivisionsCustomizationItem(
+            maxValue: 33333,
             initialValue: 22222,
             onChanged: (int? divisions) => divisions,
           ),
