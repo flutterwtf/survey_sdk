@@ -44,18 +44,15 @@ class _QuestionListState extends State<QuestionList> {
         ? widget.questions.length - 1
         : newIndex;
 
-    final itemOld = widget.questions.removeAt(oldIndex);
-
-    widget.questions.insert(
-      updatedIndex,
-      itemOld,
-    );
+    final questions = List.of(widget.questions);
+    final itemOld = questions.removeAt(oldIndex);
+    questions.insert(updatedIndex, itemOld);
 
     for (var i = 0; i < widget.questions.length; i++) {
-      widget.questions[i] = widget.questions[i].copyWith(index: i + 1);
+      questions[i] = questions[i].copyWith(index: i + 1);
     }
 
-    widget.onUpdate(widget.questions);
+    widget.onUpdate(questions);
   }
 
   @override
