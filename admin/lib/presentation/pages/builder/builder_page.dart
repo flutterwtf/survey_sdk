@@ -30,10 +30,16 @@ class _BuilderPageState extends State<BuilderPage> {
   }
 
   void _onChangePage() {
+    final questions = _cubit.state.surveyData.questions;
     final index = _surveyController.pageController.page;
+    final question = index == questions.length
+        ? _cubit.state.surveyData.endPage
+        : index != null && index % 1 == 0
+            ? questions[index.toInt()]
+            : null;
 
-    if (index != null && index % 1 == 0) {
-      _cubit.select(_cubit.state.surveyData.questions[index.toInt()]);
+    if (question != null) {
+      _cubit.select(question);
     }
   }
 
