@@ -17,6 +17,7 @@ p {
     height: 100%;
     border-radius: 25px;
     background-color: black;
+    transition: all 0.1s;
 }
 
 #splash__container {
