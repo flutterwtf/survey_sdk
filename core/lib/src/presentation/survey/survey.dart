@@ -127,7 +127,11 @@ class _SurveyState extends State<Survey> {
                     (question) => DataToWidgetUtil.createWidget(
                       data: question,
                       answer: state.answers[question.index],
-                      onSend: _cubit.saveAnswer,
+                      onSend: ({required index, required answer}) {
+                        if (widget.saveAnswer) {
+                          _cubit.saveAnswer(index: index, answer: answer);
+                        }
+                      },
                       onGoNext: _surveyController.onNext,
                     ),
                   ),
