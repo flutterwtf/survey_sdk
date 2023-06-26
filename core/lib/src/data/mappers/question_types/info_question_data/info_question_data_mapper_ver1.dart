@@ -13,6 +13,8 @@ abstract class _Fields {
   static const String secondaryButtonText = 'secondaryButtonText';
   static const String theme = 'theme';
   static const String type = 'type';
+  static const String actions = 'actions';
+  static const String mainButtonActions = 'mainButtonActions';
 }
 
 class InfoQuestionDataMapperVer1
@@ -20,6 +22,9 @@ class InfoQuestionDataMapperVer1
   @override
   InfoQuestionData fromJson(Map<String, dynamic> json) {
     final theme = json[_Fields.theme];
+    final actions = json[_Fields.actions];
+    final mainButtonAction = MainButtonAction.fromJsonByType(actions);
+
     return InfoQuestionData(
       index: json[_Fields.index],
       title: json[_Fields.title],
@@ -31,6 +36,7 @@ class InfoQuestionDataMapperVer1
           : const InfoQuestionTheme.common(),
       secondaryButtonText: json[_Fields.secondaryButtonText],
       primaryButtonText: json[_Fields.primaryButtonText],
+      mainButtonAction: mainButtonAction,
     );
   }
 
@@ -59,6 +65,11 @@ class InfoQuestionDataMapperVer1
               .toJson(const InfoQuestionTheme.common()),
       _Fields.secondaryButtonText: data.secondaryButtonText,
       _Fields.primaryButtonText: data.primaryButtonText,
+      _Fields.actions: {
+        _Fields.mainButtonActions: data.mainButtonAction == null
+            ? null
+            : MainButtonAction.toJsonByType(data.mainButtonAction!),
+      },
     };
   }
 }

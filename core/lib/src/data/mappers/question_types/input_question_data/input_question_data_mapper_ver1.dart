@@ -15,6 +15,8 @@ abstract class _Fields {
   static const String payload = 'payload';
   static const String theme = 'theme';
   static const String type = 'type';
+  static const String actions = 'actions';
+  static const String mainButtonActions = 'mainButtonActions';
 }
 
 class InputQuestionDataMapperVer1
@@ -23,6 +25,9 @@ class InputQuestionDataMapperVer1
   InputQuestionData fromJson(Map<String, dynamic> json) {
     final Map<String, dynamic> payload = json[_Fields.payload];
     final theme = json[_Fields.theme];
+    final actions = json[_Fields.actions];
+    final mainButtonAction = MainButtonAction.fromJsonByType(actions);
+
     return InputQuestionData(
       index: json[_Fields.index],
       title: json[_Fields.title],
@@ -36,6 +41,7 @@ class InputQuestionDataMapperVer1
       theme: theme != null
           ? InputQuestionThemeMapperVer1().fromJson(theme)
           : const InputQuestionTheme.common(),
+      mainButtonAction: mainButtonAction,
     );
   }
 
@@ -68,6 +74,11 @@ class InputQuestionDataMapperVer1
       },
       _Fields.secondaryButtonText: data.secondaryButtonText,
       _Fields.primaryButtonText: data.primaryButtonText,
+      _Fields.actions: {
+        _Fields.mainButtonActions: data.mainButtonAction == null
+            ? null
+            : MainButtonAction.toJsonByType(data.mainButtonAction!),
+      },
     };
   }
 }

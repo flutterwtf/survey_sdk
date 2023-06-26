@@ -19,33 +19,28 @@ typedef OnSendCallback = void Function({
 abstract class DataToWidgetUtil {
   static Widget createWidget({
     required QuestionData data,
-    required OnSendCallback onSend,
     required VoidCallback onGoNext,
+    required OnSendCallback mainButtonCallback,
     QuestionAnswer? answer,
   }) {
-    void sendAndGoNext({required int index, required QuestionAnswer answer}) {
-      onSend(index: index, answer: answer);
-      onGoNext();
-    }
-
     switch (data.runtimeType) {
       case SliderQuestionData:
         return SliderQuestionPage(
           data: data as SliderQuestionData,
           answer: answer as QuestionAnswer<double>?,
-          onSend: sendAndGoNext,
+          onMainButtonTap: mainButtonCallback,
         );
       case ChoiceQuestionData:
         return ChoiceQuestionPage(
           data: data as ChoiceQuestionData,
           answer: answer as QuestionAnswer<List<String>>?,
-          onSend: sendAndGoNext,
+          onMainButtonTap: mainButtonCallback,
         );
       case InputQuestionData:
         return InputQuestionPage(
           data: data as InputQuestionData,
           answer: answer,
-          onSend: sendAndGoNext,
+          onMainButtonTap: mainButtonCallback,
         );
       case InfoQuestionData:
         return InfoQuestionPage(

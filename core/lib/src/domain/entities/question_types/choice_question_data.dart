@@ -1,3 +1,4 @@
+import 'package:survey_sdk/src/domain/entities/actions/main_button_action/main_button_action.dart';
 import 'package:survey_sdk/src/domain/entities/constants/question_types.dart';
 import 'package:survey_sdk/src/domain/entities/question_types/question_data.dart';
 import 'package:survey_sdk/src/domain/entities/themes/choice_question_theme.dart';
@@ -58,6 +59,7 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
         ruleValue,
         secondaryButtonText,
         primaryButtonText,
+        mainButtonAction,
       ];
 
   const ChoiceQuestionData({
@@ -72,6 +74,7 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
     required super.isSkip,
     required super.secondaryButtonText,
     required super.primaryButtonText,
+    super.mainButtonAction,
     super.content,
     this.selectedByDefault,
   }) : assert(
@@ -127,6 +130,7 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
     String? secondaryButtonText,
     String? primaryButtonText,
     bool clearSelectedByDefault = false,
+    MainButtonAction? mainButtonAction,
   }) {
     return ChoiceQuestionData(
       isMultipleChoice: isMultipleChoice ?? this.isMultipleChoice,
@@ -144,6 +148,7 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
           : selectedByDefault ?? this.selectedByDefault,
       secondaryButtonText: secondaryButtonText ?? this.secondaryButtonText,
       primaryButtonText: primaryButtonText ?? this.primaryButtonText,
+      mainButtonAction: mainButtonAction ?? this.mainButtonAction,
     );
   }
 }

@@ -49,6 +49,7 @@ class SurveyData with EquatableMixin, ApiObject {
     for (final questionJson in json[_Fields.questions]) {
       questions.add(QuestionData.fromType(questionJson, schemeVersion));
     }
+    
     return SurveyData(
       questions: questions,
       endPage: endPage,

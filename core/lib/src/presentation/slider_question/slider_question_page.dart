@@ -18,14 +18,14 @@ class SliderQuestionPage extends StatefulWidget {
   final QuestionAnswer<double>? answer;
 
   /// Callback that is called after pressing bottom button.
-  final OnSendCallback onSend;
+  final OnSendCallback onMainButtonTap;
 
   /// Optional callback that is called when the secondary button is tapped.
   final VoidCallback? onSecondaryButtonTap;
 
   const SliderQuestionPage({
     required this.data,
-    required this.onSend,
+    required this.onMainButtonTap,
     this.answer,
     this.onSecondaryButtonTap,
     super.key,
@@ -126,7 +126,7 @@ class _SliderQuestionPageState extends State<SliderQuestionPage> {
                         child: QuestionBottomButton(
                           text: widget.data.primaryButtonText,
                           onPressed: () {
-                            widget.onSend.call(
+                            widget.onMainButtonTap.call(
                               index: widget.data.index,
                               answer: QuestionAnswer<double>(_answer),
                             );

@@ -29,14 +29,14 @@ class InputQuestionPage extends StatefulWidget {
 
   /// Callback that is called after pressing bottom button if input data is
   /// valid or when the question can be skipped.
-  final OnSendCallback onSend;
+  final OnSendCallback onMainButtonTap;
 
   /// Optional callback that is called when the secondary button is tapped.
   final VoidCallback? onSecondaryButtonTap;
 
   const InputQuestionPage({
     required this.data,
-    required this.onSend,
+    required this.onMainButtonTap,
     this.answer,
     this.onSecondaryButtonTap,
     super.key,
@@ -185,12 +185,12 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
                             onPressed: () {
                               if ((isValid == null) || widget.data.isSkip) {
                                 isDateType
-                                    ? widget.onSend.call(
+                                    ? widget.onMainButtonTap.call(
                                         index: widget.data.index,
                                         answer:
                                             QuestionAnswer<DateTime>(_dateTime),
                                       )
-                                    : widget.onSend.call(
+                                    : widget.onMainButtonTap.call(
                                         index: widget.data.index,
                                         answer: QuestionAnswer<String>(_input),
                                       );

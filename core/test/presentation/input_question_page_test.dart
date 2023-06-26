@@ -55,7 +55,7 @@ void main() {
             AppTester(
               child: InputQuestionPage(
                 data: mockInputData,
-                onSend: ({
+                onMainButtonTap: ({
                   required int index,
                   required QuestionAnswer answer,
                 }) =>
@@ -83,7 +83,7 @@ void main() {
             AppTester(
               child: InputQuestionPage(
                 data: mockInputWithNumber,
-                onSend: ({
+                onMainButtonTap: ({
                   required int index,
                   required QuestionAnswer answer,
                 }) =>
@@ -112,7 +112,7 @@ void main() {
             AppTester(
               child: InputQuestionPage(
                 data: mockInputData,
-                onSend: ({
+                onMainButtonTap: ({
                   required int index,
                   required QuestionAnswer answer,
                 }) =>
@@ -138,7 +138,7 @@ void main() {
             AppTester(
               child: InputQuestionPage(
                 data: mockInputData,
-                onSend: ({
+                onMainButtonTap: ({
                   required int index,
                   required QuestionAnswer answer,
                 }) =>

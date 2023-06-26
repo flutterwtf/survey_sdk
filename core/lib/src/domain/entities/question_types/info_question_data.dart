@@ -1,3 +1,4 @@
+import 'package:survey_sdk/src/domain/entities/actions/main_button_action/main_button_action.dart';
 import 'package:survey_sdk/src/domain/entities/constants/question_types.dart';
 import 'package:survey_sdk/src/domain/entities/question_types/question_data.dart';
 import 'package:survey_sdk/src/domain/entities/themes/info_question_theme.dart';
@@ -24,6 +25,7 @@ class InfoQuestionData extends QuestionData {
         content,
         secondaryButtonText,
         primaryButtonText,
+        mainButtonAction,
       ];
 
   const InfoQuestionData({
@@ -34,6 +36,7 @@ class InfoQuestionData extends QuestionData {
     required super.isSkip,
     required super.secondaryButtonText,
     required super.primaryButtonText,
+    super.mainButtonAction,
     super.content,
   });
 
@@ -70,6 +73,7 @@ class InfoQuestionData extends QuestionData {
     InfoQuestionTheme? theme,
     String? secondaryButtonText,
     String? primaryButtonText,
+    MainButtonAction? mainButtonAction,
   }) {
     return InfoQuestionData(
       index: index ?? this.index,
@@ -80,6 +84,7 @@ class InfoQuestionData extends QuestionData {
       theme: theme ?? this.theme,
       secondaryButtonText: secondaryButtonText ?? this.secondaryButtonText,
       primaryButtonText: primaryButtonText ?? this.primaryButtonText,
+      mainButtonAction: mainButtonAction ?? this.mainButtonAction,
     );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:survey_sdk/src/domain/entities/actions/main_button_action/main_button_action.dart';
 import 'package:survey_sdk/src/domain/entities/constants/question_types.dart';
 import 'package:survey_sdk/src/domain/entities/question_types/question_data.dart';
 import 'package:survey_sdk/src/domain/entities/themes/slider_question_theme.dart';
@@ -50,6 +51,7 @@ class SliderQuestionData extends QuestionData<SliderThemeData> {
         theme,
         secondaryButtonText,
         primaryButtonText,
+        mainButtonAction,
       ];
 
   const SliderQuestionData({
@@ -64,6 +66,7 @@ class SliderQuestionData extends QuestionData<SliderThemeData> {
     required super.isSkip,
     required super.secondaryButtonText,
     required super.primaryButtonText,
+    super.mainButtonAction,
     super.content,
   });
 
@@ -108,6 +111,7 @@ class SliderQuestionData extends QuestionData<SliderThemeData> {
     SliderQuestionTheme? theme,
     String? secondaryButtonText,
     String? primaryButtonText,
+    MainButtonAction? mainButtonAction,
   }) {
     return SliderQuestionData(
       minValue: minValue ?? this.minValue,
@@ -122,6 +126,7 @@ class SliderQuestionData extends QuestionData<SliderThemeData> {
       theme: theme ?? this.theme,
       secondaryButtonText: secondaryButtonText ?? this.secondaryButtonText,
       primaryButtonText: primaryButtonText ?? this.primaryButtonText,
+      mainButtonAction: mainButtonAction,
     );
   }
 }

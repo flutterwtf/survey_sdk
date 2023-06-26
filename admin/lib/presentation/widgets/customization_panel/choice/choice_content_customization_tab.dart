@@ -4,6 +4,7 @@ import 'package:survey_admin/presentation/widgets/base/customization_tab.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_multiline_text_field.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/dropdown_customization_button.dart';
+import 'package:survey_admin/presentation/widgets/customization_items/main_button_action_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/option_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/secondary_button_customization_item.dart';
 import 'package:survey_sdk/survey_sdk.dart';
@@ -140,6 +141,18 @@ class ChoiceContentCustomizationTab extends CustomizationTab {
                 editable.copyWith(isSkip: isShown, secondaryButtonText: text),
               ),
               initialText: editable.secondaryButtonText,
+            ),
+          ],
+        ),
+        CustomizationItemsContainer(
+          itemsPadding: const EdgeInsets.all(
+            SurveyDimensions.marginM,
+          ),
+          children: [
+            MainButtonActionItem(
+              onChanged: (action) => onChange(
+                editable.copyWith(mainButtonAction: action),
+              ),
             ),
           ],
         ),

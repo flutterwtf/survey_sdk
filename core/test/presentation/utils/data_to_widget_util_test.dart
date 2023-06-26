@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:survey_sdk/src/domain/entities/actions/main_button_action/main_button_action.dart';
 import 'package:survey_sdk/src/domain/entities/question_answer.dart';
 import 'package:survey_sdk/src/domain/entities/question_types/choice_question_data.dart';
 import 'package:survey_sdk/src/domain/entities/question_types/info_question_data.dart';
@@ -24,7 +25,8 @@ void main() {
     test('Call with SliderQuestionData}', () {
       final widget = DataToWidgetUtil.createWidget(
         data: mockSliderData,
-        onSend: _mockOnSend,
+        onMainButtonTap: _mockOnSend,
+        mainButtonCallback: () {},
         onGoNext: () {},
       );
       expect(widget.runtimeType, SliderQuestionPage);
@@ -34,7 +36,8 @@ void main() {
     test('Call with ChoiceQuestionData', () {
       final widget = DataToWidgetUtil.createWidget(
         data: mockChoiceData,
-        onSend: _mockOnSend,
+        onMainButtonTap: _mockOnSend,
+        mainButtonCallback: () {},
         onGoNext: () {},
       );
 
@@ -45,7 +48,8 @@ void main() {
     test('Call with InputQuestionData', () {
       final widget = DataToWidgetUtil.createWidget(
         data: mockInputData,
-        onSend: _mockOnSend,
+        onMainButtonTap: _mockOnSend,
+        mainButtonCallback: () {},
         onGoNext: () {},
       );
 
@@ -56,7 +60,8 @@ void main() {
     test('Call with InfoQuestionData', () {
       final widget = DataToWidgetUtil.createWidget(
         data: mockInfoData,
-        onSend: _mockOnSend,
+        onMainButtonTap: _mockOnSend,
+        mainButtonCallback: () {},
         onGoNext: () {},
       );
 
@@ -68,7 +73,8 @@ void main() {
       expect(
         () => DataToWidgetUtil.createWidget(
           data: const _BadQuestionData(),
-          onSend: _mockOnSend,
+          onMainButtonTap: _mockOnSend,
+          mainButtonCallback: () {},
           onGoNext: () {},
         ),
         throwsException,
@@ -104,6 +110,7 @@ class _BadQuestionData extends QuestionData {
     bool? isSkip,
     String? secondaryButtonText,
     String? primaryButtonText,
+    MainButtonAction? mainButtonAction,
   }) {
     throw UnimplementedError();
   }
