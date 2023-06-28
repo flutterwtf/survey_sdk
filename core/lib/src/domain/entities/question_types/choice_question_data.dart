@@ -1,4 +1,4 @@
-import 'package:survey_sdk/src/domain/entities/actions/main_button_action/main_button_action.dart';
+import 'package:survey_sdk/src/domain/entities/actions/survey_action.dart';
 import 'package:survey_sdk/src/domain/entities/constants/question_types.dart';
 import 'package:survey_sdk/src/domain/entities/question_types/question_data.dart';
 import 'package:survey_sdk/src/domain/entities/themes/choice_question_theme.dart';
@@ -60,6 +60,7 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
         secondaryButtonText,
         primaryButtonText,
         mainButtonAction,
+        secondaryButtonAction,
       ];
 
   const ChoiceQuestionData({
@@ -75,6 +76,7 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
     required super.secondaryButtonText,
     required super.primaryButtonText,
     super.mainButtonAction,
+    super.secondaryButtonAction,
     super.content,
     this.selectedByDefault,
   }) : assert(
@@ -130,7 +132,8 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
     String? secondaryButtonText,
     String? primaryButtonText,
     bool clearSelectedByDefault = false,
-    MainButtonAction? mainButtonAction,
+    SurveyAction? mainButtonAction,
+    SurveyAction? secondaryButtonAction,
   }) {
     return ChoiceQuestionData(
       isMultipleChoice: isMultipleChoice ?? this.isMultipleChoice,
@@ -149,6 +152,8 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
       secondaryButtonText: secondaryButtonText ?? this.secondaryButtonText,
       primaryButtonText: primaryButtonText ?? this.primaryButtonText,
       mainButtonAction: mainButtonAction ?? this.mainButtonAction,
+      secondaryButtonAction:
+          secondaryButtonAction ?? this.secondaryButtonAction,
     );
   }
 }

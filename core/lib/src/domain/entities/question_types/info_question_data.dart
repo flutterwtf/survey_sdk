@@ -1,4 +1,4 @@
-import 'package:survey_sdk/src/domain/entities/actions/main_button_action/main_button_action.dart';
+import 'package:survey_sdk/src/domain/entities/actions/survey_action.dart';
 import 'package:survey_sdk/src/domain/entities/constants/question_types.dart';
 import 'package:survey_sdk/src/domain/entities/question_types/question_data.dart';
 import 'package:survey_sdk/src/domain/entities/themes/info_question_theme.dart';
@@ -26,6 +26,7 @@ class InfoQuestionData extends QuestionData {
         secondaryButtonText,
         primaryButtonText,
         mainButtonAction,
+        secondaryButtonAction,
       ];
 
   const InfoQuestionData({
@@ -37,6 +38,7 @@ class InfoQuestionData extends QuestionData {
     required super.secondaryButtonText,
     required super.primaryButtonText,
     super.mainButtonAction,
+    super.secondaryButtonAction,
     super.content,
   });
 
@@ -73,7 +75,8 @@ class InfoQuestionData extends QuestionData {
     InfoQuestionTheme? theme,
     String? secondaryButtonText,
     String? primaryButtonText,
-    MainButtonAction? mainButtonAction,
+    SurveyAction? mainButtonAction,
+    SurveyAction? secondaryButtonAction,
   }) {
     return InfoQuestionData(
       index: index ?? this.index,
@@ -85,6 +88,8 @@ class InfoQuestionData extends QuestionData {
       secondaryButtonText: secondaryButtonText ?? this.secondaryButtonText,
       primaryButtonText: primaryButtonText ?? this.primaryButtonText,
       mainButtonAction: mainButtonAction ?? this.mainButtonAction,
+      secondaryButtonAction:
+          secondaryButtonAction ?? this.secondaryButtonAction,
     );
   }
 }

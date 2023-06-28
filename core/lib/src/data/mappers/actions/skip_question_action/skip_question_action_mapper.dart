@@ -1,8 +1,8 @@
 import 'package:survey_sdk/src/data/mappers/actions/action_mapper.dart';
-import 'package:survey_sdk/src/domain/entities/actions/main_button_action/skip_question_action.dart';
+import 'package:survey_sdk/src/domain/entities/actions/skip_question_action.dart';
 
 abstract final class _Fields {
-  static const String skipQuestionAction = 'skipQuestionAction';
+  static const String type = 'type';
 }
 
 final class SkipQuestionActionMapper
@@ -10,7 +10,7 @@ final class SkipQuestionActionMapper
   @override
   Map<String, dynamic> toJson(SkipQuestionAction data) {
     return {
-      _Fields.skipQuestionAction: {},
+      _Fields.type: data.type,
     };
   }
 

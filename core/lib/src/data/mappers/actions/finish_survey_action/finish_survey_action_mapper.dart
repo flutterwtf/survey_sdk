@@ -1,8 +1,8 @@
 import 'package:survey_sdk/src/data/mappers/actions/action_mapper.dart';
-import 'package:survey_sdk/src/domain/entities/actions/main_button_action/finish_survey_action.dart';
+import 'package:survey_sdk/src/domain/entities/actions/finish_survey_action.dart';
 
 abstract final class _Fields {
-  static const String finishSurveyAction = 'finishSurveyAction';
+  static const String type = 'type';
 }
 
 final class FinishSurveyActionMapper
@@ -10,7 +10,7 @@ final class FinishSurveyActionMapper
   @override
   Map<String, dynamic> toJson(FinishSurveyAction data) {
     return {
-      _Fields.finishSurveyAction: {},
+      _Fields.type: data.type,
     };
   }
 

@@ -1,4 +1,4 @@
-import 'package:survey_sdk/src/domain/entities/actions/main_button_action/main_button_action.dart';
+import 'package:survey_sdk/src/domain/entities/actions/survey_action.dart';
 import 'package:survey_sdk/src/domain/entities/constants/question_types.dart';
 import 'package:survey_sdk/src/domain/entities/input_validator.dart';
 import 'package:survey_sdk/src/domain/entities/question_types/question_data.dart';
@@ -37,6 +37,7 @@ class InputQuestionData extends QuestionData<InputQuestionTheme> {
         secondaryButtonText,
         primaryButtonText,
         mainButtonAction,
+        secondaryButtonAction,
       ];
 
   const InputQuestionData({
@@ -49,6 +50,7 @@ class InputQuestionData extends QuestionData<InputQuestionTheme> {
     required super.secondaryButtonText,
     required super.primaryButtonText,
     super.mainButtonAction,
+    super.secondaryButtonAction,
     super.content,
     this.hintText,
   });
@@ -85,7 +87,8 @@ class InputQuestionData extends QuestionData<InputQuestionTheme> {
     InputQuestionTheme? theme,
     String? secondaryButtonText,
     String? primaryButtonText,
-    MainButtonAction? mainButtonAction,
+    SurveyAction? mainButtonAction,
+    SurveyAction? secondaryButtonAction,
   }) {
     return InputQuestionData(
       validator: validator ?? this.validator,
@@ -99,6 +102,8 @@ class InputQuestionData extends QuestionData<InputQuestionTheme> {
       theme: theme ?? this.theme,
       secondaryButtonText: secondaryButtonText ?? this.secondaryButtonText,
       mainButtonAction: mainButtonAction ?? this.mainButtonAction,
+      secondaryButtonAction:
+          secondaryButtonAction ?? this.secondaryButtonAction,
     );
   }
 }

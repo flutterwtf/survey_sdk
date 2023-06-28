@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:survey_sdk/src/domain/entities/actions/main_button_action/finish_survey_action.dart';
-import 'package:survey_sdk/src/domain/entities/actions/main_button_action/go_to_action.dart';
-import 'package:survey_sdk/src/domain/entities/actions/main_button_action/main_button_action.dart';
-import 'package:survey_sdk/src/domain/entities/actions/main_button_action/skip_question_action.dart';
+import 'package:survey_sdk/src/domain/entities/actions/finish_survey_action.dart';
+import 'package:survey_sdk/src/domain/entities/actions/go_to_action.dart';
+import 'package:survey_sdk/src/domain/entities/actions/survey_action.dart';
+import 'package:survey_sdk/src/domain/entities/actions/skip_question_action.dart';
 import 'package:survey_sdk/src/domain/entities/question_types/question_data.dart';
 import 'package:survey_sdk/src/presentation/survey/survey_controller.dart';
 
 final class MainButtonCallback {
-  final MainButtonAction? mainButtonAction;
+  final SurveyAction? mainButtonAction;
   final VoidCallback saveAnswer;
   final SurveyController surveyController;
   final List<QuestionData> questions;
@@ -41,6 +41,7 @@ final class MainButtonCallback {
   }
 
   void _defaultSurveyCallback() {
+    print('fff');
     saveAnswer();
     surveyController.onNext();
   }

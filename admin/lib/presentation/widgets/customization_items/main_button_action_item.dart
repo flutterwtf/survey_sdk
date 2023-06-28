@@ -4,7 +4,7 @@ import 'package:survey_admin/presentation/widgets/customization_items/customizat
 import 'package:survey_sdk/survey_sdk.dart';
 
 class MainButtonActionItem extends StatefulWidget {
-  final ValueChanged<MainButtonAction> onChanged;
+  final ValueChanged<SurveyAction> onChanged;
 
   const MainButtonActionItem({
     required this.onChanged,
@@ -16,7 +16,7 @@ class MainButtonActionItem extends StatefulWidget {
 }
 
 class _MainButtonActionItemState extends State<MainButtonActionItem> {
-  MainButtonAction? _mainButtonAction;
+  SurveyAction? _mainButtonAction;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class _MainButtonActionItemState extends State<MainButtonActionItem> {
             setState(() => _mainButtonAction = value);
             widget.onChanged(value);
           },
-          itemBuilder: (_) => <PopupMenuEntry<MainButtonAction>>[
+          itemBuilder: (_) => <PopupMenuEntry<SurveyAction>>[
             PopupMenuItem(
               value: GoToAction(questionIndex: 0),
               child: const Text('Go to'),
