@@ -2,7 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:survey_sdk/src/data/data_sources/filesystem_data_source_impl.dart';
 import 'package:survey_sdk/src/data/data_sources/interfaces/filesystem_data_source.dart';
 
-import '../../utils/mocked_entities.dart';
+/*import '../../utils/mocked_entities.dart';*/
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
