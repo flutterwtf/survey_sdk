@@ -152,6 +152,7 @@ class _BuilderPageState extends State<BuilderPage> {
                 isEditMode: state is EditQuestionBuilderState,
                 onChange: _cubit.updateQuestionData,
                 editableQuestion: _editableQuestion(state),
+                questionsLength: state.surveyData.questions.length,
               ),
             ],
           ),

@@ -22,6 +22,7 @@ class CustomizationTextField extends StatefulWidget {
   final int? maxLines;
   final TextStyle? style;
   final TextAlign textAlign;
+  final String? emptyValue;
   final bool _numberInput;
 
   //ignore:prefer_const_constructors_in_immutables
@@ -41,6 +42,7 @@ class CustomizationTextField extends StatefulWidget {
     this.style,
     this.decoration = _defaultDecoration,
     this.textAlign = TextAlign.start,
+    this.emptyValue,
   }) : _numberInput = false;
 
   CustomizationTextField.int({
@@ -59,6 +61,7 @@ class CustomizationTextField extends StatefulWidget {
     this.style,
     this.decoration = _defaultDecoration,
     this.textAlign = TextAlign.start,
+    this.emptyValue,
   }) : _numberInput = true {
     this.inputFormatters = [
       FilteringTextInputFormatter.digitsOnly,
@@ -68,7 +71,7 @@ class CustomizationTextField extends StatefulWidget {
       if (text != null && text.isNotEmpty) {
         onChanged?.call(text);
       } else {
-        onChanged?.call('0');
+        onChanged?.call(emptyValue ?? '0');
       }
     };
   }

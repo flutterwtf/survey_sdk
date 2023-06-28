@@ -19,6 +19,7 @@ void main() {
             data = newData as ChoiceQuestionData;
           },
           editable: data,
+          questionsLength: 1,
         ),
       );
 

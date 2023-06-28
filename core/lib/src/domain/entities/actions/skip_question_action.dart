@@ -6,5 +6,11 @@ final class SkipQuestionAction extends SurveyAction {
   String get type => ActionTypes.skipQuestionAction;
 
   @override
+  int get hashCode => type.hashCode ^ super.hashCode;
+
+  @override
   List<Object?> get props => [];
+
+  @override
+  bool operator ==(Object other) => runtimeType == other.runtimeType;
 }

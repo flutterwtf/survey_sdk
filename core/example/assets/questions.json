@@ -214,10 +214,7 @@
       "secondaryButtonText": "Skip",
       "primaryButtonText": "NEXT",
       "actions": {
-        "mainButtonAction": {
-          "type": "GoTo",
-          "questionIndex": 0
-        },
+        "mainButtonAction": null,
         "secondaryButtonAction": null
       }
     },
@@ -265,7 +262,10 @@
       "secondaryButtonText": "Skip",
       "primaryButtonText": "NEXT",
       "actions": {
-        "mainButtonAction": null,
+        "mainButtonAction": {
+          "type": "GoTo",
+          "questionIndex": 4
+        },
         "secondaryButtonAction": null
       }
     },
@@ -274,7 +274,7 @@
       "title": "Choice",
       "subtitle": "",
       "type": "Choice",
-      "isSkip": false,
+      "isSkip": true,
       "content": "You may simply need a single, brief answer without discussion. Other times, you may want to talk through a scenario, evaluate how well a group is learning new material or solicit feedback. The types of questions you ask directly impact the type of answer you receive.",
       "theme": {
         "activeColor": 4278190080,
@@ -308,7 +308,9 @@
       "primaryButtonText": "NEXT",
       "actions": {
         "mainButtonAction": null,
-        "secondaryButtonAction": null
+        "secondaryButtonAction": {
+          "type": "FinishSurvey"
+        }
       }
     },
     {
@@ -345,7 +347,10 @@
       "secondaryButtonText": "Skip",
       "primaryButtonText": "NEXT",
       "actions": {
-        "mainButtonAction": null,
+        "mainButtonAction": {
+          "type": "GoTo",
+          "questionIndex": 3
+        },
         "secondaryButtonAction": null
       }
     }

@@ -1,25 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:survey_sdk/src/domain/entities/actions/finish_survey_action.dart';
 import 'package:survey_sdk/src/domain/entities/actions/go_to_action.dart';
-import 'package:survey_sdk/src/domain/entities/actions/survey_action.dart';
 import 'package:survey_sdk/src/domain/entities/actions/skip_question_action.dart';
+import 'package:survey_sdk/src/domain/entities/actions/survey_action.dart';
 import 'package:survey_sdk/src/domain/entities/question_types/question_data.dart';
 import 'package:survey_sdk/src/presentation/survey/survey_controller.dart';
+import 'package:survey_sdk/src/presentation/utils/callback_types.dart';
 
-final class MainButtonCallback {
-  final SurveyAction? mainButtonAction;
-  final VoidCallback saveAnswer;
+final class SurveyButtonCallback {
+  final SurveyAction? callback;
+  final VoidCallback? saveAnswer;
   final SurveyController surveyController;
   final List<QuestionData> questions;
+  final CallbackTypes callbackType;
 
-  MainButtonCallback({
-    required this.mainButtonAction,
+  SurveyButtonCallback({
+    required this.callback,
     required this.saveAnswer,
     required this.surveyController,
     required this.questions,
+    required this.callbackType,
   });
 
-  void mainButtonCallbackFromType() => switch (mainButtonAction.runtimeType) {
+  void callbackFromType() => switch (callback.runtimeType) {
         GoToAction => _goToCallback(),
         FinishSurveyAction => _finishSurveyCallback(),
         SkipQuestionAction => _skipSurveyCallback(),
@@ -27,12 +30,12 @@ final class MainButtonCallback {
       };
 
   void _goToCallback() {
-    saveAnswer();
-    surveyController.animateTo((mainButtonAction! as GoToAction).questionIndex);
+    saveAnswer?.call();
+    surveyController.animateTo((callback! as GoToAction).questionIndex - 1);
   }
 
   void _finishSurveyCallback() {
-    saveAnswer();
+    saveAnswer?.call();
     surveyController.animateTo(questions.length);
   }
 
@@ -40,9 +43,13 @@ final class MainButtonCallback {
     surveyController.onNext();
   }
 
-  void _defaultSurveyCallback() {
-    print('fff');
-    saveAnswer();
-    surveyController.onNext();
-  }
+  void _defaultSurveyCallback() => switch (callbackType) {
+        CallbackTypes.primaryCallback => {
+            saveAnswer?.call(),
+            surveyController.onNext(),
+          },
+        CallbackTypes.secondaryCallback => {
+            surveyController.onNext(),
+          },
+      };
 }

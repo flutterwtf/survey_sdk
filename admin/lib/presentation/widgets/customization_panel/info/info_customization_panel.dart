@@ -8,10 +8,12 @@ import 'package:survey_sdk/survey_sdk.dart';
 class InfoCustomizationPanel extends StatelessWidget {
   final ValueChanged<QuestionData> onChange;
   final InfoQuestionData editable;
+  final int questionsLength;
 
   const InfoCustomizationPanel({
     required this.onChange,
     required this.editable,
+    required this.questionsLength,
     super.key,
   });
 
@@ -23,6 +25,7 @@ class InfoCustomizationPanel extends StatelessWidget {
           onChange: onChange,
           title: context.localization.content,
           editable: editable,
+          questionsLength: questionsLength,
         ),
         InfoCommonCustomizationTab(
           onChange: onChange,

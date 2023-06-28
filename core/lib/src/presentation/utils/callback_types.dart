@@ -1,0 +1,4 @@
+enum CallbackTypes {
+  primaryCallback,
+  secondaryCallback,
+}

@@ -4,12 +4,14 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:survey_sdk/src/domain/entities/question_answer.dart';
 import 'package:survey_sdk/src/domain/entities/survey_data.dart';
 import 'package:survey_sdk/src/presentation/di/injector.dart';
 import 'package:survey_sdk/src/presentation/survey/survey_controller.dart';
 import 'package:survey_sdk/src/presentation/survey/survey_cubit.dart';
 import 'package:survey_sdk/src/presentation/survey/survey_state.dart';
 import 'package:survey_sdk/src/presentation/survey_error/survey_error.dart';
+import 'package:survey_sdk/src/presentation/utils/callback_types.dart';
 import 'package:survey_sdk/src/presentation/utils/utils.dart';
 
 // TODO(dev): Maybe create two classes, where one is for filePath and the other
@@ -97,6 +99,20 @@ class _SurveyState extends State<Survey> {
   /// If the survey is not yet loaded, a circular progress indicator is
   /// displayed. If the user attempts to navigate back from the first page,
   /// the onBack of the [SurveyController] is called.
+
+  void _surveyCallback({
+    required int index,
+    required QuestionAnswer? answer,
+    required CallbackTypes callbackType,
+  }) {
+    _cubit.surveyCallback(
+      _surveyController,
+      index,
+      answer,
+      callbackType,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SurveyCubit, SurveyState>(
@@ -127,11 +143,24 @@ class _SurveyState extends State<Survey> {
                     (question) => DataToWidgetUtil.createWidget(
                       data: question,
                       answer: state.answers[question.index],
-                      mainButtonCallback: ({required index, required answer}) {
-                        _cubit.mainButtonCallback(
-                          _surveyController,
-                          index,
-                          answer,
+                      primaryButtonCallback: ({
+                        required index,
+                        required answer,
+                      }) {
+                        _surveyCallback(
+                          index: index,
+                          answer: answer,
+                          callbackType: CallbackTypes.primaryCallback,
+                        );
+                      },
+                      secondaryButtonCallback: ({
+                        required index,
+                        required answer,
+                      }) {
+                        _surveyCallback(
+                          index: index,
+                          answer: answer,
+                          callbackType: CallbackTypes.secondaryCallback,
                         );
                       },
                       onGoNext: _surveyController.onNext,

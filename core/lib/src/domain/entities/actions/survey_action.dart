@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:survey_sdk/src/data/mappers/actions/action_mapper.dart';
 import 'package:survey_sdk/src/data/mappers/actions/finish_survey_action/finish_survey_action_mapper.dart';
 import 'package:survey_sdk/src/data/mappers/actions/go_to_action/go_to_action_mapper.dart';
 import 'package:survey_sdk/src/data/mappers/actions/skip_question_action/skip_question_action_mapper.dart';

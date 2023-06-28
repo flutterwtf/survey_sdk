@@ -43,13 +43,12 @@ class SurveyData with EquatableMixin, ApiObject {
   factory SurveyData.fromJson(Map<String, dynamic> json) {
     final questions = <QuestionData>[];
     final schemeVersion = json[_Fields.schemeVersion];
-    final endPage =
-        QuestionData.fromType(json[_Fields.endPage], schemeVersion)
-            as InfoQuestionData;
+    final endPage = QuestionData.fromType(json[_Fields.endPage], schemeVersion)
+        as InfoQuestionData;
     for (final questionJson in json[_Fields.questions]) {
       questions.add(QuestionData.fromType(questionJson, schemeVersion));
     }
-    
+
     return SurveyData(
       questions: questions,
       endPage: endPage,

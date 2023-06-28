@@ -2,7 +2,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:survey_sdk/src/domain/entities/question_answer.dart';
 import 'package:survey_sdk/src/domain/repository_interfaces/survey_data_repository.dart';
 import 'package:survey_sdk/src/presentation/survey/survey_state.dart';
-import 'package:survey_sdk/src/presentation/utils/main_button_callback.dart';
+import 'package:survey_sdk/src/presentation/utils/callback_types.dart';
+import 'package:survey_sdk/src/presentation/utils/survey_button_callback.dart';
 
 import 'package:survey_sdk/survey_sdk.dart';
 
@@ -23,25 +24,28 @@ class SurveyCubit extends Cubit<SurveyState> {
     }
   }
 
-  void mainButtonCallback(
+  void surveyCallback(
     SurveyController surveyController,
     int questionIndex,
-    QuestionAnswer answer,
+    QuestionAnswer? answer,
+    CallbackTypes callbackType,
   ) {
     if (state is SurveyLoadedState) {
       final loadedState = state as SurveyLoadedState;
-      final mainButtonAction = loadedState.surveyData.questions
-          .firstWhere(
-            (question) => question.index == questionIndex,
-          )
-          .mainButtonAction;
+      final question = loadedState.surveyData.questions.firstWhere(
+        (question) => question.index == questionIndex,
+      );
+      final callback = _callbackType(callbackType, question);
 
-      MainButtonCallback(
-        mainButtonAction: mainButtonAction,
-        saveAnswer: () => _saveAnswer(index: questionIndex, answer: answer),
+      SurveyButtonCallback(
+        callback: callback,
+        callbackType: callbackType,
         surveyController: surveyController,
         questions: loadedState.surveyData.questions,
-      ).mainButtonCallbackFromType();
+        saveAnswer: () => answer == null
+            ? null
+            : _saveAnswer(index: questionIndex, answer: answer),
+      ).callbackFromType();
     }
   }
 
@@ -76,4 +80,13 @@ class SurveyCubit extends Cubit<SurveyState> {
       emit(currentState.copyWith(answers: newAnswers));
     }
   }
+
+  SurveyAction? _callbackType(
+    CallbackTypes callbackType,
+    QuestionData question,
+  ) =>
+      switch (callbackType) {
+        CallbackTypes.primaryCallback => question.mainButtonAction,
+        CallbackTypes.secondaryCallback => question.secondaryButtonAction,
+      };
 }

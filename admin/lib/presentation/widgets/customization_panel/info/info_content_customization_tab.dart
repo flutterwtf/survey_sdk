@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:survey_admin/presentation/app/localization/app_localizations_ext.dart';
 import 'package:survey_admin/presentation/widgets/base/customization_tab.dart';
+import 'package:survey_admin/presentation/widgets/customization_items/actions_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_multiline_text_field.dart';
-import 'package:survey_admin/presentation/widgets/customization_items/main_button_action_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/secondary_button_customization_item.dart';
 import 'package:survey_sdk/survey_sdk.dart';
 
 class InfoContentCustomizationTab extends CustomizationTab {
   final ValueChanged<QuestionData> onChange;
   final InfoQuestionData editable;
+  final int questionsLength;
 
   const InfoContentCustomizationTab({
     required this.onChange,
     required super.title,
     required this.editable,
+    required this.questionsLength,
     super.key,
   });
 
@@ -74,17 +76,38 @@ class InfoContentCustomizationTab extends CustomizationTab {
           ],
         ),
         CustomizationItemsContainer(
-          itemsPadding: const EdgeInsets.all(
-            SurveyDimensions.marginM,
-          ),
+          title: context.localization.primaryButtonAction,
+          itemsPadding: EdgeInsets.zero,
           children: [
-            MainButtonActionItem(
+            ActionsCustomizationItem(
               onChanged: (action) => onChange(
-                editable.copyWith(mainButtonAction: action),
+                editable.copyWith(
+                  withoutPreviousMainActions: true,
+                  mainButtonAction: action,
+                ),
               ),
+              surveyAction: editable.mainButtonAction,
+              questionsLength: questionsLength,
             ),
           ],
         ),
+        if (editable.isSkip)
+          CustomizationItemsContainer(
+            title: context.localization.secondaryButtonAction,
+            itemsPadding: EdgeInsets.zero,
+            children: [
+              ActionsCustomizationItem(
+                onChanged: (action) => onChange(
+                  editable.copyWith(
+                    withoutPreviousSecondaryActions: true,
+                    secondaryButtonAction: action,
+                  ),
+                ),
+                surveyAction: editable.secondaryButtonAction,
+                questionsLength: questionsLength,
+              ),
+            ],
+          ),
       ],
     );
   }

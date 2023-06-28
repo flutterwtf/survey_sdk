@@ -87,6 +87,8 @@ class InputQuestionData extends QuestionData<InputQuestionTheme> {
     InputQuestionTheme? theme,
     String? secondaryButtonText,
     String? primaryButtonText,
+    bool withoutPreviousMainActions = false,
+    bool withoutPreviousSecondaryActions = false,
     SurveyAction? mainButtonAction,
     SurveyAction? secondaryButtonAction,
   }) {
@@ -101,9 +103,12 @@ class InputQuestionData extends QuestionData<InputQuestionTheme> {
       primaryButtonText: primaryButtonText ?? this.primaryButtonText,
       theme: theme ?? this.theme,
       secondaryButtonText: secondaryButtonText ?? this.secondaryButtonText,
-      mainButtonAction: mainButtonAction ?? this.mainButtonAction,
-      secondaryButtonAction:
-          secondaryButtonAction ?? this.secondaryButtonAction,
+      mainButtonAction: withoutPreviousMainActions
+          ? mainButtonAction
+          : mainButtonAction ?? this.mainButtonAction,
+      secondaryButtonAction: withoutPreviousSecondaryActions
+          ? secondaryButtonAction
+          : secondaryButtonAction ?? this.secondaryButtonAction,
     );
   }
 }

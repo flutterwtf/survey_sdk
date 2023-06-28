@@ -132,6 +132,8 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
     String? secondaryButtonText,
     String? primaryButtonText,
     bool clearSelectedByDefault = false,
+    bool withoutPreviousMainActions = false,
+    bool withoutPreviousSecondaryActions = false,
     SurveyAction? mainButtonAction,
     SurveyAction? secondaryButtonAction,
   }) {
@@ -151,9 +153,12 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
           : selectedByDefault ?? this.selectedByDefault,
       secondaryButtonText: secondaryButtonText ?? this.secondaryButtonText,
       primaryButtonText: primaryButtonText ?? this.primaryButtonText,
-      mainButtonAction: mainButtonAction ?? this.mainButtonAction,
-      secondaryButtonAction:
-          secondaryButtonAction ?? this.secondaryButtonAction,
+      mainButtonAction: withoutPreviousMainActions
+          ? mainButtonAction
+          : mainButtonAction ?? this.mainButtonAction,
+      secondaryButtonAction: withoutPreviousSecondaryActions
+          ? secondaryButtonAction
+          : secondaryButtonAction ?? this.secondaryButtonAction,
     );
   }
 }

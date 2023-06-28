@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:survey_sdk/src/domain/entities/question_answer.dart';
 import 'package:survey_sdk/src/domain/entities/question_types/info_question_data.dart';
 import 'package:survey_sdk/src/presentation/info_question/info_question_page.dart';
 
@@ -19,8 +20,16 @@ void main() {
       final infoQuestionPage = AppTester(
         child: InfoQuestionPage(
           data: const InfoQuestionData.common(),
-          onMainButtonTap: completerOnMainButtonTap.complete,
-          onSecondaryButtonTap: completerOnSecondButton.complete,
+          onPrimaryButtonTap: ({
+            required int index,
+            required QuestionAnswer? answer,
+          }) =>
+              completerOnMainButtonTap.complete(),
+          onSecondaryButtonTap: ({
+            required int index,
+            required QuestionAnswer? answer,
+          }) =>
+              completerOnSecondButton.complete(),
         ),
       );
 
@@ -41,6 +50,7 @@ void main() {
         (widgetTester) async {
           await widgetTester.pumpWidget(infoQuestionPage);
           await widgetTester.tap(find.text(mainButtonTitle));
+          await widgetTester.pumpAndSettle();
           expect(completerOnMainButtonTap.isCompleted, isTrue);
         },
       );

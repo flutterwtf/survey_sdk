@@ -5,12 +5,19 @@ class GoToAction extends SurveyAction {
   final int questionIndex;
 
   @override
+  int get hashCode => questionIndex ^ type.hashCode ^ super.hashCode;
+
+  @override
   String get type => ActionTypes.goToAction;
 
   @override
   List<Object?> get props => [
-    questionIndex,
-  ];
+        questionIndex,
+      ];
 
   GoToAction({required this.questionIndex});
+
+  @override
+  bool operator ==(Object other) => other is GoToAction &&
+      questionIndex == other.questionIndex;
 }

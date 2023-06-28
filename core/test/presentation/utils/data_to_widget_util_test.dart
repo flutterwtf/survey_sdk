@@ -13,7 +13,7 @@ import 'package:survey_sdk/src/presentation/slider_question/slider_question_page
 import 'package:survey_sdk/src/presentation/utils/data_to_widget_util.dart';
 
 //ignore: avoid-unused-parameters
-void _mockOnSend({required int index, required QuestionAnswer answer}) {}
+void _mockOnSend({required int index, required QuestionAnswer? answer}) {}
 
 void main() {
   const mockSliderData = SliderQuestionData.common();
@@ -25,8 +25,8 @@ void main() {
     test('Call with SliderQuestionData}', () {
       final widget = DataToWidgetUtil.createWidget(
         data: mockSliderData,
-        onMainButtonTap: _mockOnSend,
-        mainButtonCallback: () {},
+        primaryButtonCallback:
+            ({required int index, required QuestionAnswer? answer}) => {},
         onGoNext: () {},
       );
       expect(widget.runtimeType, SliderQuestionPage);
@@ -36,8 +36,7 @@ void main() {
     test('Call with ChoiceQuestionData', () {
       final widget = DataToWidgetUtil.createWidget(
         data: mockChoiceData,
-        onMainButtonTap: _mockOnSend,
-        mainButtonCallback: () {},
+        primaryButtonCallback: _mockOnSend,
         onGoNext: () {},
       );
 
@@ -48,8 +47,7 @@ void main() {
     test('Call with InputQuestionData', () {
       final widget = DataToWidgetUtil.createWidget(
         data: mockInputData,
-        onMainButtonTap: _mockOnSend,
-        mainButtonCallback: () {},
+        primaryButtonCallback: _mockOnSend,
         onGoNext: () {},
       );
 
@@ -60,8 +58,7 @@ void main() {
     test('Call with InfoQuestionData', () {
       final widget = DataToWidgetUtil.createWidget(
         data: mockInfoData,
-        onMainButtonTap: _mockOnSend,
-        mainButtonCallback: () {},
+        primaryButtonCallback: _mockOnSend,
         onGoNext: () {},
       );
 
@@ -73,8 +70,7 @@ void main() {
       expect(
         () => DataToWidgetUtil.createWidget(
           data: const _BadQuestionData(),
-          onMainButtonTap: _mockOnSend,
-          mainButtonCallback: () {},
+          primaryButtonCallback: _mockOnSend,
           onGoNext: () {},
         ),
         throwsException,

@@ -47,9 +47,9 @@ void main() {
               0,
             ),
           ),
-          onMainButtonTap: ({
+          onPrimaryButtonTap: ({
             required int index,
-            required QuestionAnswer answer,
+            required QuestionAnswer? answer,
           }) {
             completerOnSendButtonTap.complete();
           },
@@ -132,12 +132,12 @@ void main() {
                 minValue: 0,
                 theme: commonTheme,
               ),
-              onMainButtonTap: ({
+              onPrimaryButtonTap: ({
                 required int index,
-                required QuestionAnswer answer,
+                required QuestionAnswer? answer,
               }) {
                 expect(
-                  (answer as QuestionAnswer<double>).answer,
+                  (answer! as QuestionAnswer<double>).answer,
                   dragValue * 5,
                 );
                 completer.complete();

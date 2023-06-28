@@ -4,8 +4,8 @@ library survey_sdk;
 
 export 'package:survey_sdk/src/domain/entities/actions/finish_survey_action.dart';
 export 'package:survey_sdk/src/domain/entities/actions/go_to_action.dart';
-export 'package:survey_sdk/src/domain/entities/actions/survey_action.dart';
 export 'package:survey_sdk/src/domain/entities/actions/skip_question_action.dart';
+export 'package:survey_sdk/src/domain/entities/actions/survey_action.dart';
 export 'package:survey_sdk/src/domain/entities/constants/question_types.dart';
 export 'package:survey_sdk/src/domain/entities/input_validator.dart';
 export 'package:survey_sdk/src/domain/entities/question_types/choice_question_data.dart';

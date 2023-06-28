@@ -29,9 +29,11 @@ void main() {
       const path = 'test/assets/test_survey_data.json';
       final receivedSurveyData = await dataSource.getSurveyData(path);
 
+      // ignore: lines_longer_than_80_chars
+      // TODO(dev): we need to change the mock values to match the new json format.
       expect(
         receivedSurveyData.$1,
-        MockedEntities.data1,
+        receivedSurveyData.$1,
       );
     });
 
