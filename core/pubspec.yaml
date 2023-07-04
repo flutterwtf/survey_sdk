@@ -1,5 +1,7 @@
 name: survey_sdk
 description: The Survey SDK is a toolkit that allows developers to integrate surveys into their Flutter applications
+homepage: https://github.com/What-the-Flutter/survey_sdk
+repository: https://github.com/What-the-Flutter/survey_sdk
 version: 0.0.1
 environment:
   sdk: '>=3.0.0 <4.0.0'
