@@ -1,3 +1,5 @@
+import 'package:survey_sdk/src/domain/entities/actions/go_next_action.dart';
+import 'package:survey_sdk/src/domain/entities/actions/skip_question_action.dart';
 import 'package:survey_sdk/src/domain/entities/actions/survey_action.dart';
 import 'package:survey_sdk/src/domain/entities/constants/question_types.dart';
 import 'package:survey_sdk/src/domain/entities/input_validator.dart';
@@ -73,6 +75,8 @@ class InputQuestionData extends QuestionData<InputQuestionTheme> {
               'relevant and useful to you',
           primaryButtonText: 'NEXT',
           secondaryButtonText: 'SKIP',
+          mainButtonAction: const GoNextAction(),
+          secondaryButtonAction: const SkipQuestionAction(),
         );
 
   @override
@@ -87,10 +91,10 @@ class InputQuestionData extends QuestionData<InputQuestionTheme> {
     InputQuestionTheme? theme,
     String? secondaryButtonText,
     String? primaryButtonText,
-    bool withoutPreviousMainActions = false,
-    bool withoutPreviousSecondaryActions = false,
     SurveyAction? mainButtonAction,
     SurveyAction? secondaryButtonAction,
+    bool clearMainAction = false,
+    bool clearSecondaryAction = false,
   }) {
     return InputQuestionData(
       validator: validator ?? this.validator,
@@ -103,10 +107,10 @@ class InputQuestionData extends QuestionData<InputQuestionTheme> {
       primaryButtonText: primaryButtonText ?? this.primaryButtonText,
       theme: theme ?? this.theme,
       secondaryButtonText: secondaryButtonText ?? this.secondaryButtonText,
-      mainButtonAction: withoutPreviousMainActions
+      mainButtonAction: clearMainAction
           ? mainButtonAction
           : mainButtonAction ?? this.mainButtonAction,
-      secondaryButtonAction: withoutPreviousSecondaryActions
+      secondaryButtonAction: clearSecondaryAction
           ? secondaryButtonAction
           : secondaryButtonAction ?? this.secondaryButtonAction,
     );

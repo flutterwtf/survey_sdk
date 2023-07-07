@@ -10,13 +10,13 @@ import 'package:survey_sdk/survey_sdk.dart';
 class InputContentCustomizationTab extends CustomizationTab {
   final ValueChanged<QuestionData> onChange;
   final InputQuestionData editable;
-  final int questionsLength;
+  final int questionsAmount;
 
   const InputContentCustomizationTab({
     required this.onChange,
     required super.title,
     required this.editable,
-    required this.questionsLength,
+    required this.questionsAmount,
     super.key,
   });
 
@@ -94,12 +94,13 @@ class InputContentCustomizationTab extends CustomizationTab {
             ActionsCustomizationItem(
               onChanged: (action) => onChange(
                 editable.copyWith(
-                  withoutPreviousMainActions: true,
+                  clearMainAction: true,
                   mainButtonAction: action,
                 ),
               ),
               surveyAction: editable.mainButtonAction,
-              questionsLength: questionsLength,
+              callbackType: CallbackTypes.primaryCallback,
+              questionsLength: questionsAmount,
             ),
           ],
         ),
@@ -111,12 +112,13 @@ class InputContentCustomizationTab extends CustomizationTab {
               ActionsCustomizationItem(
                 onChanged: (action) => onChange(
                   editable.copyWith(
-                    withoutPreviousSecondaryActions: true,
+                    clearSecondaryAction: true,
                     secondaryButtonAction: action,
                   ),
                 ),
                 surveyAction: editable.secondaryButtonAction,
-                questionsLength: questionsLength,
+                callbackType: CallbackTypes.secondaryCallback,
+                questionsLength: questionsAmount,
               ),
             ],
           ),

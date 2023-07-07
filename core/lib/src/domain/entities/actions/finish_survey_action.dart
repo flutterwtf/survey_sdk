@@ -11,6 +11,8 @@ class FinishSurveyAction extends SurveyAction {
   @override
   List<Object?> get props => [];
 
+  const FinishSurveyAction();
+
   @override
   bool operator ==(Object other) => runtimeType == other.runtimeType;
 }

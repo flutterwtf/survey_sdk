@@ -17,7 +17,7 @@ void main() {
           data = newData as InfoQuestionData;
         },
         editable: data,
-        questionsLength: 1,
+        questionsAmount: 1,
       ),
     );
 

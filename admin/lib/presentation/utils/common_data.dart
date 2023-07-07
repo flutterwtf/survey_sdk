@@ -48,6 +48,8 @@ class CommonData {
       content: context.localization.questionContent,
       theme: const InfoQuestionTheme.common(),
       secondaryButtonText: context.localization.skip,
+      mainButtonAction: const GoNextAction(),
+      secondaryButtonAction: const SkipQuestionAction(),
     );
   }
 
@@ -63,6 +65,8 @@ class CommonData {
       theme: const InputQuestionTheme.common(),
       primaryButtonText: context.localization.next,
       secondaryButtonText: context.localization.skip,
+      mainButtonAction: const GoNextAction(),
+      secondaryButtonAction: const SkipQuestionAction(),
     );
   }
 
@@ -84,6 +88,8 @@ class CommonData {
       theme: const ChoiceQuestionTheme.common(),
       primaryButtonText: context.localization.next,
       secondaryButtonText: context.localization.skip,
+      mainButtonAction: const GoNextAction(),
+      secondaryButtonAction: const SkipQuestionAction(),
     );
   }
 
@@ -101,6 +107,8 @@ class CommonData {
       theme: const SliderQuestionTheme.common(),
       secondaryButtonText: context.localization.skip,
       primaryButtonText: context.localization.next,
+      mainButtonAction: const GoNextAction(),
+      secondaryButtonAction: const SkipQuestionAction(),
     );
   }
 
@@ -114,6 +122,8 @@ class CommonData {
       content: context.localization.emptyContent,
       theme: const InfoQuestionTheme.common(),
       secondaryButtonText: context.localization.skip,
+      mainButtonAction: const GoNextAction(),
+      secondaryButtonAction: const SkipQuestionAction(),
     );
   }
 }

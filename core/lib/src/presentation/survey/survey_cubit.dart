@@ -2,7 +2,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:survey_sdk/src/domain/entities/question_answer.dart';
 import 'package:survey_sdk/src/domain/repository_interfaces/survey_data_repository.dart';
 import 'package:survey_sdk/src/presentation/survey/survey_state.dart';
-import 'package:survey_sdk/src/presentation/utils/callback_types.dart';
 import 'package:survey_sdk/src/presentation/utils/survey_button_callback.dart';
 
 import 'package:survey_sdk/survey_sdk.dart';
@@ -24,7 +23,7 @@ class SurveyCubit extends Cubit<SurveyState> {
     }
   }
 
-  void surveyCallback(
+  void processCallback(
     SurveyController surveyController,
     int questionIndex,
     QuestionAnswer? answer,
@@ -35,7 +34,7 @@ class SurveyCubit extends Cubit<SurveyState> {
       final question = loadedState.surveyData.questions.firstWhere(
         (question) => question.index == questionIndex,
       );
-      final callback = _callbackType(callbackType, question);
+      final callback = _callbackByType(callbackType, question);
 
       SurveyButtonCallback(
         callback: callback,
@@ -81,7 +80,7 @@ class SurveyCubit extends Cubit<SurveyState> {
     }
   }
 
-  SurveyAction? _callbackType(
+  SurveyAction? _callbackByType(
     CallbackTypes callbackType,
     QuestionData question,
   ) =>

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:survey_sdk/src/domain/entities/actions/go_next_action.dart';
+import 'package:survey_sdk/src/domain/entities/actions/skip_question_action.dart';
 import 'package:survey_sdk/src/domain/entities/actions/survey_action.dart';
 import 'package:survey_sdk/src/domain/entities/constants/question_types.dart';
 import 'package:survey_sdk/src/domain/entities/question_types/question_data.dart';
@@ -97,6 +99,8 @@ class SliderQuestionData extends QuestionData<SliderThemeData> {
               'answer you receive.',
           primaryButtonText: 'NEXT',
           secondaryButtonText: 'SKIP',
+          mainButtonAction: const GoNextAction(),
+          secondaryButtonAction: const SkipQuestionAction(),
         );
 
   @override
@@ -113,10 +117,10 @@ class SliderQuestionData extends QuestionData<SliderThemeData> {
     SliderQuestionTheme? theme,
     String? secondaryButtonText,
     String? primaryButtonText,
-    bool withoutPreviousMainActions = false,
-    bool withoutPreviousSecondaryActions = false,
     SurveyAction? mainButtonAction,
     SurveyAction? secondaryButtonAction,
+    bool clearMainAction = false,
+    bool clearSecondaryAction = false,
   }) {
     return SliderQuestionData(
       minValue: minValue ?? this.minValue,
@@ -131,10 +135,10 @@ class SliderQuestionData extends QuestionData<SliderThemeData> {
       theme: theme ?? this.theme,
       secondaryButtonText: secondaryButtonText ?? this.secondaryButtonText,
       primaryButtonText: primaryButtonText ?? this.primaryButtonText,
-      mainButtonAction: withoutPreviousMainActions
+      mainButtonAction: clearMainAction
           ? mainButtonAction
           : mainButtonAction ?? this.mainButtonAction,
-      secondaryButtonAction: withoutPreviousSecondaryActions
+      secondaryButtonAction: clearSecondaryAction
           ? secondaryButtonAction
           : secondaryButtonAction ?? this.secondaryButtonAction,
     );

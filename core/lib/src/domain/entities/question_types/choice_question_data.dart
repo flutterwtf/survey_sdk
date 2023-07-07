@@ -1,3 +1,5 @@
+import 'package:survey_sdk/src/domain/entities/actions/go_next_action.dart';
+import 'package:survey_sdk/src/domain/entities/actions/skip_question_action.dart';
 import 'package:survey_sdk/src/domain/entities/actions/survey_action.dart';
 import 'package:survey_sdk/src/domain/entities/constants/question_types.dart';
 import 'package:survey_sdk/src/domain/entities/question_types/question_data.dart';
@@ -114,6 +116,8 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
           index: index,
           primaryButtonText: 'NEXT',
           secondaryButtonText: 'SKIP',
+          mainButtonAction: const GoNextAction(),
+          secondaryButtonAction: const SkipQuestionAction(),
         );
 
   @override
@@ -131,11 +135,11 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
     ChoiceQuestionTheme? theme,
     String? secondaryButtonText,
     String? primaryButtonText,
-    bool clearSelectedByDefault = false,
-    bool withoutPreviousMainActions = false,
-    bool withoutPreviousSecondaryActions = false,
     SurveyAction? mainButtonAction,
     SurveyAction? secondaryButtonAction,
+    bool clearSelectedByDefault = false,
+    bool clearMainAction = false,
+    bool clearSecondaryAction = false,
   }) {
     return ChoiceQuestionData(
       isMultipleChoice: isMultipleChoice ?? this.isMultipleChoice,
@@ -153,10 +157,10 @@ class ChoiceQuestionData extends QuestionData<ChoiceQuestionTheme> {
           : selectedByDefault ?? this.selectedByDefault,
       secondaryButtonText: secondaryButtonText ?? this.secondaryButtonText,
       primaryButtonText: primaryButtonText ?? this.primaryButtonText,
-      mainButtonAction: withoutPreviousMainActions
+      mainButtonAction: clearMainAction
           ? mainButtonAction
           : mainButtonAction ?? this.mainButtonAction,
-      secondaryButtonAction: withoutPreviousSecondaryActions
+      secondaryButtonAction: clearSecondaryAction
           ? secondaryButtonAction
           : secondaryButtonAction ?? this.secondaryButtonAction,
     );

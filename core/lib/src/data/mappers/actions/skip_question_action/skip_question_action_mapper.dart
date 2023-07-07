@@ -16,6 +16,6 @@ final class SkipQuestionActionMapper
 
   @override
   SkipQuestionAction fromJson(Map<String, dynamic> json) {
-    return SkipQuestionAction();
+    return const SkipQuestionAction();
   }
 }

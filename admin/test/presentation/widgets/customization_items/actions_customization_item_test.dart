@@ -9,7 +9,7 @@ import 'package:survey_sdk/survey_sdk.dart';
 
 import '../app_tester.dart';
 
-SurveyAction? _surveyAction;
+SurveyAction _surveyAction = const GoNextAction();
 
 void main() {
   const questionsLength = 5;
@@ -17,6 +17,8 @@ void main() {
   late String goToQuestion;
   late String finishSurvey;
   late String skipQuestion;
+  late String goNextQuestion;
+  late String goBackQuestion;
 
   group(
     'ActionsCustomizationItem render group',
@@ -31,10 +33,13 @@ void main() {
                 goToQuestion = context.localization.goToQuestion;
                 finishSurvey = context.localization.finishSurvey;
                 skipQuestion = context.localization.skipQuestion;
+                goNextQuestion = context.localization.goNextQuestion;
+                goBackQuestion = context.localization.goBackQuestion;
 
                 return ActionsCustomizationItem(
-                  onChanged: _mockedOnChanged,
+                  onChanged: (action) => _mockedOnChanged(action!),
                   surveyAction: _surveyAction,
+                  callbackType: CallbackTypes.primaryCallback,
                   questionsLength: questionsLength,
                 );
               },
@@ -58,6 +63,7 @@ void main() {
           await tester.pumpWidget(testWidget);
 
           expect(find.byType(VectorImage), findsNothing);
+          expect(find.text(goNextQuestion), findsOneWidget);
 
           await tester.tap(
             find.byType(DropdownCustomizationButton<SurveyAction?>),
@@ -66,6 +72,7 @@ void main() {
           expect(find.text(goToQuestion), findsOneWidget);
           expect(find.text(skipQuestion), findsOneWidget);
           expect(find.text(finishSurvey), findsOneWidget);
+          expect(find.text(goBackQuestion), findsOneWidget);
 
           await tester.tap(find.text(goToQuestion));
           await tester.pumpAndSettle();
@@ -77,7 +84,7 @@ void main() {
       testWidgets(
         'should switch to SkipQuestion',
         (tester) async {
-          _surveyAction = GoToAction(questionIndex: 0);
+          _surveyAction = const GoToAction(questionIndex: 0);
 
           await tester.pumpWidget(testWidget);
 
@@ -104,7 +111,7 @@ void main() {
       testWidgets(
         'should switch to FinishSurvey',
         (tester) async {
-          _surveyAction = SkipQuestionAction();
+          _surveyAction = const SkipQuestionAction();
 
           await tester.pumpWidget(testWidget);
 
@@ -125,9 +132,59 @@ void main() {
       );
 
       testWidgets(
+        'should switch to GoNextAction',
+            (tester) async {
+          _surveyAction = const SkipQuestionAction();
+
+          await tester.pumpWidget(testWidget);
+
+          expect(find.text(skipQuestion), findsOneWidget);
+
+          await tester.tap(
+            find.byType(DropdownCustomizationButton<SurveyAction?>),
+          );
+          await tester.pumpAndSettle();
+          expect(find.text(goToQuestion), findsOneWidget);
+          expect(find.text(finishSurvey), findsOneWidget);
+          expect(find.text(goNextQuestion), findsOneWidget);
+          expect(find.text(goBackQuestion), findsOneWidget);
+
+          await tester.tap(find.text(goNextQuestion));
+          await tester.pumpAndSettle();
+
+          expect(_surveyAction.runtimeType, GoNextAction);
+        },
+      );
+
+      testWidgets(
+        'should switch to GoBackAction',
+            (tester) async {
+          _surveyAction = const GoNextAction();
+
+          await tester.pumpWidget(testWidget);
+
+          expect(find.text(goNextQuestion), findsOneWidget);
+
+          await tester.tap(
+            find.byType(DropdownCustomizationButton<SurveyAction?>),
+          );
+          await tester.pumpAndSettle();
+          expect(find.text(goToQuestion), findsOneWidget);
+          expect(find.text(finishSurvey), findsOneWidget);
+          expect(find.text(skipQuestion), findsOneWidget);
+          expect(find.text(goBackQuestion), findsOneWidget);
+
+          await tester.tap(find.text(goBackQuestion));
+          await tester.pumpAndSettle();
+
+          expect(_surveyAction.runtimeType, GoBackAction);
+        },
+      );
+
+      testWidgets(
         'should clear survey action',
             (tester) async {
-          _surveyAction = FinishSurveyAction();
+          _surveyAction = const FinishSurveyAction();
 
           await tester.pumpWidget(testWidget);
 
@@ -137,12 +194,12 @@ void main() {
           await tester.tap(find.byType(VectorImage));
           await tester.pumpAndSettle();
 
-          expect(_surveyAction, isNull);
+          expect(_surveyAction.runtimeType, GoNextAction);
         },
       );
     },
   );
 }
 
-void _mockedOnChanged(SurveyAction? surveyAction) =>
+void _mockedOnChanged(SurveyAction surveyAction) =>
     _surveyAction = surveyAction;

@@ -14,7 +14,7 @@ void main() {
         data = newData as SliderQuestionData;
       },
       editable: data,
-      questionsLength: 1,
+      questionsAmount: 1,
     ),
   );
 

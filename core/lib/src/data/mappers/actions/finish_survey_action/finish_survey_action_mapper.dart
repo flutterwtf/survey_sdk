@@ -16,6 +16,6 @@ final class FinishSurveyActionMapper
 
   @override
   FinishSurveyAction fromJson(Map<String, dynamic> json) {
-    return FinishSurveyAction();
+    return const FinishSurveyAction();
   }
 }

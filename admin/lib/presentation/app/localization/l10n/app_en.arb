@@ -30,6 +30,8 @@
   "fill": "Fill",
   "finishSurvey": "Finish survey",
   "firstOption": "First option",
+  "goBackQuestion": "Go to back question",
+  "goNextQuestion": "Go to next question",
   "goToQuestion": "Go to question",
   "hex": "Hex",
   "hint": "Hint",

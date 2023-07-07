@@ -11,11 +11,13 @@ import 'package:survey_sdk/survey_sdk.dart';
 class ActionsCustomizationItem extends StatefulWidget {
   final ValueChanged<SurveyAction?> onChanged;
   final SurveyAction? surveyAction;
+  final CallbackTypes callbackType;
   final int questionsLength;
 
   const ActionsCustomizationItem({
     required this.onChanged,
     required this.surveyAction,
+    required this.callbackType,
     required this.questionsLength,
     super.key,
   });
@@ -37,19 +39,32 @@ class _ActionsCustomizationItemState extends State<ActionsCustomizationItem> {
 
     _actionItems = [
       SurveyActionItem(
+        actionLabel: context.localization.goNextQuestion,
+        action: const GoNextAction(),
+      ),
+      SurveyActionItem(
+        actionLabel: context.localization.goBackQuestion,
+        action: const GoBackAction(),
+      ),
+      SurveyActionItem(
         actionLabel: context.localization.goToQuestion,
         action: GoToAction(questionIndex: _goToQuestionIndex),
       ),
       SurveyActionItem(
         actionLabel: context.localization.skipQuestion,
-        action: SkipQuestionAction(),
+        action: const SkipQuestionAction(),
       ),
       SurveyActionItem(
         actionLabel: context.localization.finishSurvey,
-        action: FinishSurveyAction(),
+        action: const FinishSurveyAction(),
       ),
     ];
   }
+
+  SurveyAction _defaultCallbackByType() => switch (widget.callbackType) {
+        CallbackTypes.primaryCallback => const GoNextAction(),
+        CallbackTypes.secondaryCallback => const SkipQuestionAction(),
+      };
 
   @override
   Widget build(BuildContext context) {
@@ -66,16 +81,19 @@ class _ActionsCustomizationItemState extends State<ActionsCustomizationItem> {
                   for (final actionItem in _actionItems)
                     DropdownCustomizationItem(
                       value: actionItem.action,
+                      onChange: widget.onChanged,
                       child: Text(actionItem.actionLabel),
-                      onChange: (action) => widget.onChanged(action),
                     ),
                 ],
                 withColor: true,
               ),
             ),
-            if (widget.surveyAction != null)
+            if (widget.surveyAction.runtimeType !=
+                _defaultCallbackByType().runtimeType)
               GestureDetector(
-                onTap: () => widget.onChanged(null),
+                onTap: () => widget.onChanged(
+                  _defaultCallbackByType(),
+                ),
                 child: const Padding(
                   padding: EdgeInsets.all(SurveyDimensions.marginS),
                   child: VectorImage(assetName: AppAssets.closeIcon),

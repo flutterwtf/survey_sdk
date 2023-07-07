@@ -1,9 +1,9 @@
 import 'package:survey_sdk/src/domain/entities/actions/survey_action.dart';
 import 'package:survey_sdk/src/domain/entities/constants/action_types.dart';
 
-final class SkipQuestionAction extends SurveyAction {
+final class GoBackAction extends SurveyAction {
   @override
-  String get type => ActionTypes.skipQuestionAction;
+  String get type => ActionTypes.goBackAction;
 
   @override
   int get hashCode => type.hashCode ^ super.hashCode;
@@ -11,7 +11,7 @@ final class SkipQuestionAction extends SurveyAction {
   @override
   List<Object?> get props => [];
 
-  const SkipQuestionAction();
+  const GoBackAction();
 
   @override
   bool operator ==(Object other) => runtimeType == other.runtimeType;

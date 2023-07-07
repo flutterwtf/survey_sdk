@@ -11,12 +11,12 @@ class EditorBar extends StatelessWidget {
   final QuestionData? editableQuestion;
   final bool isEditMode;
   final void Function(QuestionData data) onChange;
-  final int questionsLength;
+  final int questionsAmount;
 
   const EditorBar({
     required this.onChange,
     required this.editableQuestion,
-    required this.questionsLength,
+    required this.questionsAmount,
     this.isEditMode = true,
     super.key,
   });
@@ -49,28 +49,28 @@ class EditorBar extends StatelessWidget {
                     key: UniqueKey(),
                     onChange: onChange,
                     editable: questionData as ChoiceQuestionData,
-                    questionsLength: questionsLength,
+                    questionsAmount: questionsAmount,
                   );
                 case QuestionTypes.input:
                   return InputCustomizationPanel(
                     key: UniqueKey(),
                     onChange: onChange,
                     editable: questionData as InputQuestionData,
-                    questionsLength: questionsLength,
+                    questionsAmount: questionsAmount,
                   );
                 case QuestionTypes.info:
                   return InfoCustomizationPanel(
                     key: UniqueKey(),
                     onChange: onChange,
                     editable: questionData as InfoQuestionData,
-                    questionsLength: questionsLength,
+                    questionsAmount: questionsAmount,
                   );
                 case QuestionTypes.slider:
                   return SliderCustomizationPanel(
                     key: UniqueKey(),
                     onChange: onChange,
                     editable: questionData as SliderQuestionData,
-                    questionsLength: questionsLength,
+                    questionsAmount: questionsAmount,
                   );
               }
             }

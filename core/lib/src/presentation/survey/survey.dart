@@ -105,7 +105,7 @@ class _SurveyState extends State<Survey> {
     required QuestionAnswer? answer,
     required CallbackTypes callbackType,
   }) {
-    _cubit.surveyCallback(
+    _cubit.processCallback(
       _surveyController,
       index,
       answer,

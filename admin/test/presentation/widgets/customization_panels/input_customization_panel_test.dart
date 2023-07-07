@@ -16,7 +16,7 @@ void main() {
             data = newData as InputQuestionData;
           },
           editable: data,
-          questionsLength: 1,
+          questionsAmount: 1,
         ),
       );
 

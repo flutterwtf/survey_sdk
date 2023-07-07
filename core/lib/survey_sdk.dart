@@ -3,6 +3,8 @@
 library survey_sdk;
 
 export 'package:survey_sdk/src/domain/entities/actions/finish_survey_action.dart';
+export 'package:survey_sdk/src/domain/entities/actions/go_back_action.dart';
+export 'package:survey_sdk/src/domain/entities/actions/go_next_action.dart';
 export 'package:survey_sdk/src/domain/entities/actions/go_to_action.dart';
 export 'package:survey_sdk/src/domain/entities/actions/skip_question_action.dart';
 export 'package:survey_sdk/src/domain/entities/actions/survey_action.dart';
@@ -22,4 +24,5 @@ export 'package:survey_sdk/src/domain/entities/themes/slider_question_theme.dart
 export 'package:survey_sdk/src/presentation/localization/flutter_gen/survey_localizations.dart';
 export 'package:survey_sdk/src/presentation/survey/survey.dart';
 export 'package:survey_sdk/src/presentation/survey/survey_controller.dart';
+export 'package:survey_sdk/src/presentation/utils/callback_types.dart';
 export 'package:survey_sdk/src/presentation/utils/utils.dart';

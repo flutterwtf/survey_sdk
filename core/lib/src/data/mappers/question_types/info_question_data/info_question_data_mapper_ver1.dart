@@ -13,7 +13,6 @@ abstract class _Fields {
   static const String secondaryButtonText = 'secondaryButtonText';
   static const String theme = 'theme';
   static const String type = 'type';
-  static const String actions = 'actions';
   static const String mainButtonAction = 'mainButtonAction';
   static const String secondaryButtonAction = 'secondaryButtonAction';
 }
@@ -23,7 +22,6 @@ class InfoQuestionDataMapperVer1
   @override
   InfoQuestionData fromJson(Map<String, dynamic> json) {
     final theme = json[_Fields.theme];
-    final actions = json[_Fields.actions] as Map<String, dynamic>;
 
     return InfoQuestionData(
       index: json[_Fields.index],
@@ -37,10 +35,10 @@ class InfoQuestionDataMapperVer1
       secondaryButtonText: json[_Fields.secondaryButtonText],
       primaryButtonText: json[_Fields.primaryButtonText],
       mainButtonAction: SurveyAction.fromType(
-        actions[_Fields.mainButtonAction],
+        json[_Fields.mainButtonAction],
       ),
       secondaryButtonAction: SurveyAction.fromType(
-        actions[_Fields.secondaryButtonAction],
+        json[_Fields.secondaryButtonAction],
       ),
     );
   }
@@ -70,14 +68,12 @@ class InfoQuestionDataMapperVer1
               .toJson(const InfoQuestionTheme.common()),
       _Fields.secondaryButtonText: data.secondaryButtonText,
       _Fields.primaryButtonText: data.primaryButtonText,
-      _Fields.actions: {
-        _Fields.mainButtonAction: data.mainButtonAction == null
-            ? null
-            : SurveyAction.toJsonByType(data.mainButtonAction!),
-        _Fields.secondaryButtonAction: data.secondaryButtonAction == null
-            ? null
-            : SurveyAction.toJsonByType(data.secondaryButtonAction!),
-      },
+      _Fields.mainButtonAction: data.mainButtonAction == null
+          ? null
+          : SurveyAction.toJsonByType(data.mainButtonAction!),
+      _Fields.secondaryButtonAction: data.secondaryButtonAction == null
+          ? null
+          : SurveyAction.toJsonByType(data.secondaryButtonAction!),
     };
   }
 }

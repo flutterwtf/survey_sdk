@@ -24,7 +24,7 @@ void main() {
           onChange: (QuestionData<dynamic> newData) {
             data = newData as InputQuestionData;
           },
-          questionsLength: 1,
+          questionsAmount: 1,
         ),
       );
 
