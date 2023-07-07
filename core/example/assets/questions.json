@@ -204,7 +204,7 @@
       "title": "Intro",
       "subtitle": "",
       "type": "Info",
-      "isSkip": true,
+      "isSkip": false,
       "content": "You may simply need a single, brief answer without discussion. Other times, you may want to talk through a scenario, evaluate how well a group is learning new material or solicit feedback. The types of questions you ask directly impact the type of answer you receive.",
       "theme": {
         "fill": 4294967295,
@@ -224,11 +224,10 @@
       "secondaryButtonText": "Skip",
       "primaryButtonText": "NEXT",
       "mainButtonAction": {
-        "type": "GoTo",
-        "questionIndex": 4
+        "type": "GoNext"
       },
       "secondaryButtonAction": {
-        "type": "GoNext"
+        "type": "SkipQuestion"
       }
     },
     {
@@ -286,7 +285,7 @@
       "title": "Choice",
       "subtitle": "",
       "type": "Choice",
-      "isSkip": true,
+      "isSkip": false,
       "content": "You may simply need a single, brief answer without discussion. Other times, you may want to talk through a scenario, evaluate how well a group is learning new material or solicit feedback. The types of questions you ask directly impact the type of answer you receive.",
       "theme": {
         "activeColor": 4278190080,
@@ -318,9 +317,11 @@
       },
       "secondaryButtonText": "Skip",
       "primaryButtonText": "NEXT",
-      "mainButtonAction": null,
+      "mainButtonAction": {
+        "type": "GoNext"
+      },
       "secondaryButtonAction": {
-        "type": "GoBack"
+        "type": "SkipQuestion"
       }
     },
     {
@@ -352,7 +353,7 @@
       "title": "Slider",
       "subtitle": "",
       "type": "Slider",
-      "isSkip": true,
+      "isSkip": false,
       "content": "You may simply need a single, brief answer without discussion. Other times, you may want to talk through a scenario, evaluate how well a group is learning new material or solicit feedback. The types of questions you ask directly impact the type of answer you receive.",
       "secondaryButtonText": "Skip",
       "primaryButtonText": "NEXT",
@@ -360,7 +361,7 @@
         "type": "GoNext"
       },
       "secondaryButtonAction": {
-        "type": "GoBack"
+        "type": "SkipQuestion"
       }
     }
   ]
