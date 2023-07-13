@@ -118,6 +118,6 @@ SurveyButtonCallback _surveyButtonCallbackByAction(
     saveAnswer: null,
     surveyController: mockedSurveyController,
     questions: questions,
-    callbackType: CallbackTypes.primaryCallback,
+    callbackType: CallbackType.primaryCallback,
   );
 }

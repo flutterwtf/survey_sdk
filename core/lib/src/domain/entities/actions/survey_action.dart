@@ -20,7 +20,7 @@ abstract class SurveyAction extends Equatable {
 
   const SurveyAction();
 
-  static Map<String, dynamic> toJsonByType(SurveyAction data) =>
+  static Map<String, dynamic> toJson(SurveyAction data) =>
       switch (data.runtimeType) {
         GoToAction => GoToActionMapper().toJson(
             data as GoToAction,
@@ -40,7 +40,7 @@ abstract class SurveyAction extends Equatable {
         _ => throw UnimplementedError(),
       };
 
-  static SurveyAction? fromType(dynamic json) => json == null
+  static SurveyAction? fromJson(dynamic json) => json == null
       ? null
       : switch ((json as Map<String, dynamic>)[_Fields.type]) {
           ActionTypes.goToAction => GoToActionMapper().fromJson(json),

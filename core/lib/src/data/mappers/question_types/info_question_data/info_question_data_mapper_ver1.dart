@@ -13,7 +13,7 @@ abstract class _Fields {
   static const String secondaryButtonText = 'secondaryButtonText';
   static const String theme = 'theme';
   static const String type = 'type';
-  static const String mainButtonAction = 'mainButtonAction';
+  static const String primaryButtonAction = 'primaryButtonAction';
   static const String secondaryButtonAction = 'secondaryButtonAction';
 }
 
@@ -34,10 +34,10 @@ class InfoQuestionDataMapperVer1
           : const InfoQuestionTheme.common(),
       secondaryButtonText: json[_Fields.secondaryButtonText],
       primaryButtonText: json[_Fields.primaryButtonText],
-      mainButtonAction: SurveyAction.fromType(
-        json[_Fields.mainButtonAction],
+      mainButtonAction: SurveyAction.fromJson(
+        json[_Fields.primaryButtonAction],
       ),
-      secondaryButtonAction: SurveyAction.fromType(
+      secondaryButtonAction: SurveyAction.fromJson(
         json[_Fields.secondaryButtonAction],
       ),
     );
@@ -68,12 +68,12 @@ class InfoQuestionDataMapperVer1
               .toJson(const InfoQuestionTheme.common()),
       _Fields.secondaryButtonText: data.secondaryButtonText,
       _Fields.primaryButtonText: data.primaryButtonText,
-      _Fields.mainButtonAction: data.mainButtonAction == null
+      _Fields.primaryButtonAction: data.mainButtonAction == null
           ? null
-          : SurveyAction.toJsonByType(data.mainButtonAction!),
+          : SurveyAction.toJson(data.mainButtonAction!),
       _Fields.secondaryButtonAction: data.secondaryButtonAction == null
           ? null
-          : SurveyAction.toJsonByType(data.secondaryButtonAction!),
+          : SurveyAction.toJson(data.secondaryButtonAction!),
     };
   }
 }

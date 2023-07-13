@@ -34,7 +34,7 @@ void main() {
       test(
         'fromType',
         () {
-          final action = SurveyAction.fromType(receivedJson);
+          final action = SurveyAction.fromJson(receivedJson);
 
           expect(action.runtimeType, FinishSurveyAction);
           expect(action, equals(object));
@@ -44,7 +44,7 @@ void main() {
       test(
         'toJsonByType',
         () {
-          final json = SurveyAction.toJsonByType(object);
+          final json = SurveyAction.toJson(object);
 
           expect(json, equals(receivedJson));
         },

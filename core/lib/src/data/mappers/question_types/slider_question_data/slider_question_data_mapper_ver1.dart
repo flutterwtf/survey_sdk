@@ -17,7 +17,7 @@ abstract class _Fields {
   static const String divisions = 'divisions';
   static const String initialValue = 'initialValue';
   static const String type = 'type';
-  static const String mainButtonAction = 'mainButtonAction';
+  static const String primaryButtonAction = 'primaryButtonAction';
   static const String secondaryButtonAction = 'secondaryButtonAction';
 }
 
@@ -42,10 +42,10 @@ class SliderQuestionDataMapperVer1
           : const SliderQuestionTheme.common(),
       secondaryButtonText: json[_Fields.secondaryButtonText],
       primaryButtonText: json[_Fields.primaryButtonText],
-      mainButtonAction: SurveyAction.fromType(
-        json[_Fields.mainButtonAction],
+      mainButtonAction: SurveyAction.fromJson(
+        json[_Fields.primaryButtonAction],
       ),
-      secondaryButtonAction: SurveyAction.fromType(
+      secondaryButtonAction: SurveyAction.fromJson(
         json[_Fields.secondaryButtonAction],
       ),
     );
@@ -80,12 +80,12 @@ class SliderQuestionDataMapperVer1
       _Fields.content: data.content,
       _Fields.secondaryButtonText: data.secondaryButtonText,
       _Fields.primaryButtonText: data.primaryButtonText,
-      _Fields.mainButtonAction: data.mainButtonAction == null
+      _Fields.primaryButtonAction: data.mainButtonAction == null
           ? null
-          : SurveyAction.toJsonByType(data.mainButtonAction!),
+          : SurveyAction.toJson(data.mainButtonAction!),
       _Fields.secondaryButtonAction: data.secondaryButtonAction == null
           ? null
-          : SurveyAction.toJsonByType(data.secondaryButtonAction!),
+          : SurveyAction.toJson(data.secondaryButtonAction!),
     };
   }
 }

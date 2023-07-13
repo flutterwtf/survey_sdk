@@ -103,7 +103,7 @@ class _SurveyState extends State<Survey> {
   void _surveyCallback({
     required int index,
     required QuestionAnswer? answer,
-    required CallbackTypes callbackType,
+    required CallbackType callbackType,
   }) {
     _cubit.processCallback(
       _surveyController,
@@ -150,7 +150,7 @@ class _SurveyState extends State<Survey> {
                         _surveyCallback(
                           index: index,
                           answer: answer,
-                          callbackType: CallbackTypes.primaryCallback,
+                          callbackType: CallbackType.primaryCallback,
                         );
                       },
                       secondaryButtonCallback: ({
@@ -160,7 +160,7 @@ class _SurveyState extends State<Survey> {
                         _surveyCallback(
                           index: index,
                           answer: answer,
-                          callbackType: CallbackTypes.secondaryCallback,
+                          callbackType: CallbackType.secondaryCallback,
                         );
                       },
                       onGoNext: _surveyController.onNext,

@@ -15,7 +15,7 @@ abstract class _Fields {
   static const String payload = 'payload';
   static const String theme = 'theme';
   static const String type = 'type';
-  static const String mainButtonAction = 'mainButtonAction';
+  static const String primaryButtonAction = 'primaryButtonAction';
   static const String secondaryButtonAction = 'secondaryButtonAction';
 }
 
@@ -39,10 +39,10 @@ class InputQuestionDataMapperVer1
       theme: theme != null
           ? InputQuestionThemeMapperVer1().fromJson(theme)
           : const InputQuestionTheme.common(),
-      mainButtonAction: SurveyAction.fromType(
-        json[_Fields.mainButtonAction],
+      mainButtonAction: SurveyAction.fromJson(
+        json[_Fields.primaryButtonAction],
       ),
-      secondaryButtonAction: SurveyAction.fromType(
+      secondaryButtonAction: SurveyAction.fromJson(
         json[_Fields.secondaryButtonAction],
       ),
     );
@@ -77,12 +77,12 @@ class InputQuestionDataMapperVer1
       },
       _Fields.secondaryButtonText: data.secondaryButtonText,
       _Fields.primaryButtonText: data.primaryButtonText,
-      _Fields.mainButtonAction: data.mainButtonAction == null
+      _Fields.primaryButtonAction: data.mainButtonAction == null
           ? null
-          : SurveyAction.toJsonByType(data.mainButtonAction!),
+          : SurveyAction.toJson(data.mainButtonAction!),
       _Fields.secondaryButtonAction: data.secondaryButtonAction == null
           ? null
-          : SurveyAction.toJsonByType(data.secondaryButtonAction!),
+          : SurveyAction.toJson(data.secondaryButtonAction!),
     };
   }
 }

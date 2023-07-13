@@ -27,7 +27,7 @@ class SurveyCubit extends Cubit<SurveyState> {
     SurveyController surveyController,
     int questionIndex,
     QuestionAnswer? answer,
-    CallbackTypes callbackType,
+    CallbackType callbackType,
   ) {
     if (state is SurveyLoadedState) {
       final loadedState = state as SurveyLoadedState;
@@ -81,11 +81,11 @@ class SurveyCubit extends Cubit<SurveyState> {
   }
 
   SurveyAction? _callbackByType(
-    CallbackTypes callbackType,
+    CallbackType callbackType,
     QuestionData question,
   ) =>
       switch (callbackType) {
-        CallbackTypes.primaryCallback => question.mainButtonAction,
-        CallbackTypes.secondaryCallback => question.secondaryButtonAction,
+        CallbackType.primaryCallback => question.mainButtonAction,
+        CallbackType.secondaryCallback => question.secondaryButtonAction,
       };
 }

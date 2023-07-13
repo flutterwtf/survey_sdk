@@ -30,7 +30,7 @@
   "fill": "Fill",
   "finishSurvey": "Finish survey",
   "firstOption": "First option",
-  "goBackQuestion": "Go to back question",
+  "goPreviousQuestion": "Go to previous question",
   "goNextQuestion": "Go to next question",
   "goToQuestion": "Go to question",
   "hex": "Hex",

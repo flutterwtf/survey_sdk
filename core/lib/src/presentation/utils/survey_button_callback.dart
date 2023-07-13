@@ -14,7 +14,7 @@ class SurveyButtonCallback {
   final VoidCallback? saveAnswer;
   final SurveyController surveyController;
   final List<QuestionData> questions;
-  final CallbackTypes callbackType;
+  final CallbackType callbackType;
 
   SurveyButtonCallback({
     required this.callback,
@@ -63,7 +63,7 @@ class SurveyButtonCallback {
 
   @visibleForTesting
   void defaultSurveyCallback() => switch (callbackType) {
-        CallbackTypes.primaryCallback => goNextCallback(),
-        CallbackTypes.secondaryCallback => skipSurveyCallback(),
+        CallbackType.primaryCallback => goNextCallback(),
+        CallbackType.secondaryCallback => skipSurveyCallback(),
       };
 }

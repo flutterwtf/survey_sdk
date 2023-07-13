@@ -11,7 +11,7 @@ import 'package:survey_sdk/survey_sdk.dart';
 class ActionsCustomizationItem extends StatefulWidget {
   final ValueChanged<SurveyAction?> onChanged;
   final SurveyAction? surveyAction;
-  final CallbackTypes callbackType;
+  final CallbackType callbackType;
   final int questionsLength;
 
   const ActionsCustomizationItem({
@@ -43,7 +43,7 @@ class _ActionsCustomizationItemState extends State<ActionsCustomizationItem> {
         action: const GoNextAction(),
       ),
       SurveyActionItem(
-        actionLabel: context.localization.goBackQuestion,
+        actionLabel: context.localization.goPreviousQuestion,
         action: const GoBackAction(),
       ),
       SurveyActionItem(
@@ -62,8 +62,8 @@ class _ActionsCustomizationItemState extends State<ActionsCustomizationItem> {
   }
 
   SurveyAction _defaultCallbackByType() => switch (widget.callbackType) {
-        CallbackTypes.primaryCallback => const GoNextAction(),
-        CallbackTypes.secondaryCallback => const SkipQuestionAction(),
+        CallbackType.primaryCallback => const GoNextAction(),
+        CallbackType.secondaryCallback => const SkipQuestionAction(),
       };
 
   @override
@@ -145,8 +145,8 @@ class _IndexSelector extends StatelessWidget {
             style: context.theme.textTheme.bodyMedium,
             initialValue: indexValue.toString(),
             inputFormatters: [
-              // TODO(dev): If we add the ability to remove endPage,
-              // TODO(dev): then we need to remove "+ 1".
+              // Indexing starts from 1 so max index for GoTo is
+              // questionsLength + 1 for an EndPage.
               MaxValueFormatter(questionsLength + 1),
             ],
             hintText: context.localization.questionIndex,

@@ -34,12 +34,12 @@ void main() {
                 finishSurvey = context.localization.finishSurvey;
                 skipQuestion = context.localization.skipQuestion;
                 goNextQuestion = context.localization.goNextQuestion;
-                goBackQuestion = context.localization.goBackQuestion;
+                goBackQuestion = context.localization.goPreviousQuestion;
 
                 return ActionsCustomizationItem(
                   onChanged: (action) => _mockedOnChanged(action!),
                   surveyAction: _surveyAction,
-                  callbackType: CallbackTypes.primaryCallback,
+                  callbackType: CallbackType.primaryCallback,
                   questionsLength: questionsLength,
                 );
               },
