@@ -82,10 +82,7 @@ class _SurveyState extends State<Survey> {
     Injector().init();
     _cubit = Injector().surveyCubit;
     _surveyController = widget.controller ?? SurveyController();
-
-    widget.surveyData == null
-        ? _cubit.initData(widget.filePath)
-        : _cubit.setSurveyData(widget.surveyData, []);
+    _reloadSurveyData();
   }
 
   /// Builds the survey form using a PageView widget.
@@ -111,6 +108,19 @@ class _SurveyState extends State<Survey> {
       answer,
       callbackType,
     );
+  }
+
+  void _reloadSurveyData() {
+    widget.surveyData == null
+        ? _cubit.initData(widget.filePath)
+        : _cubit.setSurveyData(widget.surveyData, []);
+  }
+
+  @override
+  void didUpdateWidget(covariant Survey oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    _reloadSurveyData();
   }
 
   @override
