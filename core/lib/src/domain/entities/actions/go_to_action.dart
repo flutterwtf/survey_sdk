@@ -15,7 +15,7 @@ class GoToAction extends SurveyAction {
         questionIndex,
       ];
 
-  const GoToAction({required this.questionIndex});
+  const GoToAction({this.questionIndex = 1});
 
   @override
   bool operator ==(Object other) =>

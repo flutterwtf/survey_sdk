@@ -1,9 +1,7 @@
 import 'package:flutter/services.dart';
 
-class MaxValueFormatter extends TextInputFormatter {
-  final int maxValue;
-
-  MaxValueFormatter(this.maxValue);
+class NoSingleZeroFormatter extends TextInputFormatter {
+  const NoSingleZeroFormatter();
 
   @override
   TextEditingValue formatEditUpdate(
@@ -12,7 +10,7 @@ class MaxValueFormatter extends TextInputFormatter {
   ) {
     final parsedValue = int.tryParse(newValue.text);
 
-    if (parsedValue != null && parsedValue <= maxValue && parsedValue != 0) {
+    if (parsedValue != null && parsedValue != 0) {
       return newValue;
     }
 
