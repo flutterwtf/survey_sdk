@@ -11,7 +11,7 @@ import 'package:survey_sdk/src/presentation/survey/survey_controller.dart';
 import 'package:survey_sdk/src/presentation/survey/survey_cubit.dart';
 import 'package:survey_sdk/src/presentation/survey/survey_state.dart';
 import 'package:survey_sdk/src/presentation/survey_error/survey_error.dart';
-import 'package:survey_sdk/src/presentation/utils/callback_types.dart';
+import 'package:survey_sdk/src/presentation/utils/callback_type.dart';
 import 'package:survey_sdk/src/presentation/utils/utils.dart';
 
 // TODO(dev): Maybe create two classes, where one is for filePath and the other

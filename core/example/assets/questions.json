@@ -24,7 +24,7 @@
     },
     "secondaryButtonText": "Skip",
     "primaryButtonText": "NEXT",
-    "mainButtonAction": {
+    "primaryButtonAction": {
       "type": "GoNext"
     },
     "secondaryButtonAction": {
@@ -65,7 +65,7 @@
       "content": "You may simply need a single, brief answer without discussion. Other times, you may want to talk through a scenario, evaluate how well a group is learning new material or solicit feedback. The types of questions you ask directly impact the type of answer you receive.",
       "secondaryButtonText": "Skip",
       "primaryButtonText": "NEXT",
-      "mainButtonAction": {
+      "primaryButtonAction": {
         "type": "GoNext"
       },
       "secondaryButtonAction": {
@@ -96,7 +96,7 @@
       },
       "secondaryButtonText": "Skip",
       "primaryButtonText": "NEXT",
-      "mainButtonAction": {
+      "primaryButtonAction": {
         "type": "GoNext"
       },
       "secondaryButtonAction": {
@@ -146,7 +146,7 @@
       },
       "secondaryButtonText": "Skip",
       "primaryButtonText": "NEXT",
-      "mainButtonAction": {
+      "primaryButtonAction": {
         "type": "GoNext"
       },
       "secondaryButtonAction": {
@@ -190,7 +190,7 @@
       },
       "secondaryButtonText": "Skip",
       "primaryButtonText": "NEXT",
-      "mainButtonAction": {
+      "primaryButtonAction": {
         "type": "GoNext"
       },
       "secondaryButtonAction": {
@@ -223,7 +223,7 @@
       },
       "secondaryButtonText": "Skip",
       "primaryButtonText": "NEXT",
-      "mainButtonAction": {
+      "primaryButtonAction": {
         "type": "GoNext"
       },
       "secondaryButtonAction": {
@@ -273,7 +273,7 @@
       },
       "secondaryButtonText": "Skip",
       "primaryButtonText": "NEXT",
-      "mainButtonAction": {
+      "primaryButtonAction": {
         "type": "GoNext"
       },
       "secondaryButtonAction": {
@@ -317,7 +317,7 @@
       },
       "secondaryButtonText": "Skip",
       "primaryButtonText": "NEXT",
-      "mainButtonAction": {
+      "primaryButtonAction": {
         "type": "GoNext"
       },
       "secondaryButtonAction": {
@@ -357,7 +357,7 @@
       "content": "You may simply need a single, brief answer without discussion. Other times, you may want to talk through a scenario, evaluate how well a group is learning new material or solicit feedback. The types of questions you ask directly impact the type of answer you receive.",
       "secondaryButtonText": "Skip",
       "primaryButtonText": "NEXT",
-      "mainButtonAction": {
+      "primaryButtonAction": {
         "type": "GoNext"
       },
       "secondaryButtonAction": {

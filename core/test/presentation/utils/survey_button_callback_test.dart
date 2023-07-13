@@ -8,7 +8,7 @@ import 'package:survey_sdk/src/domain/entities/actions/skip_question_action.dart
 import 'package:survey_sdk/src/domain/entities/actions/survey_action.dart';
 import 'package:survey_sdk/src/domain/entities/question_types/question_data.dart';
 import 'package:survey_sdk/src/presentation/survey/survey_controller.dart';
-import 'package:survey_sdk/src/presentation/utils/callback_types.dart';
+import 'package:survey_sdk/src/presentation/utils/callback_type.dart';
 import 'package:survey_sdk/src/presentation/utils/survey_button_callback.dart';
 
 import '../../utils/mocked_entities.dart';

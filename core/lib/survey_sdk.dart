@@ -24,5 +24,5 @@ export 'package:survey_sdk/src/domain/entities/themes/slider_question_theme.dart
 export 'package:survey_sdk/src/presentation/localization/flutter_gen/survey_localizations.dart';
 export 'package:survey_sdk/src/presentation/survey/survey.dart';
 export 'package:survey_sdk/src/presentation/survey/survey_controller.dart';
-export 'package:survey_sdk/src/presentation/utils/callback_types.dart';
+export 'package:survey_sdk/src/presentation/utils/callback_type.dart';
 export 'package:survey_sdk/src/presentation/utils/utils.dart';
