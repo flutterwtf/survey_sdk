@@ -216,25 +216,3 @@ class _Question extends StatelessWidget {
     );
   }
 }
-
-class _EndPage extends StatelessWidget {
-  final bool isSelected;
-  final ValueChanged<QuestionData> onTap;
-  final InfoQuestionData endPage;
-
-  const _EndPage({
-    required this.isSelected,
-    required this.endPage,
-    required this.onTap,
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return QuestionListItem(
-      isSelected: isSelected,
-      questionData: endPage,
-      onTap: onTap,
-    );
-  }
-}
