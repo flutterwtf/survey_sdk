@@ -29,14 +29,14 @@ class InputQuestionPage extends StatefulWidget {
 
   /// Callback that is called after pressing bottom button if input data is
   /// valid or when the question can be skipped.
-  final OnSendCallback onSend;
+  final SurveyCallback onPrimaryButtonTap;
 
   /// Optional callback that is called when the secondary button is tapped.
-  final VoidCallback? onSecondaryButtonTap;
+  final SurveyCallback? onSecondaryButtonTap;
 
   const InputQuestionPage({
     required this.data,
-    required this.onSend,
+    required this.onPrimaryButtonTap,
     this.answer,
     this.onSecondaryButtonTap,
     super.key,
@@ -67,6 +67,34 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
       _input = questionAnswer.answer;
     } else if (questionAnswer is QuestionAnswer<DateTime>) {
       _dateTime = questionAnswer.answer;
+    }
+  }
+
+  void _onPrimaryButtonPressed(String? isValid) {
+    if ((isValid == null) || widget.data.isSkip) {
+      isDateType
+          ? widget.onPrimaryButtonTap.call(
+              index: widget.data.index,
+              answer: QuestionAnswer<DateTime>(_dateTime),
+            )
+          : widget.onPrimaryButtonTap.call(
+              index: widget.data.index,
+              answer: QuestionAnswer<String>(_input),
+            );
+    }
+  }
+
+  void _onSecondaryButtonPressed(String? isValid) {
+    if ((isValid == null) || widget.data.isSkip) {
+      isDateType
+          ? widget.onSecondaryButtonTap?.call(
+              index: widget.data.index,
+              answer: QuestionAnswer<DateTime>(_dateTime),
+            )
+          : widget.onSecondaryButtonTap?.call(
+              index: widget.data.index,
+              answer: QuestionAnswer<String>(_input),
+            );
     }
   }
 
@@ -175,27 +203,15 @@ class _InputQuestionPageState extends State<InputQuestionPage> {
                                 textSize: theme.secondaryButtonTextSize,
                                 textColor: theme.secondaryButtonTextColor,
                                 radius: theme.secondaryButtonRadius,
-                                onPressed: widget.onSecondaryButtonTap,
+                                onPressed: () =>
+                                    _onSecondaryButtonPressed(isValid),
                               ),
                             ),
                           ),
                         Flexible(
                           child: QuestionBottomButton(
                             text: widget.data.primaryButtonText,
-                            onPressed: () {
-                              if ((isValid == null) || widget.data.isSkip) {
-                                isDateType
-                                    ? widget.onSend.call(
-                                        index: widget.data.index,
-                                        answer:
-                                            QuestionAnswer<DateTime>(_dateTime),
-                                      )
-                                    : widget.onSend.call(
-                                        index: widget.data.index,
-                                        answer: QuestionAnswer<String>(_input),
-                                      );
-                              }
-                            },
+                            onPressed: () => _onPrimaryButtonPressed(isValid),
                             isEnabled: isDateType
                                 ? _canBeSkippedDate || (isValid == null)
                                 : _canBeSkippedNumber ||

@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:survey_sdk/src/domain/entities/actions/survey_action.dart';
 import 'package:survey_sdk/src/domain/entities/question_answer.dart';
 import 'package:survey_sdk/src/domain/entities/question_types/choice_question_data.dart';
 import 'package:survey_sdk/src/domain/entities/question_types/info_question_data.dart';
@@ -12,7 +13,7 @@ import 'package:survey_sdk/src/presentation/slider_question/slider_question_page
 import 'package:survey_sdk/src/presentation/utils/data_to_widget_util.dart';
 
 //ignore: avoid-unused-parameters
-void _mockOnSend({required int index, required QuestionAnswer answer}) {}
+void _mockOnSend({required int index, required QuestionAnswer? answer}) {}
 
 void main() {
   const mockSliderData = SliderQuestionData.common();
@@ -24,7 +25,8 @@ void main() {
     test('Call with SliderQuestionData}', () {
       final widget = DataToWidgetUtil.createWidget(
         data: mockSliderData,
-        onSend: _mockOnSend,
+        primaryButtonCallback:
+            ({required int index, required QuestionAnswer? answer}) => {},
         onGoNext: () {},
       );
       expect(widget.runtimeType, SliderQuestionPage);
@@ -34,7 +36,7 @@ void main() {
     test('Call with ChoiceQuestionData', () {
       final widget = DataToWidgetUtil.createWidget(
         data: mockChoiceData,
-        onSend: _mockOnSend,
+        primaryButtonCallback: _mockOnSend,
         onGoNext: () {},
       );
 
@@ -45,7 +47,7 @@ void main() {
     test('Call with InputQuestionData', () {
       final widget = DataToWidgetUtil.createWidget(
         data: mockInputData,
-        onSend: _mockOnSend,
+        primaryButtonCallback: _mockOnSend,
         onGoNext: () {},
       );
 
@@ -56,7 +58,7 @@ void main() {
     test('Call with InfoQuestionData', () {
       final widget = DataToWidgetUtil.createWidget(
         data: mockInfoData,
-        onSend: _mockOnSend,
+        primaryButtonCallback: _mockOnSend,
         onGoNext: () {},
       );
 
@@ -68,7 +70,7 @@ void main() {
       expect(
         () => DataToWidgetUtil.createWidget(
           data: const _BadQuestionData(),
-          onSend: _mockOnSend,
+          primaryButtonCallback: _mockOnSend,
           onGoNext: () {},
         ),
         throwsException,
@@ -104,6 +106,7 @@ class _BadQuestionData extends QuestionData {
     bool? isSkip,
     String? secondaryButtonText,
     String? primaryButtonText,
+    SurveyAction? mainButtonAction,
   }) {
     throw UnimplementedError();
   }

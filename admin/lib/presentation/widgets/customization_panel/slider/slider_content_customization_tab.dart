@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:survey_admin/presentation/app/localization/app_localizations_ext.dart';
 import 'package:survey_admin/presentation/widgets/base/customization_tab.dart';
+import 'package:survey_admin/presentation/widgets/customization_items/actions_customization_item.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_items_container.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/customization_multiline_text_field.dart';
 import 'package:survey_admin/presentation/widgets/customization_items/divisions_customization_item.dart';
@@ -11,11 +12,13 @@ import 'package:survey_sdk/survey_sdk.dart';
 class SliderContentCustomizationTab extends CustomizationTab {
   final ValueChanged<QuestionData> onChange;
   final SliderQuestionData editable;
+  final int questionsAmount;
 
   const SliderContentCustomizationTab({
     required this.onChange,
     required super.title,
     required this.editable,
+    required this.questionsAmount,
     super.key,
   });
 
@@ -103,6 +106,41 @@ class SliderContentCustomizationTab extends CustomizationTab {
             ),
           ],
         ),
+        CustomizationItemsContainer(
+          title: context.localization.primaryButtonAction,
+          itemsPadding: EdgeInsets.zero,
+          children: [
+            ActionsCustomizationItem(
+              onChanged: (action) => onChange(
+                editable.copyWith(
+                  clearMainAction: true,
+                  mainButtonAction: action,
+                ),
+              ),
+              surveyAction: editable.mainButtonAction,
+              callbackType: CallbackType.primaryCallback,
+              questionsLength: questionsAmount,
+            ),
+          ],
+        ),
+        if (editable.isSkip)
+          CustomizationItemsContainer(
+            title: context.localization.secondaryButtonAction,
+            itemsPadding: EdgeInsets.zero,
+            children: [
+              ActionsCustomizationItem(
+                onChanged: (action) => onChange(
+                  editable.copyWith(
+                    clearSecondaryAction: true,
+                    secondaryButtonAction: action,
+                  ),
+                ),
+                surveyAction: editable.secondaryButtonAction,
+                callbackType: CallbackType.secondaryCallback,
+                questionsLength: questionsAmount,
+              ),
+            ],
+          ),
       ],
     );
   }

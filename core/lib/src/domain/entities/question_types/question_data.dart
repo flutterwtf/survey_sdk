@@ -3,6 +3,7 @@ import 'package:survey_sdk/src/data/mappers/question_types/choice_question_data/
 import 'package:survey_sdk/src/data/mappers/question_types/info_question_data/info_question_data_mapper_factory.dart';
 import 'package:survey_sdk/src/data/mappers/question_types/input_question_data/input_question_data_mapper_factory.dart';
 import 'package:survey_sdk/src/data/mappers/question_types/slider_question_data/slider_question_data_mapper_factory.dart';
+import 'package:survey_sdk/src/domain/entities/actions/survey_action.dart';
 import 'package:survey_sdk/src/domain/entities/constants/question_types.dart';
 
 abstract class _Fields {
@@ -39,6 +40,14 @@ abstract class QuestionData<T> extends Equatable {
   /// The text for the secondary button associated with the question.
   final String secondaryButtonText;
 
+  /// Overridden action of the main button, if this field is null,
+  /// then the standard action will be used.
+  final SurveyAction? mainButtonAction;
+
+  /// Overridden action of the secondary button, if this field is null,
+  /// then the standard action will be used.
+  final SurveyAction? secondaryButtonAction;
+
   /// The type of the question.
   ///
   /// Subclasses must provide an implementation for this property.
@@ -51,6 +60,8 @@ abstract class QuestionData<T> extends Equatable {
     required this.isSkip,
     required this.secondaryButtonText,
     required this.primaryButtonText,
+    this.mainButtonAction,
+    this.secondaryButtonAction,
     this.content,
   });
 
@@ -62,6 +73,7 @@ abstract class QuestionData<T> extends Equatable {
     bool? isSkip,
     String? secondaryButtonText,
     String? primaryButtonText,
+    SurveyAction? mainButtonAction,
   });
 
   /// Converts a JSON map to a [QuestionData] instance based on the question's

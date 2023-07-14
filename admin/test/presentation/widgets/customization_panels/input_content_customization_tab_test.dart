@@ -24,6 +24,7 @@ void main() {
           onChange: (QuestionData<dynamic> newData) {
             data = newData as InputQuestionData;
           },
+          questionsAmount: 1,
         ),
       );
 
@@ -76,7 +77,7 @@ void main() {
 
       testWidgets('Unlock Secondary button', (tester) async {
         await tester.pumpWidget(page);
-        await tester.tap(find.byType(InkWell));
+        await tester.tap(find.byType(InkWell).first);
         await tester.pump();
         expect(data.isSkip, isTrue);
       });

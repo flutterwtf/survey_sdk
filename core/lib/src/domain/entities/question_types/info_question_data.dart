@@ -1,3 +1,6 @@
+import 'package:survey_sdk/src/domain/entities/actions/go_next_action.dart';
+import 'package:survey_sdk/src/domain/entities/actions/skip_question_action.dart';
+import 'package:survey_sdk/src/domain/entities/actions/survey_action.dart';
 import 'package:survey_sdk/src/domain/entities/constants/question_types.dart';
 import 'package:survey_sdk/src/domain/entities/question_types/question_data.dart';
 import 'package:survey_sdk/src/domain/entities/themes/info_question_theme.dart';
@@ -24,6 +27,8 @@ class InfoQuestionData extends QuestionData {
         content,
         secondaryButtonText,
         primaryButtonText,
+        mainButtonAction,
+        secondaryButtonAction,
       ];
 
   const InfoQuestionData({
@@ -34,6 +39,8 @@ class InfoQuestionData extends QuestionData {
     required super.isSkip,
     required super.secondaryButtonText,
     required super.primaryButtonText,
+    super.mainButtonAction,
+    super.secondaryButtonAction,
     super.content,
   });
 
@@ -58,6 +65,8 @@ class InfoQuestionData extends QuestionData {
           theme: const InfoQuestionTheme.common(),
           secondaryButtonText: 'SKIP',
           primaryButtonText: 'NEXT',
+          mainButtonAction: const GoNextAction(),
+          secondaryButtonAction: const SkipQuestionAction(),
         );
 
   @override
@@ -70,6 +79,10 @@ class InfoQuestionData extends QuestionData {
     InfoQuestionTheme? theme,
     String? secondaryButtonText,
     String? primaryButtonText,
+    SurveyAction? mainButtonAction,
+    SurveyAction? secondaryButtonAction,
+    bool clearMainAction = false,
+    bool clearSecondaryAction = false,
   }) {
     return InfoQuestionData(
       index: index ?? this.index,
@@ -80,6 +93,12 @@ class InfoQuestionData extends QuestionData {
       theme: theme ?? this.theme,
       secondaryButtonText: secondaryButtonText ?? this.secondaryButtonText,
       primaryButtonText: primaryButtonText ?? this.primaryButtonText,
+      mainButtonAction: clearMainAction
+          ? mainButtonAction
+          : mainButtonAction ?? this.mainButtonAction,
+      secondaryButtonAction: clearSecondaryAction
+          ? secondaryButtonAction
+          : secondaryButtonAction ?? this.secondaryButtonAction,
     );
   }
 }

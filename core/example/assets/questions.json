@@ -1,5 +1,36 @@
 {
   "schemeVersion": 1,
+  "endPage": {
+    "index": 5,
+    "title": "End",
+    "subtitle": "Survey is completed",
+    "type": "Info",
+    "isSkip": false,
+    "content": "",
+    "theme": {
+      "fill": 4294967295,
+      "titleColor": 4278190080,
+      "titleSize": 16,
+      "subtitleColor": 4278190080,
+      "subtitleSize": 12,
+      "primaryButtonFill": 4278190080,
+      "primaryButtonTextColor": 4294967295,
+      "primaryButtonTextSize": 12,
+      "primaryButtonRadius": 10,
+      "secondaryButtonFill": 4278190080,
+      "secondaryButtonTextColor": 4294967295,
+      "secondaryButtonTextSize": 12,
+      "secondaryButtonRadius": 10
+    },
+    "secondaryButtonText": "Skip",
+    "primaryButtonText": "NEXT",
+    "primaryButtonAction": {
+      "type": "GoNext"
+    },
+    "secondaryButtonAction": {
+      "type": "SkipQuestion"
+    }
+  },
   "commonTheme": {
     "slider": {
       "index": 0,
@@ -33,7 +64,13 @@
       "isSkip": false,
       "content": "You may simply need a single, brief answer without discussion. Other times, you may want to talk through a scenario, evaluate how well a group is learning new material or solicit feedback. The types of questions you ask directly impact the type of answer you receive.",
       "secondaryButtonText": "Skip",
-      "primaryButtonText": "NEXT"
+      "primaryButtonText": "NEXT",
+      "primaryButtonAction": {
+        "type": "GoNext"
+      },
+      "secondaryButtonAction": {
+        "type": "SkipQuestion"
+      }
     },
     "info": {
       "index": 0,
@@ -58,7 +95,13 @@
         "secondaryButtonRadius": 10
       },
       "secondaryButtonText": "Skip",
-      "primaryButtonText": "NEXT"
+      "primaryButtonText": "NEXT",
+      "primaryButtonAction": {
+        "type": "GoNext"
+      },
+      "secondaryButtonAction": {
+        "type": "SkipQuestion"
+      }
     },
     "input": {
       "index": 0,
@@ -71,7 +114,7 @@
         "inputFill": 4294967295,
         "borderColor": 4278190080,
         "borderWidth": 1,
-        "hintColor": 4285690482,
+        "hintColor": 4287795858,
         "hintSize": 16,
         "textColor": 4278190080,
         "textSize": 16,
@@ -99,10 +142,16 @@
         "validator": 0,
         "regex": ".*",
         "is_obscured": false,
-        "isMultipleChoice": null
+        "isMultipleChoice": "Enter answer here"
       },
       "secondaryButtonText": "Skip",
-      "primaryButtonText": "NEXT"
+      "primaryButtonText": "NEXT",
+      "primaryButtonAction": {
+        "type": "GoNext"
+      },
+      "secondaryButtonAction": {
+        "type": "SkipQuestion"
+      }
     },
     "choice": {
       "index": 0,
@@ -135,12 +184,18 @@
           "Second option",
           "ThirdOption"
         ],
-        "selectedOptions": null,
+        "selectedByDefault": null,
         "ruleType": 0,
         "ruleValue": 0
       },
       "secondaryButtonText": "Skip",
-      "primaryButtonText": "NEXT"
+      "primaryButtonText": "NEXT",
+      "primaryButtonAction": {
+        "type": "GoNext"
+      },
+      "secondaryButtonAction": {
+        "type": "SkipQuestion"
+      }
     }
   },
   "questions": [
@@ -167,7 +222,13 @@
         "secondaryButtonRadius": 10
       },
       "secondaryButtonText": "Skip",
-      "primaryButtonText": "NEXT"
+      "primaryButtonText": "NEXT",
+      "primaryButtonAction": {
+        "type": "GoNext"
+      },
+      "secondaryButtonAction": {
+        "type": "SkipQuestion"
+      }
     },
     {
       "index": 2,
@@ -180,7 +241,7 @@
         "inputFill": 4294967295,
         "borderColor": 4278190080,
         "borderWidth": 1,
-        "hintColor": 4285690482,
+        "hintColor": 4287795858,
         "hintSize": 16,
         "textColor": 4278190080,
         "textSize": 16,
@@ -208,10 +269,16 @@
         "validator": 0,
         "regex": ".*",
         "is_obscured": false,
-        "isMultipleChoice": null
+        "isMultipleChoice": "Enter answer here"
       },
       "secondaryButtonText": "Skip",
-      "primaryButtonText": "NEXT"
+      "primaryButtonText": "NEXT",
+      "primaryButtonAction": {
+        "type": "GoNext"
+      },
+      "secondaryButtonAction": {
+        "type": "SkipQuestion"
+      }
     },
     {
       "index": 3,
@@ -244,12 +311,18 @@
           "Second option",
           "ThirdOption"
         ],
-        "selectedOptions": null,
+        "selectedByDefault": null,
         "ruleType": 0,
         "ruleValue": 0
       },
       "secondaryButtonText": "Skip",
-      "primaryButtonText": "NEXT"
+      "primaryButtonText": "NEXT",
+      "primaryButtonAction": {
+        "type": "GoNext"
+      },
+      "secondaryButtonAction": {
+        "type": "SkipQuestion"
+      }
     },
     {
       "index": 4,
@@ -283,7 +356,13 @@
       "isSkip": false,
       "content": "You may simply need a single, brief answer without discussion. Other times, you may want to talk through a scenario, evaluate how well a group is learning new material or solicit feedback. The types of questions you ask directly impact the type of answer you receive.",
       "secondaryButtonText": "Skip",
-      "primaryButtonText": "NEXT"
+      "primaryButtonText": "NEXT",
+      "primaryButtonAction": {
+        "type": "GoNext"
+      },
+      "secondaryButtonAction": {
+        "type": "SkipQuestion"
+      }
     }
   ]
 }

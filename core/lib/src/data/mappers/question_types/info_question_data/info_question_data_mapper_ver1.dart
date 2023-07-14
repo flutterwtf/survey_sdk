@@ -13,6 +13,8 @@ abstract class _Fields {
   static const String secondaryButtonText = 'secondaryButtonText';
   static const String theme = 'theme';
   static const String type = 'type';
+  static const String primaryButtonAction = 'primaryButtonAction';
+  static const String secondaryButtonAction = 'secondaryButtonAction';
 }
 
 class InfoQuestionDataMapperVer1
@@ -20,6 +22,7 @@ class InfoQuestionDataMapperVer1
   @override
   InfoQuestionData fromJson(Map<String, dynamic> json) {
     final theme = json[_Fields.theme];
+
     return InfoQuestionData(
       index: json[_Fields.index],
       title: json[_Fields.title],
@@ -31,6 +34,12 @@ class InfoQuestionDataMapperVer1
           : const InfoQuestionTheme.common(),
       secondaryButtonText: json[_Fields.secondaryButtonText],
       primaryButtonText: json[_Fields.primaryButtonText],
+      mainButtonAction: SurveyAction.fromJson(
+        json[_Fields.primaryButtonAction],
+      ),
+      secondaryButtonAction: SurveyAction.fromJson(
+        json[_Fields.secondaryButtonAction],
+      ),
     );
   }
 
@@ -59,6 +68,12 @@ class InfoQuestionDataMapperVer1
               .toJson(const InfoQuestionTheme.common()),
       _Fields.secondaryButtonText: data.secondaryButtonText,
       _Fields.primaryButtonText: data.primaryButtonText,
+      _Fields.primaryButtonAction: data.mainButtonAction == null
+          ? null
+          : SurveyAction.toJson(data.mainButtonAction!),
+      _Fields.secondaryButtonAction: data.secondaryButtonAction == null
+          ? null
+          : SurveyAction.toJson(data.secondaryButtonAction!),
     };
   }
 }

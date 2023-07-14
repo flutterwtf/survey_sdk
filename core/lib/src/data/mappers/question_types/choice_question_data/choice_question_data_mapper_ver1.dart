@@ -19,6 +19,8 @@ abstract class _Fields {
   static const String payload = 'payload';
   static const String theme = 'theme';
   static const String type = 'type';
+  static const String primaryButtonAction = 'primaryButtonAction';
+  static const String secondaryButtonAction = 'secondaryButtonAction';
 }
 
 class ChoiceQuestionDataMapperVer1
@@ -27,6 +29,7 @@ class ChoiceQuestionDataMapperVer1
   ChoiceQuestionData fromJson(Map<String, dynamic> json) {
     final payload = json[_Fields.payload] as Map<String, dynamic>;
     final theme = json[_Fields.theme];
+
     return ChoiceQuestionData(
       index: json[_Fields.index],
       title: json[_Fields.title],
@@ -45,6 +48,12 @@ class ChoiceQuestionDataMapperVer1
           : const ChoiceQuestionTheme.common(),
       primaryButtonText: json[_Fields.primaryButtonText],
       secondaryButtonText: json[_Fields.secondaryButtonText],
+      mainButtonAction: SurveyAction.fromJson(
+        json[_Fields.primaryButtonAction],
+      ),
+      secondaryButtonAction: SurveyAction.fromJson(
+        json[_Fields.secondaryButtonAction],
+      ),
     );
   }
 
@@ -80,6 +89,12 @@ class ChoiceQuestionDataMapperVer1
       },
       _Fields.secondaryButtonText: data.secondaryButtonText,
       _Fields.primaryButtonText: data.primaryButtonText,
+      _Fields.primaryButtonAction: data.mainButtonAction == null
+          ? null
+          : SurveyAction.toJson(data.mainButtonAction!),
+      _Fields.secondaryButtonAction: data.secondaryButtonAction == null
+          ? null
+          : SurveyAction.toJson(data.secondaryButtonAction!),
     };
   }
 }

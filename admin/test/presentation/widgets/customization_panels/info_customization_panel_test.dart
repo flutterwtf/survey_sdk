@@ -14,6 +14,7 @@ void main() {
         child: InfoCustomizationPanel(
           onChange: (QuestionData<dynamic> data) {},
           editable: const InfoQuestionData.common(),
+          questionsAmount: 1,
         ),
       );
 

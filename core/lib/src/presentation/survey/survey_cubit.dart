@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:survey_sdk/src/domain/entities/question_answer.dart';
 import 'package:survey_sdk/src/domain/repository_interfaces/survey_data_repository.dart';
 import 'package:survey_sdk/src/presentation/survey/survey_state.dart';
+import 'package:survey_sdk/src/presentation/utils/survey_button_callback.dart';
 
 import 'package:survey_sdk/survey_sdk.dart';
 
@@ -22,13 +23,28 @@ class SurveyCubit extends Cubit<SurveyState> {
     }
   }
 
-  /// Saves the provided [answer] for the question at the specified [index].
-  void saveAnswer({required int index, required QuestionAnswer answer}) {
-    final currentState = state;
-    if (currentState is SurveyLoadedState) {
-      final newAnswers = Map<int, QuestionAnswer>.of(currentState.answers);
-      newAnswers[index] = answer;
-      emit(currentState.copyWith(answers: newAnswers));
+  void processCallback(
+    SurveyController surveyController,
+    int questionIndex,
+    QuestionAnswer? answer,
+    CallbackType callbackType,
+  ) {
+    if (state is SurveyLoadedState) {
+      final loadedState = state as SurveyLoadedState;
+      final question = loadedState.surveyData.questions.firstWhere(
+        (question) => question.index == questionIndex,
+      );
+      final callback = _callbackByType(callbackType, question);
+
+      SurveyButtonCallback(
+        callback: callback,
+        callbackType: callbackType,
+        surveyController: surveyController,
+        questions: loadedState.surveyData.questions,
+        saveAnswer: () => answer == null
+            ? null
+            : _saveAnswer(index: questionIndex, answer: answer),
+      ).callbackFromType();
     }
   }
 
@@ -53,4 +69,23 @@ class SurveyCubit extends Cubit<SurveyState> {
       ),
     );
   }
+
+  /// Saves the provided [answer] for the question at the specified [index].
+  void _saveAnswer({required int index, required QuestionAnswer answer}) {
+    final currentState = state;
+    if (currentState is SurveyLoadedState) {
+      final newAnswers = Map<int, QuestionAnswer>.of(currentState.answers);
+      newAnswers[index] = answer;
+      emit(currentState.copyWith(answers: newAnswers));
+    }
+  }
+
+  SurveyAction? _callbackByType(
+    CallbackType callbackType,
+    QuestionData question,
+  ) =>
+      switch (callbackType) {
+        CallbackType.primaryCallback => question.mainButtonAction,
+        CallbackType.secondaryCallback => question.secondaryButtonAction,
+      };
 }

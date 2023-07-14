@@ -25,14 +25,14 @@ class ChoiceQuestionPage extends StatefulWidget {
 
   /// Callback that is called when [ChoiceQuestionData.isSkip] is true or at
   /// least one option has been selected.
-  final OnSendCallback onSend;
+  final SurveyCallback onPrimaryButtonTap;
 
   /// Optional callback that is called when the secondary button is tapped.
-  final VoidCallback? onSecondaryButtonTap;
+  final SurveyCallback? onSecondaryButtonTap;
 
   const ChoiceQuestionPage({
     required this.data,
-    required this.onSend,
+    required this.onPrimaryButtonTap,
     this.answer,
     this.onSecondaryButtonTap,
     super.key,
@@ -170,7 +170,13 @@ class _ChoiceQuestionPageState extends State<ChoiceQuestionPage>
                                 textColor: theme.secondaryButtonTextColor,
                                 textSize: theme.secondaryButtonTextSize,
                                 radius: theme.secondaryButtonRadius,
-                                onPressed: widget.onSecondaryButtonTap,
+                                onPressed: () {
+                                  widget.onSecondaryButtonTap?.call(
+                                    index: widget.data.index,
+                                    answer:
+                                        QuestionAnswer<List<String>>(_answer),
+                                  );
+                                },
                               ),
                             ),
                           ),
@@ -178,7 +184,7 @@ class _ChoiceQuestionPageState extends State<ChoiceQuestionPage>
                           child: QuestionBottomButton(
                             text: widget.data.primaryButtonText,
                             onPressed: () {
-                              widget.onSend.call(
+                              widget.onPrimaryButtonTap.call(
                                 index: widget.data.index,
                                 answer: QuestionAnswer<List<String>>(_answer),
                               );

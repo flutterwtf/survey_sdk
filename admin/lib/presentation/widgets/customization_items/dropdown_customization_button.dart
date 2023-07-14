@@ -84,19 +84,29 @@ class _DropdownCustomizationButtonState<T>
               horizontal: SurveyDimensions.marginM,
             ),
             child: InkWell(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  widget.items
-                      .where((element) => element.value == widget.value)
-                      .first
-                      .child,
-                  RotationTransition(
-                    turns: _animation,
-                    child: SvgPicture.asset(AppAssets.arrowIcon),
-                  ),
-                ],
-              ),
+              child: widget.value == null
+                  ? Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        RotationTransition(
+                          turns: _animation,
+                          child: SvgPicture.asset(AppAssets.arrowIcon),
+                        ),
+                      ],
+                    )
+                  : Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        widget.items
+                            .where((element) => element.value == widget.value)
+                            .first
+                            .child,
+                        RotationTransition(
+                          turns: _animation,
+                          child: SvgPicture.asset(AppAssets.arrowIcon),
+                        ),
+                      ],
+                    ),
               onTap: () {
                 _isExpanded
                     ? _iconAnimationController.reverse()
