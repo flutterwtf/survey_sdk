@@ -17,6 +17,8 @@ abstract class _Fields {
   static const String divisions = 'divisions';
   static const String initialValue = 'initialValue';
   static const String type = 'type';
+  static const String primaryButtonAction = 'primaryButtonAction';
+  static const String secondaryButtonAction = 'secondaryButtonAction';
 }
 
 class SliderQuestionDataMapperVer1
@@ -24,6 +26,7 @@ class SliderQuestionDataMapperVer1
   @override
   SliderQuestionData fromJson(Map<String, dynamic> json) {
     final theme = json[_Fields.theme];
+
     return SliderQuestionData(
       index: json[_Fields.index],
       minValue: json[_Fields.minValue],
@@ -39,6 +42,12 @@ class SliderQuestionDataMapperVer1
           : const SliderQuestionTheme.common(),
       secondaryButtonText: json[_Fields.secondaryButtonText],
       primaryButtonText: json[_Fields.primaryButtonText],
+      mainButtonAction: SurveyAction.fromJson(
+        json[_Fields.primaryButtonAction],
+      ),
+      secondaryButtonAction: SurveyAction.fromJson(
+        json[_Fields.secondaryButtonAction],
+      ),
     );
   }
 
@@ -71,6 +80,12 @@ class SliderQuestionDataMapperVer1
       _Fields.content: data.content,
       _Fields.secondaryButtonText: data.secondaryButtonText,
       _Fields.primaryButtonText: data.primaryButtonText,
+      _Fields.primaryButtonAction: data.mainButtonAction == null
+          ? null
+          : SurveyAction.toJson(data.mainButtonAction!),
+      _Fields.secondaryButtonAction: data.secondaryButtonAction == null
+          ? null
+          : SurveyAction.toJson(data.secondaryButtonAction!),
     };
   }
 }

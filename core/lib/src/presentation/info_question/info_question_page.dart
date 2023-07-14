@@ -14,15 +14,14 @@ class InfoQuestionPage extends StatefulWidget {
   final InfoQuestionData data;
 
   /// Optional callback that is called after pressing main button.
-  final VoidCallback? onMainButtonTap;
+  final SurveyCallback? onPrimaryButtonTap;
 
-  // TODO(dev): onSkip.
   /// Optional callback that is called when the secondary button is tapped.
-  final VoidCallback? onSecondaryButtonTap;
+  final SurveyCallback? onSecondaryButtonTap;
 
   const InfoQuestionPage({
     required this.data,
-    this.onMainButtonTap,
+    this.onPrimaryButtonTap,
     this.onSecondaryButtonTap,
     super.key,
   });
@@ -70,7 +69,12 @@ class _InfoQuestionPageState extends State<InfoQuestionPage> {
                                 textColor: theme.secondaryButtonTextColor,
                                 textSize: theme.secondaryButtonTextSize,
                                 radius: theme.secondaryButtonRadius,
-                                onPressed: widget.onSecondaryButtonTap,
+                                onPressed: () {
+                                  widget.onSecondaryButtonTap?.call(
+                                    index: widget.data.index,
+                                    answer: null,
+                                  );
+                                },
                               ),
                             ),
                           ),
@@ -81,7 +85,12 @@ class _InfoQuestionPageState extends State<InfoQuestionPage> {
                             textColor: theme.primaryButtonTextColor,
                             textSize: theme.primaryButtonTextSize,
                             radius: theme.primaryButtonRadius,
-                            onPressed: widget.onMainButtonTap,
+                            onPressed: () {
+                              widget.onPrimaryButtonTap?.call(
+                                index: widget.data.index,
+                                answer: null,
+                              );
+                            },
                           ),
                         ),
                       ],

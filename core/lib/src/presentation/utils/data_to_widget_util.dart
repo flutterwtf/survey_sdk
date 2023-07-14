@@ -11,46 +11,46 @@ import 'package:survey_sdk/src/presentation/info_question/info_question_page.dar
 import 'package:survey_sdk/src/presentation/input_question/input_question_page.dart';
 import 'package:survey_sdk/src/presentation/slider_question/slider_question_page.dart';
 
-typedef OnSendCallback = void Function({
+typedef SurveyCallback = void Function({
   required int index,
-  required QuestionAnswer answer,
+  required QuestionAnswer? answer,
 });
 
 abstract class DataToWidgetUtil {
   static Widget createWidget({
     required QuestionData data,
-    required OnSendCallback onSend,
     required VoidCallback onGoNext,
+    required SurveyCallback primaryButtonCallback,
+    SurveyCallback? secondaryButtonCallback,
     QuestionAnswer? answer,
   }) {
-    void sendAndGoNext({required int index, required QuestionAnswer answer}) {
-      onSend(index: index, answer: answer);
-      onGoNext();
-    }
-
     switch (data.runtimeType) {
       case SliderQuestionData:
         return SliderQuestionPage(
           data: data as SliderQuestionData,
           answer: answer as QuestionAnswer<double>?,
-          onSend: sendAndGoNext,
+          onPrimaryButtonTap: primaryButtonCallback,
+          onSecondaryButtonTap: secondaryButtonCallback,
         );
       case ChoiceQuestionData:
         return ChoiceQuestionPage(
           data: data as ChoiceQuestionData,
           answer: answer as QuestionAnswer<List<String>>?,
-          onSend: sendAndGoNext,
+          onPrimaryButtonTap: primaryButtonCallback,
+          onSecondaryButtonTap: secondaryButtonCallback,
         );
       case InputQuestionData:
         return InputQuestionPage(
           data: data as InputQuestionData,
           answer: answer,
-          onSend: sendAndGoNext,
+          onPrimaryButtonTap: primaryButtonCallback,
+          onSecondaryButtonTap: secondaryButtonCallback,
         );
       case InfoQuestionData:
         return InfoQuestionPage(
           data: data as InfoQuestionData,
-          onMainButtonTap: onGoNext,
+          onPrimaryButtonTap: primaryButtonCallback,
+          onSecondaryButtonTap: secondaryButtonCallback,
         );
       default:
         throw Exception('Unimplemented error');

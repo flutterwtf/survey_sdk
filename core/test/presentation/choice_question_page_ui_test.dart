@@ -9,7 +9,7 @@ import '../utils/mocked_entities.dart';
 import 'widget/app_tester.dart';
 
 //ignore: avoid-unused-parameters
-void _mockOnSend({required int index, required QuestionAnswer answer}) {}
+void _mockOnSend({required int index, required QuestionAnswer? answer}) {}
 
 void main() {
   group('components of Choice Question widget', () {
@@ -18,7 +18,7 @@ void main() {
         const AppTester(
           child: ChoiceQuestionPage(
             data: MockedEntities.choice1,
-            onSend: _mockOnSend,
+            onPrimaryButtonTap: _mockOnSend,
           ),
         ),
       );
@@ -39,9 +39,12 @@ void main() {
         AppTester(
           child: ChoiceQuestionPage(
             data: MockedEntities.choice2,
-            onSend: ({required int index, required QuestionAnswer answer}) {
+            onPrimaryButtonTap: ({
+              required int index,
+              required QuestionAnswer? answer,
+            }) {
               expect(
-                (answer as QuestionAnswer<List<String>>).answer.isEmpty,
+                (answer! as QuestionAnswer<List<String>>).answer.isEmpty,
                 true,
               );
               completer.complete();
@@ -59,9 +62,12 @@ void main() {
         AppTester(
           child: ChoiceQuestionPage(
             data: MockedEntities.choice1,
-            onSend: ({required int index, required QuestionAnswer answer}) {
+            onPrimaryButtonTap: ({
+              required int index,
+              required QuestionAnswer? answer,
+            }) {
               expect(
-                (answer as QuestionAnswer<List<String>>).answer.isEmpty,
+                (answer! as QuestionAnswer<List<String>>).answer.isEmpty,
                 true,
               );
               completer.complete();
@@ -80,9 +86,12 @@ void main() {
       AppTester(
         child: ChoiceQuestionPage(
           data: MockedEntities.choice2,
-          onSend: ({required int index, required QuestionAnswer answer}) {
+          onPrimaryButtonTap: ({
+            required int index,
+            required QuestionAnswer? answer,
+          }) {
             expect(
-              (answer as QuestionAnswer<List<String>>).answer.isEmpty,
+              (answer! as QuestionAnswer<List<String>>).answer.isEmpty,
               true,
             );
           },
@@ -99,8 +108,11 @@ void main() {
       AppTester(
         child: ChoiceQuestionPage(
           data: MockedEntities.choice2,
-          onSend: ({required int index, required QuestionAnswer answer}) {
-            expect((answer as QuestionAnswer<List<String>>).answer.length, 1);
+          onPrimaryButtonTap: ({
+            required int index,
+            required QuestionAnswer? answer,
+          }) {
+            expect((answer! as QuestionAnswer<List<String>>).answer.length, 1);
             completer.complete();
           },
         ),
@@ -118,8 +130,11 @@ void main() {
       AppTester(
         child: ChoiceQuestionPage(
           data: MockedEntities.choice2,
-          onSend: ({required int index, required QuestionAnswer answer}) {
-            expect((answer as QuestionAnswer<List<String>>).answer.length, 1);
+          onPrimaryButtonTap: ({
+            required int index,
+            required QuestionAnswer? answer,
+          }) {
+            expect((answer! as QuestionAnswer<List<String>>).answer.length, 1);
             completer.complete();
           },
         ),
@@ -139,9 +154,12 @@ void main() {
       AppTester(
         child: ChoiceQuestionPage(
           data: MockedEntities.choice4,
-          onSend: ({required int index, required QuestionAnswer answer}) {
+          onPrimaryButtonTap: ({
+            required int index,
+            required QuestionAnswer? answer,
+          }) {
             expect(
-              (answer as QuestionAnswer<List<String>>).answer.isEmpty,
+              (answer! as QuestionAnswer<List<String>>).answer.isEmpty,
               true,
             );
             completer.complete();
@@ -159,9 +177,12 @@ void main() {
       AppTester(
         child: ChoiceQuestionPage(
           data: MockedEntities.choice4,
-          onSend: ({required int index, required QuestionAnswer answer}) {
+          onPrimaryButtonTap: ({
+            required int index,
+            required QuestionAnswer? answer,
+          }) {
             expect(
-              (answer as QuestionAnswer<List<String>>).answer.isEmpty,
+              (answer! as QuestionAnswer<List<String>>).answer.isEmpty,
               true,
             );
             completer.complete();
@@ -183,7 +204,10 @@ void main() {
       AppTester(
         child: ChoiceQuestionPage(
           data: MockedEntities.choice1,
-          onSend: ({required int index, required QuestionAnswer answer}) {
+          onPrimaryButtonTap: ({
+            required int index,
+            required QuestionAnswer? answer,
+          }) {
             completer.complete();
           },
         ),

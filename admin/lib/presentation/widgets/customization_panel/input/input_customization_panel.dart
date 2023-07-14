@@ -9,10 +9,12 @@ import 'package:survey_sdk/survey_sdk.dart';
 class InputCustomizationPanel extends StatelessWidget {
   final ValueChanged<QuestionData> onChange;
   final InputQuestionData editable;
+  final int questionsAmount;
 
   const InputCustomizationPanel({
     required this.onChange,
     required this.editable,
+    required this.questionsAmount,
     super.key,
   });
 
@@ -24,6 +26,7 @@ class InputCustomizationPanel extends StatelessWidget {
           onChange: onChange,
           title: context.localization.content,
           editable: editable,
+          questionsAmount: questionsAmount,
         ),
         InputCustomizationTab(
           onChange: onChange,

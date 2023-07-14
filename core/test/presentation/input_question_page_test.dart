@@ -55,11 +55,11 @@ void main() {
             AppTester(
               child: InputQuestionPage(
                 data: mockInputData,
-                onSend: ({
+                onPrimaryButtonTap: ({
                   required int index,
-                  required QuestionAnswer answer,
+                  required QuestionAnswer? answer,
                 }) =>
-                    sendData = (answer as QuestionAnswer<String>).answer,
+                    sendData = (answer! as QuestionAnswer<String>).answer,
               ),
             ),
           );
@@ -83,11 +83,11 @@ void main() {
             AppTester(
               child: InputQuestionPage(
                 data: mockInputWithNumber,
-                onSend: ({
+                onPrimaryButtonTap: ({
                   required int index,
-                  required QuestionAnswer answer,
+                  required QuestionAnswer? answer,
                 }) =>
-                    sendData = (answer as QuestionAnswer<String>).answer,
+                    sendData = (answer! as QuestionAnswer<String>).answer,
               ),
             ),
           );
@@ -112,9 +112,9 @@ void main() {
             AppTester(
               child: InputQuestionPage(
                 data: mockInputData,
-                onSend: ({
+                onPrimaryButtonTap: ({
                   required int index,
-                  required QuestionAnswer answer,
+                  required QuestionAnswer? answer,
                 }) =>
                     isPressed = true,
               ),
@@ -138,11 +138,11 @@ void main() {
             AppTester(
               child: InputQuestionPage(
                 data: mockInputData,
-                onSend: ({
+                onPrimaryButtonTap: ({
                   required int index,
-                  required QuestionAnswer answer,
+                  required QuestionAnswer? answer,
                 }) =>
-                    sentData = (answer as QuestionAnswer<String>).answer,
+                    sentData = (answer! as QuestionAnswer<String>).answer,
               ),
             ),
           );
