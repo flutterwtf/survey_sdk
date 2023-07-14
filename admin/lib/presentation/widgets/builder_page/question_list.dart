@@ -44,19 +44,20 @@ class _QuestionListState extends State<QuestionList> {
         ? widget.questions.length - 1
         : newIndex;
 
-    final questions = List.of(widget.questions);
-    final itemOld = questions.removeAt(oldIndex);
-    questions.insert(updatedIndex, itemOld);
+    final itemOld = widget.questions.removeAt(oldIndex);
+    widget.questions.insert(updatedIndex, itemOld);
 
     for (var i = 0; i < widget.questions.length; i++) {
-      questions[i] = questions[i].copyWith(index: i + 1);
+      widget.questions[i] = widget.questions[i].copyWith(index: i + 1);
     }
 
-    widget.onUpdate(questions);
+    widget.onUpdate(widget.questions);
   }
 
   @override
   Widget build(BuildContext context) {
+    final length = widget.questions.length;
+
     return AnimatedContainer(
       duration: SurveyDurations.panelSwitchingDuration,
       color: SurveyColors.white,
@@ -93,27 +94,23 @@ class _QuestionListState extends State<QuestionList> {
                   },
                   buildDefaultDragHandles: false,
                   children: [
-                    for (int index = 0;
-                        index < widget.questions.length;
-                        index++)
+                    for (int index = 0; index < length; index++)
                       _Question(
                         key: ValueKey(index),
                         index: index,
                         isSelected: index == widget.selectedIndex,
-                        onDeleteButtonPressed: () {
-                          widget.onDelete(
-                            widget.questions[widget.selectedIndex!],
-                          );
-                        },
+                        onDeleteButtonPressed: () => widget.onDelete(
+                          widget.questions[index],
+                        ),
                         question: widget.questions[index],
                         onQuestionTap: widget.onSelect,
                       ),
-                    _EndPage(
-                      key: ValueKey(widget.questions.length),
-                      isSelected:
-                          widget.questions.length == widget.selectedIndex,
-                      endPage: widget.endPage,
-                      onTap: widget.onSelect,
+                    _Question(
+                      key: ValueKey(length),
+                      index: length,
+                      isSelected: length == widget.selectedIndex,
+                      question: widget.endPage,
+                      onQuestionTap: widget.onSelect,
                     ),
                   ],
                 ),
@@ -216,28 +213,6 @@ class _Question extends StatelessWidget {
           onTap: onQuestionTap,
         ),
       ),
-    );
-  }
-}
-
-class _EndPage extends StatelessWidget {
-  final bool isSelected;
-  final ValueChanged<QuestionData> onTap;
-  final InfoQuestionData endPage;
-
-  const _EndPage({
-    required this.isSelected,
-    required this.endPage,
-    required this.onTap,
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return QuestionListItem(
-      isSelected: isSelected,
-      questionData: endPage,
-      onTap: onTap,
     );
   }
 }
