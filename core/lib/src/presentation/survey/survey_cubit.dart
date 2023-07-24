@@ -27,8 +27,9 @@ class SurveyCubit extends Cubit<SurveyState> {
     SurveyController surveyController,
     int questionIndex,
     QuestionAnswer? answer,
-    CallbackType callbackType,
-  ) {
+    CallbackType callbackType, {
+    required bool saveAnswer,
+  }) {
     if (state is SurveyLoadedState) {
       final loadedState = state as SurveyLoadedState;
       final question = loadedState.surveyData.questions.firstWhere(
@@ -41,7 +42,7 @@ class SurveyCubit extends Cubit<SurveyState> {
         callbackType: callbackType,
         surveyController: surveyController,
         questions: loadedState.surveyData.questions,
-        saveAnswer: () => answer == null
+        saveAnswer: () => answer == null || !saveAnswer
             ? null
             : _saveAnswer(index: questionIndex, answer: answer),
       ).callbackFromType();
