@@ -62,7 +62,8 @@ class BuilderCubit extends Cubit<BuilderState> {
   }
 
   void select(QuestionData data) {
-    if (state is EditQuestionBuilderState) {
+      if (state is EditQuestionBuilderState ||
+          state is ImportSuccessSurveyDataBuilderState) {
       emit(
         EditQuestionBuilderState(
           selectedIndex: data.index,
