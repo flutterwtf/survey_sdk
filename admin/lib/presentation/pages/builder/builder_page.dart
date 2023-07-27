@@ -18,14 +18,19 @@ class BuilderPage extends StatefulWidget {
   State<BuilderPage> createState() => _BuilderPageState();
 }
 
-class _BuilderPageState extends State<BuilderPage> {
+class _BuilderPageState extends State<BuilderPage>
+    with SingleTickerProviderStateMixin {
   late final SurveyController _surveyController;
   late final BuilderCubit _cubit = context.read<BuilderCubit>();
+  late final TabController _tabController;
+
+  static const tabLength = 2;
 
   @override
   void initState() {
     super.initState();
     _surveyController = SurveyController()..addListener(_onChangePage);
+    _tabController = TabController(vsync: this, length: tabLength);
     initCommonData(context);
   }
 
@@ -94,6 +99,7 @@ class _BuilderPageState extends State<BuilderPage> {
   @override
   void dispose() {
     _surveyController.dispose();
+    _tabController.dispose();
     super.dispose();
   }
 
@@ -113,12 +119,18 @@ class _BuilderPageState extends State<BuilderPage> {
         return Scaffold(
           appBar: AppBar(
             title: _BuilderPageTabBar(
+              tabController: _tabController,
               onTapEditMode: _cubit.openEditMode,
               onTapPreviewMode: _cubit.openPreviewMode,
             ),
             actions: [
-              // ignore: avoid-passing-async-when-sync-expected
-              _ImportButton(onImportPressed: _cubit.importData),
+              _ImportButton(
+                onImportPressed: () {
+                  _cubit.importData();
+                  _tabController.animateTo(0);
+                  _cubit.openEditMode();
+                },
+              ),
               _ExportButton(
                 isButtonActive: _cubit.state.surveyData.questions.isEmpty,
                 downloadSurveyData: _cubit.downloadSurveyData,
@@ -163,10 +175,12 @@ class _BuilderPageState extends State<BuilderPage> {
 }
 
 class _BuilderPageTabBar extends StatelessWidget {
+  final TabController tabController;
   final VoidCallback onTapEditMode;
   final VoidCallback onTapPreviewMode;
 
   const _BuilderPageTabBar({
+    required this.tabController,
     required this.onTapEditMode,
     required this.onTapPreviewMode,
   });
@@ -174,30 +188,26 @@ class _BuilderPageTabBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const previewTabIndex = 1;
-    const tabLength = 2;
 
-    return DefaultTabController(
-      length: tabLength,
-      child: SizedBox(
-        width: SurveyDimensions.tabBarWidth,
-        child: TabBar(
-          tabs: [
-            Tab(text: context.localization.create),
-            Tab(text: context.localization.preview),
-          ],
-          padding: const EdgeInsets.only(right: SurveyDimensions.tabBarPadding),
-          indicator: const UnderlineTabIndicator(
-            borderSide: BorderSide(),
-            insets: EdgeInsets.symmetric(
-              horizontal: SurveyDimensions.margin4XL + SurveyDimensions.sizeM,
-            ),
+    return SizedBox(
+      width: SurveyDimensions.tabBarWidth,
+      child: TabBar(
+        controller: tabController,
+        tabs: [
+          Tab(text: context.localization.create),
+          Tab(text: context.localization.preview),
+        ],
+        padding: const EdgeInsets.only(right: SurveyDimensions.tabBarPadding),
+        indicator: const UnderlineTabIndicator(
+          borderSide: BorderSide(),
+          insets: EdgeInsets.symmetric(
+            horizontal: SurveyDimensions.margin4XL + SurveyDimensions.sizeM,
           ),
-          labelStyle: context.theme.textTheme.titleMedium
-              ?.copyWith(fontWeight: SurveyFonts.weightBold),
-          onTap: (tabIndex) => tabIndex == previewTabIndex
-              ? onTapPreviewMode()
-              : onTapEditMode(),
         ),
+        labelStyle: context.theme.textTheme.titleMedium
+            ?.copyWith(fontWeight: SurveyFonts.weightBold),
+        onTap: (tabIndex) =>
+            tabIndex == previewTabIndex ? onTapPreviewMode() : onTapEditMode(),
       ),
     );
   }
