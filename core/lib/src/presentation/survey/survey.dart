@@ -107,6 +107,7 @@ class _SurveyState extends State<Survey> {
       index,
       answer,
       callbackType,
+      saveAnswer: widget.saveAnswer,
     );
   }
 
