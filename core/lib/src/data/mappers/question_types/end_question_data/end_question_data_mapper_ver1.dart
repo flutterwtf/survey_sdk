@@ -1,0 +1,79 @@
+import 'package:flutter/material.dart';
+import 'package:survey_sdk/src/data/mappers/question_types/json_version/question_data_mapper_json_1.dart';
+import 'package:survey_sdk/src/data/mappers/themes/end_question_theme/end_question_theme_mapper_ver_1.dart';
+import 'package:survey_sdk/survey_sdk.dart';
+
+abstract class _Fields {
+  static const String index = 'index';
+  static const String title = 'title';
+  static const String subtitle = 'subtitle';
+  static const String isSkip = 'isSkip';
+  static const String content = 'content';
+  static const String primaryButtonText = 'primaryButtonText';
+  static const String secondaryButtonText = 'secondaryButtonText';
+  static const String theme = 'theme';
+  static const String type = 'type';
+  static const String primaryButtonAction = 'primaryButtonAction';
+  static const String secondaryButtonAction = 'secondaryButtonAction';
+}
+
+class EndQuestionDataMapperVer1
+    extends QuestionDataMapperJson1<EndQuestionData> {
+  @override
+  EndQuestionData fromJson(Map<String, dynamic> json) {
+    final theme = json[_Fields.theme];
+
+    return EndQuestionData(
+      index: json[_Fields.index],
+      title: json[_Fields.title],
+      subtitle: json[_Fields.subtitle],
+      isSkip: json[_Fields.isSkip],
+      content: json[_Fields.content],
+      theme: theme != null
+          ? EndQuestionThemeMapperVer1().fromJson(theme)
+          : const EndQuestionTheme.common(),
+      secondaryButtonText: json[_Fields.secondaryButtonText],
+      primaryButtonText: json[_Fields.primaryButtonText],
+      mainButtonAction: SurveyAction.fromJson(
+        json[_Fields.primaryButtonAction],
+      ),
+      secondaryButtonAction: SurveyAction.fromJson(
+        json[_Fields.secondaryButtonAction],
+      ),
+    );
+  }
+
+  @override
+  Map<String, dynamic> toJson(
+      EndQuestionData data, {
+        ThemeExtension<dynamic>? commonTheme,
+      }) {
+    late final EndQuestionTheme? theme;
+    //ignore: prefer-conditional-expressions
+    if (commonTheme != null) {
+      theme = commonTheme == data.theme ? null : data.theme;
+    } else {
+      theme = data.theme;
+    }
+    return {
+      _Fields.index: data.index,
+      _Fields.title: data.title,
+      _Fields.subtitle: data.subtitle,
+      _Fields.type: data.type,
+      _Fields.isSkip: data.isSkip,
+      _Fields.content: data.content,
+      _Fields.theme: theme != null
+          ? EndQuestionThemeMapperVer1().toJson(theme)
+          : EndQuestionThemeMapperVer1()
+          .toJson(const EndQuestionTheme.common()),
+      _Fields.secondaryButtonText: data.secondaryButtonText,
+      _Fields.primaryButtonText: data.primaryButtonText,
+      _Fields.primaryButtonAction: data.mainButtonAction == null
+          ? null
+          : SurveyAction.toJson(data.mainButtonAction!),
+      _Fields.secondaryButtonAction: data.secondaryButtonAction == null
+          ? null
+          : SurveyAction.toJson(data.secondaryButtonAction!),
+    };
+  }
+}

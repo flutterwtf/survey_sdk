@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:survey_sdk/src/data/mappers/question_types/choice_question_data/choice_question_data_mapper_factory.dart';
+import 'package:survey_sdk/src/data/mappers/question_types/end_question_data/end_question_data_mapper_factory.dart';
 import 'package:survey_sdk/src/data/mappers/question_types/info_question_data/info_question_data_mapper_factory.dart';
 import 'package:survey_sdk/src/data/mappers/question_types/input_question_data/input_question_data_mapper_factory.dart';
 import 'package:survey_sdk/src/data/mappers/question_types/slider_question_data/slider_question_data_mapper_factory.dart';
@@ -23,7 +24,7 @@ class SurveyData with EquatableMixin, ApiObject {
   final List<QuestionData> questions;
 
   /// Contains last page in the survey.
-  final InfoQuestionData endPage;
+  final EndQuestionData endPage;
 
   /// Defines the visual properties used throughout the app.
   final CommonTheme commonTheme;
@@ -32,6 +33,7 @@ class SurveyData with EquatableMixin, ApiObject {
   List<Object?> get props => [
         ...questions,
         commonTheme,
+        endPage,
       ];
 
   SurveyData({
@@ -44,7 +46,7 @@ class SurveyData with EquatableMixin, ApiObject {
     final questions = <QuestionData>[];
     final schemeVersion = json[_Fields.schemeVersion];
     final endPage = QuestionData.fromType(json[_Fields.endPage], schemeVersion)
-        as InfoQuestionData;
+        as EndQuestionData;
     for (final questionJson in json[_Fields.questions]) {
       questions.add(QuestionData.fromType(questionJson, schemeVersion));
     }
@@ -61,7 +63,7 @@ class SurveyData with EquatableMixin, ApiObject {
 
   SurveyData copyWith({
     List<QuestionData>? questions,
-    InfoQuestionData? endPage,
+    EndQuestionData? endPage,
     CommonTheme? commonTheme,
   }) {
     return SurveyData(
@@ -106,6 +108,8 @@ class SurveyData with EquatableMixin, ApiObject {
         return commonTheme.input.theme;
       case QuestionTypes.info:
         return commonTheme.info.theme;
+      case QuestionTypes.end:
+        return commonTheme.end.theme;
     }
     return null;
   }
@@ -142,6 +146,13 @@ class SurveyData with EquatableMixin, ApiObject {
           schemeVersion,
         ).toJson(
           question as InfoQuestionData,
+          commonTheme: themeFromQuestionType,
+        );
+      case QuestionTypes.end:
+        return EndQuestionDataMapperFactory.getMapper(
+          schemeVersion,
+        ).toJson(
+          question as EndQuestionData,
           commonTheme: themeFromQuestionType,
         );
     }

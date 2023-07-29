@@ -1,12 +1,14 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:survey_sdk/src/data/mappers/question_types/choice_question_data/choice_question_data_mapper_factory.dart';
+import 'package:survey_sdk/src/data/mappers/question_types/end_question_data/end_question_data_mapper_factory.dart';
 import 'package:survey_sdk/src/data/mappers/question_types/info_question_data/info_question_data_mapper_factory.dart';
 import 'package:survey_sdk/src/data/mappers/question_types/input_question_data/input_question_data_mapper_factory.dart';
 import 'package:survey_sdk/src/data/mappers/question_types/slider_question_data/slider_question_data_mapper_factory.dart';
 import 'package:survey_sdk/src/domain/entities/api_object.dart';
 import 'package:survey_sdk/src/domain/entities/constants/scheme_info.dart';
 import 'package:survey_sdk/src/domain/entities/question_types/choice_question_data.dart';
+import 'package:survey_sdk/src/domain/entities/question_types/end_question_data.dart';
 import 'package:survey_sdk/src/domain/entities/question_types/info_question_data.dart';
 import 'package:survey_sdk/src/domain/entities/question_types/input_question_data.dart';
 import 'package:survey_sdk/src/domain/entities/question_types/slider_question_data.dart';
@@ -16,6 +18,7 @@ abstract class _Fields {
   static const String info = 'info';
   static const String input = 'input';
   static const String choice = 'choice';
+  static const String end = 'end';
 }
 
 /// A theme class that extends the [ThemeExtension] and includes common
@@ -35,12 +38,16 @@ class CommonTheme extends ThemeExtension<CommonTheme>
   /// The theme configuration for choice questions.
   final ChoiceQuestionData choice;
 
+  /// The theme configuration for end question.
+  final EndQuestionData end;
+
   @override
   List<Object?> get props => [
         slider,
         info,
         input,
         choice,
+        end,
       ];
 
   CommonTheme({
@@ -48,6 +55,7 @@ class CommonTheme extends ThemeExtension<CommonTheme>
     required this.slider,
     required this.info,
     required this.input,
+    required this.end,
   });
 
   @override
@@ -65,6 +73,9 @@ class CommonTheme extends ThemeExtension<CommonTheme>
       choice: ChoiceQuestionDataMapperFactory.getMapper(
         schemeVersion,
       ).fromJson(json[_Fields.choice]),
+      end: EndQuestionDataMapperFactory.getMapper(
+        schemeVersion,
+      ).fromJson(json[_Fields.end]),
     );
   }
 
@@ -82,6 +93,9 @@ class CommonTheme extends ThemeExtension<CommonTheme>
         _Fields.choice: ChoiceQuestionDataMapperFactory.getMapper(
           schemeVersion ?? SchemeInfo.version,
         ).toJson(choice),
+        _Fields.end: EndQuestionDataMapperFactory.getMapper(
+          schemeVersion ?? SchemeInfo.version,
+        ).toJson(end),
       };
 
   @override
@@ -90,12 +104,14 @@ class CommonTheme extends ThemeExtension<CommonTheme>
     InfoQuestionData? info,
     InputQuestionData? input,
     ChoiceQuestionData? choice,
+    EndQuestionData? end,
   }) {
     return CommonTheme(
       slider: slider ?? this.slider,
       info: info ?? this.info,
       input: input ?? this.input,
       choice: choice ?? this.choice,
+      end: end ?? this.end,
     );
   }
 
@@ -111,6 +127,7 @@ class CommonTheme extends ThemeExtension<CommonTheme>
       info: info,
       input: input,
       choice: choice,
+      end: end,
     );
   }
 }

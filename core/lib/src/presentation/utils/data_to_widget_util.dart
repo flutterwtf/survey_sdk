@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:survey_sdk/src/domain/entities/question_answer.dart';
-import 'package:survey_sdk/src/domain/entities/question_types/choice_question_data.dart';
-import 'package:survey_sdk/src/domain/entities/question_types/info_question_data.dart';
-import 'package:survey_sdk/src/domain/entities/question_types/input_question_data.dart';
-import 'package:survey_sdk/src/domain/entities/question_types/question_data.dart';
-import 'package:survey_sdk/src/domain/entities/question_types/slider_question_data.dart';
 import 'package:survey_sdk/src/presentation/choice_question/choice_question_page.dart';
-import 'package:survey_sdk/src/presentation/end_page/end_page.dart';
+import 'package:survey_sdk/src/presentation/end_page/end_question_page.dart';
 import 'package:survey_sdk/src/presentation/info_question/info_question_page.dart';
 import 'package:survey_sdk/src/presentation/input_question/input_question_page.dart';
 import 'package:survey_sdk/src/presentation/slider_question/slider_question_page.dart';
+import 'package:survey_sdk/survey_sdk.dart';
 
 typedef SurveyCallback = void Function({
   required int index,
@@ -57,6 +53,6 @@ abstract class DataToWidgetUtil {
     }
   }
 
-  static Widget createEndPage({required InfoQuestionData data}) =>
+  static Widget createEndPage({required EndQuestionData data}) =>
       EndPage(data: data);
 }

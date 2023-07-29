@@ -20,6 +20,7 @@ class CommonData {
       info: info(),
       input: input(),
       choice: choice(),
+      end: endPage(),
     );
   }
 
@@ -112,15 +113,15 @@ class CommonData {
     );
   }
 
-  InfoQuestionData endPage({int index = 0}) {
-    return InfoQuestionData(
+  EndQuestionData endPage({int index = 0}) {
+    return EndQuestionData(
       primaryButtonText: context.localization.next,
       title: context.localization.end,
       index: index,
       subtitle: context.localization.surveyCompleted,
       isSkip: false,
       content: context.localization.emptyContent,
-      theme: const InfoQuestionTheme.common(),
+      theme: const EndQuestionTheme.common(),
       secondaryButtonText: context.localization.skip,
       mainButtonAction: const GoNextAction(),
       secondaryButtonAction: const SkipQuestionAction(),

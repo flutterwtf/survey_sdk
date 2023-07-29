@@ -136,8 +136,9 @@ class _BuilderPageState extends State<BuilderPage> {
                 onAdd: _cubit.addQuestionData,
                 questions: _cubit.state.surveyData.questions,
                 onUpdate: _cubit.updateQuestions,
+                onUpdateEndQuestion: _cubit.updateEndQuestion,
                 selectedIndex: _selectedIndex(state),
-                endPage: state.surveyData.endPage,
+                endPage: _cubit.state.surveyData.endPage,
               ),
               Expanded(
                 child: PhoneView(

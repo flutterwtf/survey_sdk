@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:survey_sdk/src/data/mappers/question_types/choice_question_data/choice_question_data_mapper_factory.dart';
+import 'package:survey_sdk/src/data/mappers/question_types/end_question_data/end_question_data_mapper_factory.dart';
 import 'package:survey_sdk/src/data/mappers/question_types/info_question_data/info_question_data_mapper_factory.dart';
 import 'package:survey_sdk/src/data/mappers/question_types/input_question_data/input_question_data_mapper_factory.dart';
 import 'package:survey_sdk/src/data/mappers/question_types/slider_question_data/slider_question_data_mapper_factory.dart';
@@ -100,6 +101,10 @@ abstract class QuestionData<T> extends Equatable {
         ).fromJson(json);
       case QuestionTypes.choice:
         return ChoiceQuestionDataMapperFactory.getMapper(
+          schemeVersion,
+        ).fromJson(json);
+      case QuestionTypes.end:
+        return EndQuestionDataMapperFactory.getMapper(
           schemeVersion,
         ).fromJson(json);
       default:

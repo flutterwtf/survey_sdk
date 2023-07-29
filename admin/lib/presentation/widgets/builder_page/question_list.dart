@@ -12,9 +12,10 @@ class QuestionList extends StatefulWidget {
   final ValueChanged<QuestionData> onAdd;
   final ValueChanged<QuestionData> onDelete;
   final ValueChanged<List<QuestionData>> onUpdate;
+  final ValueChanged<EndQuestionData> onUpdateEndQuestion;
   final int? selectedIndex;
   final List<QuestionData> questions;
-  final InfoQuestionData endPage;
+  final EndQuestionData endPage;
   final bool isEditMode;
 
   const QuestionList({
@@ -23,6 +24,7 @@ class QuestionList extends StatefulWidget {
     required this.questions,
     required this.endPage,
     required this.onUpdate,
+    required this.onUpdateEndQuestion,
     required this.onDelete,
     required this.selectedIndex,
     this.isEditMode = true,

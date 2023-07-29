@@ -7,6 +7,8 @@ import 'package:survey_admin/presentation/widgets/customization_panel/input/inpu
 import 'package:survey_admin/presentation/widgets/customization_panel/slider/slider_customization_panel.dart';
 import 'package:survey_sdk/survey_sdk.dart';
 
+import '../customization_panel/end/end_customization_panel.dart';
+
 class EditorBar extends StatelessWidget {
   final QuestionData? editableQuestion;
   final bool isEditMode;
@@ -70,6 +72,13 @@ class EditorBar extends StatelessWidget {
                     key: UniqueKey(),
                     onChange: onChange,
                     editable: questionData as SliderQuestionData,
+                    questionsAmount: questionsAmount,
+                  );
+                case QuestionTypes.end:
+                  return EndCustomizationPanel(
+                    key: UniqueKey(),
+                    onChange: onChange,
+                    editable: questionData as EndQuestionData,
                     questionsAmount: questionsAmount,
                   );
               }
