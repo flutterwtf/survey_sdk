@@ -11,7 +11,7 @@ import 'package:survey_sdk/survey_sdk.dart';
 
 abstract class _Fields {
   static const String questions = 'questions';
-  static const String endPage = 'endPage';
+  static const String endQuestion = 'endQuestion';
   static const String commonTheme = 'commonTheme';
   static const String schemeVersion = 'schemeVersion';
 }
@@ -24,7 +24,7 @@ class SurveyData with EquatableMixin, ApiObject {
   final List<QuestionData> questions;
 
   /// Contains last page in the survey.
-  final EndQuestionData endPage;
+  final EndQuestionData endQuestion;
 
   /// Defines the visual properties used throughout the app.
   final CommonTheme commonTheme;
@@ -33,27 +33,28 @@ class SurveyData with EquatableMixin, ApiObject {
   List<Object?> get props => [
         ...questions,
         commonTheme,
-        endPage,
+        endQuestion,
       ];
 
   SurveyData({
     required this.questions,
-    required this.endPage,
+    required this.endQuestion,
     required this.commonTheme,
   });
 
   factory SurveyData.fromJson(Map<String, dynamic> json) {
     final questions = <QuestionData>[];
     final schemeVersion = json[_Fields.schemeVersion];
-    final endPage = QuestionData.fromType(json[_Fields.endPage], schemeVersion)
-        as EndQuestionData;
+    final endPage =
+        QuestionData.fromType(json[_Fields.endQuestion], schemeVersion)
+            as EndQuestionData;
     for (final questionJson in json[_Fields.questions]) {
       questions.add(QuestionData.fromType(questionJson, schemeVersion));
     }
 
     return SurveyData(
       questions: questions,
-      endPage: endPage,
+      endQuestion: endPage,
       commonTheme: CommonTheme.fromJson(
         json[_Fields.commonTheme],
         schemeVersion,
@@ -63,12 +64,12 @@ class SurveyData with EquatableMixin, ApiObject {
 
   SurveyData copyWith({
     List<QuestionData>? questions,
-    EndQuestionData? endPage,
+    EndQuestionData? endQuestion,
     CommonTheme? commonTheme,
   }) {
     return SurveyData(
       questions: questions ?? this.questions,
-      endPage: endPage ?? this.endPage,
+      endQuestion: endQuestion ?? this.endQuestion,
       commonTheme: commonTheme ?? this.commonTheme,
     );
   }
@@ -78,9 +79,9 @@ class SurveyData with EquatableMixin, ApiObject {
     const schemeVersion = SchemeInfo.version;
     return {
       _Fields.schemeVersion: schemeVersion,
-      _Fields.endPage: _toJson(
-        _themeFromQuestionType(endPage.type),
-        endPage,
+      _Fields.endQuestion: _toJson(
+        _themeFromQuestionType(endQuestion.type),
+        endQuestion,
         schemeVersion,
       ),
       _Fields.commonTheme: commonTheme.toJson(

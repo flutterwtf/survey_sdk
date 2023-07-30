@@ -33,7 +33,7 @@ class _BuilderPageState extends State<BuilderPage> {
     final questions = _cubit.state.surveyData.questions;
     final index = _surveyController.pageController.page;
     final question = index == questions.length
-        ? _cubit.state.surveyData.endPage
+        ? _cubit.state.surveyData.endQuestion
         : index != null && index % 1 == 0
             ? questions[index.toInt()]
             : null;
@@ -69,8 +69,8 @@ class _BuilderPageState extends State<BuilderPage> {
 
   QuestionData? _editableQuestion(BuilderState state) {
     if (state is EditQuestionBuilderState) {
-      return state.selectedIndex == state.surveyData.endPage.index
-          ? state.surveyData.endPage
+      return state.selectedIndex == state.surveyData.endQuestion.index
+          ? state.surveyData.endQuestion
           : state.surveyData.questions
               .firstWhereOrNull((q) => q.index == state.selectedIndex);
     } else if (state is PreviewQuestionBuilderState) {
@@ -138,7 +138,7 @@ class _BuilderPageState extends State<BuilderPage> {
                 onUpdate: _cubit.updateQuestions,
                 onUpdateEndQuestion: _cubit.updateEndQuestion,
                 selectedIndex: _selectedIndex(state),
-                endPage: _cubit.state.surveyData.endPage,
+                endPage: _cubit.state.surveyData.endQuestion,
               ),
               Expanded(
                 child: PhoneView(

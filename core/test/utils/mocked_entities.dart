@@ -1,11 +1,13 @@
 import 'package:survey_sdk/src/domain/entities/input_validator.dart';
 import 'package:survey_sdk/src/domain/entities/question_types/choice_question_data.dart';
+import 'package:survey_sdk/src/domain/entities/question_types/end_question_data.dart';
 import 'package:survey_sdk/src/domain/entities/question_types/info_question_data.dart';
 import 'package:survey_sdk/src/domain/entities/question_types/input_question_data.dart';
 import 'package:survey_sdk/src/domain/entities/question_types/slider_question_data.dart';
 import 'package:survey_sdk/src/domain/entities/survey_data.dart';
 import 'package:survey_sdk/src/domain/entities/themes/choice_question_theme.dart';
 import 'package:survey_sdk/src/domain/entities/themes/common_theme.dart';
+import 'package:survey_sdk/src/domain/entities/themes/end_question_theme.dart';
 import 'package:survey_sdk/src/domain/entities/themes/info_question_theme.dart';
 import 'package:survey_sdk/src/domain/entities/themes/input_question_theme.dart';
 import 'package:survey_sdk/src/domain/entities/themes/slider_question_theme.dart';
@@ -154,13 +156,13 @@ abstract class MockedEntities {
     secondaryButtonText: 'EXIT',
   );
 
-  static const endPage = InfoQuestionData(
+  static const endQuestion = EndQuestionData(
       primaryButtonText: 'NEXT',
       title: 'title',
       index: 0,
       subtitle: 'subtitle',
       isSkip: false,
-      theme: InfoQuestionTheme.common(),
+      theme: EndQuestionTheme.common(),
       secondaryButtonText: 'Skip',
     );
 
@@ -171,7 +173,7 @@ abstract class MockedEntities {
       choice2.copyWith(index: 3),
       slider1.copyWith(index: 4),
     ],
-    endPage: endPage.copyWith(index: 5),
+    endQuestion: endQuestion.copyWith(index: 5),
     commonTheme: _commonTheme,
   );
 
@@ -196,5 +198,6 @@ abstract class MockedEntities {
     choice: const ChoiceQuestionData.common(),
     input: InputQuestionData.common(),
     info: const InfoQuestionData.common(),
+    end: const EndQuestionData.common(),
   );
 }

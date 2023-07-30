@@ -23,12 +23,13 @@ void main() {
           final currentState = surveyCubit.state;
           final surveyData = SurveyData(
             questions: [],
-            endPage: const InfoQuestionData.common(),
+            endQuestion: const EndQuestionData.common(),
             commonTheme: CommonTheme(
               slider: const SliderQuestionData.common(),
               choice: const ChoiceQuestionData.common(),
               input: InputQuestionData.common(),
               info: const InfoQuestionData.common(),
+              end: const EndQuestionData.common(),
             ),
           );
           when(() => mockedSurveyRepo.getSurveyData(''))

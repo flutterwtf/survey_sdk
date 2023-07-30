@@ -89,12 +89,12 @@ class BuilderCubit extends Cubit<BuilderState> {
 
     _updateIndex(questionList);
 
-    final endPage = state.surveyData.endPage
-        .copyWith(index: state.surveyData.endPage.index - 1);
+    final endQuestion = state.surveyData.endQuestion
+        .copyWith(index: state.surveyData.endQuestion.index - 1);
 
     final surveyData = state.surveyData.copyWith(
       questions: questionList,
-      endPage: endPage,
+      endQuestion: endQuestion,
     );
     _sessionStorageRepository.saveSurveyData(surveyData);
     emit(state.copyWith(surveyData: surveyData));
@@ -114,12 +114,12 @@ class BuilderCubit extends Cubit<BuilderState> {
     final questionList = List<QuestionData>.of(state.surveyData.questions)
       ..add(data);
 
-    final endPage = state.surveyData.endPage
-        .copyWith(index: state.surveyData.endPage.index + 1);
+    final endQuestion = state.surveyData.endQuestion
+        .copyWith(index: state.surveyData.endQuestion.index + 1);
 
     final surveyData = state.surveyData.copyWith(
       questions: questionList,
-      endPage: endPage,
+      endQuestion: endQuestion,
     );
     _sessionStorageRepository.saveSurveyData(surveyData);
     emit(state.copyWith(surveyData: surveyData));
@@ -153,12 +153,13 @@ class BuilderCubit extends Cubit<BuilderState> {
 
   void updateQuestionData(QuestionData data) {
     final questions = List.of(state.surveyData.questions);
-    final endPage = state.surveyData.endPage;
+    final endPage = state.surveyData.endQuestion;
 
     late final SurveyData surveyData;
 
     if (endPage.index == data.index) {
-      surveyData = state.surveyData.copyWith(endPage: data as EndQuestionData);
+      surveyData =
+          state.surveyData.copyWith(endQuestion: data as EndQuestionData);
     } else {
       final index = questions.indexWhere(
         (question) => question.index == data.index,
@@ -177,8 +178,8 @@ class BuilderCubit extends Cubit<BuilderState> {
     emit(state.copyWith(surveyData: surveyData));
   }
 
-  void updateEndQuestion(EndQuestionData endPage) {
-    final surveyData = state.surveyData.copyWith(endPage: endPage);
+  void updateEndQuestion(EndQuestionData endQuestion) {
+    final surveyData = state.surveyData.copyWith(endQuestion: endQuestion);
     _sessionStorageRepository.saveSurveyData(surveyData);
     emit(state.copyWith(surveyData: surveyData));
   }

@@ -2,12 +2,11 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/choice/choice_customization_panel.dart';
+import 'package:survey_admin/presentation/widgets/customization_panel/end/end_customization_panel.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/info/info_customization_panel.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/input/input_customization_panel.dart';
 import 'package:survey_admin/presentation/widgets/customization_panel/slider/slider_customization_panel.dart';
 import 'package:survey_sdk/survey_sdk.dart';
-
-import '../customization_panel/end/end_customization_panel.dart';
 
 class EditorBar extends StatelessWidget {
   final QuestionData? editableQuestion;

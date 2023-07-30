@@ -177,7 +177,7 @@ class _SurveyState extends State<Survey> {
                     ),
                   ),
                   DataToWidgetUtil.createEndPage(
-                    data: data.endPage,
+                    data: data.endQuestion,
                   ),
                 ],
               ),

@@ -20,7 +20,7 @@ class CommonData {
       info: info(),
       input: input(),
       choice: choice(),
-      end: endPage(),
+      end: endQuestion(),
     );
   }
 
@@ -32,7 +32,7 @@ class CommonData {
         choice(index: _thirdIndex),
         slider(index: _fourthIndex),
       ],
-      endPage: endPage(index: _fivethIndex),
+      endQuestion: endQuestion(index: _fivethIndex),
       commonTheme: commonTheme,
     );
   }
@@ -113,7 +113,7 @@ class CommonData {
     );
   }
 
-  EndQuestionData endPage({int index = 0}) {
+  EndQuestionData endQuestion({int index = 0}) {
     return EndQuestionData(
       primaryButtonText: context.localization.next,
       title: context.localization.end,
