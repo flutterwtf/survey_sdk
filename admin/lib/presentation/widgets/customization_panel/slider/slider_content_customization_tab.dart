@@ -12,7 +12,7 @@ import 'package:survey_sdk/survey_sdk.dart';
 class SliderContentCustomizationTab extends CustomizationTab {
   final ValueChanged<QuestionData> onChange;
   final SliderQuestionData editable;
-  final int questionsAmount;
+  final int? questionsAmount;
 
   const SliderContentCustomizationTab({
     required this.onChange,
@@ -106,7 +106,8 @@ class SliderContentCustomizationTab extends CustomizationTab {
             ),
           ],
         ),
-        CustomizationItemsContainer(
+        if (questionsAmount != null)
+          CustomizationItemsContainer(
           title: context.localization.primaryButtonAction,
           itemsPadding: EdgeInsets.zero,
           children: [
@@ -119,11 +120,11 @@ class SliderContentCustomizationTab extends CustomizationTab {
               ),
               surveyAction: editable.mainButtonAction,
               callbackType: CallbackType.primaryCallback,
-              questionsLength: questionsAmount,
+              questionsLength: questionsAmount!,
             ),
           ],
         ),
-        if (editable.isSkip)
+        if (editable.isSkip && questionsAmount != null)
           CustomizationItemsContainer(
             title: context.localization.secondaryButtonAction,
             itemsPadding: EdgeInsets.zero,
@@ -137,7 +138,7 @@ class SliderContentCustomizationTab extends CustomizationTab {
                 ),
                 surveyAction: editable.secondaryButtonAction,
                 callbackType: CallbackType.secondaryCallback,
-                questionsLength: questionsAmount,
+                questionsLength: questionsAmount!,
               ),
             ],
           ),

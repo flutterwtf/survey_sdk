@@ -3,91 +3,97 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:survey_admin/presentation/app/di/injector.dart';
 import 'package:survey_admin/presentation/app/localization/app_localizations_ext.dart';
 import 'package:survey_admin/presentation/pages/builder/builder_cubit.dart';
-import 'package:survey_admin/presentation/pages/builder/builder_state.dart';
+import 'package:survey_admin/presentation/pages/new_question_page/new_question_cubit.dart';
+import 'package:survey_admin/presentation/pages/new_question_page/new_question_state.dart';
 import 'package:survey_admin/presentation/pages/new_question_page/new_question_tabs.dart';
 import 'package:survey_admin/presentation/utils/utils.dart';
+import 'package:survey_admin/presentation/widgets/editor_bar.dart';
 import 'package:survey_admin/presentation/widgets/vector_image.dart';
 import 'package:survey_sdk/survey_sdk.dart';
 
-class NewQuestionPage extends StatefulWidget {
-  const NewQuestionPage({super.key});
+class NewQuestionPage extends StatelessWidget {
+  final SurveyData data;
 
-  @override
-  State<NewQuestionPage> createState() => _NewQuestionPageState();
-}
-
-class _NewQuestionPageState extends State<NewQuestionPage> {
-  NewQuestionTabs _selectedTab = NewQuestionTabs.info;
-  String? _selectedOption;
-
-  final BuilderCubit _cubit = i.get<BuilderCubit>();
-
-  Widget _questionTab(NewQuestionTabs tab) {
-    return _TabButton(
-      title: tab.name(context),
-      onTap: () {
-        setState(
-          () => _selectedTab = tab,
-        );
-      },
-      isSelected: _selectedTab == tab,
-    );
-  }
+  const NewQuestionPage({required this.data, super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<BuilderCubit>(
-      create: (_) => _cubit,
-      child: BlocBuilder<BuilderCubit, BuilderState>(
-        builder: (context, state) {
-          return Scaffold(
-            backgroundColor: SurveyColors.white,
-            appBar: PreferredSize(
-              preferredSize:
-                  const Size.fromHeight(SurveyDimensions.appbarHeight),
-              child: AppBar(
-                automaticallyImplyLeading: false,
-                title: const _AppBarTitle(),
-                actions: const [
-                  _BackButton(),
-                ],
-              ),
+    return BlocProvider<NewQuestionCubit>(
+      create: (_) => i.get<NewQuestionCubit>(),
+      child: _Content(),
+    );
+  }
+}
+
+class _Content extends StatelessWidget {
+  NewQuestionCubit cubit(BuildContext context) =>
+      context.read<NewQuestionCubit>();
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<NewQuestionCubit, NewQuestionState>(
+      builder: (context, state) {
+        final idle = state as NewQuestionIdleState;
+        return Scaffold(
+          backgroundColor: SurveyColors.white,
+          appBar: PreferredSize(
+            preferredSize: const Size.fromHeight(SurveyDimensions.appbarHeight),
+            child: AppBar(
+              automaticallyImplyLeading: false,
+              title: const _AppBarTitle(),
+              actions: const [
+                _BackButton(),
+              ],
             ),
-            body: Padding(
-              padding: const EdgeInsets.symmetric(
-                vertical: SurveyDimensions.margin2XS,
-                horizontal: SurveyDimensions.marginM,
-              ),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: NewQuestionTabs.values.map(_questionTab).toList(),
-                  ),
-                  _QuestionOptionsListView(
-                    options: _selectedTab.options,
-                    selectedOption: _selectedOption ?? '',
-                  ),
-                ],
-              ),
+          ),
+          body: Padding(
+            padding: const EdgeInsets.symmetric(
+              vertical: SurveyDimensions.margin2XS,
+              horizontal: SurveyDimensions.marginM,
             ),
-            persistentFooterButtons: [
-              _CancelButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              ),
-              _AddButton(
-                onPressed: () {
-                  Navigator.pop(context, _selectedTab.data);
-                },
-              ),
-            ],
-          );
-        },
-      ),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: NewQuestionTabs.values
+                      .map(
+                        (tab) => _TabButton(
+                          onTap: () => cubit(context).selectTab(tab),
+                          isSelected: idle.selectedTab == tab,
+                          title: tab.name(context),
+                        ),
+                      )
+                      .toList(),
+                ),
+                Expanded(
+                  child: _QuestionOptionsListView(
+                    options: idle.selectedTab.options,
+                  ),
+                ),
+                EditorBar(
+                  onChange: builderCubit.updateCommonTheme,
+                  editableQuestion:
+                      idle.selectedTab.data(builderCubit.state.surveyData),
+                ),
+              ],
+            ),
+          ),
+          persistentFooterButtons: [
+            _CancelButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+            _AddButton(
+              onPressed: () {
+                Navigator.pop(context, idle.selectedTab.data);
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }
@@ -163,11 +169,9 @@ class _TabButton extends StatelessWidget {
 
 class _QuestionOptionsListView extends StatelessWidget {
   final List<NewQuestionOptions> options;
-  final String selectedOption;
 
   const _QuestionOptionsListView({
     required this.options,
-    required this.selectedOption,
   });
 
   @override

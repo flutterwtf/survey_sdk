@@ -35,7 +35,7 @@ class BuilderCubit extends Cubit<BuilderState> {
     Clipboard.setData(ClipboardData(text: jsonText));
   }
 
-  void updateCommon(QuestionData data) {
+  void updateCommonTheme(QuestionData data) {
     var surveyData = state.surveyData;
     final common = state.surveyData.commonTheme;
     switch (data.type) {

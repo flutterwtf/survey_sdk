@@ -1,7 +1,9 @@
 import 'package:context_menus/context_menus.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:survey_admin/presentation/app/localization/app_localizations_ext.dart';
+import 'package:survey_admin/presentation/pages/builder/builder_cubit.dart';
 import 'package:survey_admin/presentation/pages/new_question_page/new_question_page.dart';
 import 'package:survey_admin/presentation/utils/utils.dart';
 import 'package:survey_admin/presentation/widgets/builder_page/question_list_item.dart';
@@ -72,7 +74,11 @@ class _QuestionListState extends State<QuestionList> {
               onAddButtonTap: () async {
                 final questionData = await Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => const NewQuestionPage(),
+                    builder: (context) => NewQuestionPage(
+                      data: BlocProvider.of<BuilderCubit>(context)
+                          .state
+                          .surveyData,
+                    ),
                   ),
                 );
                 if (questionData != null) {

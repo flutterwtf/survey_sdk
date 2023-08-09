@@ -26,10 +26,7 @@ class _AppState extends State<App> {
         GlobalCupertinoLocalizations.delegate,
       ],
       theme: AppTheme.theme,
-      home: BlocProvider(
-        create: (context) => i.get<BuilderCubit>(),
-        child: const BuilderPage(),
-      ),
+      home: const BuilderPage(),
     );
   }
 }

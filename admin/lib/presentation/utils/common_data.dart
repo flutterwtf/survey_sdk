@@ -11,7 +11,7 @@ class CommonData {
   static const _secondIndex = 2;
   static const _thirdIndex = 3;
   static const _fourthIndex = 4;
-  static const _fivethIndex = 5;
+  static const _fifthIndex = 5;
   static const _dividers = 10;
 
   CommonTheme get commonTheme {
@@ -31,7 +31,7 @@ class CommonData {
         choice(index: _thirdIndex),
         slider(index: _fourthIndex),
       ],
-      endPage: endPage(index: _fivethIndex),
+      endPage: endPage(index: _fifthIndex),
       commonTheme: commonTheme,
     );
   }
