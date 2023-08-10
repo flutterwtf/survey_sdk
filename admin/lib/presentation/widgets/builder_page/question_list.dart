@@ -1,9 +1,7 @@
 import 'package:context_menus/context_menus.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:survey_admin/presentation/app/localization/app_localizations_ext.dart';
-import 'package:survey_admin/presentation/pages/builder/builder_cubit.dart';
 import 'package:survey_admin/presentation/pages/new_question_page/new_question_page.dart';
 import 'package:survey_admin/presentation/utils/utils.dart';
 import 'package:survey_admin/presentation/widgets/builder_page/question_list_item.dart';
@@ -15,17 +13,19 @@ class QuestionList extends StatefulWidget {
   final ValueChanged<QuestionData> onDelete;
   final ValueChanged<List<QuestionData>> onUpdate;
   final int? selectedIndex;
-  final List<QuestionData> questions;
+  final SurveyData data;
+  final ValueChanged<SurveyData> onDataUpdate;
   final InfoQuestionData endPage;
   final bool isEditMode;
 
   const QuestionList({
     required this.onSelect,
     required this.onAdd,
-    required this.questions,
+    required this.data,
     required this.endPage,
     required this.onUpdate,
     required this.onDelete,
+    required this.onDataUpdate,
     required this.selectedIndex,
     this.isEditMode = true,
     super.key,
@@ -36,29 +36,25 @@ class QuestionList extends StatefulWidget {
 }
 
 class _QuestionListState extends State<QuestionList> {
-  void _addQuestion(QuestionData data) {
-    final index = widget.questions.length + 1;
-    widget.onAdd(data.copyWith(index: index));
-  }
-
   void _updateQuestion(int oldIndex, int newIndex) {
-    final updatedIndex = newIndex >= widget.questions.length
-        ? widget.questions.length - 1
+    final updatedIndex = newIndex >= widget.data.questions.length
+        ? widget.data.questions.length - 1
         : newIndex;
 
-    final itemOld = widget.questions.removeAt(oldIndex);
-    widget.questions.insert(updatedIndex, itemOld);
+    final itemOld = widget.data.questions.removeAt(oldIndex);
+    widget.data.questions.insert(updatedIndex, itemOld);
 
-    for (var i = 0; i < widget.questions.length; i++) {
-      widget.questions[i] = widget.questions[i].copyWith(index: i + 1);
+    for (var i = 0; i < widget.data.questions.length; i++) {
+      widget.data.questions[i] =
+          widget.data.questions[i].copyWith(index: i + 1);
     }
 
-    widget.onUpdate(widget.questions);
+    widget.onUpdate(widget.data.questions);
   }
 
   @override
   Widget build(BuildContext context) {
-    final length = widget.questions.length;
+    final length = widget.data.questions.length;
 
     return AnimatedContainer(
       duration: SurveyDurations.panelSwitchingDuration,
@@ -72,21 +68,17 @@ class _QuestionListState extends State<QuestionList> {
             _ListHeader(
               //ignore: avoid-passing-async-when-sync-expected
               onAddButtonTap: () async {
-                final questionData = await Navigator.of(context).push(
+                final surveyData = await Navigator.of(context).push(
                   MaterialPageRoute(
                     builder: (context) => NewQuestionPage(
-                      data: BlocProvider.of<BuilderCubit>(context)
-                          .state
-                          .surveyData,
+                      data: widget.data,
                     ),
                   ),
                 );
-                if (questionData != null) {
-                  _addQuestion(questionData);
-                }
+                widget.onDataUpdate(surveyData);
               },
               isEditingCommonTheme: widget.selectedIndex == -1,
-              questionList: widget.questions,
+              questionList: widget.data.questions,
             ),
             Expanded(
               child: ContextMenuOverlay(
@@ -106,9 +98,9 @@ class _QuestionListState extends State<QuestionList> {
                         index: index,
                         isSelected: index == widget.selectedIndex,
                         onDeleteButtonPressed: () => widget.onDelete(
-                          widget.questions[index],
+                          widget.data.questions[index],
                         ),
-                        question: widget.questions[index],
+                        question: widget.data.questions[index],
                         onQuestionTap: widget.onSelect,
                       ),
                     _Question(

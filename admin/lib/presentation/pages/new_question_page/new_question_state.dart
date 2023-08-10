@@ -13,6 +13,7 @@ abstract class NewQuestionState extends Equatable {
 
   NewQuestionState copyWith({
     NewQuestionTabs? selectedTab,
+    SurveyData? data,
   });
 }
 

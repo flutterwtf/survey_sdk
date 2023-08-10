@@ -35,30 +35,9 @@ class BuilderCubit extends Cubit<BuilderState> {
     Clipboard.setData(ClipboardData(text: jsonText));
   }
 
-  void updateCommonTheme(QuestionData data) {
-    var surveyData = state.surveyData;
-    final common = state.surveyData.commonTheme;
-    switch (data.type) {
-      case QuestionTypes.choice:
-        surveyData = surveyData.copyWith(
-          commonTheme: common.copyWith(choice: data as ChoiceQuestionData),
-        );
-      case QuestionTypes.input:
-        surveyData = surveyData.copyWith(
-          commonTheme: common.copyWith(input: data as InputQuestionData),
-        );
-
-      case QuestionTypes.info:
-        surveyData = surveyData.copyWith(
-          commonTheme: common.copyWith(info: data as InfoQuestionData),
-        );
-      case QuestionTypes.slider:
-        surveyData = surveyData.copyWith(
-          commonTheme: common.copyWith(slider: data as SliderQuestionData),
-        );
-    }
-    _sessionStorageRepository.saveSurveyData(surveyData);
-    emit(state.copyWith(surveyData: surveyData));
+  void updateCommonTheme(SurveyData data) {
+    _sessionStorageRepository.saveSurveyData(data);
+    emit(state.copyWith(surveyData: data));
   }
 
   void select(QuestionData data) {

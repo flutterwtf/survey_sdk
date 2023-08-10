@@ -5,9 +5,9 @@ import 'package:survey_admin/presentation/app/di/injector.dart';
 import 'package:survey_admin/presentation/app/localization/app_localizations_ext.dart';
 import 'package:survey_admin/presentation/pages/builder/builder_cubit.dart';
 import 'package:survey_admin/presentation/pages/builder/builder_state.dart';
-import 'package:survey_admin/presentation/widgets/editor_bar.dart';
 import 'package:survey_admin/presentation/widgets/builder_page/phone_view.dart';
 import 'package:survey_admin/presentation/widgets/builder_page/question_list.dart';
+import 'package:survey_admin/presentation/widgets/editor_bar.dart';
 import 'package:survey_admin/presentation/widgets/export_floating_window.dart';
 import 'package:survey_sdk/survey_sdk.dart';
 
@@ -161,10 +161,11 @@ class _ContentState extends State<_Content>
                 onDelete: cubit.deleteQuestionData,
                 onSelect: cubit.select,
                 onAdd: cubit.addQuestionData,
-                questions: cubit.state.surveyData.questions,
+                data: cubit.state.surveyData,
                 onUpdate: cubit.updateQuestions,
                 selectedIndex: _selectedIndex(state),
                 endPage: state.surveyData.endPage,
+                onDataUpdate: cubit.updateCommonTheme,
               ),
               Expanded(
                 child: PhoneView(

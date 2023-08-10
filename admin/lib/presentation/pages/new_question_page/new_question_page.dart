@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:survey_admin/presentation/app/di/injector.dart';
 import 'package:survey_admin/presentation/app/localization/app_localizations_ext.dart';
-import 'package:survey_admin/presentation/pages/builder/builder_cubit.dart';
 import 'package:survey_admin/presentation/pages/new_question_page/new_question_cubit.dart';
 import 'package:survey_admin/presentation/pages/new_question_page/new_question_state.dart';
 import 'package:survey_admin/presentation/pages/new_question_page/new_question_tabs.dart';
@@ -19,7 +18,7 @@ class NewQuestionPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<NewQuestionCubit>(
-      create: (_) => i.get<NewQuestionCubit>(),
+      create: (_) => i.get<NewQuestionCubit>(param1: data),
       child: _Content(),
     );
   }
@@ -41,8 +40,8 @@ class _Content extends StatelessWidget {
             child: AppBar(
               automaticallyImplyLeading: false,
               title: const _AppBarTitle(),
-              actions: const [
-                _BackButton(),
+              actions: [
+                _BackButton(data: idle.data),
               ],
             ),
           ),
@@ -67,15 +66,12 @@ class _Content extends StatelessWidget {
                       )
                       .toList(),
                 ),
-                Expanded(
-                  child: _QuestionOptionsListView(
-                    options: idle.selectedTab.options,
-                  ),
+                _QuestionOptionsListView(
+                  options: idle.selectedTab.options,
                 ),
                 EditorBar(
-                  onChange: builderCubit.updateCommonTheme,
-                  editableQuestion:
-                      idle.selectedTab.data(builderCubit.state.surveyData),
+                  onChange: cubit(context).updateData,
+                  editableQuestion: idle.selectedTab.data(idle.data),
                 ),
               ],
             ),
@@ -88,7 +84,15 @@ class _Content extends StatelessWidget {
             ),
             _AddButton(
               onPressed: () {
-                Navigator.pop(context, idle.selectedTab.data);
+                final index = idle.data.questions.length + 1;
+                final question = idle.selectedTab.data(idle.data).copyWith(
+                      index: index,
+                    );
+                idle.data.questions.add(question);
+                Navigator.pop(
+                  context,
+                  idle.data,
+                );
               },
             ),
           ],
@@ -99,13 +103,15 @@ class _Content extends StatelessWidget {
 }
 
 class _BackButton extends StatelessWidget {
-  const _BackButton();
+  final SurveyData data;
+
+  const _BackButton({required this.data});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
-      onTap: () => Navigator.pop(context),
+      onTap: () => Navigator.pop(context, data),
       child: const Padding(
         padding: EdgeInsets.only(right: SurveyDimensions.marginL),
         child: VectorImage(assetName: AppAssets.closeIcon),

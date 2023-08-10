@@ -12,4 +12,29 @@ class NewQuestionCubit extends Cubit<NewQuestionState> {
   void selectTab(NewQuestionTabs tab) => emit(
         state.copyWith(selectedTab: tab),
       );
+
+  void updateData(QuestionData data) {
+    var surveyData = state.data;
+    final common = surveyData.commonTheme;
+    switch (data.type) {
+      case QuestionTypes.choice:
+        surveyData = surveyData.copyWith(
+          commonTheme: common.copyWith(choice: data as ChoiceQuestionData),
+        );
+      case QuestionTypes.input:
+        surveyData = surveyData.copyWith(
+          commonTheme: common.copyWith(input: data as InputQuestionData),
+        );
+
+      case QuestionTypes.info:
+        surveyData = surveyData.copyWith(
+          commonTheme: common.copyWith(info: data as InfoQuestionData),
+        );
+      case QuestionTypes.slider:
+        surveyData = surveyData.copyWith(
+          commonTheme: common.copyWith(slider: data as SliderQuestionData),
+        );
+    }
+    emit(state.copyWith(data: surveyData));
+  }
 }
