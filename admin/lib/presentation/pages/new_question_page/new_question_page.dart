@@ -32,7 +32,6 @@ class _Content extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<NewQuestionCubit, NewQuestionState>(
       builder: (context, state) {
-        final idle = state as NewQuestionIdleState;
         return Scaffold(
           backgroundColor: SurveyColors.white,
           appBar: PreferredSize(
@@ -41,7 +40,7 @@ class _Content extends StatelessWidget {
               automaticallyImplyLeading: false,
               title: const _AppBarTitle(),
               actions: [
-                _BackButton(data: idle.data),
+                _BackButton(data: state.data),
               ],
             ),
           ),
@@ -60,18 +59,18 @@ class _Content extends StatelessWidget {
                       .map(
                         (tab) => _TabButton(
                           onTap: () => cubit(context).selectTab(tab),
-                          isSelected: idle.selectedTab == tab,
+                          isSelected: state.selectedTab == tab,
                           title: tab.name(context),
                         ),
                       )
                       .toList(),
                 ),
                 _QuestionOptionsListView(
-                  options: idle.selectedTab.options,
+                  options: state.selectedTab.options,
                 ),
                 EditorBar(
                   onChange: cubit(context).updateData,
-                  editableQuestion: idle.selectedTab.data(idle.data),
+                  editableQuestion: state.selectedTab.data(state.data),
                 ),
               ],
             ),
@@ -84,14 +83,14 @@ class _Content extends StatelessWidget {
             ),
             _AddButton(
               onPressed: () {
-                final index = idle.data.questions.length + 1;
-                final question = idle.selectedTab.data(idle.data).copyWith(
+                final index = state.data.questions.length + 1;
+                final question = state.selectedTab.data(state.data).copyWith(
                       index: index,
                     );
-                idle.data.questions.add(question);
+                state.data.questions.add(question);
                 Navigator.pop(
                   context,
-                  idle.data,
+                  state.data,
                 );
               },
             ),

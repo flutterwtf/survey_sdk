@@ -147,23 +147,23 @@ class ChoiceContentCustomizationTab extends CustomizationTab {
           ],
         ),
         if (questionsAmount != null)
-        CustomizationItemsContainer(
-          title: context.localization.primaryButtonAction,
-          itemsPadding: EdgeInsets.zero,
-          children: [
-            ActionsCustomizationItem(
-              onChanged: (action) => onChange(
-                editable.copyWith(
-                  clearMainAction: true,
-                  mainButtonAction: action,
+          CustomizationItemsContainer(
+            title: context.localization.primaryButtonAction,
+            itemsPadding: EdgeInsets.zero,
+            children: [
+              ActionsCustomizationItem(
+                onChanged: (action) => onChange(
+                  editable.copyWith(
+                    clearMainAction: true,
+                    mainButtonAction: action,
+                  ),
                 ),
+                surveyAction: editable.mainButtonAction,
+                callbackType: CallbackType.primaryCallback,
+                questionsLength: questionsAmount!,
               ),
-              surveyAction: editable.mainButtonAction,
-              callbackType: CallbackType.primaryCallback,
-              questionsLength: questionsAmount!,
-            ),
-          ],
-        ),
+            ],
+          ),
         if (editable.isSkip && questionsAmount != null)
           CustomizationItemsContainer(
             title: context.localization.secondaryButtonAction,
