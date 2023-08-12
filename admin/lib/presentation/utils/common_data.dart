@@ -11,7 +11,6 @@ class CommonData {
   static const _secondIndex = 2;
   static const _thirdIndex = 3;
   static const _fourthIndex = 4;
-  static const _fivethIndex = 5;
   static const _dividers = 10;
 
   CommonTheme get commonTheme {
@@ -26,22 +25,21 @@ class CommonData {
   SurveyData get surveyData {
     return SurveyData(
       questions: [
-        info(index: _firstIndex, title: context.localization.intro),
+        info(index: _firstIndex),
         input(index: _secondIndex),
         choice(index: _thirdIndex),
         slider(index: _fourthIndex),
       ],
-      endPage: endPage(index: _fivethIndex),
       commonTheme: commonTheme,
     );
   }
 
   const CommonData(this.context);
 
-  InfoQuestionData info({int index = 0, String? title}) {
+  InfoQuestionData info({int index = 0}) {
     return InfoQuestionData(
       primaryButtonText: context.localization.next,
-      title: title ?? context.localization.info,
+      title: context.localization.info,
       index: index,
       subtitle: context.localization.emptySubtitle,
       isSkip: false,
@@ -107,21 +105,6 @@ class CommonData {
       theme: const SliderQuestionTheme.common(),
       secondaryButtonText: context.localization.skip,
       primaryButtonText: context.localization.next,
-      mainButtonAction: const GoNextAction(),
-      secondaryButtonAction: const SkipQuestionAction(),
-    );
-  }
-
-  InfoQuestionData endPage({int index = 0}) {
-    return InfoQuestionData(
-      primaryButtonText: context.localization.next,
-      title: context.localization.end,
-      index: index,
-      subtitle: context.localization.surveyCompleted,
-      isSkip: false,
-      content: context.localization.emptyContent,
-      theme: const InfoQuestionTheme.common(),
-      secondaryButtonText: context.localization.skip,
       mainButtonAction: const GoNextAction(),
       secondaryButtonAction: const SkipQuestionAction(),
     );

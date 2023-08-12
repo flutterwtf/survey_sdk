@@ -10,7 +10,6 @@ import 'package:survey_sdk/survey_sdk.dart';
 
 abstract class _Fields {
   static const String questions = 'questions';
-  static const String endPage = 'endPage';
   static const String commonTheme = 'commonTheme';
   static const String schemeVersion = 'schemeVersion';
 }
@@ -21,9 +20,6 @@ class SurveyData with EquatableMixin, ApiObject {
   /// List of questions used to build question pages of different types
   /// of questions.
   final List<QuestionData> questions;
-
-  /// Contains last page in the survey.
-  final InfoQuestionData endPage;
 
   /// Defines the visual properties used throughout the app.
   final CommonTheme commonTheme;
@@ -36,22 +32,18 @@ class SurveyData with EquatableMixin, ApiObject {
 
   SurveyData({
     required this.questions,
-    required this.endPage,
     required this.commonTheme,
   });
 
   factory SurveyData.fromJson(Map<String, dynamic> json) {
     final questions = <QuestionData>[];
     final schemeVersion = json[_Fields.schemeVersion];
-    final endPage = QuestionData.fromType(json[_Fields.endPage], schemeVersion)
-        as InfoQuestionData;
     for (final questionJson in json[_Fields.questions]) {
       questions.add(QuestionData.fromType(questionJson, schemeVersion));
     }
 
     return SurveyData(
       questions: questions,
-      endPage: endPage,
       commonTheme: CommonTheme.fromJson(
         json[_Fields.commonTheme],
         schemeVersion,
@@ -61,12 +53,10 @@ class SurveyData with EquatableMixin, ApiObject {
 
   SurveyData copyWith({
     List<QuestionData>? questions,
-    InfoQuestionData? endPage,
     CommonTheme? commonTheme,
   }) {
     return SurveyData(
       questions: questions ?? this.questions,
-      endPage: endPage ?? this.endPage,
       commonTheme: commonTheme ?? this.commonTheme,
     );
   }
@@ -76,11 +66,6 @@ class SurveyData with EquatableMixin, ApiObject {
     const schemeVersion = SchemeInfo.version;
     return {
       _Fields.schemeVersion: schemeVersion,
-      _Fields.endPage: _toJson(
-        _themeFromQuestionType(endPage.type),
-        endPage,
-        schemeVersion,
-      ),
       _Fields.commonTheme: commonTheme.toJson(
         schemeVersion: schemeVersion,
       ),
