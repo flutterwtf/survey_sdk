@@ -12,6 +12,7 @@ import 'package:survey_sdk/src/presentation/survey/survey_cubit.dart';
 import 'package:survey_sdk/src/presentation/survey/survey_state.dart';
 import 'package:survey_sdk/src/presentation/survey_error/survey_error.dart';
 import 'package:survey_sdk/src/presentation/utils/callback_type.dart';
+import 'package:survey_sdk/src/presentation/utils/on_finish_callback.dart';
 import 'package:survey_sdk/src/presentation/utils/utils.dart';
 
 // TODO(dev): Maybe create two classes, where one is for filePath and the other
@@ -44,6 +45,9 @@ class Survey extends StatefulWidget {
   /// Whether the survey should save user selected answers.
   final bool saveAnswer;
 
+  /// Called after the survey is finished.
+  final OnFinishCallback? onFinish;
+
   /// Either [filePath] or [surveyData] must pe provided. The [controller]
   /// parameter is optional and can be used to provide a custom survey
   /// controller.
@@ -51,6 +55,7 @@ class Survey extends StatefulWidget {
     this.filePath,
     this.surveyData,
     this.controller,
+    this.onFinish,
     this.saveAnswer = true,
     super.key,
   }) : assert(
@@ -107,6 +112,7 @@ class _SurveyState extends State<Survey> {
       index,
       answer,
       callbackType,
+      onFinish: widget.onFinish,
       saveAnswer: widget.saveAnswer,
     );
   }
@@ -176,9 +182,6 @@ class _SurveyState extends State<Survey> {
                       },
                       onGoNext: _surveyController.onNext,
                     ),
-                  ),
-                  DataToWidgetUtil.createEndPage(
-                    data: data.endPage,
                   ),
                 ],
               ),
