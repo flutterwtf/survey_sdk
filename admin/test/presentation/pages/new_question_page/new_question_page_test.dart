@@ -10,11 +10,13 @@ import 'package:survey_admin/data/repositories/file_system_repository_impl.dart'
 import 'package:survey_admin/data/repositories/session_storage_repository_impl.dart';
 import 'package:survey_admin/domain/repository_interfaces/file_system_repository.dart.dart';
 import 'package:survey_admin/domain/repository_interfaces/session_storage_repository.dart';
-import 'package:survey_admin/presentation/pages/builder/builder_cubit.dart';
+import 'package:survey_admin/presentation/pages/new_question_page/new_question_cubit.dart';
 import 'package:survey_admin/presentation/pages/new_question_page/new_question_page.dart';
 import 'package:survey_admin/presentation/utils/common_data.dart';
 import 'package:survey_admin/presentation/widgets/vector_image.dart';
+import 'package:survey_sdk/survey_sdk.dart';
 
+import '../../../utils/shared_mocks.mocks.dart';
 import '../../widgets/app_tester.dart';
 
 //ignore: prefer-match-file-name
@@ -23,14 +25,28 @@ class MockNavigatorObserver extends Mock implements NavigatorObserver {}
 void main() {
   group('Tests for NewQuestionPage', () {
     final getIt = GetIt.instance;
+    final mockSurveyData = MockSurveyData();
 
     final mockObserver = MockNavigatorObserver();
     final page = AppTester(
       navigatorObservers: [mockObserver],
       child: Builder(
         builder: (context) {
-          _inject(getIt, context);
-          return const NewQuestionPage();
+          final commonData = CommonData(context);
+          when(
+            mockSurveyData.commonTheme,
+          )
+              .thenAnswer(
+                (_) => commonData.commonTheme,
+          );
+          when(
+            mockSurveyData.questions,
+          )
+              .thenAnswer(
+                (_) => [commonData.info(index: 1)],
+          );
+          _inject(getIt, context, mockSurveyData);
+          return NewQuestionPage(data: mockSurveyData);
         },
       ),
     );
@@ -42,11 +58,11 @@ void main() {
       expect(find.text('New screen'), findsOneWidget);
       expect(find.text('ADD'), findsOneWidget);
       expect(find.text('Cancel'), findsOneWidget);
-      expect(find.text('Info'), findsOneWidget);
+      expect(find.text('Info'), findsNWidgets(2));
       expect(find.text('Choice'), findsOneWidget);
       expect(find.text('Slider'), findsOneWidget);
       expect(find.text('Custom input'), findsOneWidget);
-      expect(find.text('Title'), findsOneWidget);
+      expect(find.text('Title'), findsNWidgets(2));
       tester.binding.platformDispatcher.clearTextScaleFactorTestValue();
     });
 
@@ -59,16 +75,16 @@ void main() {
 
     testWidgets('Move on tab', (tester) async {
       await tester.pumpWidget(page);
-      expect(find.text('Title'), findsOneWidget);
+      expect(find.text('Title'), findsNWidgets(2));
 
       await tester.tap(find.text('Choice'));
       await tester.pump();
-      expect(find.text('Radio button'), findsOneWidget);
+      expect(find.text('Radio button'), findsNWidgets(2));
       expect(find.text('Check box'), findsOneWidget);
 
       await tester.tap(find.text('Slider'));
       await tester.pump();
-      expect(find.text('Slider'), findsNWidgets(2));
+      expect(find.text('Slider'), findsNWidgets(4));
 
       await tester.tap(find.text('Custom input'));
       await tester.pump();
@@ -77,7 +93,7 @@ void main() {
 
       await tester.tap(find.text('Info'));
       await tester.pump();
-      expect(find.text('Title'), findsOneWidget);
+      expect(find.text('Title'), findsNWidgets(2));
     });
 
     testWidgets('Click ADD', (tester) async {
@@ -98,7 +114,7 @@ void main() {
   });
 }
 
-Future<void> _inject(GetIt getIt, BuildContext context) async {
+Future<void> _inject(GetIt getIt, BuildContext context, SurveyData data) async {
   if (getIt.isRegistered<CommonData>()) await getIt.reset();
 
   getIt
@@ -117,10 +133,7 @@ Future<void> _inject(GetIt getIt, BuildContext context) async {
     ..registerSingleton<SessionStorageRepository>(
       SessionStorageRepositoryImpl(getIt.get()),
     )
-    ..registerSingleton<BuilderCubit>(
-      BuilderCubit(
-        getIt.get(),
-        getIt.get(),
-      ),
+    ..registerFactoryParam<NewQuestionCubit, SurveyData, void>(
+          (data, _) => NewQuestionCubit(data),
     );
 }

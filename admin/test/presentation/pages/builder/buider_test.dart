@@ -11,7 +11,6 @@ import 'package:survey_admin/data/repositories/file_system_repository_impl.dart'
 import 'package:survey_admin/data/repositories/session_storage_repository_impl.dart';
 import 'package:survey_admin/domain/repository_interfaces/file_system_repository.dart.dart';
 import 'package:survey_admin/domain/repository_interfaces/session_storage_repository.dart';
-import 'package:survey_admin/presentation/app/di/injector.dart';
 import 'package:survey_admin/presentation/pages/builder/builder_cubit.dart';
 import 'package:survey_admin/presentation/pages/builder/builder_page.dart';
 
@@ -27,14 +26,11 @@ void main() {
     final mockObserver = MockNavigatorObserver();
     final page = AppTester(
       navigatorObservers: [mockObserver],
-      child: BlocProvider(
-        create: (context) => i.get<BuilderCubit>(),
-        child: Builder(
-          builder: (_) {
-            _inject(getIt);
-            return const BuilderPage();
-          },
-        ),
+      child: Builder(
+        builder: (_) {
+          _inject(getIt);
+          return const BuilderPage();
+        },
       ),
     );
 
