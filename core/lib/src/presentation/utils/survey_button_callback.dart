@@ -5,16 +5,20 @@ import 'package:survey_sdk/src/domain/entities/actions/go_next_action.dart';
 import 'package:survey_sdk/src/domain/entities/actions/go_to_action.dart';
 import 'package:survey_sdk/src/domain/entities/actions/skip_question_action.dart';
 import 'package:survey_sdk/src/domain/entities/actions/survey_action.dart';
+import 'package:survey_sdk/src/domain/entities/question_answer.dart';
 import 'package:survey_sdk/src/domain/entities/question_types/question_data.dart';
 import 'package:survey_sdk/src/presentation/survey/survey_controller.dart';
 import 'package:survey_sdk/src/presentation/utils/callback_type.dart';
+import 'package:survey_sdk/src/presentation/utils/on_finish_callback.dart';
 
 class SurveyButtonCallback {
   final SurveyAction? callback;
   final VoidCallback? saveAnswer;
   final SurveyController surveyController;
   final List<QuestionData> questions;
+  final OnFinishCallback? onFinish;
   final CallbackType callbackType;
+  final Map<int, QuestionAnswer>? answers;
 
   SurveyButtonCallback({
     required this.callback,
@@ -22,7 +26,12 @@ class SurveyButtonCallback {
     required this.surveyController,
     required this.questions,
     required this.callbackType,
-  });
+    this.answers,
+    this.onFinish,
+  }) : assert(
+          onFinish != null && answers != null || onFinish == null,
+          'If onFinish != null answers should not be null either',
+        );
 
   void callbackFromType() => switch (callback.runtimeType) {
         GoToAction => goToCallback(),
@@ -33,7 +42,6 @@ class SurveyButtonCallback {
         _ => defaultSurveyCallback(),
       };
 
-
   @visibleForTesting
   void goToCallback() {
     saveAnswer?.call();
@@ -43,6 +51,7 @@ class SurveyButtonCallback {
   @visibleForTesting
   void finishSurveyCallback() {
     saveAnswer?.call();
+    onFinish?.call(answers!);
     surveyController.animateTo(questions.length);
   }
 

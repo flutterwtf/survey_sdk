@@ -37,7 +37,10 @@ class MyHomePage extends StatelessWidget {
       ),
       // Add Survey to your widget tree with filePath parameter that accepts
       // a json file with parsed survey data
-      body: const Survey(filePath: 'assets/questions.json'),
+      body: const Survey(
+        filePath: 'assets/questions.json',
+        onFinish: print,
+      ),
     );
   }
 }

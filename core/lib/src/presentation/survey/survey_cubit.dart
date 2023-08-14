@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:survey_sdk/src/domain/entities/question_answer.dart';
 import 'package:survey_sdk/src/domain/repository_interfaces/survey_data_repository.dart';
 import 'package:survey_sdk/src/presentation/survey/survey_state.dart';
+import 'package:survey_sdk/src/presentation/utils/on_finish_callback.dart';
 import 'package:survey_sdk/src/presentation/utils/survey_button_callback.dart';
 
 import 'package:survey_sdk/survey_sdk.dart';
@@ -29,6 +30,7 @@ class SurveyCubit extends Cubit<SurveyState> {
     QuestionAnswer? answer,
     CallbackType callbackType, {
     required bool saveAnswer,
+    OnFinishCallback? onFinish,
   }) {
     if (state is SurveyLoadedState) {
       final loadedState = state as SurveyLoadedState;
@@ -41,10 +43,16 @@ class SurveyCubit extends Cubit<SurveyState> {
         callback: callback,
         callbackType: callbackType,
         surveyController: surveyController,
+        onFinish: onFinish,
+        answers: loadedState.answers,
         questions: loadedState.surveyData.questions,
         saveAnswer: () => answer == null || !saveAnswer
             ? null
-            : _saveAnswer(index: questionIndex, answer: answer),
+            : _saveAnswer(
+                index: questionIndex,
+                answer: answer,
+                onFinish: onFinish,
+              ),
       ).callbackFromType();
     }
   }
@@ -72,11 +80,18 @@ class SurveyCubit extends Cubit<SurveyState> {
   }
 
   /// Saves the provided [answer] for the question at the specified [index].
-  void _saveAnswer({required int index, required QuestionAnswer answer}) {
+  void _saveAnswer({
+    required int index,
+    required QuestionAnswer answer,
+    OnFinishCallback? onFinish,
+  }) {
     final currentState = state;
     if (currentState is SurveyLoadedState) {
       final newAnswers = Map<int, QuestionAnswer>.of(currentState.answers);
       newAnswers[index] = answer;
+      if (index == currentState.surveyData.questions.length) {
+        onFinish?.call(newAnswers);
+      }
       emit(currentState.copyWith(answers: newAnswers));
     }
   }
