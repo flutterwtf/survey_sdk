@@ -10,7 +10,7 @@ import 'package:survey_sdk/survey_sdk.dart';
 class InfoContentCustomizationTab extends CustomizationTab {
   final ValueChanged<QuestionData> onChange;
   final InfoQuestionData editable;
-  final int questionsAmount;
+  final int? questionsAmount;
 
   const InfoContentCustomizationTab({
     required this.onChange,
@@ -75,24 +75,25 @@ class InfoContentCustomizationTab extends CustomizationTab {
             ),
           ],
         ),
-        CustomizationItemsContainer(
-          title: context.localization.primaryButtonAction,
-          itemsPadding: EdgeInsets.zero,
-          children: [
-            ActionsCustomizationItem(
-              onChanged: (action) => onChange(
-                editable.copyWith(
-                  clearMainAction: true,
-                  mainButtonAction: action,
+        if (questionsAmount != null)
+          CustomizationItemsContainer(
+            title: context.localization.primaryButtonAction,
+            itemsPadding: EdgeInsets.zero,
+            children: [
+              ActionsCustomizationItem(
+                onChanged: (action) => onChange(
+                  editable.copyWith(
+                    clearMainAction: true,
+                    mainButtonAction: action,
+                  ),
                 ),
+                surveyAction: editable.mainButtonAction,
+                callbackType: CallbackType.primaryCallback,
+                questionsLength: questionsAmount!,
               ),
-              surveyAction: editable.mainButtonAction,
-              callbackType: CallbackType.primaryCallback,
-              questionsLength: questionsAmount,
-            ),
-          ],
-        ),
-        if (editable.isSkip)
+            ],
+          ),
+        if (editable.isSkip && questionsAmount != null)
           CustomizationItemsContainer(
             title: context.localization.secondaryButtonAction,
             itemsPadding: EdgeInsets.zero,
@@ -106,7 +107,7 @@ class InfoContentCustomizationTab extends CustomizationTab {
                 ),
                 surveyAction: editable.secondaryButtonAction,
                 callbackType: CallbackType.secondaryCallback,
-                questionsLength: questionsAmount,
+                questionsLength: questionsAmount!,
               ),
             ],
           ),

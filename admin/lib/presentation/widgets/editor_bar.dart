@@ -11,12 +11,12 @@ class EditorBar extends StatelessWidget {
   final QuestionData? editableQuestion;
   final bool isEditMode;
   final void Function(QuestionData data) onChange;
-  final int questionsAmount;
+  final int? questionsAmount;
 
   const EditorBar({
     required this.onChange,
     required this.editableQuestion,
-    required this.questionsAmount,
+    this.questionsAmount,
     this.isEditMode = true,
     super.key,
   });

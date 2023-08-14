@@ -12,7 +12,7 @@ import 'package:survey_sdk/survey_sdk.dart';
 class ChoiceContentCustomizationTab extends CustomizationTab {
   final ValueChanged<QuestionData> onChange;
   final ChoiceQuestionData editable;
-  final int questionsAmount;
+  final int? questionsAmount;
 
   const ChoiceContentCustomizationTab({
     required this.onChange,
@@ -146,24 +146,25 @@ class ChoiceContentCustomizationTab extends CustomizationTab {
             ),
           ],
         ),
-        CustomizationItemsContainer(
-          title: context.localization.primaryButtonAction,
-          itemsPadding: EdgeInsets.zero,
-          children: [
-            ActionsCustomizationItem(
-              onChanged: (action) => onChange(
-                editable.copyWith(
-                  clearMainAction: true,
-                  mainButtonAction: action,
+        if (questionsAmount != null)
+          CustomizationItemsContainer(
+            title: context.localization.primaryButtonAction,
+            itemsPadding: EdgeInsets.zero,
+            children: [
+              ActionsCustomizationItem(
+                onChanged: (action) => onChange(
+                  editable.copyWith(
+                    clearMainAction: true,
+                    mainButtonAction: action,
+                  ),
                 ),
+                surveyAction: editable.mainButtonAction,
+                callbackType: CallbackType.primaryCallback,
+                questionsLength: questionsAmount!,
               ),
-              surveyAction: editable.mainButtonAction,
-              callbackType: CallbackType.primaryCallback,
-              questionsLength: questionsAmount,
-            ),
-          ],
-        ),
-        if (editable.isSkip)
+            ],
+          ),
+        if (editable.isSkip && questionsAmount != null)
           CustomizationItemsContainer(
             title: context.localization.secondaryButtonAction,
             itemsPadding: EdgeInsets.zero,
@@ -177,7 +178,7 @@ class ChoiceContentCustomizationTab extends CustomizationTab {
                 ),
                 surveyAction: editable.secondaryButtonAction,
                 callbackType: CallbackType.secondaryCallback,
-                questionsLength: questionsAmount,
+                questionsLength: questionsAmount!,
               ),
             ],
           ),

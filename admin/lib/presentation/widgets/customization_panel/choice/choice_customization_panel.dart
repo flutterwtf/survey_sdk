@@ -9,7 +9,7 @@ import 'package:survey_sdk/survey_sdk.dart';
 class ChoiceCustomizationPanel extends StatelessWidget {
   final ValueChanged<QuestionData> onChange;
   final ChoiceQuestionData editable;
-  final int questionsAmount;
+  final int? questionsAmount;
 
   const ChoiceCustomizationPanel({
     required this.onChange,

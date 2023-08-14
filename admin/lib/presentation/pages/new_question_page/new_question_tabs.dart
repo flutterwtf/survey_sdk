@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:survey_admin/presentation/app/di/injector.dart';
 import 'package:survey_admin/presentation/app/localization/app_localizations_ext.dart';
 import 'package:survey_admin/presentation/utils/utils.dart';
 import 'package:survey_sdk/survey_sdk.dart';
@@ -25,16 +24,17 @@ extension NewQuestionTabsExt on NewQuestionTabs {
     }
   }
 
-  QuestionData get data {
+  QuestionData data(SurveyData data) {
     switch (this) {
       case NewQuestionTabs.info:
-        return i.get<CommonData>().info();
+        return data.commonTheme.info;
       case NewQuestionTabs.choice:
-        return i.get<CommonData>().choice();
+        return data.commonTheme.choice;
       case NewQuestionTabs.slider:
-        return i.get<CommonData>().slider();
+        return data.commonTheme.slider;
       case NewQuestionTabs.customInput:
-        return i.get<CommonData>().input();
+        return data.commonTheme.input;
+
     }
   }
 
