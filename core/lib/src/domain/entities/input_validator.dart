@@ -46,10 +46,13 @@ class InputValidator extends Equatable implements ApiObject {
   }
 
   /// Validator with type [InputType.email].
-  InputValidator.email({String? regex, bool? isObscured}) {
+  InputValidator.email({
+    String? regex,
+    bool? isObscured,
+  }) {
     type = InputType.email;
     _regex = regex ?? ValidatorRegexes.email;
-    isObscured = isObscured ?? true;
+    this.isObscured = isObscured ?? true;
   }
 
   /// Validator for with type [InputType.password].
@@ -94,19 +97,13 @@ class InputValidator extends Equatable implements ApiObject {
       case InputType.date:
         return InputValidator.date(regex: regex, isObscured: isObscured);
       case InputType.email:
-        return InputValidator.email();
+        return InputValidator.email(regex: regex, isObscured: isObscured);
       case InputType.phone:
         return InputValidator.phone(regex: regex, isObscured: isObscured);
       case InputType.number:
-        return InputValidator.number(
-          regex: regex,
-          isObscured: isObscured,
-        );
+        return InputValidator.number(regex: regex, isObscured: isObscured);
       case InputType.password:
-        return InputValidator.password(
-          regex: regex,
-          isObscured: isObscured,
-        );
+        return InputValidator.password(regex: regex, isObscured: isObscured);
     }
   }
 
