@@ -20,7 +20,7 @@ class QuestionList extends StatefulWidget {
   const QuestionList({
     required this.onSelect,
     required this.onAdd,
-    required this.questions,
+    required this.data,
     required this.onUpdate,
     required this.onDelete,
     required this.onDataUpdate,
