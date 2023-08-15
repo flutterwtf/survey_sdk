@@ -15,6 +15,7 @@ class ChoiceButtonsCustomizationTab extends CustomizationTab {
     required this.onChange,
     required super.title,
     required this.editable,
+    super.showToolTip = true,
     super.key,
   });
 

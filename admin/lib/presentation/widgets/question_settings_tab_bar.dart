@@ -46,7 +46,10 @@ class _QuestionSettingsTabBarState extends State<QuestionSettingsTabBar>
             fontWeight: SurveyFonts.weightMedium,
           ),
           tabs: [
-            for (final tab in widget.tabs) Tab(text: tab.title),
+            for (final tab in widget.tabs)
+              tab.showToolTip
+                  ? Tooltip(message: tab.title, child: Tab(text: tab.title))
+                  : Tab(text: tab.title),
           ],
         ),
         Expanded(
