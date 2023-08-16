@@ -1,34 +1,5 @@
 {
   "schemeVersion": 1,
-  "endPage": {
-    "index": 5,
-    "title": "End",
-    "subtitle": "Survey is completed",
-    "type": "Info",
-    "isSkip": false,
-    "content": "",
-    "theme": {
-      "fill": 4294967295,
-      "titleColor": 4278190080,
-      "titleSize": 16,
-      "subtitleColor": 4278190080,
-      "subtitleSize": 12,
-      "primaryButtonFill": 4278190080,
-      "primaryButtonTextColor": 4294967295,
-      "primaryButtonTextSize": 12,
-      "primaryButtonRadius": 10,
-      "secondaryButtonFill": 4278190080,
-      "secondaryButtonTextColor": 4294967295,
-      "secondaryButtonTextSize": 12,
-      "secondaryButtonRadius": 10
-    },
-    "secondaryButtonText": "Skip",
-    "primaryButtonText": "NEXT",
-    "actions": {
-      "mainButtonAction": null,
-      "secondaryButtonAction": null
-    }
-  },
   "commonTheme ": {
     "slider": {
       "index": 0,
@@ -191,7 +162,7 @@
   "questions": [
     {
       "index": 1,
-      "title": "Intro",
+      "title": "Info",
       "subtitle": "",
       "type": "Info",
       "isSkip": false,

@@ -44,7 +44,7 @@ void main() {
       expect(find.text('Survey'), findsOneWidget);
       expect(find.text('Common'), findsOneWidget);
       expect(find.text('Content'), findsOneWidget);
-      expect(find.text('Intro'), findsNWidgets(3));
+      expect(find.text('Info'), findsNWidgets(3));
       expect(find.text('Input'), findsOneWidget);
       expect(find.text('Choice'), findsOneWidget);
       expect(find.text('NEXT'), findsNWidgets(2));
@@ -132,11 +132,11 @@ void main() {
 
       await tester.pumpWidget(page);
 
-      await tester.longPress(find.text('Intro').first);
+      await tester.longPress(find.text('Info').first);
       await tester.tap(find.text('Delete'));
       await tester.pumpAndSettle();
 
-      expect(find.text('Intro'), findsNothing);
+      expect(find.text('Info'), findsNothing);
 
       tester.binding.platformDispatcher.clearTextScaleFactorTestValue();
     });

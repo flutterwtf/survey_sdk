@@ -15,14 +15,12 @@ class QuestionList extends StatefulWidget {
   final int? selectedIndex;
   final SurveyData data;
   final ValueChanged<SurveyData> onDataUpdate;
-  final InfoQuestionData endPage;
   final bool isEditMode;
 
   const QuestionList({
     required this.onSelect,
     required this.onAdd,
     required this.data,
-    required this.endPage,
     required this.onUpdate,
     required this.onDelete,
     required this.onDataUpdate,
@@ -103,13 +101,6 @@ class _QuestionListState extends State<QuestionList> {
                         question: widget.data.questions[index],
                         onQuestionTap: widget.onSelect,
                       ),
-                    _Question(
-                      key: ValueKey(length),
-                      index: length,
-                      isSelected: length == widget.selectedIndex,
-                      question: widget.endPage,
-                      onQuestionTap: widget.onSelect,
-                    ),
                   ],
                 ),
                 cardBuilder: (_, children) {

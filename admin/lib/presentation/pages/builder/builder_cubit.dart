@@ -41,8 +41,8 @@ class BuilderCubit extends Cubit<BuilderState> {
   }
 
   void select(QuestionData data) {
-      if (state is EditQuestionBuilderState ||
-          state is ImportSuccessSurveyDataBuilderState) {
+    if (state is EditQuestionBuilderState ||
+        state is ImportSuccessSurveyDataBuilderState) {
       emit(
         EditQuestionBuilderState(
           selectedIndex: data.index,
@@ -65,13 +65,7 @@ class BuilderCubit extends Cubit<BuilderState> {
 
     _updateIndex(questionList);
 
-    final endPage = state.surveyData.endPage
-        .copyWith(index: state.surveyData.endPage.index - 1);
-
-    final surveyData = state.surveyData.copyWith(
-      questions: questionList,
-      endPage: endPage,
-    );
+    final surveyData = state.surveyData.copyWith(questions: questionList);
     _sessionStorageRepository.saveSurveyData(surveyData);
     emit(state.copyWith(surveyData: surveyData));
     if (state.surveyData.questions.isEmpty) {
@@ -90,13 +84,7 @@ class BuilderCubit extends Cubit<BuilderState> {
     final questionList = List<QuestionData>.of(state.surveyData.questions)
       ..add(data);
 
-    final endPage = state.surveyData.endPage
-        .copyWith(index: state.surveyData.endPage.index + 1);
-
-    final surveyData = state.surveyData.copyWith(
-      questions: questionList,
-      endPage: endPage,
-    );
+    final surveyData = state.surveyData.copyWith(questions: questionList);
     _sessionStorageRepository.saveSurveyData(surveyData);
     emit(state.copyWith(surveyData: surveyData));
     select(state.surveyData.questions.last);

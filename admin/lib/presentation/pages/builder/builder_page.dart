@@ -50,11 +50,8 @@ class _ContentState extends State<_Content>
     final cubit = this.cubit(context);
     final questions = cubit.state.surveyData.questions;
     final index = _surveyController.pageController.page;
-    final question = index == questions.length
-        ? cubit.state.surveyData.endPage
-        : index != null && index % 1 == 0
-            ? questions[index.toInt()]
-            : null;
+    final question =
+        index != null && index % 1 == 0 ? questions[index.toInt()] : null;
 
     if (question != null) {
       cubit.select(question);
@@ -87,10 +84,8 @@ class _ContentState extends State<_Content>
 
   QuestionData? _editableQuestion(BuilderState state) {
     if (state is EditQuestionBuilderState) {
-      return state.selectedIndex == state.surveyData.endPage.index
-          ? state.surveyData.endPage
-          : state.surveyData.questions
-              .firstWhereOrNull((q) => q.index == state.selectedIndex);
+      return state.surveyData.questions
+          .firstWhereOrNull((q) => q.index == state.selectedIndex);
     } else if (state is PreviewQuestionBuilderState) {
       return state.selectedQuestion;
     } else {
@@ -164,7 +159,6 @@ class _ContentState extends State<_Content>
                 data: cubit.state.surveyData,
                 onUpdate: cubit.updateQuestions,
                 selectedIndex: _selectedIndex(state),
-                endPage: state.surveyData.endPage,
                 onDataUpdate: cubit.updateCommonTheme,
               ),
               Expanded(
